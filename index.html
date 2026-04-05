@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta Personalizada · Nationale-Nederlanden</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E85D26;
+    --orange-light: #FBF0EC;
+    --orange-mid: #F4A07A;
+    --orange-dark: #C44A18;
+    --green: #0F6E56;
+    --green-light: #E4F4EF;
+    --blue: #1A4FAB;
+    --blue-light: #EAF0FB;
+    --dark: #1C1714;
+    --text: #2A2420;
+    --text-2: #6A5F5A;
+    --text-3: #9A8F87;
+    --border: #EDE8E3;
+    --bg: #F5F0EB;
+    --white: #FFFFFF;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── LOADING ── */
+  #loading {
+    position: fixed; inset: 0;
+    background: var(--dark);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 16px;
+    z-index: 999;
+    transition: opacity 0.4s ease;
+  }
+  #loading.hide { opacity: 0; pointer-events: none; }
+  .loading-dot {
+    width: 40px; height: 40px;
+    background: var(--orange);
+    border-radius: 50%;
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+  .loading-text { font-size: 13px; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.3);opacity:0.6} }
+
+  /* ── WRAPPER ── */
+  .wrap { max-width: 640px; margin: 0 auto; padding: 24px 16px 48px; }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--dark);
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding: 36px 36px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-glow-1 {
+    position: absolute; top: -80px; right: -80px;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(232,93,38,0.2) 0%, transparent 65%);
+    border-radius: 50%;
+  }
+  .hero-glow-2 {
+    position: absolute; bottom: -60px; left: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(232,93,38,0.1) 0%, transparent 65%);
+    border-radius: 50%;
+  }
+  .hero-top {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 28px; position: relative; z-index: 1;
+  }
+  .hero-brand { display: flex; align-items: center; gap: 10px; }
+  .brand-dot {
+    width: 34px; height: 34px; background: var(--orange); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; color: #fff;
+  }
+  .brand-name { font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 0.07em; text-transform: uppercase; }
+  .hero-badge {
+    font-size: 10px; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5);
+    padding: 4px 10px; border-radius: 20px; letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .hero-product-tag {
+    font-size: 11px; color: var(--orange); text-transform: uppercase;
+    letter-spacing: 0.1em; margin-bottom: 10px; position: relative; z-index: 1;
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif; font-size: 30px; font-weight: 700;
+    color: #fff; line-height: 1.2; margin-bottom: 12px; position: relative; z-index: 1;
+  }
+  .hero-title em { color: var(--orange); font-style: normal; }
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.5); line-height: 1.6;
+    position: relative; z-index: 1; max-width: 420px;
+  }
+
+  /* ── AGENT STRIP ── */
+  .agent-strip {
+    background: rgba(255,255,255,0.05);
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 14px 36px;
+    display: flex; align-items: center; gap: 12px;
+    position: relative; z-index: 1;
+  }
+  .agent-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--orange); overflow: hidden; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; color: #fff;
+  }
+  .agent-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .agent-name { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.85); }
+  .agent-role { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 1px; }
+  .agent-contact {
+    margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
+  }
+  .agent-contact a {
+    font-size: 11px; color: rgba(255,255,255,0.45); text-decoration: none;
+    transition: color 0.15s;
+  }
+  .agent-contact a:hover { color: var(--orange); }
+
+  /* ── BODY ── */
+  .body { background: var(--white); padding: 32px 36px; }
+
+  /* ── SALUDO ── */
+  .greeting {
+    font-size: 15px; color: var(--text); line-height: 1.75;
+    margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--border);
+  }
+  .greeting strong { font-weight: 600; color: var(--dark); }
+
+  /* ── SECTION LABEL ── */
+  .sec-label {
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.09em; margin-bottom: 12px;
+  }
+  .sec-label.orange { color: var(--orange); }
+  .sec-label.green { color: var(--green); }
+  .sec-label.blue { color: var(--blue); }
+
+  /* ── GAP CARDS ── */
+  .gap-row {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px; margin-bottom: 28px;
+  }
+  .gap-card {
+    background: #FAF7F5; border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 16px 14px; text-align: center;
+  }
+  .gap-card.hot { background: var(--orange-light); border-color: var(--orange-mid); }
+  .gap-num {
+    font-family: 'Fraunces', serif; font-size: 26px; font-weight: 700;
+    color: var(--dark); line-height: 1; margin-bottom: 5px;
+  }
+  .gap-card.hot .gap-num { color: var(--orange); }
+  .gap-lbl { font-size: 11px; color: var(--text-3); line-height: 1.3; }
+
+  /* ── DIVIDER ── */
+  .div { height: 1px; background: var(--border); margin: 0 0 28px; }
+
+  /* ── COBERTURAS ── */
+  .cov-list {
+    border: 1px solid var(--border); border-radius: var(--radius-sm);
+    overflow: hidden; margin-bottom: 16px;
+  }
+  .cov-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 11px 16px; border-bottom: 1px solid var(--border); background: var(--white);
+  }
+  .cov-row:last-child { border-bottom: none; }
+  .cov-row.key { background: var(--orange-light); }
+  .cov-row.key-blue { background: var(--blue-light); }
+  .cov-row.key-green { background: var(--green-light); }
+  .cov-name { font-size: 13px; color: var(--text); display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+  .tag {
+    font-size: 9px; padding: 2px 7px; border-radius: 20px;
+    font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .tag-o { background: var(--orange); color: #fff; }
+  .tag-b { background: var(--blue); color: #fff; }
+  .tag-g { background: var(--green); color: #fff; }
+  .cov-right { display: flex; align-items: center; gap: 14px; }
+  .cov-cap { font-size: 12px; color: var(--text-3); font-variant-numeric: tabular-nums; }
+  .cov-price {
+    font-size: 13px; font-weight: 600; color: var(--orange);
+    font-variant-numeric: tabular-nums; min-width: 48px; text-align: right;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── TOTAL BOX ── */
+  .total-box {
+    background: var(--dark); border-radius: var(--radius-sm);
+    padding: 18px 20px; display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 28px;
+  }
+  .tl-label { font-size: 10px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 3px; }
+  .tl-desc { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.4; }
+  .tr-price {
+    font-family: 'Fraunces', serif; font-size: 32px; font-weight: 700; color: var(--orange);
+  }
+  .tr-sub { font-size: 10px; color: rgba(255,255,255,0.3); text-align: right; margin-top: 3px; }
+
+  /* ── EXTRAS ── */
+  .extras-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+  .extra-pill {
+    background: var(--green-light); border-radius: var(--radius-sm);
+    padding: 13px 15px; display: flex; gap: 10px; align-items: flex-start;
+  }
+  .extra-ico { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .extra-t { font-size: 13px; font-weight: 600; color: var(--green); }
+  .extra-d { font-size: 11px; color: #2A6454; margin-top: 2px; line-height: 1.4; }
+
+  /* ── CIERRE ── */
+  .cierre {
+    font-size: 14px; color: var(--text); line-height: 1.75;
+    margin-bottom: 24px;
+  }
+  .cierre strong { font-weight: 600; color: var(--dark); }
+
+  /* ── CTA ── */
+  .cta-wrap { text-align: center; margin-bottom: 28px; }
+  .cta-btn {
+    display: inline-block; background: var(--orange); color: #fff;
+    font-size: 14px; font-weight: 600; padding: 15px 36px;
+    border-radius: 100px; text-decoration: none; letter-spacing: 0.02em;
+    box-shadow: 0 4px 20px rgba(232,93,38,0.35);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(232,93,38,0.45); }
+
+  /* ── FOOTER ── */
+  .footer-card {
+    background: #EDE8E3; border-radius: 0 0 var(--radius) var(--radius);
+    padding: 20px 36px; text-align: center;
+  }
+  .footer-card p { font-size: 11px; color: var(--text-3); line-height: 1.6; }
+
+  /* ── PRODUCTO CARDS (portada) ── */
+  .product-select {
+    display: none; /* Se muestra si no hay parámetro de producto */
+    flex-direction: column; gap: 12px; margin-bottom: 28px;
+  }
+  .product-card {
+    background: var(--white); border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm); padding: 18px 20px;
+    cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 14px;
+    text-decoration: none;
+  }
+  .product-card:hover { border-color: var(--orange); background: var(--orange-light); }
+  .product-card-ico { font-size: 24px; flex-shrink: 0; }
+  .product-card-name { font-size: 15px; font-weight: 600; color: var(--dark); }
+  .product-card-desc { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+  .product-card-arrow { margin-left: auto; font-size: 18px; color: var(--text-3); }
+
+  /* ── 404 ── */
+  .not-found { text-align: center; padding: 48px 24px; }
+  .not-found h2 { font-family: 'Fraunces', serif; font-size: 24px; color: var(--dark); margin-bottom: 12px; }
+  .not-found p { font-size: 14px; color: var(--text-3); line-height: 1.6; }
+
+  /* ── ANIMATIONS ── */
+  .fade-in { opacity: 0; transform: translateY(16px); animation: fadeUp 0.5s ease forwards; }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  .fade-in:nth-child(1) { animation-delay: 0.1s; }
+  .fade-in:nth-child(2) { animation-delay: 0.2s; }
+  .fade-in:nth-child(3) { animation-delay: 0.3s; }
+  .fade-in:nth-child(4) { animation-delay: 0.4s; }
+
+  @media (max-width: 500px) {
+    .hero { padding: 28px 20px 24px; }
+    .agent-strip { padding: 14px 20px; }
+    .body { padding: 24px 20px; }
+    .footer-card { padding: 18px 20px; }
+    .hero-title { font-size: 24px; }
+    .gap-row { grid-template-columns: 1fr; }
+    .extras-row { grid-template-columns: 1fr; }
+    .total-box { flex-direction: column; gap: 12px; text-align: center; }
+    .tr-sub { text-align: center; }
+    .cov-cap { display: none; }
+    .agent-contact { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div id="loading">
+  <div class="loading-dot"></div>
+  <div class="loading-text">Preparando tu propuesta…</div>
+</div>
+
+<div class="wrap" id="app" style="display:none">
+  <!-- Contenido inyectado por JS -->
+</div>
+
+<script>
+// ── DATOS DE PRODUCTOS ──────────────────────────────────────────────
+const PRODUCTOS = {
+  autonomo: {
+    nombre: 'Contigo Autónomo',
+    emoji: '🚐',
+    color: 'orange',
+    tagClass: 'tag-o',
+    keyClass: 'key',
+    secColor: 'orange',
+    titulo: (nombre) => `La protección que <em>le falta a ${nombre}</em> como autónomo.`,
+    subtitulo: 'Si estás de baja y no puedes trabajar, la SS no llega. Esto cubre exactamente ese agujero.',
+    greeting: (nombre) => `Hola <strong>${nombre}</strong>,<br><br>Como te comenté, el Contigo Autónomo es la pieza que le falta a cualquier trabajador por cuenta propia: cuando no puedes trabajar, <strong>¿quién paga tus gastos ese mes?</strong> Aquí tienes la respuesta.`,
+    showGap: true,
+    gap: { gastos: '900€', reta: '721€', hueco: '179€' },
+    gapDesc: ['Gastos fijos mensuales', 'Lo que paga la SS en baja', 'Sin cubrir cada mes. Hasta hoy.'],
+    coberturas: [
+      { nombre: 'Incapacidad laboral temporal', cap: '30 €/día', precio: '15,13 €', key: true, tag: 'clave' },
+      { nombre: 'Fallecimiento por accidente', cap: '60.000 €', precio: '5,04 €', key: true, tag: 'clave' },
+      { nombre: 'Fallecimiento acc. circulación', cap: '60.000 €', precio: '2,82 €', key: true, tag: 'clave' },
+      { nombre: 'Fallecimiento', cap: '16.000 €', precio: '5,25 €', key: false },
+      { nombre: 'Fallecimiento plus', cap: '50.000 €', precio: '1,34 €', key: false },
+      { nombre: 'Invalidez permanente absoluta', cap: '40.000 €', precio: '2,86 €', key: false },
+      { nombre: 'Invalidez permanente total', cap: '20.000 €', precio: '3,83 €', key: false },
+      { nombre: 'Enfermedad grave + cáncer', cap: '10.000 € c/u', precio: '1,51 €', key: false },
+    ],
+    totalDesc: 'Con descuento hábitos saludables −10%<br>Capital total asegurado: 266.000 €',
+    cierre: (nombre) => `<strong>${nombre}</strong>, por menos de 1,33 € al día tienes cubierto el peor escenario. Firmamos hoy y el seguro entra en vigor el día 1.`,
+  },
+  familia: {
+    nombre: 'Contigo Familia',
+    emoji: '👨‍👩‍👧',
+    color: 'blue',
+    tagClass: 'tag-b',
+    keyClass: 'key-blue',
+    secColor: 'blue',
+    titulo: (nombre) => `La tranquilidad de saber que <em>${nombre} y los suyos</em> están protegidos.`,
+    subtitulo: 'Porque si faltaras, tu familia seguiría necesitando vivir. Esto garantiza que puedan hacerlo.',
+    greeting: (nombre) => `Hola <strong>${nombre}</strong>,<br><br>El Contigo Familia es el seguro que te permite dormir tranquilo: si algo te pasa, <strong>tu familia tiene el respaldo económico para seguir adelante.</strong> Aquí tienes tu propuesta personalizada.`,
+    showGap: false,
+    coberturas: [
+      { nombre: 'Fallecimiento', cap: '100.000 €', precio: '12,50 €', key: true, tag: 'base' },
+      { nombre: 'Fallecimiento por accidente', cap: '100.000 €', precio: '6,20 €', key: true, tag: 'clave' },
+      { nombre: 'Invalidez permanente absoluta', cap: '80.000 €', precio: '8,40 €', key: true, tag: 'clave' },
+      { nombre: 'Invalidez permanente total', cap: '40.000 €', precio: '5,10 €', key: false },
+      { nombre: 'Enfermedad grave', cap: '20.000 €', precio: '1,20 €', key: false },
+      { nombre: 'Primer diagnóstico de cáncer', cap: '20.000 €', precio: '1,30 €', key: false },
+    ],
+    totalDesc: 'Prima estimada con descuento aplicado<br>Capital total asegurado: 360.000 €',
+    cierre: (nombre) => `<strong>${nombre}</strong>, proteger a tu familia no tiene por qué ser complicado ni caro. En 10 minutos lo tienes firmado y activo.`,
+  },
+  futuro: {
+    nombre: 'Contigo Futuro',
+    emoji: '📈',
+    color: 'green',
+    tagClass: 'tag-g',
+    keyClass: 'key-green',
+    secColor: 'green',
+    titulo: (nombre) => `El plan de ahorro que hace crecer <em>el dinero de ${nombre}</em> con garantías.`,
+    subtitulo: 'Ahorro sistemático, rentabilidad garantizada y protección familiar. Todo en un solo producto.',
+    greeting: (nombre) => `Hola <strong>${nombre}</strong>,<br><br>El Contigo Futuro es la herramienta más completa para construir tu colchón financiero: <strong>ahorro mensual, interés garantizado y protección para tu familia</strong> si algo te pasa mientras ahorras.`,
+    showGap: false,
+    coberturas: [
+      { nombre: 'Aportación mensual garantizada', cap: '200 €/mes', precio: '200,00 €', key: true, tag: 'base' },
+      { nombre: 'Capital garantizado a 10 años', cap: '25.000 €', precio: '—', key: true, tag: 'garantía' },
+      { nombre: 'Cobertura fallecimiento incluida', cap: '25.000 €', precio: '—', key: false },
+      { nombre: 'Rentabilidad anual estimada', cap: '2,5% TAE', precio: '—', key: false },
+      { nombre: 'Rescate parcial disponible', cap: 'A partir año 2', precio: '—', key: false },
+    ],
+    totalDesc: 'Aportación mensual · Producto de ahorro garantizado<br>Rentabilidad estimada: 2,5% TAE',
+    cierre: (nombre) => `<strong>${nombre}</strong>, el mejor momento para empezar a ahorrar fue ayer. El segundo mejor momento es hoy. Empezamos con la aportación que tú elijas.`,
+  }
+};
+
+// ── PARÁMETROS DE URL ───────────────────────────────────────────────
+function getParams() {
+  const p = new URLSearchParams(window.location.search);
+  return {
+    nombre: p.get('nombre') || p.get('name') || '',
+    producto: (p.get('producto') || p.get('product') || '').toLowerCase(),
+    prima: p.get('prima') || p.get('price') || '',
+    capital: p.get('capital') || '',
+  };
+}
+
+// ── RENDER PRINCIPAL ────────────────────────────────────────────────
+function render() {
+  const { nombre, producto, prima, capital } = getParams();
+  const app = document.getElementById('app');
+  const prod = PRODUCTOS[producto];
+
+  // Si no hay producto válido → portada de selección
+  if (!prod) {
+    app.innerHTML = renderPortada(nombre);
+    return;
+  }
+
+  const primaFinal = prima || calcPrima(prod);
+  const capitalFinal = capital || calcCapital(prod);
+
+  app.innerHTML = `
+    ${renderHero(prod, nombre)}
+    ${renderBody(prod, nombre, primaFinal, capitalFinal)}
+    ${renderFooter()}
+  `;
+}
+
+function calcPrima(prod) {
+  const sum = prod.coberturas.reduce((a, c) => {
+    const n = parseFloat(c.precio.replace('€','').replace(',','.').replace('—','0').trim()) || 0;
+    return a + n;
+  }, 0);
+  return sum > 0 ? sum.toFixed(2).replace('.',',') + ' €' : 'A consultar';
+}
+
+function calcCapital(prod) {
+  return prod.totalDesc.match(/[\d.]+\.[\d]+\s*€/) ? prod.totalDesc.match(/[\d.]+\.[\d]+\s*€/)[0] : '—';
+}
+
+// ── PORTADA ─────────────────────────────────────────────────────────
+function renderPortada(nombre) {
+  const saludo = nombre ? `Hola <strong>${nombre}</strong>, selecciona tu propuesta:` : 'Selecciona el producto que quieres ver:';
+  return `
+    <div class="hero" style="border-radius:16px 16px 0 0">
+      <div class="hero-glow-1"></div>
+      <div class="hero-glow-2"></div>
+      <div class="hero-top">
+        <div class="hero-brand">
+          <div class="brand-dot">N</div>
+          <span class="brand-name">Nationale-Nederlanden</span>
+        </div>
+      </div>
+      <div class="hero-product-tag">Propuestas Personalizadas</div>
+      <h1 class="hero-title">Tu propuesta<br><em>te está esperando.</em></h1>
+    </div>
+    <div class="agent-strip" style="background:#1C1714">
+      <div class="agent-avatar"><img src="fede.jpg" alt="Fede" onerror="this.parentElement.innerHTML='F'"></div>
+      <div>
+        <div class="agent-name">Federico Fontanals</div>
+        <div class="agent-role">Agente Dinamizador · NN Xàtiva</div>
+      </div>
+      <div class="agent-contact">
+        <a href="tel:+34680507186">📞 680 507 186</a>
+        <a href="mailto:federico.fontanals@nnespana.es">✉️ nnespana.es</a>
+      </div>
+    </div>
+    <div class="body" style="border-radius:0 0 16px 16px">
+      <p class="greeting">${saludo}</p>
+      <div class="product-select" style="display:flex">
+        <a class="product-card" href="?producto=autonomo${nombre?'&nombre='+encodeURIComponent(nombre):''}">
+          <span class="product-card-ico">🚐</span>
+          <div>
+            <div class="product-card-name">Contigo Autónomo</div>
+            <div class="product-card-desc">Protección laboral para trabajadores por cuenta propia</div>
+          </div>
+          <span class="product-card-arrow">›</span>
+        </a>
+        <a class="product-card" href="?producto=familia${nombre?'&nombre='+encodeURIComponent(nombre):''}">
+          <span class="product-card-ico">👨‍👩‍👧</span>
+          <div>
+            <div class="product-card-name">Contigo Familia</div>
+            <div class="product-card-desc">Seguro de vida y protección familiar completa</div>
+          </div>
+          <span class="product-card-arrow">›</span>
+        </a>
+        <a class="product-card" href="?producto=futuro${nombre?'&nombre='+encodeURIComponent(nombre):''}">
+          <span class="product-card-ico">📈</span>
+          <div>
+            <div class="product-card-name">Contigo Futuro</div>
+            <div class="product-card-desc">Plan de ahorro garantizado con protección incluida</div>
+          </div>
+          <span class="product-card-arrow">›</span>
+        </a>
+      </div>
+    </div>
+    ${renderFooter()}
+  `;
+}
+
+// ── HERO ────────────────────────────────────────────────────────────
+function renderHero(prod, nombre) {
+  const displayNombre = nombre || 'tu propuesta';
+  return `
+  <div class="hero fade-in">
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+    <div class="hero-top">
+      <div class="hero-brand">
+        <div class="brand-dot">N</div>
+        <span class="brand-name">Nationale-Nederlanden</span>
+      </div>
+      <span class="hero-badge">${prod.emoji} ${prod.nombre}</span>
+    </div>
+    <div class="hero-product-tag">${prod.nombre} · Propuesta personalizada</div>
+    <h1 class="hero-title">${prod.titulo(displayNombre)}</h1>
+    <p class="hero-sub">${prod.subtitulo}</p>
+  </div>
+  <div class="agent-strip" style="background:#1C1714">
+    <div class="agent-avatar"><img src="fede.jpg" alt="Fede" onerror="this.parentElement.innerHTML='F'"></div>
+    <div>
+      <div class="agent-name">Federico Fontanals</div>
+      <div class="agent-role">Agente Dinamizador · Punto Naranja NN Xàtiva</div>
+    </div>
+    <div class="agent-contact">
+      <a href="tel:+34680507186">📞 680 507 186</a>
+      <a href="mailto:federico.fontanals@nnespana.es">✉️ federico.fontanals@nnespana.es</a>
+    </div>
+  </div>`;
+}
+
+// ── BODY ────────────────────────────────────────────────────────────
+function renderBody(prod, nombre, prima, capital) {
+  const displayNombre = nombre || 'aquí';
+  const gapHTML = prod.showGap ? `
+    <div class="sec-label ${prod.secColor}">${prod.nombre === 'Contigo Autónomo' ? 'El agujero real del RETA' : 'La situación real'}</div>
+    <div class="gap-row">
+      <div class="gap-card">
+        <div class="gap-num">${prod.gap.gastos}</div>
+        <div class="gap-lbl">${prod.gapDesc[0]}</div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-num">${prod.gap.reta}</div>
+        <div class="gap-lbl">${prod.gapDesc[1]}</div>
+      </div>
+      <div class="gap-card hot">
+        <div class="gap-num">${prod.gap.hueco}</div>
+        <div class="gap-lbl">${prod.gapDesc[2]}</div>
+      </div>
+    </div>
+    <div class="div"></div>
+  ` : '';
+
+  const covsHTML = prod.coberturas.map(c => `
+    <div class="cov-row ${c.key ? prod.keyClass : ''}">
+      <span class="cov-name">
+        ${c.nombre}
+        ${c.key ? `<span class="tag ${prod.tagClass}">${c.tag}</span>` : ''}
+      </span>
+      <div class="cov-right">
+        <span class="cov-cap">${c.cap}</span>
+        <span class="cov-price">${c.precio}</span>
+      </div>
+    </div>
+  `).join('');
+
+  return `
+  <div class="body fade-in">
+    <div class="greeting">${prod.greeting(displayNombre)}</div>
+    ${gapHTML}
+    <div class="sec-label ${prod.secColor}">Qué incluye tu propuesta</div>
+    <div class="cov-list">${covsHTML}</div>
+    <div class="total-box">
+      <div>
+        <div class="tl-label">Prima mensual estimada</div>
+        <div class="tl-desc">${prod.totalDesc}</div>
+      </div>
+      <div>
+        <div class="tr-price">${prima}</div>
+        <div class="tr-sub">al mes</div>
+      </div>
+    </div>
+    <div class="sec-label green">Incluido sin coste adicional</div>
+    <div class="extras-row">
+      <div class="extra-pill">
+        <span class="extra-ico">🩺</span>
+        <div>
+          <div class="extra-t">App Salud</div>
+          <div class="extra-d">Chat médico 24h · múltiples especialidades · sin límite</div>
+        </div>
+      </div>
+      <div class="extra-pill">
+        <span class="extra-ico">⚖️</span>
+        <div>
+          <div class="extra-t">App Legal</div>
+          <div class="extra-d">Asesoramiento jurídico ilimitado · respuesta en 2 min</div>
+        </div>
+      </div>
+    </div>
+    <div class="div"></div>
+    <div class="cierre">${prod.cierre(displayNombre)}</div>
+    <div class="cta-wrap">
+      <a href="tel:+34680507186" class="cta-btn">Llamar a Fede · 680 507 186</a>
+    </div>
+  </div>`;
+}
+
+// ── FOOTER ──────────────────────────────────────────────────────────
+function renderFooter() {
+  return `
+  <div class="footer-card fade-in">
+    <p>
+      Nationale-Nederlanden · Avenida de Bruselas 16, Alcobendas (Madrid)<br>
+      Federico Fontanals · federico.fontanals@nnespana.es · +34 680 507 186<br>
+      Prima estimada sujeta a confirmación · Documento informativo no contractual
+    </p>
+  </div>`;
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    render();
+    document.getElementById('app').style.display = 'block';
+    const loader = document.getElementById('loading');
+    loader.classList.add('hide');
+    setTimeout(() => loader.remove(), 500);
+  }, 800);
+});
+</script>
+</body>
+</html>
