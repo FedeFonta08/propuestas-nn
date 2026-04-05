@@ -3,615 +3,328 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Propuesta Personalizada · Nationale-Nederlanden</title>
+<title>Propuesta Personalizada · Nationale-Nederlanden · Fede Fontanals</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --orange: #E85D26;
-    --orange-light: #FBF0EC;
-    --orange-mid: #F4A07A;
-    --orange-dark: #C44A18;
-    --green: #0F6E56;
-    --green-light: #E4F4EF;
-    --blue: #1A4FAB;
-    --blue-light: #EAF0FB;
-    --dark: #1C1714;
-    --text: #2A2420;
-    --text-2: #6A5F5A;
-    --text-3: #9A8F87;
-    --border: #EDE8E3;
-    --bg: #F5F0EB;
-    --white: #FFFFFF;
-    --radius: 16px;
-    --radius-sm: 10px;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-  }
-
-  /* ── LOADING ── */
-  #loading {
-    position: fixed; inset: 0;
-    background: var(--dark);
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 16px;
-    z-index: 999;
-    transition: opacity 0.4s ease;
-  }
-  #loading.hide { opacity: 0; pointer-events: none; }
-  .loading-dot {
-    width: 40px; height: 40px;
-    background: var(--orange);
-    border-radius: 50%;
-    animation: pulse 1.2s ease-in-out infinite;
-  }
-  .loading-text { font-size: 13px; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; }
-  @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.3);opacity:0.6} }
-
-  /* ── WRAPPER ── */
-  .wrap { max-width: 640px; margin: 0 auto; padding: 24px 16px 48px; }
-
-  /* ── HERO ── */
-  .hero {
-    background: var(--dark);
-    border-radius: var(--radius) var(--radius) 0 0;
-    padding: 36px 36px 32px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-glow-1 {
-    position: absolute; top: -80px; right: -80px;
-    width: 280px; height: 280px;
-    background: radial-gradient(circle, rgba(232,93,38,0.2) 0%, transparent 65%);
-    border-radius: 50%;
-  }
-  .hero-glow-2 {
-    position: absolute; bottom: -60px; left: -60px;
-    width: 200px; height: 200px;
-    background: radial-gradient(circle, rgba(232,93,38,0.1) 0%, transparent 65%);
-    border-radius: 50%;
-  }
-  .hero-top {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 28px; position: relative; z-index: 1;
-  }
-  .hero-brand { display: flex; align-items: center; gap: 10px; }
-  .brand-dot {
-    width: 34px; height: 34px; background: var(--orange); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; color: #fff;
-  }
-  .brand-name { font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 0.07em; text-transform: uppercase; }
-  .hero-badge {
-    font-size: 10px; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5);
-    padding: 4px 10px; border-radius: 20px; letter-spacing: 0.05em; text-transform: uppercase;
-  }
-  .hero-product-tag {
-    font-size: 11px; color: var(--orange); text-transform: uppercase;
-    letter-spacing: 0.1em; margin-bottom: 10px; position: relative; z-index: 1;
-  }
-  .hero-title {
-    font-family: 'Fraunces', serif; font-size: 30px; font-weight: 700;
-    color: #fff; line-height: 1.2; margin-bottom: 12px; position: relative; z-index: 1;
-  }
-  .hero-title em { color: var(--orange); font-style: normal; }
-  .hero-sub {
-    font-size: 13.5px; color: rgba(255,255,255,0.5); line-height: 1.6;
-    position: relative; z-index: 1; max-width: 420px;
-  }
-
-  /* ── AGENT STRIP ── */
-  .agent-strip {
-    background: rgba(255,255,255,0.05);
-    border-top: 1px solid rgba(255,255,255,0.07);
-    padding: 14px 36px;
-    display: flex; align-items: center; gap: 12px;
-    position: relative; z-index: 1;
-  }
-  .agent-avatar {
-    width: 38px; height: 38px; border-radius: 50%;
-    background: var(--orange); overflow: hidden; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; color: #fff;
-  }
-  .agent-avatar img { width: 100%; height: 100%; object-fit: cover; }
-  .agent-name { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.85); }
-  .agent-role { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 1px; }
-  .agent-contact {
-    margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
-  }
-  .agent-contact a {
-    font-size: 11px; color: rgba(255,255,255,0.45); text-decoration: none;
-    transition: color 0.15s;
-  }
-  .agent-contact a:hover { color: var(--orange); }
-
-  /* ── BODY ── */
-  .body { background: var(--white); padding: 32px 36px; }
-
-  /* ── SALUDO ── */
-  .greeting {
-    font-size: 15px; color: var(--text); line-height: 1.75;
-    margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--border);
-  }
-  .greeting strong { font-weight: 600; color: var(--dark); }
-
-  /* ── SECTION LABEL ── */
-  .sec-label {
-    font-size: 10px; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.09em; margin-bottom: 12px;
-  }
-  .sec-label.orange { color: var(--orange); }
-  .sec-label.green { color: var(--green); }
-  .sec-label.blue { color: var(--blue); }
-
-  /* ── GAP CARDS ── */
-  .gap-row {
-    display: grid; grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px; margin-bottom: 28px;
-  }
-  .gap-card {
-    background: #FAF7F5; border: 1px solid var(--border);
-    border-radius: var(--radius-sm); padding: 16px 14px; text-align: center;
-  }
-  .gap-card.hot { background: var(--orange-light); border-color: var(--orange-mid); }
-  .gap-num {
-    font-family: 'Fraunces', serif; font-size: 26px; font-weight: 700;
-    color: var(--dark); line-height: 1; margin-bottom: 5px;
-  }
-  .gap-card.hot .gap-num { color: var(--orange); }
-  .gap-lbl { font-size: 11px; color: var(--text-3); line-height: 1.3; }
-
-  /* ── DIVIDER ── */
-  .div { height: 1px; background: var(--border); margin: 0 0 28px; }
-
-  /* ── COBERTURAS ── */
-  .cov-list {
-    border: 1px solid var(--border); border-radius: var(--radius-sm);
-    overflow: hidden; margin-bottom: 16px;
-  }
-  .cov-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 11px 16px; border-bottom: 1px solid var(--border); background: var(--white);
-  }
-  .cov-row:last-child { border-bottom: none; }
-  .cov-row.key { background: var(--orange-light); }
-  .cov-row.key-blue { background: var(--blue-light); }
-  .cov-row.key-green { background: var(--green-light); }
-  .cov-name { font-size: 13px; color: var(--text); display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
-  .tag {
-    font-size: 9px; padding: 2px 7px; border-radius: 20px;
-    font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
-  }
-  .tag-o { background: var(--orange); color: #fff; }
-  .tag-b { background: var(--blue); color: #fff; }
-  .tag-g { background: var(--green); color: #fff; }
-  .cov-right { display: flex; align-items: center; gap: 14px; }
-  .cov-cap { font-size: 12px; color: var(--text-3); font-variant-numeric: tabular-nums; }
-  .cov-price {
-    font-size: 13px; font-weight: 600; color: var(--orange);
-    font-variant-numeric: tabular-nums; min-width: 48px; text-align: right;
-    font-family: 'DM Mono', monospace;
-  }
-
-  /* ── TOTAL BOX ── */
-  .total-box {
-    background: var(--dark); border-radius: var(--radius-sm);
-    padding: 18px 20px; display: flex; justify-content: space-between;
-    align-items: center; margin-bottom: 28px;
-  }
-  .tl-label { font-size: 10px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 3px; }
-  .tl-desc { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.4; }
-  .tr-price {
-    font-family: 'Fraunces', serif; font-size: 32px; font-weight: 700; color: var(--orange);
-  }
-  .tr-sub { font-size: 10px; color: rgba(255,255,255,0.3); text-align: right; margin-top: 3px; }
-
-  /* ── EXTRAS ── */
-  .extras-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
-  .extra-pill {
-    background: var(--green-light); border-radius: var(--radius-sm);
-    padding: 13px 15px; display: flex; gap: 10px; align-items: flex-start;
-  }
-  .extra-ico { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-  .extra-t { font-size: 13px; font-weight: 600; color: var(--green); }
-  .extra-d { font-size: 11px; color: #2A6454; margin-top: 2px; line-height: 1.4; }
-
-  /* ── CIERRE ── */
-  .cierre {
-    font-size: 14px; color: var(--text); line-height: 1.75;
-    margin-bottom: 24px;
-  }
-  .cierre strong { font-weight: 600; color: var(--dark); }
-
-  /* ── CTA ── */
-  .cta-wrap { text-align: center; margin-bottom: 28px; }
-  .cta-btn {
-    display: inline-block; background: var(--orange); color: #fff;
-    font-size: 14px; font-weight: 600; padding: 15px 36px;
-    border-radius: 100px; text-decoration: none; letter-spacing: 0.02em;
-    box-shadow: 0 4px 20px rgba(232,93,38,0.35);
-    transition: transform 0.15s, box-shadow 0.15s;
-  }
-  .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(232,93,38,0.45); }
-
-  /* ── FOOTER ── */
-  .footer-card {
-    background: #EDE8E3; border-radius: 0 0 var(--radius) var(--radius);
-    padding: 20px 36px; text-align: center;
-  }
-  .footer-card p { font-size: 11px; color: var(--text-3); line-height: 1.6; }
-
-  /* ── PRODUCTO CARDS (portada) ── */
-  .product-select {
-    display: none; /* Se muestra si no hay parámetro de producto */
-    flex-direction: column; gap: 12px; margin-bottom: 28px;
-  }
-  .product-card {
-    background: var(--white); border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm); padding: 18px 20px;
-    cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 14px;
-    text-decoration: none;
-  }
-  .product-card:hover { border-color: var(--orange); background: var(--orange-light); }
-  .product-card-ico { font-size: 24px; flex-shrink: 0; }
-  .product-card-name { font-size: 15px; font-weight: 600; color: var(--dark); }
-  .product-card-desc { font-size: 12px; color: var(--text-3); margin-top: 2px; }
-  .product-card-arrow { margin-left: auto; font-size: 18px; color: var(--text-3); }
-
-  /* ── 404 ── */
-  .not-found { text-align: center; padding: 48px 24px; }
-  .not-found h2 { font-family: 'Fraunces', serif; font-size: 24px; color: var(--dark); margin-bottom: 12px; }
-  .not-found p { font-size: 14px; color: var(--text-3); line-height: 1.6; }
-
-  /* ── ANIMATIONS ── */
-  .fade-in { opacity: 0; transform: translateY(16px); animation: fadeUp 0.5s ease forwards; }
-  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-  .fade-in:nth-child(1) { animation-delay: 0.1s; }
-  .fade-in:nth-child(2) { animation-delay: 0.2s; }
-  .fade-in:nth-child(3) { animation-delay: 0.3s; }
-  .fade-in:nth-child(4) { animation-delay: 0.4s; }
-
-  @media (max-width: 500px) {
-    .hero { padding: 28px 20px 24px; }
-    .agent-strip { padding: 14px 20px; }
-    .body { padding: 24px 20px; }
-    .footer-card { padding: 18px 20px; }
-    .hero-title { font-size: 24px; }
-    .gap-row { grid-template-columns: 1fr; }
-    .extras-row { grid-template-columns: 1fr; }
-    .total-box { flex-direction: column; gap: 12px; text-align: center; }
-    .tr-sub { text-align: center; }
-    .cov-cap { display: none; }
-    .agent-contact { display: none; }
-  }
+:root{--o:#E85D26;--ol:#FBF0EC;--om:#F4A07A;--od:#C44A18;--g:#0F6E56;--gl:#E4F4EF;--b:#1A4FAB;--bl:#EAF0FB;--p:#6B3FA0;--pl:#F0EAF8;--dk:#1C1714;--tx:#2A2420;--t2:#6A5F5A;--t3:#9A8F87;--br:#EDE8E3;--bg:#F5F0EB;--wh:#FFFFFF;--r:16px;--rs:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
+#loader{position:fixed;inset:0;background:var(--dk);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;z-index:999;transition:opacity .4s}
+#loader.off{opacity:0;pointer-events:none}
+.ld{width:38px;height:38px;background:var(--o);border-radius:50%;animation:pu 1.2s ease-in-out infinite}
+.lt{font-size:12px;color:rgba(255,255,255,.35);letter-spacing:.08em}
+@keyframes pu{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:.5}}
+.wrap{max-width:640px;margin:0 auto;padding:24px 16px 48px}
+.hero{background:var(--dk);border-radius:var(--r) var(--r) 0 0;padding:36px 36px 32px;position:relative;overflow:hidden}
+.g1{position:absolute;top:-80px;right:-80px;width:280px;height:280px;background:radial-gradient(circle,rgba(232,93,38,.22) 0%,transparent 65%);border-radius:50%}
+.g2{position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(232,93,38,.1) 0%,transparent 65%);border-radius:50%}
+.htop{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;position:relative;z-index:1}
+.hbrand{display:flex;align-items:center;gap:10px}
+.bdot{width:34px;height:34px;background:var(--o);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:#fff}
+.bname{font-size:12px;color:rgba(255,255,255,.4);letter-spacing:.07em;text-transform:uppercase}
+.hbadge{font-size:10px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.45);padding:4px 10px;border-radius:20px;letter-spacing:.05em;text-transform:uppercase}
+.hpt{font-size:11px;color:var(--o);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;position:relative;z-index:1}
+.htit{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:12px;position:relative;z-index:1}
+.htit em{color:var(--o);font-style:normal}
+.hsub{font-size:13.5px;color:rgba(255,255,255,.5);line-height:1.6;position:relative;z-index:1;max-width:420px}
+.astrip{background:rgba(255,255,255,.05);border-top:1px solid rgba(255,255,255,.07);padding:14px 36px;display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.aav{width:38px;height:38px;border-radius:50%;background:var(--o);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:#fff}
+.aav img{width:100%;height:100%;object-fit:cover}
+.an{font-size:13px;font-weight:600;color:rgba(255,255,255,.85)}
+.ar{font-size:11px;color:rgba(255,255,255,.4);margin-top:1px}
+.ac{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.ac a{font-size:11px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s}
+.ac a:hover{color:var(--o)}
+.body{background:var(--wh);padding:32px 36px}
+.greet{font-size:15px;color:var(--tx);line-height:1.75;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--br)}
+.greet strong{font-weight:600;color:var(--dk)}
+.sl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;margin-bottom:12px}
+.slo{color:var(--o)}.slg{color:var(--g)}.slb{color:var(--b)}.slp{color:var(--p)}
+.fbadge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:20px}
+.fbo{background:var(--ol);color:var(--od)}.fbb{background:var(--bl);color:var(--b)}.fbp{background:var(--pl);color:var(--p)}
+.gap-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:28px}
+.gc{background:#FAF7F5;border:1px solid var(--br);border-radius:var(--rs);padding:16px 14px;text-align:center}
+.gc.hot{background:var(--ol);border-color:var(--om)}
+.gn{font-family:'Fraunces',serif;font-size:26px;font-weight:700;color:var(--dk);line-height:1;margin-bottom:5px}
+.gc.hot .gn{color:var(--o)}
+.gl{font-size:11px;color:var(--t3);line-height:1.3}
+.hbox{border-radius:var(--rs);padding:14px 16px;margin-bottom:20px;font-size:13.5px;line-height:1.6}
+.hbo{background:var(--ol);border-left:3px solid var(--o);color:var(--od)}
+.hbb{background:var(--bl);border-left:3px solid var(--b);color:var(--b)}
+.hbg{background:var(--gl);border-left:3px solid var(--g);color:var(--g)}
+.hbp{background:var(--pl);border-left:3px solid var(--p);color:var(--p)}
+.hbox strong{font-weight:600}
+.st-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.stc{background:#FAF7F5;border:1px solid var(--br);border-radius:var(--rs);padding:14px 12px;text-align:center}
+.stv{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--dk);line-height:1;margin-bottom:4px}
+.stl{font-size:11px;color:var(--t3);line-height:1.3}
+.cl{border:1px solid var(--br);border-radius:var(--rs);overflow:hidden;margin-bottom:16px}
+.cr{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px solid var(--br);background:var(--wh)}
+.cr:last-child{border-bottom:none}
+.cr.ko{background:var(--ol)}.cr.kb{background:var(--bl)}.cr.kg{background:var(--gl)}.cr.kp{background:var(--pl)}
+.cn{font-size:13px;color:var(--tx);display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.tag{font-size:9px;padding:2px 7px;border-radius:20px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.to{background:var(--o);color:#fff}.tb{background:var(--b);color:#fff}.tg{background:var(--g);color:#fff}.tp{background:var(--p);color:#fff}
+.crr{display:flex;align-items:center;gap:14px}
+.cc{font-size:12px;color:var(--t3);font-variant-numeric:tabular-nums}
+.cp{font-size:13px;font-weight:600;color:var(--o);font-variant-numeric:tabular-nums;min-width:52px;text-align:right;font-family:'DM Mono',monospace}
+.cp.nb{color:var(--b)}.cp.ng{color:var(--g)}.cp.np{color:var(--p)}
+.total{background:var(--dk);border-radius:var(--rs);padding:18px 20px;display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+.tll{font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+.tld{font-size:12px;color:rgba(255,255,255,.45);line-height:1.4}
+.trp{font-family:'Fraunces',serif;font-size:32px;font-weight:700;color:var(--o)}
+.trs{font-size:10px;color:rgba(255,255,255,.3);text-align:right;margin-top:3px}
+.div{height:1px;background:var(--br);margin:0 0 28px}
+.extras{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px}
+.ep{background:var(--gl);border-radius:var(--rs);padding:13px 15px;display:flex;gap:10px;align-items:flex-start}
+.ei{font-size:20px;flex-shrink:0;margin-top:1px}
+.et{font-size:13px;font-weight:600;color:var(--g)}
+.ed{font-size:11px;color:#2A6454;margin-top:2px;line-height:1.4}
+.cierre{font-size:14px;color:var(--tx);line-height:1.75;margin-bottom:24px}
+.cierre strong{font-weight:600;color:var(--dk)}
+.cta{text-align:center;margin-bottom:28px}
+.ctab{display:inline-block;background:var(--o);color:#fff;font-size:14px;font-weight:600;padding:15px 36px;border-radius:100px;text-decoration:none;letter-spacing:.02em;box-shadow:0 4px 20px rgba(232,93,38,.35);transition:transform .15s,box-shadow .15s}
+.ctab:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(232,93,38,.45)}
+.foot{background:#EDE8E3;border-radius:0 0 var(--r) var(--r);padding:20px 36px;text-align:center}
+.foot p{font-size:11px;color:var(--t3);line-height:1.6}
+.pc{background:var(--wh);border:1.5px solid var(--br);border-radius:var(--rs);padding:18px 20px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:14px;text-decoration:none;margin-bottom:10px}
+.pc:hover{border-color:var(--o);background:var(--ol)}
+.pi{font-size:26px;flex-shrink:0}
+.pn{font-size:15px;font-weight:600;color:var(--dk)}
+.pd{font-size:12px;color:var(--t3);margin-top:2px}
+.pa{margin-left:auto;font-size:20px;color:var(--t3)}
+.pht{font-size:11px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin:20px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--br)}
+.ogg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+.ogc{background:#FAF7F5;border:1px solid var(--br);border-radius:var(--rs);padding:16px;text-align:center}
+.ogi{font-size:24px;margin-bottom:8px}
+.ogv{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--dk);margin-bottom:4px}
+.ogl{font-size:11px;color:var(--t3);line-height:1.3}
+.spl{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.spi{display:flex;gap:14px;align-items:flex-start;background:#FAF7F5;border:1px solid var(--br);border-radius:var(--rs);padding:14px 16px}
+.spn{width:26px;height:26px;border-radius:50%;background:var(--o);color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.spb{font-size:13.5px;color:var(--tx);line-height:1.55}
+.spb strong{font-weight:600}
+.spno{font-size:12px;color:var(--t3);margin-top:3px}
+.pr{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.pi2{background:var(--ol);color:var(--od);font-size:12px;font-weight:500;padding:6px 14px;border-radius:20px}
+.pi2.g{background:var(--gl);color:var(--g)}.pi2.b{background:var(--bl);color:var(--b)}
+.fi{opacity:0;transform:translateY(14px);animation:fu .5s ease forwards}
+@keyframes fu{to{opacity:1;transform:translateY(0)}}
+.fi:nth-child(1){animation-delay:.05s}.fi:nth-child(2){animation-delay:.15s}.fi:nth-child(3){animation-delay:.25s}.fi:nth-child(4){animation-delay:.35s}
+@media(max-width:500px){
+  .hero,.body,.foot{padding-left:20px;padding-right:20px}
+  .astrip{padding-left:20px;padding-right:20px}
+  .htit{font-size:24px}
+  .gap-row,.st-row,.ogg,.extras{grid-template-columns:1fr}
+  .total{flex-direction:column;gap:12px;text-align:center}
+  .trs{text-align:center}
+  .cc{display:none}
+  .ac{display:none}
+}
 </style>
 </head>
 <body>
-
-<!-- LOADING -->
-<div id="loading">
-  <div class="loading-dot"></div>
-  <div class="loading-text">Preparando tu propuesta…</div>
-</div>
-
-<div class="wrap" id="app" style="display:none">
-  <!-- Contenido inyectado por JS -->
-</div>
-
+<div id="loader"><div class="ld"></div><div class="lt">Preparando tu propuesta…</div></div>
+<div class="wrap" id="app" style="display:none"></div>
 <script>
-// ── DATOS DE PRODUCTOS ──────────────────────────────────────────────
-const PRODUCTOS = {
-  autonomo: {
-    nombre: 'Contigo Autónomo',
-    emoji: '🚐',
-    color: 'orange',
-    tagClass: 'tag-o',
-    keyClass: 'key',
-    secColor: 'orange',
-    titulo: (nombre) => `La protección que <em>le falta a ${nombre}</em> como autónomo.`,
-    subtitulo: 'Si estás de baja y no puedes trabajar, la SS no llega. Esto cubre exactamente ese agujero.',
-    greeting: (nombre) => `Hola <strong>${nombre}</strong>,<br><br>Como te comenté, el Contigo Autónomo es la pieza que le falta a cualquier trabajador por cuenta propia: cuando no puedes trabajar, <strong>¿quién paga tus gastos ese mes?</strong> Aquí tienes la respuesta.`,
-    showGap: true,
-    gap: { gastos: '900€', reta: '721€', hueco: '179€' },
-    gapDesc: ['Gastos fijos mensuales', 'Lo que paga la SS en baja', 'Sin cubrir cada mes. Hasta hoy.'],
-    coberturas: [
-      { nombre: 'Incapacidad laboral temporal', cap: '30 €/día', precio: '15,13 €', key: true, tag: 'clave' },
-      { nombre: 'Fallecimiento por accidente', cap: '60.000 €', precio: '5,04 €', key: true, tag: 'clave' },
-      { nombre: 'Fallecimiento acc. circulación', cap: '60.000 €', precio: '2,82 €', key: true, tag: 'clave' },
-      { nombre: 'Fallecimiento', cap: '16.000 €', precio: '5,25 €', key: false },
-      { nombre: 'Fallecimiento plus', cap: '50.000 €', precio: '1,34 €', key: false },
-      { nombre: 'Invalidez permanente absoluta', cap: '40.000 €', precio: '2,86 €', key: false },
-      { nombre: 'Invalidez permanente total', cap: '20.000 €', precio: '3,83 €', key: false },
-      { nombre: 'Enfermedad grave + cáncer', cap: '10.000 € c/u', precio: '1,51 €', key: false },
-    ],
-    totalDesc: 'Con descuento hábitos saludables −10%<br>Capital total asegurado: 266.000 €',
-    cierre: (nombre) => `<strong>${nombre}</strong>, por menos de 1,33 € al día tienes cubierto el peor escenario. Firmamos hoy y el seguro entra en vigor el día 1.`,
-  },
-  familia: {
-    nombre: 'Contigo Familia',
-    emoji: '👨‍👩‍👧',
-    color: 'blue',
-    tagClass: 'tag-b',
-    keyClass: 'key-blue',
-    secColor: 'blue',
-    titulo: (nombre) => `La tranquilidad de saber que <em>${nombre} y los suyos</em> están protegidos.`,
-    subtitulo: 'Porque si faltaras, tu familia seguiría necesitando vivir. Esto garantiza que puedan hacerlo.',
-    greeting: (nombre) => `Hola <strong>${nombre}</strong>,<br><br>El Contigo Familia es el seguro que te permite dormir tranquilo: si algo te pasa, <strong>tu familia tiene el respaldo económico para seguir adelante.</strong> Aquí tienes tu propuesta personalizada.`,
-    showGap: false,
-    coberturas: [
-      { nombre: 'Fallecimiento', cap: '100.000 €', precio: '12,50 €', key: true, tag: 'base' },
-      { nombre: 'Fallecimiento por accidente', cap: '100.000 €', precio: '6,20 €', key: true, tag: 'clave' },
-      { nombre: 'Invalidez permanente absoluta', cap: '80.000 €', precio: '8,40 €', key: true, tag: 'clave' },
-      { nombre: 'Invalidez permanente total', cap: '40.000 €', precio: '5,10 €', key: false },
-      { nombre: 'Enfermedad grave', cap: '20.000 €', precio: '1,20 €', key: false },
-      { nombre: 'Primer diagnóstico de cáncer', cap: '20.000 €', precio: '1,30 €', key: false },
-    ],
-    totalDesc: 'Prima estimada con descuento aplicado<br>Capital total asegurado: 360.000 €',
-    cierre: (nombre) => `<strong>${nombre}</strong>, proteger a tu familia no tiene por qué ser complicado ni caro. En 10 minutos lo tienes firmado y activo.`,
-  },
-  futuro: {
-    nombre: 'Contigo Futuro',
-    emoji: '📈',
-    color: 'green',
-    tagClass: 'tag-g',
-    keyClass: 'key-green',
-    secColor: 'green',
-    titulo: (nombre) => `El plan de ahorro que hace crecer <em>el dinero de ${nombre}</em> con garantías.`,
-    subtitulo: 'Ahorro sistemático, rentabilidad garantizada y protección familiar. Todo en un solo producto.',
-    greeting: (nombre) => `Hola <strong>${nombre}</strong>,<br><br>El Contigo Futuro es la herramienta más completa para construir tu colchón financiero: <strong>ahorro mensual, interés garantizado y protección para tu familia</strong> si algo te pasa mientras ahorras.`,
-    showGap: false,
-    coberturas: [
-      { nombre: 'Aportación mensual garantizada', cap: '200 €/mes', precio: '200,00 €', key: true, tag: 'base' },
-      { nombre: 'Capital garantizado a 10 años', cap: '25.000 €', precio: '—', key: true, tag: 'garantía' },
-      { nombre: 'Cobertura fallecimiento incluida', cap: '25.000 €', precio: '—', key: false },
-      { nombre: 'Rentabilidad anual estimada', cap: '2,5% TAE', precio: '—', key: false },
-      { nombre: 'Rescate parcial disponible', cap: 'A partir año 2', precio: '—', key: false },
-    ],
-    totalDesc: 'Aportación mensual · Producto de ahorro garantizado<br>Rentabilidad estimada: 2,5% TAE',
-    cierre: (nombre) => `<strong>${nombre}</strong>, el mejor momento para empezar a ahorrar fue ayer. El segundo mejor momento es hoy. Empezamos con la aportación que tú elijas.`,
-  }
+const PRODS={
+  // FASE 1
+  sialp:{fase:'Fase 1 · Ahorro e Inversión',fb:'fbp',ico:'🏦',nom:'Plan SIALP',sub:'Seguro de Ahorro a Largo Plazo con exención fiscal total.',col:'p',
+    tit:n=>`El ahorro que hace crecer <em>el dinero de ${n}</em> sin pagar a Hacienda.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>El Plan SIALP es la herramienta de ahorro más eficiente: <strong>exención fiscal total de los rendimientos</strong> si mantienes la inversión 5 años.`,
+    hb:{t:'hbp',x:'<strong>Ventaja clave:</strong> Exención fiscal total. Aportación máxima 5.000 €/año. Sin tributación al vencimiento.'},
+    sts:[{v:'5.000 €',l:'Aportación máx. anual'},{v:'5 años',l:'Plazo mín. exención'},{v:'0%',l:'Tributación'}],
+    covs:[{n:'Ahorro garantizado',c:'Hasta 5.000 €/año',p:'Desde 50 €/mes',k:true,t:'base'},{n:'Exención fiscal total',c:'100%',p:'✓',k:true,t:'ventaja'},{n:'Capital garantizado al vencimiento',c:'100%',p:'✓',k:false},{n:'Liquidez parcial',c:'A partir año 3',p:'—',k:false}],
+    tdesc:'Aportación mensual flexible · Horizonte mín. 5 años',prima:'Desde 50 €/mes',
+    cierre:n=>`<strong>${n}</strong>, ahorrar sin pagar impuestos es la decisión más inteligente. Empezamos con la aportación que elijas.`},
+
+  flexible:{fase:'Fase 1 · Ahorro e Inversión',fb:'fbp',ico:'🌍',nom:'Plan Flexible (Unit Linked)',sub:'Inversión internacional dinámica sin vencimiento fijo.',col:'p',
+    tit:n=>`La inversión internacional que hace <em>trabajar el dinero de ${n}</em>.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Gestión dinámica en mercados internacionales, sin vencimiento fijo. <strong>Tu dinero crece por encima de la inflación.</strong>`,
+    hb:{t:'hbp',x:'<strong>Diferencial:</strong> Gestión activa en mercados internacionales. Sin vencimiento. Rescate en cualquier momento.'},
+    sts:[{v:'Unit Linked',l:'Estructura'},{v:'Internacional',l:'Mercados'},{v:'Flexible',l:'Sin vencimiento'}],
+    covs:[{n:'Gestión activa cartera internacional',c:'100% invertido',p:'Variable',k:true,t:'diferencial'},{n:'Sin vencimiento fijo',c:'Flexibilidad total',p:'✓',k:true,t:'ventaja'},{n:'Rescate total o parcial',c:'Cualquier momento',p:'—',k:false},{n:'Cobertura fallecimiento',c:'Capital invertido',p:'—',k:false}],
+    tdesc:'Perfil: tolerancia media-alta al riesgo',prima:'A consultar',
+    cierre:n=>`<strong>${n}</strong>, tu dinero puede trabajar más que tú. Analizamos juntos el perfil inversor que mejor te encaja.`},
+
+  garantizado:{fase:'Fase 1 · Ahorro e Inversión',fb:'fbp',ico:'🔒',nom:'Plan Garantizado',sub:'Inversión internacional con garantía 100% del capital.',col:'p',
+    tit:n=>`La inversión de ${n} <em>con garantía absoluta</em> del capital.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Participas en mercados internacionales <strong>sin arriesgar ni un euro del capital</strong>. Al vencimiento, 100% garantizado.`,
+    hb:{t:'hbp',x:'<strong>Garantía contractual:</strong> 100% del capital garantizado al vencimiento. Sin riesgo de pérdida del principal.'},
+    sts:[{v:'100%',l:'Capital garantizado'},{v:'0%',l:'Riesgo pérdida'},{v:'+Rentabilidad',l:'Potencial'}],
+    covs:[{n:'Garantía 100% capital al vencimiento',c:'Contractual',p:'✓',k:true,t:'garantía'},{n:'Participación mercados internacionales',c:'Sin riesgo principal',p:'✓',k:true,t:'diferencial'},{n:'Rentabilidad adicional potencial',c:'Según mercado',p:'Variable',k:false},{n:'Cobertura fallecimiento',c:'Capital invertido',p:'—',k:false}],
+    tdesc:'Perfil: conservador que quiere rentabilidad',prima:'A consultar',
+    cierre:n=>`<strong>${n}</strong>, tranquilidad de no poder perder lo invertido. Esta es tu herramienta.`},
+
+  flexicuenta:{fase:'Fase 1 · Ahorro e Inversión',fb:'fbp',ico:'💰',nom:'Flexicuenta (Ahorro Remunerado)',sub:'Rentabilidad garantizada y disponibilidad total sin penalización.',col:'g',
+    tit:n=>`El ahorro de ${n} <em>siempre disponible</em> y siempre rentable.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Rentabilidad garantizada desde el día 1 y <strong>dinero disponible al instante, sin penalización</strong>. El fondo de emergencia perfecto.`,
+    hb:{t:'hbg',x:'<strong>Ventaja única:</strong> Disponibilidad total inmediata SIN penalización. Rentabilidad garantizada desde el día 1.'},
+    sts:[{v:'100%',l:'Disponibilidad inmediata'},{v:'0 €',l:'Penalización rescate'},{v:'Garantizada',l:'Rentabilidad'}],
+    covs:[{n:'Disponibilidad total e inmediata',c:'Sin penalización',p:'✓',k:true,t:'clave'},{n:'Rentabilidad garantizada',c:'Desde día 1',p:'✓',k:true,t:'ventaja'},{n:'Aportaciones flexibles',c:'Sin límite mín.',p:'—',k:false},{n:'Sin plazo de permanencia',c:'Total libertad',p:'—',k:false}],
+    tdesc:'Aportación flexible · Ideal como fondo de emergencia',prima:'Flexible',
+    cierre:n=>`<strong>${n}</strong>, un colchón que renta mientras duermes es la base de cualquier estrategia económica.`},
+
+  futuro:{fase:'Fase 1 · Ahorro e Inversión',fb:'fbp',ico:'📈',nom:'Contigo Futuro',sub:'Ahorro-inversión ESG con garantía diaria y creciente.',col:'p',
+    tit:n=>`El plan de ahorro que hace crecer <em>el dinero de ${n}</em> con garantías diarias.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Contigo Futuro: inversión sostenible ESG con <strong>garantía diaria y creciente</strong>. Tus beneficios quedan protegidos cada día.`,
+    hb:{t:'hbp',x:'<strong>Diferencial único:</strong> Garantía diaria y creciente. Fondos sostenibles ESG. Beneficios consolidados automáticamente cada día.'},
+    sts:[{v:'Diaria',l:'Frecuencia garantía'},{v:'ESG',l:'Inversión sostenible'},{v:'Creciente',l:'Protección beneficios'}],
+    covs:[{n:'Garantía diaria sobre valor invertido',c:'Creciente',p:'✓',k:true,t:'único'},{n:'Fondos sostenibles ESG',c:'100%',p:'✓',k:true,t:'diferencial'},{n:'Consolidación diaria de beneficios',c:'Automática',p:'✓',k:false},{n:'Cobertura fallecimiento',c:'Capital invertido',p:'—',k:false},{n:'Rescate parcial',c:'A partir año 2',p:'—',k:false}],
+    tdesc:'Aportación mensual elegida · Garantía diaria y creciente',prima:'Desde 100 €/mes',
+    cierre:n=>`<strong>${n}</strong>, invertir de forma ética con garantías diarias. Empezamos con la aportación que elijas.`},
+
+  // FASE 2
+  saludvida:{fase:'Fase 2 · Salud, Vida y Accidentes',fb:'fbo',ico:'❤️',nom:'Plan Salud + Vida',sub:'Solución híbrida única: salud y vida en un solo contrato.',col:'o',
+    tit:n=>`La protección completa de <em>${n} y su familia</em> en un solo contrato.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>El producto estrella de NN: <strong>medicina privada Sanitas + seguro de vida gratis el primer año</strong>. Protección total con ahorro inmediato.`,
+    hb:{t:'hbo',x:'<strong>Oferta exclusiva:</strong> Al contratar la cobertura de salud de Sanitas, el seguro de vida es GRATIS el primer año.'},
+    covs:[{n:'Seguro de salud Sanitas completo',c:'Familia completa',p:'Desde 80 €/mes',k:true,t:'estrella'},{n:'Seguro de vida 1er año GRATIS',c:'Capital a elegir',p:'0 € primer año',k:true,t:'gratis'},{n:'Medicina familiar y especialistas',c:'Acceso directo',p:'✓',k:false},{n:'Hospitalización y urgencias 24h',c:'Incluido',p:'✓',k:false},{n:'Cobertura dental',c:'Incluida',p:'✓',k:false},{n:'Pruebas diagnósticas',c:'Sin límite',p:'✓',k:false}],
+    tdesc:'Prima variable según edad y coberturas · Vida incluido gratis el 1er año',prima:'Desde 80 €/mes',
+    cierre:n=>`<strong>${n}</strong>, medicina privada Sanitas más vida gratis el primer año. La decisión que marca la diferencia.`},
+
+  saludcompleto:{fase:'Fase 2 · Salud, Vida y Accidentes',fb:'fbo',ico:'🏥',nom:'Seguro de Salud Completo',sub:'Cobertura médica total con acceso directo a red Sanitas.',col:'o',
+    tit:n=>`La medicina privada de <em>${n}</em>, sin esperas y sin límites.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Sanitas completo: <strong>medicina familiar, especialidades, hospitalización, urgencias 24h y dental</strong>. La cobertura más amplia del mercado.`,
+    hb:{t:'hbo',x:'<strong>Red Sanitas:</strong> Más de 40.000 profesionales y 1.000 centros en España. Sin listas de espera. Sin burocracia.'},
+    covs:[{n:'Medicina familiar',c:'Acceso directo',p:'✓',k:true,t:'incluido'},{n:'Especialidades médicas',c:'Sin límite',p:'✓',k:true,t:'incluido'},{n:'Hospitalización completa',c:'Incluida',p:'✓',k:false},{n:'Urgencias 24h',c:'Incluidas',p:'✓',k:false},{n:'Pruebas diagnósticas',c:'Sin límite',p:'✓',k:false},{n:'Cobertura dental',c:'Incluida',p:'✓',k:false}],
+    tdesc:'Prima variable según edad y zona · Red Sanitas completa',prima:'A consultar',
+    cierre:n=>`<strong>${n}</strong>, con Sanitas tienes respuesta inmediata cuando la necesitas.`},
+
+  saludcopago:{fase:'Fase 2 · Salud, Vida y Accidentes',fb:'fbo',ico:'💊',nom:'Salud con Copago',sub:'Medicina privada Sanitas con prima reducida y pago por uso.',col:'o',
+    tit:n=>`La medicina privada de Sanitas para ${n}, <em>al precio que le encaja.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Las mismas coberturas Sanitas, pero con <strong>prima mensual reducida a cambio de un pequeño copago por uso</strong>.`,
+    hb:{t:'hbo',x:'<strong>Optimización de costes:</strong> Mismas coberturas. Prima mensual reducida. Copago solo cuando se usa el servicio.'},
+    covs:[{n:'Red médica completa Sanitas',c:'Acceso total',p:'Prima reducida',k:true,t:'ahorro'},{n:'Copago por uso',c:'Solo cuando se usa',p:'Pequeño importe',k:true,t:'flexible'},{n:'Especialidades y diagnóstico',c:'Incluidos',p:'✓',k:false},{n:'Hospitalización y urgencias',c:'Incluidas',p:'✓',k:false},{n:'Dental incluida',c:'Incluida',p:'✓',k:false}],
+    tdesc:'Prima reducida · Copago solo al usar el servicio',prima:'Desde 55 €/mes',
+    cierre:n=>`<strong>${n}</strong>, medicina privada de calidad sin que el coste fijo sea un problema.`},
+
+  vidafamilia:{fase:'Fase 2 · Salud, Vida y Accidentes',fb:'fbo',ico:'👨‍👩‍👧',nom:'Seguro de Vida y Familia',sub:'Protección económica ante fallecimiento, invalidez y enfermedades graves.',col:'o',
+    tit:n=>`Si algo le pasara a ${n}, <em>su familia estaría protegida.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Si algo te pasa, <strong>tu familia tiene el respaldo económico para seguir adelante</strong>: hipoteca cubierta, estudios garantizados, vida mantenida.`,
+    hb:{t:'hbo',x:'<strong>Cobertura pionera:</strong> Protección específica para cáncer de mama, además de fallecimiento e invalidez.'},
+    covs:[{n:'Fallecimiento por cualquier causa',c:'Capital a elegir',p:'Desde 12 €/mes',k:true,t:'base'},{n:'Invalidez permanente absoluta',c:'Capital a elegir',p:'Desde 8 €/mes',k:true,t:'clave'},{n:'Protección cáncer de mama',c:'Pionera',p:'✓',k:true,t:'único'},{n:'Fallecimiento por accidente',c:'Capital adicional',p:'Desde 5 €/mes',k:false},{n:'Enfermedades graves',c:'Capital adicional',p:'Desde 1 €/mes',k:false}],
+    tdesc:'Prima variable según edad y coberturas · Recomendado: 10x ingresos anuales',prima:'Desde 25 €/mes',
+    cierre:n=>`<strong>${n}</strong>, la pregunta no es si puedes permitirte este seguro. Es si tu familia puede permitirse no tenerlo.`},
+
+  senior:{fase:'Fase 2 · Salud, Vida y Accidentes',fb:'fbo',ico:'🧓',nom:'Contigo Senior (+55)',sub:'Protección integral para mayores de 55: accidentes, salud y servicios de autonomía.',col:'o',
+    tit:n=>`La protección y la independencia que <em>${n} merece.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Contigo Senior: <strong>capital por accidente, asistencia Sanitas y servicios reales de autonomía</strong> para seguir viviendo con calidad e independencia.`,
+    hb:{t:'hbo',x:'<strong>Servicios únicos:</strong> Geriatría, podología, peluquería a domicilio, auxiliar en casa y acompañamiento a citas médicas.'},
+    sts:[{v:'65.000 €',l:'Capital máx. accidente'},{v:'+55 años',l:'Edad de acceso'},{v:'Sanitas',l:'Red asistencial'}],
+    covs:[{n:'Capital por accidente (baremo)',c:'Hasta 65.000 €',p:'Desde 15 €/mes',k:true,t:'clave'},{n:'Asistencia Sanitas geriatría',c:'Incluida',p:'✓',k:true,t:'diferencial'},{n:'Auxiliar a domicilio',c:'Servicio real',p:'✓',k:false},{n:'Peluquería a domicilio',c:'Incluida',p:'✓',k:false},{n:'Acompañamiento citas médicas',c:'Incluido',p:'✓',k:false}],
+    tdesc:'Prima variable según edad · Diseñado para +55',prima:'Desde 20 €/mes',
+    cierre:n=>`<strong>${n}</strong>, mantener la independencia y la calidad de vida es lo más valioso. Este producto lo hace posible.`},
+
+  accidentes:{fase:'Fase 2 · Salud, Vida y Accidentes',fb:'fbo',ico:'⚡',nom:'Seguro de Accidentes',sub:'Indemnización directa e inmediata por lesiones fortuitas.',col:'o',
+    tit:n=>`El respaldo inmediato de ${n} <em>ante cualquier accidente.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br><strong>Indemnización directa y asistencia sanitaria especializada</strong> ante cualquier accidente. Sin burocracia, sin esperas.`,
+    hb:{t:'hbo',x:'<strong>Respuesta rápida:</strong> Indemnización directa por lesiones. Asistencia sanitaria especializada. Fallecimiento por accidente incluido.'},
+    covs:[{n:'Indemnización lesiones accidentales',c:'Según baremo',p:'Desde 8 €/mes',k:true,t:'clave'},{n:'Asistencia sanitaria especializada',c:'Incluida',p:'✓',k:true,t:'incluido'},{n:'Fallecimiento por accidente',c:'Capital a elegir',p:'Desde 3 €/mes',k:false},{n:'Invalidez por accidente',c:'Capital a elegir',p:'Desde 3 €/mes',k:false}],
+    tdesc:'Desde 8 €/mes · Complemento perfecto para cualquier seguro de vida',prima:'Desde 8 €/mes',
+    cierre:n=>`<strong>${n}</strong>, los accidentes no avisan. Por menos de un café al día, tienes respaldo inmediato.`},
+
+  // FASE 5
+  autonomo:{fase:'Fase 5 · Profesional y Empresa',fb:'fbo',ico:'🚐',nom:'Contigo Autónomo',sub:'Protección laboral integral para trabajadores por cuenta propia.',col:'o',
+    tit:n=>`La protección que <em>le falta a ${n}</em> como autónomo.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Como autónomo, si no trabajas, no ingresas. <strong>Este seguro cubre el agujero entre lo que paga la SS y lo que necesitas para mantener tu negocio y tu vida.</strong>`,
+    gap:true,gd:{g:'900€',r:'721€',h:'179€'},gl:['Gastos fijos mensuales','Lo que paga la SS en baja','Sin cubrir cada mes. Hasta hoy.'],
+    covs:[{n:'Incapacidad laboral temporal (ILT)',c:'30 €/día',p:'15,13 €',k:true,t:'clave'},{n:'Fallecimiento por accidente',c:'60.000 €',p:'5,04 €',k:true,t:'clave'},{n:'Fallecimiento acc. circulación',c:'60.000 €',p:'2,82 €',k:true,t:'clave'},{n:'Fallecimiento',c:'16.000 €',p:'5,25 €',k:false},{n:'Fallecimiento plus',c:'50.000 €',p:'1,34 €',k:false},{n:'Invalidez permanente absoluta',c:'40.000 €',p:'2,86 €',k:false},{n:'Invalidez permanente total',c:'20.000 €',p:'3,83 €',k:false},{n:'Enfermedad grave + cáncer',c:'10.000 € c/u',p:'1,51 €',k:false}],
+    tdesc:'Con descuento hábitos saludables −10%<br>Capital total: 266.000 €',prima:'39,94 €/mes',
+    cierre:n=>`<strong>${n}</strong>, por menos de 1,33 € al día tienes cubierto el peor escenario. Firmamos hoy y entra en vigor el día 1.`},
+
+  ilt:{fase:'Fase 5 · Profesional y Empresa',fb:'fbo',ico:'🩹',nom:'Baja Laboral Autónomos (ILT)',sub:'Indemnización diaria por incapacidad temporal para autónomos.',col:'o',
+    tit:n=>`Si ${n} no puede trabajar, <em>sus ingresos no se detienen.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br><strong>Indemnización diaria que cubre la pérdida de ingresos o el mantenimiento de gastos fijos</strong> mientras no puedes trabajar.`,
+    hb:{t:'hbo',x:'<strong>ILT autónomos:</strong> Desde el 1er día en accidente. Cubre enfermedad y accidente. Solo para autónomos en RETA.'},
+    gap:true,gd:{g:'900€',r:'721€',h:'179€'},gl:['Gastos fijos mensuales','Prestación RETA en baja','Agujero mensual sin cubrir'],
+    covs:[{n:'Indemnización diaria IT (accidente)',c:'Sin carencia',p:'Desde 10 €/día',k:true,t:'clave'},{n:'Indemnización diaria IT (enfermedad)',c:'Carencia 2-12 meses',p:'Desde 10 €/día',k:true,t:'clave'},{n:'Franquicia elegible',c:'0, 7, 15 o 30 días',p:'A elegir',k:false},{n:'Máx. 365 días/anualidad',c:'Límite anual',p:'—',k:false}],
+    tdesc:'Prima según capital diario y grupo profesional · Solo autónomos RETA',prima:'Desde 12 €/mes',
+    cierre:n=>`<strong>${n}</strong>, ¿puedes permitirte no tenerlo cuando más lo necesitas?`},
+
+  pyme:{fase:'Fase 5 · Profesional y Empresa',fb:'fbb',ico:'🏢',nom:'Contigo Pyme',sub:'Seguro colectivo de vida y accidentes para empleados de PYME.',col:'b',
+    tit:n=>`La empresa de ${n} <em>protege a sus empleados</em> desde hoy.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Protección de vida y accidentes para todos los empleados <strong>sin exámenes médicos para la gran mayoría</strong>. Cumple convenios y fideliza talento.`,
+    hb:{t:'hbb',x:'<strong>Sin examen médico:</strong> Para la gran mayoría de empleados. Adaptado a convenios laborales. Beneficio social que retiene talento.'},
+    sts:[{v:'Sin examen',l:'Médico mayoría'},{v:'Convenios',l:'Totalmente adaptado'},{v:'Colectivo',l:'Toda la plantilla'}],
+    covs:[{n:'Seguro de vida colectivo',c:'Capital a definir',p:'Desde 5 €/empleado',k:true,t:'base'},{n:'Sin examen médico (mayoría)',c:'Contratación directa',p:'✓',k:true,t:'ventaja'},{n:'Cobertura accidentes laborales',c:'Incluida',p:'✓',k:false},{n:'Adaptado a convenio',c:'Obligaciones legales',p:'✓',k:false},{n:'Gestión colectiva una póliza',c:'Simplificada',p:'✓',k:false}],
+    tdesc:'Prima por empleado · Según plantilla y coberturas',prima:'Desde 5 €/empleado',
+    cierre:n=>`<strong>${n}</strong>, proteger a tu equipo es la mejor inversión. Lo formalizamos con una reunión sin compromiso.`},
+
+  comercios:{fase:'Fase 5 · Profesional y Empresa',fb:'fbb',ico:'🏪',nom:'Seguro para Comercios',sub:'Multirriesgo integral para negocios y locales comerciales.',col:'b',
+    tit:n=>`El negocio de ${n} protegido <em>ante cualquier imprevisto.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Local, mobiliario, existencias y <strong>garantía de continuidad del negocio</strong> si un siniestro obliga a cerrar temporalmente.`,
+    hb:{t:'hbb',x:'<strong>Garantía crítica:</strong> Continuidad del negocio ante cierre temporal. Tu inversión protegida al 100%.'},
+    covs:[{n:'Continente (local y estructura)',c:'Capital a asegurar',p:'Desde 20 €/mes',k:true,t:'base'},{n:'Contenido (mobiliario y existencias)',c:'Capital a asegurar',p:'Desde 15 €/mes',k:true,t:'clave'},{n:'Garantía continuidad del negocio',c:'Pérdida beneficios',p:'✓',k:true,t:'diferencial'},{n:'Responsabilidad civil',c:'Incluida',p:'✓',k:false},{n:'Robo e incendio',c:'Incluidos',p:'✓',k:false},{n:'Daños por agua',c:'Incluidos',p:'✓',k:false}],
+    tdesc:'Prima variable según actividad y capitales · Valoración en 3 minutos',prima:'Desde 35 €/mes',
+    cierre:n=>`<strong>${n}</strong>, un siniestro puede cerrar un negocio para siempre. Este seguro garantiza que no ocurra.`},
+
+  saludautonomos:{fase:'Fase 5 · Profesional y Empresa',fb:'fbo',ico:'🩺',nom:'Salud con Copago Autónomos',sub:'Medicina privada Sanitas deducible en el IRPF.',col:'g',
+    tit:n=>`La salud privada de ${n}, <em>deducible en el IRPF.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Como autónomo, la prima es <strong>deducible en el IRPF como gasto profesional</strong>. Medicina privada Sanitas que se paga sola.`,
+    hb:{t:'hbg',x:'<strong>Ventaja fiscal autónomos:</strong> Prima deducible en IRPF. Medicina privada Sanitas. Ahorro fiscal estimado hasta 40% de la prima.'},
+    sts:[{v:'Deducible',l:'Prima en IRPF'},{v:'Sanitas',l:'Red médica'},{v:'Hasta 40%',l:'Ahorro fiscal'}],
+    covs:[{n:'Deducción IRPF de la prima',c:'Gasto profesional',p:'✓',k:true,t:'fiscal'},{n:'Red médica Sanitas completa',c:'Especialidades',p:'✓',k:true,t:'incluido'},{n:'Copago optimizado',c:'Prima reducida',p:'Desde 40 €/mes',k:false},{n:'Hospitalización y urgencias 24h',c:'Incluidas',p:'✓',k:false},{n:'Dental incluida',c:'Incluida',p:'✓',k:false}],
+    tdesc:'Desde 40 €/mes · Deducible como gasto profesional en IRPF',prima:'Desde 40 €/mes',
+    cierre:n=>`<strong>${n}</strong>, medicina privada que además te ahorra impuestos. La decisión más inteligente como autónomo.`},
+
+  ppsa:{fase:'Fase 5 · Profesional y Empresa',fb:'fbb',ico:'💼',nom:'PPSA (Plan Pensiones Autónomos)',sub:'Deducción hasta 5.750 €/año · Gestión Goldman Sachs.',col:'b',
+    tit:n=>`${n} reduce impuestos hoy <em>y construye su pensión para mañana.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>El PPSA es la herramienta fiscal más potente para autónomos: <strong>deducción hasta 5.750 €/año en el IRPF</strong> con gestión profesional de Goldman Sachs.`,
+    hb:{t:'hbb',x:'<strong>Ventaja fiscal máxima:</strong> Deducción hasta 5.750 €/año (vs 1.500 € planes individuales). Goldman Sachs. Costes 0,97%.'},
+    sts:[{v:'5.750 €',l:'Deducción máx. anual'},{v:'Goldman Sachs',l:'Gestión profesional'},{v:'0,97%',l:'Costes gestión'}],
+    covs:[{n:'Deducción IRPF hasta 5.750 €/año',c:'Autónomos',p:'✓',k:true,t:'fiscal'},{n:'Gestión Goldman Sachs 50/50',c:'Profesional',p:'✓',k:true,t:'diferencial'},{n:'Liquidez a partir de 10 años',c:'O contingencias',p:'✓',k:false},{n:'Cese de actividad como contingencia',c:'Liquidez anticipada',p:'✓',k:false},{n:'Costes gestión competitivos',c:'0,97% anual',p:'✓',k:false}],
+    tdesc:'Aportación máx. 5.750 €/año · Ahorro fiscal estimado hasta 2.300 €/año',prima:'Hasta 5.750 €/año',
+    cierre:n=>`<strong>${n}</strong>, cada año sin un PPSA es dinero que le regalas a Hacienda. Empezamos hoy.`},
 };
 
-// ── PARÁMETROS DE URL ───────────────────────────────────────────────
-function getParams() {
-  const p = new URLSearchParams(window.location.search);
-  return {
-    nombre: p.get('nombre') || p.get('name') || '',
-    producto: (p.get('producto') || p.get('product') || '').toLowerCase(),
-    prima: p.get('prima') || p.get('price') || '',
-    capital: p.get('capital') || '',
+function q(k,d=''){return new URLSearchParams(window.location.search).get(k)||d;}
+
+function strip(){return`<div class="astrip"><div class="aav"><img src="fede.jpg" alt="F" onerror="this.parentElement.innerHTML='F'"></div><div><div class="an">Federico Fontanals</div><div class="ar">Agente Dinamizador · Punto Naranja NN Xàtiva</div></div><div class="ac"><a href="tel:+34680507186">📞 680 507 186</a><a href="mailto:federico.fontanals@nnespana.es">✉️ nnespana.es</a></div></div>`;}
+function foot(){return`<div class="foot fi"><p>Nationale-Nederlanden · Av. Bruselas 16, Alcobendas · Federico Fontanals · federico.fontanals@nnespana.es · +34 680 507 186<br>Prima estimada sujeta a confirmación · Documento informativo no contractual</p></div>`;}
+function exts(){return`<div class="sl slg">Incluido sin coste adicional</div><div class="extras"><div class="ep"><span class="ei">🩺</span><div><div class="et">App Salud</div><div class="ed">Chat médico 24h · múltiples especialidades</div></div></div><div class="ep"><span class="ei">⚖️</span><div><div class="et">App Legal</div><div class="ed">Asesoramiento jurídico ilimitado · 2 min</div></div></div></div>`;}
+function kc(c){return{o:'ko',b:'kb',g:'kg',p:'kp'}[c]||'ko';}
+function tc(c){return{o:'to',b:'tb',g:'tg',p:'tp'}[c]||'to';}
+function pc(c){return{o:'',b:'nb',g:'ng',p:'np'}[c]||'';}
+function sc(c){return{o:'slo',b:'slb',g:'slg',p:'slp'}[c]||'slo';}
+
+function renderProd(p,nombre,prima){
+  const n=nombre||'tu propuesta';
+  const pf=prima||p.prima||'A consultar';
+  const K=kc(p.col),T=tc(p.col),PC=pc(p.col),SC=sc(p.col);
+  const gapH=p.gap?`<div class="sl slo">El agujero real</div><div class="gap-row"><div class="gc"><div class="gn">${p.gd.g}</div><div class="gl">${p.gl[0]}</div></div><div class="gc"><div class="gn">${p.gd.r}</div><div class="gl">${p.gl[1]}</div></div><div class="gc hot"><div class="gn">${p.gd.h}</div><div class="gl">${p.gl[2]}</div></div></div><div class="div"></div>`:''
+  const hbH=p.hb?`<div class="hbox ${p.hb.t}">${p.hb.x}</div>`:''
+  const stH=p.sts?`<div class="st-row">${p.sts.map(s=>`<div class="stc"><div class="stv">${s.v}</div><div class="stl">${s.l}</div></div>`).join('')}</div>`:''
+  const cvH=p.covs.map(c=>`<div class="cr ${c.k?K:''} "><span class="cn">${c.n}${c.k?`<span class="tag ${T}">${c.t}</span>`:''}</span><div class="crr"><span class="cc">${c.c}</span><span class="cp ${PC}">${c.p}</span></div></div>`).join('')
+  return`<div class="hero fi"><div class="g1"></div><div class="g2"></div><div class="htop"><div class="hbrand"><div class="bdot">N</div><span class="bname">Nationale-Nederlanden</span></div><span class="hbadge">${p.ico} ${p.nom}</span></div><div class="hpt">${p.nom} · Propuesta personalizada</div><h1 class="htit">${p.tit(n)}</h1><p class="hsub">${p.sub}</p></div>${strip()}<div class="body fi"><div class="greet">${p.greet(n)}</div><span class="fbadge ${p.fb}">${p.ico} ${p.fase}</span>${gapH}${hbH}${stH}<div class="sl ${SC}">Qué incluye tu propuesta</div><div class="cl">${cvH}</div><div class="total"><div><div class="tll">Prima mensual estimada</div><div class="tld">${p.tdesc}</div></div><div><div class="trp">${pf}</div><div class="trs">al mes</div></div></div>${exts()}<div class="div"></div><div class="cierre">${p.cierre(n)}</div><div class="cta"><a href="tel:+34680507186" class="ctab">Llamar a Fede · 680 507 186</a></div></div>${foot()}`;
+}
+
+function renderAgente(n){
+  const nm=n||'Aquí';
+  return`<div class="hero fi"><div class="g1"></div><div class="g2"></div><div class="htop"><div class="hbrand"><div class="bdot">N</div><span class="bname">Nationale-Nederlanden</span></div><span class="hbadge">🤝 Oportunidad de negocio</span></div><div class="hpt">Únete a la red NN · Propuesta personalizada</div><h1 class="htit">${nm}, construye <em>tu negocio propio</em> con el respaldo de NN.</h1><p class="hsub">800.000+ clientes en España. Ingresos recurrentes. Formación completa. Tú pones las ganas.</p></div>${strip()}<div class="body fi"><div class="greet">Hola <strong>${nm}</strong>,<br><br>Te escribo porque creo que tienes el perfil ideal para construir un negocio propio como agente NN. <strong>Sin inversión inicial, con ingresos recurrentes y con todo el respaldo de una de las aseguradoras más grandes de Europa.</strong></div><div class="sl slo">La oportunidad en números</div><div class="ogg"><div class="ogc"><div class="ogi">🌍</div><div class="ogv">800K+</div><div class="ogl">Clientes en España</div></div><div class="ogc"><div class="ogi">📈</div><div class="ogv">Recurrente</div><div class="ogl">Ingreso mensual</div></div><div class="ogc"><div class="ogi">🎓</div><div class="ogv">Completa</div><div class="ogl">Formación incluida</div></div><div class="ogc"><div class="ogi">🤝</div><div class="ogv">Tu ritmo</div><div class="ogl">Flexibilidad total</div></div></div><div class="div"></div><div class="sl slo">El proceso para empezar</div><div class="spl"><div class="spi"><div class="spn">1</div><div class="spb"><strong>Proceso ADN personalizado</strong><div class="spno">Analizamos juntos tu perfil, tu zona y tu potencial de negocio.</div></div></div><div class="spi"><div class="spn">2</div><div class="spb"><strong>Formación y certificación DGS</strong><div class="spno">Te preparamos desde cero. Soporte continuo de tu equipo.</div></div></div><div class="spi"><div class="spn">3</div><div class="spb"><strong>Cartera desde el primer día</strong><div class="spno">Trabajas con tu red de contactos y las herramientas digitales de NN.</div></div></div><div class="spi"><div class="spn">4</div><div class="spb"><strong>Ingresos recurrentes y crecientes</strong><div class="spno">Cada póliza genera comisión anual renovable. Tu negocio crece solo.</div></div></div></div><div class="div"></div><div class="sl slg">Perfil que buscamos</div><div class="pr"><span class="pi2">Orientado a personas</span><span class="pi2">Capacidad de escucha</span><span class="pi2 g">Ambición de crecer</span><span class="pi2 g">Zona La Costera / Levante</span><span class="pi2 b">Ganas de aprender</span><span class="pi2 b">Red de contactos propia</span></div><div class="div"></div><div class="cierre">La primera reunión no te compromete a nada. <strong>En 30 minutos sabes si esto encaja con lo que estás buscando.</strong></div><div class="cta"><a href="tel:+34680507186" class="ctab">Hablar con Fede · 680 507 186</a></div></div>${foot()}`;
+}
+
+function renderPortada(){
+  const fases={
+    'Fase 1 · Ahorro e Inversión 💰':[{k:'sialp',i:'🏦',n:'Plan SIALP',d:'Ahorro exento de impuestos a largo plazo'},{k:'flexible',i:'🌍',n:'Plan Flexible (Unit Linked)',d:'Inversión internacional dinámica'},{k:'garantizado',i:'🔒',n:'Plan Garantizado',d:'Capital 100% garantizado al vencimiento'},{k:'flexicuenta',i:'💰',n:'Flexicuenta',d:'Ahorro disponible al instante, siempre rentable'},{k:'futuro',i:'📈',n:'Contigo Futuro',d:'ESG con garantía diaria y creciente'}],
+    'Fase 2 · Salud, Vida y Accidentes ❤️':[{k:'saludvida',i:'❤️',n:'Plan Salud + Vida',d:'Vida gratis el primer año · Producto estrella'},{k:'saludcompleto',i:'🏥',n:'Salud Completo',d:'Cobertura total · Red Sanitas'},{k:'saludcopago',i:'💊',n:'Salud con Copago',d:'Medicina privada con prima optimizada'},{k:'vidafamilia',i:'👨‍👩‍👧',n:'Vida y Familia',d:'Fallecimiento, invalidez y enfermedades graves'},{k:'senior',i:'🧓',n:'Contigo Senior (+55)',d:'Protección integral para mayores de 55'},{k:'accidentes',i:'⚡',n:'Seguro de Accidentes',d:'Indemnización directa por lesiones fortuitas'}],
+    'Fase 5 · Profesional y Empresa 💼':[{k:'autonomo',i:'🚐',n:'Contigo Autónomo',d:'Protección laboral integral para autónomos'},{k:'ilt',i:'🩹',n:'Baja Laboral (ILT)',d:'Indemnización diaria por incapacidad temporal'},{k:'pyme',i:'🏢',n:'Contigo Pyme',d:'Seguro colectivo para empleados'},{k:'comercios',i:'🏪',n:'Seguro para Comercios',d:'Multirriesgo integral para negocios'},{k:'saludautonomos',i:'🩺',n:'Salud Autónomos',d:'Salud privada deducible en el IRPF'},{k:'ppsa',i:'💼',n:'PPSA Autónomos',d:'Plan pensiones · Deducción hasta 5.750 €/año'}],
   };
+  let h=`<div class="hero fi"><div class="g1"></div><div class="g2"></div><div class="htop"><div class="hbrand"><div class="bdot">N</div><span class="bname">Nationale-Nederlanden</span></div></div><div class="hpt">Portal de Propuestas · Fede Fontanals</div><h1 class="htit">Selecciona la <em>propuesta</em> que quieres ver.</h1><p class="hsub">Cada propuesta se personaliza con el nombre y los datos del cliente.</p></div>${strip()}<div class="body fi"><div class="greet">Bienvenido al portal de propuestas de <strong>Federico Fontanals</strong>, Agente Dinamizador NN Xàtiva. Selecciona el producto para ver la propuesta completa.</div>`;
+  for(const[f,ps] of Object.entries(fases)){h+=`<div class="pht">${f}</div>`;ps.forEach(p=>{h+=`<a class="pc" href="?producto=${p.k}"><span class="pi">${p.i}</span><div><div class="pn">${p.n}</div><div class="pd">${p.d}</div></div><span class="pa">›</span></a>`;});}
+  h+=`<div class="pht">🤝 Para Agentes</div><a class="pc" href="?seccion=agente"><span class="pi">🤝</span><div><div class="pn">Oportunidad de negocio NN</div><div class="pd">Presentación para candidatos a agente</div></div><span class="pa">›</span></a></div>${foot()}`;
+  return h;
 }
 
-// ── RENDER PRINCIPAL ────────────────────────────────────────────────
-function render() {
-  const { nombre, producto, prima, capital } = getParams();
-  const app = document.getElementById('app');
-  const prod = PRODUCTOS[producto];
-
-  // Si no hay producto válido → portada de selección
-  if (!prod) {
-    app.innerHTML = renderPortada(nombre);
-    return;
-  }
-
-  const primaFinal = prima || calcPrima(prod);
-  const capitalFinal = capital || calcCapital(prod);
-
-  app.innerHTML = `
-    ${renderHero(prod, nombre)}
-    ${renderBody(prod, nombre, primaFinal, capitalFinal)}
-    ${renderFooter()}
-  `;
+function main(){
+  const sec=q('seccion'),prod=q('producto').toLowerCase(),n=q('nombre')||q('name'),p=q('prima')||q('price'),app=document.getElementById('app');
+  if(sec==='agente')app.innerHTML=renderAgente(n);
+  else if(prod&&PRODS[prod])app.innerHTML=renderProd(PRODS[prod],n,p);
+  else app.innerHTML=renderPortada();
 }
 
-function calcPrima(prod) {
-  const sum = prod.coberturas.reduce((a, c) => {
-    const n = parseFloat(c.precio.replace('€','').replace(',','.').replace('—','0').trim()) || 0;
-    return a + n;
-  }, 0);
-  return sum > 0 ? sum.toFixed(2).replace('.',',') + ' €' : 'A consultar';
-}
-
-function calcCapital(prod) {
-  return prod.totalDesc.match(/[\d.]+\.[\d]+\s*€/) ? prod.totalDesc.match(/[\d.]+\.[\d]+\s*€/)[0] : '—';
-}
-
-// ── PORTADA ─────────────────────────────────────────────────────────
-function renderPortada(nombre) {
-  const saludo = nombre ? `Hola <strong>${nombre}</strong>, selecciona tu propuesta:` : 'Selecciona el producto que quieres ver:';
-  return `
-    <div class="hero" style="border-radius:16px 16px 0 0">
-      <div class="hero-glow-1"></div>
-      <div class="hero-glow-2"></div>
-      <div class="hero-top">
-        <div class="hero-brand">
-          <div class="brand-dot">N</div>
-          <span class="brand-name">Nationale-Nederlanden</span>
-        </div>
-      </div>
-      <div class="hero-product-tag">Propuestas Personalizadas</div>
-      <h1 class="hero-title">Tu propuesta<br><em>te está esperando.</em></h1>
-    </div>
-    <div class="agent-strip" style="background:#1C1714">
-      <div class="agent-avatar"><img src="fede.jpg" alt="Fede" onerror="this.parentElement.innerHTML='F'"></div>
-      <div>
-        <div class="agent-name">Federico Fontanals</div>
-        <div class="agent-role">Agente Dinamizador · NN Xàtiva</div>
-      </div>
-      <div class="agent-contact">
-        <a href="tel:+34680507186">📞 680 507 186</a>
-        <a href="mailto:federico.fontanals@nnespana.es">✉️ nnespana.es</a>
-      </div>
-    </div>
-    <div class="body" style="border-radius:0 0 16px 16px">
-      <p class="greeting">${saludo}</p>
-      <div class="product-select" style="display:flex">
-        <a class="product-card" href="?producto=autonomo${nombre?'&nombre='+encodeURIComponent(nombre):''}">
-          <span class="product-card-ico">🚐</span>
-          <div>
-            <div class="product-card-name">Contigo Autónomo</div>
-            <div class="product-card-desc">Protección laboral para trabajadores por cuenta propia</div>
-          </div>
-          <span class="product-card-arrow">›</span>
-        </a>
-        <a class="product-card" href="?producto=familia${nombre?'&nombre='+encodeURIComponent(nombre):''}">
-          <span class="product-card-ico">👨‍👩‍👧</span>
-          <div>
-            <div class="product-card-name">Contigo Familia</div>
-            <div class="product-card-desc">Seguro de vida y protección familiar completa</div>
-          </div>
-          <span class="product-card-arrow">›</span>
-        </a>
-        <a class="product-card" href="?producto=futuro${nombre?'&nombre='+encodeURIComponent(nombre):''}">
-          <span class="product-card-ico">📈</span>
-          <div>
-            <div class="product-card-name">Contigo Futuro</div>
-            <div class="product-card-desc">Plan de ahorro garantizado con protección incluida</div>
-          </div>
-          <span class="product-card-arrow">›</span>
-        </a>
-      </div>
-    </div>
-    ${renderFooter()}
-  `;
-}
-
-// ── HERO ────────────────────────────────────────────────────────────
-function renderHero(prod, nombre) {
-  const displayNombre = nombre || 'tu propuesta';
-  return `
-  <div class="hero fade-in">
-    <div class="hero-glow-1"></div>
-    <div class="hero-glow-2"></div>
-    <div class="hero-top">
-      <div class="hero-brand">
-        <div class="brand-dot">N</div>
-        <span class="brand-name">Nationale-Nederlanden</span>
-      </div>
-      <span class="hero-badge">${prod.emoji} ${prod.nombre}</span>
-    </div>
-    <div class="hero-product-tag">${prod.nombre} · Propuesta personalizada</div>
-    <h1 class="hero-title">${prod.titulo(displayNombre)}</h1>
-    <p class="hero-sub">${prod.subtitulo}</p>
-  </div>
-  <div class="agent-strip" style="background:#1C1714">
-    <div class="agent-avatar"><img src="fede.jpg" alt="Fede" onerror="this.parentElement.innerHTML='F'"></div>
-    <div>
-      <div class="agent-name">Federico Fontanals</div>
-      <div class="agent-role">Agente Dinamizador · Punto Naranja NN Xàtiva</div>
-    </div>
-    <div class="agent-contact">
-      <a href="tel:+34680507186">📞 680 507 186</a>
-      <a href="mailto:federico.fontanals@nnespana.es">✉️ federico.fontanals@nnespana.es</a>
-    </div>
-  </div>`;
-}
-
-// ── BODY ────────────────────────────────────────────────────────────
-function renderBody(prod, nombre, prima, capital) {
-  const displayNombre = nombre || 'aquí';
-  const gapHTML = prod.showGap ? `
-    <div class="sec-label ${prod.secColor}">${prod.nombre === 'Contigo Autónomo' ? 'El agujero real del RETA' : 'La situación real'}</div>
-    <div class="gap-row">
-      <div class="gap-card">
-        <div class="gap-num">${prod.gap.gastos}</div>
-        <div class="gap-lbl">${prod.gapDesc[0]}</div>
-      </div>
-      <div class="gap-card">
-        <div class="gap-num">${prod.gap.reta}</div>
-        <div class="gap-lbl">${prod.gapDesc[1]}</div>
-      </div>
-      <div class="gap-card hot">
-        <div class="gap-num">${prod.gap.hueco}</div>
-        <div class="gap-lbl">${prod.gapDesc[2]}</div>
-      </div>
-    </div>
-    <div class="div"></div>
-  ` : '';
-
-  const covsHTML = prod.coberturas.map(c => `
-    <div class="cov-row ${c.key ? prod.keyClass : ''}">
-      <span class="cov-name">
-        ${c.nombre}
-        ${c.key ? `<span class="tag ${prod.tagClass}">${c.tag}</span>` : ''}
-      </span>
-      <div class="cov-right">
-        <span class="cov-cap">${c.cap}</span>
-        <span class="cov-price">${c.precio}</span>
-      </div>
-    </div>
-  `).join('');
-
-  return `
-  <div class="body fade-in">
-    <div class="greeting">${prod.greeting(displayNombre)}</div>
-    ${gapHTML}
-    <div class="sec-label ${prod.secColor}">Qué incluye tu propuesta</div>
-    <div class="cov-list">${covsHTML}</div>
-    <div class="total-box">
-      <div>
-        <div class="tl-label">Prima mensual estimada</div>
-        <div class="tl-desc">${prod.totalDesc}</div>
-      </div>
-      <div>
-        <div class="tr-price">${prima}</div>
-        <div class="tr-sub">al mes</div>
-      </div>
-    </div>
-    <div class="sec-label green">Incluido sin coste adicional</div>
-    <div class="extras-row">
-      <div class="extra-pill">
-        <span class="extra-ico">🩺</span>
-        <div>
-          <div class="extra-t">App Salud</div>
-          <div class="extra-d">Chat médico 24h · múltiples especialidades · sin límite</div>
-        </div>
-      </div>
-      <div class="extra-pill">
-        <span class="extra-ico">⚖️</span>
-        <div>
-          <div class="extra-t">App Legal</div>
-          <div class="extra-d">Asesoramiento jurídico ilimitado · respuesta en 2 min</div>
-        </div>
-      </div>
-    </div>
-    <div class="div"></div>
-    <div class="cierre">${prod.cierre(displayNombre)}</div>
-    <div class="cta-wrap">
-      <a href="tel:+34680507186" class="cta-btn">Llamar a Fede · 680 507 186</a>
-    </div>
-  </div>`;
-}
-
-// ── FOOTER ──────────────────────────────────────────────────────────
-function renderFooter() {
-  return `
-  <div class="footer-card fade-in">
-    <p>
-      Nationale-Nederlanden · Avenida de Bruselas 16, Alcobendas (Madrid)<br>
-      Federico Fontanals · federico.fontanals@nnespana.es · +34 680 507 186<br>
-      Prima estimada sujeta a confirmación · Documento informativo no contractual
-    </p>
-  </div>`;
-}
-
-// ── INIT ─────────────────────────────────────────────────────────────
-window.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => {
-    render();
-    document.getElementById('app').style.display = 'block';
-    const loader = document.getElementById('loading');
-    loader.classList.add('hide');
-    setTimeout(() => loader.remove(), 500);
-  }, 800);
+window.addEventListener('DOMContentLoaded',()=>{
+  setTimeout(()=>{main();document.getElementById('app').style.display='block';const l=document.getElementById('loader');l.classList.add('off');setTimeout(()=>l.remove(),500);},700);
 });
 </script>
 </body>
