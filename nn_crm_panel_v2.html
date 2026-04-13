@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NN CRM · Panel de Registro</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+/* ── VARIABLES ─────────────────────────────────────── */
+:root {
+  --o:    #C94D00;
+  --ol:   #FFF0E8;
+  --og:   #E85C0D;
+  --g:    #16A34A;
+  --gl:   #DCFCE7;
+  --b:    #1D4ED8;
+  --bl:   #EFF6FF;
+  --r:    #B91C1C;
+  --rl:   #FEF2F2;
+  --am:   #B45309;
+  --aml:  #FFFBEB;
+  --bg:   #F5F5F0;
+  --card: #FFFFFF;
+  --tx:   #111827;
+  --tx2:  #374151;
+  --tx3:  #6B7280;
+  --brd:  #E5E7EB;
+  --brd2: #D1D5DB;
+  --rad:  12px;
+  --rads: 8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;padding:16px}
+
+/* ── TABS ──────────────────────────────────────────── */
+.tabs{display:flex;gap:8px;margin-bottom:20px;background:var(--card);border:1.5px solid var(--brd);border-radius:var(--rad);padding:6px}
+.tab{flex:1;padding:10px;border:none;border-radius:var(--rads);background:transparent;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--tx3);cursor:pointer;transition:all .2s}
+.tab.active{background:var(--o);color:#fff}
+
+/* ── SECCIÓN ───────────────────────────────────────── */
+.sec{display:none}
+.sec.active{display:block}
+
+/* ── BÚSQUEDA ──────────────────────────────────────── */
+.search-wrap{position:relative;margin-bottom:16px}
+.search-wrap input{width:100%;padding:14px 48px 14px 16px;border:2px solid var(--brd2);border-radius:var(--rad);font-family:'DM Sans',sans-serif;font-size:15px;color:var(--tx);background:var(--card);outline:none;transition:border .2s}
+.search-wrap input:focus{border-color:var(--o)}
+.search-wrap .ico{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--tx3)}
+.search-results{background:var(--card);border:1.5px solid var(--brd2);border-radius:var(--rad);overflow:hidden;margin-top:4px;display:none}
+.search-item{padding:12px 16px;cursor:pointer;border-bottom:1px solid var(--brd);transition:background .15s}
+.search-item:hover{background:var(--ol)}
+.search-item:last-child{border-bottom:none}
+.search-item .sn{font-weight:600;font-size:14px;color:var(--tx)}
+.search-item .ss{font-size:12px;color:var(--tx3);margin-top:2px}
+
+/* ── CONTACTO SELECCIONADO ─────────────────────────── */
+.contact-card{background:var(--ol);border:2px solid var(--o);border-radius:var(--rad);padding:14px 16px;margin-bottom:16px;display:none}
+.contact-card.show{display:block}
+.cc-name{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--o);letter-spacing:.5px}
+.cc-info{font-size:13px;color:var(--tx2);margin-top:4px}
+
+/* ── RESULTADO LLAMADA ─────────────────────────────── */
+.resultado-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.res-btn{padding:14px 10px;border:2px solid var(--brd2);border-radius:var(--rad);background:var(--card);cursor:pointer;text-align:center;transition:all .2s;font-family:'DM Sans',sans-serif}
+.res-btn .emoji{font-size:24px;display:block;margin-bottom:6px}
+.res-btn .label{font-size:12px;font-weight:600;color:var(--tx2)}
+.res-btn:hover,.res-btn.active{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.res-btn[data-v="contactado"].active{border-color:var(--g);background:var(--gl)}
+.res-btn[data-v="no_contactado"].active{border-color:var(--r);background:var(--rl)}
+.res-btn[data-v="cita_fijada"].active{border-color:var(--b);background:var(--bl)}
+.res-btn[data-v="llamar_despues"].active{border-color:var(--am);background:var(--aml)}
+
+/* ── CAMPOS CITA ───────────────────────────────────── */
+.cita-fields{display:none;background:var(--bl);border:1.5px solid var(--b);border-radius:var(--rad);padding:14px;margin-bottom:12px}
+.cita-fields.show{display:block}
+.cita-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+
+/* ── FORM FIELDS ───────────────────────────────────── */
+.field{margin-bottom:12px}
+label{display:block;font-size:12px;font-weight:600;color:var(--tx2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px}
+input[type=text],input[type=tel],input[type=email],input[type=date],input[type=time],input[type=number],select,textarea{
+  width:100%;padding:11px 14px;border:1.5px solid var(--brd2);border-radius:var(--rads);
+  font-family:'DM Sans',sans-serif;font-size:14px;color:var(--tx);background:var(--card);outline:none;transition:border .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--o)}
+textarea{resize:vertical;min-height:80px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* ── SECCIÓN CABECERA ──────────────────────────────── */
+.sec-head{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--o);margin:20px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--ol)}
+
+/* ── BOTÓN PRINCIPAL ───────────────────────────────── */
+.btn-main{width:100%;padding:16px;background:var(--o);color:#fff;border:none;border-radius:var(--rad);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;cursor:pointer;transition:all .2s;margin-top:8px}
+.btn-main:hover{background:var(--og);transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,77,0,.3)}
+.btn-main:disabled{background:var(--tx3);cursor:not-allowed;transform:none;box-shadow:none}
+.btn-sec{width:100%;padding:12px;background:transparent;color:var(--o);border:2px solid var(--o);border-radius:var(--rad);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;margin-top:8px}
+.btn-sec:hover{background:var(--ol)}
+
+/* ── TOAST ─────────────────────────────────────────── */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#111827;color:#fff;padding:14px 24px;border-radius:40px;font-size:14px;font-weight:500;opacity:0;transition:all .3s;z-index:999;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.ok{background:var(--g)}
+.toast.err{background:var(--r)}
+
+/* ── SPINNER ───────────────────────────────────────── */
+.spin{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── GRUPOS FORM ───────────────────────────────────── */
+.form-group{background:var(--card);border:1.5px solid var(--brd);border-radius:var(--rad);padding:16px;margin-bottom:12px}
+.form-group-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.5px;color:var(--tx);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.form-group-title span{background:var(--ol);color:var(--o);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════ -->
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+  <div style="width:44px;height:44px;background:var(--o);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px">🟠</div>
+  <div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px">NN CRM · REGISTRO</div>
+    <div style="font-size:12px;color:var(--tx3)" id="ts">Cargando...</div>
+  </div>
+</div>
+
+<!-- ══ TABS ═════════════════════════════════════════════════ -->
+<div class="tabs">
+  <button class="tab active" onclick="cambiarTab('llamada',this)">📞 Llamada</button>
+  <button class="tab" onclick="cambiarTab('contacto',this)">➕ Nuevo contacto</button>
+</div>
+
+<!-- ══ TAB 1: REGISTRO LLAMADA ══════════════════════════════ -->
+<div id="sec-llamada" class="sec active">
+
+  <!-- Búsqueda -->
+  <div class="search-wrap">
+    <input type="text" id="buscar" placeholder="Buscar contacto por nombre..." oninput="buscar(this.value)" autocomplete="off">
+    <span class="ico">🔍</span>
+  </div>
+  <div class="search-results" id="resultados-busqueda"></div>
+
+  <!-- Contacto seleccionado -->
+  <div class="contact-card" id="contact-card">
+    <div class="cc-name" id="cc-nombre">—</div>
+    <div class="cc-info" id="cc-info">—</div>
+  </div>
+
+  <!-- Resultado de la llamada -->
+  <div class="sec-head">¿Cómo fue la llamada?</div>
+  <div class="resultado-grid">
+    <button class="res-btn" data-v="contactado" onclick="selRes(this)">
+      <span class="emoji">✅</span><span class="label">Contactado</span>
+    </button>
+    <button class="res-btn" data-v="no_contactado" onclick="selRes(this)">
+      <span class="emoji">❌</span><span class="label">No contactado</span>
+    </button>
+    <button class="res-btn" data-v="cita_fijada" onclick="selRes(this)">
+      <span class="emoji">📅</span><span class="label">Cita fijada</span>
+    </button>
+    <button class="res-btn" data-v="llamar_despues" onclick="selRes(this)">
+      <span class="emoji">🔄</span><span class="label">Llamar después</span>
+    </button>
+  </div>
+
+  <!-- Campos de cita (solo si cita_fijada) -->
+  <div class="cita-fields" id="cita-fields">
+    <div style="font-weight:600;font-size:13px;color:var(--b);margin-bottom:10px">📅 Datos de la cita — se creará en Google Calendar</div>
+    <div class="cita-row">
+      <div class="field">
+        <label>Fecha cita</label>
+        <input type="date" id="fecha-cita">
+      </div>
+      <div class="field">
+        <label>Hora cita</label>
+        <input type="time" id="hora-cita" value="10:00">
+      </div>
+    </div>
+    <div class="field">
+      <label>Próxima acción</label>
+      <input type="text" id="prox-accion-cita" placeholder="Ej: Visita para presentar Plan Salud+Vida">
+    </div>
+  </div>
+
+  <!-- Campos para no-cita -->
+  <div id="campos-nocita">
+    <div class="field">
+      <label>Próxima acción</label>
+      <input type="text" id="prox-accion" placeholder="Ej: Llamar el lunes a las 10h">
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Fecha próxima</label>
+        <input type="date" id="fecha-prox">
+      </div>
+      <div class="field">
+        <label>Producto ofrecido</label>
+        <select id="producto">
+          <option value="">— Seleccionar —</option>
+          <option>Contigo Familia</option>
+          <option>Contigo Autónomo</option>
+          <option>Plan Salud + Vida</option>
+          <option>Plan Creciente SIALP</option>
+          <option>Contigo Senior</option>
+          <option>Mi Hogar</option>
+          <option>Hipoteca</option>
+          <option>Ninguno</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Notas libres</label>
+    <textarea id="notas" placeholder="Lo que necesites recordar de esta llamada..."></textarea>
+  </div>
+
+  <button class="btn-main" id="btn-guardar" onclick="guardarLlamada()" disabled>
+    GUARDAR EN CRM
+  </button>
+  <button class="btn-sec" onclick="limpiarLlamada()">Limpiar</button>
+</div>
+
+<!-- ══ TAB 2: NUEVO CONTACTO ════════════════════════════════ -->
+<div id="sec-contacto" class="sec">
+  <div style="background:var(--bl);border-radius:var(--rad);padding:12px 14px;font-size:13px;color:var(--b);margin-bottom:16px">
+    💡 Se guardará en el CRM y en <strong>Google Contacts</strong> (sincroniza con tu Samsung automáticamente)
+  </div>
+
+  <!-- IDENTIFICACIÓN -->
+  <div class="form-group">
+    <div class="form-group-title"><span>1</span> Identificación</div>
+    <div class="field-row">
+      <div class="field"><label>Nombre completo *</label><input type="text" id="nc-nombre" placeholder="Nombre y apellidos"></div>
+      <div class="field"><label>Apodo</label><input type="text" id="nc-apodo" placeholder="Como le llaman"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Empresa</label><input type="text" id="nc-empresa"></div>
+      <div class="field"><label>Cargo</label><input type="text" id="nc-cargo"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Teléfono 1 (móvil) *</label><input type="tel" id="nc-tel1" placeholder="+34 6XX XXX XXX"></div>
+      <div class="field"><label>Teléfono 2</label><input type="tel" id="nc-tel2"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Email</label><input type="email" id="nc-email"></div>
+      <div class="field"><label>Localidad</label><input type="text" id="nc-localidad"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Cumpleaños</label><input type="date" id="nc-cumpleanos"></div>
+      <div class="field"><label>¿Quién le recomendó?</label><input type="text" id="nc-recomendado"></div>
+    </div>
+  </div>
+
+  <!-- ESTADO COMERCIAL -->
+  <div class="form-group">
+    <div class="form-group-title"><span>2</span> Estado comercial</div>
+    <div class="field-row">
+      <div class="field">
+        <label>Estado *</label>
+        <select id="nc-estado">
+          <option value="Potencial">Potencial</option>
+          <option value="En proceso">En proceso</option>
+          <option value="Cliente activo">Cliente activo</option>
+          <option value="Perdido">Perdido</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Urgencia</label>
+        <select id="nc-urgencia">
+          <option value="⚪ RESTO">⚪ Sin urgencia</option>
+          <option value="🔴 URGENTE">🔴 Urgente</option>
+          <option value="🟡 PRÓXIMO">🟡 Próximo</option>
+          <option value="🟢 OK">🟢 Activo OK</option>
+        </select>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Canal preferido</label>
+        <select id="nc-canal">
+          <option value="">— Seleccionar —</option>
+          <option>WhatsApp</option>
+          <option>Llamada</option>
+          <option>Email</option>
+          <option>Presencial</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Buyer Persona</label>
+        <select id="nc-buyer">
+          <option value="">— Seleccionar —</option>
+          <option>FAMILIA</option>
+          <option>AUTÓNOMO</option>
+          <option>JOVEN AHORRO</option>
+          <option>PLANIFICADOR</option>
+          <option>SENIOR</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADN PERSONAL -->
+  <div class="form-group">
+    <div class="form-group-title"><span>3</span> ADN — Perfil personal</div>
+    <div class="field-row">
+      <div class="field">
+        <label>Estado civil</label>
+        <select id="nc-estadocivil">
+          <option value="">—</option>
+          <option>Soltero/a</option>
+          <option>Casado/a</option>
+          <option>Pareja de hecho</option>
+          <option>Divorciado/a</option>
+          <option>Viudo/a</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Régimen SS</label>
+        <select id="nc-regimen">
+          <option value="">—</option>
+          <option>General</option>
+          <option>Autónomo (RETA)</option>
+          <option>Funcionario (MUFACE)</option>
+          <option>No cotiza</option>
+        </select>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Años cotizados SS</label><input type="number" id="nc-anioss" min="0" max="50"></div>
+      <div class="field"><label>Nº hijos &lt;25</label><input type="number" id="nc-hijos" min="0" max="20"></div>
+    </div>
+    <div class="field">
+      <label>Tiene pareja</label>
+      <select id="nc-pareja">
+        <option value="">—</option>
+        <option value="Sí">Sí</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ADN ECONÓMICO -->
+  <div class="form-group">
+    <div class="form-group-title"><span>4</span> ADN — Perfil económico</div>
+    <div class="field-row">
+      <div class="field"><label>Salario neto mensual (€)</label><input type="number" id="nc-salario" min="0"></div>
+      <div class="field"><label>Nº pagas</label><input type="number" id="nc-pagas" min="12" max="16" value="12"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Ahorro acumulado (€)</label><input type="number" id="nc-ahorro" min="0"></div>
+      <div class="field"><label>Gastos anuales hogar (€)</label><input type="number" id="nc-gastos" min="0"></div>
+    </div>
+    <div class="field">
+      <label>Nivel económico</label>
+      <select id="nc-nivel">
+        <option value="">—</option>
+        <option>Bajo</option>
+        <option>Medio-bajo</option>
+        <option>Medio</option>
+        <option>Medio-alto</option>
+        <option>Alto</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ADN NECESIDAD -->
+  <div class="form-group">
+    <div class="form-group-title"><span>5</span> ADN — Necesidad NN</div>
+    <div class="field-row">
+      <div class="field">
+        <label>Necesidad principal</label>
+        <select id="nc-necesidad">
+          <option value="">—</option>
+          <option>Protección familiar</option>
+          <option>Ahorro</option>
+          <option>Salud</option>
+          <option>Jubilación</option>
+          <option>Protección autónomo</option>
+          <option>Hogar</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Producto recomendado</label>
+        <select id="nc-producto-rec">
+          <option value="">—</option>
+          <option>Contigo Familia</option>
+          <option>Contigo Autónomo</option>
+          <option>Plan Salud + Vida</option>
+          <option>Plan Creciente SIALP</option>
+          <option>Contigo Senior</option>
+          <option>Mi Hogar</option>
+          <option>Hipoteca</option>
+        </select>
+      </div>
+    </div>
+    <div class="field"><label>Observaciones / notas</label><textarea id="nc-observaciones" placeholder="Información importante para el seguimiento..."></textarea></div>
+  </div>
+
+  <button class="btn-main" id="btn-nc" onclick="guardarContacto()">
+    GUARDAR CONTACTO
+  </button>
+</div>
+
+<!-- ══ TOAST ═════════════════════════════════════════════════ -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// CONFIGURACIÓN — pega aquí la URL del Apps Script desplegado
+// ══════════════════════════════════════════════════════════════
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwAoXafi8diQhPgdC4gkbEC9V3xkG19LouyEF5nc7hju8J3pGOttRuyEATxY3LymLin8Q/exec';
+
+// ── Estado global ─────────────────────────────────────────────
+let contactoSeleccionado = null;
+let resultadoSeleccionado = null;
+let buscarTimer = null;
+
+// ── Reloj ─────────────────────────────────────────────────────
+(function tick() {
+  const now = new Date();
+  const d = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'][now.getDay()];
+  const h = String(now.getHours()).padStart(2,'0');
+  const m = String(now.getMinutes()).padStart(2,'0');
+  document.getElementById('ts').textContent = `${d} ${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()} · ${h}:${m}`;
+  setTimeout(tick, 30000);
+})();
+
+// ── Tabs ──────────────────────────────────────────────────────
+function cambiarTab(id, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('sec-' + id).classList.add('active');
+}
+
+// ── Búsqueda de contacto ──────────────────────────────────────
+function buscar(val) {
+  clearTimeout(buscarTimer);
+  const res = document.getElementById('resultados-busqueda');
+  if (val.length < 2) { res.style.display = 'none'; return; }
+  buscarTimer = setTimeout(() => {
+    post({ accion: 'buscar_contacto', nombre: val })
+      .then(data => {
+        if (!data.ok || !data.resultados.length) {
+          res.style.display = 'none'; return;
+        }
+        res.innerHTML = data.resultados.map(r =>
+          `<div class="search-item" onclick="selContacto(${JSON.stringify(r).replace(/"/g,'&quot;')})">
+            <div class="sn">${r.nombre}</div>
+            <div class="ss">${r.tel1 || ''} · ${r.estado || ''} · ${r.necesidad || ''}</div>
+          </div>`
+        ).join('');
+        res.style.display = 'block';
+      }).catch(() => { res.style.display = 'none'; });
+  }, 350);
+}
+
+function selContacto(r) {
+  contactoSeleccionado = r;
+  document.getElementById('buscar').value = r.nombre;
+  document.getElementById('resultados-busqueda').style.display = 'none';
+  const card = document.getElementById('contact-card');
+  card.classList.add('show');
+  document.getElementById('cc-nombre').textContent = r.nombre;
+  document.getElementById('cc-info').textContent = `📞 ${r.tel1 || '—'} · ${r.estado || '—'} · Necesidad: ${r.necesidad || '—'}`;
+  actualizarBtnGuardar();
+}
+
+// ── Selección resultado ───────────────────────────────────────
+function selRes(btn) {
+  document.querySelectorAll('.res-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  resultadoSeleccionado = btn.dataset.v;
+
+  const esCita = resultadoSeleccionado === 'cita_fijada';
+  document.getElementById('cita-fields').classList.toggle('show', esCita);
+  document.getElementById('campos-nocita').style.display = esCita ? 'none' : 'block';
+
+  if (esCita) {
+    const hoy = new Date();
+    hoy.setDate(hoy.getDate() + 1);
+    document.getElementById('fecha-cita').valueAsDate = hoy;
+  }
+  actualizarBtnGuardar();
+}
+
+function actualizarBtnGuardar() {
+  document.getElementById('btn-guardar').disabled =
+    !(contactoSeleccionado && resultadoSeleccionado);
+}
+
+// ── Guardar llamada ───────────────────────────────────────────
+async function guardarLlamada() {
+  const btn = document.getElementById('btn-guardar');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span>Guardando...';
+
+  const esCita = resultadoSeleccionado === 'cita_fijada';
+  const payload = {
+    accion:          'registrar_llamada',
+    nombre:          contactoSeleccionado.nombre,
+    resultado:       resultadoSeleccionado,
+    notas:           document.getElementById('notas').value.trim(),
+    productoOfrecido: document.getElementById('producto').value,
+    proxAccion:      esCita
+      ? document.getElementById('prox-accion-cita').value
+      : document.getElementById('prox-accion').value,
+    fechaProx:       esCita
+      ? document.getElementById('fecha-cita').value
+      : document.getElementById('fecha-prox').value,
+    horaCita:        esCita ? document.getElementById('hora-cita').value : null,
+  };
+
+  try {
+    const r = await post(payload);
+    if (r.ok) {
+      const extra = r.calEventId ? ' · Cita en Calendar ✅' : '';
+      toast('✅ Guardado en CRM' + extra, 'ok');
+      setTimeout(limpiarLlamada, 1800);
+    } else {
+      toast('❌ Error: ' + r.error, 'err');
+    }
+  } catch(e) {
+    toast('❌ Sin conexión con el script', 'err');
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = 'GUARDAR EN CRM';
+}
+
+function limpiarLlamada() {
+  contactoSeleccionado = null;
+  resultadoSeleccionado = null;
+  document.getElementById('buscar').value = '';
+  document.getElementById('contact-card').classList.remove('show');
+  document.querySelectorAll('.res-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('cita-fields').classList.remove('show');
+  document.getElementById('campos-nocita').style.display = 'block';
+  document.getElementById('notas').value = '';
+  document.getElementById('producto').value = '';
+  document.getElementById('prox-accion').value = '';
+  document.getElementById('fecha-prox').value = '';
+  actualizarBtnGuardar();
+}
+
+// ── Guardar nuevo contacto ────────────────────────────────────
+async function guardarContacto() {
+  const nombre = document.getElementById('nc-nombre').value.trim();
+  const tel1   = document.getElementById('nc-tel1').value.trim();
+  if (!nombre || !tel1) { toast('⚠️ Nombre y teléfono son obligatorios', 'err'); return; }
+
+  const btn = document.getElementById('btn-nc');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span>Guardando...';
+
+  const payload = {
+    accion:            'nuevo_contacto',
+    nombre,
+    apodo:             document.getElementById('nc-apodo').value.trim(),
+    empresa:           document.getElementById('nc-empresa').value.trim(),
+    cargo:             document.getElementById('nc-cargo').value.trim(),
+    tel1,
+    tel2:              document.getElementById('nc-tel2').value.trim(),
+    email:             document.getElementById('nc-email').value.trim(),
+    localidad:         document.getElementById('nc-localidad').value.trim(),
+    cumpleanos:        document.getElementById('nc-cumpleanos').value,
+    recomendado:       document.getElementById('nc-recomendado').value.trim(),
+    estado:            document.getElementById('nc-estado').value,
+    urgencia:          document.getElementById('nc-urgencia').value,
+    canal:             document.getElementById('nc-canal').value,
+    buyerPersona:      document.getElementById('nc-buyer').value,
+    estadoCivil:       document.getElementById('nc-estadocivil').value,
+    regimenSS:         document.getElementById('nc-regimen').value,
+    aniosSS:           document.getElementById('nc-anioss').value,
+    hijos:             document.getElementById('nc-hijos').value,
+    pareja:            document.getElementById('nc-pareja').value,
+    salario:           document.getElementById('nc-salario').value,
+    pagas:             document.getElementById('nc-pagas').value,
+    ahorro:            document.getElementById('nc-ahorro').value,
+    gastos:            document.getElementById('nc-gastos').value,
+    nivelEco:          document.getElementById('nc-nivel').value,
+    necesidad:         document.getElementById('nc-necesidad').value,
+    productoRecomendado: document.getElementById('nc-producto-rec').value,
+    observaciones:     document.getElementById('nc-observaciones').value.trim(),
+  };
+
+  try {
+    const r = await post(payload);
+    if (r.ok) {
+      toast('✅ ' + r.msg, 'ok');
+      setTimeout(() => {
+        document.querySelectorAll('#sec-contacto input, #sec-contacto select, #sec-contacto textarea')
+          .forEach(el => { el.value = ''; });
+        document.getElementById('nc-estado').value   = 'Potencial';
+        document.getElementById('nc-urgencia').value = '⚪ RESTO';
+        document.getElementById('nc-pagas').value    = '12';
+      }, 2000);
+    } else {
+      toast('❌ Error: ' + r.error, 'err');
+    }
+  } catch(e) {
+    toast('❌ Sin conexión con el script', 'err');
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = 'GUARDAR CONTACTO';
+}
+
+// ── Utilidades ────────────────────────────────────────────────
+async function post(data) {
+  if (SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbx_VZlftBULYuollYWp6K9Cx3sYL4F7TfjL0u68RPxzHBLw2MAIPYSZu44GxKelhm0/exec') {
+    await new Promise(r => setTimeout(r, 800));
+    return { ok: true, msg: 'DEMO: script no configurado aún', fila: 99 };
+  }
+  // Apps Script requiere GET con parámetro para evitar problemas CORS desde GitHub Pages
+  const url = SCRIPT_URL + '?payload=' + encodeURIComponent(JSON.stringify(data));
+  const res = await fetch(url, { method: 'GET', redirect: 'follow' });
+  const text = await res.text();
+  try { return JSON.parse(text); }
+  catch(e) { return { ok: false, error: 'Respuesta no válida: ' + text.substring(0,100) }; }
+}
+
+let toastTimer;
+function toast(msg, tipo = '') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast show ' + tipo;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.className = 'toast'; }, 3500);
+}
+</script>
+</body>
+</html>
