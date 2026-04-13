@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema de Llamadas — NN Xàtiva · Fede</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --nn-orange: #E85C0D;
+  --nn-orange-l: #FF7A30;
+  --nn-dark: #0F1923;
+  --nn-navy: #162030;
+  --nn-navy2: #1E2D40;
+  --nn-navy3: #243448;
+  --green: #22C55E;
+  --green-d: #16A34A;
+  --green-bg: rgba(34,197,94,0.1);
+  --amber: #F59E0B;
+  --amber-bg: rgba(245,158,11,0.1);
+  --red: #EF4444;
+  --red-bg: rgba(239,68,68,0.08);
+  --blue: #3B82F6;
+  --blue-bg: rgba(59,130,246,0.1);
+  --white: #FFFFFF;
+  --text: #E8EDF2;
+  --text2: #94A3B8;
+  --text3: #5B6E82;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --card: rgba(255,255,255,0.04);
+  --card-hover: rgba(255,255,255,0.07);
+  --radius: 12px;
+  --radius-lg: 18px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--nn-dark);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ══════════════════════════════════════════
+   HEADER
+══════════════════════════════════════════ */
+.header {
+  background: var(--nn-navy);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-icon {
+  width: 34px;
+  height: 34px;
+  background: var(--nn-orange);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-icon svg { width: 18px; height: 18px; }
+
+.brand-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: var(--white);
+}
+
+.brand-sub {
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 0.5px;
+  margin-top: -2px;
+}
+
+.header-stats {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.hstat {
+  text-align: center;
+}
+
+.hstat-n {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  line-height: 1;
+  display: block;
+}
+
+.hstat-l {
+  font-size: 9px;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-top: 1px;
+}
+
+.hstat-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+}
+
+.progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.progress-bar {
+  width: 120px;
+  height: 4px;
+  background: var(--border2);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--nn-orange), var(--nn-orange-l));
+  border-radius: 100px;
+  transition: width 0.4s ease;
+}
+
+.progress-label {
+  font-size: 12px;
+  color: var(--text2);
+  white-space: nowrap;
+}
+
+.progress-label strong { color: var(--nn-orange); }
+
+/* ══════════════════════════════════════════
+   NOMBRE PANEL — EL CORAZÓN DEL SISTEMA
+══════════════════════════════════════════ */
+.nombre-panel {
+  background: linear-gradient(135deg, var(--nn-navy) 0%, var(--nn-navy2) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 1.25rem 2rem;
+}
+
+.nombre-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nombre-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text3);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nombre-field-wrap {
+  flex: 1;
+  position: relative;
+}
+
+.nombre-field {
+  width: 100%;
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 0.6rem 1rem 0.6rem 2.5rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--white);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.nombre-field::placeholder { color: var(--text3); font-weight: 400; }
+
+.nombre-field:focus {
+  border-color: var(--nn-orange);
+  background: rgba(232,92,13,0.06);
+}
+
+.nombre-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text3);
+  pointer-events: none;
+}
+
+.wa-preview {
+  flex: 1.5;
+  background: rgba(37,211,102,0.08);
+  border: 1px solid rgba(37,211,102,0.2);
+  border-radius: var(--radius);
+  padding: 0.6rem 1rem;
+  font-size: 13px;
+  color: #86EFAC;
+  line-height: 1.4;
+  transition: all 0.3s ease;
+}
+
+.wa-preview-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--green-d);
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.wa-copy-btn {
+  background: rgba(37,211,102,0.15);
+  border: 1px solid rgba(37,211,102,0.3);
+  border-radius: 6px;
+  color: #86EFAC;
+  font-size: 11px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.wa-copy-btn:hover {
+  background: rgba(37,211,102,0.25);
+}
+
+.wa-copy-btn.copied {
+  background: rgba(34,197,94,0.3);
+  color: #4ADE80;
+}
+
+/* ══════════════════════════════════════════
+   LAYOUT PRINCIPAL
+══════════════════════════════════════════ */
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: calc(100vh - 60px - 84px);
+}
+
+/* SIDEBAR */
+.sidebar {
+  background: var(--nn-navy);
+  border-right: 1px solid var(--border);
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: sticky;
+  top: 144px;
+  height: calc(100vh - 144px);
+  overflow-y: auto;
+}
+
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 100px; }
+
+.section-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text3);
+  margin-bottom: 0.5rem;
+  padding: 0 0.25rem;
+}
+
+/* REGLA DE ORO */
+.regla-box {
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: var(--radius);
+  padding: 0.875rem;
+}
+
+.regla-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #FCA5A5;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.regla-text {
+  font-size: 12px;
+  color: #FCA5A5;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.regla-text strong { color: #FCA5A5; opacity: 1; }
+
+/* PREGUNTA CLAVE */
+.pregunta-clave {
+  background: rgba(59,130,246,0.08);
+  border: 1px solid rgba(59,130,246,0.2);
+  border-radius: var(--radius);
+  padding: 0.875rem;
+}
+
+.pq-question {
+  font-size: 13px;
+  font-style: italic;
+  color: #93C5FD;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.pq-answer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pq-row {
+  font-size: 11px;
+  color: #60A5FA;
+  line-height: 1.5;
+}
+
+.pq-row strong { color: #93C5FD; }
+
+/* NAV */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background 0.15s;
+  color: var(--text2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+}
+
+.nav-item:hover { background: var(--card-hover); color: var(--text); }
+.nav-item.active { background: rgba(232,92,13,0.12); color: var(--nn-orange-l); }
+
+.nav-num {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.nav-name { flex: 1; line-height: 1.3; }
+
+.nav-result-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* STATS DEL DÍA */
+.stats-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.875rem;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+
+.stats-row:last-child { border-bottom: none; }
+.stats-row-name { color: var(--text2); }
+.stats-row-val { font-weight: 500; }
+
+/* ══════════════════════════════════════════
+   MAIN CONTENT
+══════════════════════════════════════════ */
+.main {
+  padding: 1.5rem 2rem;
+  max-width: 860px;
+}
+
+/* APERTURA ACTIVA — gran bloque superior */
+.active-apertura {
+  background: var(--nn-navy2);
+  border: 1.5px solid var(--nn-orange);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.active-apertura::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--nn-orange), var(--nn-orange-l));
+}
+
+.active-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--nn-orange);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.active-label::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--nn-orange);
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+.active-script {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--white);
+  font-weight: 400;
+  margin-bottom: 1.25rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255,255,255,0.04);
+  border-radius: 10px;
+  border-left: 3px solid var(--nn-orange);
+}
+
+.active-script .nombre-highlight {
+  color: var(--nn-orange-l);
+  font-weight: 600;
+}
+
+.active-bottom {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.active-pregunta {
+  flex: 1;
+  background: var(--blue-bg);
+  border: 1px solid rgba(59,130,246,0.25);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 13px;
+  color: #93C5FD;
+  line-height: 1.5;
+}
+
+.active-pregunta-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #60A5FA;
+  margin-bottom: 4px;
+}
+
+.copy-main-btn {
+  background: var(--nn-orange);
+  border: none;
+  border-radius: 10px;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.copy-main-btn:hover { background: var(--nn-orange-l); transform: translateY(-1px); }
+.copy-main-btn.copied { background: var(--green-d); }
+
+/* RESULT BUTTONS */
+.result-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.result-btn {
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 0.4rem 0.875rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: transparent;
+}
+
+.result-btn:hover { transform: translateY(-1px); }
+.result-btn.selected { font-weight: 600; }
+
+.result-btn.no_coge   { color: #FCA5A5; border-color: rgba(239,68,68,0.3); }
+.result-btn.cuelga    { color: #FDB97D; border-color: rgba(245,158,11,0.3); }
+.result-btn.no_interes{ color: #94A3B8; border-color: var(--border2); }
+.result-btn.escucha   { color: #86EFAC; border-color: rgba(34,197,94,0.3); }
+.result-btn.cita      { color: var(--nn-orange-l); border-color: rgba(232,92,13,0.4); }
+
+.result-btn.no_coge.selected   { background: rgba(239,68,68,0.15); }
+.result-btn.cuelga.selected    { background: rgba(245,158,11,0.15); }
+.result-btn.no_interes.selected{ background: rgba(148,163,184,0.1); }
+.result-btn.escucha.selected   { background: rgba(34,197,94,0.15); }
+.result-btn.cita.selected      { background: rgba(232,92,13,0.15); }
+
+/* SELECTOR DE APERTURA */
+.selector-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: var(--text2);
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* CARDS DE APERTURA */
+.apertura-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+
+.apertura-card:hover { border-color: var(--border2); }
+.apertura-card.active-card { border-color: var(--nn-orange); background: rgba(232,92,13,0.05); }
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 1rem;
+}
+
+.card-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.card-info { flex: 1; }
+
+.card-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.card-why {
+  font-size: 11px;
+  color: var(--text3);
+  line-height: 1.4;
+}
+
+.card-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nivel-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 100px;
+}
+
+.usar-btn {
+  background: var(--card-hover);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  color: var(--text2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.usar-btn:hover { background: var(--nn-orange); border-color: var(--nn-orange); color: var(--white); }
+.active-card .usar-btn { background: var(--nn-orange); border-color: var(--nn-orange); color: var(--white); }
+
+.card-result-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border2);
+}
+
+.card-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.card-body.open { max-height: 400px; }
+
+.card-body-inner {
+  padding: 0 1rem 1rem;
+  border-top: 1px solid var(--border);
+  margin-top: 0;
+}
+
+.script-preview {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6;
+  padding: 0.75rem;
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+  margin-top: 0.75rem;
+  font-style: italic;
+}
+
+/* ══════════════════════════════════════════
+   SECCIÓN OBJECIONES
+══════════════════════════════════════════ */
+.objeciones-section {
+  margin-top: 2rem;
+}
+
+.objeciones-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: var(--text);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.objeciones-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.obj-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.obj-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.obj-card:hover { background: var(--card-hover); border-color: var(--border2); }
+
+.obj-q {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--text3);
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.obj-q::before { content: '"'; }
+.obj-q::after { content: '"'; }
+
+.obj-a {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.55;
+  display: none;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.obj-a.open { display: block; }
+
+.obj-copy-btn {
+  background: none;
+  border: none;
+  color: var(--text3);
+  font-size: 11px;
+  cursor: pointer;
+  padding: 2px 0;
+  font-family: 'DM Sans', sans-serif;
+  transition: color 0.15s;
+  display: none;
+}
+
+.obj-copy-btn.visible { display: block; }
+.obj-copy-btn:hover { color: var(--nn-orange); }
+.obj-copy-btn.copied { color: var(--green); }
+
+.obj-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.obj-chevron {
+  color: var(--text3);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.obj-chevron.open { transform: rotate(180deg); }
+
+/* ══════════════════════════════════════════
+   FOOTER BASE PROGRAMA
+══════════════════════════════════════════ */
+.footer-banner {
+  background: linear-gradient(90deg, var(--nn-navy2) 0%, var(--nn-navy3) 100%);
+  border-top: 1px solid var(--border);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.footer-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: var(--text3);
+}
+
+.footer-brand span { color: var(--nn-orange); }
+
+.footer-hint {
+  font-size: 11px;
+  color: var(--text3);
+  flex: 1;
+}
+
+.reset-btn {
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.25);
+  border-radius: 8px;
+  color: #FCA5A5;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 0.4rem 0.875rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.reset-btn:hover { background: rgba(239,68,68,0.2); }
+
+/* ══════════════════════════════════════════
+   UTILITIES
+══════════════════════════════════════════ */
+.nivel-1 { background: rgba(34,197,94,0.12); color: #86EFAC; }
+.nivel-2 { background: rgba(59,130,246,0.12); color: #93C5FD; }
+.nivel-3 { background: rgba(245,158,11,0.12); color: #FCD34D; }
+.nivel-4 { background: rgba(239,68,68,0.12); color: #FCA5A5; }
+
+.cnum-1 { background: rgba(34,197,94,0.15); color: #4ADE80; }
+.cnum-2 { background: rgba(34,197,94,0.12); color: #86EFAC; }
+.cnum-3 { background: rgba(59,130,246,0.15); color: #93C5FD; }
+.cnum-4 { background: rgba(59,130,246,0.12); color: #60A5FA; }
+.cnum-5 { background: rgba(245,158,11,0.15); color: #FCD34D; }
+.cnum-6 { background: rgba(245,158,11,0.12); color: #FDB97D; }
+.cnum-7 { background: rgba(239,68,68,0.15); color: #FCA5A5; }
+
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--nn-navy2);
+  border: 1px solid var(--nn-orange);
+  border-radius: var(--radius);
+  padding: 0.75rem 1.25rem;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--white);
+  z-index: 1000;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.toast.show { transform: translateY(0); opacity: 1; }
+
+.nivel-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.nivel-line { flex: 1; height: 1px; background: var(--border); }
+.nivel-tag {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<div class="header">
+  <div class="header-brand">
+    <div class="brand-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .13h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.08v2.84z"/>
+      </svg>
+    </div>
+    <div>
+      <div class="brand-text">NN Xàtiva · Sistema de Llamadas</div>
+      <div class="brand-sub">Fede — Agente Dinamizador · Punto Naranja</div>
+    </div>
+  </div>
+  <div class="header-stats">
+    <div class="hstat">
+      <span class="hstat-n" id="h-total" style="color:var(--text)">0</span>
+      <div class="hstat-l">Llamadas</div>
+    </div>
+    <div class="hstat-divider"></div>
+    <div class="hstat">
+      <span class="hstat-n" id="h-escucha" style="color:var(--green)">0</span>
+      <div class="hstat-l">Escuchas</div>
+    </div>
+    <div class="hstat-divider"></div>
+    <div class="hstat">
+      <span class="hstat-n" id="h-citas" style="color:var(--nn-orange)">0</span>
+      <div class="hstat-l">Citas</div>
+    </div>
+    <div class="hstat-divider"></div>
+    <div class="progress-wrap">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+      <div class="progress-label" id="progress-label">Tasa: <strong>0%</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ NOMBRE PANEL ══ -->
+<div class="nombre-panel">
+  <div class="nombre-inner">
+    <div class="nombre-label">📞 A quién llamas ahora:</div>
+    <div class="nombre-field-wrap">
+      <div class="nombre-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <input type="text" class="nombre-field" id="nombre-input" placeholder="Escribe el nombre... (ej: María)" autocomplete="off">
+    </div>
+    <div class="wa-preview" id="wa-preview">
+      <div class="wa-preview-label">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="#22C55E"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.098.543 4.067 1.494 5.778L0 24l6.388-1.673A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.655-.52-5.17-1.425l-.37-.22-3.793.994.994-3.698-.24-.383A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        WhatsApp previo — manda 5 min antes
+      </div>
+      <span id="wa-text">Escribe el nombre para generar el mensaje</span>
+    </div>
+    <button class="wa-copy-btn" id="wa-copy-btn" onclick="copiarWA()">Copiar WA</button>
+  </div>
+</div>
+
+<!-- ══ LAYOUT PRINCIPAL ══ -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div>
+      <div class="section-label">Regla de oro</div>
+      <div class="regla-box">
+        <div class="regla-title">⛔ Nunca en los primeros 30 seg.</div>
+        <div class="regla-text">
+          <strong>"seguro"</strong> · <strong>"póliza"</strong> · <strong>"contratar"</strong><br><br>
+          Di en cambio: <strong>salud · Sanitas · descuento · medicina privada</strong>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Pregunta de calificación universal</div>
+      <div class="pregunta-clave">
+        <div class="pq-question">¿Tienes médico privado ahora mismo?</div>
+        <div class="pq-answer">
+          <div class="pq-row"><strong>NO →</strong> Puerta completamente abierta</div>
+          <div class="pq-row"><strong>SÍ →</strong> "¿Cuánto pagas?" → comparamos</div>
+          <div class="pq-row"><strong>SS sola →</strong> "¿Cuánto esperas para especialista?"</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Aperturas</div>
+      <div id="sidebar-nav"></div>
+    </div>
+
+    <div style="margin-top:auto">
+      <div class="section-label">Resultados del día</div>
+      <div class="stats-card" id="stats-resumen">
+        <div style="font-size:11px;color:var(--text3);font-style:italic;padding:.25rem 0">Sin resultados aún. Anota al terminar cada llamada.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- APERTURA ACTIVA -->
+    <div class="active-apertura" id="active-apertura">
+      <div class="active-label">Apertura activa ahora</div>
+      <div class="active-script" id="active-script">
+        <span style="color:var(--text3);font-style:italic;font-size:15px">Selecciona una apertura de la lista de abajo para verla aquí. Escribe el nombre arriba para personalizar el guion al instante.</span>
+      </div>
+      <div class="active-bottom">
+        <div class="active-pregunta" id="active-pregunta">
+          <div class="active-pregunta-label">Si dice sí → di esto</div>
+          <span id="active-pregunta-text" style="color:var(--text3);font-style:italic">—</span>
+        </div>
+        <button class="copy-main-btn" id="copy-main-btn" onclick="copiarScriptActivo()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copiar guion
+        </button>
+      </div>
+      <div class="result-row" id="active-results"></div>
+    </div>
+
+    <!-- SELECTOR DE APERTURA -->
+    <div class="selector-title">ELIGE TU APERTURA</div>
+    <div id="cards-container"></div>
+
+    <!-- OBJECIONES -->
+    <div class="objeciones-section">
+      <div class="objeciones-title">OBJECIONES — RESPUESTAS LISTAS</div>
+      <div class="obj-grid" id="obj-grid"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-banner">
+  <div class="footer-brand">NN Xàtiva · <span>Fede Fontanals</span> · Sistema de Llamadas v4</div>
+  <div class="footer-hint">Los resultados se guardan automáticamente en este navegador. Próxima versión: integración con tu lista diaria de contactos.</div>
+  <button class="reset-btn" onclick="resetDia()">🗑 Reset del día</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ══ DATOS Y LÓGICA ══ -->
+<script>
+// ── DATOS ────────────────────────────────────────────────────────────────
+const APERTURAS = [
+  {
+    id:'a1', num:1,
+    nombre:'La del reencuentro',
+    why:'Activa la relación previa. No vende nada todavía — solo reconecta.',
+    nivel:1, nivelLabel:'Suave · Para conocidos',
+    script:'"Hola [NOMBRE], soy Fede, nos conocemos de cuando estaba en Santalucía. Oye, estoy ahora en Nationale-Nederlanden y tenemos algo de salud con Sanitas que me ha parecido que te podía encajar. ¿Tienes 2 minutos?"',
+    pregunta:'"¿Tienes médico privado ahora mismo?"',
+    cnum:'cnum-1', nlvl:'nivel-1'
+  },
+  {
+    id:'a2', num:2,
+    nombre:'La de la salud sin seguros',
+    why:'Nunca dice "seguro" ni "póliza". Solo habla de salud, Sanitas y descuento.',
+    nivel:1, nivelLabel:'Suave · Para conocidos',
+    script:'"Hola [NOMBRE], soy Fede. Oye, te llamo porque estamos con una campaña de medicina privada Sanitas con un 12,5% de descuento directo. Sin listas de espera. ¿Son 2 minutos, te cuento?"',
+    pregunta:'"¿Tu médico ahora es de la Seguridad Social o tienes privado?"',
+    cnum:'cnum-2', nlvl:'nivel-1'
+  },
+  {
+    id:'a3', num:3,
+    nombre:'La de los números concretos',
+    why:'El 12,5% para al cerebro. Un número concreto frena el rechazo automático.',
+    nivel:2, nivelLabel:'Directa · Con gancho concreto',
+    script:'"Hola [NOMBRE], soy Fede de Nationale-Nederlanden en Xàtiva. Mira, te llamo rápido: tenemos una campaña de salud privada Sanitas con descuento del 12,5% y además el primer año te dan protección de vida gratis. ¿Tienes literalmente 3 minutos?"',
+    pregunta:'"¿Cuántas veces al año vas al médico aproximadamente?"',
+    cnum:'cnum-3', nlvl:'nivel-2'
+  },
+  {
+    id:'a4', num:4,
+    nombre:'La de la lista de espera',
+    why:'Todo el mundo ha esperado meses para un especialista. Toca un dolor real.',
+    nivel:2, nivelLabel:'Directa · Con gancho concreto',
+    script:'"Hola [NOMBRE], soy Fede. Oye, una pregunta rápida: ¿cuánto tiempo esperas normalmente para ver un especialista? Te lo pregunto porque tenemos acceso a Sanitas sin listas de espera, con un descuento importante ahora mismo. ¿Tienes 2 minutos?"',
+    pregunta:'Deja que responda — su respuesta te da el argumento exacto que necesitas.',
+    cnum:'cnum-4', nlvl:'nivel-2'
+  },
+  {
+    id:'a5', num:5,
+    nombre:'La del reto de 60 segundos',
+    why:'Pone el control en sus manos. ¿Quién rechaza 60 segundos? Bajo rechazo inicial.',
+    nivel:3, nivelLabel:'Atrevida · Rompe el patrón',
+    script:'"Hola [NOMBRE], soy Fede. Mira, te voy a pedir exactamente 60 segundos. Si en ese tiempo no te digo algo que te interese, cuelgas y no te molesto más. ¿Trato?"',
+    pregunta:'"Sanitas. Medicina privada. Sin esperas. Descuento 12,5% esta semana. Vida gratis el primer año. ¿Tienes médico privado ahora?"',
+    cnum:'cnum-5', nlvl:'nivel-3'
+  },
+  {
+    id:'a6', num:6,
+    nombre:'La brutal honesta',
+    why:'Desarma completamente. La honestidad extrema genera confianza inmediata.',
+    nivel:3, nivelLabel:'Atrevida · Rompe el patrón',
+    script:'"Hola [NOMBRE], soy Fede. Mira, te llamo porque soy agente de seguros y tengo una oferta que creo que te interesa. Sé que no es el momento más esperado del día, pero prometo ser breve y concreto. ¿Me das 90 segundos?"',
+    pregunta:'"Tengo una campaña de salud Sanitas con 12,5% de descuento. Solo te pido que lo escuches. ¿Tienes médico privado ahora?"',
+    cnum:'cnum-6', nlvl:'nivel-3'
+  },
+  {
+    id:'a7', num:7,
+    nombre:'La de vencimiento próximo',
+    why:'Para contactos con póliza que vence. El contexto es perfecto — están esperando tu llamada.',
+    nivel:4, nivelLabel:'Urgente · Con contexto de vencimiento',
+    script:'"Hola [NOMBRE], soy Fede, tu agente en Nationale-Nederlanden. Te llamo porque veo que tienes el [producto] que vence próximamente. Quería revisarlo contigo antes de que llegue la fecha, para asegurarme de que sigues bien cubierto. ¿Cuándo tienes 20 minutos?"',
+    pregunta:'"¿Ha cambiado algo en tu situación desde que contrataste? ¿Familia, trabajo, necesidades nuevas?"',
+    cnum:'cnum-7', nlvl:'nivel-4'
+  }
+];
+
+const OBJECIONES = [
+  {
+    q:'Ya tengo médico de la Seguridad Social, me basta',
+    a:'"La SS es buena para urgencias y revisiones rutinarias. Pero cuando necesitas un especialista, una resonancia o una operación, las listas de espera son de meses. Con esto tienes especialista en días. ¿Cuánto tiempo esperas ahora para un especialista?"'
+  },
+  {
+    q:'Ya tengo seguro de salud con otra compañía',
+    a:'"Perfecto, me alegra saberlo. ¿Cuánto pagas? Porque con la campaña de Sanitas que tenemos ahora mismo con el 12,5% de descuento, en muchos casos saldrías más barato y con mejor cobertura. ¿Me dices la cifra y te comparo?"'
+  },
+  {
+    q:'Es muy caro',
+    a:'"Para dos personas son menos de 3€ al día por cabeza. Una sola consulta al especialista privado cuesta entre 60 y 120€ sin seguro. Con una visita al año ya está amortizado. ¿Cuántas veces vas al médico aproximadamente?"'
+  },
+  {
+    q:'Ahora no es buen momento, llámame en unos meses',
+    a:'"Te entiendo perfectamente. Pero la campaña con el 12,5% de descuento y la vida gratis el primer año es limitada. Si la dejamos para otro momento, puede que ya no esté disponible. ¿Qué es lo que más te frena ahora mismo?"'
+  },
+  {
+    q:'No me interesa, gracias',
+    a:'"Entendido. Solo una última pregunta: ¿es que ya tienes cobertura médica privada, o es que ahora mismo no es el momento? Porque si es lo segundo, te apunto y en 3 meses te llamo cuando pase lo que sea."'
+  },
+  {
+    q:'¿Por qué NN y no otra compañía?',
+    a:'"NN trabaja con Sanitas, que es la red médica privada más grande de España. Tienes acceso a todos sus médicos y centros. Y el seguro de vida gratis el primer año es una campaña exclusiva que no existe en otras compañías."'
+  },
+  {
+    q:'Cuelga al escuchar seguro/póliza',
+    a:'Truco: no uses esas palabras. "Medicina privada Sanitas" funciona mucho mejor que "seguro de salud". El objetivo de la primera llamada es conseguir 2 minutos, no vender. Repite desde el principio con la apertura 2.'
+  },
+  {
+    q:'Lo pienso y te llamo yo',
+    a:'"Perfecto. Pero para no quedarnos en el aire, ¿me dejas que te llame yo el [día concreto] a [hora concreta]? Así tú no tienes que acordarte de nada. ¿El martes a las 11 te viene bien?"'
+  }
+];
+
+// ── ESTADO ──────────────────────────────────────────────────────────────
+const STORAGE_KEY = 'nn_llamadas_v4';
+let state = cargarEstado();
+let aperturaActivaId = state.aperturaActiva || null;
+
+function cargarEstado() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? JSON.parse(saved) : { resultados: {}, aperturaActiva: null, ganadores: [] };
+  } catch(e) {
+    return { resultados: {}, aperturaActiva: null, ganadores: [] };
+  }
+}
+
+function guardarEstado() {
+  try {
+    state.aperturaActiva = aperturaActivaId;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch(e) {}
+}
+
+// ── NOMBRE Y WA ─────────────────────────────────────────────────────────
+const nombreInput = document.getElementById('nombre-input');
+const waText = document.getElementById('wa-text');
+
+nombreInput.addEventListener('input', () => {
+  actualizarNombre();
+});
+
+function actualizarNombre() {
+  const n = nombreInput.value.trim();
+  const nombre = n || '[nombre]';
+
+  // Actualizar WA preview
+  if (n) {
+    waText.textContent = `Hola ${nombre}, soy Fede, te llamo en unos minutos, es algo breve que creo que te interesa. Un saludo.`;
+  } else {
+    waText.textContent = 'Escribe el nombre para generar el mensaje personalizado';
+  }
+
+  // Actualizar script activo
+  actualizarScriptActivo();
+}
+
+function copiarWA() {
+  const n = nombreInput.value.trim();
+  if (!n) { mostrarToast('✏️ Escribe el nombre primero'); return; }
+  const msg = `Hola ${n}, soy Fede, te llamo en unos minutos, es algo breve que creo que te interesa. Un saludo.`;
+  copiarTexto(msg, 'wa-copy-btn', '✅ WhatsApp copiado');
+}
+
+// ── APERTURA ACTIVA ──────────────────────────────────────────────────────
+function activarApertura(id) {
+  aperturaActivaId = id;
+  guardarEstado();
+
+  // Actualizar cards
+  document.querySelectorAll('.apertura-card').forEach(c => {
+    c.classList.toggle('active-card', c.dataset.id === id);
+  });
+
+  // Actualizar nav
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.toggle('active', n.dataset.id === id);
+  });
+
+  actualizarScriptActivo();
+  mostrarToast('✓ Apertura seleccionada — ¡a marcar!');
+
+  // Scroll suave al bloque activo
+  document.getElementById('active-apertura').scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+function actualizarScriptActivo() {
+  if (!aperturaActivaId) return;
+  const a = APERTURAS.find(x => x.id === aperturaActivaId);
+  if (!a) return;
+
+  const n = nombreInput.value.trim();
+  const nombre = n || '[NOMBRE]';
+  const script = a.script.replace(/\[NOMBRE\]/g, `<span class="nombre-highlight">${nombre}</span>`);
+
+  document.getElementById('active-script').innerHTML = script;
+  document.getElementById('active-pregunta-text').textContent = a.pregunta;
+  document.getElementById('active-label-nombre') && (document.getElementById('active-label-nombre').textContent = nombre);
+
+  // Result buttons
+  const rr = document.getElementById('active-results');
+  const resultados = state.resultados[aperturaActivaId] || {};
+  rr.innerHTML = `
+    <span style="font-size:11px;color:var(--text3);align-self:center;margin-right:.25rem">Resultado:</span>
+    ${[
+      ['no_coge','❌ No coge'],
+      ['cuelga','📵 Cuelga'],
+      ['no_interes','🤷 No interesa'],
+      ['escucha','👂 Me escucha'],
+      ['cita','⭐ Cita']
+    ].map(([val,lbl]) => `
+      <button class="result-btn ${val} ${resultados[val] ? 'selected' : ''}"
+        onclick="anotarResultado('${aperturaActivaId}','${val}')">
+        ${lbl}${resultados[val] ? ` (${resultados[val]})` : ''}
+      </button>
+    `).join('')}
+  `;
+}
+
+function copiarScriptActivo() {
+  if (!aperturaActivaId) { mostrarToast('⚠️ Selecciona una apertura primero'); return; }
+  const a = APERTURAS.find(x => x.id === aperturaActivaId);
+  const n = nombreInput.value.trim() || '[nombre]';
+  const texto = a.script.replace(/\[NOMBRE\]/g, n).replace(/<[^>]+>/g, '');
+  copiarTexto(texto, 'copy-main-btn', '✅ Guion copiado');
+}
+
+// ── RESULTADOS ───────────────────────────────────────────────────────────
+function anotarResultado(id, val) {
+  if (!state.resultados[id]) state.resultados[id] = {};
+  state.resultados[id][val] = (state.resultados[id][val] || 0) + 1;
+  guardarEstado();
+  actualizarScriptActivo();
+  actualizarStats();
+  actualizarNavDots();
+  actualizarResumen();
+
+  const labels = { no_coge:'No cogió', cuelga:'Colgó', no_interes:'No le interesó', escucha:'Te escuchó 👂', cita:'¡CITA conseguida! ⭐' };
+  mostrarToast(labels[val] || 'Anotado');
+}
+
+function actualizarStats() {
+  let total=0, escucha=0, citas=0;
+  Object.values(state.resultados).forEach(r => {
+    Object.entries(r).forEach(([k,v]) => {
+      total+=v;
+      if(k==='escucha'||k==='cita') escucha+=v;
+      if(k==='cita') citas+=v;
+    });
+  });
+  document.getElementById('h-total').textContent = total;
+  document.getElementById('h-escucha').textContent = escucha;
+  document.getElementById('h-citas').textContent = citas;
+  const pct = total ? Math.round(escucha/total*100) : 0;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').innerHTML = `Tasa: <strong>${pct}%</strong>`;
+}
+
+function actualizarNavDots() {
+  APERTURAS.forEach(a => {
+    const dot = document.getElementById('navdot-'+a.id);
+    if (!dot) return;
+    const r = state.resultados[a.id] || {};
+    const citas = r.cita || 0;
+    const escucha = r.escucha || 0;
+    const total = Object.values(r).reduce((s,v)=>s+v, 0);
+    if (citas > 0) dot.style.background = 'var(--nn-orange)';
+    else if (escucha > 0) dot.style.background = 'var(--green)';
+    else if (total > 0) dot.style.background = 'var(--red)';
+    else dot.style.background = 'var(--border2)';
+  });
+}
+
+function actualizarResumen() {
+  const el = document.getElementById('stats-resumen');
+  const keys = Object.keys(state.resultados).filter(k => {
+    return Object.values(state.resultados[k]).some(v => v > 0);
+  });
+  if (!keys.length) {
+    el.innerHTML = '<div style="font-size:11px;color:var(--text3);font-style:italic;padding:.25rem 0">Sin resultados aún. Anota al terminar cada llamada.</div>';
+    return;
+  }
+  const aMap = {};
+  APERTURAS.forEach(a => aMap[a.id] = a.num + '. ' + a.nombre);
+  const rows = keys.sort((a,b) => {
+    const okA = (state.resultados[a].escucha||0)+(state.resultados[a].cita||0);
+    const okB = (state.resultados[b].escucha||0)+(state.resultados[b].cita||0);
+    return okB - okA;
+  }).map(k => {
+    const r = state.resultados[k];
+    const tot = Object.values(r).reduce((s,v)=>s+v,0);
+    const ok = (r.escucha||0)+(r.cita||0);
+    const pct = tot ? Math.round(ok/tot*100) : 0;
+    const color = ok > 0 ? (r.cita > 0 ? 'var(--nn-orange)' : 'var(--green)') : 'var(--red)';
+    return `<div class="stats-row">
+      <span class="stats-row-name">${aMap[k]||k}</span>
+      <span class="stats-row-val" style="color:${color}">${ok}/${tot} · ${pct}%</span>
+    </div>`;
+  }).join('');
+  el.innerHTML = rows;
+}
+
+// ── BUILD UI ─────────────────────────────────────────────────────────────
+function buildNav() {
+  const nav = document.getElementById('sidebar-nav');
+  nav.innerHTML = '';
+  let lastNivel = 0;
+  APERTURAS.forEach(a => {
+    if (a.nivel !== lastNivel) {
+      lastNivel = a.nivel;
+      const lbl = document.createElement('div');
+      lbl.style.cssText = 'font-size:9px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:var(--text3);padding:.75rem .5rem .25rem;';
+      lbl.textContent = 'Nivel ' + a.nivel;
+      nav.appendChild(lbl);
+    }
+    const btn = document.createElement('button');
+    btn.className = 'nav-item' + (aperturaActivaId === a.id ? ' active' : '');
+    btn.dataset.id = a.id;
+    btn.innerHTML = `
+      <div class="nav-num ${a.cnum}">${a.num}</div>
+      <div class="nav-name">${a.nombre}</div>
+      <div class="nav-result-dot" id="navdot-${a.id}"></div>
+    `;
+    btn.onclick = () => activarApertura(a.id);
+    nav.appendChild(btn);
+  });
+}
+
+function buildCards() {
+  const container = document.getElementById('cards-container');
+  container.innerHTML = '';
+  let lastNivel = 0;
+
+  APERTURAS.forEach(a => {
+    if (a.nivel !== lastNivel) {
+      lastNivel = a.nivel;
+      const lh = document.createElement('div');
+      lh.className = 'nivel-header';
+      lh.innerHTML = `
+        <div class="nivel-line"></div>
+        <span class="nivel-tag ${a.nlvl}">Nivel ${a.nivel} · ${a.nivelLabel}</span>
+        <div class="nivel-line"></div>
+      `;
+      container.appendChild(lh);
+    }
+
+    const card = document.createElement('div');
+    card.className = 'apertura-card' + (aperturaActivaId === a.id ? ' active-card' : '');
+    card.dataset.id = a.id;
+    card.innerHTML = `
+      <div class="card-header" onclick="toggleCard('${a.id}')">
+        <div class="card-num ${a.cnum}">${a.num}</div>
+        <div class="card-info">
+          <div class="card-title">${a.nombre}</div>
+          <div class="card-why">${a.why}</div>
+        </div>
+        <div class="card-right">
+          <span class="nivel-badge ${a.nlvl}">${a.nivelLabel.split(' · ')[0]}</span>
+          <button class="usar-btn" onclick="event.stopPropagation(); activarApertura('${a.id}')">
+            ${aperturaActivaId === a.id ? '✓ Activa' : 'Usar'}
+          </button>
+        </div>
+      </div>
+      <div class="card-body" id="body-${a.id}">
+        <div class="card-body-inner">
+          <div class="script-preview">${a.script}</div>
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function toggleCard(id) {
+  const body = document.getElementById('body-'+id);
+  body.classList.toggle('open');
+}
+
+function buildObjeciones() {
+  const grid = document.getElementById('obj-grid');
+  OBJECIONES.forEach((obj, i) => {
+    const card = document.createElement('div');
+    card.className = 'obj-card';
+    card.innerHTML = `
+      <div class="obj-toggle" onclick="toggleObj(${i})">
+        <div class="obj-q">${obj.q}</div>
+        <div class="obj-chevron" id="ochv-${i}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <div class="obj-a" id="oa-${i}">${obj.a}</div>
+      <button class="obj-copy-btn" id="ocb-${i}" onclick="copiarObj(${i})">Copiar respuesta</button>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function toggleObj(i) {
+  const a = document.getElementById('oa-'+i);
+  const chv = document.getElementById('ochv-'+i);
+  const btn = document.getElementById('ocb-'+i);
+  a.classList.toggle('open');
+  chv.classList.toggle('open');
+  btn.classList.toggle('visible');
+}
+
+function copiarObj(i) {
+  const texto = OBJECIONES[i].a.replace(/"/g, '');
+  copiarTexto(texto, 'ocb-'+i, '✅ Respuesta copiada');
+}
+
+// ── UTILIDADES ───────────────────────────────────────────────────────────
+function copiarTexto(texto, btnId, msg) {
+  navigator.clipboard.writeText(texto).then(() => {
+    mostrarToast(msg);
+    if (btnId) {
+      const btn = document.getElementById(btnId);
+      if (btn) {
+        btn.classList.add('copied');
+        setTimeout(() => btn.classList.remove('copied'), 2000);
+      }
+    }
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = texto;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    mostrarToast(msg);
+  });
+}
+
+function mostrarToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2200);
+}
+
+function resetDia() {
+  if (!confirm('¿Resetear todos los resultados del día? Los datos se borrarán.')) return;
+  state.resultados = {};
+  guardarEstado();
+  actualizarStats();
+  actualizarNavDots();
+  actualizarResumen();
+  mostrarToast('🗑 Resultados del día borrados');
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────
+buildNav();
+buildCards();
+buildObjeciones();
+actualizarStats();
+actualizarNavDots();
+actualizarResumen();
+
+if (aperturaActivaId) {
+  actualizarScriptActivo();
+}
+
+// Placeholder animado
+setTimeout(() => {
+  nombreInput.focus();
+}, 300);
+</script>
+</body>
+</html>
