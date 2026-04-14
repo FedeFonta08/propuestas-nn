@@ -819,6 +819,7 @@ body::before {
       <input type="number" id="pvm-input" placeholder="Pts hoy" min="0"
         style="width:90px;background:#F9FAFB;border:1.5px solid #D1D5DB;border-radius:8px;padding:0.4rem 0.6rem;color:#111827;font-family:DM Sans,sans-serif;font-size:14px;text-align:center;outline:none;">
       <button onclick="actualizarPVM()" style="width:90px;background:#15803D;border:none;border-radius:8px;color:white;font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;padding:0.4rem;cursor:pointer;">+ Añadir</button>
+      <button onclick="mostrarEdicion()" style="width:90px;background:#F9FAFB;border:1.5px solid #D1D5DB;border-radius:8px;color:#374151;font-family:DM Sans,sans-serif;font-size:13px;font-weight:600;padding:0.4rem;cursor:pointer;">✏️ Editar</button>
     </div>
   </div>
 </div>
@@ -1175,6 +1176,17 @@ async function cargarRadar() {
 }
 
 cargarRadar();
+
+// ── EDICIÓN DIRECTA PVM ──────────────────────
+function mostrarEdicion() {
+  const actual = cargarPVM();
+  const nuevo = prompt(`Valor total real de PVM acumulado:\n(Actual: ${actual.toLocaleString('es-ES')} pts)\n\nEscribe el número correcto:`, actual);
+  if (nuevo === null) return; // canceló
+  const v = parseInt(nuevo);
+  if (isNaN(v) || v < 0) { alert('Introduce un número válido.'); return; }
+  guardarPVM(v);
+  renderPVM(v);
+}
 
 // ── ACCESO DIRECTO ───────────────────────────
 function crearAccesoDirecto() {
