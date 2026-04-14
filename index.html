@@ -560,6 +560,108 @@ body::before {
 .c-teal   { background: #CCFBF1; color: #0F766E; }
 .c-red    { background: #FEE2E2; color: #991B1B; }
 
+/* ── RADAR COMERCIAL ────────────────────────── */
+.radar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+
+.radar-card {
+  background: #FFFFFF;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  border-radius: var(--r);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: box-shadow 0.15s;
+}
+
+.radar-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+
+.radar-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.radar-producto {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  flex: 1;
+}
+
+.radar-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+
+.badge-activa   { background: #DCFCE7; color: #15803D; }
+.badge-urgente  { background: #FEF3C7; color: #92400E; }
+.badge-cambio   { background: #DBEAFE; color: #1D4ED8; }
+.badge-otro     { background: #F3F4F6; color: #4B5563; }
+
+.radar-tipo {
+  font-size: 11px;
+  color: var(--text3);
+  font-weight: 500;
+}
+
+.radar-desc {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.5;
+}
+
+.radar-accion {
+  font-size: 12px;
+  color: var(--orange);
+  font-weight: 600;
+  line-height: 1.4;
+  padding-top: 4px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.radar-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.radar-tag {
+  font-size: 10px;
+  background: rgba(201,77,0,0.08);
+  color: var(--orange);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.radar-loading {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 2rem;
+  color: var(--text3);
+  font-size: 13px;
+}
+
+.radar-footer {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--text3);
+  text-align: right;
+}
+
+.radar-footer a { color: var(--orange); text-decoration: none; }
+.radar-footer a:hover { text-decoration: underline; }
+
 /* ── FOOTER ──────────────────────────────────── */
 .footer {
   position: relative;
@@ -855,8 +957,25 @@ body::before {
 
 <hr class="sep">
 
+<!-- ══ RADAR COMERCIAL NN ══ -->
+<div class="section fade-in delay-5" id="radar-section">
+  <div class="section-header">
+    <div class="section-icon c-orange">📡</div>
+    <div class="section-title">RADAR COMERCIAL NN — Campañas Activas</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="radar-grid" id="radar-grid">
+    <div class="radar-loading">⏳ Cargando campañas activas desde el Radar Comercial NN…</div>
+  </div>
+
+  <div class="radar-footer" id="radar-footer"></div>
+</div>
+
+<hr class="sep">
+
 <!-- ══ FRASE DEL DÍA ══ -->
-<div class="section fade-in delay-5">
+<div class="section fade-in delay-6">
   <div class="frase-box">
     <div class="frase-text" id="frase-text">"La diferencia entre el comercial que llega a fin de mes con lo justo y el que construye una cartera sólida no es el talento. Es la constancia de las llamadas cuando no apetece."</div>
     <div class="frase-autor" id="frase-autor">— Principio de trabajo · NN Xàtiva</div>
@@ -954,6 +1073,98 @@ const FRASES = [
 const frase = FRASES[new Date().getDay() % FRASES.length];
 document.getElementById('frase-text').textContent = frase[0];
 document.getElementById('frase-autor').textContent = frase[1];
+
+// ── RADAR COMERCIAL NN ───────────────────────
+// Lee la pestaña "Campañas Activas" del Sheets via API pública JSON
+const RADAR_SHEET_ID = '16RFegu-rNY2dWOkO0pt97OElUdSDOO6gC0n3cyKSuUk';
+const RADAR_TAB      = 'Campañas Activas'; // nombre exacto de la pestaña
+const RADAR_URL      = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(RADAR_TAB)}`;
+const RADAR_LINK     = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}`;
+
+function badgeClass(estado) {
+  if (!estado) return 'badge-otro';
+  const e = estado.toUpperCase();
+  if (e.includes('URGENTE'))  return 'badge-urgente';
+  if (e.includes('ACTIVA'))   return 'badge-activa';
+  if (e.includes('CAMBIO'))   return 'badge-cambio';
+  return 'badge-otro';
+}
+
+function badgeLabel(estado) {
+  if (!estado) return 'INFO';
+  const e = estado.toUpperCase();
+  if (e.includes('URGENTE'))  return '⚡ URGENTE';
+  if (e.includes('ACTIVA'))   return '✅ ACTIVA';
+  if (e.includes('CAMBIO'))   return '🔵 CAMBIO';
+  return estado;
+}
+
+async function cargarRadar() {
+  const grid = document.getElementById('radar-grid');
+  const footer = document.getElementById('radar-footer');
+  try {
+    const res  = await fetch(RADAR_URL);
+    const text = await res.text();
+    // La API devuelve JSON envuelto en /*O_o*/ google.visualization.Query.setResponse({...});
+    const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
+    const rows = json.table.rows;
+    const cols = json.table.cols.map(c => c.label);
+
+    // Columnas: Producto(0), Tipo(1), Desc(2), FechaInicio(3), FechaFin(4), Cupo(5), Descuento(6), Segmento(7), Accion(8), Estado(9)
+    const campanas = rows
+      .slice(1) // fila 1 = cabecera real, fila 0 = título fusionado
+      .filter(r => r.c && r.c[0] && r.c[0].v) // solo filas con datos
+      .map(r => ({
+        producto:  r.c[0]?.v || '',
+        tipo:      r.c[1]?.v || '',
+        desc:      r.c[2]?.v || '',
+        inicio:    r.c[3]?.v || '',
+        fin:       r.c[4]?.v || '',
+        cupo:      r.c[5]?.v || '',
+        dto:       r.c[6]?.v || '',
+        segmento:  r.c[7]?.v || '',
+        accion:    r.c[8]?.v || '',
+        estado:    r.c[9]?.v || '',
+      }));
+
+    if (!campanas.length) {
+      grid.innerHTML = '<div class="radar-loading">Sin campañas activas esta semana.</div>';
+      return;
+    }
+
+    // Ordenar: URGENTE primero, luego ACTIVA, luego CAMBIO
+    const orden = e => e.includes('URGENTE') ? 0 : e.includes('ACTIVA') ? 1 : 2;
+    campanas.sort((a,b) => orden(a.estado.toUpperCase()) - orden(b.estado.toUpperCase()));
+
+    grid.innerHTML = campanas.map(c => {
+      const tags = [c.fin ? `⏰ Hasta ${c.fin}` : '', c.cupo && c.cupo !== 'Sin cupo' ? `📊 ${c.cupo}` : '', c.dto && c.dto !== '—' ? `🏷️ ${c.dto}` : '']
+        .filter(Boolean)
+        .map(t => `<span class="radar-tag">${t}</span>`)
+        .join('');
+      return `
+        <div class="radar-card">
+          <div class="radar-card-top">
+            <div class="radar-producto">${c.producto}</div>
+            <div class="radar-badge ${badgeClass(c.estado)}">${badgeLabel(c.estado)}</div>
+          </div>
+          <div class="radar-tipo">${c.tipo}</div>
+          <div class="radar-desc">${c.desc}</div>
+          ${tags ? `<div class="radar-meta">${tags}</div>` : ''}
+          ${c.accion ? `<div class="radar-accion">→ ${c.accion}</div>` : ''}
+        </div>`;
+    }).join('');
+
+    // Último En Nosotros en footer
+    const now = new Date();
+    footer.innerHTML = `Actualizado desde <a href="${RADAR_LINK}" target="_blank">Radar Comercial NN</a> · ${campanas.length} campañas activas · ${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`;
+
+  } catch(e) {
+    grid.innerHTML = `<div class="radar-loading">⚠️ No se pudo conectar con el Radar Comercial. <a href="${RADAR_LINK}" target="_blank" style="color:var(--orange)">Abrirlo directamente →</a></div>`;
+    console.warn('Radar error:', e);
+  }
+}
+
+cargarRadar();
 
 // ── ACCESO DIRECTO ───────────────────────────
 function crearAccesoDirecto() {
