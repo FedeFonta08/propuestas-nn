@@ -405,9 +405,10 @@ textarea{resize:vertical;min-height:80px}
 
 <script>
 // ══════════════════════════════════════════════════════════════
-// CONFIGURACIÓN — pega aquí la URL del Apps Script desplegado
+// CONFIGURACIÓN — URL del Apps Script desplegado y conectado
+// al Sistema_Gestion_NN_v4_BuyerPersona (Google Sheets)
 // ══════════════════════════════════════════════════════════════
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzL0-m5mu79I8MHD0HNotzEyCIn4_vUiIgt1uUuyAEDfF9UHy5iZYxf7EvDUvqrtsX74g/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxpYhW-S9OvA3w1NTR_Mu6GHffGTtHKE1ENKgoM98ySB8gyxt-j4BbaKF7Mk48grrcr_g/exec';
 
 // ── Estado global ─────────────────────────────────────────────
 let contactoSeleccionado = null;
@@ -446,7 +447,7 @@ function buscar(val) {
         res.innerHTML = data.resultados.map(r =>
           `<div class="search-item" onclick="selContacto(${JSON.stringify(r).replace(/"/g,'&quot;')})">
             <div class="sn">${r.nombre}</div>
-            <div class="ss">${r.tel1 || ''} · ${r.estado || ''} · ${r.necesidad || ''}</div>
+            <div class="ss">${r.tel1 || ''} · ${r.estado || ''} · ${r.segmento || ''}</div>
           </div>`
         ).join('');
         res.style.display = 'block';
@@ -461,7 +462,8 @@ function selContacto(r) {
   const card = document.getElementById('contact-card');
   card.classList.add('show');
   document.getElementById('cc-nombre').textContent = r.nombre;
-  document.getElementById('cc-info').textContent = `📞 ${r.tel1 || '—'} · ${r.estado || '—'} · Necesidad: ${r.necesidad || '—'}`;
+  document.getElementById('cc-info').textContent =
+    `📞 ${r.tel1 || '—'} · ${r.estado || '—'} · ${r.segmento || ''} · Necesidad: ${r.necesidad || '—'}`;
   actualizarBtnGuardar();
 }
 
@@ -496,18 +498,18 @@ async function guardarLlamada() {
 
   const esCita = resultadoSeleccionado === 'cita_fijada';
   const payload = {
-    accion:          'registrar_llamada',
-    nombre:          contactoSeleccionado.nombre,
-    resultado:       resultadoSeleccionado,
-    notas:           document.getElementById('notas').value.trim(),
+    accion:           'registrar_llamada',
+    nombre:           contactoSeleccionado.nombre,
+    resultado:        resultadoSeleccionado,
+    notas:            document.getElementById('notas').value.trim(),
     productoOfrecido: document.getElementById('producto').value,
-    proxAccion:      esCita
+    proxAccion:       esCita
       ? document.getElementById('prox-accion-cita').value
       : document.getElementById('prox-accion').value,
-    fechaProx:       esCita
+    fechaProx:        esCita
       ? document.getElementById('fecha-cita').value
       : document.getElementById('fecha-prox').value,
-    horaCita:        esCita ? document.getElementById('hora-cita').value : null,
+    horaCita:         esCita ? document.getElementById('hora-cita').value : null,
   };
 
   try {
@@ -553,34 +555,34 @@ async function guardarContacto() {
   btn.innerHTML = '<span class="spin"></span>Guardando...';
 
   const payload = {
-    accion:            'nuevo_contacto',
+    accion:              'nuevo_contacto',
     nombre,
-    apodo:             document.getElementById('nc-apodo').value.trim(),
-    empresa:           document.getElementById('nc-empresa').value.trim(),
-    cargo:             document.getElementById('nc-cargo').value.trim(),
+    apodo:               document.getElementById('nc-apodo').value.trim(),
+    empresa:             document.getElementById('nc-empresa').value.trim(),
+    cargo:               document.getElementById('nc-cargo').value.trim(),
     tel1,
-    tel2:              document.getElementById('nc-tel2').value.trim(),
-    email:             document.getElementById('nc-email').value.trim(),
-    localidad:         document.getElementById('nc-localidad').value.trim(),
-    cumpleanos:        document.getElementById('nc-cumpleanos').value,
-    recomendado:       document.getElementById('nc-recomendado').value.trim(),
-    estado:            document.getElementById('nc-estado').value,
-    urgencia:          document.getElementById('nc-urgencia').value,
-    canal:             document.getElementById('nc-canal').value,
-    buyerPersona:      document.getElementById('nc-buyer').value,
-    estadoCivil:       document.getElementById('nc-estadocivil').value,
-    regimenSS:         document.getElementById('nc-regimen').value,
-    aniosSS:           document.getElementById('nc-anioss').value,
-    hijos:             document.getElementById('nc-hijos').value,
-    pareja:            document.getElementById('nc-pareja').value,
-    salario:           document.getElementById('nc-salario').value,
-    pagas:             document.getElementById('nc-pagas').value,
-    ahorro:            document.getElementById('nc-ahorro').value,
-    gastos:            document.getElementById('nc-gastos').value,
-    nivelEco:          document.getElementById('nc-nivel').value,
-    necesidad:         document.getElementById('nc-necesidad').value,
+    tel2:                document.getElementById('nc-tel2').value.trim(),
+    email:               document.getElementById('nc-email').value.trim(),
+    localidad:           document.getElementById('nc-localidad').value.trim(),
+    cumpleanos:          document.getElementById('nc-cumpleanos').value,
+    recomendado:         document.getElementById('nc-recomendado').value.trim(),
+    estado:              document.getElementById('nc-estado').value,
+    urgencia:            document.getElementById('nc-urgencia').value,
+    canal:               document.getElementById('nc-canal').value,
+    buyerPersona:        document.getElementById('nc-buyer').value,
+    estadoCivil:         document.getElementById('nc-estadocivil').value,
+    regimenSS:           document.getElementById('nc-regimen').value,
+    aniosSS:             document.getElementById('nc-anioss').value,
+    hijos:               document.getElementById('nc-hijos').value,
+    pareja:              document.getElementById('nc-pareja').value,
+    salario:             document.getElementById('nc-salario').value,
+    pagas:               document.getElementById('nc-pagas').value,
+    ahorro:              document.getElementById('nc-ahorro').value,
+    gastos:              document.getElementById('nc-gastos').value,
+    nivelEco:            document.getElementById('nc-nivel').value,
+    necesidad:           document.getElementById('nc-necesidad').value,
     productoRecomendado: document.getElementById('nc-producto-rec').value,
-    observaciones:     document.getElementById('nc-observaciones').value.trim(),
+    observaciones:       document.getElementById('nc-observaciones').value.trim(),
   };
 
   try {
@@ -605,13 +607,8 @@ async function guardarContacto() {
   btn.innerHTML = 'GUARDAR CONTACTO';
 }
 
-// ── Utilidades ────────────────────────────────────────────────
+// ── POST → GET con payload (evita CORS desde GitHub Pages) ───
 async function post(data) {
-  if (SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbx_VZlftBULYuollYWp6K9Cx3sYL4F7TfjL0u68RPxzHBLw2MAIPYSZu44GxKelhm0/exec') {
-    await new Promise(r => setTimeout(r, 800));
-    return { ok: true, msg: 'DEMO: script no configurado aún', fila: 99 };
-  }
-  // Apps Script requiere GET con parámetro para evitar problemas CORS desde GitHub Pages
   const url = SCRIPT_URL + '?payload=' + encodeURIComponent(JSON.stringify(data));
   const res = await fetch(url, { method: 'GET', redirect: 'follow' });
   const text = await res.text();
@@ -619,6 +616,7 @@ async function post(data) {
   catch(e) { return { ok: false, error: 'Respuesta no válida: ' + text.substring(0,100) }; }
 }
 
+// ── Toast ─────────────────────────────────────────────────────
 let toastTimer;
 function toast(msg, tipo = '') {
   const el = document.getElementById('toast');
