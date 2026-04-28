@@ -658,7 +658,7 @@ async function guardarLlamada() {
   const payload = {
     accion:           'registrar_llamada',
     nombre:           contactoSeleccionado.nombre,
-    telefono:         contactoSeleccionado.tel1 || '', // Añadir teléfono
+    telefono:         contactoSeleccionado.tel1 || '',
     resultado:        resultadoSeleccionado,
     notas:            document.getElementById('notas').value.trim(),
     productoOfrecido: document.getElementById('producto').value,
@@ -669,7 +669,7 @@ async function guardarLlamada() {
       ? document.getElementById('fecha-cita').value
       : document.getElementById('fecha-prox').value,
     horaCita:         esCita ? document.getElementById('hora-cita').value : null,
-    crearTarea:       esNoContactado, // Crear TAREA solo para No contactado
+    crearTarea:       esNoContactado,
   };
 
   try {
