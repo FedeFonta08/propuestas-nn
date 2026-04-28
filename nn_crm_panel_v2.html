@@ -653,9 +653,12 @@ async function guardarLlamada() {
   btn.innerHTML = '<span class="spin"></span>Guardando...';
 
   const esCita = resultadoSeleccionado === 'cita_fijada';
+  const esNoContactado = resultadoSeleccionado === 'no_contactado';
+  
   const payload = {
     accion:           'registrar_llamada',
     nombre:           contactoSeleccionado.nombre,
+    telefono:         contactoSeleccionado.tel1 || '', // Añadir teléfono
     resultado:        resultadoSeleccionado,
     notas:            document.getElementById('notas').value.trim(),
     productoOfrecido: document.getElementById('producto').value,
@@ -666,12 +669,15 @@ async function guardarLlamada() {
       ? document.getElementById('fecha-cita').value
       : document.getElementById('fecha-prox').value,
     horaCita:         esCita ? document.getElementById('hora-cita').value : null,
+    crearTarea:       esNoContactado, // Crear TAREA solo para No contactado
   };
 
   try {
     const r = await post(payload);
     if (r.ok) {
-      const extra = r.calEventId ? ' · Cita en Calendar ✅' : '';
+      let extra = '';
+      if (r.calEventId) extra = ' · Evento en Calendar ✅';
+      if (r.taskId) extra = ' · Tarea creada ✅';
       toast('✅ Guardado en CRM' + extra, 'ok');
       setTimeout(limpiarLlamada, 1800);
     } else {
