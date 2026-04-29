@@ -603,10 +603,20 @@ body::before {
   letter-spacing: 0.3px;
 }
 
-.badge-activa   { background: #DCFCE7; color: #15803D; }
-.badge-urgente  { background: #FEF3C7; color: #92400E; }
-.badge-cambio   { background: #DBEAFE; color: #1D4ED8; }
-.badge-otro     { background: #F3F4F6; color: #4B5563; }
+.badge-activa     { background: #DCFCE7; color: #15803D; }
+.badge-urgente    { background: #FEF3C7; color: #92400E; }
+.badge-cambio     { background: #DBEAFE; color: #1D4ED8; }
+.badge-info       { background: #E0F2FE; color: #075985; }
+.badge-baja       { background: #FEF9C3; color: #854D0E; }
+.badge-finalizada { background: #F3F4F6; color: #6B7280; }
+.badge-otro       { background: #F3F4F6; color: #4B5563; }
+
+/* Card finalizada se muestra atenuada */
+.radar-card.is-finalizada {
+  opacity: 0.55;
+  background: #FAFAF7;
+}
+.radar-card.is-finalizada .radar-producto { text-decoration: line-through; }
 
 .radar-tipo {
   font-size: 11px;
@@ -1088,72 +1098,53 @@ document.getElementById('frase-autor').textContent = frase[1];
 // ── RADAR COMERCIAL NN ───────────────────────
 // Lee la pestaña "Campañas Activas" del Sheets via API pública JSON
 const RADAR_SHEET_ID = '1mYKiIdoglAxzFwJOE_0V8CyHwNUsKkh_oPtkUKg4GCQ';
-const RADAR_TAB      = '🟢 Campañas Activas'; // nombre exacto de la pestaña con emoji
-const RADAR_URL      = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(RADAR_TAB)}`;
-const RADAR_LINK     = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}`;
+const RADAR_GID      = '1697560330'; // gid de la pestaña Campañas Activas
+const RADAR_URL      = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}/gviz/tq?tqx=out:json&gid=${RADAR_GID}`;
+const RADAR_LINK     = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}/edit?gid=${RADAR_GID}#gid=${RADAR_GID}`;
+const RADAR_CACHE_KEY = 'nn_radar_cache_v2';
 
 function badgeClass(estado) {
   if (!estado) return 'badge-otro';
   const e = estado.toUpperCase();
-  if (e.includes('URGENTE'))  return 'badge-urgente';
-  if (e.includes('ACTIVA'))   return 'badge-activa';
-  if (e.includes('CAMBIO'))   return 'badge-cambio';
+  if (e.includes('FINALIZ'))                 return 'badge-finalizada';
+  if (e.includes('URGENTE'))                 return 'badge-urgente';
+  if (e.includes('BAJA PRIORIDAD'))          return 'badge-baja';
+  if (e.includes('ACTIVA'))                  return 'badge-activa';
+  if (e.includes('CAMBIO'))                  return 'badge-cambio';
+  if (e.includes('INFORMATIVA') || e.includes('INFO')) return 'badge-info';
   return 'badge-otro';
 }
 
 function badgeLabel(estado) {
   if (!estado) return 'INFO';
   const e = estado.toUpperCase();
-  if (e.includes('URGENTE'))  return '⚡ URGENTE';
-  if (e.includes('ACTIVA'))   return '✅ ACTIVA';
-  if (e.includes('CAMBIO'))   return '🔵 CAMBIO';
+  if (e.includes('FINALIZ'))                 return '🔴 FINALIZADA';
+  if (e.includes('URGENTE'))                 return '⚡ URGENTE';
+  if (e.includes('BAJA PRIORIDAD'))          return '🟡 BAJA PRIORIDAD';
+  if (e.includes('ACTIVA'))                  return '✅ ACTIVA';
+  if (e.includes('CAMBIO'))                  return '🔵 CAMBIO';
+  if (e.includes('INFORMATIVA') || e.includes('INFO')) return '🔵 INFORMATIVA';
   return estado;
 }
 
 async function cargarRadar() {
   const grid = document.getElementById('radar-grid');
   const footer = document.getElementById('radar-footer');
-  try {
-    const res  = await fetch(RADAR_URL);
-    const text = await res.text();
-    // La API devuelve JSON envuelto en /*O_o*/ google.visualization.Query.setResponse({...});
-    const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
-    const rows = json.table.rows;
-    const cols = json.table.cols.map(c => c.label);
 
-    // Columnas: Producto(0), Tipo(1), Desc(2), FechaInicio(3), FechaFin(4), Cupo(5), Descuento(6), Segmento(7), Accion(8), Estado(9)
-    const campanas = rows
-      .slice(1) // fila 1 = cabecera real, fila 0 = título fusionado
-      .filter(r => r.c && r.c[0] && r.c[0].v) // solo filas con datos
-      .map(r => ({
-        producto:  r.c[0]?.v || '',
-        tipo:      r.c[1]?.v || '',
-        desc:      r.c[2]?.v || '',
-        inicio:    r.c[3]?.v || '',
-        fin:       r.c[4]?.v || '',
-        cupo:      r.c[5]?.v || '',
-        dto:       r.c[6]?.v || '',
-        segmento:  r.c[7]?.v || '',
-        accion:    r.c[8]?.v || '',
-        estado:    r.c[9]?.v || '',
-      }));
-
+  function pintar(campanas, esCache) {
     if (!campanas.length) {
       grid.innerHTML = '<div class="radar-loading">Sin campañas activas esta semana.</div>';
       return;
     }
-
-    // Ordenar: URGENTE primero, luego ACTIVA, luego CAMBIO
-    const orden = e => e.includes('URGENTE') ? 0 : e.includes('ACTIVA') ? 1 : 2;
-    campanas.sort((a,b) => orden(a.estado.toUpperCase()) - orden(b.estado.toUpperCase()));
-
     grid.innerHTML = campanas.map(c => {
-      const tags = [c.fin ? `⏰ Hasta ${c.fin}` : '', c.cupo && c.cupo !== 'Sin cupo' ? `📊 ${c.cupo}` : '', c.dto && c.dto !== '—' ? `🏷️ ${c.dto}` : '']
-        .filter(Boolean)
-        .map(t => `<span class="radar-tag">${t}</span>`)
-        .join('');
+      const finalizada = (c.estado || '').toUpperCase().includes('FINALIZ');
+      const tags = [
+        c.fin && !finalizada ? `⏰ Hasta ${c.fin}` : '',
+        c.cupo && c.cupo !== 'Sin cupo' && !finalizada ? `📊 ${c.cupo}` : '',
+        c.dto && c.dto !== '—' && !finalizada ? `🏷️ ${c.dto}` : ''
+      ].filter(Boolean).map(t => `<span class="radar-tag">${t}</span>`).join('');
       return `
-        <div class="radar-card">
+        <div class="radar-card ${finalizada ? 'is-finalizada' : ''}">
           <div class="radar-card-top">
             <div class="radar-producto">${c.producto}</div>
             <div class="radar-badge ${badgeClass(c.estado)}">${badgeLabel(c.estado)}</div>
@@ -1161,17 +1152,70 @@ async function cargarRadar() {
           <div class="radar-tipo">${c.tipo}</div>
           <div class="radar-desc">${c.desc}</div>
           ${tags ? `<div class="radar-meta">${tags}</div>` : ''}
-          ${c.accion ? `<div class="radar-accion">→ ${c.accion}</div>` : ''}
+          ${c.accion && !finalizada ? `<div class="radar-accion">→ ${c.accion}</div>` : ''}
         </div>`;
     }).join('');
 
-    // Último En Nosotros en footer
     const now = new Date();
-    footer.innerHTML = `Actualizado desde <a href="${RADAR_LINK}" target="_blank">Radar Comercial NN</a> · ${campanas.length} campañas activas · ${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`;
+    const fechaTxt = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`;
+    const aviso = esCache ? ' · ⚠️ datos en caché (sin conexión)' : '';
+    footer.innerHTML = `Actualizado desde <a href="${RADAR_LINK}" target="_blank">Radar Comercial NN</a> · ${campanas.length} campañas · ${fechaTxt}${aviso}`;
+  }
+
+  // Orden: URGENTE → ACTIVA → CAMBIO → INFORMATIVA → BAJA → FINALIZADA
+  function prioridad(estado) {
+    const e = (estado || '').toUpperCase();
+    if (e.includes('URGENTE'))         return 0;
+    if (e.includes('BAJA PRIORIDAD'))  return 4;
+    if (e.includes('ACTIVA'))          return 1;
+    if (e.includes('CAMBIO'))          return 2;
+    if (e.includes('INFORMATIVA') || e.includes('INFO')) return 3;
+    if (e.includes('FINALIZ'))         return 5;
+    return 6;
+  }
+
+  try {
+    const res  = await fetch(RADAR_URL);
+    const text = await res.text();
+    const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
+    const rows = json.table.rows;
+
+    // Estructura del Sheet: fila 0 = título, fila 1 = última actualización, fila 2 = cabecera, filas 3+ = datos
+    // Columnas: Producto(0), Tipo(1), Desc(2), FechaInicio(3), FechaFin(4), Cupo(5), Descuento(6), Segmento(7), Accion(8), Estado(9)
+    const campanas = rows
+      .slice(3) // saltamos las 3 filas de cabecera
+      .filter(r => r.c && r.c[0] && r.c[0].v && r.c[9] && r.c[9].v) // solo filas con producto Y estado
+      .map(r => ({
+        producto: r.c[0]?.v || '',
+        tipo:     r.c[1]?.v || '',
+        desc:     r.c[2]?.v || '',
+        inicio:   r.c[3]?.v || '',
+        fin:      r.c[4]?.v || '',
+        cupo:     r.c[5]?.v || '',
+        dto:      r.c[6]?.v || '',
+        segmento: r.c[7]?.v || '',
+        accion:   r.c[8]?.v || '',
+        estado:   (r.c[9]?.v || '').trim(),
+      }));
+
+    campanas.sort((a,b) => prioridad(a.estado) - prioridad(b.estado));
+
+    // Guardamos en caché para fallback futuro
+    try { localStorage.setItem(RADAR_CACHE_KEY, JSON.stringify({ts: Date.now(), data: campanas})); } catch(_) {}
+
+    pintar(campanas, false);
 
   } catch(e) {
+    console.warn('Radar error, intentando caché:', e);
+    // Fallback: caché local si la API falla (rate limit, sin red, etc.)
+    try {
+      const cache = JSON.parse(localStorage.getItem(RADAR_CACHE_KEY) || 'null');
+      if (cache && cache.data && cache.data.length) {
+        pintar(cache.data, true);
+        return;
+      }
+    } catch(_) {}
     grid.innerHTML = `<div class="radar-loading">⚠️ No se pudo conectar con el Radar Comercial. <a href="${RADAR_LINK}" target="_blank" style="color:var(--orange)">Abrirlo directamente →</a></div>`;
-    console.warn('Radar error:', e);
   }
 }
 
