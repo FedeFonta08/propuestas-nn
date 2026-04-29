@@ -49,14 +49,16 @@ https://fedefonta08.github.io/propuestas-nn/?nombre=Juan&producto=futuro&prima=2
 Redacta un email corto y personal desde tu cuenta NN. Al final añade:
 
 > 👉 He preparado tu propuesta personalizada: [Ver propuesta](URL_DEL_CLIENTE)
-
----
-
-## 🛠️ Mantenimiento
-
-- `index.html` → portal completo (no tocar si no es necesario)
-- `fede.jpg` → tu foto de perfil (reemplazar con foto real)
-
----
-
-*Federico Fontanals · Agente Dinamizador Punto Naranja NN Xàtiva · La Costera*
+>
+> ---
+>
+> ## 🛠️ Mantenimiento
+>
+> > ⚠️ **CUIDADO con el borrado de archivos**: No elimines ningún archivo del repositorio sin estar seguro. Borrar archivos puede romper el portal y dejar de funcionar para todos los clientes. Si tienes dudas, consulta antes de borrar.
+> >
+> > - `index.html` → portal completo (no tocar si no es necesario)
+> > - - `fede.jpg` → tu foto de perfil (reemplazar con foto real)
+> >  
+> >   - ---
+> >
+> > *Federico Fontanals · Agente Dinamizador Punto Naranja NN Xàtiva · La Costera*
