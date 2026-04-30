@@ -1237,8 +1237,8 @@ body {
     try {
       const [cR, nR, hR] = await Promise.all([
         fetch(RADAR_URLS.campanas,  {cache:'no-store'}),
-        fetch(RADAR_URLS.novedades, {cache:'no-store'}),
-        fetch(RADAR_URLS.historial, {cache:'no-store'})
+        fetch(RADAR_URLS.novedades, {cache:'no-store', credentials:'omit'}),
+        fetch(RADAR_URLS.historial, {cache:'no-store', credentials:'omit'})
       ]);
       if (!cR.ok || !nR.ok || !hR.ok) throw new Error('HTTP ' + [cR.status,nR.status,hR.status].join('/'));
       const [cT, nT, hT] = await Promise.all([cR.text(), nR.text(), hR.text()]);
@@ -1316,7 +1316,7 @@ body {
 </div>
 
 <!-- ══ NOMBRE PANEL ══ -->
-<div class="nombre-panel">
+<div class="nombre-panel" style="position:sticky;top:60px;z-index:99;">
   <div class="nombre-inner">
     <div class="nombre-label">📞 A quién llamas ahora:</div>
     <div class="nombre-field-wrap">
