@@ -475,25 +475,47 @@ body::before {
 
 /* ── MOTIVACIÓN ──────────────────────────────── */
 .frase-box {
-  background: #FFFFFF;
-  border: 1.5px solid rgba(0,0,0,0.10);
-  border-left: 4px solid var(--orange);
-  border-radius: 0 var(--r) var(--r) 0;
-  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, #FFF8F5 0%, #FFFFFF 100%);
+  border: 2px solid var(--orange);
+  border-left: 6px solid var(--orange);
+  border-radius: 0 var(--r-lg) var(--r-lg) 0;
+  padding: 2rem 2.5rem;
   margin-bottom: 0;
+  box-shadow: 0 4px 12px rgba(201, 77, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.frase-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 0% 0%, rgba(201, 77, 0, 0.03) 0%, transparent 60%);
+  pointer-events: none;
 }
 
 .frase-text {
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: 600;
   font-style: italic;
   color: #111827;
-  line-height: 1.7;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
 .frase-autor {
-  font-size: 12px;
-  color: #6B7280;
-  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--orange);
+  margin-top: 10px;
+  letter-spacing: 0.3px;
+  position: relative;
+  z-index: 1;
 }
 
 /* ── PVM MINI TRACKER ────────────────────────── */
@@ -1069,6 +1091,29 @@ const FRASES = [
   ['"No llames para vender. Llama para escuchar. El cliente te dirá exactamente qué necesita."', '— Técnica de escucha activa'],
   ['"Cada no te acerca un paso más al siguiente sí. El proceso es matemático, no emocional."', '— Resiliencia comercial'],
   ['"Tu agenda de hoy es tu cartera de dentro de seis meses."', '— Planificación · NN Xàtiva'],
+  ['"10.291 puntos no se consiguen con suerte. Se consiguen llamando cuando otros descansan."', '— Meta 2026'],
+  ['"El miedo a la llamada se cura haciendo la llamada. No hay otra forma."', '— Acción directa'],
+  ['"Los primeros 100 noes duelen. Los segundos 100 enseñan. Los terceros 100 pagan."', '— Proceso de aprendizaje'],
+  ['"Si esperas a tener ganas de llamar, nunca llamarás. La disciplina gana cuando la motivación falla."', '— Disciplina vs motivación'],
+  ['"Cada mañana decides: ser el agente que quieres ser o el que tienes miedo de no ser."', '— Decisión diaria'],
+  ['"No compites con los 30.000 agentes de España. Compites con el Fede de ayer."', '— Competencia real'],
+  ['"Las 7 de la mañana no preguntan si dormiste bien. O marcas o otro agente se lleva el cliente."', '— Madrugada productiva'],
+  ['"El CRM lleno de contactos sin llamar no es una base de datos. Es una lista de excusas."', '— Acción sobre planificación'],
+  ['"Nadie recuerda al agente que casi llegó al objetivo. Todos recuerdan al que lo superó."', '— Resultados finales'],
+  ['"La llamada perfecta no existe. La llamada hecha sí."', '— Perfeccionismo vs acción'],
+  ['"Cuando no sabes qué decir, di la verdad: Hola, soy Fede, te llamo porque creo que puedo ayudarte."', '— Honestidad brutal'],
+  ['"Los clientes no compran seguros. Compran tranquilidad. Véndeles lo segundo."', '— Venta emocional'],
+  ['"Si no estás incómodo, no estás creciendo. La zona de confort no paga 10.291 puntos al mes."', '— Zona de crecimiento'],
+  ['"Cada objeción es una pregunta disfrazada. Aprende a escuchar la pregunta real."', '— Manejo de objeciones'],
+  ['"El agente promedio hace 20 llamadas al día. El agente top hace 50. Tú decides en qué grupo estar."', '— Volumen de actividad'],
+  ['"No vendas lo que tienes. Vende lo que el cliente necesita. La diferencia es todo."', '— Enfoque en necesidades'],
+  ['"El secreto no es cerrar más. Es abrir mejor."', '— Técnica de apertura'],
+  ['"Fede de las 6 AM es más fuerte que Fede de las 11 AM. Aprovéchalo."', '— Energía matinal'],
+  ['"Los referidos no aparecen por suerte. Aparecen por excelencia en el servicio."', '— Calidad de servicio'],
+  ['"No esperes el momento perfecto. El momento perfecto es ahora, con el teléfono en la mano."', '— Timing perfecto'],
+  ['"965 contactos en la base. 4-5 agentes en septiembre. El plan está claro. Sólo falta ejecutar."', '— Objetivos 2026'],
+  ['"La primera llamada del día marca el ritmo de las siguientes 49."', '— Momentum diario'],
+  ['"Cuando piensas en rendirte, recuerda por qué empezaste. Fede a los 58 no se rinde."', '— Propósito personal']
 ];
 
 const frase = FRASES[new Date().getDay() % FRASES.length];
