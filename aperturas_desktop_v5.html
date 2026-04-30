@@ -1040,11 +1040,11 @@ body {
     for (let i = 0; i < txt.length; i++){
       const c = txt[i], n = txt[i+1];
       if (q){
-        if (c === '"' && n === '"'){ cell += '"'; i++; }
-        else if (c === '"'){ q = false; }
+        if (c === "\"" && n === "\""){ cell += "\""; i++; }
+        else if (c === "\""){ q = false; }
         else cell += c;
       } else {
-        if (c === '"') q = true;
+        if (c === "\"") q = true;
         else if (c === ','){ cur.push(cell); cell = ''; }
         else if (c === '\n'){ cur.push(cell); rows.push(cur); cur = []; cell = ''; }
         else if (c === '\r'){ /* skip */ }
