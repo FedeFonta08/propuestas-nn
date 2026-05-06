@@ -1,0 +1,2384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Modo Enfoque Pro | Punto Naranja Xàtiva</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════
+   VARIABLES — Coherente con CRM Panel v2
+   ══════════════════════════════════════════════════════ */
+:root {
+  --o: #C94D00;
+  --ol: #FFF0E8;
+  --og: #E85C0D;
+  --o-glow: rgba(201,77,0,.15);
+  --g: #16A34A;
+  --gl: #DCFCE7;
+  --b: #1D4ED8;
+  --bl: #EFF6FF;
+  --r: #B91C1C;
+  --rl: #FEF2F2;
+  --am: #B45309;
+  --aml: #FFFBEB;
+  --navy: #0A1628;
+  --navy2: #132038;
+  --bg: #F5F5F0;
+  --card: #FFFFFF;
+  --tx: #111827;
+  --tx2: #374151;
+  --tx3: #6B7280;
+  --brd: #E5E7EB;
+  --brd2: #D1D5DB;
+  --rad: 14px;
+  --rads: 8px;
+  --shadow: 0 2px 8px rgba(0,0,0,.06);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--tx);
+  min-height: 100dvh;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ══ LAYOUT ══════════════════════════════════════════ */
+.app {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 16px 16px 100px;
+}
+
+/* ══ HEADER ══════════════════════════════════════════ */
+.header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  border-radius: var(--rad);
+  padding: 20px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 120px; height: 120px;
+  background: var(--o);
+  opacity: .08;
+  border-radius: 50%;
+}
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+.header-brand {
+  display: flex; align-items: center; gap: 10px;
+}
+.brand-dot {
+  width: 36px; height: 36px;
+  background: var(--o);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 0 20px rgba(201,77,0,.3);
+}
+.brand-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  color: #fff;
+  letter-spacing: 1.5px;
+  line-height: 1.1;
+}
+.brand-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,.5);
+  letter-spacing: .3px;
+}
+
+/* Contador de llamadas */
+.call-counter {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px;
+  padding: 8px 14px;
+  text-align: center;
+  min-width: 80px;
+}
+.call-counter-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--o);
+  line-height: 1;
+}
+.call-counter-label {
+  font-size: 10px;
+  color: rgba(255,255,255,.5);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.call-pips {
+  display: flex; gap: 4px; justify-content: center; margin-top: 4px;
+}
+.pip {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.15);
+  transition: all .3s;
+}
+.pip.done { background: var(--g); }
+.pip.current { background: var(--o); box-shadow: 0 0 8px rgba(201,77,0,.5); }
+
+/* Input nombre */
+.name-input-wrap {
+  position: relative;
+}
+.name-input {
+  width: 100%;
+  padding: 14px 16px 14px 42px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  border: 2px solid rgba(255,255,255,.1);
+  border-radius: 10px;
+  background: rgba(255,255,255,.06);
+  color: #fff;
+  outline: none;
+  transition: all .2s;
+}
+.name-input::placeholder { color: rgba(255,255,255,.3); }
+.name-input:focus {
+  border-color: var(--o);
+  background: rgba(255,255,255,.1);
+}
+.name-input-icon {
+  position: absolute;
+  left: 14px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  opacity: .4;
+}
+
+/* ══ FASES ═══════════════════════════════════════════ */
+.phase {
+  display: none;
+  animation: slideIn .35s ease;
+}
+.phase.active { display: block; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ══ FASE BAR (indicador de progreso) ════════════════ */
+.phase-bar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding: 0 4px;
+}
+.phase-step {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--brd);
+  transition: all .3s;
+  cursor: pointer;
+}
+.phase-step.done { background: var(--g); }
+.phase-step.current { background: var(--o); }
+.phase-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding: 0 4px;
+}
+.phase-label span {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--tx3);
+  transition: color .2s;
+}
+.phase-label span.current { color: var(--o); }
+.phase-label span.done { color: var(--g); }
+
+/* ══ CARDS GENÉRICAS ═════════════════════════════════ */
+.card {
+  background: var(--card);
+  border: 1.5px solid var(--brd);
+  border-radius: var(--rad);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+.card-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px;
+  letter-spacing: .8px;
+  color: var(--o);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ══ SELECTOR DE PERFIL ══════════════════════════════ */
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.profile-btn {
+  background: var(--card);
+  border: 2px solid var(--brd);
+  padding: 12px 8px;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--tx2);
+  cursor: pointer;
+  transition: all .2s;
+  text-align: center;
+  line-height: 1.3;
+}
+.profile-btn .p-emoji {
+  display: block;
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+.profile-btn:hover {
+  border-color: var(--o);
+  color: var(--o);
+  transform: translateY(-1px);
+}
+.profile-btn.active {
+  background: var(--o);
+  color: #fff;
+  border-color: var(--o);
+  box-shadow: 0 4px 12px rgba(201,77,0,.25);
+}
+
+/* ══ WHATSAPP PRE-CALL ═══════════════════════════════ */
+.wa-bar {
+  background: #075E54;
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.wa-bar:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(7,94,84,.3); }
+.wa-bar-icon { font-size: 24px; }
+.wa-bar-text {
+  flex: 1;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.wa-bar-text small {
+  display: block;
+  font-weight: 400;
+  opacity: .7;
+  font-size: 11px;
+  margin-top: 2px;
+}
+.wa-bar-arrow {
+  color: #25D366;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* ══ TEMPORIZADOR ════════════════════════════════════ */
+.timer-strip {
+  background: var(--navy);
+  border-radius: 10px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.timer-display {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: #fff;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+.timer-display.precall { color: var(--o); }
+.timer-label {
+  font-size: 10px;
+  color: rgba(255,255,255,.5);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.timer-controls {
+  display: flex; gap: 8px;
+}
+.timer-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.timer-btn.start { background: var(--g); color: #fff; }
+.timer-btn.start:hover { background: #15803D; }
+.timer-btn.pause { background: var(--am); color: #fff; }
+.timer-btn.stop { background: var(--r); color: #fff; }
+.timer-btn.stop:hover { background: #991B1B; }
+
+/* ══ SCRIPT DISPLAY ══════════════════════════════════ */
+.script-card {
+  background: var(--card);
+  border: 1.5px solid var(--brd);
+  border-left: 5px solid var(--o);
+  border-radius: var(--rad);
+  padding: 20px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+.script-card p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--tx);
+  margin-bottom: 14px;
+}
+.script-card p:last-child { margin-bottom: 0; }
+.dyn-name {
+  font-weight: 700;
+  color: var(--o);
+  background: var(--ol);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+.script-tag {
+  display: inline-block;
+  background: var(--ol);
+  color: var(--o);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: .3px;
+  margin-bottom: 12px;
+}
+.script-note {
+  background: var(--aml);
+  border: 1px solid #FCD34D;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: var(--am);
+  font-weight: 500;
+  margin-top: 12px;
+  line-height: 1.4;
+}
+
+/* ══ OBJECIONES ══════════════════════════════════════ */
+.obj-section {
+  margin-top: 4px;
+}
+.obj-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: .8px;
+  color: var(--tx3);
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.obj-btn {
+  width: 100%;
+  background: var(--card);
+  border: 1.5px solid var(--brd);
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--tx);
+  cursor: pointer;
+  text-align: left;
+  margin-bottom: 6px;
+  transition: all .2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.obj-btn:hover { border-color: var(--o); }
+.obj-btn::after {
+  content: '+';
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--o);
+  transition: transform .2s;
+}
+.obj-btn.open { 
+  border-color: var(--o);
+  background: var(--ol);
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 0;
+}
+.obj-btn.open::after { content: '−'; }
+.obj-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .25s ease-out;
+  background: #FFFAF5;
+  border: 1.5px solid var(--o);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  margin-bottom: 6px;
+}
+.obj-panel-inner {
+  padding: 14px 16px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--navy);
+  font-style: italic;
+}
+
+/* ══ RESULTADO LLAMADA ═══════════════════════════════ */
+.resultado-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.res-btn {
+  padding: 16px 10px;
+  border: 2px solid var(--brd2);
+  border-radius: var(--rad);
+  background: var(--card);
+  cursor: pointer;
+  text-align: center;
+  transition: all .2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.res-btn .r-emoji { font-size: 26px; display: block; margin-bottom: 6px; }
+.res-btn .r-label { font-size: 12px; font-weight: 700; color: var(--tx2); }
+.res-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+.res-btn[data-v="contactado"].active { border-color: var(--g); background: var(--gl); }
+.res-btn[data-v="no_contactado"].active { border-color: var(--r); background: var(--rl); }
+.res-btn[data-v="cita_fijada"].active { border-color: var(--b); background: var(--bl); }
+.res-btn[data-v="llamar_despues"].active { border-color: var(--am); background: var(--aml); }
+
+/* Campos de cita */
+.cita-fields {
+  display: none;
+  background: var(--bl);
+  border: 1.5px solid var(--b);
+  border-radius: var(--rad);
+  padding: 14px;
+  margin-bottom: 12px;
+}
+.cita-fields.show { display: block; }
+.cita-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+/* Form fields */
+.field { margin-bottom: 12px; }
+.field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--tx2);
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  margin-bottom: 5px;
+}
+.field input, .field select, .field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--brd2);
+  border-radius: var(--rads);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: var(--tx);
+  background: var(--card);
+  outline: none;
+  transition: border .2s;
+}
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--o); }
+.field textarea { resize: vertical; min-height: 70px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* ══ BOTONES PRINCIPALES ═════════════════════════════ */
+.btn-primary {
+  width: 100%;
+  padding: 16px;
+  background: var(--o);
+  color: #fff;
+  border: none;
+  border-radius: var(--rad);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-primary:hover {
+  background: var(--og);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(201,77,0,.3);
+}
+.btn-primary:disabled {
+  background: var(--tx3);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.btn-secondary {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  color: var(--o);
+  border: 2px solid var(--o);
+  border-radius: var(--rad);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+  margin-top: 8px;
+}
+.btn-secondary:hover { background: var(--ol); }
+
+.btn-green {
+  width: 100%;
+  padding: 16px;
+  background: var(--g);
+  color: #fff;
+  border: none;
+  border-radius: var(--rad);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-green:hover {
+  background: #15803D;
+  transform: translateY(-1px);
+}
+
+/* ══ TOAST ═══════════════════════════════════════════ */
+.toast {
+  position: fixed;
+  bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: #111827;
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0;
+  transition: all .3s;
+  z-index: 999;
+  white-space: nowrap;
+  max-width: 90vw;
+  text-align: center;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.ok { background: var(--g); }
+.toast.err { background: var(--r); }
+.toast.warn { background: var(--am); }
+
+/* ══ CAMPAÑA BADGE ═══════════════════════════════════ */
+.campaign-badge {
+  background: linear-gradient(135deg, #DC2626, #B91C1C);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .7; }
+}
+
+/* ══ LISTA CONTACTOS DEL DÍA ═════════════════════════ */
+.daylist-card {
+  background: var(--card);
+  border: 1.5px solid var(--brd);
+  border-radius: var(--rad);
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.daylist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  background: var(--card);
+  transition: background .15s;
+}
+.daylist-header:hover { background: #FAFAF8; }
+.daylist-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px;
+  letter-spacing: .8px;
+  color: var(--o);
+  display: flex; align-items: center; gap: 8px;
+}
+.daylist-count {
+  background: var(--ol);
+  color: var(--o);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.daylist-toggle {
+  font-size: 14px;
+  color: var(--tx3);
+  transition: transform .2s;
+}
+.daylist-toggle.open { transform: rotate(180deg); }
+.daylist-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .3s ease;
+  border-top: 1px solid var(--brd);
+}
+.daylist-body.open {
+  max-height: 600px;
+  border-top: 1px solid var(--brd);
+}
+.daylist-input-row {
+  display: flex;
+  gap: 6px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--brd);
+  background: #FAFAF8;
+}
+.daylist-input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1.5px solid var(--brd2);
+  border-radius: var(--rads);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--tx);
+  outline: none;
+}
+.daylist-input:focus { border-color: var(--o); }
+.daylist-add-btn {
+  padding: 10px 14px;
+  background: var(--o);
+  color: #fff;
+  border: none;
+  border-radius: var(--rads);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.daylist-items { list-style: none; }
+.daylist-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--brd);
+  font-size: 14px;
+  color: var(--tx);
+  transition: background .15s;
+}
+.daylist-item:last-child { border-bottom: none; }
+.daylist-item.done {
+  color: var(--tx3);
+  text-decoration: line-through;
+  background: #F9FBF7;
+}
+.daylist-item.current {
+  background: var(--ol);
+  font-weight: 600;
+  color: var(--o);
+}
+.daylist-item-num {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  background: var(--brd);
+  color: var(--tx3);
+  flex-shrink: 0;
+}
+.daylist-item.done .daylist-item-num { background: var(--gl); color: var(--g); }
+.daylist-item.current .daylist-item-num { background: var(--o); color: #fff; }
+.daylist-item-name { flex: 1; }
+.daylist-item-del {
+  background: none;
+  border: none;
+  color: var(--tx3);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px;
+  opacity: .5;
+  transition: opacity .2s;
+}
+.daylist-item-del:hover { opacity: 1; color: var(--r); }
+.daylist-item-load {
+  background: none;
+  border: 1.5px solid var(--o);
+  color: var(--o);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.daylist-item-load:hover { background: var(--o); color: #fff; }
+.daylist-empty {
+  padding: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--tx3);
+}
+
+/* ══ RESUMEN SESIÓN ══════════════════════════════════ */
+.summary-card {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  border-radius: var(--rad);
+  padding: 20px;
+  margin-bottom: 12px;
+  color: #fff;
+}
+.summary-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+  color: var(--o);
+}
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.summary-stat {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+}
+.summary-stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  line-height: 1;
+}
+.summary-stat-num.green { color: var(--g); }
+.summary-stat-num.orange { color: var(--o); }
+.summary-stat-num.blue { color: #60A5FA; }
+.summary-stat-num.red { color: #F87171; }
+.summary-stat-label {
+  font-size: 10px;
+  color: rgba(255,255,255,.5);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-top: 4px;
+}
+
+/* ══ HISTORIAL PENDIENTES ════════════════════════════ */
+.pending-card {
+  background: var(--aml);
+  border: 1.5px solid #FCD34D;
+  border-radius: var(--rad);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.pending-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+}
+.pending-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: .5px;
+  color: var(--am);
+  display: flex; align-items: center; gap: 6px;
+}
+.pending-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .3s ease;
+}
+.pending-body.open { max-height: 500px; overflow-y: auto; }
+.pending-item {
+  padding: 10px 16px;
+  border-top: 1px solid #FDE68A;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pending-item-name { font-weight: 600; color: var(--tx); }
+.pending-item-res { font-size: 11px; color: var(--tx2); }
+.pending-item-time { font-size: 10px; color: var(--tx3); }
+
+/* ══ BLOQUE COMPLETADO ═══════════════════════════════ */
+.bloque-done {
+  display: none;
+  text-align: center;
+  padding: 40px 20px;
+}
+.bloque-done.show { display: block; }
+.bloque-done-emoji { font-size: 64px; margin-bottom: 16px; }
+.bloque-done-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--g);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.bloque-done-sub {
+  font-size: 14px;
+  color: var(--tx2);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+/* ══ ACTIONS BAR (bottom tools) ══════════════════════ */
+.actions-bar {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+.action-chip {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 8px;
+  background: var(--card);
+  border: 1.5px solid var(--brd);
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tx2);
+  cursor: pointer;
+  transition: all .15s;
+}
+.action-chip:hover {
+  border-color: var(--o);
+  color: var(--o);
+}
+
+/* ══ SCROLL HIDE ═════════════════════════════════════ */
+::-webkit-scrollbar { width: 0; }
+
+/* ══ RESPONSIVE TWEAKS ═══════════════════════════════ */
+@media (max-width: 380px) {
+  .profile-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .profile-btn { padding: 10px 6px; font-size: 12px; }
+  .timer-display { font-size: 30px; }
+  .script-card p { font-size: 15px; }
+}
+
+/* ══ MODAL DE ROL ════════════════════════════════════ */
+.role-overlay {
+  position: fixed; top:0; left:0; right:0; bottom:0;
+  background: rgba(10,22,40,.88);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.role-overlay.hidden { display: none; }
+.role-modal {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 22px 22px;
+  max-width: 360px;
+  width: 100%;
+  animation: popIn .3s ease;
+}
+@keyframes popIn {
+  from { opacity:0; transform:scale(.93) translateY(12px); }
+  to   { opacity:1; transform:scale(1) translateY(0); }
+}
+.role-modal-logo {
+  width:46px; height:46px;
+  background: var(--o);
+  border-radius: 13px;
+  display: flex; align-items:center; justify-content:center;
+  font-size:22px;
+  margin: 0 auto 14px;
+  box-shadow: 0 4px 16px rgba(201,77,0,.3);
+}
+.role-modal-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:22px; letter-spacing:1px;
+  color:var(--navy); text-align:center; margin-bottom:4px;
+}
+.role-modal-sub {
+  font-size:13px; color:var(--tx3);
+  text-align:center; margin-bottom:20px; line-height:1.4;
+}
+.role-step { display:none; }
+.role-step.active { display:block; }
+.role-pick-btn {
+  width:100%; background:#fff;
+  border:2px solid var(--brd);
+  padding:13px 14px; border-radius:12px;
+  font-family:'DM Sans',sans-serif;
+  font-size:14px; font-weight:600; color:var(--tx);
+  cursor:pointer; transition:all .2s;
+  text-align:left; display:flex; align-items:center; gap:12px;
+  margin-bottom:8px;
+}
+.role-pick-btn:hover { border-color:var(--o); background:var(--ol); }
+.role-pick-btn:last-child { margin-bottom:0; }
+.rp-icon { font-size:24px; flex-shrink:0; }
+.rp-texts { flex:1; }
+.rp-texts small { display:block; font-weight:400; color:var(--tx3); font-size:11px; margin-top:1px; }
+.role-field-label {
+  display:block; font-size:11px; font-weight:700; color:var(--tx2);
+  text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px;
+}
+.role-field-input {
+  width:100%; padding:12px 14px;
+  border:2px solid var(--brd2); border-radius:10px;
+  font-family:'DM Sans',sans-serif; font-size:15px; color:var(--tx);
+  outline:none; margin-bottom:10px; transition:border .2s;
+}
+.role-field-input:focus { border-color:var(--o); }
+.role-cta-btn {
+  width:100%; padding:14px;
+  background:var(--o); color:#fff; border:none;
+  border-radius:12px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:18px; letter-spacing:.5px;
+  cursor:pointer; transition:background .2s; margin-bottom:6px;
+}
+.role-cta-btn:hover { background:var(--og); }
+.role-back-btn {
+  width:100%; padding:10px;
+  background:transparent; color:var(--tx3);
+  border:2px solid var(--brd); border-radius:10px;
+  font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600;
+  cursor:pointer; transition:all .2s;
+}
+.role-back-btn:hover { border-color:var(--tx2); color:var(--tx); }
+/* Badge de rol en header */
+.role-badge-btn {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.18);
+  color: rgba(255,255,255,.75);
+  padding: 5px 11px; border-radius:20px;
+  font-size:11px; font-weight:600;
+  cursor:pointer; transition:all .2s; letter-spacing:.2px;
+}
+.role-badge-btn:hover { background:rgba(255,255,255,.18); color:#fff; }
+
+</style>
+</head>
+<body>
+
+<div class="app">
+
+<!-- ══════════════════════════════════════════════════════
+     MODAL DE SELECCIÓN DE ROL
+     ══════════════════════════════════════════════════════ -->
+<div class="role-overlay" id="roleOverlay">
+  <div class="role-modal">
+    <div class="role-modal-logo">🟠</div>
+    <div class="role-modal-title">MODO ENFOQUE PRO</div>
+    <div class="role-modal-sub">¿Desde qué rol vas a trabajar hoy?</div>
+
+    <!-- Paso 1: Fede o Agente -->
+    <div class="role-step active" id="rStep1">
+      <button class="role-pick-btn" onclick="rolePickFede()">
+        <span class="rp-icon">🎯</span>
+        <div class="rp-texts">Soy Fede (Dinamizador)<small>Delegado · Punto Naranja Xàtiva</small></div>
+      </button>
+      <button class="role-pick-btn" onclick="roleGoStep(2)">
+        <span class="rp-icon">🚀</span>
+        <div class="rp-texts">Soy un agente del equipo<small>Accede a tus guiones personalizados</small></div>
+      </button>
+    </div>
+
+    <!-- Paso 2: Nombre del agente -->
+    <div class="role-step" id="rStep2">
+      <label class="role-field-label">¿Cuál es tu nombre?</label>
+      <input class="role-field-input" id="rAgentName" type="text" placeholder="Ej: Rosiane, María, Carlos..." oninput="rCheckName()">
+      <button class="role-cta-btn" id="rNameNext" onclick="roleGoStep(3)" disabled>SIGUIENTE →</button>
+      <button class="role-back-btn" onclick="roleGoStep(1)">← Volver</button>
+    </div>
+
+    <!-- Paso 3: Tipo de agente -->
+    <div class="role-step" id="rStep3">
+      <div style="font-size:13px;font-weight:600;color:var(--tx2);margin-bottom:12px;" id="rStep3Title">¿Cuál es tu situación?</div>
+      <button class="role-pick-btn" onclick="rolePickType('excliente')">
+        <span class="rp-icon">🔄</span>
+        <div class="rp-texts">Vengo de otra compañía<small>Tienes cartera de ex-clientes propios</small></div>
+      </button>
+      <button class="role-pick-btn" onclick="rolePickType('nuevo')">
+        <span class="rp-icon">👋</span>
+        <div class="rp-texts">Empiezo de cero<small>Solo tienes red personal (amigos, familia)</small></div>
+      </button>
+      <button class="role-back-btn" style="margin-top:8px" onclick="roleGoStep(2)">← Volver</button>
+    </div>
+
+    <!-- Paso 4: Compañía anterior (si tipo=excliente) -->
+    <div class="role-step" id="rStep4">
+      <label class="role-field-label">¿De qué compañía vienes?</label>
+      <input class="role-field-input" id="rAgentCompany" type="text" placeholder="Ej: Generali, Mapfre, Mutua...">
+      <button class="role-cta-btn" onclick="roleConfirm()">EMPEZAR →</button>
+      <button class="role-back-btn" onclick="roleGoStep(3)">← Volver</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     HEADER
+     ══════════════════════════════════════════════════════ -->
+<div class="header">
+  <div class="header-top">
+    <div class="header-brand">
+      <div class="brand-dot">🟠</div>
+      <div>
+        <div class="brand-title">MODO ENFOQUE PRO</div>
+        <div class="brand-sub">Punto Naranja · Xàtiva</div>
+      </div>
+    </div>
+    <div class="call-counter">
+      <div class="call-counter-num" id="callNum">0</div>
+      <div class="call-counter-label">de 8</div>
+      <div class="call-pips" id="callPips"></div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:flex-end;margin:-8px 0 10px">
+    <button class="role-badge-btn" id="roleBadgeBtn" onclick="openRoleModal()" style="display:none" title="Cambiar rol">
+      <span id="roleBadgeText">👤</span>
+    </button>
+  </div>
+  <div class="name-input-wrap">
+    <span class="name-input-icon">👤</span>
+    <input type="text" class="name-input" id="prospectName" placeholder="Nombre del contacto..." oninput="updateName()" autocomplete="off">
+  </div>
+</div>
+
+<!-- ══ PHASE BAR ════════════════════════════════════════ -->
+<div class="phase-bar">
+  <div class="phase-step current" data-phase="1"></div>
+  <div class="phase-step" data-phase="2"></div>
+  <div class="phase-step" data-phase="3"></div>
+</div>
+<div class="phase-label">
+  <span class="current" data-pl="1">Preparar</span>
+  <span data-pl="2">Llamar</span>
+  <span data-pl="3">Registrar</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     FASE 1 — PREPARAR
+     ══════════════════════════════════════════════════════ -->
+<div class="phase active" id="phase-1">
+
+  <!-- Selector de perfil -->
+  <div class="card">
+    <div class="card-title">🎯 Perfil del contacto</div>
+    <div class="profile-grid" id="profileGrid"></div>
+  </div>
+
+  <!-- WhatsApp pre-call -->
+  <div class="wa-bar" id="waBar" onclick="enviarWhatsApp()">
+    <span class="wa-bar-icon">💬</span>
+    <div class="wa-bar-text">
+      Enviar WhatsApp previo
+      <small>Protocolo 5 min antes de llamar</small>
+    </div>
+    <span class="wa-bar-arrow">→</span>
+  </div>
+
+  <!-- Temporizador pre-call 5 min -->
+  <div class="timer-strip" id="precallTimer" style="display:none">
+    <div>
+      <div class="timer-label">Esperando antes de llamar</div>
+      <div class="timer-display precall" id="precallDisplay">5:00</div>
+    </div>
+    <div class="timer-controls">
+      <button class="timer-btn stop" onclick="skipPrecall()" title="Saltar">⏭️</button>
+    </div>
+  </div>
+
+  <!-- Lista de contactos del día -->
+  <div class="daylist-card">
+    <div class="daylist-header" onclick="toggleDaylist()">
+      <div class="daylist-title">📋 CONTACTOS DEL DÍA <span class="daylist-count" id="daylistCount">0</span></div>
+      <span class="daylist-toggle" id="daylistToggle">▼</span>
+    </div>
+    <div class="daylist-body" id="daylistBody">
+      <div class="daylist-input-row">
+        <input type="text" class="daylist-input" id="daylistInput" placeholder="Añadir contacto..." onkeydown="if(event.key==='Enter')addToDaylist()">
+        <button class="daylist-add-btn" onclick="addToDaylist()">+ Añadir</button>
+      </div>
+      <ul class="daylist-items" id="daylistItems"></ul>
+      <div class="daylist-empty" id="daylistEmpty">Prepara tu lista la noche anterior. Añade los contactos que vas a llamar mañana.</div>
+    </div>
+  </div>
+
+  <!-- Resumen de sesión -->
+  <div id="summaryContainer"></div>
+
+  <!-- Registros pendientes de sincronizar -->
+  <div class="pending-card" id="pendingCard" style="display:none">
+    <div class="pending-header" onclick="togglePending()">
+      <div class="pending-title">⏳ PENDIENTES DE SINCRONIZAR <span class="daylist-count" id="pendingCount">0</span></div>
+      <span class="daylist-toggle" id="pendingToggle">▼</span>
+    </div>
+    <div class="pending-body" id="pendingBody">
+      <div id="pendingItems"></div>
+    </div>
+  </div>
+
+  <button class="btn-primary" onclick="goPhase(2)">EMPEZAR LLAMADA →</button>
+
+  <!-- Acciones rápidas -->
+  <div class="actions-bar">
+    <button class="action-chip" onclick="resetDailyCounter()">🔄 Reset contador</button>
+    <button class="action-chip" onclick="clearPending()">🗑️ Limpiar cola</button>
+    <button class="action-chip" onclick="exportPending()">📤 Exportar</button>
+  </div>
+</div>
+
+<!-- ══ BLOQUE COMPLETADO (overlay) ════════════════════════ -->
+<div class="bloque-done" id="bloqueDone">
+  <div class="bloque-done-emoji">🏆</div>
+  <div class="bloque-done-title">¡BLOQUE COMPLETADO!</div>
+  <div class="bloque-done-sub" id="bloqueDoneSub">Has completado 8 llamadas hoy.</div>
+  <div id="bloqueDoneSummary"></div>
+  <button class="btn-primary" onclick="closeBloqueView()" style="margin-top:20px">VOLVER AL PANEL</button>
+  <button class="btn-secondary" onclick="startNewBloque()">INICIAR NUEVO BLOQUE</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     FASE 2 — LLAMAR
+     ══════════════════════════════════════════════════════ -->
+<div class="phase" id="phase-2">
+
+  <!-- Temporizador de llamada -->
+  <div class="timer-strip">
+    <div>
+      <div class="timer-label">Duración de la llamada</div>
+      <div class="timer-display" id="callTimerDisplay">0:00</div>
+    </div>
+    <div class="timer-controls">
+      <button class="timer-btn start" id="callTimerBtn" onclick="toggleCallTimer()">▶</button>
+      <button class="timer-btn stop" onclick="resetCallTimer()">⏹</button>
+    </div>
+  </div>
+
+  <!-- SCRIPTS — Contenido dinámico -->
+  <div id="scriptContainer"></div>
+
+  <!-- OBJECIONES -->
+  <div class="obj-section">
+    <div class="obj-title">🛡️ ESCUDO ANTIMISILES</div>
+    <div id="objContainer"></div>
+  </div>
+
+  <div style="margin-top:16px">
+    <button class="btn-primary" onclick="goPhase(3)">REGISTRAR RESULTADO →</button>
+    <button class="btn-secondary" onclick="goPhase(1)">← Volver a preparar</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     FASE 3 — REGISTRAR
+     ══════════════════════════════════════════════════════ -->
+<div class="phase" id="phase-3">
+
+  <div class="card">
+    <div class="card-title">📝 ¿Cómo fue la llamada?</div>
+    <div class="resultado-grid">
+      <button class="res-btn" data-v="contactado" onclick="selRes(this)">
+        <span class="r-emoji">✅</span><span class="r-label">Contactado</span>
+      </button>
+      <button class="res-btn" data-v="no_contactado" onclick="selRes(this)">
+        <span class="r-emoji">❌</span><span class="r-label">No contactado</span>
+      </button>
+      <button class="res-btn" data-v="cita_fijada" onclick="selRes(this)">
+        <span class="r-emoji">📅</span><span class="r-label">Cita fijada</span>
+      </button>
+      <button class="res-btn" data-v="llamar_despues" onclick="selRes(this)">
+        <span class="r-emoji">🔄</span><span class="r-label">Llamar después</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Campos de cita -->
+  <div class="cita-fields" id="citaFields">
+    <div style="font-weight:600;font-size:13px;color:var(--b);margin-bottom:10px">📅 Datos de la cita</div>
+    <div class="cita-row">
+      <div class="field">
+        <label>Fecha cita</label>
+        <input type="date" id="fechaCita">
+      </div>
+      <div class="field">
+        <label>Hora cita</label>
+        <input type="time" id="horaCita" value="10:00">
+      </div>
+    </div>
+    <div class="field">
+      <label>Próxima acción</label>
+      <input type="text" id="proxAccionCita" placeholder="Ej: Visita para presentar Plan Salud+Vida">
+    </div>
+  </div>
+
+  <!-- Campos no-cita -->
+  <div id="camposNoCita">
+    <div class="field">
+      <label>Próxima acción</label>
+      <input type="text" id="proxAccion" placeholder="Ej: Llamar el lunes a las 10h">
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Fecha próxima</label>
+        <input type="date" id="fechaProx">
+      </div>
+      <div class="field">
+        <label>Producto ofrecido</label>
+        <select id="producto">
+          <option value="">— Seleccionar —</option>
+          <option>Contigo Familia</option>
+          <option>Contigo Autónomo ILT</option>
+          <option>Plan Salud + Vida</option>
+          <option>Plan Creciente SIALP</option>
+          <option>Contigo Senior</option>
+          <option>PPSA</option>
+          <option>Mi Hogar Seguro</option>
+          <option>Hipoteca ING/Abanca</option>
+          <option>Líder Plus Accidentes</option>
+          <option>Protección Plus</option>
+          <option>Ninguno</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Notas libres</label>
+    <textarea id="notas" placeholder="Lo que necesites recordar de esta llamada..."></textarea>
+  </div>
+
+  <button class="btn-green" id="btnGuardar" onclick="guardarYSiguiente()" disabled>
+    ✅ GUARDAR Y SIGUIENTE CONTACTO
+  </button>
+  <button class="btn-secondary" onclick="goPhase(2)">← Volver al script</button>
+</div>
+
+</div><!-- /.app -->
+
+<!-- ══ TOAST ═════════════════════════════════════════════ -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+// ESTADO GLOBAL
+// ══════════════════════════════════════════════════════════
+let currentPhase = 1;
+let currentProfile = 'autonomo';
+let resultadoSel = null;
+let callCount = parseInt(localStorage.getItem('mep_callCount') || '0');
+const CALL_TARGET = 8;
+
+// Temporizadores
+let callTimerInterval = null;
+let callSeconds = 0;
+let callTimerRunning = false;
+let precallInterval = null;
+
+// Daylist
+let daylist = JSON.parse(localStorage.getItem('mep_daylist') || '[]');
+let daylistOpen = false;
+
+// Estadísticas de sesión
+let sessionStats = JSON.parse(localStorage.getItem('mep_sessionStats') || '{"contactado":0,"no_contactado":0,"cita_fijada":0,"llamar_despues":0,"totalDuration":0}');
+
+// ══════════════════════════════════════════════════════════
+// SCRIPTS COMERCIALES
+// ══════════════════════════════════════════════════════════
+
+// ══════════════════════════════════════════════════════════
+// ESTADO DE ROL
+// ══════════════════════════════════════════════════════════
+let userRole = null;      // 'fede' | 'agent'
+let agentName = '';
+let agentType = null;     // 'excliente' | 'nuevo'
+let agentPrevCompany = '';
+
+// ══════════════════════════════════════════════════════════
+// PERFILES POR ROL
+// ══════════════════════════════════════════════════════════
+const PROFILES_FEDE = [
+  { id:'autonomo',  emoji:'💼', label:'Autónomo',      sub:'PPSA · ILT' },
+  { id:'familia',   emoji:'👨‍👩‍👧', label:'Familia',       sub:'Salud · Vida' },
+  { id:'senior',    emoji:'🧓', label:'Senior 55+',    sub:'Contigo Senior' },
+  { id:'ahorro',    emoji:'💰', label:'Ahorro',        sub:'SIALP · Creciente' },
+  { id:'excliente', emoji:'🔄', label:'Ex-Santalucía', sub:'Sorpresa' },
+  { id:'cartera',   emoji:'📋', label:'Cartera NN',    sub:'Revisión' },
+  { id:'ilt',       emoji:'🛡️', label:'Autónomo ILT',  sub:'Baja laboral' },
+  { id:'sialp',     emoji:'📈', label:'SIALP Fiscal',  sub:'Plan Creciente' }
+];
+
+function getAgentProfiles() {
+  const slot5 = agentType === 'nuevo'
+    ? { id:'redpersonal',  emoji:'👋', label:'Red personal',    sub:'Amigos · Familia · Conocidos' }
+    : { id:'excagente',    emoji:'🔄', label:'Mis ex-clientes', sub:'Cartera de ' + (agentPrevCompany || 'compañía anterior') };
+  return [
+    { id:'autonomo',     emoji:'💼', label:'Autónomo',       sub:'PPSA · ILT' },
+    { id:'familia',      emoji:'👨‍👩‍👧', label:'Familia',        sub:'Salud · Vida' },
+    { id:'senior',       emoji:'🧓', label:'Senior 55+',     sub:'Contigo Senior' },
+    { id:'ahorro',       emoji:'💰', label:'Ahorro',         sub:'SIALP · Creciente' },
+    slot5,
+    { id:'referenciado', emoji:'🤝', label:'Referenciado',   sub:'Contacto de colega' },
+    { id:'ilt',          emoji:'🛡️', label:'Autónomo ILT',   sub:'Baja laboral' },
+    { id:'sialp',        emoji:'📈', label:'SIALP Fiscal',   sub:'Plan Creciente' }
+  ];
+}
+
+// ══════════════════════════════════════════════════════════
+// SCRIPTS COMERCIALES — VERSIONADOS POR ROL
+// ══════════════════════════════════════════════════════════
+const SCRIPTS = {
+
+  // ── AUTÓNOMO (PPSA) ──────────────────────────────────
+  autonomo: {
+    tag: 'PPSA · Autónomo',
+    campaign: null,
+    fede: {
+      paragraphs: [
+        '"Hola <span class="dyn-name">[Nombre]</span>. Soy Fede, el nuevo Delegado del Punto Naranja de Nationale-Nederlanden para Xàtiva y La Costera. Te llamo un momento para presentarme."',
+        '"Hablando con profesionales de la zona, veo que la queja número uno es el hachazo de Hacienda cada trimestre y la incertidumbre de la pensión. Desde la nueva delegación estamos aplicando un instrumento técnico con Goldman Sachs para que podáis deducir hasta 5.750 € directos del IRPF este mismo año."',
+        '"<span class="dyn-name">[Nombre]</span>, te hablo con transparencia: no sé si ya lo tienes optimizado al milímetro con tu gestoría. Mi trabajo hoy no es venderte nada. Te propongo que nos tomemos un café de 20 minutos. Vemos los números y, si estás dejando dinero en la mesa, te enseño cómo recuperarlo. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"'
+      ],
+      note: 'Clave: deducción fiscal inmediata. No mencionar "plan de pensiones" — usar "instrumento de optimización fiscal". No dar cifras exactas por teléfono.'
+    },
+    agent: {
+      paragraphs: [
+        '"Hola <span class="dyn-name">[Nombre]</span>. Soy <span class="dyn-agent">[Agente]</span>, del equipo de Nationale-Nederlanden aquí en la comarca. Te llamo un momento porque estamos trabajando con autónomos de la zona."',
+        '"Hablando con profesionales de por aquí, la queja número uno es el hachazo de Hacienda cada trimestre. Tenemos un instrumento para que podáis deducir hasta 5.750 € directos del IRPF este mismo año, gestionado con una de las mejores gestoras del mundo."',
+        '"<span class="dyn-name">[Nombre]</span>, no sé si ya lo tienes optimizado al milímetro con tu gestoría. Mi objetivo hoy no es venderte nada. Te propongo un café de 20 minutos para ver los números reales de tu caso. Si no te aporta nada, me lo dices y tan amigos. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"'
+      ],
+      note: 'No mencionar "plan de pensiones" — usar "instrumento de optimización fiscal". No dar cifras por teléfono. No mencionar "delegación".'
+    }
+  },
+
+  // ── FAMILIA — Script A del meta-análisis ─────────────
+  familia: {
+    tag: 'Trabajador · Familia',
+    campaign: 'Descuento 12,5% Salud',
+    fede: {
+      paragraphs: [
+        '"Hola <span class="dyn-name">[Nombre]</span>. Soy Fede, Delegado de Nationale-Nederlanden para Xàtiva y La Costera. Te llamo un momento porque estoy hablando con familias de la comarca."',
+        '"Estoy trabajando con familias y gente que trabaja por la zona — Canals, Vallada, Enguera. No sé si lo que te voy a decir encaja contigo, así que te lo cuento en medio minuto y tú decides si seguimos, ¿te parece?"',
+        '"Le pregunto algo muy concreto: si mañana tiene un accidente y no puede ir a trabajar durante uno o dos meses… ¿sabe exactamente cuánto cobraría al mes mientras esté de baja? <em>(Pausa)</em> Es lo normal, casi nadie lo tiene claro. Y ahí es donde viene el problema: la diferencia entre lo que cobra y lo que necesita para pagar la hipoteca y los gastos del mes puede ser de 400, 600 o más euros. Cada mes."',
+        '"No le llamo para venderle nada por teléfono. Lo que estoy haciendo es un chequeo de protección de 20 minutos: cuántos meses aguanta su familia hoy si pasa algo, qué diferencia haría una protección por accidentes, y cómo ahorrar poquito a poco en un plan que no paga impuestos a los años. Le dejo por escrito su foto real — para que la tenga usted, no yo."',
+        '"Si después de verlo me dice que no lo ve claro, para mí es un no perfecto y tan amigos. ¿Qué le viene mejor, que nos veamos una mañana de esta semana o prefiere a media tarde?"'
+      ],
+      note: 'Script A del meta-análisis (7/7 IAs). Objetivo: SOLO la cita de 20 min. No dar precios. No decir "seguro" en los primeros 30 seg. Pausa real de 3 seg después de la pregunta clave.'
+    },
+    agent_excliente: {
+      paragraphs: [
+        '"Buenos días, ¿<span class="dyn-name">[Nombre]</span>? Soy <span class="dyn-agent">[Agente]</span>, del equipo de Nationale-Nederlanden aquí en Xàtiva. ¿Le pillo en buen momento?"',
+        '"Le llamo porque sé que tenía una relación con <span class="dyn-company">[Compañía]</span> y quería presentarme: ahora le atiende nuestro equipo en la zona. No le llamo para cambiarle nada ni para hablar de precios por teléfono."',
+        '"Solo quiero hacerle un chequeo rápido de 20 minutos: ver cómo está su protección ahora y si hay algo que se pueda mejorar o que le falte sin saberlo. Si después de verlo está todo correcto, perfecto. Pero al menos tendrá la foto clara. ¿Le viene mejor esta semana o la que viene?"'
+      ],
+      note: 'Sub-variante 1: agente con cartera previa. Reemplaza [Compañía] con el nombre real (Generali, Mapfre…). No presionar para cancelar nada.'
+    },
+    agent_nuevo: {
+      paragraphs: [
+        '"Hola, <span class="dyn-name">[Nombre]</span>. Soy <span class="dyn-agent">[Agente]</span>, estoy trabajando con Nationale-Nederlanden aquí en Xàtiva y La Costera."',
+        '"Te llamo porque estoy haciendo algo que creo que te puede interesar: un chequeo de protección gratuito de 20 minutos. Básicamente, ver si tu familia está realmente cubierta si mañana te pasa algo y no puedes trabajar. La mayoría de gente que conozco cree que con lo del banco o la Seguridad Social ya está… y cuando miramos los números reales, no es así."',
+        '"Son 20 minutos, sin compromiso. Si no te aporta nada, se queda todo igual. ¿Te apetece que lo veamos un día de estos? ¿Te viene mejor por la mañana o por la tarde?"'
+      ],
+      note: 'Sub-variante 2: agente nuevo, red personal. Tono cercano (tuteo). No mencionar compañías anteriores. Clave: la mayoría cree que está cubierto y no lo está.'
+    }
+  },
+
+  // ── SENIOR — Script B del meta-análisis ──────────────
+  senior: {
+    tag: 'Contigo Senior · 55+',
+    campaign: '🔥 Campaña 4-29 mayo: 6 meses bonificados',
+    fede: {
+      paragraphs: [
+        '"Buenos días, ¿hablo con <span class="dyn-name">[Nombre]</span>? Soy Fede, Delegado de Nationale-Nederlanden para Xàtiva y La Costera. Estoy hablando con personas de la comarca y le soy sincero: no sé si lo que le voy a contar le interesa o no. Puede que sí, puede que no, y las dos cosas están bien."',
+        '"Le cuento rápido: tenemos un producto pensado para personas que quieren seguir activas e independientes. No es el típico producto de «si pasa algo»; es algo que se usa de verdad en el día a día: podología varias veces al año, limpieza dental, chequeos preventivos. Si tiene cualquier percance en casa, le mandan ayuda: una persona para limpiar, hacer la compra, incluso peluquería a domicilio. Y si el accidente es grave, además paga una indemnización."',
+        '"¿Tiene usted ahora mismo algo que le cubra este tipo de cosas, más allá de la Seguridad Social? <em>(Pausa)</em>"',
+        '"Lo que le propongo es muy sencillo: nos sentamos 20 minutos, en su casa o donde usted se sienta cómodo, y hacemos su ADN de protección: qué tiene ya, qué cosas no le están cubriendo, y si tiene sentido añadir algo que le dé más tranquilidad. No hay que decidir nada en esa reunión. Ahora mismo tenemos una campaña con 6 meses bonificados que termina el 29 de mayo."',
+        '"¿Le vendría mejor que nos viéramos por la mañana, dando un paseo por la Alameda, o por la tarde y me acerco a su casa para que le resulte más cómodo?"'
+      ],
+      note: 'Script B meta-análisis. SIEMPRE usted con mayores de 60. Campaña activa hasta 29 mayo: 6 meses bonificados. NN NO ofrece Decesos — este producto es la alternativa. Pausa real después de la pregunta.'
+    },
+    agent_excliente: {
+      paragraphs: [
+        '"Buenos días, ¿<span class="dyn-name">[Nombre]</span>? Soy <span class="dyn-agent">[Agente]</span>, del equipo de Nationale-Nederlanden en Xàtiva. Le llamo porque llevamos su zona y quería presentarme personalmente."',
+        '"No sé si esto le encaja, pero estamos ofreciendo a personas de más de 55 años algo que mucha gente no sabe que existe: un producto que incluye podólogo varias veces al año, dentista, chequeos, y ayuda en casa si tiene un tropezón. No es el típico producto para el cajón — es algo del día a día."',
+        '"Son 20 minutos para que lo vea y decida si le interesa, en su casa o donde prefiera. Sin compromiso. Ahora mismo hay una campaña con 6 meses bonificados. ¿Cuándo le viene bien?"'
+      ],
+      note: 'Sub-variante 1 Senior. USTED siempre. Campaña hasta 29 mayo.'
+    },
+    agent_nuevo: {
+      paragraphs: [
+        '"Hola, <span class="dyn-name">[Nombre]</span>. Soy <span class="dyn-agent">[Agente]</span>, trabajo con Nationale-Nederlanden aquí en Xàtiva. Le llamo porque he empezado a atender a personas de su edad en la comarca."',
+        '"¿Sabía que hay un producto específico para mayores de 55 que incluye podología, dentista, chequeos y ayuda a domicilio si le pasa algo? No es un producto de esos que ojalá nunca use, es algo del día a día. Ahora mismo hay una campaña con 6 meses bonificados."',
+        '"Me gustaría enseñárselo en persona, 20 minutos, en su casa o donde prefiera. Si no le encaja, se queda igual. ¿Le va mejor por la mañana o por la tarde?"'
+      ],
+      note: 'Sub-variante 2 Senior. USTED siempre. Campaña hasta 29 mayo.'
+    }
+  },
+
+  // ── AHORRO ────────────────────────────────────────────
+  ahorro: {
+    tag: 'Ahorro · Flexicuenta / SIALP',
+    campaign: null,
+    fede: {
+      paragraphs: [
+        '"Hola <span class="dyn-name">[Nombre]</span>. Soy Fede, del nuevo Punto Naranja de Nationale-Nederlanden en La Costera."',
+        '"Muchos vecinos nos preguntan cómo proteger sus ahorros de la inflación sin asumir riesgos raros. Nosotros estamos abriendo cuentas aseguradas que dan rentabilidad garantizada y liquidez total desde el primer día."',
+        '"<span class="dyn-name">[Nombre]</span>, como no sé cómo tienes estructurado tu ahorro ahora mismo, mi intención no es convencerte de nada. Te propongo un café de 20 minutos, te enseño cómo le sacamos rendimiento al dinero aquí y decides si te encaja. ¿Martes a las 10 o miércoles tarde?"'
+      ],
+      note: 'Flexicuenta: rentabilidad garantizada + liquidez total. SIALP: desde 167€/mes, exención IRPF a los 5 años. No mencionar Goldman Sachs por teléfono.'
+    },
+    agent: {
+      paragraphs: [
+        '"Hola <span class="dyn-name">[Nombre]</span>. Soy <span class="dyn-agent">[Agente]</span>, del equipo de Nationale-Nederlanden en la comarca."',
+        '"Te llamo porque estamos presentando algo que está dando mucho de qué hablar: una cuenta asegurada que da rentabilidad garantizada y tienes el dinero disponible desde el primer día. Sin riesgos extraños."',
+        '"Como no sé cómo tienes estructurado tu ahorro, no te voy a decir que esto sea mejor que lo tuyo. Te propongo un café de 20 minutos para que veas cómo funciona y decides tú. ¿Martes a las 10 o miércoles tarde?"'
+      ],
+      note: 'Flexicuenta: rentabilidad garantizada + liquidez. SIALP: exención IRPF a 5 años. No dar cifras por teléfono.'
+    }
+  },
+
+  // ── EX-SANTALUCÍA — solo Fede ─────────────────────────
+  excliente: {
+    tag: 'Ex-Santalucía · Sorpresa',
+    campaign: null,
+    fede: {
+      paragraphs: [
+        '"¡Hola <span class="dyn-name">[Nombre]</span>! Soy Fede. Seguramente te suene mi voz de mi etapa anterior, ¿verdad? <em>(Pausa)</em>. Pues agárrate porque te llamo para darte una sorpresa."',
+        '"He dado un salto profesional y me acaban de nombrar Delegado para abrir el nuevo Punto Naranja de Nationale-Nederlanden. Te llamo directamente porque quería que fueras de los primeros en saberlo. Ahora tengo acceso a herramientas de ahorro, optimización de impuestos y salud muy potentes que antes no te podía ofrecer."',
+        '"No te llamo para que cambies nada. Solo quiero invitarte a un café de 20 minutos para ponernos al día y que sepas qué hacemos ahora por si alguna vez lo necesitas. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"'
+      ],
+      note: 'Sus pólizas son de Santalucía, NO de NN. No presionar para cancelar nada. Mapear: Decesos → Contigo Senior, Hogar → MiHogar, Vida → Contigo Familia.'
+    }
+  },
+
+  // ── CARTERA NN — solo Fede ────────────────────────────
+  cartera: {
+    tag: 'Cartera NN · Revisión',
+    campaign: null,
+    fede: {
+      paragraphs: [
+        '"Hola <span class="dyn-name">[Nombre]</span>. Soy Fede, el nuevo Delegado de Nationale-Nederlanden para Xàtiva y La Costera."',
+        '"Te llamo porque, con la apertura de la nueva delegación, me acaban de asignar personalmente tu expediente para ser tu gestor de referencia a partir de ahora. Como cliente activo, mi obligación corporativa es presentarme y asegurarme de que todo lo que tienes contratado está actualizado y en orden."',
+        '"No te llamo para venderte nada, es una llamada de servicio. Quiero que le pongas cara a la persona que va a gestionar tus temas. Nos tomamos un café 20 minutos, hacemos un check-list rápido de tu expediente y me doy por presentado. ¿Te cuadra mejor martes a las 10:00 o miércoles tarde?"'
+      ],
+      note: 'Llamada de servicio puro. Objetivo: presencial para detectar cross-sell. Revisar si tiene solo un producto NN (oportunidad de ampliación).'
+    }
+  },
+
+  // ── ILT ───────────────────────────────────────────────
+  ilt: {
+    tag: 'Contigo Autónomo ILT',
+    campaign: null,
+    fede: {
+      paragraphs: [
+        '"Hola <span class="dyn-name">[Nombre]</span>. Soy Fede, del Punto Naranja de Nationale-Nederlanden en Xàtiva. Te llamo un momento porque estamos contactando con profesionales autónomos de la zona."',
+        '"Te hago una pregunta directa: si mañana te pones enfermo y no puedes trabajar durante dos o tres meses, ¿sabes cuánto te paga la Seguridad Social? La mayoría de autónomos se llevan un susto cuando ven la cifra real. Nosotros tenemos una protección que complementa esa cantidad para que tus gastos fijos no se coman tus ahorros."',
+        '"<span class="dyn-name">[Nombre]</span>, no sé tu situación concreta y no quiero darte números al aire por teléfono. Te propongo un café de 20 minutos donde vemos tu base de cotización real, calculamos el hueco y te enseño cómo cerrarlo. ¿Te viene mejor martes por la mañana o jueves por la tarde?"'
+      ],
+      note: 'Indemnización diaria que complementa la IT de la SS. Producto de RIESGO — cuenta para el 50% mínimo mensual. No dar cifras por teléfono.'
+    },
+    agent: {
+      paragraphs: [
+        '"Hola <span class="dyn-name">[Nombre]</span>. Soy <span class="dyn-agent">[Agente]</span>, del equipo de Nationale-Nederlanden en la zona. Te llamo porque estamos trabajando con autónomos de la comarca."',
+        '"Te hago una pregunta directa: si mañana te pones enfermo y no puedes trabajar dos o tres meses, ¿sabes cuánto te paga la Seguridad Social? La mayoría se llevan un susto. Tenemos una protección que complementa esa cantidad para que tus gastos no se coman tus ahorros."',
+        '"No sé tu situación concreta y no quiero darte números al aire. Te propongo un café de 20 minutos donde calculamos el hueco real y ves si tiene sentido cubrirlo. ¿Martes por la mañana o jueves por la tarde?"'
+      ],
+      note: 'Producto de RIESGO. No dar cifras por teléfono. No mencionar "delegación" ni "Punto Naranja".'
+    }
+  },
+
+  // ── SIALP ─────────────────────────────────────────────
+  sialp: {
+    tag: 'SIALP / Plan Creciente',
+    campaign: null,
+    fede: {
+      paragraphs: [
+        '"Hola <span class="dyn-name">[Nombre]</span>. Soy Fede, de Nationale-Nederlanden en Xàtiva. Te llamo porque estamos presentando una herramienta financiera en la comarca que está dando mucho de qué hablar."',
+        '"¿Has oído hablar de planes de ahorro donde los beneficios quedan exentos de impuestos a los 5 años? Nosotros gestionamos uno con aportaciones desde 167 €/mes, garantía dinámica del capital, y a los 5 años los rendimientos no pasan por Hacienda. Es la fórmula que están usando muchos profesionales para construir un colchón sin regalar dinero."',
+        '"<span class="dyn-name">[Nombre]</span>, no sé cómo tienes organizado tu ahorro ahora mismo, así que no te voy a decir que esto sea mejor que lo tuyo. Te propongo que nos sentemos 20 minutos, te enseño los números reales y tú decides si merece la pena mover ficha. ¿Martes a las 10 o miércoles tarde?"'
+      ],
+      note: 'SIALP: máx 5.000€/año. Exención IRPF rendimientos a los 5 años. Garantía dinámica 85% HWM. PVM alto: 1.500-2.500 pts. No decir "Goldman Sachs" por teléfono.'
+    },
+    agent: {
+      paragraphs: [
+        '"Hola <span class="dyn-name">[Nombre]</span>. Soy <span class="dyn-agent">[Agente]</span>, del equipo de Nationale-Nederlanden en la comarca. Te llamo porque tenemos algo que está dando mucho de qué hablar."',
+        '"¿Sabías que hay planes de ahorro donde los beneficios quedan exentos de impuestos a los 5 años? Aportaciones desde 167€/mes, garantía dinámica del capital, y a los 5 años Hacienda no te toca los rendimientos."',
+        '"No sé cómo tienes estructurado tu ahorro, así que no te voy a decir que sea mejor que lo tuyo. Te propongo 20 minutos de café para que veas los números reales y decides tú. ¿Martes a las 10 o miércoles tarde?"'
+      ],
+      note: 'No dar cifras exactas por teléfono. No mencionar "delegación". Exención IRPF es sobre rendimientos, no deducción de prima.'
+    }
+  },
+
+  // ── MIS EX-CLIENTES — solo agentes con cartera previa ─
+  excagente: {
+    tag: 'Mis ex-clientes · Presentación',
+    campaign: null,
+    agent_excliente: {
+      paragraphs: [
+        '"¡Hola <span class="dyn-name">[Nombre]</span>! Soy <span class="dyn-agent">[Agente]</span>. ¿Te acuerdas de mí de mi etapa en <span class="dyn-company">[Compañía]</span>? <em>(Pausa)</em> Pues te llamo porque he dado un paso importante."',
+        '"Acabo de incorporarme al equipo de Nationale-Nederlanden aquí en la comarca. Te llamo directamente porque quería que fueras de los primeros en saberlo. Ahora tengo acceso a herramientas de salud, ahorro y optimización fiscal que antes no te podía ofrecer."',
+        '"No te llamo para que cambies nada. Solo quiero invitarte a un café de 20 minutos para ponernos al día y que sepas qué puedo hacer por ti ahora. ¿Te viene mejor el martes o el miércoles?"'
+      ],
+      note: 'Adaptación del guión "sorpresa" de Fede. Reemplaza [Compañía] con la real (ej: Generali). No presionar para cancelar. Detectar necesidades nuevas.'
+    }
+  },
+
+  // ── RED PERSONAL — agentes nuevos ──────────────────────
+  redpersonal: {
+    tag: 'Red personal · Entorno cercano',
+    campaign: null,
+    agent_nuevo: {
+      paragraphs: [
+        '"Hola <span class="dyn-name">[Nombre]</span>, soy <span class="dyn-agent">[Agente]</span>. Mira, te llamo porque acabo de incorporarme a Nationale-Nederlanden y estoy empezando a ver a personas de confianza."',
+        '"Lo que estoy haciendo es un chequeo de protección gratuito de 20 minutos: básicamente, ver si tú y tu familia estáis realmente cubiertos si mañana pasa algo y no puedes trabajar. La mayoría de gente que conozco cree que con el banco o la Seguridad Social ya tiene suficiente… y cuando miramos los números, hay un hueco importante."',
+        '"Son 20 minutos, sin compromiso, y si no te aporta nada, me lo dices y seguimos siendo amigos igual que antes. ¿Cuándo podemos vernos un momento?"'
+      ],
+      note: 'Tono muy cercano — son contactos personales. No usar "usted". La clave es la honestidad total: "si no te aporta nada, me lo dices". Generar confianza, no venta.'
+    }
+  },
+
+  // ── REFERENCIADO ─────────────────────────────────────
+  referenciado: {
+    tag: 'Referenciado · Contacto cualificado',
+    campaign: null,
+    agent: {
+      paragraphs: [
+        '"Buenos días, ¿<span class="dyn-name">[Nombre]</span>? Soy <span class="dyn-agent">[Agente]</span>, de Nationale-Nederlanden en Xàtiva. Le llamo porque <span class="dyn-ref">[Referente]</span> me ha comentado que podría interesarle echar un vistazo a cómo está su protección."',
+        '"No sé si es para usted, pero lo que hago es un chequeo de 20 minutos: vemos qué tiene hoy, qué le falta, y si hay algo que pueda mejorar sin complicarse. Si no le encaja nada, se queda igual y tan amigos."',
+        '"¿Le va bien que nos veamos esta semana? ¿Mañana o tarde?"'
+      ],
+      note: 'Contacto templado — viene recomendado. Mencionar siempre al referente por nombre. Si el referente es Fede: "mi compañero Fede me ha dado su contacto". La temperatura del contacto es mayor, ir directo.'
+    }
+  }
+};
+
+// ══════════════════════════════════════════════════════════
+// OBTENER SCRIPT SEGÚN ROL
+// ══════════════════════════════════════════════════════════
+function getScript() {
+  const s = SCRIPTS[currentProfile];
+  if (!s) return null;
+
+  let version;
+  if (!userRole || userRole === 'fede') {
+    version = s.fede;
+  } else {
+    // Agente: seleccionar sub-variante
+    if (agentType === 'excliente') {
+      version = s.agent_excliente || s.agent || s.fede;
+    } else {
+      version = s.agent_nuevo || s.agent || s.fede;
+    }
+    // Perfiles exclusivos de agente
+    if (currentProfile === 'excagente')    version = s.agent_excliente;
+    if (currentProfile === 'redpersonal') version = s.agent_nuevo;
+    if (currentProfile === 'referenciado') version = s.agent;
+  }
+
+  if (!version) return null;
+
+  return {
+    tag: s.tag,
+    campaign: s.campaign,
+    paragraphs: version.paragraphs,
+    note: version.note
+  };
+}
+
+// ══════════════════════════════════════════════════════════
+// BANCO DE OBJECIONES DEFINITIVO (meta-análisis 7 IAs)
+// ══════════════════════════════════════════════════════════
+const OBJECTIONS = [
+  {
+    q: 'No tengo tiempo / Estoy muy liado',
+    a: '"Lo entiendo perfectamente. Por eso son solo 20 minutos, reloj en mano. Y si en los primeros 5 minutos ve que no le aporta nada, lo dejamos ahí sin problema. Incluso puedo pasarme por su zona de trabajo a la hora del descanso. ¿Le viene mejor mañana o pasado?"'
+  },
+  {
+    q: 'Ya tengo seguro / Ya tengo algo en el banco',
+    a: '"Perfecto, eso es lo ideal. Justo por eso quiero verlo: la mayoría de gente de aquí tiene productos que creen que cubren unas cosas… y luego no. En 20 minutos revisamos lo que ya tiene y le digo si está bien o si hay algo que mejorar. Si está todo correcto, me alegro y se queda igual. ¿Le viene mejor mañana o pasado?"'
+  },
+  {
+    q: 'No quiero contratar nada',
+    a: '"Perfecto, porque yo tampoco quiero que contrate nada hoy. Solo quiero que tenga claro qué tiene y qué no. Le dejo un resumen por escrito con su foto real de protección y usted decide con calma. ¿Le va bien que lo veamos un día de estos?"'
+  },
+  {
+    q: '¿Cuánto cuesta?',
+    a: '"Depende totalmente de su caso: su edad, su situación familiar, lo que ya tiene. Por eso hacemos la reunión: para que usted vea los números reales de SU caso, no cifras genéricas. Lo importante es que primero vea si lo necesita. ¿Le viene mejor mañana o pasado?"'
+  },
+  {
+    q: 'No me interesa / No lo necesito',
+    a: '"Entiendo, puede ser que no sea para usted. Solo una cosa: si mañana tiene un accidente o una baja larga, ¿tiene claro quién se encarga de todo? Si quiere, lo vemos 20 minutos y decide usted con los números delante. Si no le aporta nada, me dice que no y tan amigos."'
+  },
+  {
+    q: 'Envíemelo por email / WhatsApp',
+    a: '"Claro, puedo mandarle un par de páginas ahora mismo. Pero la experiencia me dice que en 20 minutos le explico mucho mejor y le resuelvo todas las dudas. ¿Qué le parece si le mando primero la info y quedamos para verlo juntos?"'
+  },
+  {
+    q: 'A mi edad ya no necesito estas cosas',
+    a: '"Precisamente, <span class="dyn-name">[Nombre]</span>. Esto no es un producto de esos que ojalá nunca use. Es algo que va a usar: el podólogo, el dentista, el chequeo. Son cosas del día a día. Y si algún día pasa algo, tiene la tranquilidad de que no va a depender de nadie para que le echen una mano en casa."'
+  },
+  {
+    q: 'Tengo que hablarlo con mi pareja / mis hijos',
+    a: '"Me parece estupendo. De hecho, si quiere, cuando nos sentemos a verlo pueden estar ellos delante también. Así lo ven todos juntos y deciden en familia con los números encima de la mesa. ¿Cuándo podríamos quedar?"'
+  },
+  {
+    q: 'Ya me llamaron de otra compañía / Estoy harto de llamadas',
+    a: '"Lo entiendo perfectamente, y precisamente por eso le llamo así: sin rollo, sin presión. No soy un call center. Soy el agente que lleva la zona de Xàtiva, estoy aquí en la comarca, y mi objetivo es que tenga claro qué tiene y qué le falta. Si no le aporto nada, no vuelvo a llamar. ¿Me da 20 minutos?"',
+    fedeExtra: '"Lo entiendo perfectamente, y precisamente por eso le llamo así: sin rollo, sin presión. No soy un call center. Soy el delegado que lleva la zona de Xàtiva y La Costera, estoy aquí en la comarca, y mi objetivo es que tenga claro qué tiene y qué le falta. Si no le aporto nada, no vuelvo a llamar. ¿Me da 20 minutos?"'
+  },
+  {
+    q: 'Lo del ahorro/pensión ya lo lleva mi banco',
+    a: '"Genial, así empezamos con algo. Solo una cosa: ¿su banco le ha explicado alguna vez que hay productos donde los beneficios no pagan impuestos a los 5 años? No le pido que deje su banco. Solo que compare con datos en 20 minutos. Si después prefiere seguir como está, estupendo. Pero al menos habrá decidido con toda la información encima de la mesa."'
+  },
+  {
+    q: '¿Dónde está vuestra oficina?',
+    a: '"Ahora mismo estamos en pleno proceso de configuración del Punto Naranja para toda la comarca. Para su comodidad, me desplazo yo directamente. Podemos quedar en su casa, en su trabajo, o si lo prefiere tomamos un café en el centro. Lo que a usted le resulte más cómodo."',
+    fedeOnly: false
+  },
+  {
+    q: 'Estoy muy bien en Santalucía',
+    a: '"¡Me parece fantástico! Mi objetivo no es que cancele allí. El tema es que ahora toco áreas que antes no podía ofrecerle: optimización fiscal, campañas de Sanitas, ahorro gestionado profesionalmente. Solo quiero que sepa qué herramientas tiene a su disposición ahora. ¿Nos vemos el martes?"',
+    fedeOnly: true
+  },
+  {
+    q: '¿Qué es Nationale-Nederlanden? No os conozco',
+    a: '"Es normal, el nombre suena holandés porque lo es. NN lleva más de 160 años en seguros y está en 18 países. En España es la compañía detrás de ING — seguro que ING sí le suena. Lo que hacemos diferente es que tenemos un agente local, cara a cara en la comarca, no un 900 desde Madrid. ¿Le apetece conocer cómo trabajamos tomando un café?"'
+  }
+];
+// ══════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════
+
+// ══════════════════════════════════════════════════════════
+// FUNCIONES DE ROL
+// ══════════════════════════════════════════════════════════
+function openRoleModal() {
+  document.getElementById('roleOverlay').classList.remove('hidden');
+  roleGoStep(userRole === 'agent' ? 3 : 1);
+}
+
+function roleGoStep(n) {
+  document.querySelectorAll('.role-step').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('rStep' + n);
+  if (el) el.classList.add('active');
+}
+
+function rCheckName() {
+  const val = document.getElementById('rAgentName').value.trim();
+  document.getElementById('rNameNext').disabled = !val;
+}
+
+function rolePickFede() {
+  userRole = 'fede';
+  agentName = 'Fede';
+  agentType = null;
+  agentPrevCompany = '';
+  localStorage.setItem('mep_userRole', 'fede');
+  localStorage.setItem('mep_agentName', 'Fede');
+  localStorage.removeItem('mep_agentType');
+  localStorage.removeItem('mep_agentPrevCompany');
+  roleClose();
+  updateRoleBadge();
+  renderProfileGrid();
+  renderScript();
+  renderObjecciones();
+  toast('🎯 Modo Delegado — Fede', 'ok');
+}
+
+function rolePickType(type) {
+  agentType = type;
+  localStorage.setItem('mep_agentType', type);
+  if (type === 'excliente') {
+    roleGoStep(4);
+  } else {
+    // Nuevo: no necesita compañía
+    agentPrevCompany = '';
+    localStorage.removeItem('mep_agentPrevCompany');
+    roleConfirm();
+  }
+}
+
+function roleConfirm() {
+  const nameInput = document.getElementById('rAgentName').value.trim();
+  if (!nameInput) { toast('⚠️ Escribe tu nombre', 'warn'); roleGoStep(2); return; }
+  agentName = nameInput;
+  userRole = 'agent';
+  if (agentType === 'excliente') {
+    agentPrevCompany = document.getElementById('rAgentCompany').value.trim() || 'tu compañía anterior';
+  }
+  localStorage.setItem('mep_userRole', 'agent');
+  localStorage.setItem('mep_agentName', agentName);
+  localStorage.setItem('mep_agentType', agentType);
+  if (agentPrevCompany) localStorage.setItem('mep_agentPrevCompany', agentPrevCompany);
+  roleClose();
+  updateRoleBadge();
+  renderProfileGrid();
+  renderScript();
+  renderObjecciones();
+  toast('🚀 Bienvenido/a, ' + agentName, 'ok');
+}
+
+function roleClose() {
+  document.getElementById('roleOverlay').classList.add('hidden');
+}
+
+function updateRoleBadge() {
+  const btn = document.getElementById('roleBadgeBtn');
+  const txt = document.getElementById('roleBadgeText');
+  if (!btn) return;
+  btn.style.display = 'block';
+  if (userRole === 'fede') {
+    txt.textContent = '🎯 Fede';
+  } else if (userRole === 'agent') {
+    txt.textContent = '🚀 ' + agentName;
+  }
+}
+
+function renderProfileGrid() {
+  const profiles = (!userRole || userRole === 'fede') ? PROFILES_FEDE : getAgentProfiles();
+  let html = '';
+  profiles.forEach((p, i) => {
+    const isActive = (i === 0 && !currentProfile) || (currentProfile === p.id);
+    html += '<button class="profile-btn' + (isActive ? ' active' : '') + '" onclick="selectProfile(\'' + p.id + '\', this)">';
+    html += '<span class="p-emoji">' + p.emoji + '</span>' + p.label;
+    html += '<br><small style="font-weight:400;font-size:11px;opacity:.7">' + p.sub + '</small>';
+    html += '</button>';
+  });
+  const grid = document.getElementById('profileGrid');
+  if (grid) grid.innerHTML = html;
+}
+
+// Actualiza spans dinámicos del agente
+function updateAgentName() {
+  const display = userRole === 'agent' ? agentName : 'Fede';
+  document.querySelectorAll('.dyn-agent').forEach(el => el.textContent = display);
+  document.querySelectorAll('.dyn-company').forEach(el => el.textContent = agentPrevCompany || 'tu compañía anterior');
+  document.querySelectorAll('.dyn-ref').forEach(el => {
+    if (el.textContent === '[Referente]') el.textContent = '[Referente]'; // placeholder
+  });
+}
+
+(function init() {
+  // Cargar rol guardado
+  const savedRole = localStorage.getItem('mep_userRole');
+  if (savedRole) {
+    userRole = savedRole;
+    agentName = localStorage.getItem('mep_agentName') || 'Fede';
+    agentType = localStorage.getItem('mep_agentType') || null;
+    agentPrevCompany = localStorage.getItem('mep_agentPrevCompany') || '';
+    document.getElementById('roleOverlay').classList.add('hidden');
+    updateRoleBadge();
+  }
+
+  // Reset diario
+  const lastDate = localStorage.getItem('mep_lastDate');
+  const today = new Date().toDateString();
+  if (lastDate !== today) {
+    callCount = 0;
+    sessionStats = {contactado:0, no_contactado:0, cita_fijada:0, llamar_despues:0, totalDuration:0};
+    localStorage.setItem('mep_callCount', '0');
+    localStorage.setItem('mep_sessionStats', JSON.stringify(sessionStats));
+    localStorage.setItem('mep_lastDate', today);
+  }
+
+  document.getElementById('callNum').textContent = callCount;
+  renderPips();
+  renderProfileGrid();
+  renderScript();
+  renderObjecciones();
+  renderDaylist();
+  renderSummary();
+  renderPending();
+})();
+
+// ══════════════════════════════════════════════════════════
+// NAVEGACI\u00d3N DE FASES
+// ══════════════════════════════════════════════════════════
+function goPhase(n) {
+  if (n === 2) {
+    const name = document.getElementById('prospectName').value.trim();
+    if (!name) {
+      toast('\u26a0\ufe0f Escribe el nombre del contacto', 'warn');
+      document.getElementById('prospectName').focus();
+      return;
+    }
+    if (!callTimerRunning) toggleCallTimer();
+  }
+
+  currentPhase = n;
+  document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+  document.getElementById('phase-' + n).classList.add('active');
+
+  // Ocultar bloque completado si visible
+  document.getElementById('bloqueDone').classList.remove('show');
+
+  document.querySelectorAll('.phase-step').forEach(s => {
+    const pn = parseInt(s.dataset.phase);
+    s.className = 'phase-step';
+    if (pn < n) s.classList.add('done');
+    if (pn === n) s.classList.add('current');
+  });
+  document.querySelectorAll('.phase-label span').forEach(s => {
+    const pn = parseInt(s.dataset.pl);
+    s.className = '';
+    if (pn < n) s.classList.add('done');
+    if (pn === n) s.classList.add('current');
+  });
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ══════════════════════════════════════════════════════════
+// NOMBRE DIN\u00c1MICO
+// ══════════════════════════════════════════════════════════
+function updateName() {
+  const val = document.getElementById('prospectName').value.trim() || '[Nombre]';
+  document.querySelectorAll('.dyn-name').forEach(el => el.textContent = val);
+}
+
+// ══════════════════════════════════════════════════════════
+// SELECCI\u00d3N DE PERFIL
+// ══════════════════════════════════════════════════════════
+function selectProfile(id, btn) {
+  currentProfile = id;
+  document.querySelectorAll('.profile-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderScript();
+}
+
+// ══════════════════════════════════════════════════════════
+// RENDER SCRIPT
+// ══════════════════════════════════════════════════════════
+function renderScript() {
+  const s = getScript();
+  if (!s) return;
+  let html = '<div class="script-card">';
+  html += '<span class="script-tag">' + s.tag + '</span>';
+  if (s.campaign) html += ' <span class="campaign-badge">' + s.campaign + '</span>';
+  s.paragraphs.forEach(p => { html += '<p>' + p + '</p>'; });
+  if (s.note) html += '<div class="script-note">\ud83d\udca1 ' + s.note + '</div>';
+  html += '</div>';
+  document.getElementById('scriptContainer').innerHTML = html;
+  updateName();
+  updateAgentName();
+}
+
+// ══════════════════════════════════════════════════════════
+// RENDER OBJECIONES
+// ══════════════════════════════════════════════════════════
+function renderObjecciones() {
+  let html = '';
+  let idx = 0;
+  OBJECTIONS.forEach((obj) => {
+    // Omitir objeciones solo para Fede cuando es agente
+    if (obj.fedeOnly && userRole === 'agent') return;
+    // Seleccionar respuesta: Fede usa fedeExtra si existe, agente usa respuesta estándar
+    let answer = (userRole === 'fede' && obj.fedeExtra) ? obj.fedeExtra : obj.a;
+    // Personalizar referencias de delegado para agentes
+    if (userRole === 'agent') {
+      answer = answer.replace(/el delegado que lleva la zona[^""]*/g, 'el agente que lleva tu zona');
+      answer = answer.replace(/Fede/g, agentName || 'tu agente');
+      answer = answer.replace(/Punto Naranja/g, 'nuestro equipo de NN');
+    }
+    html += '<button class="obj-btn" onclick="toggleObj(this, ' + idx + ')">' + obj.q + '</button>';
+    html += '<div class="obj-panel" id="objPanel' + idx + '"><div class="obj-panel-inner">' + answer + '</div></div>';
+    idx++;
+  });
+  document.getElementById('objContainer').innerHTML = html;
+  updateName();
+  updateAgentName();
+}
+
+function toggleObj(btn, i) {
+  const panel = document.getElementById('objPanel' + i);
+  const isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.obj-btn').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.obj-panel').forEach(p => p.style.maxHeight = null);
+  if (!isOpen) {
+    btn.classList.add('open');
+    panel.style.maxHeight = panel.scrollHeight + 'px';
+  }
+  updateName();
+}
+
+// ══════════════════════════════════════════════════════════
+// WHATSAPP PRE-CALL
+// ══════════════════════════════════════════════════════════
+function enviarWhatsApp() {
+  const name = document.getElementById('prospectName').value.trim();
+  if (!name) { toast('\u26a0\ufe0f Primero escribe el nombre', 'warn'); return; }
+
+  // Identificación dinámica según rol
+  let senderLine;
+  if (!userRole || userRole === 'fede') {
+    senderLine = 'soy Fede Fontanals, Delegado de Nationale-Nederlanden en X\u00e0tiva y La Costera.';
+  } else {
+    senderLine = 'soy ' + agentName + ', agente de Nationale-Nederlanden en tu zona.';
+  }
+
+  const msg = encodeURIComponent(
+    'Hola ' + name + ', ' + senderLine +
+    ' Te escribo porque en breve te llamar\u00e9 para un tema concreto: un chequeo de protecci\u00f3n gratuito de 20 min.' +
+    ' No es una llamada comercial al uso \u2014 solo quiero presentarme y ver si te puedo ser \u00fatil.' +
+    ' Si prefieres que no te contacte, responde BAJA y no volveremos a escribirte. \u00a1Gracias!'
+  );
+  window.open('https://wa.me/?text=' + msg, '_blank');
+  startPrecallTimer();
+}
+
+function startPrecallTimer() {
+  const el = document.getElementById('precallTimer');
+  el.style.display = 'flex';
+  let secs = 300;
+  clearInterval(precallInterval);
+  precallInterval = setInterval(() => {
+    secs--;
+    if (secs <= 0) {
+      clearInterval(precallInterval);
+      el.style.display = 'none';
+      toast('\u2705 \u00a15 min cumplidos! Hora de llamar', 'ok');
+      return;
+    }
+    const m = Math.floor(secs / 60);
+    const s = secs % 60;
+    document.getElementById('precallDisplay').textContent = m + ':' + String(s).padStart(2, '0');
+  }, 1000);
+}
+
+function skipPrecall() {
+  clearInterval(precallInterval);
+  document.getElementById('precallTimer').style.display = 'none';
+}
+
+// ══════════════════════════════════════════════════════════
+// TEMPORIZADOR DE LLAMADA
+// ══════════════════════════════════════════════════════════
+function toggleCallTimer() {
+  const btn = document.getElementById('callTimerBtn');
+  if (callTimerRunning) {
+    clearInterval(callTimerInterval);
+    callTimerRunning = false;
+    btn.textContent = '\u25b6';
+    btn.className = 'timer-btn start';
+  } else {
+    callTimerRunning = true;
+    btn.textContent = '\u23f8';
+    btn.className = 'timer-btn pause';
+    callTimerInterval = setInterval(() => {
+      callSeconds++;
+      const m = Math.floor(callSeconds / 60);
+      const s = callSeconds % 60;
+      document.getElementById('callTimerDisplay').textContent = m + ':' + String(s).padStart(2, '0');
+    }, 1000);
+  }
+}
+
+function resetCallTimer() {
+  clearInterval(callTimerInterval);
+  callTimerRunning = false;
+  callSeconds = 0;
+  document.getElementById('callTimerDisplay').textContent = '0:00';
+  document.getElementById('callTimerBtn').textContent = '\u25b6';
+  document.getElementById('callTimerBtn').className = 'timer-btn start';
+}
+
+// ══════════════════════════════════════════════════════════
+// RESULTADO LLAMADA
+// ══════════════════════════════════════════════════════════
+function selRes(btn) {
+  document.querySelectorAll('.res-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  resultadoSel = btn.dataset.v;
+  const esCita = resultadoSel === 'cita_fijada';
+  document.getElementById('citaFields').classList.toggle('show', esCita);
+  document.getElementById('camposNoCita').style.display = esCita ? 'none' : 'block';
+  if (esCita) {
+    const hoy = new Date();
+    hoy.setDate(hoy.getDate() + 1);
+    document.getElementById('fechaCita').valueAsDate = hoy;
+  }
+  document.getElementById('btnGuardar').disabled = false;
+}
+
+// ══════════════════════════════════════════════════════════
+// GUARDAR Y SIGUIENTE
+// ══════════════════════════════════════════════════════════
+function guardarYSiguiente() {
+  const nombre = document.getElementById('prospectName').value.trim();
+  if (!nombre || !resultadoSel) return;
+  const esCita = resultadoSel === 'cita_fijada';
+
+  const registro = {
+    timestamp: new Date().toISOString(),
+    nombre: nombre,
+    perfil: currentProfile,
+    resultado: resultadoSel,
+    producto: document.getElementById('producto').value,
+    notas: document.getElementById('notas').value.trim(),
+    duracion: callSeconds,
+    proxAccion: esCita ? document.getElementById('proxAccionCita').value : document.getElementById('proxAccion').value,
+    fechaProx: esCita ? document.getElementById('fechaCita').value : document.getElementById('fechaProx').value,
+    horaCita: esCita ? document.getElementById('horaCita').value : null
+  };
+
+  // Cola de pendientes
+  const cola = JSON.parse(localStorage.getItem('mep_pendientes') || '[]');
+  cola.push(registro);
+  localStorage.setItem('mep_pendientes', JSON.stringify(cola));
+
+  // Actualizar stats
+  sessionStats[resultadoSel] = (sessionStats[resultadoSel] || 0) + 1;
+  sessionStats.totalDuration += callSeconds;
+  localStorage.setItem('mep_sessionStats', JSON.stringify(sessionStats));
+
+  // Marcar contacto como hecho en daylist
+  markDaylistDone(nombre);
+
+  // Incrementar contador
+  callCount++;
+  localStorage.setItem('mep_callCount', String(callCount));
+  document.getElementById('callNum').textContent = callCount;
+  renderPips();
+
+  const resultLabels = {
+    contactado: '\u2705 Contactado',
+    no_contactado: '\u274c No contactado',
+    cita_fijada: '\ud83d\udcc5 \u00a1Cita fijada!',
+    llamar_despues: '\ud83d\udd04 Llamar despu\u00e9s'
+  };
+  toast(resultLabels[resultadoSel] + ' \u00b7 Llamada ' + callCount + '/' + CALL_TARGET, 'ok');
+
+  resetCallTimer();
+
+  setTimeout(() => {
+    limpiarTodo();
+
+    if (callCount >= CALL_TARGET) {
+      showBloqueCompletado();
+    }
+  }, 1200);
+}
+
+function limpiarTodo() {
+  resultadoSel = null;
+  document.querySelectorAll('.res-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('citaFields').classList.remove('show');
+  document.getElementById('camposNoCita').style.display = 'block';
+  document.getElementById('notas').value = '';
+  document.getElementById('producto').value = '';
+  document.getElementById('proxAccion').value = '';
+  document.getElementById('fechaProx').value = '';
+  document.getElementById('proxAccionCita').value = '';
+  document.getElementById('btnGuardar').disabled = true;
+
+  // Cargar siguiente de daylist
+  const next = getNextDaylistContact();
+  document.getElementById('prospectName').value = next || '';
+
+  goPhase(1);
+  renderSummary();
+  renderPending();
+  updateName();
+}
+
+// ══════════════════════════════════════════════════════════
+// BLOQUE COMPLETADO
+// ══════════════════════════════════════════════════════════
+function showBloqueCompletado() {
+  const bd = document.getElementById('bloqueDone');
+  const totalMin = Math.round(sessionStats.totalDuration / 60);
+  const citas = sessionStats.cita_fijada || 0;
+  const contactados = sessionStats.contactado || 0;
+
+  document.getElementById('bloqueDoneSub').textContent =
+    callCount + ' llamadas \u00b7 ' + totalMin + ' min total \u00b7 ' + citas + ' citas \u00b7 ' + contactados + ' contactados';
+
+  document.getElementById('bloqueDoneSummary').innerHTML = renderSummaryHTML();
+
+  // Ocultar fases, mostrar bloque
+  document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+  bd.classList.add('show');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function closeBloqueView() {
+  document.getElementById('bloqueDone').classList.remove('show');
+  goPhase(1);
+}
+
+function startNewBloque() {
+  callCount = 0;
+  sessionStats = {contactado:0, no_contactado:0, cita_fijada:0, llamar_despues:0, totalDuration:0};
+  localStorage.setItem('mep_callCount', '0');
+  localStorage.setItem('mep_sessionStats', JSON.stringify(sessionStats));
+  document.getElementById('callNum').textContent = 0;
+  renderPips();
+  renderSummary();
+  closeBloqueView();
+}
+
+// ══════════════════════════════════════════════════════════
+// PIPS
+// ══════════════════════════════════════════════════════════
+function renderPips() {
+  let html = '';
+  for (let i = 0; i < CALL_TARGET; i++) {
+    let cls = 'pip';
+    if (i < callCount) cls += ' done';
+    else if (i === callCount) cls += ' current';
+    html += '<div class="' + cls + '"></div>';
+  }
+  document.getElementById('callPips').innerHTML = html;
+}
+
+// ══════════════════════════════════════════════════════════
+// LISTA DE CONTACTOS DEL D\u00cdA
+// ══════════════════════════════════════════════════════════
+function toggleDaylist() {
+  daylistOpen = !daylistOpen;
+  document.getElementById('daylistBody').classList.toggle('open', daylistOpen);
+  document.getElementById('daylistToggle').classList.toggle('open', daylistOpen);
+}
+
+function addToDaylist() {
+  const input = document.getElementById('daylistInput');
+  const name = input.value.trim();
+  if (!name) return;
+
+  // Permite a\u00f1adir varios separados por coma
+  const names = name.split(',').map(n => n.trim()).filter(n => n);
+  names.forEach(n => {
+    daylist.push({ name: n, done: false });
+  });
+
+  localStorage.setItem('mep_daylist', JSON.stringify(daylist));
+  input.value = '';
+  renderDaylist();
+}
+
+function renderDaylist() {
+  const container = document.getElementById('daylistItems');
+  const empty = document.getElementById('daylistEmpty');
+  document.getElementById('daylistCount').textContent = daylist.length;
+
+  if (!daylist.length) {
+    container.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  let html = '';
+  daylist.forEach((item, i) => {
+    const cls = item.done ? 'done' : (i === daylist.findIndex(x => !x.done) ? 'current' : '');
+    html += '<li class="daylist-item ' + cls + '">';
+    html += '<span class="daylist-item-num">' + (i + 1) + '</span>';
+    html += '<span class="daylist-item-name">' + item.name + '</span>';
+    if (!item.done) {
+      html += '<button class="daylist-item-load" onclick="loadFromDaylist(' + i + ')">Cargar</button>';
+    }
+    html += '<button class="daylist-item-del" onclick="removeFromDaylist(' + i + ')">\u00d7</button>';
+    html += '</li>';
+  });
+  container.innerHTML = html;
+}
+
+function loadFromDaylist(i) {
+  const item = daylist[i];
+  if (!item) return;
+  document.getElementById('prospectName').value = item.name;
+  updateName();
+  // Cerrar daylist
+  daylistOpen = false;
+  document.getElementById('daylistBody').classList.remove('open');
+  document.getElementById('daylistToggle').classList.remove('open');
+  toast('\ud83d\udc64 ' + item.name + ' cargado', 'ok');
+}
+
+function removeFromDaylist(i) {
+  daylist.splice(i, 1);
+  localStorage.setItem('mep_daylist', JSON.stringify(daylist));
+  renderDaylist();
+}
+
+function markDaylistDone(nombre) {
+  const idx = daylist.findIndex(x => !x.done && x.name.toLowerCase() === nombre.toLowerCase());
+  if (idx >= 0) {
+    daylist[idx].done = true;
+    localStorage.setItem('mep_daylist', JSON.stringify(daylist));
+    renderDaylist();
+  }
+}
+
+function getNextDaylistContact() {
+  const next = daylist.find(x => !x.done);
+  return next ? next.name : '';
+}
+
+// ══════════════════════════════════════════════════════════
+// RESUMEN DE SESI\u00d3N
+// ══════════════════════════════════════════════════════════
+function renderSummaryHTML() {
+  if (callCount === 0) return '';
+  const totalMin = Math.round(sessionStats.totalDuration / 60);
+  return '<div class="summary-card">' +
+    '<div class="summary-title">\ud83d\udcca RESUMEN DE HOY</div>' +
+    '<div class="summary-grid">' +
+      '<div class="summary-stat"><div class="summary-stat-num green">' + (sessionStats.contactado || 0) + '</div><div class="summary-stat-label">Contactados</div></div>' +
+      '<div class="summary-stat"><div class="summary-stat-num blue">' + (sessionStats.cita_fijada || 0) + '</div><div class="summary-stat-label">Citas fijadas</div></div>' +
+      '<div class="summary-stat"><div class="summary-stat-num red">' + (sessionStats.no_contactado || 0) + '</div><div class="summary-stat-label">No contestan</div></div>' +
+      '<div class="summary-stat"><div class="summary-stat-num orange">' + totalMin + ' min</div><div class="summary-stat-label">Tiempo total</div></div>' +
+    '</div></div>';
+}
+
+function renderSummary() {
+  document.getElementById('summaryContainer').innerHTML = renderSummaryHTML();
+}
+
+// ══════════════════════════════════════════════════════════
+// REGISTROS PENDIENTES
+// ══════════════════════════════════════════════════════════
+function renderPending() {
+  const cola = JSON.parse(localStorage.getItem('mep_pendientes') || '[]');
+  const card = document.getElementById('pendingCard');
+  const container = document.getElementById('pendingItems');
+  document.getElementById('pendingCount').textContent = cola.length;
+
+  if (!cola.length) {
+    card.style.display = 'none';
+    return;
+  }
+  card.style.display = 'block';
+
+  const resultEmoji = { contactado: '\u2705', no_contactado: '\u274c', cita_fijada: '\ud83d\udcc5', llamar_despues: '\ud83d\udd04' };
+
+  let html = '';
+  cola.slice(-10).reverse().forEach(r => {
+    const time = new Date(r.timestamp);
+    const hh = String(time.getHours()).padStart(2, '0');
+    const mm = String(time.getMinutes()).padStart(2, '0');
+    html += '<div class="pending-item">';
+    html += '<span class="pending-item-name">' + (resultEmoji[r.resultado] || '') + ' ' + r.nombre + '</span>';
+    html += '<span class="pending-item-res">' + (r.producto || r.perfil) + '</span>';
+    html += '<span class="pending-item-time">' + hh + ':' + mm + '</span>';
+    html += '</div>';
+  });
+  container.innerHTML = html;
+}
+
+function togglePending() {
+  const body = document.getElementById('pendingBody');
+  const toggle = document.getElementById('pendingToggle');
+  body.classList.toggle('open');
+  toggle.classList.toggle('open');
+}
+
+// ══════════════════════════════════════════════════════════
+// ACCIONES R\u00c1PIDAS
+// ══════════════════════════════════════════════════════════
+function resetDailyCounter() {
+  if (!confirm('\u00bfReiniciar el contador de llamadas del d\u00eda a 0?')) return;
+  callCount = 0;
+  sessionStats = {contactado:0, no_contactado:0, cita_fijada:0, llamar_despues:0, totalDuration:0};
+  localStorage.setItem('mep_callCount', '0');
+  localStorage.setItem('mep_sessionStats', JSON.stringify(sessionStats));
+  document.getElementById('callNum').textContent = 0;
+  renderPips();
+  renderSummary();
+  toast('\ud83d\udd04 Contador reiniciado', 'ok');
+}
+
+function clearPending() {
+  const cola = JSON.parse(localStorage.getItem('mep_pendientes') || '[]');
+  if (!cola.length) { toast('No hay registros pendientes', 'warn'); return; }
+  if (!confirm('\u00bfLimpiar ' + cola.length + ' registros pendientes? (Se perder\u00e1n hasta sincronizar)')) return;
+  localStorage.setItem('mep_pendientes', '[]');
+  renderPending();
+  toast('\ud83d\uddd1\ufe0f Cola limpiada', 'ok');
+}
+
+function exportPending() {
+  const cola = JSON.parse(localStorage.getItem('mep_pendientes') || '[]');
+  if (!cola.length) { toast('No hay registros para exportar', 'warn'); return; }
+
+  let csv = 'Fecha,Hora,Nombre,Perfil,Resultado,Producto,Duracion_seg,ProxAccion,FechaProx,Notas\n';
+  cola.forEach(r => {
+    const d = new Date(r.timestamp);
+    const fecha = d.toLocaleDateString('es-ES');
+    const hora = d.toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit'});
+    csv += [fecha, hora, '"' + r.nombre + '"', r.perfil, r.resultado, '"' + (r.producto||'') + '"', r.duracion, '"' + (r.proxAccion||'') + '"', r.fechaProx||'', '"' + (r.notas||'').replace(/"/g,"'") + '"'].join(',') + '\n';
+  });
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'modo_enfoque_' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('\ud83d\udce4 CSV exportado (' + cola.length + ' registros)', 'ok');
+}
+
+// ══════════════════════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════════════════════
+let toastTimer;
+function toast(msg, tipo) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast show ' + (tipo || '');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.className = 'toast'; }, 3500);
+}
+</script>
+</body>
+</html>
