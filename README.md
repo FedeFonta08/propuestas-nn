@@ -12,8 +12,8 @@
 | **Portal Propuestas** | `propuestas.html` | [Ver portal](https://fedefonta08.github.io/propuestas-nn/propuestas.html) | Propuestas personalizadas por URL (30 productos) |
 | **CRM Panel v2** | `nn_crm_panel_v2.html` | [Ver CRM](https://fedefonta08.github.io/propuestas-nn/nn_crm_panel_v2.html) | Gestión de contactos, búsqueda, historial |
 | **Sistema Llamadas** | `aperturas_desktop_v4.html` | [Ver sistema](https://fedefonta08.github.io/propuestas-nn/aperturas_desktop_v4.html) | Workflow de llamadas comerciales (8/día) |
-| **Modo Enfoque Pro** | `modo_enfoque_pro_v3.html` | [Ver herramienta](https://fedefonta08.github.io/propuestas-nn/modo_enfoque_pro_v3.html) | Call scripting + CRM sync + registros |
-| **Reclutamiento NN** | `Reclutamiento_NN_v2.html` | [Ver pipeline](https://fedefonta08.github.io/propuestas-nn/Reclutamiento_NN_v2.html) | Gestión pipeline candidatos (4-5 agentes) |
+| **Modo Enfoque Pro** | `modo_enfoque_pro_v3_RGPD.html` | [Ver herramienta](https://fedefonta08.github.io/propuestas-nn/modo_enfoque_pro_v3_RGPD.html) | Call scripting + CRM sync + registros |
+| **Reclutamiento NN** | `Reclutamiento_NN_v2_RGPD.html` | [Ver pipeline](https://fedefonta08.github.io/propuestas-nn/Reclutamiento_NN_v2_RGPD.html) | Gestión pipeline candidatos (4-5 agentes) |
 
 ---
 
@@ -213,4 +213,3 @@ Cartera desde día 1
 
 **Última actualización:** 8 mayo 2026  
 **Versión:** 2.1 (RGPD compliant, GitHub Pages activo, Radar Comercial integrado)
-
