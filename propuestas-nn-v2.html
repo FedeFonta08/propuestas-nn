@@ -160,13 +160,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-h
   .cc{display:none}
   .ac{display:none}
 }
-/* PR #1 — Deadline / urgency badge */
 .deadline-badge{display:flex;align-items:flex-start;gap:12px;background:#C0392B;color:#fff;border-radius:var(--rs);padding:14px 16px;margin-bottom:20px}
 .db-ico{font-size:22px;flex-shrink:0;margin-top:2px}
 .db-main{flex:1}
 .db-badge{font-size:12px;font-weight:700;letter-spacing:.06em;line-height:1.3;text-transform:uppercase}
 .db-loss{font-size:11.5px;font-weight:400;opacity:.88;margin-top:5px;line-height:1.55}
-/* PR #2 — Accordion objeciones FAQ */
 .faq-hed{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:var(--t2);margin:4px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--br)}
 .faq-list{display:flex;flex-direction:column;gap:7px;margin-bottom:24px}
 .faq-item{border:1.5px solid var(--br);border-radius:var(--rs);overflow:hidden;transition:border-color .15s,border-left-width .15s}
@@ -193,9 +191,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-h
 
 <script>
 // ═══════════════════════════════════════════════════════════════
-// PROPUESTAS NN · v2 — Datos reales de productos
+// PROPUESTAS NN · v2 RECTIFICADO — Datos reales de productos
 // Federico Fontanals · Agente Dinamizador · Punto Naranja NN Xàtiva
 // ═══════════════════════════════════════════════════════════════
+
+// FUNCIÓN FORMATEAR PRECIO CON € Y PERIODO
+function formatearPrecio(precio) {
+  if (precio === 'Consultar' || !precio) return precio;
+  if (precio.includes('€')) return precio;
+  if (/^\d+/.test(precio)) return precio + ' €/mes';
+  return precio;
+}
 
 const FASES = {
   'f1': { label: 'Fase 1 · Ahorro e Inversión', ico: '💰', col: 'p', fb: 'fbp', sl: 'slp' },
@@ -227,7 +233,7 @@ const PRODS = {
     ],
     pendiente: false,
     totalDesc: 'Aportación mínima flexible · Máximo 5.000 €/año · Costes totales ~2,5%/año',
-    prima: 'Desde 150 €/mes',
+    prima: '166 €/mes',
     cierre: n => `<strong>${n}</strong>, ahorrar sin pagar impuestos es la decisión más inteligente. Hablamos para ver cuánto quieres aportar.`,
     objeciones: [
       { q: '¿Puedo sacar el dinero antes del año 5?', a: 'Sí, puedes rescatar en cualquier momento. Antes del año 5 los rendimientos tributan como capital mobiliario (19–26% IRPF), con penalización de 1–2% en años 2–4. A partir del año 5: exención fiscal total del 100% de los rendimientos, sin penalización.' },
@@ -358,7 +364,7 @@ const PRODS = {
     sub: 'Solución híbrida única en el mercado: asistencia sanitaria Sanitas + seguro de vida en un contrato. Seguro de vida GRATIS el primer año. Descuento 12,5% anual hasta el 1 de junio 2026.',
     tit: n => `La protección completa de <em>${n} y su familia</em> en un solo contrato.`,
     deadline: { ico: '⏰', badge: 'DESCUENTO 12,5% SOLO HASTA 1 JUNIO 2026', loss: 'Si contratas después del 1 de junio de 2026, pierdes el 12,5% de descuento anual en tu prima — ese ahorro ya no vuelve. La promoción aplica a pólizas con fecha efecto 1 abril, 1 mayo o 1 junio 2026.' },
-    greet: n => `Hola <strong>${n}</strong>,<br><br>El producto estrella de NN: <strong>medicina privada Sanitas más seguro de vida, con el seguro de vida gratis el primer año</strong>. La solución más completa del mercado para una familia.<br><br><strong>Atención, ${n}:</strong> el descuento del 12,5% en la prima anual solo se aplica a pólizas contratadas con fecha efecto hasta el 1 de junio de 2026. Si lo dejas para más adelante, ese ahorro desaparece para siempre y pagarás la prima completa desde el primer recibo.`,
+    greet: n => `Hola <strong>${n}</strong>,<br><br>El producto estrella de Nationale-Nederlanden: <strong>medicina privada Sanitas más seguro de vida, con el seguro de vida gratis el primer año</strong>. La solución más completa del mercado para una familia.<br><br><strong>Atención, ${n}:</strong> el descuento del 12,5% en la prima anual solo se aplica a pólizas contratadas con fecha efecto hasta el 1 de junio de 2026. Si lo dejas para más adelante, ese ahorro desaparece para siempre y pagarás la prima completa desde el primer recibo.`,
     hb: { t: 'hbo', x: '<strong>Oferta única del mercado:</strong> Al contratar la cobertura de salud de Sanitas, el seguro de vida es GRATIS el primer año. Protección total con ahorro inmediato.' },
     covs: [
       { n: 'Asistencia sanitaria completa Sanitas', c: 'Familia completa', p: 'Consultar', k: true, t: 'estrella' },
@@ -740,13 +746,13 @@ const PORTADA_FASES = {
 // ═══════════════════════════════════════════════════════════════
 function q(k,d=''){return new URLSearchParams(window.location.search).get(k)||d;}
 function strip(){
-  return`<div class="astrip"><div class="aav"><img src="fede.jpg" alt="F" onerror="this.parentElement.innerHTML='F'"></div><div><div class="an">Federico Fontanals</div><div class="ar">Agente Dinamizador · Punto Naranja NN Xàtiva · La Costera</div></div><div class="ac"><a href="tel:+34680507186">📞 680 507 186</a><a href="mailto:federico.fontanals@nnespana.es">✉️ nnespana.es</a></div></div>`;
+  return`<div class="astrip"><div class="aav"><img src="https://cdn.jsdelivr.net/gh/FedeFonta08/propuestas-nn/fede_profile_github.jpg" alt="F" onerror="this.parentElement.innerHTML='F'"></div><div><div class="an">Federico Fontanals</div><div class="ar">Agente Dinamizador · Punto Naranja · Nationale-Nederlanden Xàtiva · La Costera</div></div><div class="ac"><a href="tel:+34680507186">📞 680 507 186</a><a href="mailto:federico.fontanals@nnespana.es">✉️ nnespana.es</a></div></div>`;
 }
 function foot(){
-  return`<div class="foot fi"><div class="foot-section"><div class="foot-label">Nationale-Nederlanden Vida y Generales</div><div class="foot-content">Av. de Bruselas, 16 · Parque Arroyo de la Vega · 28108 Alcobendas (Madrid)<br><a href="tel:+34916026000">☎️ +34 91 602 60 00</a></div></div><div class="foot-section"><div class="foot-label">Derechos RGPD/LOPDGDD</div><div class="foot-content"><a href="mailto:seleccion.redcomercial@nnespana.com?subject=Ejercicio%20derechos%20ARCO">Ejercer derechos ARCO</a> · <a href="mailto:dpo@nnespana.es">DPO</a><br><a href="https://www.aepd.es/" target="_blank">Reclamaciones ante AEPD</a></div></div><div class="foot-agent"><div class="foot-agent-name">🟠 Federico Fontanals</div><div class="foot-agent-title">Agente Dinamizador Punto Naranja · Xàtiva</div><div class="foot-agent-contact"><div class="foot-agent-contact-item"><span class="foot-agent-contact-icon">📧</span><a href="mailto:federico.fontanals@nnespana.es">Email</a></div><div class="foot-agent-contact-item"><span class="foot-agent-contact-icon">☎️</span><a href="tel:+34680507186">Llamada</a></div><div class="foot-agent-contact-item"><span class="foot-agent-contact-icon">💬</span><a href="https://wa.me/34680507186" target="_blank">WhatsApp</a></div></div><div class="foot-disclaimer">Documento informativo no contractual · Datos verificados de condiciones generales y documentación oficial NN</div></div></div>`;
+  return`<div class="foot fi"><div class="foot-section"><div class="foot-label">Nationale-Nederlanden Vida y Generales</div><div class="foot-content">Av. de Bruselas, 16 · Parque Arroyo de la Vega · 28108 Alcobendas (Madrid)<br><a href="tel:+34916026000">☎️ +34 91 602 60 00</a></div></div><div class="foot-section"><div class="foot-label">Derechos RGPD/LOPDGDD</div><div class="foot-content"><a href="mailto:seleccion.redcomercial@nnespana.com?subject=Ejercicio%20derechos%20ARCO">Ejercer derechos ARCO</a> · <a href="mailto:dpo@nnespana.es">DPO</a><br><a href="https://www.aepd.es/" target="_blank">Reclamaciones ante AEPD</a></div></div><div class="foot-agent"><div class="foot-agent-name">🟠 Federico Fontanals</div><div class="foot-agent-title">Agente Dinamizador Punto Naranja · Xàtiva</div><div class="foot-agent-contact"><div class="foot-agent-contact-item"><span class="foot-agent-contact-icon">📧</span><a href="mailto:federico.fontanals@nnespana.es">Email</a></div><div class="foot-agent-contact-item"><span class="foot-agent-contact-icon">☎️</span><a href="tel:+34680507186">Llamada</a></div></div><div class="foot-disclaimer">Documento informativo no contractual · Datos verificados de condiciones generales y documentación oficial Nationale-Nederlanden</div></div></div>`;
 }
 function socialProof(){
-  return`<div class="social-proof-container fi"><div class="sp-header"><div class="sp-title">¿Por qué elegir NN?</div><div class="sp-subtitle">Solidez, experiencia y confianza</div></div><div class="sp-grid"><div class="sp-card"><div class="sp-icon">🏛️</div><div class="sp-stat-num">63 años</div><div class="sp-stat-txt">Presencia en España desde 1963</div><div class="sp-stat-sub">Generaciones de familias confían en nosotros</div></div><div class="sp-card"><div class="sp-icon">👥</div><div class="sp-stat-num">800K+</div><div class="sp-stat-txt">Clientes en España</div><div class="sp-stat-sub">Una de cada 50 familias españolas es cliente NN</div></div><div class="sp-card"><div class="sp-icon">⭐</div><div class="sp-stat-num">AA−</div><div class="sp-stat-txt">Calificación S&amp;P (Solvencia)</div><div class="sp-stat-sub">Standard &amp; Poor's: Capacidad sólida de pagar</div></div><div class="sp-card"><div class="sp-icon">✅</div><div class="sp-stat-num">98.5%</div><div class="sp-stat-txt">Siniestros pagados dentro de plazo</div><div class="sp-stat-sub">Sin demoras ni sorpresas</div></div><div class="sp-card"><div class="sp-icon">🌍</div><div class="sp-stat-num">11</div><div class="sp-stat-txt">Países europeos</div><div class="sp-stat-sub">Grupo NN: presencia continental</div></div><div class="sp-card"><div class="sp-icon">💡</div><div class="sp-stat-num">100%</div><div class="sp-stat-txt">Digitalizado y mobile-first</div><div class="sp-stat-sub">Apps gratuitas: Salud + Legal incluidas</div></div></div><div class="sp-testimonials"><div class="sp-test-title">Lo que dicen nuestros clientes</div><div class="sp-test-grid"><div class="sp-test-card"><div class="sp-test-stars">⭐⭐⭐⭐⭐</div><div class="sp-test-quote">"Me salvó la vida. Sin Contigo Autónomo, habría quebrado."</div><div class="sp-test-author">Javier M. · Barcelona (Autónomo)</div></div><div class="sp-test-card"><div class="sp-test-stars">⭐⭐⭐⭐⭐</div><div class="sp-test-quote">"El pago fue en 3 días. Sin burocracia, sin sorpresas."</div><div class="sp-test-author">María L. · Valencia (Siniestro Hogar)</div></div><div class="sp-test-card"><div class="sp-test-stars">⭐⭐⭐⭐⭐</div><div class="sp-test-quote">"Plan Creciente SIALP: el mejor ahorro sin tributar que conozco."</div><div class="sp-test-author">Carlos P. · Madrid (Planificador)</div></div></div></div></div>`;
+  return`<div class="social-proof-container fi"><div class="sp-header"><div class="sp-title">¿Por qué elegir Nationale-Nederlanden?</div><div class="sp-subtitle">Solidez, experiencia y confianza</div></div><div class="sp-grid"><div class="sp-card"><div class="sp-icon">🏛️</div><div class="sp-stat-num">63 años</div><div class="sp-stat-txt">Presencia en España desde 1963</div><div class="sp-stat-sub">Generaciones de familias confían en nosotros</div></div><div class="sp-card"><div class="sp-icon">👥</div><div class="sp-stat-num">800K+</div><div class="sp-stat-txt">Clientes en España</div><div class="sp-stat-sub">Una de cada 50 familias españolas es cliente NN</div></div><div class="sp-card"><div class="sp-icon">⭐</div><div class="sp-stat-num">AA−</div><div class="sp-stat-txt">Calificación S&amp;P (Solvencia)</div><div class="sp-stat-sub">Standard &amp; Poor's: Capacidad sólida de pagar</div></div><div class="sp-card"><div class="sp-icon">✅</div><div class="sp-stat-num">98.5%</div><div class="sp-stat-txt">Siniestros pagados dentro de plazo</div><div class="sp-stat-sub">Sin demoras ni sorpresas</div></div><div class="sp-card"><div class="sp-icon">🌍</div><div class="sp-stat-num">11</div><div class="sp-stat-txt">Países europeos</div><div class="sp-stat-sub">Grupo Nationale-Nederlanden: presencia continental</div></div><div class="sp-card"><div class="sp-icon">💡</div><div class="sp-stat-num">100%</div><div class="sp-stat-txt">Digitalizado y mobile-first</div><div class="sp-stat-sub">Apps gratuitas: Salud + Legal incluidas</div></div></div><div class="sp-testimonials"><div class="sp-test-title">Lo que dicen nuestros clientes</div><div class="sp-test-grid"><div class="sp-test-card"><div class="sp-test-stars">⭐⭐⭐⭐⭐</div><div class="sp-test-quote">"Me salvó la vida. Sin Contigo Autónomo, habría quebrado."</div><div class="sp-test-author">Javier M. · Barcelona (Autónomo)</div></div><div class="sp-test-card"><div class="sp-test-stars">⭐⭐⭐⭐⭐</div><div class="sp-test-quote">"El pago fue en 3 días. Sin burocracia, sin sorpresas."</div><div class="sp-test-author">María L. · Valencia (Siniestro Hogar)</div></div><div class="sp-test-card"><div class="sp-test-stars">⭐⭐⭐⭐⭐</div><div class="sp-test-quote">"Plan Creciente SIALP: el mejor ahorro sin tributar que conozco."</div><div class="sp-test-author">Carlos P. · Madrid (Planificador)</div></div></div></div></div>`;
 }
 function rgpdBanner(){
   return`<div class="rgpd-banner fi"><div class="rgpd-title">⚖️ Información sobre Protección de Datos (RGPD/LOPDGDD)</div><div class="rgpd-text"><strong>Responsable del tratamiento:</strong> Nationale-Nederlanden Vida y Nationale-Nederlanden Generales, Compañías de Seguros y Reaseguros, S.A.E. (Av. Bruselas, 16 · 28108 Alcobendas, Madrid).</div><div class="rgpd-text"><strong>Tus derechos ARCO-POL:</strong> Acceso, Rectificación, Cancelación, Oposición y Portabilidad de tus datos personales. Tienes derecho a revocar consentimiento para comunicaciones comerciales sin que afecte a contratos previos.</div><div class="rgpd-actions"><a href="mailto:seleccion.redcomercial@nnespana.com?subject=Ejercicio%20derechos%20ARCO%20RGPD&cc=dpo@nnespana.es" class="rgpd-action-btn">📧 Ejercer derechos ARCO</a><a href="https://www.nnespana.es/" target="_blank" class="rgpd-action-btn">📋 Política privacidad NN</a><a href="https://www.aepd.es/" target="_blank" class="rgpd-action-btn">⚖️ Reclamar AEPD</a><span style="font-size:11px;color:#9A8F87;display:block;margin-top:10px"><strong>Derecho de oposición:</strong> Responde a cualquier email con "BAJA" en el asunto para excluirte de comunicaciones comerciales · <strong>DPO:</strong> dpo@nnespana.es</span></div></div>`;
@@ -768,7 +774,7 @@ function priceClass(c){return `c${colMap(c)}`;}
 // ═══════════════════════════════════════════════════════════════
 function renderProd(p, nombre, prima){
   const n = nombre || 'tu propuesta';
-  const pf = prima || p.prima || 'Consultar';
+  const pf = formatearPrecio(prima || p.prima || 'Consultar');
   const f = FASES[p.fase];
   const KC = keyClass(f.col), TC = tagClass(f.col), PC = priceClass(f.col);
 
@@ -800,7 +806,7 @@ function renderProd(p, nombre, prima){
   const totalH = p.totalDesc ? `
     <div class="total">
       <div><div class="tll">Prima / Aportación</div><div class="tld">${p.totalDesc}</div></div>
-      <div><div class="trp">${pf}</div><div class="trs">referencia</div></div>
+      <div><div class="trp">${pf.includes('€') ? pf.split(' ')[0] : pf}</div><div class="trs">${pf.includes('€') ? pf.split(' ').slice(1).join(' ') : 'referencia'}</div></div>
     </div>` : '';
 
   return `
@@ -839,13 +845,13 @@ function renderAgente(nombre){
         <div class="hbrand"><div class="bdot">N</div><span class="bname">Nationale-Nederlanden</span></div>
         <span class="hbadge">🤝 Oportunidad de negocio</span>
       </div>
-      <div class="hpt">Únete a la red NN · Propuesta personalizada</div>
-      <h1 class="htit">${n}, construye <em>tu negocio propio</em> con el respaldo de NN.</h1>
+      <div class="hpt">Únete a la red Nationale-Nederlanden · Propuesta personalizada</div>
+      <h1 class="htit">${n}, construye <em>tu negocio propio</em> con el respaldo de Nationale-Nederlanden.</h1>
       <p class="hsub">800.000+ clientes en España. Ingresos recurrentes. Formación completa. Tú pones las ganas.</p>
     </div>
     ${strip()}
     <div class="body fi">
-      <div class="greet">Hola <strong>${n}</strong>,<br><br>Te escribo porque creo que tienes el perfil ideal para construir un negocio propio como agente NN. <strong>Sin inversión inicial, con ingresos recurrentes y con todo el respaldo de una de las aseguradoras más grandes de Europa.</strong></div>
+      <div class="greet">Hola <strong>${n}</strong>,<br><br>Te escribo porque creo que tienes el perfil ideal para construir un negocio propio como agente de Nationale-Nederlanden. <strong>Sin inversión inicial, con ingresos recurrentes y con todo el respaldo de una de las aseguradoras más grandes de Europa.</strong></div>
       <div class="sl slo">La oportunidad en números</div>
       <div class="ogg">
         <div class="ogc"><div class="ogi">🌍</div><div class="ogv">800K+</div><div class="ogl">Clientes en España</div></div>
@@ -858,7 +864,7 @@ function renderAgente(nombre){
       <div class="spl">
         <div class="spi"><div class="spn">1</div><div class="spb"><strong>Proceso ADN personalizado</strong><div class="spno">Analizamos juntos tu perfil, tu zona y tu potencial de negocio.</div></div></div>
         <div class="spi"><div class="spn">2</div><div class="spb"><strong>Formación y certificación DGS</strong><div class="spno">Te preparamos desde cero. Soporte continuo de tu equipo.</div></div></div>
-        <div class="spi"><div class="spn">3</div><div class="spb"><strong>Cartera desde el primer día</strong><div class="spno">Trabajas con tu red de contactos y las herramientas digitales de NN.</div></div></div>
+        <div class="spi"><div class="spn">3</div><div class="spb"><strong>Cartera desde el primer día</strong><div class="spno">Trabajas con tu red de contactos y las herramientas digitales de Nationale-Nederlanden.</div></div></div>
         <div class="spi"><div class="spn">4</div><div class="spb"><strong>Ingresos recurrentes y crecientes</strong><div class="spno">Cada póliza genera comisión anual renovable. Tu negocio crece solo.</div></div></div>
       </div>
       <div class="dv"></div>
@@ -893,7 +899,7 @@ function renderPortada(){
     </div>
     ${strip()}
     <div class="body fi">
-      <div class="greet">Bienvenido al portal de propuestas de <strong>Federico Fontanals</strong>, Agente Dinamizador NN Xàtiva. Selecciona el producto para ver la propuesta completa.</div>`;
+      <div class="greet">Bienvenido al portal de propuestas de <strong>Federico Fontanals</strong>, Agente Dinamizador Nationale-Nederlanden Xàtiva. Selecciona el producto para ver la propuesta completa.</div>`;
 
   for(const [fase, prods] of Object.entries(PORTADA_FASES)){
     h += `<div class="pht">${fase}</div>`;
@@ -911,7 +917,7 @@ function renderPortada(){
   h += `<div class="pht">🤝 Para Agentes</div>
     <a class="pc" href="?seccion=agente">
       <span class="pi">🤝</span>
-      <div><div class="pn">Oportunidad de negocio NN</div><div class="pd">Presentación personalizada para candidatos a agente.</div></div>
+      <div><div class="pn">Oportunidad de negocio Nationale-Nederlanden</div><div class="pd">Presentación personalizada para candidatos a agente.</div></div>
       <span class="pa">›</span>
     </a>
   </div>${socialProof()}${foot()}${rgpdBanner()}`;
