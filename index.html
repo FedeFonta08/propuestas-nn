@@ -880,27 +880,17 @@ body::before {
       <div class="tool-arrow">→</div>
     </a>
 
-    <a class="tool-card" href="https://fedefonta08.github.io/propuestas-nn/guias-comerciales/guia-hipotecas-ING-Abanca-agentes.html" target="_blank">
-      <div class="tool-icon c-blue">🏦</div>
+    <a class="tool-card" href="https://fedefonta08.github.io/propuestas-nn/aperturas_desktop_v4.html" target="_blank">
+      <div class="tool-icon c-purple">📞</div>
       <div class="tool-info">
-        <div class="tool-tag" style="color:var(--blue)">Hipotecas</div>
-        <div class="tool-name">Guía ING + Abanca</div>
-        <div class="tool-desc">Agentes · Proceso y argumentario</div>
+        <div class="tool-tag" style="color:var(--purple)">Llamadas · Sistema</div>
+        <div class="tool-name">Sistema Aperturas</div>
+        <div class="tool-desc">8 llamadas/día · WhatsApp previo · Registro</div>
       </div>
       <div class="tool-arrow">→</div>
     </a>
 
-    <a class="tool-card" href="https://fedefonta08.github.io/propuestas-nn/guias-comerciales/guion-inmobiliarias-hipotecas-NN.html" target="_blank">
-      <div class="tool-icon c-teal">🏠</div>
-      <div class="tool-info">
-        <div class="tool-tag" style="color:var(--teal)">Hipotecas</div>
-        <div class="tool-name">Guión Inmobiliarias</div>
-        <div class="tool-desc">Script visita agencias · Argumentario</div>
-      </div>
-      <div class="tool-arrow">→</div>
-    </a>
-
-    <a class="tool-card" href="https://fedefonta08.github.io/propuestas-nn/propuestas.html" target="_blank" style="border-color:var(--orange);background:#FFF8F5">
+    <a class="tool-card" href="https://fedefonta08.github.io/propuestas-nn/propuestas-nn-v2.html" target="_blank" style="border-color:var(--orange);background:#FFF8F5">
       <div class="tool-icon c-orange">🎯</div>
       <div class="tool-info">
         <div class="tool-tag" style="color:var(--orange)">Propuestas · Cierre</div>
@@ -917,6 +907,26 @@ body::before {
         <div class="tool-tag" style="color:var(--red)">Control · Monitor</div>
         <div class="tool-name">Cockpit Documentos NN</div>
         <div class="tool-desc">Centro de mando · Monitor semanal portal</div>
+      </div>
+      <div class="tool-arrow">→</div>
+    </a>
+
+    <a class="tool-card" href="https://fedefonta08.github.io/propuestas-nn/Reclutamiento_NN_v2_RGPD.html" target="_blank">
+      <div class="tool-icon c-teal">🤝</div>
+      <div class="tool-info">
+        <div class="tool-tag" style="color:var(--teal)">Reclutamiento · Equipo</div>
+        <div class="tool-name">Reclutamiento NN v2 RGPD</div>
+        <div class="tool-desc">Captación agentes · Presentación NN · RGPD compliant</div>
+      </div>
+      <div class="tool-arrow">→</div>
+    </a>
+
+    <a class="tool-card" href="https://fedefonta08.github.io/propuestas-nn/generador_urls_propuestas.html" target="_blank">
+      <div class="tool-icon c-orange">🔗</div>
+      <div class="tool-info">
+        <div class="tool-tag" style="color:var(--orange)">URLs · Productividad</div>
+        <div class="tool-name">Generador URLs</div>
+        <div class="tool-desc">Constructor rápido enlaces propuestas personalizadas</div>
       </div>
       <div class="tool-arrow">→</div>
     </a>
@@ -999,6 +1009,17 @@ body::before {
         </div>
       </div>
       <div class="guia-name">Guía Hipotecas para Agentes</div>
+    </a>
+
+    <a class="guia-card" href="https://fedefonta08.github.io/propuestas-nn/guias-comerciales/guion-inmobiliarias-hipotecas-NN.html" target="_blank">
+      <div class="guia-header">
+        <div class="guia-icon c-teal">🏠</div>
+        <div>
+          <div class="guia-prod" style="color:var(--teal)">Inmobiliarias</div>
+          <div class="guia-version">Script visita agencias</div>
+        </div>
+      </div>
+      <div class="guia-name">Guión Comercial Inmobiliarias</div>
     </a>
 
     <div class="guia-card" style="border-style:dashed;cursor:default;opacity:0.5">
@@ -1158,9 +1179,95 @@ document.getElementById('frase-autor').textContent = frase[1];
 
 // ── RADAR COMERCIAL NN ───────────────────────
 const RADAR_SHEET_ID = '1mYKiIdoglAxzFwJOE_0V8CyHwNUsKkh_oPtkUKg4GCQ';
-const RADAR_TAB      = '🟠 Campañas Activas';
-const RADAR_URL      = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(RADAR_TAB)}`;
 const RADAR_LINK     = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}`;
+
+// Datos inline del Radar Comercial (última actualización: 27/04/2026 · Entre Nosotros #559)
+const CAMPANAS_ACTIVAS = [
+  {
+    producto: 'Salud Completo Copago',
+    tipo: 'Descuento autonomía comercial',
+    desc: '4% dto en primera anualidad para nuevos clientes y nuevos asegurados',
+    inicio: '15/04/2026',
+    fin: '30/06/2026',
+    cupo: '260 asegurados',
+    dto: '4%',
+    segmento: 'S2 Constructor · S3 Protector · S3A Autónomo',
+    accion: 'Llamar contactos 28-50 años esta semana. Pólizas con efecto 1 mayo y 1 junio',
+    estado: '🟢 ACTIVA'
+  },
+  {
+    producto: 'PC SIALP',
+    tipo: 'Ampliación edad contratación',
+    desc: 'Nueva edad máx. contratación 75 años y vencimiento hasta 85 años',
+    inicio: '10/04/2026',
+    fin: 'indefinido',
+    cupo: 'Sin cupo',
+    dto: '—',
+    segmento: 'S4 Planificador · S5 Senior',
+    accion: 'Llamar contactos 55-75 años. Novedad como excusa natural de contacto',
+    estado: '🟢 ACTIVA'
+  },
+  {
+    producto: 'PC SIALP + Contigo Futuro',
+    tipo: 'Indexación automática 5%',
+    desc: 'Indexación automática del 5% en primas regulares Nuevo Negocio. Argumento anti-inflación',
+    inicio: '10/04/2026',
+    fin: 'indefinido',
+    cupo: 'Sin cupo',
+    dto: '5% indexación',
+    segmento: 'S3 Protector · S4 Planificador',
+    accion: 'Mencionar protección anti-inflación en presentaciones ahorro. Argumento clave SIALP/PC.',
+    estado: '🟢 ACTIVA'
+  },
+  {
+    producto: 'Contigo Senior',
+    tipo: 'Bonificación prima',
+    desc: 'Bonificación 6 meses prima primer año',
+    inicio: '04/05/2026',
+    fin: '29/05/2026',
+    cupo: 'Sin cupo',
+    dto: '6 meses bonif.',
+    segmento: 'S5 Senior +60',
+    accion: 'Filtrar base 965 contactos 60+ años. Mapeo Decesos → Contigo Senior. ACTIVA - empieza 4 mayo',
+    estado: '🟢 ACTIVA'
+  },
+  {
+    producto: 'AGE / Plan Creciente',
+    tipo: 'Plan/Ahorro',
+    desc: 'Incremento tipos +40pb (2,40% AGE, 2,60% AGE VIP)',
+    inicio: '30/04/2026',
+    fin: '31/12/2026',
+    cupo: 'Sin cupo',
+    dto: 'Mejor rentabilidad (+40 pb)',
+    segmento: 'S4 Planificador',
+    accion: 'Propuesta simulación + comparar banco',
+    estado: '🟢 ACTIVA'
+  },
+  {
+    producto: 'Hipotecas ABANCA',
+    tipo: 'Actualización de precios',
+    desc: 'Todas las modalidades suben precio excepto Hipoteca Mari Carmen Fija Valor que mejora',
+    inicio: '01/04/2026',
+    fin: 'indefinido',
+    cupo: 'Sin cupo',
+    dto: '—',
+    segmento: 'S2 Constructor 30-45',
+    accion: 'Solo recomendar Hipoteca Mari Carmen Fija Valor. NO promocionar resto modalidades.',
+    estado: '🔵 INFORMATIVA'
+  },
+  {
+    producto: 'Hipoteca ABANCA',
+    tipo: 'Incentivo agente',
+    desc: '250€ por 1ª hipoteca / 500€ si Top Valor >300k€',
+    inicio: '01/05/2026',
+    fin: 'indefinido',
+    cupo: 'Sin cupo',
+    dto: '250€ / 500€',
+    segmento: 'S2 Constructor 30-45',
+    accion: 'Prospección secundaria. NO priorizar vs SIALP/PC. Bajo impacto PVM.',
+    estado: '🟡 ACTIVA - baja prioridad'
+  }
+];
 
 function badgeClass(estado) {
   if (!estado) return 'badge-otro';
@@ -1186,73 +1293,52 @@ function badgeLabel(estado) {
   return estado.replace(/[🟢🟡🔵⚫🟠]/g, '').trim();
 }
 
-async function cargarRadar() {
+function cargarRadar() {
   const grid = document.getElementById('radar-grid');
   const footer = document.getElementById('radar-footer');
-  try {
-    const res  = await fetch(RADAR_URL);
-    const text = await res.text();
-    const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
-    const rows = json.table.rows;
-    const cols = json.table.cols.map(c => c.label);
-
-    const campanas = rows
-      .slice(1)
-      .filter(r => r.c && r.c[0] && r.c[0].v)
-      .map(r => ({
-        producto:  r.c[0]?.v || '',
-        tipo:      r.c[1]?.v || '',
-        desc:      r.c[2]?.v || '',
-        inicio:    r.c[3]?.v || '',
-        fin:       r.c[4]?.v || '',
-        cupo:      r.c[5]?.v || '',
-        dto:       r.c[6]?.v || '',
-        segmento:  r.c[7]?.v || '',
-        accion:    r.c[8]?.v || '',
-        estado:    r.c[9]?.v || '',
-      }));
-
-    if (!campanas.length) {
-      grid.innerHTML = '<div class="radar-loading">Sin campañas activas esta semana.</div>';
-      return;
-    }
-
-    const orden = e => {
-      const x = e.toUpperCase();
-      if (x.includes('FINALIZADA'))     return 99;
-      if (x.includes('BAJA PRIORIDAD')) return 3;
-      if (x.includes('INFORMATIVA'))    return 2;
-      if (x.includes('URGENTE'))        return 0;
-      if (x.includes('ACTIVA'))         return 1;
-      return 50;
-    };
-    campanas.sort((a,b) => orden(a.estado) - orden(b.estado));
-
-    grid.innerHTML = campanas.map(c => {
-      const tags = [c.fin ? `⏰ Hasta ${c.fin}` : '', c.cupo && c.cupo !== 'Sin cupo' ? `📊 ${c.cupo}` : '', c.dto && c.dto !== '—' ? `🏷️ ${c.dto}` : '']
-        .filter(Boolean)
-        .map(t => `<span class="radar-tag">${t}</span>`)
-        .join('');
-      return `
-        <div class="radar-card">
-          <div class="radar-card-top">
-            <div class="radar-producto">${c.producto}</div>
-            <div class="radar-badge ${badgeClass(c.estado)}">${badgeLabel(c.estado)}</div>
-          </div>
-          <div class="radar-tipo">${c.tipo}</div>
-          <div class="radar-desc">${c.desc}</div>
-          ${tags ? `<div class="radar-meta">${tags}</div>` : ''}
-          ${c.accion ? `<div class="radar-accion">→ ${c.accion}</div>` : ''}
-        </div>`;
-    }).join('');
-
-    const now = new Date();
-    footer.innerHTML = `Actualizado desde <a href="${RADAR_LINK}" target="_blank">Radar Comercial NN</a> · ${campanas.length} campañas activas · ${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`;
-
-  } catch(e) {
-    grid.innerHTML = `<div class="radar-loading">⚠️ No se pudo conectar con el Radar Comercial. <a href="${RADAR_LINK}" target="_blank" style="color:var(--orange)">Abrirlo directamente →</a></div>`;
-    console.warn('Radar error:', e);
+  
+  if (!CAMPANAS_ACTIVAS.length) {
+    grid.innerHTML = '<div class="radar-loading">Sin campañas activas esta semana.</div>';
+    return;
   }
+
+  // Ordenar por prioridad: URGENTE → ACTIVA → INFORMATIVA → BAJA PRIORIDAD → FINALIZADA
+  const orden = e => {
+    const x = e.toUpperCase();
+    if (x.includes('FINALIZADA'))     return 99;
+    if (x.includes('BAJA PRIORIDAD')) return 3;
+    if (x.includes('INFORMATIVA'))    return 2;
+    if (x.includes('URGENTE'))        return 0;
+    if (x.includes('ACTIVA'))         return 1;
+    return 50;
+  };
+  const campanasOrdenadas = [...CAMPANAS_ACTIVAS].sort((a,b) => orden(a.estado) - orden(b.estado));
+
+  grid.innerHTML = campanasOrdenadas.map(c => {
+    const tags = [
+      c.fin && c.fin !== 'indefinido' ? `⏰ Hasta ${c.fin}` : '',
+      c.cupo && c.cupo !== 'Sin cupo' ? `📊 ${c.cupo}` : '',
+      c.dto && c.dto !== '—' ? `🏷️ ${c.dto}` : ''
+    ]
+      .filter(Boolean)
+      .map(t => `<span class="radar-tag">${t}</span>`)
+      .join('');
+    
+    return `
+      <div class="radar-card">
+        <div class="radar-card-top">
+          <div class="radar-producto">${c.producto}</div>
+          <div class="radar-badge ${badgeClass(c.estado)}">${badgeLabel(c.estado)}</div>
+        </div>
+        <div class="radar-tipo">${c.tipo}</div>
+        <div class="radar-desc">${c.desc}</div>
+        ${tags ? `<div class="radar-meta">${tags}</div>` : ''}
+        ${c.accion ? `<div class="radar-accion">→ ${c.accion}</div>` : ''}
+      </div>`;
+  }).join('');
+
+  const now = new Date();
+  footer.innerHTML = `Última actualización: 27/04/2026 · <a href="${RADAR_LINK}" target="_blank">Radar Comercial NN</a> · ${campanasOrdenadas.length} campañas activas`;
 }
 
 cargarRadar();
