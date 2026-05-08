@@ -15,7 +15,6 @@
 | 📞 Sistema Llamadas | `aperturas_desktop_v4.html` | [Ver sistema](https://fedefonta08.github.io/propuestas-nn/aperturas_desktop_v4.html) | Workflow de llamadas comerciales (8/día, pre-WhatsApp, cronómetro, registro inmediato) |
 | 🎬 Modo Enfoque Pro | `modo_enfoque_pro_v3_RGPD.html` | [Ver herramienta](https://fedefonta08.github.io/propuestas-nn/modo_enfoque_pro_v3_RGPD.html) | Call scripting + CRM sync + registros automáticos + objecciones accordion |
 | 🤝 Reclutamiento NN | `Reclutamiento_NN_v2_RGPD.html` | [Ver pipeline](https://fedefonta08.github.io/propuestas-nn/Reclutamiento_NN_v2_RGPD.html) | Gestión pipeline candidatos (objetivo 4-5 agentes antes sept) |
-| ❌ propuestas.html | **DEPRECATED** | ❌ Eliminar | **OBSOLETO** · Reemplazado por propuestas-nn-v2.html · Mantenerlo causa confusión · Eliminar de GitHub |
 
 ---
 
