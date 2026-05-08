@@ -266,158 +266,166 @@ body::before {
 .main-tool::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, transparent 100%);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.25s;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--orange);
 }
 
-.main-tool:hover::before { opacity: 1; }
-.main-tool:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(201,77,0,0.12); }
+.main-tool:hover {
+  border-color: var(--orange-l);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201,77,0,0.15);
+}
 
 .main-tool-icon {
-  width: 64px; height: 64px;
-  background: linear-gradient(135deg, var(--orange), var(--orange-l));
-  border-radius: 12px;
+  width: 60px; height: 60px;
+  background: rgba(201,77,0,0.10);
+  border: 2px solid rgba(201,77,0,0.25);
+  border-radius: 16px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 32px;
+  font-size: 28px;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(201,77,0,0.2);
 }
 
-.main-tool-text h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
-  letter-spacing: 1px;
-  margin-bottom: 2px;
-  color: #111827;
-}
+.main-tool-info { flex: 1; }
 
-.main-tool-text p {
-  font-size: 13px;
-  color: var(--text3);
-  line-height: 1.4;
-}
-
-/* ── GRID PVM ───────────────────────────────── */
-.pvm-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-@media (max-width: 768px) {
-  .pvm-grid { grid-template-columns: 1fr; }
-}
-
-.pvm-card {
-  background: #FFFFFF;
-  border: 2px solid rgba(0,0,0,0.08);
-  border-radius: var(--r);
-  padding: 1.25rem;
-  transition: all 0.25s;
-}
-
-.pvm-card:hover { border-color: var(--orange); box-shadow: 0 8px 20px rgba(201,77,0,0.08); }
-
-.pvm-label {
+.main-tool-badge {
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--text3);
-  margin-bottom: 6px;
+  color: var(--orange);
+  font-weight: 700;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.pvm-value {
+.main-tool-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--orange);
+  border-radius: 50%;
+  animation: blink 1.8s infinite;
+}
+
+@keyframes blink {
+  0%,100% { opacity:1; }
+  50% { opacity:0.3; }
+}
+
+.main-tool-name {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 32px;
-  color: #E85C0D;
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: #111827;
   line-height: 1;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
-.pvm-sub {
-  font-size: 12px;
-  color: var(--text3);
+.main-tool-desc {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.5;
 }
 
-/* ── BARRA PVM ─────────────────────────────── */
-.pvm-bar-section {
-  background: #FFFFFF;
-  border: 2px solid rgba(0,0,0,0.08);
-  border-radius: var(--r);
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
+.main-tool-arrow {
+  width: 42px; height: 42px;
+  background: var(--orange);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.2s;
 }
 
-.pvm-bar-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); margin-bottom: 8px; }
-.pvm-bar-container { height: 12px; background: #E5E7EB; border-radius: 100px; overflow: hidden; margin-bottom: 8px; }
-.pvm-bar { height: 100%; background: linear-gradient(90deg, #FF6200, #C94D00); border-radius: 100px; width: 0%; transition: width 1s cubic-bezier(.25,.46,.45,.94); }
-.pvm-bar-txt { font-size: 12px; color: var(--text3); text-align: right; }
+.main-tool:hover .main-tool-arrow { transform: translateX(3px); }
 
-/* ── HERRAMIENTAS ──────────────────────────── */
-.herramientas-grid {
+/* ── GRID DE HERRAMIENTAS ────────────────────── */
+.tools-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1rem;
-  margin-bottom: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.75rem;
 }
 
-@media (max-width: 768px) {
-  .herramientas-grid { grid-template-columns: 1fr; }
-}
-
-.herramienta-card {
+.tool-card {
   background: #FFFFFF;
-  border: 2px solid rgba(0,0,0,0.08);
+  border: 1.5px solid rgba(0,0,0,0.12);
   border-radius: var(--r);
-  padding: 1.25rem;
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   cursor: pointer;
-  transition: all 0.25s;
+  transition: all 0.2s;
   text-decoration: none;
   color: inherit;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 }
 
-.herramienta-card:hover {
+.tool-card:hover {
+  background: #FFF8F5;
   border-color: var(--orange);
-  box-shadow: 0 8px 20px rgba(201,77,0,0.08);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-.herramienta-icon {
-  width: 40px; height: 40px;
-  background: #FFF0E8;
-  border-radius: 8px;
+.tool-card:hover .tool-arrow { opacity: 1; }
+
+.tool-icon {
+  width: 42px; height: 42px;
+  border-radius: 11px;
   display: flex; align-items: center; justify-content: center;
   font-size: 20px;
+  flex-shrink: 0;
 }
 
-.herramienta-nombre {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.5px;
+.tool-info { flex: 1; min-width: 0; }
+
+.tool-tag {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.tool-name {
+  font-size: 15px;
+  font-weight: 600;
   color: #111827;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.herramienta-desc {
-  font-size: 11px;
-  color: var(--text3);
-  line-height: 1.3;
+.tool-desc {
+  font-size: 12px;
+  color: #6B7280;
+  line-height: 1.4;
 }
 
-/* ── GUÍAS ───────────────────────────────── */
+.tool-arrow {
+  color: var(--orange);
+  opacity: 0;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+  font-size: 18px;
+}
+
+/* ── GUÍAS PDF ───────────────────────────────── */
+.guias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
 .guia-card {
   background: #FFFFFF;
-  border: 2px solid rgba(0,0,0,0.08);
+  border: 1.5px solid rgba(0,0,0,0.12);
   border-radius: var(--r);
   padding: 1rem;
   cursor: pointer;
-  transition: all 0.25s;
+  transition: all 0.2s;
   text-decoration: none;
   color: inherit;
   display: flex;
@@ -426,253 +434,285 @@ body::before {
 }
 
 .guia-card:hover {
+  background: #FFF8F5;
   border-color: var(--orange);
-  box-shadow: 0 8px 20px rgba(201,77,0,0.08);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .guia-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 2px;
+  gap: 8px;
 }
 
 .guia-icon {
   width: 32px; height: 32px;
-  background: #FFF0E8;
-  border-radius: 7px;
+  border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 16px;
+  font-size: 15px;
   flex-shrink: 0;
 }
 
 .guia-prod {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 12px;
-  letter-spacing: 0.5px;
-  color: var(--orange);
-  margin-bottom: 1px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.guia-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.3;
 }
 
 .guia-version {
   font-size: 10px;
-  color: var(--text3);
+  color: #6B7280;
 }
 
-.guia-name {
-  font-size: 12px;
+/* ── MOTIVACIÓN ──────────────────────────────── */
+.frase-box {
+  background: #FFFFFF;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  border-left: 4px solid var(--orange);
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 0;
+}
+
+.frase-text {
+  font-size: 16px;
+  font-style: italic;
   color: #111827;
-  font-weight: 500;
+  line-height: 1.7;
 }
 
-/* ── RADAR COMERCIAL ───────────────────────── */
-.radar-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
+.frase-autor {
+  font-size: 12px;
+  color: #6B7280;
+  margin-top: 6px;
+}
+
+/* ── PVM MINI TRACKER ────────────────────────── */
+.pvm-strip {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(0,0,0,0.12);
+  border-radius: var(--r);
+  padding: 1rem 1.5rem;
   margin-bottom: 1rem;
 }
 
-@media (max-width: 768px) {
-  .radar-grid { grid-template-columns: 1fr; }
+.pvm-item { text-align: center; }
+
+.pvm-n {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  line-height: 1;
+  display: block;
+}
+
+.pvm-l {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #6B7280;
+  margin-top: 1px;
+}
+
+.pvm-div { width:1px; height:32px; background: rgba(0,0,0,0.10); }
+
+.pvm-bar-wrap { flex: 1; }
+
+.pvm-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #6B7280;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.pvm-bar {
+  height: 10px;
+  background: #E5E7EB;
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.pvm-fill {
+  height: 100%;
+  border-radius: 100px;
+  transition: width 1.2s cubic-bezier(.25,.46,.45,.94);
+}
+
+/* ── COLORES DE CATEGORÍAS ─────────────────── */
+.c-orange { background: #FEE2CC; color: #9A3412; }
+.c-green  { background: #DCFCE7; color: #15803D; }
+.c-blue   { background: #DBEAFE; color: #1D4ED8; }
+.c-amber  { background: #FEF3C7; color: #92400E; }
+.c-purple { background: #EDE9FE; color: #6D28D9; }
+.c-teal   { background: #CCFBF1; color: #0F766E; }
+.c-red    { background: #FEE2E2; color: #991B1B; }
+
+/* ── RADAR COMERCIAL ────────────────────────── */
+.radar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
 }
 
 .radar-card {
   background: #FFFFFF;
-  border: 2px solid rgba(0,0,0,0.08);
+  border: 1.5px solid rgba(0,0,0,0.10);
   border-radius: var(--r);
-  padding: 1.25rem;
-  transition: all 0.25s;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: box-shadow 0.15s;
 }
 
-.radar-card:hover { border-color: var(--orange); box-shadow: 0 8px 20px rgba(201,77,0,0.08); }
+.radar-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
 
 .radar-card-top {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 8px;
+  gap: 8px;
 }
 
 .radar-producto {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  color: #111827;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  flex: 1;
 }
 
 .radar-badge {
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 9px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
   white-space: nowrap;
-  flex-shrink: 0;
+  letter-spacing: 0.3px;
 }
 
-.badge-urgente { background: #FEE2E2; color: #991B1B; }
-.badge-activa { background: #DCFCE7; color: #15803D; }
-.badge-cambio { background: #E0E7FF; color: #3730A3; }
-.badge-otro { background: #F3F4F6; color: #6B7280; }
+.badge-activa   { background: #DCFCE7; color: #15803D; }
+.badge-urgente  { background: #FEF3C7; color: #92400E; }
+.badge-cambio   { background: #DBEAFE; color: #1D4ED8; }
+.badge-otro     { background: #F3F4F6; color: #4B5563; }
 
 .radar-tipo {
   font-size: 11px;
-  color: var(--orange);
-  font-weight: 600;
-  margin-bottom: 4px;
+  color: var(--text3);
+  font-weight: 500;
 }
 
 .radar-desc {
   font-size: 12px;
   color: var(--text2);
+  line-height: 1.5;
+}
+
+.radar-accion {
+  font-size: 12px;
+  color: var(--orange);
+  font-weight: 600;
   line-height: 1.4;
-  margin-bottom: 8px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(0,0,0,0.06);
 }
 
 .radar-meta {
   display: flex;
+  gap: 8px;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 8px;
 }
 
 .radar-tag {
-  display: inline-block;
-  background: #FFF0E8;
-  color: var(--orange);
-  padding: 4px 8px;
-  border-radius: 4px;
   font-size: 10px;
-}
-
-.radar-accion {
-  font-size: 11px;
+  background: rgba(201,77,0,0.08);
   color: var(--orange);
-  font-weight: 600;
-  padding-top: 6px;
-  border-top: 1px solid rgba(0,0,0,0.06);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
 }
 
 .radar-loading {
   grid-column: 1/-1;
   text-align: center;
-  padding: 2rem 1rem;
+  padding: 2rem;
   color: var(--text3);
   font-size: 13px;
 }
 
-.radar-loading a {
-  color: var(--orange);
-  text-decoration: underline;
-  cursor: pointer;
-}
-
 .radar-footer {
+  margin-top: 8px;
   font-size: 11px;
   color: var(--text3);
   text-align: right;
-  margin-top: 1rem;
 }
 
-.radar-footer a {
-  color: var(--orange);
-  text-decoration: underline;
-}
+.radar-footer a { color: var(--orange); text-decoration: none; }
+.radar-footer a:hover { text-decoration: underline; }
 
-/* ── FRASE DEL DÍA ───────────────────────── */
-.frase-box {
-  background: linear-gradient(135deg, #FFF8F5 0%, #FFF0E8 100%);
-  border: 2px solid var(--orange);
-  border-radius: var(--r-lg);
-  padding: 2rem;
-  text-align: center;
-}
-
-.frase-text {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 18px;
-  line-height: 1.5;
-  color: #111827;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-  margin-bottom: 1rem;
-}
-
-.frase-text::before { content: open-quote; }
-.frase-text::after { content: close-quote; }
-
-.frase-autor {
-  font-size: 11px;
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* ── FOOTER ──────────────────────────────── */
+/* ── FOOTER ──────────────────────────────────── */
 .footer {
   position: relative;
   z-index: 1;
-  padding: 2rem;
-  max-width: 1280px;
-  margin: 0 auto;
-  text-align: center;
   border-top: 1px solid rgba(0,0,0,0.10);
-  margin-top: 2rem;
+  background: #FFFFFF;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .footer-brand {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 1px;
-  color: #374151;
-  margin-bottom: 6px;
+  color: #6B7280;
 }
 
 .footer-brand span { color: var(--orange); }
 
 .footer-hint {
-  font-size: 11px;
-  color: var(--text3);
+  font-size: 12px;
+  color: #6B7280;
 }
 
 .footer-hint a {
   color: var(--orange);
-  text-decoration: underline;
-  cursor: pointer;
+  text-decoration: none;
 }
 
-/* ── ANIMACIONES ──────────────────────────── */
-.fade-in { opacity: 0; animation: fadeInUp 0.6s ease-out forwards; }
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-.delay-4 { animation-delay: 0.4s; }
-.delay-5 { animation-delay: 0.5s; }
-.delay-6 { animation-delay: 0.6s; }
+.footer-hint a:hover { text-decoration: underline; }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
+/* ── ANIMACIONES DE ENTRADA ─────────────────── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeUp 0.5s ease forwards;
+}
+
+@keyframes fadeUp {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ── MOBILE ──────────────────────────────── */
-@media (max-width: 640px) {
-  .header { padding: 0 1rem; }
-  .hero { padding: 1.5rem 1rem 1rem; }
-  .titulo { font-size: 32px; }
-  .section { padding: 1.25rem 1rem; }
-  .hero-top { flex-direction: column; align-items: stretch; }
-  .objetivo-box { text-align: left; min-width: unset; }
-  .pvm-grid { grid-template-columns: 1fr; }
-  .herramientas-grid { gap: 0.75rem; }
-  .section-title { font-size: 16px; }
-  .frase-text { font-size: 16px; }
-}
+.delay-1 { animation-delay: 0.05s; }
+.delay-2 { animation-delay: 0.1s; }
+.delay-3 { animation-delay: 0.15s; }
+.delay-4 { animation-delay: 0.2s; }
+.delay-5 { animation-delay: 0.25s; }
+.delay-6 { animation-delay: 0.3s; }
 </style>
 </head>
 <body>
@@ -681,34 +721,37 @@ body::before {
 <div class="header">
   <div class="header-left">
     <div class="logo-box">
-      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 15h10"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
     </div>
     <div>
-      <div class="logo-text">DESPEGUE</div>
-      <div class="logo-sub">Panel NN · Fede</div>
+      <div class="logo-text">DESPEGUE · Panel NN</div>
+      <div class="logo-sub">Fede Fontanals — Agente Dinamizador · Punto Naranja Xàtiva</div>
     </div>
   </div>
   <div class="header-right">
-    <div style="text-align: right">
+    <div>
       <div class="clock" id="clock">--:--:--</div>
-      <div class="date-label" id="date-label">—</div>
+      <div class="date-label" id="date-label">--</div>
     </div>
   </div>
 </div>
 
-<!-- ══ HERO SALUDO ══ -->
-<div class="hero">
+<!-- ══ HERO ══ -->
+<div class="hero fade-in">
   <div class="hero-top">
     <div>
       <div class="saludo" id="saludo">Buenos días</div>
-      <div class="titulo">Objetivo <span>2026</span></div>
+      <div class="titulo">FEDE,<br><span>¿A POR QUÉ<br>VAMOS HOY?</span></div>
     </div>
     <div class="objetivo-box">
-      <div class="obj-label">PVM Este Mes</div>
+      <div class="obj-label">Objetivo 2026 — PVM</div>
       <div class="obj-num" id="pvm-actual">0</div>
-      <div class="obj-total">Meta: 10.291 pts</div>
+      <div class="obj-total">de 10.291 puntos</div>
       <div class="progress-hero">
-        <div class="progress-hero-fill" id="pvm-fill2"></div>
+        <div class="progress-hero-fill" id="pvm-bar"></div>
       </div>
     </div>
   </div>
@@ -716,137 +759,194 @@ body::before {
 
 <hr class="sep">
 
-<!-- ══ PVM ══ -->
+<!-- ══ HERRAMIENTA DEL DÍA ══ -->
 <div class="section fade-in delay-1">
   <div class="section-header">
-    <div class="section-icon c-orange" style="background:#FFF0E8;color:var(--orange)">📊</div>
-    <div class="section-title">Seguimiento PVM</div>
+    <div class="section-icon c-orange">🎯</div>
+    <div class="section-title">HERRAMIENTA DEL DÍA</div>
     <div class="section-line"></div>
   </div>
 
-  <div class="pvm-grid">
-    <div class="pvm-card">
-      <div class="pvm-label">PVM Acumulado</div>
-      <div class="pvm-value" id="pvm-pts">0</div>
-      <div class="pvm-sub" id="pvm-pct">0%</div>
+  <a class="main-tool" href="https://fedefonta08.github.io/propuestas-nn/aperturas_desktop_v4.html" target="_blank">
+    <div class="main-tool-icon">📞</div>
+    <div class="main-tool-info">
+      <div class="main-tool-badge">Activa ahora · Campaña Salud</div>
+      <div class="main-tool-name">SISTEMA DE LLAMADAS v4</div>
+      <div class="main-tool-desc">Guiones personalizados con el nombre del contacto · WhatsApp previo automático · Objeciones listas · Resultados guardados</div>
     </div>
-    <div class="pvm-card">
-      <div class="pvm-label">Falta Para Meta</div>
-      <div class="pvm-value" id="pvm-falta">10.291</div>
-      <div class="pvm-sub">Puntos restantes</div>
-    </div>
-  </div>
-
-  <div class="pvm-bar-section">
-    <div class="pvm-bar-label">Progreso del Mes</div>
-    <div class="pvm-bar-container">
-      <div class="pvm-bar" id="pvm-bar"></div>
-    </div>
-    <div class="pvm-bar-txt" id="pvm-bar-txt">0 / 10.291 pts</div>
-  </div>
-
-  <div style="display:flex;gap:0.75rem;margin-bottom:1rem">
-    <input type="number" id="pvm-input" placeholder="Pts conseguidos hoy" style="flex:1;padding:10px;border:2px solid rgba(0,0,0,0.08);border-radius:10px;font-size:14px">
-    <button onclick="actualizarPVM()" style="padding:10px 20px;background:var(--orange);color:white;border:none;border-radius:10px;font-weight:600;cursor:pointer;font-size:14px">Registrar</button>
-    <button onclick="mostrarEdicion()" style="padding:10px 14px;background:#F3F4F6;color:#111827;border:none;border-radius:10px;cursor:pointer;font-size:13px;font-weight:500">✎ Editar</button>
-  </div>
-</div>
-
-<hr class="sep">
-
-<!-- ══ HERRAMIENTAS ══ -->
-<div class="section fade-in delay-2">
-  <div class="section-header">
-    <div class="section-icon c-orange" style="background:#FFF0E8;color:var(--orange)">🛠️</div>
-    <div class="section-title">Herramientas Comerciales</div>
-    <div class="section-line"></div>
-  </div>
-
-  <a href="propuestas.html" class="main-tool">
-    <div class="main-tool-icon">📋</div>
-    <div class="main-tool-text">
-      <h3>Portal Propuestas</h3>
-      <p>Crea y gestiona propuestas personalizadas por cliente y producto.</p>
+    <div class="main-tool-arrow">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </div>
   </a>
+</div>
 
-  <div class="herramientas-grid">
-    <a href="nn_crm_panel_v2.html" class="herramienta-card">
-      <div class="herramienta-icon">👥</div>
-      <div class="herramienta-nombre">CRM Panel</div>
-      <div class="herramienta-desc">Acceso a base 965 contactos ex-Santalucía</div>
+<hr class="sep">
+
+<!-- ══ OBJETIVO PVM ══ -->
+<div class="section fade-in delay-2">
+  <div class="section-header">
+    <div class="section-icon c-green">📊</div>
+    <div class="section-title">SEGUIMIENTO PVM</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="pvm-strip">
+    <div class="pvm-item">
+      <span class="pvm-n" id="pvm-pts" style="color:var(--green)">0</span>
+      <div class="pvm-l">Pts. acumulados</div>
+    </div>
+    <div class="pvm-div"></div>
+    <div class="pvm-item">
+      <span class="pvm-n" id="pvm-falta" style="color:var(--amber)">10.291</span>
+      <div class="pvm-l">Faltan</div>
+    </div>
+    <div class="pvm-div"></div>
+    <div class="pvm-item">
+      <span class="pvm-n" id="pvm-pct" style="color:var(--text2)">0%</span>
+      <div class="pvm-l">Completado</div>
+    </div>
+    <div class="pvm-div"></div>
+    <div class="pvm-bar-wrap">
+      <div class="pvm-bar-label">
+        <span>Progreso 2026</span>
+        <span id="pvm-bar-txt">0 / 10.291 pts</span>
+      </div>
+      <div class="pvm-bar">
+        <div class="pvm-fill" id="pvm-fill2" style="background: linear-gradient(90deg, #16A34A, #22C55E); width:0%"></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">
+      <input type="number" id="pvm-input" placeholder="Pts hoy" min="0"
+        style="width:90px;background:#F9FAFB;border:1.5px solid #D1D5DB;border-radius:8px;padding:0.4rem 0.6rem;color:#111827;font-family:DM Sans,sans-serif;font-size:14px;text-align:center;outline:none;">
+      <button onclick="actualizarPVM()" style="width:90px;background:#15803D;border:none;border-radius:8px;color:white;font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;padding:0.4rem;cursor:pointer;">+ Añadir</button>
+      <button onclick="mostrarEdicion()" style="width:90px;background:#F9FAFB;border:1.5px solid #D1D5DB;border-radius:8px;color:#374151;font-family:DM Sans,sans-serif;font-size:13px;font-weight:600;padding:0.4rem;cursor:pointer;">✏️ Editar</button>
+    </div>
+  </div>
+</div>
+
+<hr class="sep">
+
+<!-- ══ HERRAMIENTAS ACTIVAS ══ -->
+<div class="section fade-in delay-3">
+  <div class="section-header">
+    <div class="section-icon c-blue">⚡</div>
+    <div class="section-title">HERRAMIENTAS ACTIVAS</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="tools-grid">
+    <a class="tool-card" href="https://fedefonta08.github.io/propuestas-nn/aperturas_desktop_v4.html" target="_blank">
+      <div class="tool-icon c-orange">📞</div>
+      <div class="tool-info">
+        <div class="tool-tag" style="color:var(--orange)">Campaña activa</div>
+        <div class="tool-name">Sistema de Llamadas v4</div>
+        <div class="tool-desc">Guiones · WhatsApp · Objeciones</div>
+      </div>
+      <div class="tool-arrow">→</div>
     </a>
 
-    <a href="aperturas_desktop_v4.html" class="herramienta-card">
-      <div class="herramienta-icon">☎️</div>
-      <div class="herramienta-nombre">Sistema Llamadas</div>
-      <div class="herramienta-desc">8 llamadas/día con script dinámico</div>
+    <a class="tool-card" href="https://fedefonta08.github.io/propuestas-nn/nn_crm_panel_v2.html" target="_blank">
+      <div class="tool-icon c-green">👥</div>
+      <div class="tool-info">
+        <div class="tool-tag" style="color:var(--green)">CRM · Gestión</div>
+        <div class="tool-name">Panel CRM v2</div>
+        <div class="tool-desc">Contactos · Nuevo cliente · Sin llamada</div>
+      </div>
+      <div class="tool-arrow">→</div>
     </a>
 
-    <a href="#" onclick="alert('Próximamente disponible');return false" class="herramienta-card" style="opacity:0.6">
-      <div class="herramienta-icon">🎯</div>
-      <div class="herramienta-nombre">Modo Enfoque Pro</div>
-      <div class="herramienta-desc">Integración llamadas + CRM + Registro</div>
+    <a class="tool-card" href="https://fedefonta08.github.io/propuestas-nn/guias-comerciales/guia-hipotecas-ING-Abanca-agentes.html" target="_blank">
+      <div class="tool-icon c-blue">🏦</div>
+      <div class="tool-info">
+        <div class="tool-tag" style="color:var(--blue)">Hipotecas</div>
+        <div class="tool-name">Guía ING + Abanca</div>
+        <div class="tool-desc">Agentes · Proceso y argumentario</div>
+      </div>
+      <div class="tool-arrow">→</div>
     </a>
 
-    <a href="#" onclick="alert('Próximamente disponible');return false" class="herramienta-card" style="opacity:0.6">
-      <div class="herramienta-icon">🌐</div>
-      <div class="herramienta-nombre">Reclutamiento</div>
-      <div class="herramienta-desc">Onboarding dinámico para agentes</div>
+    <a class="tool-card" href="https://fedefonta08.github.io/propuestas-nn/guias-comerciales/guion-inmobiliarias-hipotecas-NN.html" target="_blank">
+      <div class="tool-icon c-teal">🏠</div>
+      <div class="tool-info">
+        <div class="tool-tag" style="color:var(--teal)">Hipotecas</div>
+        <div class="tool-name">Guión Inmobiliarias</div>
+        <div class="tool-desc">Script visita agencias · Argumentario</div>
+      </div>
+      <div class="tool-arrow">→</div>
+    </a>
+
+    <a class="tool-card" href="https://fedefonta08.github.io/propuestas-nn/propuestas-nn-v2.html" target="_blank">
+      <div class="tool-icon c-purple">🎯</div>
+      <div class="tool-info">
+        <div class="tool-tag" style="color:var(--purple)">Portal</div>
+        <div class="tool-name">Portal de Propuestas v2</div>
+        <div class="tool-desc">28 productos NN · URLs personalizadas</div>
+      </div>
+      <div class="tool-arrow">→</div>
+    </a>
+
+    <a class="tool-card" href="https://fedefonta08.github.io/propuestas-nn/generador_urls_propuestas.html" target="_blank">
+      <div class="tool-icon c-orange">⚙️</div>
+      <div class="tool-info">
+        <div class="tool-tag" style="color:var(--orange)">Utilidad</div>
+        <div class="tool-name">Generador de URLs</div>
+        <div class="tool-desc">Crea propuestas + emails · Copia automática</div>
+      </div>
+      <div class="tool-arrow">→</div>
     </a>
   </div>
 </div>
 
 <hr class="sep">
 
-<!-- ══ GUÍAS COMERCIALES ══ -->
-<div class="section fade-in delay-3">
+<!-- ══ GUÍAS DE PRODUCTO ══ -->
+<div class="section fade-in delay-4">
   <div class="section-header">
-    <div class="section-icon c-orange" style="background:#FFF0E8;color:var(--orange)">📖</div>
-    <div class="section-title">Guías de Productos</div>
+    <div class="section-icon c-amber">📚</div>
+    <div class="section-title">GUÍAS DE PRODUCTO</div>
     <div class="section-line"></div>
   </div>
 
-  <div class="herramientas-grid">
-    <a href="#" onclick="alert('Abriendo en nueva ventana...');return false" class="guia-card">
+  <div class="guias-grid">
+    <a class="guia-card" href="https://fedefonta08.github.io/propuestas-nn/guias-comerciales/guia-profesional-contigo-familia-v3.pdf" target="_blank">
       <div class="guia-header">
-        <div class="guia-icon">💼</div>
+        <div class="guia-icon c-red">❤️</div>
         <div>
-          <div class="guia-prod">PPSA</div>
-          <div class="guia-version">Plan Protección Salud</div>
+          <div class="guia-prod" style="color:var(--red)">Contigo Familia</div>
+          <div class="guia-version">v3 · Actualizada</div>
         </div>
       </div>
-      <div class="guia-name">PPSA · Documentación</div>
+      <div class="guia-name">Guía Profesional Completa</div>
     </a>
 
-    <a href="#" onclick="alert('Abriendo en nueva ventana...');return false" class="guia-card">
+    <a class="guia-card" href="https://fedefonta08.github.io/propuestas-nn/guias-comerciales/guia-maestra-contigo-autonomo-v2.pdf" target="_blank">
       <div class="guia-header">
-        <div class="guia-icon">🏥</div>
+        <div class="guia-icon c-amber">🔧</div>
         <div>
-          <div class="guia-prod">SALUD</div>
-          <div class="guia-version">Plan Salud+Vida</div>
+          <div class="guia-prod" style="color:var(--amber)">Contigo Autónomo</div>
+          <div class="guia-version">v2 · Maestra</div>
         </div>
       </div>
-      <div class="guia-name">Plan Salud+Vida · Documentación</div>
+      <div class="guia-name">Guía Maestra Profesional</div>
     </a>
 
-    <a href="#" onclick="alert('Abriendo en nueva ventana...');return false" class="guia-card">
+    <a class="guia-card" href="https://fedefonta08.github.io/propuestas-nn/guias-comerciales/guia-plan-salud-vida-v2.pdf" target="_blank">
       <div class="guia-header">
-        <div class="guia-icon">👴</div>
+        <div class="guia-icon c-blue">💊</div>
         <div>
-          <div class="guia-prod">55+</div>
-          <div class="guia-version">Contigo Senior</div>
+          <div class="guia-prod" style="color:var(--blue)">Plan Salud + Vida</div>
+          <div class="guia-version">v2 · Campaña activa</div>
         </div>
       </div>
-      <div class="guia-name">Contigo Senior 55+ · Documentación</div>
+      <div class="guia-name">Guía Profesional + Caso real</div>
     </a>
 
-    <a href="#" onclick="alert('Abriendo en nueva ventana...');return false" class="guia-card">
+    <a class="guia-card" href="https://fedefonta08.github.io/propuestas-nn/docs/fase1-ahorro/sialp/" target="_blank">
       <div class="guia-header">
-        <div class="guia-icon">💰</div>
+        <div class="guia-icon c-green">💰</div>
         <div>
-          <div class="guia-prod">AHORRO</div>
-          <div class="guia-version">Plan Creciente</div>
+          <div class="guia-prod" style="color:var(--green)">SIALP</div>
+          <div class="guia-version">Plan Creciente · Documentación</div>
         </div>
       </div>
       <div class="guia-name">Docs SIALP · Plan Creciente</div>
@@ -881,7 +981,7 @@ body::before {
 <!-- ══ RADAR COMERCIAL NN ══ -->
 <div class="section fade-in delay-5" id="radar-section">
   <div class="section-header">
-    <div class="section-icon c-orange" style="background:#FFF0E8;color:var(--orange)">📡</div>
+    <div class="section-icon c-orange">📡</div>
     <div class="section-title">RADAR COMERCIAL NN — Campañas Activas</div>
     <div class="section-line"></div>
   </div>
@@ -996,7 +1096,7 @@ document.getElementById('frase-text').textContent = frase[0];
 document.getElementById('frase-autor').textContent = frase[1];
 
 // ── RADAR COMERCIAL NN ───────────────────────
-// REPARADO: Sheet ID y nombre de pestaña correctos
+// Lee la pestaña "Campañas Activas" del Sheets via API pública JSON
 const RADAR_SHEET_ID = '1mYKiIdoglAxzFwJOE_0V8CyHwNUsKkh_oPtkUKg4GCQ';
 const RADAR_TAB      = '🟠 Campañas Activas'; // pestaña naranja NN
 const RADAR_URL      = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(RADAR_TAB)}`;
@@ -1031,83 +1131,4 @@ async function cargarRadar() {
     const rows = json.table.rows;
     const cols = json.table.cols.map(c => c.label);
 
-    // Columnas: Producto(0), Tipo(1), Desc(2), FechaInicio(3), FechaFin(4), Cupo(5), Descuento(6), Segmento(7), Accion(8), Estado(9)
-    const campanas = rows
-      .slice(1) // fila 1 = cabecera real, fila 0 = título fusionado
-      .filter(r => r.c && r.c[0] && r.c[0].v) // solo filas con datos
-      .map(r => ({
-        producto:  r.c[0]?.v || '',
-        tipo:      r.c[1]?.v || '',
-        desc:      r.c[2]?.v || '',
-        inicio:    r.c[3]?.v || '',
-        fin:       r.c[4]?.v || '',
-        cupo:      r.c[5]?.v || '',
-        dto:       r.c[6]?.v || '',
-        segmento:  r.c[7]?.v || '',
-        accion:    r.c[8]?.v || '',
-        estado:    r.c[9]?.v || '',
-      }));
-
-    if (!campanas.length) {
-      grid.innerHTML = '<div class="radar-loading">Sin campañas activas esta semana.</div>';
-      return;
-    }
-
-    // Ordenar: URGENTE primero, luego ACTIVA, luego CAMBIO
-    const orden = e => e.includes('URGENTE') ? 0 : e.includes('ACTIVA') ? 1 : 2;
-    campanas.sort((a,b) => orden(a.estado.toUpperCase()) - orden(b.estado.toUpperCase()));
-
-    grid.innerHTML = campanas.map(c => {
-      const tags = [c.fin ? `⏰ Hasta ${c.fin}` : '', c.cupo && c.cupo !== 'Sin cupo' ? `📊 ${c.cupo}` : '', c.dto && c.dto !== '—' ? `🏷️ ${c.dto}` : '']
-        .filter(Boolean)
-        .map(t => `<span class="radar-tag">${t}</span>`)
-        .join('');
-      return `
-        <div class="radar-card">
-          <div class="radar-card-top">
-            <div class="radar-producto">${c.producto}</div>
-            <div class="radar-badge ${badgeClass(c.estado)}">${badgeLabel(c.estado)}</div>
-          </div>
-          <div class="radar-tipo">${c.tipo}</div>
-          <div class="radar-desc">${c.desc}</div>
-          ${tags ? `<div class="radar-meta">${tags}</div>` : ''}
-          ${c.accion ? `<div class="radar-accion">→ ${c.accion}</div>` : ''}
-        </div>`;
-    }).join('');
-
-    // Último En Nosotros en footer
-    const now = new Date();
-    footer.innerHTML = `Actualizado desde <a href="${RADAR_LINK}" target="_blank">Radar Comercial NN</a> · ${campanas.length} campañas activas · ${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`;
-
-  } catch(e) {
-    grid.innerHTML = `<div class="radar-loading">⚠️ No se pudo conectar con el Radar Comercial. <a href="${RADAR_LINK}" target="_blank" style="color:var(--orange)">Abrirlo directamente →</a></div>`;
-    console.warn('Radar error:', e);
-  }
-}
-
-cargarRadar();
-
-// ── EDICIÓN DIRECTA PVM ──────────────────────
-function mostrarEdicion() {
-  const actual = cargarPVM();
-  const nuevo = prompt(`Valor total real de PVM acumulado:\n(Actual: ${actual.toLocaleString('es-ES')} pts)\n\nEscribe el número correcto:`, actual);
-  if (nuevo === null) return; // canceló
-  const v = parseInt(nuevo);
-  if (isNaN(v) || v < 0) { alert('Introduce un número válido.'); return; }
-  guardarPVM(v);
-  renderPVM(v);
-}
-
-// ── ACCESO DIRECTO ───────────────────────────
-function crearAccesoDirecto() {
-  const url = window.location.href;
-  navigator.clipboard.writeText(url).then(() => {
-    alert('✅ URL copiada. Pégala en tu escritorio o guárdala como favorito en el navegador.');
-  }).catch(() => {
-    prompt('Copia esta URL para guardarla:', url);
-  });
-  return false;
-}
-</script>
-</body>
-</html>
+    // Columnas: Producto(0), Tipo(1), Desc(2), FechaInicio(3), FechaFin(4), Cupo(5), Descuento(6), Segmento(7), Accion(8), Es
