@@ -498,12 +498,16 @@ textarea{resize:vertical;min-height:80px}
 
 <script>
 // ══════════════════════════════════════════════════════════════
-// CONFIGURACIÓN — URL del Apps Script v2
+// CONFIGURACIÓN Y SEGURIDAD
 // ══════════════════════════════════════════════════════════════
-</script>
-<script src="config.js"></script>
-<script>
-const SCRIPT_URL = (typeof ENV !== 'undefined') ? ENV.SCRIPT_URL : 'https://script.google.com/macros/s/ELIMINADO_POR_SEGURIDAD/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxpYhW-S9OvA3w1NTR_Mu6GHffGTtHKE1ENKgoM98ySB8gyxt-j4BbaKF7Mk48grrcr_g/exec';
+
+// Validar token maestro al entrar
+let MASTER_TOKEN = localStorage.getItem('nn_master_token');
+if (!MASTER_TOKEN) {
+  MASTER_TOKEN = prompt("🔒 Seguridad NN: Introduce la Contraseña Maestra del CRM:");
+  if (MASTER_TOKEN) localStorage.setItem('nn_master_token', MASTER_TOKEN);
+}
 
 // ── Estado global ─────────────────────────────────────────────
 let contactoSeleccionado = null;
@@ -777,6 +781,7 @@ async function guardarContacto() {
 
 // ── POST → GET con payload (evita CORS desde GitHub Pages) ───
 async function post(data) {
+  data.token = MASTER_TOKEN; // 🔒 Inyectar contraseña maestra
   const url = SCRIPT_URL + '?payload=' + encodeURIComponent(JSON.stringify(data));
   const res = await fetch(url, { method: 'GET', redirect: 'follow' });
   const text = await res.text();

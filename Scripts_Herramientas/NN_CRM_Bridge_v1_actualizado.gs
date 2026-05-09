@@ -28,6 +28,7 @@ const CFG = {
   NOMBRE_AGENTE:   'Fede Fontanals',
   CAL_ID:          'fefontanals@gmail.com',  // calendario principal
   TZ:              'Europe/Madrid',
+  PASSWORD:        'DespegueNN2026' // 🔒 CONTRASEÑA MAESTRA DE SEGURIDAD
 };
 
 // ── MAPA DE COLUMNAS (basado en CRM v4) ──────────────────────
@@ -83,6 +84,14 @@ function doPost(e) {
 
   try {
     const data = JSON.parse(e.postData.contents);
+    
+    // 🛡️ VALIDACIÓN DE SEGURIDAD (CONTRASEÑA MAESTRA)
+    if (data.token !== CFG.PASSWORD) {
+      return ContentService
+        .createTextOutput(JSON.stringify({ ok: false, error: 'Acceso denegado. Contraseña maestra incorrecta.' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
     let result;
 
     switch (data.accion) {
@@ -126,6 +135,14 @@ function doGet(e) {
   // Petición real con payload
   try {
     const data = JSON.parse(decodeURIComponent(e.parameter.payload));
+    
+    // 🛡️ VALIDACIÓN DE SEGURIDAD (CONTRASEÑA MAESTRA)
+    if (data.token !== CFG.PASSWORD) {
+      return ContentService
+        .createTextOutput(JSON.stringify({ ok: false, error: 'Acceso denegado. Contraseña maestra incorrecta.' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
     let result;
     switch (data.accion) {
       case 'registrar_llamada':  result = registrarLlamada(data); break;
