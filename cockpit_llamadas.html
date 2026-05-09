@@ -859,9 +859,16 @@ body {
      ══════════════════════════════════════════════════════════════ -->
 <script>
 // ══════════════════════════════════════════════════════════════
-// CONFIGURACIÓN
+// CONFIGURACIÓN Y SEGURIDAD
 // ══════════════════════════════════════════════════════════════
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxpYhW-S9OvA3w1NTR_Mu6GHffGTtHKE1ENKgoM98ySB8gyxt-j4BbaKF7Mk48grrcr_g/exec';
+
+// Validar token maestro al entrar
+let MASTER_TOKEN = localStorage.getItem('nn_master_token');
+if (!MASTER_TOKEN) {
+  MASTER_TOKEN = prompt("🔒 Seguridad NN: Introduce la Contraseña Maestra del CRM:");
+  if (MASTER_TOKEN) localStorage.setItem('nn_master_token', MASTER_TOKEN);
+}
 const SHEET_ID = '16lui0o9wPYe9tL-9PaU6_H2heG8uIBYrCIL9vvfpdC0';
 const PVM_OBJ = 10291;
 const PVM_KEY = 'nn_pvm_2026';
@@ -1472,6 +1479,7 @@ function cerrarPaneles() {
 // API BRIDGE (mismo patrón que CRM Panel)
 // ══════════════════════════════════════════════════════════════
 async function post(data) {
+  data.token = MASTER_TOKEN; // 🔒 Inyectar contraseña maestra
   const url = SCRIPT_URL + '?payload=' + encodeURIComponent(JSON.stringify(data));
   const res = await fetch(url, { method: 'GET', redirect: 'follow' });
   const text = await res.text();
