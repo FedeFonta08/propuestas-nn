@@ -1,0 +1,328 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:0 0 1.5rem}
+.topbar{background:#0D1B2A;border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:1rem}
+.topbar-title{font-size:14px;font-weight:500;color:#fff}
+.topbar-sub{font-size:11px;color:#94a3b8;margin-top:2px}
+.phase-box{border-radius:var(--border-radius-lg);padding:.875rem 1rem;margin-bottom:1rem;border:0.5px solid var(--color-border-tertiary)}
+.phase-title{font-size:12px;font-weight:500;margin-bottom:.4rem}
+.phase-text{font-size:12px;color:var(--color-text-secondary);line-height:1.6}
+.whatsapp-box{background:#EAF3DE;border-radius:var(--border-radius-md);padding:.75rem 1rem;margin-bottom:1rem}
+.whatsapp-label{font-size:10px;font-weight:500;color:#27500A;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.4rem}
+.whatsapp-text{font-size:12px;color:#27500A;line-height:1.6;font-style:italic}
+.level-label{font-size:10px;font-weight:500;letter-spacing:.6px;color:var(--color-text-secondary);margin:.75rem 0 .4rem .25rem;text-transform:uppercase}
+.scard{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:.875rem 1rem;margin-bottom:.5rem}
+.scard-top{display:flex;align-items:center;gap:8px;margin-bottom:.5rem}
+.snum{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0}
+.sname{font-size:12px;font-weight:500;color:var(--color-text-primary)}
+.sbadge{font-size:10px;font-weight:500;padding:2px 7px;border-radius:100px;margin-left:auto}
+.swhy{font-size:11px;color:var(--color-text-secondary);margin-bottom:.6rem;font-style:italic;line-height:1.5}
+.stext{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.75rem;font-size:12px;color:var(--color-text-primary);line-height:1.75;font-style:italic}
+.pregunta{background:#E6F1FB;border-radius:var(--border-radius-md);padding:.6rem .875rem;margin-top:.5rem;font-size:12px;color:#0C447C;line-height:1.5}
+.pregunta-label{font-size:10px;font-weight:500;color:#185FA5;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.4px}
+.result-row{display:flex;align-items:center;gap:8px;margin-top:.65rem;flex-wrap:wrap}
+.result-label{font-size:11px;color:var(--color-text-secondary);flex-shrink:0}
+.result-select{font-size:11px;padding:3px 8px;border-radius:var(--border-radius-md)}
+.mark-btn{font-size:11px;padding:4px 10px;border-radius:var(--border-radius-md);cursor:pointer;border:0.5px solid var(--color-border-secondary);background:none;color:var(--color-text-secondary)}
+.mark-btn.winner{background:#1E8449;color:#fff;border-color:#1E8449}
+.stats-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:1rem}
+.stat{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.75rem;text-align:center}
+.stat-n{font-size:20px;font-weight:500;color:var(--color-text-primary)}
+.stat-l{font-size:10px;color:var(--color-text-secondary);margin-top:2px}
+.winner-box{background:#EAF3DE;border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-top:1rem;display:none}
+.winner-title{font-size:13px;font-weight:500;color:#27500A;margin-bottom:.5rem}
+.winner-text{font-size:12px;color:#3B6D11;line-height:1.6}
+</style>
+
+<div class="wrap">
+<div class="topbar">
+  <div class="topbar-title">Sistema de aperturas v2 — calibrado</div>
+  <div class="topbar-sub">Con pre-contacto WhatsApp + pregunta de calificacion · Mañana 10-12h</div>
+</div>
+
+<div class="stats-grid">
+  <div class="stat"><div class="stat-n" id="s-total">0</div><div class="stat-l">Llamadas</div></div>
+  <div class="stat"><div class="stat-n" style="color:#1E8449" id="s-ok">0</div><div class="stat-l">Me escucharon</div></div>
+  <div class="stat"><div class="stat-n" style="color:#E24B4A" id="s-pct">0%</div><div class="stat-l">Tasa escucha</div></div>
+</div>
+
+<div class="phase-box" style="background:#EAF3DE;border-color:#97C459">
+  <div class="phase-title" style="color:#27500A">Paso 0 — ANTES de llamar (nuevo)</div>
+  <div class="phase-text" style="color:#3B6D11">5 minutos antes de cada llamada, manda este WhatsApp. Cuando llames ya no eres un desconocido. Dobla la tasa de respuesta.</div>
+</div>
+
+<div class="whatsapp-box">
+  <div class="whatsapp-label">WhatsApp previo — copia y adapta</div>
+  <div class="whatsapp-text">"Hola [nombre], soy [tu nombre] de Xativa. Te llamo en unos minutos, es algo breve que creo que te interesa. Un saludo."</div>
+</div>
+
+<div class="level-label">Nivel 1 · Suave · Para conocidos</div>
+
+<div class="scard" id="s1">
+  <div class="scard-top">
+    <div class="snum" style="background:#EAF3DE;color:#27500A">1</div>
+    <div class="sname">La del reencuentro</div>
+    <span class="sbadge" style="background:#EAF3DE;color:#27500A">Conocidos SL</span>
+  </div>
+  <div class="swhy">Activa la relacion previa. No vende nada todavia, solo reconecta.</div>
+  <div class="stext">"Hola [nombre], soy [tu nombre], nos conocemos de cuando estaba en Santalucia. Oye, estoy ahora en Nationale-Nederlanden y tenemos algo de salud con Sanitas que me ha parecido que te podia encajar. Tienes 2 minutos?"</div>
+  <div class="pregunta">
+    <div class="pregunta-label">Si dice si, pregunta inmediatamente</div>
+    "¿Tienes medico privado ahora mismo?"
+  </div>
+  <div class="result-row">
+    <div class="result-label">Resultado:</div>
+    <select class="result-select" onchange="saveResult('s1',this.value,this)">
+      <option value="">— anotar —</option>
+      <option value="no_coge">No coge</option>
+      <option value="cuelga">Cuelga al oir seguros</option>
+      <option value="no_interes">No le interesa</option>
+      <option value="escucha">Me escucha</option>
+      <option value="cita">Cita conseguida</option>
+    </select>
+    <button class="mark-btn" id="btn-s1" onclick="toggleWinner('s1')">Mejor</button>
+  </div>
+</div>
+
+<div class="scard" id="s2">
+  <div class="scard-top">
+    <div class="snum" style="background:#EAF3DE;color:#27500A">2</div>
+    <div class="sname">La de la salud sin mencionar seguros</div>
+    <span class="sbadge" style="background:#EAF3DE;color:#27500A">Frío suave</span>
+  </div>
+  <div class="swhy">Nunca dice seguro ni poliza. Solo habla de salud, Sanitas y descuento.</div>
+  <div class="stext">"Hola [nombre], soy [tu nombre]. Oye, te llamo porque estamos con una campana de medicina privada Sanitas con un 12,5% de descuento directo. Sin listas de espera. Son 2 minutos, te cuento?"</div>
+  <div class="pregunta">
+    <div class="pregunta-label">Si dice si, pregunta inmediatamente</div>
+    "¿Tu medico ahora es de la Seguridad Social o tienes privado?"
+  </div>
+  <div class="result-row">
+    <div class="result-label">Resultado:</div>
+    <select class="result-select" onchange="saveResult('s2',this.value,this)">
+      <option value="">— anotar —</option>
+      <option value="no_coge">No coge</option>
+      <option value="cuelga">Cuelga al oir seguros</option>
+      <option value="no_interes">No le interesa</option>
+      <option value="escucha">Me escucha</option>
+      <option value="cita">Cita conseguida</option>
+    </select>
+    <button class="mark-btn" id="btn-s2" onclick="toggleWinner('s2')">Mejor</button>
+  </div>
+</div>
+
+<div class="level-label">Nivel 2 · Directa · Con gancho concreto</div>
+
+<div class="scard" id="s3">
+  <div class="scard-top">
+    <div class="snum" style="background:#E6F1FB;color:#0C447C">3</div>
+    <div class="sname">La de los numeros concretos</div>
+    <span class="sbadge" style="background:#E6F1FB;color:#0C447C">Frío directo</span>
+  </div>
+  <div class="swhy">Un numero concreto para el cerebro. El 12,5% detiene el piloto automatico del rechazo.</div>
+  <div class="stext">"Hola [nombre], soy [tu nombre] de Nationale-Nederlanden en Xativa. Mira, te llamo rapido: tenemos una campana activa de salud privada Sanitas con descuento del 12,5% y ademas el primer ano te dan proteccion de vida gratis. Tienes literalmente 3 minutos?"</div>
+  <div class="pregunta">
+    <div class="pregunta-label">Si dice si, pregunta inmediatamente</div>
+    "¿Cuantas veces al año vas al medico aproximadamente?"
+  </div>
+  <div class="result-row">
+    <div class="result-label">Resultado:</div>
+    <select class="result-select" onchange="saveResult('s3',this.value,this)">
+      <option value="">— anotar —</option>
+      <option value="no_coge">No coge</option>
+      <option value="cuelga">Cuelga al oir seguros</option>
+      <option value="no_interes">No le interesa</option>
+      <option value="escucha">Me escucha</option>
+      <option value="cita">Cita conseguida</option>
+    </select>
+    <button class="mark-btn" id="btn-s3" onclick="toggleWinner('s3')">Mejor</button>
+  </div>
+</div>
+
+<div class="scard" id="s4">
+  <div class="scard-top">
+    <div class="snum" style="background:#E6F1FB;color:#0C447C">4</div>
+    <div class="sname">La de la lista de espera</div>
+    <span class="sbadge" style="background:#E6F1FB;color:#0C447C">Dolor real</span>
+  </div>
+  <div class="swhy">Todo el mundo ha esperado meses para ver un especialista. Toca un dolor real y conocido.</div>
+  <div class="stext">"Hola [nombre], soy [tu nombre]. Oye, una pregunta rapida: ¿cuanto tiempo esperas normalmente para ver un especialista? Te lo pregunto porque tenemos acceso a Sanitas sin listas de espera, con un descuento importante ahora mismo. Tienes 2 minutos?"</div>
+  <div class="pregunta">
+    <div class="pregunta-label">Deja que responda la pregunta</div>
+    Su respuesta te da el argumento exacto que necesitas.
+  </div>
+  <div class="result-row">
+    <div class="result-label">Resultado:</div>
+    <select class="result-select" onchange="saveResult('s4',this.value,this)">
+      <option value="">— anotar —</option>
+      <option value="no_coge">No coge</option>
+      <option value="cuelga">Cuelga al oir seguros</option>
+      <option value="no_interes">No le interesa</option>
+      <option value="escucha">Me escucha</option>
+      <option value="cita">Cita conseguida</option>
+    </select>
+    <button class="mark-btn" id="btn-s4" onclick="toggleWinner('s4')">Mejor</button>
+  </div>
+</div>
+
+<div class="level-label">Nivel 3 · Atrevida · Rompe el patron</div>
+
+<div class="scard" id="s5">
+  <div class="scard-top">
+    <div class="snum" style="background:#FAEEDA;color:#633806">5</div>
+    <div class="sname">La del reto de 60 segundos</div>
+    <span class="sbadge" style="background:#FAEEDA;color:#633806">Alto impacto</span>
+  </div>
+  <div class="swhy">Pone el control en sus manos. Quien rechaza 60 segundos? Muy bajo rechazo inicial.</div>
+  <div class="stext">"Hola [nombre], soy [tu nombre]. Mira, te voy a pedir exactamente 60 segundos. Si en ese tiempo no te digo algo que te interese, cuelgas y no te molesto mas. Trato?"</div>
+  <div class="pregunta">
+    <div class="pregunta-label">Cuando diga si, di en 60 segundos exactos</div>
+    "Sanitas. Medicina privada. Sin esperas. Con descuento del 12,5% solo esta semana. Y el primer ano te dan vida gratis. ¿Tienes medico privado ahora?"
+  </div>
+  <div class="result-row">
+    <div class="result-label">Resultado:</div>
+    <select class="result-select" onchange="saveResult('s5',this.value,this)">
+      <option value="">— anotar —</option>
+      <option value="no_coge">No coge</option>
+      <option value="cuelga">Cuelga al oir seguros</option>
+      <option value="no_interes">No le interesa</option>
+      <option value="escucha">Me escucha</option>
+      <option value="cita">Cita conseguida</option>
+    </select>
+    <button class="mark-btn" id="btn-s5" onclick="toggleWinner('s5')">Mejor</button>
+  </div>
+</div>
+
+<div class="scard" id="s6">
+  <div class="scard-top">
+    <div class="snum" style="background:#FAEEDA;color:#633806">6</div>
+    <div class="sname">La brutal honesta</div>
+    <span class="sbadge" style="background:#FAEEDA;color:#633806">Rompe patron</span>
+  </div>
+  <div class="swhy">Desactiva el escudo antes de que se active. La honestidad inesperada paraliza el no automatico.</div>
+  <div class="stext">"Hola [nombre], soy [tu nombre] y te llamo para venderte algo. Pero antes de que cuelgues, dame 30 segundos porque creo que de verdad te conviene. Si no, cuelgas y tan amigos."</div>
+  <div class="pregunta">
+    <div class="pregunta-label">Cuando baje la guardia, pregunta</div>
+    "¿Tienes medico privado o vas a la Seguridad Social?"
+  </div>
+  <div class="result-row">
+    <div class="result-label">Resultado:</div>
+    <select class="result-select" onchange="saveResult('s6',this.value,this)">
+      <option value="">— anotar —</option>
+      <option value="no_coge">No coge</option>
+      <option value="cuelga">Cuelga al oir seguros</option>
+      <option value="no_interes">No le interesa</option>
+      <option value="escucha">Me escucha</option>
+      <option value="cita">Cita conseguida</option>
+    </select>
+    <button class="mark-btn" id="btn-s6" onclick="toggleWinner('s6')">Mejor</button>
+  </div>
+</div>
+
+<div class="scard" id="s7">
+  <div class="scard-top">
+    <div class="snum" style="background:#FCEBEB;color:#791F1F">7</div>
+    <div class="sname">La de la urgencia real</div>
+    <span class="sbadge" style="background:#FCEBEB;color:#791F1F">Solo valientes</span>
+  </div>
+  <div class="swhy">El miedo a perder mueve mas que la posibilidad de ganar. Para cuando ya tienes soltura.</div>
+  <div class="stext">"Hola [nombre], soy [tu nombre]. Oye, te llamo porque esta campana de Sanitas acaba pronto y no queria que te quedaras sin el descuento del 12,5% por no haberme avisado a tiempo. Son 2 minutos, te cuento antes de que se acabe?"</div>
+  <div class="pregunta">
+    <div class="pregunta-label">Si te da la oportunidad, pregunta</div>
+    "¿Tu y tu familia teneis medico privado o vais al de cabecera?"
+  </div>
+  <div class="result-row">
+    <div class="result-label">Resultado:</div>
+    <select class="result-select" onchange="saveResult('s7',this.value,this)">
+      <option value="">— anotar —</option>
+      <option value="no_coge">No coge</option>
+      <option value="cuelga">Cuelga al oir seguros</option>
+      <option value="no_interes">No le interesa</option>
+      <option value="escucha">Me escucha</option>
+      <option value="cita">Cita conseguida</option>
+    </select>
+    <button class="mark-btn" id="btn-s7" onclick="toggleWinner('s7')">Mejor</button>
+  </div>
+</div>
+
+<div class="scard" id="s8">
+  <div class="scard-top">
+    <div class="snum" style="background:#FCEBEB;color:#791F1F">8</div>
+    <div class="sname">La del WhatsApp de seguimiento</div>
+    <span class="sbadge" style="background:#FCEBEB;color:#791F1F">Para los que no cogen</span>
+  </div>
+  <div class="swhy">Para los que no cogieron ayer. Segundo intento con contexto. Muy diferente a llamar en frio otra vez.</div>
+  <div class="stext">"Hola [nombre], soy [tu nombre], te mande un mensaje ayer. Te llamo porque queria comentarte algo sobre salud privada Sanitas con una oferta que acaba pronto. Tienes un momento ahora?"</div>
+  <div class="pregunta">
+    <div class="pregunta-label">Referencia el mensaje previo</div>
+    Que sepa que no es la primera vez que intentas contactarle. Eso da mas legitimidad.
+  </div>
+  <div class="result-row">
+    <div class="result-label">Resultado:</div>
+    <select class="result-select" onchange="saveResult('s8',this.value,this)">
+      <option value="">— anotar —</option>
+      <option value="no_coge">No coge</option>
+      <option value="cuelga">Cuelga al oir seguros</option>
+      <option value="no_interes">No le interesa</option>
+      <option value="escucha">Me escucha</option>
+      <option value="cita">Cita conseguida</option>
+    </select>
+    <button class="mark-btn" id="btn-s8" onclick="toggleWinner('s8')">Mejor</button>
+  </div>
+</div>
+
+<div class="winner-box" id="winner-box">
+  <div class="winner-title">Tu mejor apertura hasta ahora</div>
+  <div class="winner-text" id="winner-text"></div>
+</div>
+
+<button style="width:100%;padding:.75rem;background:#0D1B2A;color:#fff;border:none;border-radius:var(--border-radius-md);font-size:13px;font-weight:500;cursor:pointer;margin-top:.75rem" onclick="sendPrompt('He probado las aperturas. Dame un analisis de que esta funcionando mejor y como mejorar las que no funcionan')">Analizar resultados y mejorar con Claude</button>
+</div>
+
+<script>
+const results={};
+const winners=new Set();
+const names={s1:'La del reencuentro',s2:'La de la salud sin seguros',s3:'La de los numeros',s4:'La de la lista de espera',s5:'La del reto 60s',s6:'La brutal honesta',s7:'La de la urgencia',s8:'La del seguimiento'};
+const vals={'no_coge':'No coge','cuelga':'Cuelga','no_interes':'No interes','escucha':'Escucha','cita':'Cita'};
+
+function saveResult(id,val){
+  if(!val) return;
+  if(!results[id]) results[id]={no_coge:0,cuelga:0,no_interes:0,escucha:0,cita:0};
+  results[id][val]=(results[id][val]||0)+1;
+  updateStats();
+}
+
+function updateStats(){
+  let total=0,ok=0;
+  Object.values(results).forEach(r=>{
+    Object.entries(r).forEach(([k,v])=>{
+      total+=v;
+      if(k==='escucha'||k==='cita') ok+=v;
+    });
+  });
+  document.getElementById('s-total').textContent=total;
+  document.getElementById('s-ok').textContent=ok;
+  document.getElementById('s-pct').textContent=total?Math.round(ok/total*100)+'%':'0%';
+}
+
+function toggleWinner(id){
+  const btn=document.getElementById('btn-'+id);
+  const box=document.getElementById('winner-box');
+  const txt=document.getElementById('winner-text');
+  if(winners.has(id)){
+    winners.delete(id);
+    btn.classList.remove('winner');
+    btn.textContent='Mejor';
+  } else {
+    winners.add(id);
+    btn.classList.add('winner');
+    btn.textContent='Marcada';
+  }
+  if(winners.size>0){
+    box.style.display='block';
+    txt.textContent='Has marcado como mejor: '+Array.from(winners).map(w=>names[w]).join(', ')+'. Sigue probando para confirmar el patron.';
+  } else {
+    box.style.display='none';
+  }
+}
+</script>

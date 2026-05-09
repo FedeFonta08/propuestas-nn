@@ -1,0 +1,17 @@
+# Entorno y variables
+.env
+.env.*
+
+# Credenciales de Google APIs
+credentials.json
+token.json
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE y OS
+.vscode/
+.idea/
+.DS_Store
+desktop.ini

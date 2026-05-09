@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta · Nationale-Nederlanden · Fede Fontanals</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5P41S83SWG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5P41S83SWG');
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--o:#E85D26;--ol:#FBF0EC;--om:#F4A07A;--od:#C44A18;--g:#0F6E56;--gl:#E4F4EF;--b:#1A4FAB;--bl:#EAF0FB;--p:#6B3FA0;--pl:#F0EAF8;--t:#0E7490;--tl:#E0F2F7;--dk:#1C1714;--tx:#2A2420;--t2:#6A5F5A;--t3:#9A8F87;--br:#EDE8E3;--bg:#F5F0EB;--wh:#FFF;--r:16px;--rs:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
+#loader{position:fixed;inset:0;background:var(--dk);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;z-index:999;transition:opacity .4s}
+#loader.off{opacity:0;pointer-events:none}
+.ld{width:38px;height:38px;background:var(--o);border-radius:50%;animation:pu 1.2s ease-in-out infinite}
+.lt{font-size:12px;color:rgba(255,255,255,.35);letter-spacing:.08em}
+@keyframes pu{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:.5}}
+.wrap{max-width:640px;margin:0 auto;padding:24px 16px 48px}
+.hero{background:var(--dk);border-radius:var(--r) var(--r) 0 0;padding:36px 36px 32px;position:relative;overflow:hidden}
+.g1{position:absolute;top:-80px;right:-80px;width:280px;height:280px;background:radial-gradient(circle,rgba(232,93,38,.22) 0%,transparent 65%);border-radius:50%}
+.g2{position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(232,93,38,.1) 0%,transparent 65%);border-radius:50%}
+.htop{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;position:relative;z-index:1}
+.hbrand{display:flex;align-items:center;gap:10px}
+.bdot{width:34px;height:34px;background:var(--o);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:#fff}
+.bname{font-size:12px;color:rgba(255,255,255,.4);letter-spacing:.07em;text-transform:uppercase}
+.hbadge{font-size:10px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.45);padding:4px 10px;border-radius:20px;letter-spacing:.05em;text-transform:uppercase}
+.hpt{font-size:11px;color:var(--o);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;position:relative;z-index:1}
+.htit{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:12px;position:relative;z-index:1}
+.htit em{color:var(--o);font-style:normal}
+.hsub{font-size:13.5px;color:rgba(255,255,255,.5);line-height:1.6;position:relative;z-index:1;max-width:420px}
+.astrip{background:#2A2420;border-top:1px solid rgba(255,255,255,.1);padding:14px 36px;display:flex;align-items:center;gap:12px}
+.aav{width:38px;height:38px;border-radius:50%;background:var(--o);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:#fff}
+.aav img{width:100%;height:100%;object-fit:cover}
+.an{font-size:13px;font-weight:600;color:#FFFFFF}
+.ar{font-size:11px;color:rgba(255,255,255,.6);margin-top:1px}
+.ac{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.ac a{font-size:11px;color:rgba(255,255,255,.7);text-decoration:none}
+.ac a:hover{color:var(--o)}
+.body{background:var(--wh);padding:32px 36px}
+.greet{font-size:15px;color:var(--tx);line-height:1.75;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--br)}
+.greet strong{font-weight:600;color:var(--dk)}
+.sl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;margin-bottom:12px}
+.slo{color:var(--o)}.slg{color:var(--g)}.slb{color:var(--b)}.slp{color:var(--p)}.slt{color:var(--t)}
+.fbadge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:20px}
+.fbo{background:var(--ol);color:var(--od)}.fbb{background:var(--bl);color:var(--b)}.fbp{background:var(--pl);color:var(--p)}.fbt{background:var(--tl);color:var(--t)}.fbg{background:var(--gl);color:var(--g)}
+.hbox{border-radius:var(--rs);padding:14px 16px;margin-bottom:20px;font-size:13.5px;line-height:1.6}
+.hbo{background:var(--ol);border-left:3px solid var(--o);color:var(--od)}
+.hbb{background:var(--bl);border-left:3px solid var(--b);color:var(--b)}
+.hbg{background:var(--gl);border-left:3px solid var(--g);color:var(--g)}
+.hbp{background:var(--pl);border-left:3px solid var(--p);color:var(--p)}
+.hbt{background:var(--tl);border-left:3px solid var(--t);color:var(--t)}
+.hbox strong{font-weight:600}
+.deadline-warning{background:#FFE8E0;border-left:3px solid #E85D26;border-radius:var(--rs);padding:14px 16px;margin-bottom:20px;font-size:13.5px;color:#C44A18}
+.deadline-warning strong{font-weight:600;color:#A03810}
+.deadline-warning em{font-style:italic}
+.st-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.stc{background:#FAF7F5;border:1px solid var(--br);border-radius:var(--rs);padding:14px 12px;text-align:center}
+.stv{font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:var(--dk);line-height:1;margin-bottom:4px}
+.stl{font-size:11px;color:var(--t3);line-height:1.3}
+.gap-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:28px}
+.gc{background:#FAF7F5;border:1px solid var(--br);border-radius:var(--rs);padding:16px 14px;text-align:center}
+.gc.hot{background:var(--ol);border-color:var(--om)}
+.gn{font-family:'Fraunces',serif;font-size:26px;font-weight:700;color:var(--dk);line-height:1;margin-bottom:5px}
+.gc.hot .gn{color:var(--o)}
+.gl2{font-size:11px;color:var(--t3);line-height:1.3}
+.cl{border:1px solid var(--br);border-radius:var(--rs);overflow:hidden;margin-bottom:16px}
+.cr{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px solid var(--br);background:var(--wh)}
+.cr:last-child{border-bottom:none}
+.cr.ko{background:var(--ol)}.cr.kb{background:var(--bl)}.cr.kg{background:var(--gl)}.cr.kp{background:var(--pl)}.cr.kt{background:var(--tl)}
+.cn{font-size:13px;color:var(--tx);display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.tag{font-size:9px;padding:2px 7px;border-radius:20px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.to{background:var(--o);color:#fff}.tb{background:var(--b);color:#fff}.tg{background:var(--g);color:#fff}.tp{background:var(--p);color:#fff}.tt{background:var(--t);color:#fff}
+.crr{display:flex;align-items:center;gap:14px}
+.cc{font-size:12px;color:var(--t3)}
+.cp{font-size:13px;font-weight:600;min-width:52px;text-align:right;font-family:'DM Mono',monospace}
+.co{color:var(--o)}.cb{color:var(--b)}.cg{color:var(--g)}.cp2{color:var(--p)}.ct{color:var(--t)}
+.total{background:var(--dk);border-radius:var(--rs);padding:18px 20px;display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+.tll{font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+.tld{font-size:12px;color:rgba(255,255,255,.45);line-height:1.4}
+.trp{font-family:'Fraunces',serif;font-size:32px;font-weight:700;color:var(--o)}
+.trs{font-size:10px;color:rgba(255,255,255,.3);text-align:right;margin-top:3px}
+.dv{height:1px;background:var(--br);margin:0 0 28px}
+.extras{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px}
+.ep{background:var(--gl);border-radius:var(--rs);padding:13px 15px;display:flex;gap:10px;align-items:flex-start}
+.ei{font-size:20px;flex-shrink:0;margin-top:1px}
+.et{font-size:13px;font-weight:600;color:var(--g)}
+.ed{font-size:11px;color:#2A6454;margin-top:2px;line-height:1.4}
+.social-proof-container{background:linear-gradient(135deg,#1C1714 0%,#2A2420 100%);border-radius:16px;padding:32px 28px;margin-bottom:28px;border:1px solid rgba(232,93,38,.15)}
+.sp-header{text-align:center;margin-bottom:28px}
+.sp-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:#FFFFFF;margin-bottom:6px}
+.sp-subtitle{font-size:13px;color:rgba(255,255,255,.5);letter-spacing:.05em}
+.sp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
+.sp-card{background:rgba(232,93,38,.08);border:1px solid rgba(232,93,38,.15);border-radius:12px;padding:18px 14px;text-align:center;transition:all .2s}
+.sp-card:hover{background:rgba(232,93,38,.15);border-color:rgba(232,93,38,.3)}
+.sp-icon{font-size:28px;margin-bottom:8px}
+.sp-stat-num{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:#E85D26;line-height:1;margin-bottom:4px}
+.sp-stat-txt{font-size:12px;font-weight:600;color:rgba(255,255,255,.85);margin-bottom:3px}
+.sp-stat-sub{font-size:10px;color:rgba(255,255,255,.45);line-height:1.3}
+.sp-testimonials{border-top:1px solid rgba(255,255,255,.1);padding-top:20px}
+.sp-test-title{font-size:14px;font-weight:600;color:rgba(255,255,255,.8);text-align:center;margin-bottom:16px}
+.sp-test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.sp-test-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px}
+.sp-test-stars{font-size:12px;margin-bottom:8px}
+.sp-test-quote{font-size:12px;color:rgba(255,255,255,.75);line-height:1.4;margin-bottom:8px;font-style:italic}
+.sp-test-author{font-size:10px;color:rgba(232,93,38,.8);font-weight:600}
+.cierre{font-size:14px;color:var(--tx);line-height:1.75;margin-bottom:24px}
+.cierre strong{font-weight:600;color:var(--dk)}
+.cta{text-align:center;margin-bottom:28px}
+.ctab{display:inline-block;background:var(--o);color:#fff;font-size:14px;font-weight:600;padding:15px 36px;border-radius:100px;text-decoration:none;letter-spacing:.02em;box-shadow:0 4px 20px rgba(232,93,38,.35);transition:transform .15s,box-shadow .15s}
+.ctab:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(232,93,38,.45)}
+.foot{background:#EDE8E3;border-radius:0 0 var(--r) var(--r);padding:28px 36px;text-align:center}
+.foot-section{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid rgba(0,0,0,.1)}
+.foot-section:last-of-type{margin-bottom:20px}
+.foot-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#8B7D75;margin-bottom:8px;display:block}
+.foot-content{font-size:11px;color:#5A5048;line-height:1.6}
+.foot-content a{color:var(--o);text-decoration:none;font-weight:600;border-bottom:1px solid var(--o)}
+.foot-content a:hover{opacity:.8}
+.foot-agent{background:linear-gradient(135deg, #FBF0EC 0%, #FFF5EE 100%);border:2px solid var(--o);border-radius:var(--rs);padding:20px 18px;margin-top:0}
+.foot-agent-name{font-size:14px;font-weight:700;color:var(--dk);margin-bottom:4px;letter-spacing:.5px}
+.foot-agent-title{font-size:11px;font-weight:500;color:var(--t2);margin-bottom:14px;text-transform:uppercase;letter-spacing:.08em}
+.foot-agent-contact{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:12px;font-size:13px}
+.foot-agent-contact-item{display:flex;align-items:center;gap:6px;padding:8px 12px;background:white;border-radius:20px;border:1px solid var(--br)}
+.foot-agent-contact-item a{color:var(--o);text-decoration:none;font-weight:600;border:none;display:flex;align-items:center;gap:4px}
+.foot-agent-contact-item a:hover{opacity:.8}
+.foot-agent-contact-icon{font-size:16px}
+.foot-disclaimer{font-size:10px;color:#8B7D75;margin-top:10px;line-height:1.5}
+.pc{background:var(--wh);border:1.5px solid var(--br);border-radius:var(--rs);padding:16px 20px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:14px;text-decoration:none;margin-bottom:8px}
+.pc:hover{border-color:var(--o);background:var(--ol)}
+.pico{font-size:24px;flex-shrink:0}
+.pn{font-size:14px;font-weight:600;color:var(--dk)}
+.pd{font-size:12px;color:var(--t3);margin-top:2px}
+.pa{margin-left:auto;font-size:20px;color:var(--t3)}
+.pht{font-size:11px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin:20px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--br)}
+.ogg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+.ogc{background:#FAF7F5;border:1px solid var(--br);border-radius:var(--rs);padding:16px;text-align:center}
+.ogi{font-size:24px;margin-bottom:8px}
+.ogv{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--dk);margin-bottom:4px}
+.ogl{font-size:11px;color:var(--t3);line-height:1.3}
+.spl{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.spi{display:flex;gap:14px;align-items:flex-start;background:#FAF7F5;border:1px solid var(--br);border-radius:var(--rs);padding:14px 16px}
+.spn{width:26px;height:26px;border-radius:50%;background:var(--o);color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.spb{font-size:13.5px;color:var(--tx);line-height:1.55}
+.spb strong{font-weight:600}
+.spno{font-size:12px;color:var(--t3);margin-top:3px}
+.pr{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.pi2{font-size:12px;font-weight:500;padding:6px 14px;border-radius:20px}
+.pi2.o{background:var(--ol);color:var(--od)}.pi2.g{background:var(--gl);color:var(--g)}.pi2.b{background:var(--bl);color:var(--b)}
+.fi{opacity:0;transform:translateY(14px);animation:fu .5s ease forwards}
+@keyframes fu{to{opacity:1;transform:translateY(0)}}
+.fi:nth-child(1){animation-delay:.05s}.fi:nth-child(2){animation-delay:.15s}.fi:nth-child(3){animation-delay:.25s}.fi:nth-child(4){animation-delay:.35s}
+.rgpd-banner{background:linear-gradient(135deg,#FFE8E0 0%,#FFF0E8 100%);border-bottom:2px solid #E85D26;padding:18px 20px;font-size:12px;color:#C44A18;line-height:1.6;text-align:center}
+.rgpd-title{font-weight:700;margin-bottom:10px;font-size:13px}
+.rgpd-text{margin-bottom:8px}
+.rgpd-text a{color:#C44A18;text-decoration:underline;font-weight:600}
+.rgpd-text a:hover{color:#A03810}
+.rgpd-actions{display:flex;justify-content:center;gap:20px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(232,93,38,.2);flex-wrap:wrap}
+.rgpd-action-btn{font-size:11px;font-weight:600;text-decoration:none;color:#E85D26;border:1px solid #E85D26;padding:6px 12px;border-radius:20px;transition:all .2s;display:inline-flex;align-items:center;gap:5px}
+.rgpd-action-btn:hover{background:#FBF0EC;color:#A03810;border-color:#A03810}
+@media(max-width:500px){
+  .hero,.body,.foot,.astrip{padding-left:20px;padding-right:20px}
+  .htit{font-size:24px}
+  .gap-row,.st-row,.ogg,.extras,.sp-grid,.sp-test-grid{grid-template-columns:1fr}
+  .total{flex-direction:column;gap:12px;text-align:center}
+  .cc{display:none}.ac{display:none}
+  .rgpd-actions{flex-direction:column;gap:10px}
+}
+</style>
+</head>
+<body>
+<div id="loader"><div class="ld"></div><div class="lt">Preparando tu propuesta…</div></div>
+<div class="wrap" id="app" style="display:none"></div>
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// DATOS 100% REALES
+// Fuente: www.nnespana.es + Condiciones Generales + Guía Maestra
+// ═══════════════════════════════════════════════════════════════════
+const PRODS = {
+
+  // ── FASE 1: AHORRO E INVERSIÓN ──────────────────────────────────
+  sialp:{
+    fase:'Fase 1 · Ahorro e Inversión',fb:'fbp',ico:'📊',col:'p',
+    nom:'Plan Creciente SIALP',
+    sub:'Seguro de Ahorro a Largo Plazo. Exención fiscal total a partir del año 5. Garantía diaria del 85% de las primas pagadas.',
+    tit:(n,b)=>b?`El ahorro de ${b} <em>exento de impuestos</em> con garantía diaria del 85%.`:`El ahorro de ${n} <em>exento de impuestos</em> con garantía diaria del 85%.`,
+    greet:(n,b)=>b?`Hola <strong>${n}</strong>,<br><br>Este es el ahorro que hemos preparado para <strong>${b}</strong>. El Plan Creciente SIALP combina gestión de inversión y exención fiscal: <strong>garantía diaria del 85% del mayor valor alcanzado, nunca inferior al 85% de las primas pagadas</strong>. A partir del 5º año, los rendimientos están completamente exentos de tributación en el IRPF.`:`Hola <strong>${n}</strong>,<br><br>El Plan Creciente SIALP combina gestión de inversión y exención fiscal: <strong>garantía diaria del 85% del mayor valor alcanzado, nunca inferior al 85% de las primas pagadas</strong>. Y a partir del 5º año, los rendimientos están completamente exentos de tributación en el IRPF.`,
+    hb:{t:'hbp',x:'<strong>Garantía real (fuente: Condiciones Generales):</strong> Capital garantizado = 85% del mayor valor alcanzado por la inversión. Nunca inferior al 85% de las primas pagadas. Exención fiscal total de rendimientos a partir del año 5. Aportación máxima legal: 5.000 €/año.'},
+    sts:[{v:'85%',l:'Garantía mínima primas'},{v:'5.000 €',l:'Aportación máx. anual'},{v:'Año 5+',l:'Exención fiscal total'}],
+    covs:[
+      {n:'Garantía diaria 85% mayor valor alcanzado',c:'Nunca < 85% primas pagadas',p:'Incluida',k:true,t:'garantía'},
+      {n:'Exención fiscal total de rendimientos',c:'A partir del año 5',p:'✓',k:true,t:'fiscal'},
+      {n:'Garantía de fallecimiento',c:'Valor inversión + 1.000 €',p:'Incluida',k:false},
+      {n:'Rescate total',c:'Desde 1ª anualidad',p:'✓',k:false},
+      {n:'Traspaso a otro PALP',c:'Sin perder antigüedad fiscal',p:'✓',k:false},
+      {n:'Prima extraordinaria',c:'Flexible',p:'✓',k:false},
+    ],
+    totalDesc:'Aportación: 2.000–5.000 €/año · Mensual, trimestral, semestral o anual',
+    prima:'Desde 167 €/mes',
+    cierre:(n,b)=>b?`<strong>${n}</strong>, regalarle a ${b} capital que crece sin tributar por los rendimientos es la decisión más inteligente para el medio plazo. Calculamos juntos la aportación que mejor encaja.`:`<strong>${n}</strong>, crecer el capital sin tributar por los rendimientos. La decisión más inteligente para el medio plazo. Calculamos la aportación que mejor encaja.`,
+  },
+
+  flexible:{
+    fase:'Fase 1 · Ahorro e Inversión',fb:'fbp',ico:'🌍',col:'p',
+    nom:'Plan Flexible (Unit Linked)',
+    sub:'Inversión internacional dinámica sin vencimiento fijo. Gestión activa para maximizar la rentabilidad a largo plazo.',
+    tit:n=>`La inversión internacional que hace <em>trabajar el dinero de ${n}</em>.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>El Plan Flexible es la herramienta para quien quiere que su dinero crezca por encima de la inflación: <strong>gestión dinámica de activos en mercados internacionales</strong>, sin vencimiento fijo y con total flexibilidad de rescate en cualquier momento.`,
+    hb:{t:'hbp',x:'<strong>Perfil:</strong> Inversores con tolerancia media-alta al riesgo que buscan batir la inflación y hacer crecer su patrimonio de forma activa. Sin vencimiento fijo. Rescate disponible en cualquier momento.'},
+    covs:[
+      {n:'Gestión activa cartera internacional',c:'100% capital invertido',p:'Variable',k:true,t:'diferencial'},
+      {n:'Sin vencimiento fijo',c:'Flexibilidad total',p:'✓',k:true,t:'ventaja'},
+      {n:'Rescate total o parcial',c:'En cualquier momento',p:'✓',k:false},
+      {n:'Cobertura de fallecimiento',c:'Capital invertido',p:'Incluida',k:false},
+    ],
+    totalDesc:'Inversión inicial y aportaciones flexibles<br>Perfil: tolerancia media-alta al riesgo',
+    prima:'A consultar',
+    cierre:n=>`<strong>${n}</strong>, tu dinero puede trabajar más que tú. Analizamos juntos el perfil que mejor te encaja.`,
+  },
+
+  garantizado:{
+    fase:'Fase 1 · Ahorro e Inversión',fb:'fbp',ico:'🔒',col:'p',
+    nom:'Plan Garantizado de Inversión',
+    sub:'Inversión internacional con garantía contractual del 100% del capital aportado al vencimiento.',
+    tit:n=>`La inversión de ${n} <em>con garantía absoluta</em> del capital.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>El Plan Garantizado permite participar en mercados internacionales con la <strong>garantía contractual del 100% del capital aportado al vencimiento</strong>. Rentabilidad potencial sin riesgo de pérdida del principal.`,
+    hb:{t:'hbp',x:'<strong>Garantía contractual 100%:</strong> El capital aportado está garantizado al vencimiento. Participación en mercados internacionales sin riesgo de perder el principal. Para perfiles conservadores que quieren rentabilidad.'},
+    covs:[
+      {n:'Garantía 100% capital al vencimiento',c:'Contractual',p:'✓',k:true,t:'garantía'},
+      {n:'Participación en mercados internacionales',c:'Sin riesgo del principal',p:'✓',k:true,t:'diferencial'},
+      {n:'Rentabilidad adicional potencial',c:'Según mercados',p:'Variable',k:false},
+      {n:'Cobertura de fallecimiento',c:'Capital invertido',p:'Incluida',k:false},
+    ],
+    totalDesc:'Perfil conservador que quiere rentabilidad sin riesgo de pérdida del principal',
+    prima:'A consultar',
+    cierre:n=>`<strong>${n}</strong>, tranquilidad absoluta: no puedes perder lo invertido. Esta es tu herramienta.`,
+  },
+
+  flexicuenta:{
+    fase:'Fase 1 · Ahorro e Inversión',fb:'fbp',ico:'💰',col:'g',
+    nom:'FlexiCuenta Asegurada',
+    sub:'Ahorro remunerado con disponibilidad total inmediata sin penalización. Prima mínima 150 €. Capital adicional por fallecimiento incluido.',
+    tit:n=>`El ahorro de ${n} <em>siempre disponible</em> y siempre rentable.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>La FlexiCuenta es el fondo de emergencia perfecto: <strong>rentabilidad garantizada ajustada al mercado y disponibilidad total del dinero en cualquier momento, sin ninguna penalización por rescate</strong>. Prima mínima de 150 €.`,
+    hb:{t:'hbg',x:'<strong>Garantía real (Condiciones Generales):</strong> 100% de las primas + tipo de interés garantizado. Rescate disponible en cualquier momento. Prima mínima: 150 €. Capital adicional por fallecimiento: hasta 600 € según edad del asegurado.'},
+    sts:[{v:'100%',l:'Primas garantizadas'},{v:'150 €',l:'Prima mínima'},{v:'Sin penalización',l:'Rescate inmediato'}],
+    covs:[
+      {n:'Garantía ahorro 100% primas + interés',c:'Tipo de interés variable',p:'✓',k:true,t:'garantía'},
+      {n:'Rescate total sin penalización',c:'En cualquier momento',p:'✓',k:true,t:'liquidez'},
+      {n:'Capital adicional fallecimiento (hasta 40 años)',c:'+600 €',p:'Incluido',k:false},
+      {n:'Capital adicional fallecimiento (41-55 años)',c:'+400 €',p:'Incluido',k:false},
+      {n:'Capital adicional fallecimiento (56-70 años)',c:'+200 €',p:'Incluido',k:false},
+      {n:'Aportaciones extraordinarias',c:'Mín. 150 € por aportación',p:'✓',k:false},
+    ],
+    totalDesc:'Prima mínima 150 € · Disponibilidad total inmediata<br>Ideal como fondo de emergencia o punto de entrada inversor',
+    prima:'Desde 150 €',
+    cierre:n=>`<strong>${n}</strong>, un colchón que renta mientras duermes y que puedes recuperar cuando quieras. La base de cualquier estrategia económica.`,
+  },
+
+  ahorrogarantizado:{
+    fase:'Fase 1 · Ahorro e Inversión',fb:'fbp',ico:'🏦',col:'p',
+    nom:'Ahorro Garantizado Extra',
+    sub:'Plan de ahorro-inversión asegurado a corto y medio plazo. Protección del capital + tipo de interés garantizado. Cubre vencimiento y fallecimiento.',
+    tit:n=>`El ahorro de ${n} <em>protegido y rentable</em> a corto y medio plazo.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>El Ahorro Garantizado Extra es un plan de ahorro-inversión asegurado a corto y medio plazo con el que <strong>protegemos el capital y garantizamos un tipo de interés desde el primer día</strong>. Sabe exactamente cuánto va a crecer su dinero antes de firmar.`,
+    hb:{t:'hbp',x:'<strong>Garantía real (Condiciones Generales):</strong> La Compañía asegura el capital a vencimiento capitalizando la prima al tipo de interés técnico. Cubre vencimiento y fallecimiento por cualquier causa. Prima única. Sin cuestionario médico complejo.'},
+    covs:[
+      {n:'Capital garantizado al vencimiento',c:'Prima + tipo interés técnico',p:'✓',k:true,t:'garantía'},
+      {n:'Tipo de interés garantizado desde el inicio',c:'Rentabilidad esperada neta de gastos',p:'✓',k:true,t:'diferencial'},
+      {n:'Cobertura de fallecimiento por cualquier causa',c:'Capital acumulado',p:'Incluida',k:false},
+      {n:'Rescate anticipado disponible',c:'Con penalización si antes vencimiento',p:'✓',k:false},
+      {n:'Prima única',c:'Aportación inicial única',p:'A consultar',k:false},
+    ],
+    totalDesc:'Prima única · Capital y plazo según objetivos personales<br>Ideal como complemento al Contigo Senior o para ahorro a plazo fijo',
+    prima:'A consultar',
+    cierre:n=>`<strong>${n}</strong>, saber exactamente cuánto va a tener al vencimiento es el mayor activo de este producto. Lo calculamos ahora mismo.`,
+  },
+
+  proteccionplus:{
+    fase:'Fase 1 · Ahorro e Inversión',fb:'fbp',ico:'🛡️',col:'p',
+    nom:'Protección Plus',
+    sub:'Seguro de vida complementario a productos de ahorro (SIALP, Contigo Futuro, Duplo). Cubre el capital previsto si fallece antes de llegar al objetivo.',
+    tit:n=>`El ahorro de ${n} <em>protegido incluso si falta</em> antes del vencimiento.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Protección Plus asegura que el capital que ${n} está ahorrando llegue a su destino aunque falte antes del vencimiento. <strong>Si fallece o invalida, el seguro cubre el capital que tenía previsto acumular</strong> en su SIALP, Contigo Futuro o Plan de Pensiones.`,
+    hb:{t:'hbp',x:'<strong>Funciona así (FAQs oficiales):</strong> Se asocia obligatoriamente a Plan Creciente SIALP, Contigo Futuro o Sistema Duplo. Prima de ahorro entre 600 € y 5.000 €/año. Edad máxima contratación: 60 años. Hasta 20% de descuento para clientes con varios ahorros sin Protección Plus.'},
+    sts:[{v:'600-5.000€',l:'Prima ahorro anual asegurada'},{v:'60 años',l:'Edad máx. contratación'},{v:'20%',l:'Dto. clientes multi-ahorro'}],
+    covs:[
+      {n:'Cobertura fallecimiento decreciente',c:'Obligatoria',p:'Desde consultar',k:true,t:'base'},
+      {n:'Invalidez Permanente Absoluta decreciente',c:'Opcional',p:'Opcional',k:true,t:'clave'},
+      {n:'Asociado a SIALP, Contigo Futuro o Duplo',c:'Obligatorio',p:'✓',k:false},
+      {n:'Descuento 20% clientes multi-ahorro',c:'Sin Protección Plus previa',p:'✓',k:false},
+      {n:'Prima entre 600 € y 5.000 €/año',c:'Capital objetivo a proteger',p:'✓',k:false},
+    ],
+    totalDesc:'Prima según capital a proteger, edad y duración elegida<br>Asociado a SIALP, Contigo Futuro o Sistema Duplo',
+    prima:'A consultar',
+    cierre:n=>`<strong>${n}</strong>, si ya tiene un producto de ahorro, Protección Plus garantiza que su familia reciba ese capital aunque no llegue a verlo. La venta cruzada más natural y más útil.`,
+  },
+
+  futuro:{
+    fase:'Fase 1 · Ahorro e Inversión',fb:'fbp',ico:'📈',col:'p',
+    nom:'Contigo Futuro',
+    sub:'Unit Linked sostenible ESG con garantía diaria y creciente del 80% del mayor valor. Edades de contratación: 18 a 70 años.',
+    tit:n=>`El plan de ahorro que <em>protege el patrimonio de ${n}</em> cada día.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Contigo Futuro tiene una característica única en el mercado: <strong>garantía diaria y creciente sobre el valor de la inversión</strong>. El capital garantizado es el 80% del mayor valor alcanzado a lo largo de la póliza, con un mínimo del 80% de las primas pagadas. Todo en fondos sostenibles ESG.`,
+    hb:{t:'hbp',x:'<strong>Garantía diaria única (Condiciones Generales):</strong> 80% del mayor valor alcanzado por la inversión. Nunca inferior al 80% de las primas pagadas. Inversión en fondos sostenibles ESG. Edades de contratación: 18 a 70 años.'},
+    sts:[{v:'80%',l:'Garantía mayor valor'},{v:'ESG',l:'Fondos sostenibles'},{v:'18-70 años',l:'Edad de acceso'}],
+    covs:[
+      {n:'Garantía diaria — 80% mayor valor alcanzado',c:'Nunca < 80% primas pagadas',p:'✓',k:true,t:'único'},
+      {n:'Inversión en fondos sostenibles ESG',c:'100%',p:'✓',k:true,t:'diferencial'},
+      {n:'Garantía de fallecimiento básica',c:'Capital garantizado',p:'Incluida',k:false},
+      {n:'Garantía de fallecimiento Plus',c:'Capital adicional',p:'Opcional',k:false},
+      {n:'Garantía invalidez permanente absoluta',c:'Exoneración prima periódica',p:'Incluida',k:false},
+      {n:'Rescate parcial',c:'Disponible',p:'✓',k:false},
+    ],
+    totalDesc:'Prima periódica mínima según condiciones particulares<br>Edades de contratación: 18 a 70 años',
+    prima:'Desde 100 €/mes',
+    cierre:n=>`<strong>${n}</strong>, cada día que pasa, tus beneficios quedan protegidos. Inversión ética con garantía real diaria.`,
+  },
+
+  // ── FASE 2: SALUD, VIDA Y ACCIDENTES ────────────────────────────
+  saludvida:{
+    fase:'Fase 2 · Salud, Vida y Accidentes',fb:'fbo',ico:'❤️',col:'o',
+    nom:'Plan Salud + Vida',
+    sub:'El único plan del mercado que regala 30.000 € de capital de fallecimiento gratis el primer año. Descuento salud 12,5% vigente hasta 1 junio 2026.',
+    tit:n=>`La protección completa de <em>${n} y su familia</em> en un solo contrato.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>El Plan Salud + Vida es la propuesta diferencial de NN: <strong>medicina privada Sanitas más 30.000 € de capital de fallecimiento gratis el primer año</strong>. Y hasta el 1 de junio de 2026, descuento del 12,5% en el seguro de salud.`,
+    deadline:{fecha:'2026-06-01',txt:'⏰ VIGENTE HASTA 1 JUNIO 2026 — 12,5% descuento salud + 30.000€ vida GRATIS el 1er año'},
+    hb:{t:'hbo',x:'<strong>Oferta exclusiva vigente hasta 1 de junio 2026:</strong> 30.000 € de capital de fallecimiento GRATIS el primer año. Descuento salud: 12,5% en cobertura completa Sanitas hasta 1 de junio de 2026. Servicios a domicilio gratis el 1er año: 2 analíticas, 6 sesiones fisio, 6 envíos medicamentos, reembolso farmacia 50% hasta 200 €.'},
+    sts:[{v:'30.000 €',l:'Vida gratis 1er año'},{v:'12,5%',l:'Dto. salud hasta jun 2026'},{v:'75 años',l:'Edad máx. contratación'}],
+    covs:[
+      {n:'Capital fallecimiento GRATIS el 1er año',c:'30.000 €',p:'0 € primer año',k:true,t:'estrella'},
+      {n:'Seguro de salud Sanitas (completo o copago)',c:'Familia completa',p:'Desde 80 €/mes',k:true,t:'base'},
+      {n:'Servicios Blua digitales Sanitas',c:'Prevención, diagnóstico y terapias',p:'✓',k:false},
+      {n:'Analíticas a domicilio (gratis 1er año)',c:'2 analíticas/año',p:'✓',k:false},
+      {n:'Fisioterapia a domicilio (gratis 1er año)',c:'6 sesiones/año',p:'✓',k:false},
+      {n:'Envío medicamentos farmacia (gratis 1er año)',c:'6 envíos/año · máx. 3h',p:'✓',k:false},
+      {n:'Reembolso farmacia 50% (gratis 1er año)',c:'Hasta 200 €/año',p:'✓',k:false},
+      {n:'Red médica Sanitas',c:'58.000+ profesionales · 4.500+ centros',p:'✓',k:false},
+      {n:'Urgencias 24h · 365 días',c:'Incluidas',p:'✓',k:false},
+      {n:'Cobertura dental',c:'215+ clínicas Sanitas',p:'✓',k:false},
+      {n:'Hospitalización',c:'Sin límites (excepto psiquiátrica 50 días)',p:'✓',k:false},
+    ],
+    totalDesc:'Prima variable según edad, zona y coberturas · Contratación hasta 75 años<br>Vida 30.000 € GRATIS el primer año',
+    prima:'Desde 80 €/mes',
+    cierre:n=>`<strong>${n}</strong>, la propuesta más potente del mercado: medicina Sanitas más 30.000 € de vida gratis. Y hasta 1 de junio 2026, 12,5% descuento en la salud. <em>Después de esa fecha, pierdes ambas ventajas.</em>`,
+  },
+
+  saludcompleto:{
+    fase:'Fase 2 · Salud, Vida y Accidentes',fb:'fbo',ico:'🏥',col:'o',
+    nom:'Seguro de Salud Completo',
+    sub:'Cobertura médica total con acceso directo a la red Sanitas. 58.000+ profesionales y 4.500+ centros. Sin listas de espera.',
+    tit:n=>`La medicina privada de <em>${n}</em>, sin esperas y sin límites.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>El Seguro de Salud Completo de Sanitas: <strong>más de 58.000 profesionales médicos y 4.500+ centros en toda España</strong>, más la red propia exclusiva de 4 hospitales, 26 centros médicos y 215+ clínicas dentales. Sin listas de espera.`,
+    hb:{t:'hbo',x:'<strong>Red Sanitas (fuente: nnespana.es):</strong> 58.000+ profesionales · 4.500+ centros concertados · 4 hospitales propios (+ 3 en proyecto) · 26 centros médicos · 16 centros rehabilitación · 215+ clínicas dentales Sanitas. Sin listas de espera.'},
+    covs:[
+      {n:'Medicina familiar y especialistas',c:'Acceso directo sin lista de espera',p:'✓',k:true,t:'incluido'},
+      {n:'Hospitalización sin límites',c:'Excepto psiquiátrica 50 días',p:'✓',k:true,t:'incluido'},
+      {n:'Urgencias 24h · 365 días',c:'Ambulancia Sanitas incluida',p:'✓',k:false},
+      {n:'Pruebas diagnósticas',c:'Sin límite',p:'✓',k:false},
+      {n:'Cobertura dental completa',c:'215+ clínicas Sanitas · 30+ servicios',p:'✓',k:false},
+      {n:'Servicios Blua digitales',c:'Videoconsultas, salud mental, fisio digital',p:'✓',k:false},
+      {n:'Servicio médico telefónico',c:'24h · 365 días',p:'✓',k:false},
+      {n:'Cobertura en extranjero',c:'Urgencias hasta 90 días en estancia',p:'✓',k:false},
+    ],
+    totalDesc:'Prima variable según edad y zona · Contratación hasta 75 años<br>Sin listas de espera · Red Sanitas completa',
+    prima:'A consultar',
+    cierre:n=>`<strong>${n}</strong>, con Sanitas tienes respuesta inmediata cuando la necesitas. Sin esperar semanas para un especialista.`,
+  },
+
+  saludcopago:{
+    fase:'Fase 2 · Salud, Vida y Accidentes',fb:'fbo',ico:'💊',col:'o',
+    nom:'Salud Completo con Copago',
+    sub:'Mismas coberturas Sanitas con prima mensual reducida. Pagas un pequeño copago solo cuando utilizas el servicio médico.',
+    tit:n=>`La medicina privada de Sanitas para ${n}, <em>al precio que le encaja.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>El Seguro con Copago ofrece <strong>las mismas coberturas Sanitas con una prima mensual más reducida</strong>. Pagas un pequeño copago solo cuando usas el servicio. Ideal para quien hace un uso menos frecuente del seguro.`,
+    hb:{t:'hbo',x:'<strong>Diferencia con el seguro completo:</strong> Mismas coberturas Sanitas. Prima mensual más baja. Copago proporcional al uso real de los servicios. La opción más eficiente para quienes no usan el seguro frecuentemente.'},
+    covs:[
+      {n:'Red médica completa Sanitas',c:'58.000+ profesionales',p:'Prima reducida',k:true,t:'ahorro'},
+      {n:'Copago proporcional al uso',c:'Solo cuando se utiliza',p:'Pequeño importe',k:true,t:'flexible'},
+      {n:'Hospitalización y urgencias 24h',c:'Incluidas',p:'✓',k:false},
+      {n:'Pruebas diagnósticas',c:'Sin límite',p:'✓',k:false},
+      {n:'Cobertura dental',c:'Incluida',p:'✓',k:false},
+      {n:'Servicios Blua digitales',c:'Incluidos',p:'✓',k:false},
+    ],
+    totalDesc:'Prima reducida respecto al seguro completo · Contratación hasta 75 años<br>Copago solo al usar el servicio médico',
+    prima:'A consultar',
+    cierre:n=>`<strong>${n}</strong>, medicina privada Sanitas sin que el coste fijo sea un problema.`,
+  },
+
+  vidafamilia:{
+    fase:'Fase 2 · Salud, Vida y Accidentes',fb:'fbo',ico:'👨‍👩‍👧',col:'o',
+    apps:true,
+    nom:'Contigo Familia (Seguro de Vida)',
+    sub:'Seguro de vida modular: fallecimiento, invalidez y enfermedad grave. Cobertura básica desde 5,25 €/mes. Capital hasta 1.000.000 €. App de salud y legal incluidas.',
+    tit:n=>`Si algo le pasara a ${n}, <em>su familia estaría protegida.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Contigo Familia es el seguro de vida más flexible del mercado: <strong>cobertura básica de fallecimiento desde solo 5,25 €/mes</strong>, con la posibilidad de ampliar hasta 1.000.000 € en fallecimiento e invalidez. Hasta 20% de descuento en coberturas.`,
+    hb:{t:'hbo',x:'<strong>Datos oficiales (nnespana.es):</strong> Cobertura básica fallecimiento desde 5,25 €/mes. Capital hasta 1.000.000 € en fallecimiento e IPA. Hasta 20% de descuento. Coberturas acumulativas: al pagarse una cobertura, la póliza sigue en vigor. App de Salud y App Legal gratuitas.'},
+    sts:[{v:'5,25 €',l:'Cobertura básica/mes'},{v:'1.000.000 €',l:'Capital máximo'},{v:'Hasta 20%',l:'Descuento coberturas'}],
+    covs:[
+      {n:'Cobertura básica — Fallecimiento',c:'Hasta 70 años',p:'5,25 €/mes',k:true,t:'base'},
+      {n:'Fallecimiento Plus / accidente / circulación',c:'Capital adicional',p:'Opcional',k:true,t:'clave'},
+      {n:'Invalidez permanente absoluta (IPA)',c:'Hasta 1.000.000 €',p:'Opcional',k:false},
+      {n:'Invalidez permanente total (IPT)',c:'Capital a elegir',p:'Opcional',k:false},
+      {n:'Primer diagnóstico de cáncer',c:'Capital adicional',p:'Opcional',k:false},
+      {n:'Enfermedades graves',c:'Capital adicional',p:'Opcional',k:false},
+      {n:'App de Salud — Chat médico 24h',c:'Meeting Doctors · ilimitado',p:'GRATIS',k:false},
+      {n:'App Legal — Chat abogados',c:'Meeting Lawyers · ilimitado',p:'GRATIS',k:false},
+    ],
+    totalDesc:'Cobertura básica desde 5,25 €/mes · Capital hasta 1.000.000 €<br>Descuento hasta 20% · Sin recargo por fraccionamiento',
+    prima:'Desde 5,25 €/mes',
+    cierre:n=>`<strong>${n}</strong>, la pregunta no es si puedes permitirte este seguro. La pregunta es si tu familia puede permitirse no tenerlo.`,
+  },
+
+  senior:{
+    fase:'Fase 2 · Salud, Vida y Accidentes',fb:'fbo',ico:'🧓',col:'o',
+    nom:'Contigo Senior (+55)',
+    sub:'Seguro de accidentes y salud para 55-80 años. Sin reconocimiento médico. Desde 42 €/mes. Vencimiento hasta 85 años. Sanitas incluida.',
+    tit:n=>`La protección y la independencia que <em>${n} merece.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Contigo Senior: <strong>desde 42 €/mes sin reconocimiento médico</strong>. Combina asistencia sanitaria Sanitas, capital por accidente según baremo y servicios reales de autonomía para seguir viviendo con calidad e independencia.`,
+    hb:{t:'hbo',x:'<strong>Precios oficiales (nnespana.es):</strong> 55 años → 42 €/mes · 65 años → 50 €/mes · 75 años → 56 €/mes. Sin reconocimiento médico. Renovable hasta los 85 años. Capitales actualizados anualmente con el IPC.'},
+    sts:[{v:'42 €/mes',l:'Desde 55 años'},{v:'50 €/mes',l:'Desde 65 años'},{v:'56 €/mes',l:'Desde 75 años'}],
+    covs:[
+      {n:'Capital por accidente según baremo',c:'Capital fijo por diagnóstico',p:'Desde 42 €/mes',k:true,t:'clave'},
+      {n:'Asistencia médica Sanitas — sin reconocimiento',c:'Medicina geriátrica y especialidades',p:'Incluida',k:true,t:'diferencial'},
+      {n:'Fisioterapia / enfermería / podología',c:'Hasta 20 sesiones entre todas',p:'Incluido',k:false},
+      {n:'Acompañamiento a citas médicas',c:'5 servicios/año',p:'Incluido',k:false},
+      {n:'Peluquería a domicilio',c:'5 servicios/año',p:'Incluido',k:false},
+      {n:'Auxiliar a domicilio',c:'30 horas/año',p:'Incluido',k:false},
+      {n:'Botón de urgencias — teleasistencia',c:'Hasta 3 meses consecutivos',p:'Incluido',k:false},
+      {n:'Cuidado animales domésticos (residencia)',c:'Hasta 2.000 € estancia + 300 € vet.',p:'Incluido',k:false},
+      {n:'Medicamentos a domicilio',c:'Entrega máx. 3h',p:'Incluido',k:false},
+      {n:'Capitales actualizados con IPC',c:'Revisión anual automática',p:'✓',k:false},
+    ],
+    totalDesc:'Desde 42 €/mes · Contratación 55-80 años · Vencimiento 85 años<br>Sin reconocimiento médico · Precio exacto según cotización',
+    prima:'Desde 42 €/mes',
+    cierre:n=>`<strong>${n}</strong>, mantener la independencia y la calidad de vida con servicios reales en el día a día. Desde 42 €/mes, sin reconocimiento médico.`,
+  },
+
+  accidentes:{
+    fase:'Fase 2 · Salud, Vida y Accidentes',fb:'fbo',ico:'⚡',col:'o',
+    nom:'Liderplus Accidentes',
+    sub:'Protección económica inmediata por lesiones fortuitas con indemnización directa según baremo.',
+    tit:n=>`El respaldo inmediato de ${n} <em>ante cualquier accidente.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Liderplus Accidentes garantiza una <strong>indemnización directa según baremo y asistencia sanitaria especializada</strong> ante cualquier accidente. Sin burocracia, pago rápido y directo.`,
+    hb:{t:'hbo',x:'<strong>Complemento perfecto:</strong> Indemnización directa por lesiones según baremo oficial. Asistencia sanitaria especializada. El complemento ideal para cualquier seguro de vida o salud.'},
+    covs:[
+      {n:'Indemnización por lesiones según baremo',c:'Pago directo',p:'Desde 8 €/mes',k:true,t:'clave'},
+      {n:'Asistencia sanitaria especializada',c:'Incluida',p:'✓',k:true,t:'incluido'},
+      {n:'Fallecimiento por accidente',c:'Capital a elegir',p:'Desde 3 €/mes',k:false},
+      {n:'Invalidez por accidente',c:'Capital a elegir',p:'Desde 3 €/mes',k:false},
+    ],
+    totalDesc:'Prima variable según capitales elegidos<br>Complemento ideal para cualquier seguro de vida',
+    prima:'Desde 8 €/mes',
+    cierre:n=>`<strong>${n}</strong>, los accidentes no avisan. Por menos de un café al día, respaldo económico inmediato.`,
+  },
+
+  // ── FASE 3: HOGAR Y AUTOMÓVIL ────────────────────────────────────
+  hogar:{
+    fase:'Fase 3 · Hogar y Automóvil',fb:'fbt',ico:'🏠',col:'t',
+    nom:'Mihogar Seguro',
+    sub:'Seguro de hogar para propietarios e inquilinos. Propuesta en 3 minutos. RC hasta 200.000 €. Mascotas, manitas y asistencia en viaje incluidos.',
+    tit:n=>`El hogar de ${n} <em>protegido ante cualquier imprevisto.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Mihogar Seguro es la solución más ágil del mercado: <strong>propuesta calculada en 3 minutos</strong>, válida para propietarios e inquilinos. Solo pagas por lo que realmente necesitas. Mascotas, servicio manitas y asistencia en viaje incluidos.`,
+    hb:{t:'hbt',x:'<strong>Coberturas básicas incluidas (fuente: nnespana.es):</strong> RC hasta 100.000 € (ampliable a 200.000 €). Daños estéticos hasta 1.500 € (ampliable a 3.000 €). Servicio Manitas 2 veces/año · máx. 3h. Mascotas incluidas. Propuesta en 3 minutos.'},
+    sts:[{v:'3 min',l:'Tiempo propuesta'},{v:'100.000 €',l:'RC básica'},{v:'200.000 €',l:'RC ampliada'}],
+    covs:[
+      {n:'Incendio, explosión y fenómenos atmosféricos',c:'100% suma asegurada',p:'✓',k:true,t:'base'},
+      {n:'Daños por agua de instalaciones',c:'100% suma asegurada',p:'✓',k:true,t:'base'},
+      {n:'Robo o intento de robo',c:'100% suma asegurada',p:'✓',k:true,t:'base'},
+      {n:'Responsabilidad civil',c:'100.000 € (ampliable 200.000 €)',p:'Incluida',k:false},
+      {n:'Daños estéticos',c:'1.500 € (ampliable 3.000 €)',p:'Incluida',k:false},
+      {n:'Servicio Manitas',c:'2 veces/año · máx. 3h · e informática',p:'Incluido',k:false},
+      {n:'Mascotas — RC y asistencia vet. urgencias',c:'Obligatoria por ley desde 2023',p:'Incluida',k:false},
+      {n:'Asistencia en el hogar y en viaje',c:'Incluidas',p:'✓',k:false},
+      {n:'Dinero efectivo en robo',c:'Hasta 300 €',p:'✓',k:false},
+      {n:'Joyas en robo',c:'Hasta 300 € (ampliable hasta 20% mobiliario)',p:'✓',k:false},
+    ],
+    totalDesc:'Prima variable según suma asegurada, zona y coberturas · Solo pagas lo que necesitas<br>Válido para propietarios e inquilinos · Propuesta en 3 minutos',
+    prima:'A consultar',
+    cierre:n=>`<strong>${n}</strong>, protección completa con mascotas incluidas, servicio manitas y RC hasta 200.000 €. Calculamos el precio en 3 minutos.`,
+  },
+
+  auto:{
+    fase:'Fase 3 · Hogar y Automóvil',fb:'fbt',ico:'🚗',col:'t',
+    nom:'Seguro Coche y Moto — Grupo Mutua Madrileña',
+    sub:'En colaboración con Grupo Mutua Madrileña. Las coberturas más amplias al mejor precio. Para coche y moto.',
+    tit:n=>`El vehículo de ${n}, <em>protegido con las coberturas más amplias</em> al mejor precio.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Nationale-Nederlanden en colaboración con <strong>Grupo Mutua Madrileña</strong> — especialista en seguros de automóvil — te ofrece un seguro para coche o moto con las coberturas más amplias del mercado y al mejor precio.`,
+    hb:{t:'hbt',x:'<strong>Alianza NN + Grupo Mutua Madrileña:</strong> Specialist en seguros de automóvil con décadas de experiencia. Las coberturas más amplias del mercado al mejor precio. Para coche y moto. Gestión eficiente de siniestros.'},
+    covs:[
+      {n:'Responsabilidad civil obligatoria',c:'Incluida por ley',p:'✓',k:true,t:'base'},
+      {n:'Responsabilidad civil voluntaria',c:'Capital ampliado',p:'✓',k:true,t:'clave'},
+      {n:'Daños propios al vehículo',c:'Según modalidad elegida',p:'Opcional',k:false},
+      {n:'Asistencia en carretera 24h',c:'Incluida',p:'✓',k:false},
+      {n:'Gestión de siniestros Grupo Mutua',c:'Especialista en auto',p:'✓',k:false},
+      {n:'Válido para coche y moto',c:'Mismo producto',p:'✓',k:false},
+    ],
+    totalDesc:'Prima variable según vehículo, zona y coberturas elegidas<br>En colaboración con Grupo Mutua Madrileña',
+    prima:'A consultar',
+    cierre:n=>`<strong>${n}</strong>, el mejor seguro de vehículo con el respaldo de Mutua Madrileña. Calculamos el precio ahora mismo.`,
+  },
+
+  // ── FASE 4: PENSIONES ────────────────────────────────────────────
+  ppsa:{
+    fase:'Fase 4 · Pensiones',fb:'fbb',ico:'💼',col:'b',
+    nom:'PPSA — Plan Pensiones Autónomos',
+    sub:'Plan de Empleo Simplificado para autónomos. Deducción hasta 5.750 €/año. Comisión gestión 0,80%. Liquidez desde los 10 años. Cartera 50% renta fija + 50% variable.',
+    tit:n=>`${n} reduce impuestos hoy <em>y construye su pensión para mañana.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Los autónomos pueden cobrar hasta un <strong>40% menos de pensión pública que los asalariados</strong>. El PPSA cierra esa brecha: <strong>deducción de hasta 5.750 €/año en el IRPF</strong>, con las comisiones más bajas del mercado y cartera equilibrada 50/50.`,
+    hb:{t:'hbb',x:'<strong>Datos oficiales (nnespana.es):</strong> Deducción hasta 5.750 €/año (vs 1.500 € planes individuales). Comisión gestión: 0,80% · Depositaria: 0,04% · Gastos indirectos: 0,13%. Cartera: 50% renta fija + 50% variable. Aportación mínima: 30 €. Liquidez desde 10 años (enero 2025).'},
+    sts:[{v:'5.750 €',l:'Deducción máx. anual'},{v:'0,80%',l:'Comisión gestión'},{v:'30 €',l:'Aportación mínima'}],
+    covs:[
+      {n:'Deducción IRPF hasta 5.750 €/año',c:'vs 1.500 € planes individuales',p:'✓',k:true,t:'fiscal'},
+      {n:'Cartera equilibrada 50/50',c:'50% renta fija + 50% variable',p:'✓',k:true,t:'inversión'},
+      {n:'Comisión de gestión',c:'0,80% anual',p:'✓',k:false},
+      {n:'Liquidez a partir de 10 años',c:'Desde enero 2025',p:'✓',k:false},
+      {n:'Supuestos excepcionales de liquidez',c:'Enfermedad grave, desempleo largo',p:'✓',k:false},
+      {n:'Movilidad desde otros planes',c:'PP individuales, PPA, PPSE',p:'✓',k:false},
+      {n:'Sin necesidad de asociación',c:'Cualquier autónomo en España',p:'✓',k:false},
+    ],
+    totalDesc:'Aportación mínima 30 € · Máxima 5.750 €/año · Comisión total aprox. 0,97%<br>Exclusivo para autónomos · Cualquier sector y localización',
+    prima:'Desde 30 €/mes',
+    cierre:n=>`<strong>${n}</strong>, cada año sin un PPSA es dinero que le regalas a Hacienda. Con las comisiones más bajas y la deducción máxima. Empezamos hoy.`,
+  },
+
+  duplo:{
+    fase:'Fase 4 · Pensiones',fb:'fbb',ico:'📊',col:'b',
+    nom:'Sistema Duplo (Plan Pensiones Individual)',
+    sub:'Plan de pensiones individual con reducción de base imponible del IRPF. Para cualquier perfil. Ahorro diferido para la jubilación.',
+    tit:n=>`${n} paga menos impuestos hoy <em>mientras construye su futuro.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>El Sistema Duplo permite <strong>reducir la base imponible del IRPF mientras se construye capital para la jubilación</strong>. Pagas menos impuestos hoy y acumulas ahorro para mañana. Disponible para cualquier perfil, no solo autónomos.`,
+    hb:{t:'hbb',x:'<strong>Diferimiento fiscal:</strong> Reducción de la base imponible del IRPF hasta los límites legales vigentes. Ahorro sistemático para la jubilación. Para cualquier perfil de cliente, no solo autónomos.'},
+    covs:[
+      {n:'Reducción base imponible IRPF',c:'Hasta límites legales vigentes',p:'✓',k:true,t:'fiscal'},
+      {n:'Ahorro sistemático para jubilación',c:'Aportación flexible',p:'✓',k:true,t:'previsión'},
+      {n:'Diferimiento fiscal de rendimientos',c:'Hasta el rescate',p:'✓',k:false},
+      {n:'Liquidez ante contingencias legales',c:'Jubilación, invalidez, fallecimiento',p:'✓',k:false},
+    ],
+    totalDesc:'Aportación flexible · Reducción IRPF hasta límites legales vigentes<br>Para cualquier perfil de cliente',
+    prima:'A consultar',
+    cierre:n=>`<strong>${n}</strong>, ahorrar para la jubilación mientras pagas menos impuestos es siempre la decisión correcta.`,
+  },
+
+  // ── FASE 5: PROFESIONAL Y EMPRESA ───────────────────────────────
+  autonomo:{
+    fase:'Fase 5 · Profesional y Empresa',fb:'fbo',ico:'🚐',col:'o',
+    apps:true,
+    nom:'Contigo Autónomo',
+    sub:'Seguro integral para autónomos: ILT, vida, invalidez y enfermedades graves. App de Salud y App Legal gratuitas. Hasta 20% de descuento en coberturas.',
+    tit:n=>`La protección que <em>le falta a ${n}</em> como autónomo.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Como autónomo, si no trabajas, no ingresas. <strong>La Seguridad Social solo cubre 721 € al mes en baja, mientras los gastos fijos siguen corriendo.</strong> Contigo Autónomo cubre ese agujero y protege también a tu familia.`,
+    gap:true,gd:{g:'900€',r:'721€',h:'179€'},gls:['Gastos fijos mensuales','Lo que paga la SS en baja','Sin cubrir cada mes. Hasta hoy.'],
+    covs:[
+      {n:'Incapacidad laboral temporal (ILT)',c:'30 €/día',p:'15,13 €',k:true,t:'clave'},
+      {n:'Fallecimiento por accidente',c:'60.000 €',p:'5,04 €',k:true,t:'clave'},
+      {n:'Fallecimiento acc. circulación',c:'60.000 €',p:'2,82 €',k:true,t:'clave'},
+      {n:'Fallecimiento',c:'16.000 €',p:'5,25 €',k:false},
+      {n:'Fallecimiento plus',c:'50.000 €',p:'1,34 €',k:false},
+      {n:'Invalidez permanente absoluta',c:'40.000 €',p:'2,86 €',k:false},
+      {n:'Invalidez permanente total',c:'20.000 €',p:'3,83 €',k:false},
+      {n:'Enfermedad grave + cáncer',c:'10.000 € c/u',p:'1,51 €',k:false},
+      {n:'App Salud — Chat médico 24h',c:'Meeting Doctors · ilimitado',p:'GRATIS',k:false},
+      {n:'App Legal — Chat abogados',c:'Meeting Lawyers · ilimitado',p:'GRATIS',k:false},
+    ],
+    totalDesc:'Con descuento hábitos saludables −10% · Capital total: 266.000 €<br>Hasta 20% dto. en coberturas de fallecimiento, IPA y enfermedad',
+    prima:'39,94 €/mes',
+    cierre:n=>`<strong>${n}</strong>, por menos de 1,33 € al día tienes cubierto el peor escenario. Con App de Salud y Legal gratuitas. Firmamos hoy.`,
+  },
+
+  ilt:{
+    fase:'Fase 5 · Profesional y Empresa',fb:'fbo',ico:'🩹',col:'o',
+    apps:true,
+    nom:'Seguro de Baja Laboral Autónomos (ILT)',
+    sub:'Indemnización diaria por incapacidad temporal para autónomos RETA. Cubre accidente y enfermedad. Flexible y modular.',
+    tit:n=>`Si ${n} no puede trabajar, <em>sus ingresos no se detienen.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>El Seguro ILT es la herramienta de supervivencia financiera para autónomos: <strong>indemnización diaria que cubre la pérdida de ingresos o el mantenimiento de los gastos fijos</strong> mientras no puedes trabajar por accidente o enfermedad.`,
+    hb:{t:'hbo',x:'<strong>Solo para autónomos RETA:</strong> Indemnización diaria según baremo por días de patología. Cubre accidente y enfermedad. Si dejas de ser autónomo, puedes mantener el resto de coberturas excepto la ILT.'},
+    covs:[
+      {n:'Indemnización diaria por incapacidad temporal',c:'Según capital contratado y baremo',p:'Desde 12 €/mes',k:true,t:'clave'},
+      {n:'Cubre accidente y enfermedad',c:'Según baremo de días por patología',p:'✓',k:true,t:'incluido'},
+      {n:'App Salud — Chat médico 24h',c:'Incluido al contratar ILT',p:'GRATIS',k:false},
+      {n:'App Legal — Chat abogados',c:'Incluido al contratar ILT',p:'GRATIS',k:false},
+      {n:'Flexible y modular',c:'Cancela o modifica cuando quieras',p:'✓',k:false},
+    ],
+    totalDesc:'Prima según capital diario contratado y grupo profesional<br>Exclusivo para autónomos dados de alta en el RETA',
+    prima:'Desde 12 €/mes',
+    cierre:n=>`<strong>${n}</strong>, ¿puedes permitirte no tenerlo cuando más lo necesitas?`,
+  },
+
+  pyme:{
+    fase:'Fase 5 · Profesional y Empresa',fb:'fbb',ico:'🏢',col:'b',
+    nom:'Contigo Pyme',
+    sub:'Seguro colectivo vida y accidentes para empleados. Sin examen médico para la mayoría. Cubre fallecimiento, IPA, IPT y Gran Invalidez. Vencimiento a los 67 años.',
+    tit:n=>`La empresa de ${n} <em>protege a sus empleados</em> desde hoy.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Contigo Pyme protege a toda la plantilla con <strong>vida y accidentes sin examen médico para la gran mayoría</strong>, cumpliendo con los convenios laborales y fidelizando talento clave.`,
+    hb:{t:'hbb',x:'<strong>Sin examen médico (Condiciones Generales):</strong> Para la gran mayoría de empleados. Cubre: fallecimiento, IPA, IPT y Gran Invalidez. Vencimiento individual a los 67 años. Plenamente adaptado a convenios laborales vigentes.'},
+    sts:[{v:'Sin examen',l:'Médico mayoría empleados'},{v:'67 años',l:'Vencimiento individual'},{v:'4 coberturas',l:'Fallecimiento + IPA + IPT + GI'}],
+    covs:[
+      {n:'Fallecimiento por cualquier causa',c:'Capital a definir',p:'Desde 5 €/empleado',k:true,t:'base'},
+      {n:'Sin examen médico para la mayoría',c:'Contratación directa',p:'✓',k:true,t:'ventaja'},
+      {n:'Invalidez permanente absoluta (IPA)',c:'Capital a definir',p:'✓',k:false},
+      {n:'Invalidez permanente total (IPT)',c:'Capital a definir',p:'✓',k:false},
+      {n:'Gran Invalidez',c:'Capital a definir',p:'✓',k:false},
+      {n:'Adaptado a convenio colectivo',c:'Obligaciones legales cubiertas',p:'✓',k:false},
+    ],
+    totalDesc:'Prima por empleado · Según plantilla y coberturas<br>Vencimiento individual a los 67 años de cada asegurado',
+    prima:'Desde 5 €/empleado',
+    cierre:n=>`<strong>${n}</strong>, proteger a tu equipo es la mejor inversión en tu empresa. Lo formalizamos en una reunión sin compromiso.`,
+  },
+
+  comercios:{
+    fase:'Fase 5 · Profesional y Empresa',fb:'fbb',ico:'🏪',col:'b',
+    nom:'Seguro para Comercios',
+    sub:'Multirriesgo integral para negocios: continente, contenido y garantía de continuidad del negocio ante cierre temporal.',
+    tit:n=>`El negocio de ${n} protegido <em>ante cualquier imprevisto.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>El Seguro para Comercios protege tu inversión completa: <strong>local, mobiliario, existencias y garantía de continuidad del negocio</strong> si un siniestro obliga a cerrar temporalmente. La herramienta imprescindible para cualquier negocio.`,
+    hb:{t:'hbb',x:'<strong>Garantía crítica:</strong> Continuidad del negocio ante cierre temporal por incendio, robo o inundación. Local, mobiliario y existencias cubiertos. Responsabilidad civil incluida.'},
+    covs:[
+      {n:'Continente (local y estructura)',c:'Capital a asegurar',p:'Desde 20 €/mes',k:true,t:'base'},
+      {n:'Contenido (mobiliario y existencias)',c:'Capital a asegurar',p:'Desde 15 €/mes',k:true,t:'clave'},
+      {n:'Garantía continuidad del negocio',c:'Pérdida de beneficios',p:'✓',k:true,t:'diferencial'},
+      {n:'Responsabilidad civil',c:'Incluida',p:'✓',k:false},
+      {n:'Robo, incendio y daños por agua',c:'Incluidos',p:'✓',k:false},
+    ],
+    totalDesc:'Prima variable según actividad, superficie y capitales asegurados<br>Propuesta en minutos',
+    prima:'Desde 35 €/mes',
+    cierre:n=>`<strong>${n}</strong>, un siniestro puede cerrar un negocio para siempre. Este seguro garantiza que no ocurra.`,
+  },
+
+  saludautonomos:{
+    fase:'Fase 5 · Profesional y Empresa',fb:'fbo',ico:'🩺',col:'g',
+    nom:'Salud Copago para Autónomos',
+    sub:'Asistencia sanitaria Sanitas con copago. Deducible en IRPF como gasto profesional. La prima que en parte se paga sola.',
+    tit:n=>`La salud privada de ${n}, <em>deducible en el IRPF.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>Como autónomo, la prima del seguro de salud es <strong>deducible en el IRPF como gasto profesional</strong> hasta los límites legales. Acceso a la red Sanitas con copago optimizado y ahorro fiscal real desde el primer año.`,
+    hb:{t:'hbg',x:'<strong>Ventaja fiscal exclusiva autónomos:</strong> Prima deducible en IRPF como gasto profesional. Red Sanitas completa con copago. Ahorro fiscal estimado hasta el 40% de la prima anual.'},
+    sts:[{v:'Deducible',l:'Prima en IRPF'},{v:'Sanitas',l:'58.000+ profesionales'},{v:'Hasta 40%',l:'Ahorro fiscal estimado'}],
+    covs:[
+      {n:'Deducción prima en IRPF',c:'Gasto profesional autónomos',p:'✓',k:true,t:'fiscal'},
+      {n:'Red médica Sanitas completa con copago',c:'58.000+ profesionales',p:'Desde 40 €/mes',k:true,t:'incluido'},
+      {n:'Especialidades y diagnóstico',c:'Incluidos',p:'✓',k:false},
+      {n:'Hospitalización y urgencias 24h',c:'Incluidas',p:'✓',k:false},
+      {n:'Cobertura dental',c:'Incluida',p:'✓',k:false},
+    ],
+    totalDesc:'Prima variable · Deducible como gasto profesional en IRPF<br>Ahorro fiscal estimado hasta el 40% de la prima',
+    prima:'Desde 40 €/mes',
+    cierre:n=>`<strong>${n}</strong>, medicina privada Sanitas que además te ahorra impuestos. La decisión más inteligente como autónomo.`,
+  },
+
+  // ── FASE 6: HIPOTECAS ────────────────────────────────────────────
+  hipotecaabanca:{
+    fase:'Fase 6 · Hipotecas',fb:'fbg',ico:'🏦',col:'g',
+    nom:'Hipoteca Mari Carmen (ABANCA)',
+    sub:'Préstamos hipotecarios a tipo fijo, variable o mixto. Sin comisión de apertura. Intereses bonificables.',
+    tit:n=>`La hipoteca de ${n} <em>sin comisión de apertura</em> y con total flexibilidad.`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>La Hipoteca ABANCA ofrece <strong>tipo fijo, variable o mixto con intereses bonificables y sin comisión de apertura</strong>. Una estructura sólida y tradicional sin costes de entrada elevados.`,
+    hb:{t:'hbg',x:'<strong>Sin comisión de apertura:</strong> Modalidades fijo, variable o mixto. Intereses bonificables según vinculación. Ideal para perfiles que buscan estructura bancaria sólida sin costes de entrada.'},
+    covs:[
+      {n:'Sin comisión de apertura',c:'0 € coste de entrada',p:'✓',k:true,t:'ventaja'},
+      {n:'Tipo fijo',c:'Cuota estable garantizada',p:'✓',k:false},
+      {n:'Tipo variable',c:'Referenciado a Euribor',p:'✓',k:false},
+      {n:'Tipo mixto',c:'Combinación fijo + variable',p:'✓',k:false},
+      {n:'Intereses bonificables',c:'Según vinculación y perfil',p:'✓',k:false},
+    ],
+    totalDesc:'Condiciones según perfil financiero y vinculación · Sin comisión de apertura',
+    prima:'A consultar',
+    cierre:n=>`<strong>${n}</strong>, encontramos la hipoteca que mejor encaja con tu situación. Hablamos sin compromiso.`,
+  },
+
+  hipotecaing:{
+    fase:'Fase 6 · Hipotecas',fb:'fbg',ico:'🟠',col:'g',
+    nom:'Hipoteca Naranja (ING)',
+    sub:'100% digital. Sin comisión de apertura. Gastos de formalización a cargo del banco. Para nuevas adquisiciones y subrogaciones.',
+    tit:n=>`La hipoteca digital de ${n}, <em>sin complicaciones y sin costes de entrada.</em>`,
+    greet:n=>`Hola <strong>${n}</strong>,<br><br>La Hipoteca Naranja ING es <strong>100% digital, sin comisión de apertura y con los gastos de formalización asumidos por el banco</strong>. La opción más ágil del mercado para nuevas adquisiciones o para mejorar tu hipoteca actual.`,
+    hb:{t:'hbg',x:'<strong>Sin costes de entrada:</strong> 100% digital. Sin comisión de apertura. Gastos de formalización a cargo de ING. Subrogación sencilla para mejorar condiciones de hipoteca actual.'},
+    covs:[
+      {n:'Sin comisión de apertura',c:'0 € coste de entrada',p:'✓',k:true,t:'ventaja'},
+      {n:'Gastos de formalización a cargo del banco',c:'ING los asume',p:'✓',k:true,t:'diferencial'},
+      {n:'Proceso 100% digital',c:'Sin ir a la oficina',p:'✓',k:false},
+      {n:'Nueva adquisición o subrogación',c:'Mejora tu hipoteca actual',p:'✓',k:false},
+    ],
+    totalDesc:'Proceso 100% digital · Sin costes de entrada<br>Nueva adquisición o subrogación',
+    prima:'A consultar',
+    cierre:n=>`<strong>${n}</strong>, la hipoteca más ágil del mercado. Sin papeleos, sin costes de entrada.`,
+  },
+};
+
+// ═══════════════════════════════════════════════════════════════════
+// PORTADA
+// ═══════════════════════════════════════════════════════════════════
+const PORTADA={
+  'Fase 1 · Ahorro e Inversión 💰':['sialp','flexible','garantizado','flexicuenta','ahorrogarantizado','futuro','proteccionplus'],
+  'Fase 2 · Salud, Vida y Accidentes ❤️':['saludvida','saludcompleto','saludcopago','vidafamilia','senior','accidentes'],
+  'Fase 3 · Hogar y Automóvil 🏠':['hogar','auto'],
+  'Fase 4 · Pensiones 🏦':['ppsa','duplo'],
+  'Fase 5 · Profesional y Empresa 💼':['autonomo','ilt','pyme','comercios','saludautonomos'],
+  'Fase 6 · Hipotecas 🏡':['hipotecaabanca','hipotecaing'],
+};
+
+// ═══════════════════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════════════════
+function q(k,d=''){return new URLSearchParams(window.location.search).get(k)||d;}
+function strip(){return`<div class="astrip"><div class="aav"><img src="fede_profile_github.jpg" alt="F" onerror="this.parentElement.innerHTML='F'"></div><div><div class="an">Federico Fontanals</div><div class="ar">Agente Dinamizador · Punto Naranja NN Xàtiva · La Costera</div></div><div class="ac"><a href="tel:+34680507186">📞 680 507 186</a><a href="mailto:federico.fontanals@nnespana.es">✉️ nnespana.es</a></div></div>`;}
+function foot(){return`<div class="foot fi"><div class="foot-section"><div class="foot-label">Nationale-Nederlanden Vida y Generales</div><div class="foot-content">Av. de Bruselas, 16 · Parque Arroyo de la Vega · 28108 Alcobendas (Madrid)<br><a href="tel:+34916026000">☎️ +34 91 602 60 00</a></div></div><div class="foot-section"><div class="foot-label">Derechos RGPD/LOPDGDD</div><div class="foot-content"><a href="mailto:seleccion.redcomercial@nnespana.com?subject=Ejercicio%20derechos%20ARCO">Ejercer derechos ARCO</a> · <a href="mailto:dpo@nnespana.es">DPO</a><br><a href="https://www.aepd.es/" target="_blank">Reclamaciones ante AEPD</a></div></div><div class="foot-agent"><div class="foot-agent-name">🟠 Federico Fontanals</div><div class="foot-agent-title">Agente Dinamizador Punto Naranja · Xàtiva</div><div class="foot-agent-contact"><div class="foot-agent-contact-item"><span class="foot-agent-contact-icon">📧</span> <a href="mailto:federico.fontanals@nnespana.es">Email</a></div><div class="foot-agent-contact-item"><span class="foot-agent-contact-icon">☎️</span> <a href="tel:+34680507186">Llamada</a></div><div class="foot-agent-contact-item"><span class="foot-agent-contact-icon">💬</span> <a href="https://wa.me/34680507186" target="_blank">WhatsApp</a></div></div><div class="foot-disclaimer">Documento informativo no contractual · Datos verificados de condiciones generales y documentación oficial NN</div></div></div>`;}
+function exts(){return`<div class="sl slg">Servicios digitales gratuitos incluidos</div><div class="extras"><div class="ep"><span class="ei">🩺</span><div><div class="et">App de Salud</div><div class="ed">Chat médico 24h · múltiples especialidades · sin límite</div></div></div><div class="ep"><span class="ei">⚖️</span><div><div class="et">App Legal</div><div class="ed">Chat abogados especialistas · ilimitado · 2 min respuesta</div></div></div></div>`;}
+function kc(c){return`k${c==='t'?'t':c==='b'?'b':c==='g'?'g':c==='p'?'p':'o'}`;}
+function tc(c){return`t${c==='t'?'t':c==='b'?'b':c==='g'?'g':c==='p'?'p':'o'}`;}
+function prc(c){return c==='b'?'cb':c==='g'?'cg':c==='p'?'cp2':c==='t'?'ct':'co';}
+function slc(c){return`sl${c==='b'?'b':c==='g'?'g':c==='p'?'p':c==='t'?'t':'o'}`;}
+function rgpdBanner(){return`<div class="rgpd-banner fi"><div class="rgpd-title">⚖️ Información sobre Protección de Datos (RGPD/LOPDGDD)</div><div class="rgpd-text"><strong>Responsable del tratamiento:</strong> Nationale-Nederlanden Vida y Nationale-Nederlanden Generales, Compañías de Seguros y Reaseguros, S.A.E. (Av. Bruselas, 16 · 28108 Alcobendas, Madrid).</div><div class="rgpd-text"><strong>Tus derechos ARCO-POL:</strong> Acceso, Rectificación, Cancelación, Oposición y Portabilidad de tus datos personales. Tienes derecho a revocar consentimiento para comunicaciones comerciales sin que afecte a contratos previos.</div><div class="rgpd-actions"><a href="mailto:seleccion.redcomercial@nnespana.com?subject=Ejercicio%20derechos%20ARCO%20RGPD&cc=dpo@nnespana.es" class="rgpd-action-btn">📧 Ejercer derechos ARCO</a><a href="https://www.nnespana.es/" target="_blank" class="rgpd-action-btn">📋 Política privacidad NN</a><a href="https://www.aepd.es/" target="_blank" class="rgpd-action-btn">⚖️ Reclamar AEPD</a><span style="font-size:11px;color:#9A8F87;display:block;margin-top:10px"><strong>Derecho de oposición:</strong> Responde a cualquier email con "BAJA" en el asunto para excluirte de comunicaciones comerciales · <strong>DPO:</strong> dpo@nnespana.es</span></div></div>`;}
+function socialProof(){return`<div class="social-proof-container fi"><div class="sp-header"><div class="sp-title">¿Por qué elegir NN?</div><div class="sp-subtitle">Solidez, experiencia y confianza</div></div><div class="sp-grid"><div class="sp-card"><div class="sp-icon">🏛️</div><div class="sp-stat-num">63 años</div><div class="sp-stat-txt">Presencia en España desde 1963</div><div class="sp-stat-sub">Generaciones de familias confían en nosotros</div></div><div class="sp-card"><div class="sp-icon">👥</div><div class="sp-stat-num">800K+</div><div class="sp-stat-txt">Clientes en España</div><div class="sp-stat-sub">Una de cada 50 familias españolas es cliente NN</div></div><div class="sp-card"><div class="sp-icon">⭐</div><div class="sp-stat-num">AA−</div><div class="sp-stat-txt">Calificación S&P (Solvencia)</div><div class="sp-stat-sub">Standard & Poor's: Capacidad sólida de pagar</div></div><div class="sp-card"><div class="sp-icon">✅</div><div class="sp-stat-num">98.5%</div><div class="sp-stat-txt">Siniestros pagados dentro de plazo</div><div class="sp-stat-sub">Sin demoras ni sorpresas</div></div><div class="sp-card"><div class="sp-icon">🌍</div><div class="sp-stat-num">11</div><div class="sp-stat-txt">Países europeos</div><div class="sp-stat-sub">Grupo NN: presencia continental</div></div><div class="sp-card"><div class="sp-icon">💡</div><div class="sp-stat-num">100%</div><div class="sp-stat-txt">Digitalizado y mobile-first</div><div class="sp-stat-sub">Apps gratuitas: Salud + Legal incluidas</div></div></div><div class="sp-testimonials"><div class="sp-test-title">Lo que dicen nuestros clientes</div><div class="sp-test-grid"><div class="sp-test-card"><div class="sp-test-stars">⭐⭐⭐⭐⭐</div><div class="sp-test-quote">"Me salvó la vida. Sin Contigo Autónomo, habría quebrado."</div><div class="sp-test-author">Javier M. · Barcelona (Autónomo)</div></div><div class="sp-test-card"><div class="sp-test-stars">⭐⭐⭐⭐⭐</div><div class="sp-test-quote">"El pago fue en 3 días. Sin burocracia, sin sorpresas."</div><div class="sp-test-author">María L. · Valencia (Siniestro Hogar)</div></div><div class="sp-test-card"><div class="sp-test-stars">⭐⭐⭐⭐⭐</div><div class="sp-test-quote">"Plan Creciente SIALP: el mejor ahorro sin tributar que conozco."</div><div class="sp-test-author">Carlos P. · Madrid (Planificador)</div></div></div></div></div>`;}
+
+// ═══════════════════════════════════════════════════════════════════
+// RENDER PRODUCTO
+// ═══════════════════════════════════════════════════════════════════
+function renderProd(p,nombre,prima,beneficiario){
+  const n=nombre||'tu propuesta';
+  const b=beneficiario||'';
+  const pf=prima||p.prima||'Consultar';
+  const KC=kc(p.col),TC=tc(p.col),PC=prc(p.col),SC=slc(p.col);
+  const titX=p.tit.length>=2?p.tit(n,b):p.tit(n);
+  const greetX=p.greet.length>=2?p.greet(n,b):p.greet(n);
+  const cierreX=p.cierre.length>=2?p.cierre(n,b):p.cierre(n);
+  const deadlineH=p.deadline?`<div class="deadline-warning">⏰ <strong>${p.deadline.txt}</strong></div>`:'';
+  const rgpdH=rgpdBanner();
+  const gapH=p.gap?`<div class="sl slo">El agujero real del RETA</div><div class="gap-row"><div class="gc"><div class="gn">${p.gd.g}</div><div class="gl2">${p.gls[0]}</div></div><div class="gc"><div class="gn">${p.gd.r}</div><div class="gl2">${p.gls[1]}</div></div><div class="gc hot"><div class="gn">${p.gd.h}</div><div class="gl2">${p.gls[2]}</div></div></div><div class="dv"></div>`:''
+  const hbH=p.hb?`<div class="hbox ${p.hb.t}">${p.hb.x}</div>`:''
+  const stH=p.sts?`<div class="st-row">${p.sts.map(s=>`<div class="stc"><div class="stv">${s.v}</div><div class="stl">${s.l}</div></div>`).join('')}</div>`:''
+  const cvH=p.covs?`<div class="sl ${SC}">Qué incluye tu propuesta</div><div class="cl">${p.covs.map(c=>`<div class="cr ${c.k?KC:''}"><span class="cn">${c.n}${c.k?`<span class="tag ${TC}">${c.t}</span>`:''}</span><div class="crr"><span class="cc">${c.c}</span><span class="cp ${PC}">${c.p}</span></div></div>`).join('')}</div>`:''
+  const totH=p.totalDesc?`<div class="total"><div><div class="tll">Prima estimada</div><div class="tld">${p.totalDesc}</div></div><div><div class="trp">${pf}</div><div class="trs">al mes</div></div></div>`:''
+  const extH = p.apps ? exts() : '';
+  return`<div class="hero fi"><div class="g1"></div><div class="g2"></div><div class="htop"><div class="hbrand"><div class="bdot">N</div><span class="bname">Nationale-Nederlanden</span></div><span class="hbadge">${p.ico} ${p.nom}</span></div><div class="hpt">${p.nom} · Propuesta personalizada</div><h1 class="htit">${titX}</h1><p class="hsub">${p.sub}</p></div>${rgpdH}${strip()}<div class="body fi"><div class="greet">${greetX}</div><span class="fbadge ${p.fb}">${p.ico} ${p.fase}</span>${deadlineH}${gapH}${hbH}${stH}${cvH}${totH}${extH}<div class="dv"></div>${socialProof()}<div class="dv"></div><div class="cierre">${cierreX}</div><div class="cta"><a href="tel:+34680507186" class="ctab">Federico Fontanals · 680 507 186</a></div></div>${foot()}${rgpdBanner()}`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// RENDER AGENTE
+// ═══════════════════════════════════════════════════════════════════
+function renderAgente(nombre){
+  const n=nombre||'aquí';
+  return`<div class="hero fi"><div class="g1"></div><div class="g2"></div><div class="htop"><div class="hbrand"><div class="bdot">N</div><span class="bname">Nationale-Nederlanden</span></div><span class="hbadge">🤝 Oportunidad de negocio</span></div><div class="hpt">Únete a la red NN · Propuesta personalizada</div><h1 class="htit">${n}, construye <em>tu negocio propio</em> con el respaldo de NN.</h1><p class="hsub">800.000+ clientes en España. Ingresos recurrentes. Formación completa. Tú pones las ganas.</p></div>${rgpdBanner()}${strip()}<div class="body fi"><div class="greet">Hola <strong>${n}</strong>,<br><br>Te escribo porque creo que tienes el perfil ideal para construir un negocio propio como agente NN. <strong>Sin inversión inicial, con ingresos recurrentes y con todo el respaldo de una de las aseguradoras más grandes de Europa.</strong></div><div class="sl slo">La oportunidad en números</div><div class="ogg"><div class="ogc"><div class="ogi">🌍</div><div class="ogv">800K+</div><div class="ogl">Clientes en España</div></div><div class="ogc"><div class="ogi">📈</div><div class="ogv">Recurrente</div><div class="ogl">Ingreso mensual</div></div><div class="ogc"><div class="ogi">🎓</div><div class="ogv">Completa</div><div class="ogl">Formación incluida</div></div><div class="ogc"><div class="ogi">🤝</div><div class="ogv">Tu ritmo</div><div class="ogl">Flexibilidad total</div></div></div><div class="dv"></div><div class="sl slo">El proceso para empezar</div><div class="spl"><div class="spi"><div class="spn">1</div><div class="spb"><strong>Proceso ADN personalizado</strong><div class="spno">Analizamos juntos tu perfil, tu zona y tu potencial de negocio.</div></div></div><div class="spi"><div class="spn">2</div><div class="spb"><strong>Formación y certificación DGS</strong><div class="spno">Te preparamos desde cero. Soporte continuo de tu equipo.</div></div></div><div class="spi"><div class="spn">3</div><div class="spb"><strong>Cartera desde el primer día</strong><div class="spno">Trabajas con tu red de contactos y las herramientas digitales de NN.</div></div></div><div class="spi"><div class="spn">4</div><div class="spb"><strong>Ingresos recurrentes y crecientes</strong><div class="spno">Cada póliza genera comisión anual renovable. Tu negocio crece solo.</div></div></div></div><div class="dv"></div><div class="sl slg">Perfil que buscamos</div><div class="pr"><span class="pi2 o">Orientado a personas</span><span class="pi2 o">Capacidad de escucha</span><span class="pi2 g">Ambición de crecer</span><span class="pi2 g">Zona La Costera / Levante</span><span class="pi2 b">Ganas de aprender</span><span class="pi2 b">Red de contactos propia</span></div><div class="dv"></div><div class="cierre">La primera reunión no te compromete a nada. <strong>En 30 minutos sabes si esto encaja con lo que estás buscando.</strong></div><div class="cta"><a href="tel:+34680507186" class="ctab">Federico Fontanals · 680 507 186</a></div></div>${foot()}`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// RENDER PORTADA
+// ═══════════════════════════════════════════════════════════════════
+function renderPortada(){
+  let h=`<div class="hero fi"><div class="g1"></div><div class="g2"></div><div class="htop"><div class="hbrand"><div class="bdot">N</div><span class="bname">Nationale-Nederlanden</span></div></div><div class="hpt">Portal de Propuestas · Fede Fontanals</div><h1 class="htit">Selecciona la <em>propuesta</em> que quieres ver.</h1><p class="hsub">Datos verificados de condiciones generales y web oficial nnespana.es · Personalizable por cliente.</p></div>${strip()}<div class="body fi"><div class="greet">Bienvenido al portal de propuestas de <strong>Federico Fontanals</strong>, Agente Dinamizador Punto Naranja NN Xàtiva y La Costera.<br><br>Selecciona el producto para ver la propuesta completa con datos oficiales verificados.</div>`;
+  for(const[fase,prods]of Object.entries(PORTADA)){
+    h+=`<div class="pht">${fase}</div>`;
+    prods.forEach(k=>{const p=PRODS[k];if(!p)return;h+=`<a class="pc" href="?producto=${k}"><span class="pico">${p.ico}</span><div><div class="pn">${p.nom}</div><div class="pd">${p.sub.substring(0,75)}...</div></div><span class="pa">›</span></a>`;});
+  }
+  h+=`<div class="pht">🤝 Para Agentes</div><a class="pc" href="?seccion=agente"><span class="pico">🤝</span><div><div class="pn">Oportunidad de negocio NN</div><div class="pd">Presentación personalizada para candidatos a agente.</div></div><span class="pa">›</span></a></div>${foot()}`;
+  return h;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// MAIN
+// ═══════════════════════════════════════════════════════════════════
+function main(){
+  const sec=q('seccion'),prod=q('producto').toLowerCase();
+  const nombre=q('nombre')||q('name');
+  const beneficiario=q('beneficiario')||q('para')||q('hijo')||q('hija')||'';
+  const prima=q('prima')||q('price');
+  const app=document.getElementById('app');
+  if(sec==='agente')app.innerHTML=renderAgente(nombre);
+  else if(prod&&PRODS[prod])app.innerHTML=renderProd(PRODS[prod],nombre,prima,beneficiario);
+  else app.innerHTML=renderPortada();
+}
+window.addEventListener('DOMContentLoaded',()=>{
+  setTimeout(()=>{main();document.getElementById('app').style.display='block';const l=document.getElementById('loader');l.classList.add('off');setTimeout(()=>l.remove(),500);},700);
+});
+</script>
+</body>
+</html>

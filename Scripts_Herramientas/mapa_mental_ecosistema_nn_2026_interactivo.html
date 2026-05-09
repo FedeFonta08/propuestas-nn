@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Mental Ecosistema NN 2026 — Fede Fontanals</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e8e8e8;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+            border-bottom: 3px solid #ff6b35;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #ff6b35;
+            margin-bottom: 12px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header .subtitle {
+            font-size: 22px;
+            color: #b8b8b8;
+            font-weight: 400;
+        }
+        
+        .header .metadata {
+            margin-top: 18px;
+            font-size: 16px;
+            color: #888;
+        }
+        
+        .search-box {
+            margin-bottom: 30px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            background: rgba(30, 30, 50, 0.95);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #ff6b35;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 16px 22px;
+            font-size: 20px;
+            border: 2px solid #444;
+            border-radius: 8px;
+            background: #2a2a3e;
+            color: #fff;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #ff6b35;
+            background: #333350;
+        }
+        
+        .tree {
+            margin-top: 25px;
+        }
+        
+        .node {
+            margin-bottom: 12px;
+            margin-left: 0;
+        }
+        
+        .node-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+        
+        .node-content:hover {
+            background: rgba(255, 107, 53, 0.15);
+            border-left-color: #ff6b35;
+            transform: translateX(5px);
+        }
+        
+        .toggle {
+            min-width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: #ff6b35;
+            background: rgba(255, 107, 53, 0.2);
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        
+        .toggle:hover {
+            background: rgba(255, 107, 53, 0.4);
+            transform: scale(1.1);
+        }
+        
+        .node-text {
+            flex: 1;
+            font-size: 19px;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .node-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .badge-estado {
+            background: rgba(76, 175, 80, 0.3);
+            color: #a5d6a7;
+        }
+        
+        .badge-urgencia {
+            background: rgba(244, 67, 54, 0.3);
+            color: #ef9a9a;
+        }
+        
+        .badge-warning {
+            background: rgba(255, 152, 0, 0.3);
+            color: #ffcc80;
+        }
+        
+        .badge-info {
+            background: rgba(33, 150, 243, 0.3);
+            color: #90caf9;
+        }
+        
+        .children {
+            margin-left: 35px;
+            margin-top: 12px;
+            border-left: 3px solid rgba(255, 107, 53, 0.3);
+            padding-left: 18px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .level-1 .node-content {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.25) 0%, rgba(255, 107, 53, 0.15) 100%);
+            border-left-width: 5px;
+            padding: 20px 22px;
+        }
+        
+        .level-1 .node-text {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .level-2 .node-content {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 18px 20px;
+        }
+        
+        .level-2 .node-text {
+            font-size: 21px;
+            font-weight: 600;
+        }
+        
+        .level-3 .node-text {
+            font-size: 19px;
+        }
+        
+        .level-4 .node-text {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .level-5 .node-text {
+            font-size: 17px;
+            font-weight: 400;
+            color: #d0d0d0;
+        }
+        
+        .highlight {
+            background: rgba(255, 235, 59, 0.3) !important;
+            border-left-color: #ffeb3b !important;
+        }
+        
+        .controls {
+            margin-bottom: 25px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 14px 24px;
+            background: #ff6b35;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #ff8555;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+        }
+        
+        .details {
+            margin-top: 12px;
+            padding: 14px 18px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #c0c0c0;
+        }
+        
+        .details strong {
+            color: #ff6b35;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 32px;
+            }
+            
+            .node-text {
+                font-size: 17px;
+            }
+            
+            .children {
+                margin-left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Mapa Mental Ecosistema NN 2026</h1>
+            <div class="subtitle">Fede Fontanals · Punto Naranja Xàtiva</div>
+            <div class="metadata">
+                Análisis: 18/04/2026 · Versión 1.0 · 93 nodos · 15 conexiones identificadas
+            </div>
+        </div>
+        
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 Buscar en el mapa... (ej: CRM, panel, urgente, bloqueado)">
+        </div>
+        
+        <div class="controls">
+            <button class="btn" onclick="expandAll()">▼ Expandir Todo</button>
+            <button class="btn" onclick="collapseAll()">▲ Colapsar Todo</button>
+            <button class="btn" onclick="showOnlyUrgent()">🔴 Solo Urgente</button>
+            <button class="btn" onclick="showOnlyBlocked()">🔴 Solo Bloqueado</button>
+            <button class="btn" onclick="resetView()">↻ Resetear Vista</button>
+        </div>
+        
+        <div class="tree" id="tree"></div>
+    </div>
+    
+    <script>
+        const data = {
+  "title": "Ecosistema Comercial NN — Fede Fontanals · Punto Naranja Xàtiva",
+  "fecha_analisis": "2026-04-18",
+  "version": "1.0",
+  "root": {
+    "id": "node-0",
+    "text": "Ecosistema NN Fede Fontanals",
+    "level": 1,
+    "children": [
+      {
+        "id": "node-1",
+        "text": "FUENTES DE VERDAD (Google Drive)",
+        "level": 2,
+        "estado": "✅ OPERATIVO",
+        "children": [
+          {
+            "id": "node-11",
+            "text": "Sistema_Gestion_NN_v4_BuyerPersona.xlsx — BASE PRINCIPAL",
+            "level": 3,
+            "archivo": "227 KB · 8 pestañas · 965 contactos",
+            "estado": "✅ OPERATIVO",
+            "children": [
+              {
+                "id": "node-111",
+                "text": "CRM MAESTRO: 965 contactos × 51 columnas",
+                "level": 4,
+                "descripcion": "Identificación, Estado comercial, Pólizas NN, ADN personal, ADN económico, Necesidad NN, Buyer Persona, Producto recomendado",
+                "estado": "✅ COMPLETO"
+              },
+              {
+                "id": "node-112",
+                "text": "8 LLAMADAS HOY: Sistema diario selección",
+                "level": 4,
+                "descripcion": "Pre-selección nocturna de 8 contactos para eliminar fricción de decisión",
+                "estado": "✅ EN USO"
+              },
+              {
+                "id": "node-113",
+                "text": "CHECKLIST ADN: 38 puntos de verificación",
+                "level": 4,
+                "descripcion": "Proceso completo Análisis de Necesidades pre-visita",
+                "estado": "✅ OPERATIVO"
+              },
+              {
+                "id": "node-114",
+                "text": "BANCO OBJECIONES: 12 objeciones + respuestas",
+                "level": 4,
+                "estado": "✅ OPERATIVO"
+              },
+              {
+                "id": "node-115",
+                "text": "ABRIL URGENTE: 53 contactos vencimientos",
+                "level": 4,
+                "urgencia": "🔴 ALTA",
+                "estado": "🔄 ACTIVO"
+              },
+              {
+                "id": "node-116",
+                "text": "MAYO: 44 contactos preparación",
+                "level": 4,
+                "urgencia": "🟡 MEDIA",
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-117",
+                "text": "JUNIO: 35 contactos calentamiento",
+                "level": 4,
+                "urgencia": "🟢 BAJA",
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-118",
+                "text": "RESUMEN EJECUTIVO: Dashboard general",
+                "level": 4,
+                "estado": "✅ OPERATIVO"
+              }
+            ]
+          },
+          {
+            "id": "node-12",
+            "text": "Tablero_Proyecto_NN_Privado_v4.xlsx — PLAN MAESTRO",
+            "level": 3,
+            "archivo": "13.2 KB · 3 pestañas",
+            "estado": "✅ OPERATIVO",
+            "children": [
+              {
+                "id": "node-121",
+                "text": "📋 Tablero: 7 fases × 30 tareas",
+                "level": 4,
+                "descripcion": "F1-Producto NN, F2-Buyer Personas, F3-Segmentación CRM, F4-Campaña Senior, F5-Hipotecas, F6-Claude, F7-Radar",
+                "estado": "🔄 EN CURSO",
+                "progreso": "13 completadas, 2 en curso, 12 pendientes, 3 bloqueadas"
+              },
+              {
+                "id": "node-122",
+                "text": "❓ Pendiente Antonio: 3 preguntas rastreadas",
+                "level": 4,
+                "descripcion": "t02-Plazo AGE ✅, t03-Exención fiscal AGE ✅, t04-Canal hipotecas 🔄",
+                "estado": "🔄 2 RESUELTAS, 1 EN CURSO"
+              },
+              {
+                "id": "node-123",
+                "text": "📖 Cómo usar: Instrucciones para Claude",
+                "level": 4,
+                "estado": "✅ DOCUMENTADO"
+              }
+            ]
+          },
+          {
+            "id": "node-13",
+            "text": "Radar_Comercial_NN.xlsx — SISTEMA RADAR",
+            "level": 3,
+            "archivo": "11.2 KB · 4 pestañas",
+            "estado": "✅ OPERATIVO",
+            "children": [
+              {
+                "id": "node-131",
+                "text": "🟠 Campañas Activas: 6 campañas NN vigentes",
+                "level": 4,
+                "descripcion": "Campaña Salud 12.5% dto, SIALP, Hipotecas, etc.",
+                "estado": "✅ ACTUALIZADO #557"
+              },
+              {
+                "id": "node-132",
+                "text": "📦 Novedades Producto: 6 cambios recientes",
+                "level": 4,
+                "estado": "✅ ACTUALIZADO #557"
+              },
+              {
+                "id": "node-133",
+                "text": "📋 Historial Entre Nosotros: Registro semanal",
+                "level": 4,
+                "ultima_edicion": "#557 — 10/04/2026",
+                "estado": "✅ OPERATIVO"
+              },
+              {
+                "id": "node-134",
+                "text": "📖 Instrucciones: Flujo automático",
+                "level": 4,
+                "descripcion": "Email → Gmail → Claude lee → Actualiza Radar → Resumen + 3 acciones",
+                "estado": "✅ CONFIGURADO"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "node-2",
+        "text": "INTERFACES WEB (GitHub Pages)",
+        "level": 2,
+        "repositorio": "github.com/FedeFonta08/propuestas-nn",
+        "url_publica": "fedefonta08.github.io/propuestas-nn/",
+        "estado": "🔄 PARCIAL",
+        "children": [
+          {
+            "id": "node-21",
+            "text": "nn_crm_panel_v2.html — PANEL CRM ⭐ PIEZA ANGULAR",
+            "level": 3,
+            "archivo": "29.6 KB",
+            "estado": "⚠️ DESCONECTADO",
+            "problema": "No guarda datos — localStorage no persistente",
+            "children": [
+              {
+                "id": "node-211",
+                "text": "Funciones implementadas",
+                "level": 4,
+                "children": [
+                  {
+                    "id": "node-2111",
+                    "text": "guardarContacto(): 51 campos → Google Apps Script",
+                    "level": 5,
+                    "estado": "❌ NO CONECTADO"
+                  },
+                  {
+                    "id": "node-2112",
+                    "text": "guardarLlamada(): Registro llamadas",
+                    "level": 5,
+                    "estado": "❌ NO CONECTADO"
+                  },
+                  {
+                    "id": "node-2113",
+                    "text": "buscar(): Buscador contactos",
+                    "level": 5,
+                    "estado": "✅ FUNCIONA (según Fede)"
+                  },
+                  {
+                    "id": "node-2114",
+                    "text": "selContacto(): Mostrar tarjeta resumen",
+                    "level": 5,
+                    "estado": "✅ FUNCIONA"
+                  },
+                  {
+                    "id": "node-2115",
+                    "text": "expandirContacto(): FALTA IMPLEMENTAR",
+                    "level": 5,
+                    "estado": "❌ NO EXISTE",
+                    "objetivo": "Mostrar TODO el historial al clicar contacto"
+                  }
+                ]
+              },
+              {
+                "id": "node-212",
+                "text": "Google Apps Script detectado",
+                "level": 4,
+                "estado": "⚠️ URL PRESENTE PERO SIN CONFIRMAR FUNCIONALIDAD"
+              },
+              {
+                "id": "node-213",
+                "text": "Pestañas: Llamada | Nuevo contacto",
+                "level": 4,
+                "estado": "✅ DISEÑO COMPLETO"
+              },
+              {
+                "id": "node-214",
+                "text": "Flujo diseñado: WhatsApp → Llamada → Cita Calendar → Próxima acción",
+                "level": 4,
+                "estado": "✅ LÓGICA CORRECTA"
+              },
+              {
+                "id": "node-215",
+                "text": "Integración prometida: Google Contacts + Calendar",
+                "level": 4,
+                "estado": "❌ NO IMPLEMENTADA"
+              }
+            ]
+          },
+          {
+            "id": "node-22",
+            "text": "panel-despegue-v3-radar.html — PANEL MATUTINO",
+            "level": 3,
+            "archivo": "34.2 KB",
+            "estado": "✅ LISTO PARA SUBIR",
+            "children": [
+              {
+                "id": "node-221",
+                "text": "Tracker PVM: Objetivo 10.291 pts",
+                "level": 4,
+                "estado": "✅ IMPLEMENTADO",
+                "almacenamiento": "localStorage (OK para uso personal)"
+              },
+              {
+                "id": "node-222",
+                "text": "Sección Radar: Campañas + Novedades",
+                "level": 4,
+                "estado": "✅ IMPLEMENTADO",
+                "pendiente": "Conectar con Radar_Comercial_NN.xlsx vía API pública"
+              },
+              {
+                "id": "node-223",
+                "text": "Herramientas: Enlaces a guías, calculadoras, propuestas",
+                "level": 4,
+                "estado": "✅ IMPLEMENTADO"
+              }
+            ]
+          },
+          {
+            "id": "node-23",
+            "text": "sistema_8_llamadas_diarias_1.html — SELECCIONADOR",
+            "level": 3,
+            "archivo": "18.3 KB",
+            "estado": "⚠️ SIN CONFIRMAR CONEXIÓN",
+            "descripcion": "Herramienta para selección nocturna de 8 contactos",
+            "pendiente": "Verificar si conecta con Sistema_Gestion_NN_v4"
+          }
+        ]
+      },
+      {
+        "id": "node-3",
+        "text": "CONEXIONES Y FLUJOS",
+        "level": 2,
+        "estado": "🔄 PARCIAL",
+        "children": [
+          {
+            "id": "node-31",
+            "text": "FLUJO DIARIO DISEÑADO (8 llamadas)",
+            "level": 3,
+            "estado": "✅ DISEÑADO | ❌ NO AUTOMATIZADO",
+            "children": [
+              {
+                "id": "node-311",
+                "text": "Paso 1: Noche anterior — Pre-selección 8 contactos",
+                "level": 4,
+                "herramienta": "sistema_8_llamadas_diarias_1.html",
+                "estado": "⚠️ MANUAL"
+              },
+              {
+                "id": "node-312",
+                "text": "Paso 2: 08:00 — DESPEGUE Panel v3",
+                "level": 4,
+                "herramienta": "panel-despegue-v3-radar.html",
+                "estado": "✅ FUNCIONA"
+              },
+              {
+                "id": "node-313",
+                "text": "Paso 3: Abrir nn_crm_panel_v2.html",
+                "level": 4,
+                "estado": "⚠️ DESCONECTADO DE SHEETS"
+              },
+              {
+                "id": "node-314",
+                "text": "Paso 4: Buscar contacto en panel CRM",
+                "level": 4,
+                "estado": "✅ FUNCIONA"
+              },
+              {
+                "id": "node-315",
+                "text": "Paso 5: WhatsApp pre-llamada (5 min antes)",
+                "level": 4,
+                "estado": "✅ MANUAL OK"
+              },
+              {
+                "id": "node-316",
+                "text": "Paso 6: Llamar y registrar resultado",
+                "level": 4,
+                "estado": "❌ DATOS SE PIERDEN AL CERRAR PANEL"
+              }
+            ]
+          },
+          {
+            "id": "node-32",
+            "text": "FLUJO RADAR COMERCIAL (semanal)",
+            "level": 3,
+            "estado": "✅ OPERATIVO",
+            "children": [
+              {
+                "id": "node-321",
+                "text": "Paso 1: Email 'Entre Nosotros' llega",
+                "level": 4,
+                "estado": "✅ AUTOMÁTICO"
+              },
+              {
+                "id": "node-322",
+                "text": "Paso 2: Fede reenvía a Gmail personal",
+                "level": 4,
+                "estado": "✅ MANUAL"
+              },
+              {
+                "id": "node-323",
+                "text": "Paso 3: Claude lee vía Gmail MCP y actualiza Radar",
+                "level": 4,
+                "estado": "✅ CONFIGURADO",
+                "ultima_ejecucion": "#557 — 10/04/2026"
+              },
+              {
+                "id": "node-324",
+                "text": "Paso 4: Claude genera resumen + 3 acciones",
+                "level": 4,
+                "estado": "✅ OPERATIVO"
+              }
+            ]
+          },
+          {
+            "id": "node-33",
+            "text": "CONEXIÓN FALTANTE: Panel CRM → Google Sheets",
+            "level": 3,
+            "estado": "❌ BLOQUEANTE CRÍTICO",
+            "children": [
+              {
+                "id": "node-331",
+                "text": "URL Google Apps Script detectada en código",
+                "level": 4,
+                "url": "AKfycbzL0-m5mu79I8MHD0HNotzEyCIn4_vUiIgt1uUuyAEDfF9UHy5iZYxf7EvDUvqrtsX74g",
+                "estado": "⚠️ PRESENTE PERO SIN CONFIRMAR"
+              },
+              {
+                "id": "node-332",
+                "text": "Funciones necesarias en Apps Script",
+                "level": 4,
+                "estado": "❌ FALTA IMPLEMENTAR",
+                "children": [
+                  {
+                    "id": "node-3321",
+                    "text": "doPost('nuevo_contacto'): Escribir en CRM MAESTRO",
+                    "level": 5,
+                    "estado": "❌ FALTA"
+                  },
+                  {
+                    "id": "node-3322",
+                    "text": "doPost('guardar_llamada'): Escribir historial llamadas",
+                    "level": 5,
+                    "estado": "❌ FALTA"
+                  },
+                  {
+                    "id": "node-3323",
+                    "text": "doGet('buscar_contacto'): Leer de CRM MAESTRO",
+                    "level": 5,
+                    "estado": "⚠️ PARCIAL (buscador funciona según Fede)"
+                  },
+                  {
+                    "id": "node-3324",
+                    "text": "doGet('expandir_contacto'): Leer TODO historial contacto",
+                    "level": 5,
+                    "estado": "❌ FALTA"
+                  }
+                ]
+              },
+              {
+                "id": "node-333",
+                "text": "Publicación Web App con permisos",
+                "level": 4,
+                "estado": "❌ FALTA VERIFICAR"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "node-4",
+        "text": "HERRAMIENTAS Y ACCESOS",
+        "level": 2,
+        "children": [
+          {
+            "id": "node-41",
+            "text": "Google Workspace",
+            "level": 3,
+            "estado": "✅ ACTIVO",
+            "children": [
+              {
+                "id": "node-411",
+                "text": "Gmail: federico.fontanals@nnespana.es + fefontanals@gmail.com",
+                "level": 4,
+                "estado": "✅ OPERATIVO",
+                "uso": "Recepción Entre Nosotros + MCP Claude"
+              },
+              {
+                "id": "node-412",
+                "text": "Google Drive: Almacenamiento archivos Excel",
+                "level": 4,
+                "estado": "✅ OPERATIVO",
+                "acceso": "Claude via Drive MCP"
+              },
+              {
+                "id": "node-413",
+                "text": "Google Sheets: 4 archivos clave",
+                "level": 4,
+                "estado": "✅ OPERATIVO",
+                "pendiente": "URL completa del Sistema_Gestion_NN_v4 para Apps Script"
+              },
+              {
+                "id": "node-414",
+                "text": "Google Calendar: Calendario eventos comerciales",
+                "level": 4,
+                "estado": "✅ ACTIVO",
+                "acceso": "Claude via Calendar MCP"
+              }
+            ]
+          },
+          {
+            "id": "node-42",
+            "text": "GitHub",
+            "level": 3,
+            "estado": "✅ ACTIVO",
+            "children": [
+              {
+                "id": "node-421",
+                "text": "Repositorio: FedeFonta08/propuestas-nn",
+                "level": 4,
+                "estado": "✅ OPERATIVO"
+              },
+              {
+                "id": "node-422",
+                "text": "GitHub Pages: fedefonta08.github.io/propuestas-nn/",
+                "level": 4,
+                "estado": "✅ DESPLEGADO",
+                "pendiente": "Subir panel-despegue-v3-radar.html como index.html (t27)"
+              }
+            ]
+          },
+          {
+            "id": "node-43",
+            "text": "Claude.ai — Proyecto NN Comercial",
+            "level": 3,
+            "estado": "✅ CONFIGURADO",
+            "children": [
+              {
+                "id": "node-431",
+                "text": "MCP Servers conectados: Gmail, Calendar, Drive",
+                "level": 4,
+                "estado": "✅ ACTIVOS"
+              },
+              {
+                "id": "node-432",
+                "text": "Archivos proyecto subidos: 17 PDFs SIALP/Plan Creciente + 2 HTMLs",
+                "level": 4,
+                "estado": "✅ DISPONIBLES"
+              },
+              {
+                "id": "node-433",
+                "text": "Memoria proyecto: userMemories actualizada 18/04/2026",
+                "level": 4,
+                "estado": "✅ ACTUALIZADA"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "node-5",
+        "text": "PLAN DE ACCIÓN FIN DE SEMANA",
+        "level": 2,
+        "estado": "⏳ PENDIENTE INICIO",
+        "objetivo": "Lunes 21/04 100% operativo",
+        "children": [
+          {
+            "id": "node-51",
+            "text": "FASE 1: CONECTAR PANEL CRM A SHEETS",
+            "level": 3,
+            "prioridad": "🔴 CRÍTICA",
+            "children": [
+              {
+                "id": "node-511",
+                "text": "Obtener URL completa Google Sheet Sistema_Gestion_NN_v4",
+                "level": 4,
+                "responsable": "Fede",
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-512",
+                "text": "Verificar Apps Script existente",
+                "level": 4,
+                "responsable": "Fede + Claude",
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-513",
+                "text": "Crear/actualizar Google Apps Script con 4 funciones",
+                "level": 4,
+                "responsable": "Claude",
+                "funciones": "nuevo_contacto, guardar_llamada, buscar_contacto, expandir_contacto",
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-514",
+                "text": "Publicar Web App con permisos correctos",
+                "level": 4,
+                "responsable": "Fede + Claude",
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-515",
+                "text": "Actualizar URL en nn_crm_panel_v2.html y testear",
+                "level": 4,
+                "responsable": "Claude",
+                "estado": "⏳ PENDIENTE"
+              }
+            ]
+          },
+          {
+            "id": "node-52",
+            "text": "FASE 2: MEJORAS PANEL CRM",
+            "level": 3,
+            "prioridad": "🟡 ALTA",
+            "children": [
+              {
+                "id": "node-521",
+                "text": "Implementar función expandirContacto()",
+                "level": 4,
+                "objetivo": "Al clicar contacto → mostrar TODO (historial, llamadas, productos, notas)",
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-522",
+                "text": "Mejorar tipografía: letras más grandes + oscuras",
+                "level": 4,
+                "razon": "Vista de Fede — dificultad lectura pantalla",
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-523",
+                "text": "Optimizar para móvil (Samsung Galaxy A56)",
+                "level": 4,
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-524",
+                "text": "Añadir historial de llamadas por contacto",
+                "level": 4,
+                "descripcion": "Cuándo llamaste, qué pasó, qué dijiste, próxima acción",
+                "estado": "⏳ PENDIENTE"
+              }
+            ]
+          },
+          {
+            "id": "node-53",
+            "text": "FASE 3: INTEGRACIONES ADICIONALES",
+            "level": 3,
+            "prioridad": "🟢 MEDIA",
+            "children": [
+              {
+                "id": "node-531",
+                "text": "Conectar Google Calendar para citas",
+                "level": 4,
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-532",
+                "text": "Sincronizar Google Contacts con móvil",
+                "level": 4,
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-533",
+                "text": "Conectar Panel DESPEGUE v3 con Radar Sheets",
+                "level": 4,
+                "estado": "⏳ PENDIENTE"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "node-6",
+        "text": "DATOS CLAVE Y ESTADÍSTICAS",
+        "level": 2,
+        "children": [
+          {
+            "id": "node-61",
+            "text": "Base de contactos: 965 contactos ex-Santalucía",
+            "level": 3,
+            "detalle": "Prospectos fríos NN con capacidad de pago demostrada",
+            "productos_actuales": "Decesos, Hogar, Vida (Santalucía)",
+            "productos_nn_objetivo": "Contigo Senior, Plan Salud+Vida, MiHogar, PPSA"
+          },
+          {
+            "id": "node-62",
+            "text": "Segmentación Buyer Persona",
+            "level": 3,
+            "estado": "⏳ FÓRMULAS LISTAS, PENDIENTE APLICAR",
+            "children": [
+              {
+                "id": "node-621",
+                "text": "S1 — JOVEN (18-35 años): Ahorro inicial (~86 contactos)",
+                "level": 4
+              },
+              {
+                "id": "node-622",
+                "text": "S2 — CONSTRUCTOR (28-45 años): Primera hipoteca (~77 contactos)",
+                "level": 4
+              },
+              {
+                "id": "node-623",
+                "text": "S3 — PROTECTOR (35-55 años): Familia establecida (~174 contactos)",
+                "level": 4
+              },
+              {
+                "id": "node-624",
+                "text": "S3A — AUTÓNOMO (25-65 años): Protección profesional (~48 contactos)",
+                "level": 4
+              },
+              {
+                "id": "node-625",
+                "text": "S4 — PLANIFICADOR (45-60 años): Jubilación (~193 contactos)",
+                "level": 4
+              },
+              {
+                "id": "node-626",
+                "text": "S5 — SENIOR (60+ años): Protección AGE + Salud (~435 contactos)",
+                "level": 4,
+                "campana_activa": "✅ Argumentario Contigo Senior vs Decesos listo (t14)"
+              }
+            ]
+          },
+          {
+            "id": "node-63",
+            "text": "Objetivos 2026",
+            "level": 3,
+            "children": [
+              {
+                "id": "node-631",
+                "text": "PVM: 10.291 puntos anuales (objetivo EQUIPO)",
+                "level": 4,
+                "estado": "🔄 EN CURSO",
+                "nota": "Rosiane aporta ~1.600-2.000 pts/mes"
+              },
+              {
+                "id": "node-632",
+                "text": "Equipo: 4-5 agentes antes septiembre 2026",
+                "level": 4,
+                "estado": "⏳ REACTIVAR POST-15 ABRIL",
+                "pipeline_actual": "0 (Alicia y José Micó no continuaron)"
+              }
+            ]
+          },
+          {
+            "id": "node-64",
+            "text": "Urgencias comerciales",
+            "level": 3,
+            "children": [
+              {
+                "id": "node-641",
+                "text": "Abril 2026: 53 contactos vencimientos urgentes",
+                "level": 4,
+                "urgencia": "🔴 ALTA"
+              },
+              {
+                "id": "node-642",
+                "text": "Campaña Salud 12.5% descuento: Vigente",
+                "level": 4,
+                "estado": "✅ ACTIVA"
+              },
+              {
+                "id": "node-643",
+                "text": "Formación hipotecas NN: ~15/05/2026",
+                "level": 4,
+                "bloqueante": "Fase 5 completa (t18, t19, t20)"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+};
+        
+        function renderNode(node) {
+            const div = document.createElement('div');
+            div.className = `node level-${node.level}`;
+            div.dataset.id = node.id;
+            
+            const content = document.createElement('div');
+            content.className = 'node-content';
+            
+            if (node.children && node.children.length > 0) {
+                const toggle = document.createElement('div');
+                toggle.className = 'toggle';
+                toggle.textContent = '▼';
+                toggle.onclick = (e) => {
+                    e.stopPropagation();
+                    const children = div.querySelector('.children');
+                    if (children.classList.contains('hidden')) {
+                        children.classList.remove('hidden');
+                        toggle.textContent = '▼';
+                    } else {
+                        children.classList.add('hidden');
+                        toggle.textContent = '▶';
+                    }
+                };
+                content.appendChild(toggle);
+            }
+            
+            const text = document.createElement('div');
+            text.className = 'node-text';
+            text.textContent = node.text;
+            content.appendChild(text);
+            
+            const badges = document.createElement('div');
+            badges.className = 'node-badges';
+            
+            if (node.estado) {
+                const badge = document.createElement('span');
+                badge.className = 'badge';
+                if (node.estado.includes('✅') || node.estado.includes('OPERATIVO') || node.estado.includes('COMPLETO')) {
+                    badge.className += ' badge-estado';
+                } else if (node.estado.includes('❌') || node.estado.includes('BLOQUEANTE') || node.estado.includes('FALTA')) {
+                    badge.className += ' badge-urgencia';
+                } else if (node.estado.includes('⚠️') || node.estado.includes('DESCONECTADO')) {
+                    badge.className += ' badge-warning';
+                } else {
+                    badge.className += ' badge-info';
+                }
+                badge.textContent = node.estado;
+                badges.appendChild(badge);
+            }
+            
+            if (node.urgencia) {
+                const badge = document.createElement('span');
+                badge.className = 'badge badge-urgencia';
+                badge.textContent = node.urgencia;
+                badges.appendChild(badge);
+            }
+            
+            if (node.prioridad) {
+                const badge = document.createElement('span');
+                badge.className = 'badge badge-urgencia';
+                badge.textContent = node.prioridad;
+                badges.appendChild(badge);
+            }
+            
+            content.appendChild(badges);
+            div.appendChild(content);
+            
+            // Añadir detalles si existen
+            const details = [];
+            if (node.descripcion) details.push(`<strong>Descripción:</strong> ${node.descripcion}`);
+            if (node.archivo) details.push(`<strong>Archivo:</strong> ${node.archivo}`);
+            if (node.progreso) details.push(`<strong>Progreso:</strong> ${node.progreso}`);
+            if (node.objetivo) details.push(`<strong>Objetivo:</strong> ${node.objetivo}`);
+            if (node.responsable) details.push(`<strong>Responsable:</strong> ${node.responsable}`);
+            if (node.pendiente) details.push(`<strong>Pendiente:</strong> ${node.pendiente}`);
+            if (node.problema) details.push(`<strong>Problema:</strong> ${node.problema}`);
+            if (node.funciones) details.push(`<strong>Funciones:</strong> ${node.funciones}`);
+            
+            if (details.length > 0) {
+                const detailsDiv = document.createElement('div');
+                detailsDiv.className = 'details';
+                detailsDiv.innerHTML = details.join('<br>');
+                div.appendChild(detailsDiv);
+            }
+            
+            if (node.children && node.children.length > 0) {
+                const children = document.createElement('div');
+                children.className = 'children';
+                node.children.forEach(child => {
+                    children.appendChild(renderNode(child));
+                });
+                div.appendChild(children);
+            }
+            
+            return div;
+        }
+        
+        function renderTree() {
+            const tree = document.getElementById('tree');
+            tree.innerHTML = '';
+            tree.appendChild(renderNode(data.root));
+        }
+        
+        function expandAll() {
+            document.querySelectorAll('.children').forEach(el => {
+                el.classList.remove('hidden');
+            });
+            document.querySelectorAll('.toggle').forEach(el => {
+                el.textContent = '▼';
+            });
+        }
+        
+        function collapseAll() {
+            document.querySelectorAll('.children').forEach(el => {
+                el.classList.add('hidden');
+            });
+            document.querySelectorAll('.toggle').forEach(el => {
+                el.textContent = '▶';
+            });
+        }
+        
+        function showOnlyUrgent() {
+            resetView();
+            document.querySelectorAll('.node').forEach(node => {
+                const hasUrgent = node.textContent.includes('🔴') || 
+                                  node.textContent.includes('URGENTE') || 
+                                  node.textContent.includes('CRÍTICA');
+                if (!hasUrgent) {
+                    node.style.display = 'none';
+                }
+            });
+        }
+        
+        function showOnlyBlocked() {
+            resetView();
+            document.querySelectorAll('.node').forEach(node => {
+                const hasBlocked = node.textContent.includes('❌') || 
+                                   node.textContent.includes('BLOQUEANTE') || 
+                                   node.textContent.includes('FALTA');
+                if (!hasBlocked) {
+                    node.style.display = 'none';
+                }
+            });
+        }
+        
+        function resetView() {
+            document.querySelectorAll('.node').forEach(node => {
+                node.style.display = '';
+            });
+            document.querySelectorAll('.node-content').forEach(el => {
+                el.classList.remove('highlight');
+            });
+        }
+        
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const search = e.target.value.toLowerCase();
+            
+            if (search === '') {
+                resetView();
+                return;
+            }
+            
+            document.querySelectorAll('.node').forEach(node => {
+                const text = node.textContent.toLowerCase();
+                const nodeContent = node.querySelector('.node-content');
+                
+                if (text.includes(search)) {
+                    nodeContent.classList.add('highlight');
+                    
+                    // Expandir padres
+                    let parent = node.parentElement;
+                    while (parent) {
+                        if (parent.classList.contains('children')) {
+                            parent.classList.remove('hidden');
+                            const toggle = parent.previousElementSibling?.querySelector('.toggle');
+                            if (toggle) toggle.textContent = '▼';
+                        }
+                        parent = parent.parentElement;
+                    }
+                } else {
+                    nodeContent.classList.remove('highlight');
+                }
+            });
+        });
+        
+        renderTree();
+    </script>
+</body>
+</html>

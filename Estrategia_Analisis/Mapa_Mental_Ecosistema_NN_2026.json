@@ -1,0 +1,819 @@
+{
+  "title": "Ecosistema Comercial NN — Fede Fontanals · Punto Naranja Xàtiva",
+  "fecha_analisis": "2026-04-18",
+  "version": "1.0",
+  "root": {
+    "id": "node-0",
+    "text": "Ecosistema NN Fede Fontanals, 6 nodos secundarios",
+    "level": 1,
+    "children": [
+      {
+        "id": "node-1",
+        "text": "FUENTES DE VERDAD (Google Drive), 4 nodos secundarios",
+        "level": 2,
+        "estado": "✅ OPERATIVO",
+        "children": [
+          {
+            "id": "node-11",
+            "text": "Sistema_Gestion_NN_v4_BuyerPersona.xlsx — BASE PRINCIPAL, 8 nodos secundarios",
+            "level": 3,
+            "archivo": "227 KB · 8 pestañas · 965 contactos",
+            "estado": "✅ OPERATIVO",
+            "children": [
+              {
+                "id": "node-111",
+                "text": "CRM MAESTRO: 965 contactos × 51 columnas",
+                "level": 4,
+                "descripcion": "Identificación, Estado comercial, Pólizas NN, ADN personal, ADN económico, Necesidad NN, Buyer Persona, Producto recomendado",
+                "estado": "✅ COMPLETO"
+              },
+              {
+                "id": "node-112",
+                "text": "8 LLAMADAS HOY: Sistema diario selección",
+                "level": 4,
+                "descripcion": "Pre-selección nocturna de 8 contactos para eliminar fricción de decisión",
+                "estado": "✅ EN USO"
+              },
+              {
+                "id": "node-113",
+                "text": "CHECKLIST ADN: 38 puntos de verificación",
+                "level": 4,
+                "descripcion": "Proceso completo Análisis de Necesidades pre-visita",
+                "estado": "✅ OPERATIVO"
+              },
+              {
+                "id": "node-114",
+                "text": "BANCO OBJECIONES: 12 objeciones + respuestas",
+                "level": 4,
+                "estado": "✅ OPERATIVO"
+              },
+              {
+                "id": "node-115",
+                "text": "ABRIL URGENTE: 53 contactos vencimientos",
+                "level": 4,
+                "urgencia": "🔴 ALTA",
+                "estado": "🔄 ACTIVO"
+              },
+              {
+                "id": "node-116",
+                "text": "MAYO: 44 contactos preparación",
+                "level": 4,
+                "urgencia": "🟡 MEDIA",
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-117",
+                "text": "JUNIO: 35 contactos calentamiento",
+                "level": 4,
+                "urgencia": "🟢 BAJA",
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-118",
+                "text": "RESUMEN EJECUTIVO: Dashboard general",
+                "level": 4,
+                "estado": "✅ OPERATIVO"
+              }
+            ],
+            "expanded": true
+          },
+          {
+            "id": "node-12",
+            "text": "Tablero_Proyecto_NN_Privado_v4.xlsx — PLAN MAESTRO, 3 nodos secundarios",
+            "level": 3,
+            "archivo": "13.2 KB · 3 pestañas",
+            "estado": "✅ OPERATIVO",
+            "children": [
+              {
+                "id": "node-121",
+                "text": "📋 Tablero: 7 fases × 30 tareas",
+                "level": 4,
+                "descripcion": "F1-Producto NN, F2-Buyer Personas, F3-Segmentación CRM, F4-Campaña Senior, F5-Hipotecas, F6-Claude, F7-Radar",
+                "estado": "🔄 EN CURSO",
+                "progreso": "13 completadas, 2 en curso, 12 pendientes, 3 bloqueadas"
+              },
+              {
+                "id": "node-122",
+                "text": "❓ Pendiente Antonio: 3 preguntas rastreadas",
+                "level": 4,
+                "descripcion": "t02-Plazo AGE ✅, t03-Exención fiscal AGE ✅, t04-Canal hipotecas 🔄",
+                "estado": "🔄 2 RESUELTAS, 1 EN CURSO"
+              },
+              {
+                "id": "node-123",
+                "text": "📖 Cómo usar: Instrucciones para Claude",
+                "level": 4,
+                "estado": "✅ DOCUMENTADO"
+              }
+            ],
+            "expanded": true
+          },
+          {
+            "id": "node-13",
+            "text": "Radar_Comercial_NN.xlsx — SISTEMA RADAR, 4 nodos secundarios",
+            "level": 3,
+            "archivo": "11.2 KB · 4 pestañas",
+            "estado": "✅ OPERATIVO",
+            "children": [
+              {
+                "id": "node-131",
+                "text": "🟠 Campañas Activas: 6 campañas NN vigentes",
+                "level": 4,
+                "descripcion": "Campaña Salud 12.5% dto, SIALP, Hipotecas, etc.",
+                "estado": "✅ ACTUALIZADO #557"
+              },
+              {
+                "id": "node-132",
+                "text": "📦 Novedades Producto: 6 cambios recientes",
+                "level": 4,
+                "estado": "✅ ACTUALIZADO #557"
+              },
+              {
+                "id": "node-133",
+                "text": "📋 Historial Entre Nosotros: Registro semanal",
+                "level": 4,
+                "ultima_edicion": "#557 — 10/04/2026",
+                "estado": "✅ OPERATIVO"
+              },
+              {
+                "id": "node-134",
+                "text": "📖 Instrucciones: Flujo automático",
+                "level": 4,
+                "descripcion": "Email → Gmail → Claude lee → Actualiza Radar → Resumen + 3 acciones",
+                "estado": "✅ CONFIGURADO"
+              }
+            ],
+            "expanded": true
+          },
+          {
+            "id": "node-14",
+            "text": "NN_CRM_965_Contactos_BuyerPersona_v2026.xlsx — BACKUP",
+            "level": 3,
+            "archivo": "328 KB · Duplicado de Sistema_Gestion_NN_v4",
+            "estado": "⚠️ BACKUP/DUPLICADO"
+          }
+        ],
+        "expanded": true
+      },
+      {
+        "id": "node-2",
+        "text": "INTERFACES WEB (GitHub Pages), 4 nodos secundarios",
+        "level": 2,
+        "repositorio": "github.com/FedeFonta08/propuestas-nn",
+        "url_publica": "fedefonta08.github.io/propuestas-nn/",
+        "estado": "🔄 PARCIAL",
+        "children": [
+          {
+            "id": "node-21",
+            "text": "nn_crm_panel_v2.html — PANEL CRM ⭐ PIEZA ANGULAR, 5 nodos secundarios",
+            "level": 3,
+            "archivo": "29.6 KB",
+            "estado": "⚠️ DESCONECTADO",
+            "problema": "No guarda datos — localStorage no persistente",
+            "children": [
+              {
+                "id": "node-211",
+                "text": "Funciones implementadas, 5 nodos secundarios",
+                "level": 4,
+                "children": [
+                  {
+                    "id": "node-2111",
+                    "text": "guardarContacto(): 51 campos → Google Apps Script",
+                    "level": 5,
+                    "estado": "❌ NO CONECTADO"
+                  },
+                  {
+                    "id": "node-2112",
+                    "text": "guardarLlamada(): Registro llamadas",
+                    "level": 5,
+                    "estado": "❌ NO CONECTADO"
+                  },
+                  {
+                    "id": "node-2113",
+                    "text": "buscar(): Buscador contactos",
+                    "level": 5,
+                    "estado": "✅ FUNCIONA (según Fede)"
+                  },
+                  {
+                    "id": "node-2114",
+                    "text": "selContacto(): Mostrar tarjeta resumen",
+                    "level": 5,
+                    "estado": "✅ FUNCIONA"
+                  },
+                  {
+                    "id": "node-2115",
+                    "text": "expandirContacto(): FALTA IMPLEMENTAR",
+                    "level": 5,
+                    "estado": "❌ NO EXISTE",
+                    "objetivo": "Mostrar TODO el historial al clicar contacto"
+                  }
+                ]
+              },
+              {
+                "id": "node-212",
+                "text": "Google Apps Script detectado: AKfycbzL0-m5mu79I8MHD0HNotzEyCIn4_vUiIgt...",
+                "level": 4,
+                "estado": "⚠️ URL PRESENTE PERO SIN CONFIRMAR FUNCIONALIDAD"
+              },
+              {
+                "id": "node-213",
+                "text": "Pestañas: Llamada | Nuevo contacto",
+                "level": 4,
+                "estado": "✅ DISEÑO COMPLETO"
+              },
+              {
+                "id": "node-214",
+                "text": "Flujo diseñado: WhatsApp → Llamada → Cita Calendar → Próxima acción",
+                "level": 4,
+                "estado": "✅ LÓGICA CORRECTA"
+              },
+              {
+                "id": "node-215",
+                "text": "Integración prometida: Google Contacts + Calendar",
+                "level": 4,
+                "estado": "❌ NO IMPLEMENTADA"
+              }
+            ],
+            "expanded": true
+          },
+          {
+            "id": "node-22",
+            "text": "panel-despegue-v3-radar.html — PANEL MATUTINO, 3 nodos secundarios",
+            "level": 3,
+            "archivo": "34.2 KB",
+            "estado": "✅ LISTO PARA SUBIR",
+            "children": [
+              {
+                "id": "node-221",
+                "text": "Tracker PVM: Objetivo 10.291 pts",
+                "level": 4,
+                "estado": "✅ IMPLEMENTADO",
+                "almacenamiento": "localStorage (OK para uso personal)"
+              },
+              {
+                "id": "node-222",
+                "text": "Sección Radar: Campañas + Novedades",
+                "level": 4,
+                "estado": "✅ IMPLEMENTADO",
+                "pendiente": "Conectar con Radar_Comercial_NN.xlsx vía API pública"
+              },
+              {
+                "id": "node-223",
+                "text": "Herramientas: Enlaces a guías, calculadoras, propuestas",
+                "level": 4,
+                "estado": "✅ IMPLEMENTADO"
+              }
+            ],
+            "expanded": true
+          },
+          {
+            "id": "node-23",
+            "text": "sistema_8_llamadas_diarias_1.html — SELECCIONADOR",
+            "level": 3,
+            "archivo": "18.3 KB",
+            "estado": "⚠️ SIN CONFIRMAR CONEXIÓN",
+            "descripcion": "Herramienta para selección nocturna de 8 contactos",
+            "pendiente": "Verificar si conecta con Sistema_Gestion_NN_v4"
+          },
+          {
+            "id": "node-24",
+            "text": "index_4.html — PORTADA GITHUB PAGES",
+            "level": 3,
+            "archivo": "67.6 KB",
+            "estado": "✅ PROBABLEMENTE INDEX ACTUAL",
+            "descripcion": "Portal productos NN, agente, propuestas",
+            "funciones": "renderPortada, renderAgente, renderProd"
+          }
+        ],
+        "expanded": true
+      },
+      {
+        "id": "node-3",
+        "text": "CONEXIONES Y FLUJOS, 5 nodos secundarios",
+        "level": 2,
+        "estado": "🔄 PARCIAL",
+        "children": [
+          {
+            "id": "node-31",
+            "text": "FLUJO DIARIO DISEÑADO (8 llamadas), 6 nodos secundarios",
+            "level": 3,
+            "estado": "✅ DISEÑADO | ❌ NO AUTOMATIZADO",
+            "children": [
+              {
+                "id": "node-311",
+                "text": "Paso 1: Noche anterior — Pre-selección 8 contactos",
+                "level": 4,
+                "herramienta": "sistema_8_llamadas_diarias_1.html",
+                "estado": "⚠️ MANUAL"
+              },
+              {
+                "id": "node-312",
+                "text": "Paso 2: 08:00 — DESPEGUE Panel v3",
+                "level": 4,
+                "herramienta": "panel-despegue-v3-radar.html",
+                "estado": "✅ FUNCIONA"
+              },
+              {
+                "id": "node-313",
+                "text": "Paso 3: Abrir nn_crm_panel_v2.html",
+                "level": 4,
+                "estado": "⚠️ DESCONECTADO DE SHEETS"
+              },
+              {
+                "id": "node-314",
+                "text": "Paso 4: Buscar contacto en panel CRM",
+                "level": 4,
+                "estado": "✅ FUNCIONA"
+              },
+              {
+                "id": "node-315",
+                "text": "Paso 5: WhatsApp pre-llamada (5 min antes)",
+                "level": 4,
+                "estado": "✅ MANUAL OK"
+              },
+              {
+                "id": "node-316",
+                "text": "Paso 6: Llamar y registrar resultado",
+                "level": 4,
+                "estado": "❌ DATOS SE PIERDEN AL CERRAR PANEL"
+              }
+            ],
+            "expanded": true
+          },
+          {
+            "id": "node-32",
+            "text": "FLUJO RADAR COMERCIAL (semanal), 4 nodos secundarios",
+            "level": 3,
+            "estado": "✅ OPERATIVO",
+            "children": [
+              {
+                "id": "node-321",
+                "text": "Paso 1: Email 'Entre Nosotros' llega a federico.fontanals@nnespana.es",
+                "level": 4,
+                "estado": "✅ AUTOMÁTICO"
+              },
+              {
+                "id": "node-322",
+                "text": "Paso 2: Fede reenvía a Gmail personal",
+                "level": 4,
+                "estado": "✅ MANUAL"
+              },
+              {
+                "id": "node-323",
+                "text": "Paso 3: Claude lee vía Gmail MCP y actualiza Radar_Comercial_NN.xlsx",
+                "level": 4,
+                "estado": "✅ CONFIGURADO",
+                "ultima_ejecucion": "#557 — 10/04/2026"
+              },
+              {
+                "id": "node-324",
+                "text": "Paso 4: Claude genera resumen ejecutivo + 3 acciones",
+                "level": 4,
+                "estado": "✅ OPERATIVO"
+              }
+            ],
+            "expanded": true
+          },
+          {
+            "id": "node-33",
+            "text": "CONEXIÓN FALTANTE: Panel CRM → Google Sheets, 3 nodos secundarios",
+            "level": 3,
+            "estado": "❌ BLOQUEANTE CRÍTICO",
+            "children": [
+              {
+                "id": "node-331",
+                "text": "URL Google Apps Script detectada en código",
+                "level": 4,
+                "url": "AKfycbzL0-m5mu79I8MHD0HNotzEyCIn4_vUiIgt1uUuyAEDfF9UHy5iZYxf7EvDUvqrtsX74g",
+                "estado": "⚠️ PRESENTE PERO SIN CONFIRMAR"
+              },
+              {
+                "id": "node-332",
+                "text": "Funciones necesarias en Apps Script, 4 nodos secundarios",
+                "level": 4,
+                "estado": "❌ FALTA IMPLEMENTAR",
+                "children": [
+                  {
+                    "id": "node-3321",
+                    "text": "doPost('nuevo_contacto'): Escribir en CRM MAESTRO",
+                    "level": 5,
+                    "estado": "❌ FALTA"
+                  },
+                  {
+                    "id": "node-3322",
+                    "text": "doPost('guardar_llamada'): Escribir historial llamadas",
+                    "level": 5,
+                    "estado": "❌ FALTA"
+                  },
+                  {
+                    "id": "node-3323",
+                    "text": "doGet('buscar_contacto'): Leer de CRM MAESTRO",
+                    "level": 5,
+                    "estado": "⚠️ PARCIAL (buscador funciona según Fede)"
+                  },
+                  {
+                    "id": "node-3324",
+                    "text": "doGet('expandir_contacto'): Leer TODO historial contacto",
+                    "level": 5,
+                    "estado": "❌ FALTA"
+                  }
+                ]
+              },
+              {
+                "id": "node-333",
+                "text": "Publicación Web App con permisos",
+                "level": 4,
+                "estado": "❌ FALTA VERIFICAR"
+              }
+            ],
+            "expanded": true
+          },
+          {
+            "id": "node-34",
+            "text": "CONEXIÓN PENDIENTE: Panel DESPEGUE → Radar Sheets",
+            "level": 3,
+            "estado": "⏳ PENDIENTE",
+            "descripcion": "Conectar panel-despegue-v3-radar.html con Radar_Comercial_NN.xlsx vía API pública Sheets",
+            "tarea_tablero": "t26"
+          },
+          {
+            "id": "node-35",
+            "text": "CONEXIÓN PENDIENTE: Google Calendar + Google Contacts",
+            "level": 3,
+            "estado": "⏳ PENDIENTE",
+            "descripcion": "Integración prometida en panel CRM para citas y sincronización móvil"
+          }
+        ],
+        "expanded": true
+      },
+      {
+        "id": "node-4",
+        "text": "HERRAMIENTAS Y ACCESOS, 4 nodos secundarios",
+        "level": 2,
+        "children": [
+          {
+            "id": "node-41",
+            "text": "Google Workspace, 5 nodos secundarios",
+            "level": 3,
+            "estado": "✅ ACTIVO",
+            "children": [
+              {
+                "id": "node-411",
+                "text": "Gmail: federico.fontanals@nnespana.es + fefontanals@gmail.com",
+                "level": 4,
+                "estado": "✅ OPERATIVO",
+                "uso": "Recepción Entre Nosotros + MCP Claude"
+              },
+              {
+                "id": "node-412",
+                "text": "Google Drive: Almacenamiento archivos Excel",
+                "level": 4,
+                "estado": "✅ OPERATIVO",
+                "acceso": "Claude via Drive MCP"
+              },
+              {
+                "id": "node-413",
+                "text": "Google Sheets: 4 archivos clave",
+                "level": 4,
+                "estado": "✅ OPERATIVO",
+                "pendiente": "URL completa del Sistema_Gestion_NN_v4 para Apps Script"
+              },
+              {
+                "id": "node-414",
+                "text": "Google Calendar: Calendario eventos comerciales",
+                "level": 4,
+                "estado": "✅ ACTIVO",
+                "acceso": "Claude via Calendar MCP"
+              },
+              {
+                "id": "node-415",
+                "text": "Google Contacts: Base contactos móvil",
+                "level": 4,
+                "estado": "⚠️ SIN CONFIRMAR SINCRONIZACIÓN"
+              }
+            ],
+            "expanded": true
+          },
+          {
+            "id": "node-42",
+            "text": "GitHub, 2 nodos secundarios",
+            "level": 3,
+            "estado": "✅ ACTIVO",
+            "children": [
+              {
+                "id": "node-421",
+                "text": "Repositorio: FedeFonta08/propuestas-nn",
+                "level": 4,
+                "estado": "✅ OPERATIVO"
+              },
+              {
+                "id": "node-422",
+                "text": "GitHub Pages: fedefonta08.github.io/propuestas-nn/",
+                "level": 4,
+                "estado": "✅ DESPLEGADO",
+                "pendiente": "Subir panel-despegue-v3-radar.html como index.html (t27)"
+              }
+            ],
+            "expanded": true
+          },
+          {
+            "id": "node-43",
+            "text": "Claude.ai — Proyecto NN Comercial, 3 nodos secundarios",
+            "level": 3,
+            "estado": "✅ CONFIGURADO",
+            "children": [
+              {
+                "id": "node-431",
+                "text": "MCP Servers conectados: Gmail, Calendar, Drive",
+                "level": 4,
+                "estado": "✅ ACTIVOS"
+              },
+              {
+                "id": "node-432",
+                "text": "Archivos proyecto subidos: 17 PDFs SIALP/Plan Creciente + 2 HTMLs",
+                "level": 4,
+                "estado": "✅ DISPONIBLES"
+              },
+              {
+                "id": "node-433",
+                "text": "Memoria proyecto: userMemories actualizada 18/04/2026",
+                "level": 4,
+                "estado": "✅ ACTUALIZADA"
+              }
+            ],
+            "expanded": true
+          },
+          {
+            "id": "node-44",
+            "text": "Dispositivos, 3 nodos secundarios",
+            "level": 3,
+            "children": [
+              {
+                "id": "node-441",
+                "text": "PC Windows: Herramienta principal",
+                "level": 4,
+                "ruta_descargas": "D:\\Users\\ffont\\Downloads",
+                "estado": "✅ ACTIVO"
+              },
+              {
+                "id": "node-442",
+                "text": "iPad: ADN app / Contigo Futuro",
+                "level": 4,
+                "estado": "✅ ACTIVO"
+              },
+              {
+                "id": "node-443",
+                "text": "Samsung Galaxy A56: En tránsito",
+                "level": 4,
+                "estado": "⏳ PENDIENTE ACTIVACIÓN"
+              }
+            ],
+            "expanded": true
+          }
+        ],
+        "expanded": true
+      },
+      {
+        "id": "node-5",
+        "text": "PLAN DE ACCIÓN FIN DE SEMANA, 3 nodos secundarios",
+        "level": 2,
+        "estado": "⏳ PENDIENTE INICIO",
+        "objetivo": "Lunes 21/04 100% operativo",
+        "children": [
+          {
+            "id": "node-51",
+            "text": "FASE 1: CONECTAR PANEL CRM A SHEETS, 5 nodos secundarios",
+            "level": 3,
+            "prioridad": "🔴 CRÍTICA",
+            "children": [
+              {
+                "id": "node-511",
+                "text": "Obtener URL completa Google Sheet Sistema_Gestion_NN_v4",
+                "level": 4,
+                "responsable": "Fede",
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-512",
+                "text": "Verificar Apps Script AKfycbzL0-m5mu79I8MHD0HNotzEyCIn4_vUiIgt...",
+                "level": 4,
+                "responsable": "Fede + Claude",
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-513",
+                "text": "Crear/actualizar Google Apps Script con 4 funciones",
+                "level": 4,
+                "responsable": "Claude",
+                "funciones": "nuevo_contacto, guardar_llamada, buscar_contacto, expandir_contacto",
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-514",
+                "text": "Publicar Web App con permisos correctos",
+                "level": 4,
+                "responsable": "Fede + Claude",
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-515",
+                "text": "Actualizar URL en nn_crm_panel_v2.html y testear",
+                "level": 4,
+                "responsable": "Claude",
+                "estado": "⏳ PENDIENTE"
+              }
+            ],
+            "expanded": true
+          },
+          {
+            "id": "node-52",
+            "text": "FASE 2: MEJORAS PANEL CRM, 4 nodos secundarios",
+            "level": 3,
+            "prioridad": "🟡 ALTA",
+            "children": [
+              {
+                "id": "node-521",
+                "text": "Implementar función expandirContacto()",
+                "level": 4,
+                "objetivo": "Al clicar contacto → mostrar TODO (historial, llamadas, productos, notas)",
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-522",
+                "text": "Mejorar tipografía: letras más grandes + oscuras",
+                "level": 4,
+                "razon": "Vista de Fede — dificultad lectura pantalla",
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-523",
+                "text": "Optimizar para móvil (Samsung Galaxy A56)",
+                "level": 4,
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-524",
+                "text": "Añadir historial de llamadas por contacto",
+                "level": 4,
+                "descripcion": "Cuándo llamaste, qué pasó, qué dijiste, próxima acción",
+                "estado": "⏳ PENDIENTE"
+              }
+            ],
+            "expanded": true
+          },
+          {
+            "id": "node-53",
+            "text": "FASE 3: INTEGRACIONES ADICIONALES, 3 nodos secundarios",
+            "level": 3,
+            "prioridad": "🟢 MEDIA",
+            "children": [
+              {
+                "id": "node-531",
+                "text": "Conectar Google Calendar para citas",
+                "level": 4,
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-532",
+                "text": "Sincronizar Google Contacts con móvil",
+                "level": 4,
+                "estado": "⏳ PENDIENTE"
+              },
+              {
+                "id": "node-533",
+                "text": "Conectar Panel DESPEGUE v3 con Radar Sheets",
+                "level": 4,
+                "estado": "⏳ PENDIENTE"
+              }
+            ],
+            "expanded": true
+          }
+        ],
+        "expanded": true
+      },
+      {
+        "id": "node-6",
+        "text": "DATOS CLAVE Y ESTADÍSTICAS, 4 nodos secundarios",
+        "level": 2,
+        "children": [
+          {
+            "id": "node-61",
+            "text": "Base de contactos: 965 contactos ex-Santalucía",
+            "level": 3,
+            "detalle": "Prospectos fríos NN con capacidad de pago demostrada",
+            "productos_actuales": "Decesos, Hogar, Vida (Santalucía)",
+            "productos_nn_objetivo": "Contigo Senior, Plan Salud+Vida, MiHogar, PPSA"
+          },
+          {
+            "id": "node-62",
+            "text": "Segmentación Buyer Persona, 6 nodos secundarios",
+            "level": 3,
+            "estado": "⏳ FÓRMULAS LISTAS, PENDIENTE APLICAR",
+            "children": [
+              {
+                "id": "node-621",
+                "text": "S1 — JOVEN (18-35 años): Ahorro inicial",
+                "level": 4,
+                "estimado": "~86 contactos"
+              },
+              {
+                "id": "node-622",
+                "text": "S2 — CONSTRUCTOR (28-45 años): Primera hipoteca",
+                "level": 4,
+                "estimado": "~77 contactos"
+              },
+              {
+                "id": "node-623",
+                "text": "S3 — PROTECTOR (35-55 años): Familia establecida",
+                "level": 4,
+                "estimado": "~174 contactos"
+              },
+              {
+                "id": "node-624",
+                "text": "S3A — AUTÓNOMO (25-65 años): Protección profesional",
+                "level": 4,
+                "estimado": "~48 contactos"
+              },
+              {
+                "id": "node-625",
+                "text": "S4 — PLANIFICADOR (45-60 años): Jubilación",
+                "level": 4,
+                "estimado": "~193 contactos"
+              },
+              {
+                "id": "node-626",
+                "text": "S5 — SENIOR (60+ años): Protección AGE + Salud",
+                "level": 4,
+                "estimado": "~435 contactos",
+                "campana_activa": "✅ Argumentario Contigo Senior vs Decesos listo (t14)"
+              }
+            ],
+            "expanded": true
+          },
+          {
+            "id": "node-63",
+            "text": "Objetivos 2026, 2 nodos secundarios",
+            "level": 3,
+            "children": [
+              {
+                "id": "node-631",
+                "text": "PVM: 10.291 puntos anuales (objetivo EQUIPO)",
+                "level": 4,
+                "estado": "🔄 EN CURSO",
+                "nota": "Rosiane aporta ~1.600-2.000 pts/mes"
+              },
+              {
+                "id": "node-632",
+                "text": "Equipo: 4-5 agentes antes septiembre 2026",
+                "level": 4,
+                "estado": "⏳ REACTIVAR POST-15 ABRIL",
+                "pipeline_actual": "0 (Alicia y José Micó no continuaron)"
+              }
+            ],
+            "expanded": true
+          },
+          {
+            "id": "node-64",
+            "text": "Urgencias comerciales, 3 nodos secundarios",
+            "level": 3,
+            "children": [
+              {
+                "id": "node-641",
+                "text": "Abril 2026: 53 contactos vencimientos urgentes",
+                "level": 4,
+                "urgencia": "🔴 ALTA"
+              },
+              {
+                "id": "node-642",
+                "text": "Campaña Salud 12.5% descuento: Vigente",
+                "level": 4,
+                "estado": "✅ ACTIVA"
+              },
+              {
+                "id": "node-643",
+                "text": "Formación hipotecas NN: ~15/05/2026",
+                "level": 4,
+                "bloqueante": "Fase 5 completa (t18, t19, t20)"
+              }
+            ],
+            "expanded": true
+          }
+        ],
+        "expanded": true
+      }
+    ],
+    "expanded": true
+  },
+  "metadatos": {
+    "analista": "Claude Sonnet 4.5",
+    "colaboracion": "Fede Fontanals",
+    "archivos_analizados": 11,
+    "total_nodos": 93,
+    "conexiones_identificadas": 15,
+    "conexiones_operativas": 8,
+    "conexiones_faltantes": 7,
+    "prioridad_maxima": "Conectar Panel CRM v2 a Google Sheets",
+    "objetivo_fin_semana": "100% operativo lunes 21/04/2026",
+    "siguiente_paso": "Obtener URL Google Sheet + verificar Apps Script"
+  }
+}
