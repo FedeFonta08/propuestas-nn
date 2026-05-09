@@ -23,25 +23,76 @@
             padding: 2rem;
             background-image: radial-gradient(ellipse 80% 50% at 10% 0%, rgba(201,77,0,0.04) 0%, transparent 60%);
         }
-        .header { max-width: 1000px; margin: 0 auto 2rem; border-bottom: 3px solid var(--orange); padding-bottom: 1rem; }
-        .logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 1.5px; color: var(--navy); }
+        .header {
+            max-width: 1000px;
+            margin: 0 auto 2rem;
+            border-bottom: 3px solid var(--orange);
+            padding-bottom: 1rem;
+        }
+        .logo-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            letter-spacing: 1.5px;
+            color: var(--navy);
+        }
         .logo-text span { color: var(--orange); }
         .subtitle { font-size: 13px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
         
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
-        .card { background: var(--card-bg); border: 2px solid var(--orange); border-radius: 14px; padding: 1.5rem; box-shadow: 0 8px 24px rgba(201,77,0,0.08); position: relative; overflow: hidden; }
-        .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--orange); }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 2px solid var(--orange);
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 24px rgba(201,77,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--orange);
+        }
         .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
-        .badge { background: #FFF8F5; color: var(--orange); padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border: 1px solid rgba(201,77,0,0.2); }
+        .badge {
+            background: #FFF8F5;
+            color: var(--orange);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid rgba(201,77,0,0.2);
+        }
         .producto { font-family: 'Bebas Neue', sans-serif; font-size: 26px; line-height: 1.1; margin-top: 8px; }
         .segmento { color: #16A34A; font-size: 12px; font-weight: 700; text-transform: uppercase; }
         .novedad { font-size: 14px; color: var(--text2); margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--card-border); }
         
-        .adn-box { background: #F9FAFB; border-left: 4px solid var(--navy); padding: 1rem; margin-bottom: 1rem; border-radius: 0 8px 8px 0; }
+        .adn-box {
+            background: #F9FAFB;
+            border-left: 4px solid var(--navy);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
         .adn-title { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--navy); margin-bottom: 4px; }
         .adn-text { font-size: 14px; color: var(--text2); }
         
-        .apertura-box { background: #FFF8F5; border: 1.5px solid rgba(201,77,0,0.3); border-radius: 8px; padding: 1rem; }
+        .apertura-box {
+            background: #FFF8F5;
+            border: 1.5px solid rgba(201,77,0,0.3);
+            border-radius: 8px;
+            padding: 1rem;
+        }
         .apertura-title { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--orange); margin-bottom: 6px; }
         .apertura-text { font-size: 15px; font-weight: 600; font-style: italic; color: var(--navy); line-height: 1.4; }
     </style>
@@ -56,21 +107,84 @@
         <div class="card">
             <div class="card-header">
                 <div>
-                    <div class="segmento">🎯 Familias con hijos pertenecientes a colectivos profesionales.</div>
+                    <div class="segmento">🎯 S3 Protector (quienes priorizan el bienestar y la seguridad económica de su familia a largo plazo), S2 Constructor (profesionales que buscan una planificación financiera robusta y protección patrimonial).</div>
                     <div class="producto">Contigo Familia</div>
                 </div>
-                <div class="badge">🟢 ACTIVA</div>
+                <div class="badge">Campaña Activa</div>
             </div>
-            <div class="novedad">25% de descuento de por vida en el seguro Contigo Familia para profesionales de determinados colectivos, incluyendo clientes y clientes de cartera.</div>
+            <div class="novedad">Campaña con 25% de descuento vitalicio para profesionales de colectivos específicos que cumplan requisitos de contratación. Una oportunidad relevante para clientes y clientes de cartera.</div>
             
             <div class="adn-box">
                 <div class="adn-title">🔪 Vulnerabilidad Detectada (Bisturí ADN)</div>
-                <div class="adn-text">¿Quién paga la universidad y las facturas si tú faltas mañana?</div>
+                <div class="adn-text">La profunda inquietud por garantizar el futuro económico y la calidad de vida de la familia, incluso si el pilar financiero principal ya no puede proveerlo, especialmente en profesiones con alto sentido de responsabilidad y compromiso.</div>
             </div>
             
             <div class="apertura-box">
                 <div class="apertura-title">🗣️ Pregunta de Apertura Consultiva</div>
-                <div class="apertura-text">"Si mañana, por una situación inesperada, tus ingresos desaparecieran, ¿cómo te asegurarías de que tus hijos pudieran continuar con su educación y mantener la estabilidad que tienen hoy?"</div>
+                <div class="apertura-text">"Más allá del día a día, ¿cuáles son sus mayores preocupaciones sobre la capacidad de su familia para mantener su nivel de vida deseado ante cualquier imprevisto futuro?"</div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <div class="segmento">🎯 S2 Constructor (individuos que buscan optimizar la rentabilidad de su capital con seguridad), S3 Protector (personas que desean salvaguardar y hacer crecer sus ahorros para objetivos futuros importantes).</div>
+                    <div class="producto">AGE y AGE VIP</div>
+                </div>
+                <div class="badge">Campaña Activa</div>
+            </div>
+            <div class="novedad">Incremento del tipo de interés en 40 puntos básicos, situándose en 2.40% (AGE) y 2.60% (AGE VIP), lo que refuerza su atractivo como soluciones de ahorro a medio plazo en el contexto actual de mercado.</div>
+            
+            <div class="adn-box">
+                <div class="adn-title">🔪 Vulnerabilidad Detectada (Bisturí ADN)</div>
+                <div class="adn-text">La frustración de ver los ahorros estancados o perdiendo valor frente a la inflación, la búsqueda de opciones seguras y rentables para proteger el capital a medio plazo y asegurar el cumplimiento de metas financieras futuras.</div>
+            </div>
+            
+            <div class="apertura-box">
+                <div class="apertura-title">🗣️ Pregunta de Apertura Consultiva</div>
+                <div class="apertura-text">"En el entorno económico actual, ¿cómo de seguro se siente de que sus estrategias de ahorro a medio plazo están generando el rendimiento esperado para sus metas?"</div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <div class="segmento">🎯 S2 Constructor (inversores que buscan fundamentos sólidos para su estrategia de crecimiento patrimonial), S3 Protector (personas que desean asegurar el valor de sus inversiones a largo plazo frente a la incertidumbre).</div>
+                    <div class="producto">Unit Linked, PGI y GFU</div>
+                </div>
+                <div class="badge">Informativa</div>
+            </div>
+            <div class="novedad">Publicación del informe del primer trimestre de 2026, ofreciendo una visión completa del contexto económico, político y sectorial que influye en los mercados financieros, con un análisis del comportamiento de fondos y la importancia de la inversión a largo plazo.</div>
+            
+            <div class="adn-box">
+                <div class="adn-title">🔪 Vulnerabilidad Detectada (Bisturí ADN)</div>
+                <div class="adn-text">La incertidumbre y el temor a la volatilidad de los mercados que pueden comprometer los planes financieros futuros, y la necesidad de una estrategia de inversión clara y fundamentada que genere confianza y estabilidad a largo plazo.</div>
+            </div>
+            
+            <div class="apertura-box">
+                <div class="apertura-title">🗣️ Pregunta de Apertura Consultiva</div>
+                <div class="apertura-text">"Considerando la evolución actual de los mercados, ¿cómo de confiado se siente en la resiliencia y el potencial a largo plazo de sus actuales estrategias de inversión?"</div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <div class="segmento">🎯 S3 Protector (familias y personas que priorizan la salud y buscan seguridad y acceso rápido a servicios médicos de calidad), S2 Constructor (profesionales que valoran la eficiencia y la personalización en su atención sanitaria).</div>
+                    <div class="producto">Seguro de Salud Privado</div>
+                </div>
+                <div class="badge">Informativa</div>
+            </div>
+            <div class="novedad">El Observatorio IDIS 2026 confirma que la sanidad privada es un sector en crecimiento y un elemento estructural del sistema sanitario español, reforzando la propuesta de valor del seguro de salud privado.</div>
+            
+            <div class="adn-box">
+                <div class="adn-title">🔪 Vulnerabilidad Detectada (Bisturí ADN)</div>
+                <div class="adn-text">La preocupación por la demora y la calidad en el acceso a servicios de salud, el anhelo de tener control y tranquilidad sobre la atención médica propia y familiar, y el deseo de asegurar un bienestar integral sin depender exclusivamente del sistema público.</div>
+            </div>
+            
+            <div class="apertura-box">
+                <div class="apertura-title">🗣️ Pregunta de Apertura Consultiva</div>
+                <div class="apertura-text">"¿Qué tan importante es para usted tener la tranquilidad de un acceso ágil y de alta calidad a la atención médica para su familia y para usted?"</div>
             </div>
         </div>
         
