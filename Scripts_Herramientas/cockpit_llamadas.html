@@ -861,7 +861,10 @@ body {
 // ══════════════════════════════════════════════════════════════
 // CONFIGURACIÓN
 // ══════════════════════════════════════════════════════════════
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxpYhW-S9OvA3w1NTR_Mu6GHffGTtHKE1ENKgoM98ySB8gyxt-j4BbaKF7Mk48grrcr_g/exec';
+</script>
+<script src="config.js"></script>
+<script>
+const SCRIPT_URL = (typeof ENV !== 'undefined') ? ENV.SCRIPT_URL : 'https://script.google.com/macros/s/ELIMINADO_POR_SEGURIDAD/exec';
 const SHEET_ID = '16lui0o9wPYe9tL-9PaU6_H2heG8uIBYrCIL9vvfpdC0';
 const PVM_OBJ = 10291;
 const PVM_KEY = 'nn_pvm_2026';

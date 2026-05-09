@@ -884,7 +884,10 @@ textarea{resize:vertical;min-height:80px}
 // ══════════════════════════════════════════════════════════════
 // CONFIGURACIÓN — URL del Apps Script v2
 // ══════════════════════════════════════════════════════════════
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxpYhW-S9OvA3w1NTR_Mu6GHffGTtHKE1ENKgoM98ySB8gyxt-j4BbaKF7Mk48grrcr_g/exec';
+</script>
+<script src="config.js"></script>
+<script>
+const SCRIPT_URL = (typeof ENV !== 'undefined') ? ENV.SCRIPT_URL : 'https://script.google.com/macros/s/ELIMINADO_POR_SEGURIDAD/exec';
 
 // ── Estado global ─────────────────────────────────────────────
 let contactoSeleccionado = null;
