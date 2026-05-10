@@ -943,9 +943,10 @@ body {
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxpYhW-S9OvA3w1NTR_Mu6GHffGTtHKE1ENKgoM98ySB8gyxt-j4BbaKF7Mk48grrcr_g/exec';
 
 // ── SISTEMA MAESTRO (actividad agentes) ──────────────────────
+// El Excel está local → usamos servidor_actividad.py en localhost:5151
+// Para arrancar: python servidor_actividad.py (en la carpeta propuestas-nn-repo)
 const SISTEMA_MAESTRO_ID = '1qshgFOXh-SOuTxgeY95ORfXsC71kwF7O';
-// ⚠️ Reemplaza esta URL con la del Apps Script que crearás en el Sheet:
-const ACTIVIDAD_SCRIPT_URL = 'https://script.google.com/macros/s/PENDIENTE_CONFIGURAR/exec';
+const ACTIVIDAD_SCRIPT_URL = 'http://localhost:5151';
 
 // Validar token maestro al entrar
 let MASTER_TOKEN = localStorage.getItem('nn_master_token');
@@ -1527,9 +1528,7 @@ async function registrarActividadMaestro(tipoResultado) {
   // 1. Actualizar marcador local de inmediato (sin esperar red)
   guardarMarcadorLocal(agente, tipoResultado);
 
-  // 2. Intentar enviar al Apps Script del SISTEMA MAESTRO (si está configurado)
-  if (ACTIVIDAD_SCRIPT_URL.includes('PENDIENTE_CONFIGURAR')) return; // Aún no configurado
-
+  // 2. Enviar al servidor Python local (servidor_actividad.py en localhost:5151)
   try {
     const dia = ['DOM','LUN','MAR','MIE','JUE','VIE','SAB'][new Date().getDay()];
     await fetch(ACTIVIDAD_SCRIPT_URL + '?payload=' + encodeURIComponent(JSON.stringify({
@@ -1540,7 +1539,8 @@ async function registrarActividadMaestro(tipoResultado) {
       semana: getSemana()
     })), { method: 'GET', redirect: 'follow' });
   } catch(e) {
-    console.warn('Actividad guardada localmente, no se pudo sincronizar con SISTEMA MAESTRO:', e);
+    // El servidor no está corriendo → datos guardados solo en local (OK)
+    console.info('servidor_actividad.py no disponible — actividad guardada localmente:', e.message);
   }
 }
 
