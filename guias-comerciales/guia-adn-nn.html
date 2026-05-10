@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Maestra ADN — NN Xàtiva · Fede</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --nn: #C94D00;
+  --nn-light: #E85C0D;
+  --nn-glow: rgba(201,77,0,0.12);
+  --nn-bg: #FFF8F5;
+  --nn-bg2: #FFF0E8;
+  --dark: #0F0F0F;
+  --dark2: #1A1A1A;
+  --dark3: #2A2A2A;
+  --dark4: #3A3A3A;
+  --text: #F5F5F0;
+  --text2: #C0BDB8;
+  --text3: #8A8780;
+  --green: #22C55E;
+  --green-bg: rgba(34,197,94,0.12);
+  --red: #EF4444;
+  --red-bg: rgba(239,68,68,0.12);
+  --blue: #3B82F6;
+  --blue-bg: rgba(59,130,246,0.12);
+  --amber: #F59E0B;
+  --amber-bg: rgba(245,158,11,0.12);
+  --purple: #A855F7;
+  --purple-bg: rgba(168,85,247,0.12);
+  --r: 12px;
+  --r-lg: 18px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ══ HEADER ══════════════════════════════════════ */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15,15,15,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 2px solid var(--nn);
+  padding: 0 2rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo-box {
+  width: 36px; height: 36px;
+  background: var(--nn);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 20px rgba(201,77,0,0.3);
+}
+
+.logo-box svg { width: 18px; height: 18px; }
+
+.logo-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 1.5px;
+  color: var(--text);
+}
+
+.logo-sub {
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.5px;
+}
+
+.header-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--nn-light);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.header-back:hover { opacity: 1; }
+
+/* ══ LEVEL TABS ══════════════════════════════════ */
+.level-bar {
+  background: var(--dark2);
+  border-bottom: 1px solid var(--dark3);
+  padding: 0 2rem;
+  display: flex;
+  gap: 0;
+  position: sticky;
+  top: 60px;
+  z-index: 99;
+}
+
+.level-tab {
+  padding: 14px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text3);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.level-tab:hover { color: var(--text2); }
+
+.level-tab.active {
+  color: var(--nn-light);
+  border-bottom-color: var(--nn);
+}
+
+.level-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.badge-quick { background: var(--green-bg); color: var(--green); }
+.badge-guide { background: var(--blue-bg); color: var(--blue); }
+.badge-deep { background: var(--purple-bg); color: var(--purple); }
+
+/* ══ HERO ════════════════════════════════════════ */
+.hero {
+  padding: 4rem 2rem 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(201,77,0,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--nn-light);
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(42px, 6vw, 64px);
+  letter-spacing: 3px;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.hero h1 span { color: var(--nn-light); }
+
+.hero-desc {
+  font-size: 18px;
+  color: var(--text2);
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ══ CONTENT ═════════════════════════════════════ */
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+
+.level-content {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.level-content.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ══ SECTIONS ════════════════════════════════════ */
+.section {
+  margin-top: 3rem;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 1.5rem;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--dark3);
+}
+
+.section-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.icon-orange { background: var(--nn-glow); }
+.icon-green { background: var(--green-bg); }
+.icon-blue { background: var(--blue-bg); }
+.icon-purple { background: var(--purple-bg); }
+.icon-amber { background: var(--amber-bg); }
+.icon-red { background: var(--red-bg); }
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 1.5px;
+  color: var(--text);
+}
+
+.section-sub {
+  font-size: 12px;
+  color: var(--text3);
+  letter-spacing: 0.5px;
+}
+
+/* ══ CARDS ═══════════════════════════════════════ */
+.card {
+  background: var(--dark2);
+  border: 1px solid var(--dark3);
+  border-radius: var(--r-lg);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s;
+}
+
+.card:hover { border-color: var(--dark4); }
+
+.card-accent {
+  border-left: 4px solid var(--nn);
+}
+
+.card-green { border-left: 4px solid var(--green); }
+.card-blue { border-left: 4px solid var(--blue); }
+.card-purple { border-left: 4px solid var(--purple); }
+.card-amber { border-left: 4px solid var(--amber); }
+.card-red { border-left: 4px solid var(--red); }
+
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-title .num {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--nn);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card p {
+  color: var(--text2);
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+
+.card p:last-child { margin-bottom: 0; }
+
+/* ══ COLLAPSIBLE ═════════════════════════════════ */
+.collapse-trigger {
+  width: 100%;
+  background: var(--dark2);
+  border: 1px solid var(--dark3);
+  border-radius: var(--r-lg);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-bottom: 4px;
+  transition: all 0.3s;
+  color: var(--text);
+  font-family: inherit;
+  font-size: inherit;
+  text-align: left;
+}
+
+.collapse-trigger:hover {
+  border-color: var(--nn);
+  background: var(--dark3);
+}
+
+.collapse-trigger.open {
+  border-color: var(--nn);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-bottom: 0;
+  background: var(--dark3);
+}
+
+.collapse-trigger .label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.collapse-trigger .fase-num {
+  background: var(--nn);
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.collapse-trigger .chevron {
+  transition: transform 0.3s;
+  color: var(--text3);
+}
+
+.collapse-trigger.open .chevron { transform: rotate(180deg); }
+
+.collapse-body {
+  display: none;
+  background: var(--dark2);
+  border: 1px solid var(--nn);
+  border-top: none;
+  border-bottom-left-radius: var(--r-lg);
+  border-bottom-right-radius: var(--r-lg);
+  padding: 1.5rem;
+  margin-bottom: 12px;
+  animation: slideDown 0.3s ease;
+}
+
+.collapse-body.open { display: block; }
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ══ DIALOGUE BOXES ══════════════════════════════ */
+.dialogue {
+  background: var(--dark3);
+  border-radius: var(--r);
+  padding: 1.25rem;
+  margin: 12px 0;
+  position: relative;
+}
+
+.dialogue-bad {
+  border-left: 4px solid var(--red);
+}
+
+.dialogue-good {
+  border-left: 4px solid var(--green);
+}
+
+.dialogue-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.label-bad { color: var(--red); }
+.label-good { color: var(--green); }
+
+.dialogue p {
+  color: var(--text2);
+  font-size: 15px;
+  line-height: 1.65;
+  margin-bottom: 6px;
+  font-style: italic;
+}
+
+.dialogue p:last-child { margin-bottom: 0; }
+
+.dialogue .speaker {
+  color: var(--nn-light);
+  font-weight: 600;
+  font-style: normal;
+}
+
+.dialogue .silence {
+  display: block;
+  text-align: center;
+  color: var(--amber);
+  font-weight: 600;
+  font-style: normal;
+  padding: 6px 0;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+/* ══ TIP BOXES ═══════════════════════════════════ */
+.tip {
+  background: rgba(201,77,0,0.06);
+  border: 1px solid rgba(201,77,0,0.2);
+  border-radius: var(--r);
+  padding: 1rem 1.25rem;
+  margin: 12px 0;
+}
+
+.tip-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--nn-light);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tip p {
+  color: var(--text2);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.warning {
+  background: var(--red-bg);
+  border: 1px solid rgba(239,68,68,0.25);
+}
+
+.warning .tip-title { color: var(--red); }
+
+.golden {
+  background: var(--amber-bg);
+  border: 1px solid rgba(245,158,11,0.25);
+}
+
+.golden .tip-title { color: var(--amber); }
+
+/* ══ COMPARISON TABLE ════════════════════════════ */
+.vs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.vs-col {
+  background: var(--dark3);
+  border-radius: var(--r);
+  padding: 1rem;
+}
+
+.vs-col.bad { border-top: 3px solid var(--red); }
+.vs-col.good { border-top: 3px solid var(--green); }
+
+.vs-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.vs-col.bad .vs-label { color: var(--red); }
+.vs-col.good .vs-label { color: var(--green); }
+
+.vs-col li {
+  color: var(--text2);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 4px;
+  margin-left: 16px;
+}
+
+/* ══ FLOW STEPS ══════════════════════════════════ */
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 16px 0;
+}
+
+.flow-step {
+  display: flex;
+  gap: 16px;
+  position: relative;
+}
+
+.flow-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 36px;
+}
+
+.flow-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--nn);
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.flow-connector {
+  width: 2px;
+  flex: 1;
+  background: var(--dark4);
+  min-height: 16px;
+}
+
+.flow-content {
+  padding-bottom: 20px;
+  flex: 1;
+}
+
+.flow-content h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.flow-content p {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.6;
+}
+
+/* ══ PRIORITY TABLE ══════════════════════════════ */
+.priority-grid {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.priority-row {
+  display: grid;
+  grid-template-columns: 40px 1fr 1fr 1fr auto;
+  gap: 10px;
+  align-items: center;
+  background: var(--dark3);
+  border-radius: var(--r);
+  padding: 12px 16px;
+  font-size: 14px;
+}
+
+.priority-rank {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: var(--nn-light);
+}
+
+.priority-profile { font-weight: 600; color: var(--text); }
+.priority-product { color: var(--text2); }
+.priority-pts {
+  font-weight: 700;
+  color: var(--green);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+}
+
+/* ══ CHECKLIST ═══════════════════════════════════ */
+.checklist {
+  margin: 12px 0;
+}
+
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--dark3);
+}
+
+.check-item:last-child { border-bottom: none; }
+
+.check-box {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--dark4);
+  border-radius: 6px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check-box.checked {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.check-box.checked::after {
+  content: '✓';
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.check-text {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.5;
+}
+
+.check-text strong { color: var(--text); }
+
+/* ══ KEYWORD ═════════════════════════════════════ */
+.kw {
+  display: inline-block;
+  background: var(--nn-glow);
+  color: var(--nn-light);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ══ QUOTE ═══════════════════════════════════════ */
+.quote {
+  border-left: 4px solid var(--nn);
+  padding: 1rem 1.5rem;
+  margin: 16px 0;
+  background: rgba(201,77,0,0.04);
+  border-radius: 0 var(--r) var(--r) 0;
+}
+
+.quote p {
+  font-size: 18px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.quote .author {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--nn-light);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+/* ══ TOAST ═══════════════════════════════════════ */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--nn);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  z-index: 200;
+  transition: transform 0.3s;
+  box-shadow: 0 8px 30px rgba(201,77,0,0.4);
+}
+
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ══ FOOTER ══════════════════════════════════════ */
+.footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  border-top: 1px solid var(--dark3);
+  margin-top: 4rem;
+}
+
+.footer-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: var(--text3);
+}
+
+.footer-brand span { color: var(--nn-light); }
+
+/* ══ RESPONSIVE ══════════════════════════════════ */
+@media (max-width: 768px) {
+  .header { padding: 0 1rem; }
+  .level-bar { padding: 0 0.5rem; overflow-x: auto; }
+  .level-tab { padding: 12px 14px; font-size: 12px; }
+  .hero { padding: 2.5rem 1.5rem 2rem; }
+  .content { padding: 0 1.25rem 3rem; }
+  .vs-grid { grid-template-columns: 1fr; }
+  .priority-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .priority-rank { display: none; }
+  .card { padding: 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <div>
+      <div class="logo-text">GUÍA MAESTRA ADN</div>
+      <div class="logo-sub">Manual del Asesor Consultivo · NN Xàtiva</div>
+    </div>
+  </div>
+  <a class="header-back" href="https://fedefonta08.github.io/propuestas-nn/" target="_blank">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Volver al Panel
+  </a>
+</div>
+
+<!-- ══ LEVEL TABS ══ -->
+<div class="level-bar">
+  <div class="level-tab active" onclick="switchLevel('quick')">
+    ⚡ Cheat Sheet <span class="level-badge badge-quick">1 MIN</span>
+  </div>
+  <div class="level-tab" onclick="switchLevel('guide')">
+    📋 Guía Práctica <span class="level-badge badge-guide">ESTUDIO</span>
+  </div>
+  <div class="level-tab" onclick="switchLevel('deep')">
+    🧠 Manual Profundo <span class="level-badge badge-deep">FORMACIÓN</span>
+  </div>
+</div>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="hero-label">Sistema de asesoramiento consultivo</div>
+  <h1>DIAGNOSTICA. NO <span>VENDAS.</span></h1>
+  <p class="hero-desc">El ADN no es un formulario. Es tu herramienta de diagnóstico financiero. Esta guía te enseña a usarlo para que el cliente descubra por sí mismo lo que necesita.</p>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════════════════════════════════════════
+     NIVEL 1: CHEAT SHEET
+═══════════════════════════════════════════════════ -->
+<div class="level-content active" id="level-quick">
+
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-orange">📞</div>
+      <div>
+        <div class="section-title">FLUJO RÁPIDO DE LA ENTREVISTA ADN</div>
+        <div class="section-sub">Consulta durante la entrevista · 5 fases</div>
+      </div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot">1</div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>APERTURA · 3 minutos</h4>
+          <p><span class="speaker">"No estoy aquí para venderte nada. Estoy aquí para ayudarte a descubrir si tienes algún agujero en tu protección que no has visto."</span></p>
+          <div class="tip">
+            <div class="tip-title">🎯 Clave</div>
+            <p>Pide permiso. Establece que tu rol es diagnosticar, no vender. El cliente debe sentir que ELIGE participar.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot">2</div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>DESCUBRIMIENTO · 10-15 minutos</h4>
+          <p>Pregunta abierta: <span class="speaker">"¿Cómo es un mes normal para ti económicamente?"</span></p>
+          <p>Refleja sus números: <span class="speaker">"Entonces te sobran unos Z € al mes... ¿a dónde van?"</span></p>
+          <p>Pregunta demoledora: <span class="speaker">"Si mañana tienes una emergencia grave, ¿de dónde sale el dinero?"</span></p>
+          <div class="golden">
+            <div class="tip-title">⚡ Regla de oro</div>
+            <p>USA SUS NÚMEROS, NO LOS TUYOS. "Tú has dicho que..." es imbatible.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot">3</div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>ACTIVAR CONCIENCIA · 5-10 minutos</h4>
+          <p>IT: <span class="speaker">"Si no puedes trabajar 6 meses, ¿cómo cubres tus gastos?"</span></p>
+          <p>Familia: <span class="speaker">"Si tú faltas, ¿cómo vive tu familia el mes que viene?"</span></p>
+          <p>Jubilación: <span class="speaker">"¿De dónde van a salir esos € al mes cuando no trabajes?"</span></p>
+          <div class="warning">
+            <div class="tip-title">🤫 Silencio</div>
+            <p>Después de la pregunta, CÁLLATE. Cuenta hasta 10. El que habla primero pierde poder. Deja que el cliente conecte.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot">4</div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>RECAPITULACIÓN · 2-3 minutos</h4>
+          <p><span class="speaker">"Recapitulemos: (1) si no puedes trabajar, no tienes cómo cubrir gastos. (2) Si faltas, tu familia no tiene cómo mantenerse. (3) Cuando te jubiles, te van a faltar X € al mes. ¿Estoy equivocado en algo?"</span></p>
+          <p>Luego: <span class="speaker">"¿Qué quieres hacer con esta información?"</span></p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot">5</div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>SOLUCIÓN NATURAL · 5-10 minutos</h4>
+          <p><span class="speaker">"No te voy a vender nada que no necesites. Pero sí te enseño cómo cerrar estos agujeros. ¿Te las explico y tú decides?"</span></p>
+          <div class="tip">
+            <div class="tip-title">🎯 Cierre suave</div>
+            <p>"¿Empezamos con [producto] y luego vemos el resto, o prefieres cerrar todo de una vez?"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHEAT: OBJECIONES RÁPIDAS -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-red">🛡️</div>
+      <div>
+        <div class="section-title">OBJECIONES — RESPUESTA RÁPIDA</div>
+        <div class="section-sub">Copia y usa · Las 5 más frecuentes</div>
+      </div>
+    </div>
+
+    <div class="card card-red">
+      <div class="card-title">"Es muy caro"</div>
+      <p><span class="speaker">"¿Caro comparado con qué? Si mañana no puedes trabajar, pierdes X € al mes. Este producto te cubre Y €. ¿Qué es más caro: pagar 200 €/mes ahora o perder 2.000 €/mes si te pasa algo?"</span></p>
+    </div>
+
+    <div class="card card-amber">
+      <div class="card-title">"Déjame pensarlo"</div>
+      <p><span class="speaker">"Por supuesto. Pero antes: ¿qué parte no te ha quedado clara? ¿Es el precio, la necesidad, o el producto?"</span></p>
+      <p>Después: <span class="speaker">"Si dentro de 6 meses tienes un accidente, ¿vas a pensar 'menos mal que contraté' o 'por qué esperé'?"</span></p>
+    </div>
+
+    <div class="card card-blue">
+      <div class="card-title">"Ya tengo seguro"</div>
+      <p><span class="speaker">"Perfecto. ¿Qué cobertura tienes? ¿Cuánto te cubre al mes si no puedes trabajar? ¿Durante cuánto tiempo?"</span></p>
+      <p>Después: <span class="speaker">"Tus gastos son Z € al mes. ¿Cómo cubres la diferencia?"</span></p>
+    </div>
+
+    <div class="card card-purple">
+      <div class="card-title">"Tengo que consultarlo con mi pareja"</div>
+      <p><span class="speaker">"Me parece perfecto. ¿Qué crees que le preocupará más: el precio o la necesidad? Te preparo un resumen para que decidáis juntos."</span></p>
+    </div>
+
+    <div class="card card-green">
+      <div class="card-title">"No es el momento"</div>
+      <p><span class="speaker">"Entiendo. ¿Cuál sería el momento? Porque los accidentes no esperan al momento adecuado..."</span></p>
+    </div>
+  </div>
+
+  <!-- CHEAT: DECISIÓN RÁPIDA -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-green">🎯</div>
+      <div>
+        <div class="section-title">¿QUÉ PRODUCTO PRIMERO?</div>
+        <div class="section-sub">Árbol de decisión rápido</div>
+      </div>
+    </div>
+
+    <div class="card card-accent">
+      <p><strong>¿Autónomo?</strong> → <span class="kw">Contigo Autónomo</span> (dolor IT agudo)</p>
+      <p><strong>¿Hijos o pareja dependiente?</strong> → <span class="kw">Plan Salud+Vida</span> (protección familiar)</p>
+      <p><strong>¿Mayor de 50?</strong> → <span class="kw">Plan Creciente SIALP</span> (urgencia jubilación)</p>
+      <p><strong>¿Casa sin seguro hogar?</strong> → <span class="kw">MiHogar Seguro</span> (cierre fácil)</p>
+      <p><strong>¿Ninguna anterior?</strong> → <span class="kw">Plan Salud+Vida</span> (producto estrella universal)</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     NIVEL 2: GUÍA PRÁCTICA
+═══════════════════════════════════════════════════ -->
+<div class="level-content" id="level-guide">
+
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-orange">🧬</div>
+      <div>
+        <div class="section-title">CÓMO FUNCIONA EL ADN POR DENTRO</div>
+        <div class="section-sub">Lo que el formulario realmente mide en cada bloque</div>
+      </div>
+    </div>
+
+    <!-- BLOQUE 1 -->
+    <button class="collapse-trigger" onclick="toggleCollapse(this)">
+      <div class="label"><div class="fase-num">1</div> Ingresos y Gastos — Capacidad de pago oculta</div>
+      <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="collapse-body">
+      <p>El ADN pide ingresos, gastos, ahorro acumulado y ahorro jubilación. No es un formulario fiscal: es un escáner de vulnerabilidades.</p>
+      <p><strong>Lo que realmente calcula:</strong></p>
+      <p>→ <strong>Ingresos – Gastos</strong> = capacidad de ahorro real. Si gana 60.000 € y gasta 48.000 €, tiene 1.000 €/mes de margen aunque no ahorre nada.</p>
+      <p>→ <strong>Ahorro acumulado = 0 €</strong> con ingresos altos = perfil reactivo (solo actúa ante crisis).</p>
+      <p>→ <strong>Ahorro jubilación = 0 €</strong> = miopía de futuro. Palanca: "¿Cómo vas a vivir cuando no puedas trabajar?"</p>
+      <p>→ <strong>Gastos anuales</strong> = su estándar de vida. Cualquier amenaza a ese nivel genera ansiedad inmediata.</p>
+
+      <div class="dialogue dialogue-good">
+        <div class="dialogue-label label-good">ASÍ SE PREGUNTA</div>
+        <p><span class="speaker">Agente:</span> "Cuéntame: ¿cómo es un mes normal para ti económicamente? Sin entrar en detalles, más o menos... ¿cuánto entra y cuánto sale?"</p>
+        <p><span class="speaker">Agente:</span> "Vale, entonces te sobran unos Z € al mes... ¿a dónde van?"</p>
+        <p><span class="speaker">Agente:</span> "Y si mañana tienes una emergencia grave, ¿de dónde sale el dinero?"</p>
+        <p><span class="silence">— SILENCIO. DEJAR QUE PROCESE —</span></p>
+      </div>
+
+      <div class="tip">
+        <div class="tip-title">🎯 Lo que consigues</div>
+        <p>El cliente verbaliza que no tiene colchón. No se lo dices tú: lo descubre él. Esa es la diferencia entre vender y diagnosticar.</p>
+      </div>
+    </div>
+
+    <!-- BLOQUE 2 -->
+    <button class="collapse-trigger" onclick="toggleCollapse(this)">
+      <div class="label"><div class="fase-num">2</div> Datos personales — Segmentación de riesgo</div>
+      <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="collapse-body">
+      <p>Edad, estado civil, hijos, régimen SS, años cotizados. Cada campo segmenta al cliente:</p>
+      <p>→ <strong>Edad</strong> = reloj de urgencia. 25-35: protección IT. 36-50: familia + jubilación. 51-65: urgencia jubilación. 65+: rentas vitalicias.</p>
+      <p>→ <strong>Casado + hijos</strong> = multiplicador emocional. "Si tú faltas, ¿quién paga la universidad?"</p>
+      <p>→ <strong>Autónomo + pocos años cotizados</strong> = desprotección total en IT y jubilación.</p>
+
+      <div class="golden">
+        <div class="tip-title">⚡ Clave práctica</div>
+        <p>Años hasta jubilación = tu ventana de venta para ahorro. Dependientes = tu palanca emocional para protección. Régimen SS = tu argumento para IT complementaria.</p>
+      </div>
+    </div>
+
+    <!-- BLOQUE 3 -->
+    <button class="collapse-trigger" onclick="toggleCollapse(this)">
+      <div class="label"><div class="fase-num">3</div> Protección — La falsa dicotomía</div>
+      <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="collapse-body">
+      <p>El ADN pregunta: ¿Protección personal (IT) o protección familiar (fallecimiento/IPA)?</p>
+      <p>Está diseñado para que el cliente no pueda elegir solo una sin sentirse desprotegido. Si elige IT, ¿y si fallece? Si elige vida, ¿y si se incapacita?</p>
+      <p><strong>Lectura del cliente:</strong></p>
+      <p>→ Solo elige IT = perfil reactivo, piensa en el presente.</p>
+      <p>→ Elige vida/IPA = perfil previsor, piensa en los suyos.</p>
+      <p>→ Quiere ambas = cliente ideal, abierto a paquete combinado.</p>
+    </div>
+
+    <!-- BLOQUE 4 -->
+    <button class="collapse-trigger" onclick="toggleCollapse(this)">
+      <div class="label"><div class="fase-num">4</div> Necesidad prioritaria — Puerta de entrada</div>
+      <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="collapse-body">
+      <p>Jubilación, Protección, Ahorro o Hogar. El cliente elige una, pero ninguna existe aislada:</p>
+      <p>→ Elige <span class="kw">Jubilación</span>: le muestras que sin protección no llegará a jubilarse.</p>
+      <p>→ Elige <span class="kw">Protección</span>: le muestras que sin ahorro estará protegido pero pobre.</p>
+      <p>→ Elige <span class="kw">Ahorro</span>: cliente con excedente, busca rentabilidad.</p>
+      <p>→ Elige <span class="kw">Hogar</span>: bajo valor, pero es puerta de entrada para cross-selling.</p>
+
+      <div class="tip">
+        <div class="tip-title">🎯 Estrategia</div>
+        <p>Empieza siempre por su dolor activo (lo que elige). Luego expande al dolor latente (lo que no ha visto). Nunca vendas todo de golpe.</p>
+      </div>
+    </div>
+
+    <!-- BLOQUE 5 -->
+    <button class="collapse-trigger" onclick="toggleCollapse(this)">
+      <div class="label"><div class="fase-num">5</div> Jubilación — El generador de urgencia</div>
+      <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="collapse-body">
+      <p>El ADN pregunta si las pensiones se mantendrán y pide un % de reducción estimado. El cliente está calculando su propia brecha futura.</p>
+
+      <div class="dialogue dialogue-good">
+        <div class="dialogue-label label-good">CONVERSACIÓN TIPO</div>
+        <p><span class="speaker">Agente:</span> "Dentro de X años, cuando dejes de trabajar... ¿cómo te imaginas que vas a vivir?"</p>
+        <p><span class="speaker">Cliente:</span> "Pues... bien, supongo."</p>
+        <p><span class="speaker">Agente:</span> "¿'Bien' significa con el mismo nivel de vida que ahora?"</p>
+        <p><span class="speaker">Cliente:</span> "Sí, igual o mejor."</p>
+        <p><span class="speaker">Agente:</span> "Si hoy gastas X € al mes, cuando te jubiles vas a necesitar lo mismo. La pregunta del millón: ¿de dónde van a salir esos € cuando no estés trabajando?"</p>
+        <p><span class="speaker">Cliente:</span> "De la pensión..."</p>
+        <p><span class="speaker">Agente:</span> "Con Y años cotizados, probablemente entre Z1 y Z2 €. Eso es GAP € menos de lo que necesitas. Cada mes. Durante 20-25 años. ¿Cómo piensas cerrar esa brecha?"</p>
+        <p><span class="silence">— SILENCIO LARGO. DEJAR QUE CAIGA EL PESO —</span></p>
+      </div>
+    </div>
+
+    <!-- BLOQUE 6 -->
+    <button class="collapse-trigger" onclick="toggleCollapse(this)">
+      <div class="label"><div class="fase-num">6</div> Gráfico de brechas — El espejo financiero</div>
+      <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="collapse-body">
+      <p>El ADN genera un gráfico automático: barra naranja (lo que necesita) vs barras pequeñas (lo que tiene). Es un diagnóstico visual que elimina la negación.</p>
+      <p>→ El cliente ve que la barra de su objetivo es el doble que la de su protección actual.</p>
+      <p>→ Si dice "no puedo permitirme 200 €/mes" pero el sistema muestra 2.200 € de ahorro disponible, puedes señalar la contradicción.</p>
+
+      <div class="golden">
+        <div class="tip-title">⚡ Momento clave</div>
+        <p>Este es el punto de máxima conciencia. El cliente VE su problema. No lo interrumpas. Deja que lo procese. Después pregunta: "¿Qué quieres hacer con esta información?"</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUÍA: TÉCNICAS DE ESCUCHA -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-blue">👂</div>
+      <div>
+        <div class="section-title">TÉCNICAS DE ESCUCHA ACTIVA</div>
+        <div class="section-sub">Las 5 herramientas del asesor consultivo</div>
+      </div>
+    </div>
+
+    <div class="card card-blue">
+      <div class="card-title"><span class="num">1</span> El Espejo (Mirroring)</div>
+      <p>Repite las últimas 2-3 palabras del cliente en forma de pregunta. Él sigue hablando y revelando información sin que hagas preguntas invasivas.</p>
+      <div class="dialogue dialogue-good">
+        <p><span class="speaker">Cliente:</span> "Es que ahora mismo no puedo permitírmelo..."</p>
+        <p><span class="speaker">Agente:</span> "¿No puedes permitírtelo?"</p>
+        <p><span class="speaker">Cliente:</span> "Bueno, es que tengo muchos gastos... la hipoteca, el colegio..."</p>
+      </div>
+    </div>
+
+    <div class="card card-blue">
+      <div class="card-title"><span class="num">2</span> El Etiquetado (Labeling)</div>
+      <p>Verbaliza la emoción que percibes. El cliente se siente comprendido y baja defensas.</p>
+      <div class="dialogue dialogue-good">
+        <p><span class="speaker">Cliente:</span> (tono dubitativo) "No sé... es mucho dinero..."</p>
+        <p><span class="speaker">Agente:</span> "Parece que te preocupa el compromiso económico..."</p>
+        <p><span class="speaker">Cliente:</span> "Sí, es que si me comprometo a 200 €/mes y luego tengo un imprevisto..."</p>
+      </div>
+    </div>
+
+    <div class="card card-blue">
+      <div class="card-title"><span class="num">3</span> Silencio Calibrado</div>
+      <p>Después de una pregunta dura, cuenta mentalmente hasta 10. El 90% de las veces el cliente habla antes.</p>
+      <div class="vs-grid">
+        <div class="vs-col bad">
+          <div class="vs-label">Agente novato</div>
+          <p style="font-size:14px;color:var(--text2)">"Bueno, es que... quiero decir... imagino que es difícil..."</p>
+          <p style="font-size:13px;color:var(--red)">Rompe la tensión. El cliente no conecta.</p>
+        </div>
+        <div class="vs-col good">
+          <div class="vs-label">Agente experto</div>
+          <p style="font-size:14px;color:var(--text2)">Silencio. Contacto visual tranquilo. Espera.</p>
+          <p style="font-size:13px;color:var(--green)">El cliente verbaliza su vulnerabilidad.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-blue">
+      <div class="card-title"><span class="num">4</span> Preguntas Calibradas</div>
+      <p>Empiezan con "¿Cómo...?" o "¿Qué...?" y obligan a pensar. Evita siempre preguntas cerradas (sí/no).</p>
+      <p>→ "¿Cómo piensas resolver esto?"</p>
+      <p>→ "¿Qué pasaría si...?"</p>
+      <p>→ "¿Cómo afectaría esto a tu familia?"</p>
+      <p>→ "¿Qué te impide dar el paso hoy?"</p>
+    </div>
+
+    <div class="card card-blue">
+      <div class="card-title"><span class="num">5</span> Resumen Acumulativo</div>
+      <p>Cada 10-15 minutos, resume lo que el cliente ha dicho. Le devuelves SUS respuestas. Confirma su situación sin que tú lo juzgues.</p>
+      <div class="dialogue dialogue-good">
+        <p><span class="speaker">Agente:</span> "Déjame ver si lo he entendido: ganas X €, gastas Y €, no tienes ahorro acumulado, si mañana no puedes trabajar no sabes cómo cubrirías los gastos, y te preocupa tu jubilación pero no has empezado a ahorrar. ¿Es correcto?"</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUÍA: CROSS-SELLING -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-green">📈</div>
+      <div>
+        <div class="section-title">CROSS-SELLING SECUENCIAL</div>
+        <div class="section-sub">Nunca vendas todo de golpe — 5 pasos en el tiempo</div>
+      </div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot">1</div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>Venta inicial — Producto ancla</h4>
+          <p>Cierra el producto que resuelve el dolor más agudo. Nada más.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot">2</div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>Entrega/Firma — Semana 1-2</h4>
+          <p>"¿Cómo te sientes ahora que tienes esto cerrado?"</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot">3</div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>Apertura brecha secundaria — Semana 2-3</h4>
+          <p>"Me quedó en la cabeza el tema de [brecha no cerrada]. ¿Lo hablamos?"</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot">4</div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>Venta cruzada — Mes 2</h4>
+          <p>Presenta solución para la segunda brecha.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot">5</div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>Cliente recurrente — Mes 6-12</h4>
+          <p>"Han pasado X meses. ¿Ha cambiado algo? ¿Hijos nuevos? ¿Cambio laboral? Revisemos."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUÍA: PRIORIZACIÓN POR PERFIL -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-purple">👤</div>
+      <div>
+        <div class="section-title">MAPA DE PRIORIZACIÓN POR PERFIL</div>
+        <div class="section-sub">Qué vender primero según el tipo de cliente</div>
+      </div>
+    </div>
+
+    <div class="card card-accent" style="margin-bottom:8px;">
+      <div class="card-title" style="font-size:14px;">Autónomo joven (25-40)</div>
+      <p><span class="kw">Contigo Autónomo</span> → <span class="kw">Plan Salud+Vida</span> → <span class="kw">SIALP</span> · PVM estimado: ~3.300 pts</p>
+      <p style="font-size:14px;color:var(--text3)">"Protege tu presente + construye tu futuro"</p>
+    </div>
+    <div class="card card-accent" style="margin-bottom:8px;">
+      <div class="card-title" style="font-size:14px;">Familia con hijos (30-50)</div>
+      <p><span class="kw">Plan Salud+Vida</span> → <span class="kw">Contigo Familia</span> → <span class="kw">MiHogar</span> · PVM estimado: ~2.100 pts</p>
+      <p style="font-size:14px;color:var(--text3)">"Protección 360º de los tuyos"</p>
+    </div>
+    <div class="card card-accent" style="margin-bottom:8px;">
+      <div class="card-title" style="font-size:14px;">Pre-jubilado (55-65)</div>
+      <p><span class="kw">SIALP</span> → <span class="kw">Contigo Senior</span> → <span class="kw">Plan Salud+Vida</span> · PVM estimado: ~3.500 pts</p>
+      <p style="font-size:14px;color:var(--text3)">"Último tren para tu jubilación digna"</p>
+    </div>
+    <div class="card card-accent" style="margin-bottom:8px;">
+      <div class="card-title" style="font-size:14px;">Senior 65+</div>
+      <p><span class="kw">Contigo Senior</span> → <span class="kw">Renta Vitalicia</span> → <span class="kw">MiHogar</span> · PVM estimado: ~2.200 pts</p>
+      <p style="font-size:14px;color:var(--text3)">"Dignidad y tranquilidad en la vejez"</p>
+    </div>
+    <div class="card card-accent" style="margin-bottom:8px;">
+      <div class="card-title" style="font-size:14px;">Constructor patrimonial (40-55)</div>
+      <p><span class="kw">SIALP</span> → <span class="kw">Protección Plus</span> → <span class="kw">PPSA</span> · PVM estimado: ~4.200 pts</p>
+      <p style="font-size:14px;color:var(--text3)">"Optimización fiscal + construcción patrimonio"</p>
+    </div>
+    <div class="card card-accent">
+      <div class="card-title" style="font-size:14px;">Empleado cuenta ajena (30-50)</div>
+      <p><span class="kw">Plan Salud+Vida</span> → <span class="kw">PPSA</span> → <span class="kw">MiHogar + Auto</span> · PVM estimado: ~2.500 pts</p>
+      <p style="font-size:14px;color:var(--text3)">"Fiscalidad + protección + patrimonio"</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     NIVEL 3: MANUAL PROFUNDO
+═══════════════════════════════════════════════════ -->
+<div class="level-content" id="level-deep">
+
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-purple">🧠</div>
+      <div>
+        <div class="section-title">MINDSET: ASESOR VS VENDEDOR</div>
+        <div class="section-sub">El cambio mental que lo cambia todo</div>
+      </div>
+    </div>
+
+    <div class="vs-grid">
+      <div class="vs-col bad">
+        <div class="vs-label">Vendedor de pólizas</div>
+        <ul>
+          <li>Objetivo: colocar producto</li>
+          <li>"¿Qué quieres comprar?"</li>
+          <li>Resistencia alta (huelen venta)</li>
+          <li>Foco: características del producto</li>
+          <li>Cierre: presión ("Firma aquí")</li>
+          <li>Resultado: venta única</li>
+          <li>Relación: termina tras la firma</li>
+        </ul>
+      </div>
+      <div class="vs-col good">
+        <div class="vs-label">Asesor de ADN</div>
+        <ul>
+          <li>Objetivo: descubrir vulnerabilidades</li>
+          <li>"¿Qué te pasaría si...?"</li>
+          <li>Resistencia baja (sienten ayuda)</li>
+          <li>Foco: problemas del cliente</li>
+          <li>Cierre: natural ("¿Qué quieres hacer?")</li>
+          <li>Resultado: cliente recurrente + referidos</li>
+          <li>Relación: empieza tras la firma</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="quote">
+      <p>"No estoy aquí para venderle nada. Estoy aquí para ayudarle a descubrir si tiene problemas que aún no ha visto. Si los tiene, le enseñaré cómo solucionarlos. Si no los tiene, se lo diré y nos despediremos."</p>
+      <div class="author">— Mantra pre-entrevista</div>
+    </div>
+
+    <div class="card">
+      <p>Este mindset elimina TU ansiedad comercial, que el cliente percibe inconscientemente. Cuando tú estás relajado porque no "necesitas" vender, el cliente baja defensas.</p>
+      <p><strong>Vendedor piensa:</strong> "Necesito cerrar esta venta." / "¿Cómo le convenzo?"</p>
+      <p><strong>Asesor piensa:</strong> "¿Qué riesgos tiene que no ve?" / "¿Cómo le ayudo a descubrirlos?"</p>
+      <p>El cambio es sutil pero poderoso. Cuando dejas de intentar vender y empiezas a diagnosticar vulnerabilidades, tu lenguaje corporal, tu tono, tus preguntas... todo cambia. El cliente lo percibe.</p>
+    </div>
+  </div>
+
+  <!-- DEEP: 3 REGLAS DE ORO -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-amber">⚡</div>
+      <div>
+        <div class="section-title">3 REGLAS DE ORO INNEGOCIABLES</div>
+        <div class="section-sub">Rompe una y pierdes la venta</div>
+      </div>
+    </div>
+
+    <div class="card card-amber">
+      <div class="card-title"><span class="num" style="background:var(--amber)">1</span> Nunca presentes la solución antes de que el cliente verbalice el problema</div>
+
+      <div class="vs-grid">
+        <div class="vs-col bad">
+          <div class="vs-label">Error</div>
+          <p style="font-size:14px;color:var(--text2)">"Tienes que contratar Plan Salud+Vida porque si te pasa algo grave y la sanidad pública tiene lista de espera..."</p>
+          <p style="font-size:13px;color:var(--red)">Tú creas el problema. El cliente no conecta.</p>
+        </div>
+        <div class="vs-col good">
+          <div class="vs-label">Correcto</div>
+          <p style="font-size:14px;color:var(--text2)">"¿Qué pasaría si mañana te diagnostican algo grave y te dicen que la cita es dentro de 4 meses?"</p>
+          <p style="font-size:13px;color:var(--green)">Él descubre el problema. Se abre.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-amber">
+      <div class="card-title"><span class="num" style="background:var(--amber)">2</span> Usa sus números, nunca los tuyos</div>
+      <div class="vs-grid">
+        <div class="vs-col bad">
+          <div class="vs-label">Error</div>
+          <p style="font-size:14px;color:var(--text2)">"La pensión media en España es de 1.200 €. Eso no te va a alcanzar."</p>
+          <p style="font-size:13px;color:var(--red)">Estadísticas genéricas. Puede pensar "a mí me irá mejor".</p>
+        </div>
+        <div class="vs-col good">
+          <div class="vs-label">Correcto</div>
+          <p style="font-size:14px;color:var(--text2)">"TÚ has dicho que necesitas 1.800 €/mes. Con 15 años cotizados, la SS te dará unos 900 €. Tus propios números dicen que te faltan 900 €/mes."</p>
+          <p style="font-size:13px;color:var(--green)">No pueden rebatir SUS propios datos.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-amber">
+      <div class="card-title"><span class="num" style="background:var(--amber)">3</span> Si dicen "déjame pensarlo", no has creado suficiente urgencia</div>
+      <p>Las 3 razones reales detrás de "déjame pensarlo":</p>
+      <p>→ <strong>Precio:</strong> Fraccionamiento. "¿Prefieres pagar 200 €/mes o arriesgarte a perder 2.000 €/mes?"</p>
+      <p>→ <strong>Urgencia:</strong> Proyección. "Los accidentes no esperan. ¿Qué pasa si ocurre mientras piensas?"</p>
+      <p>→ <strong>Confianza:</strong> Transferencia social. "¿Quieres que hable con [quien te recomendó] para que confirme?"</p>
+    </div>
+  </div>
+
+  <!-- DEEP: BLOQUEADORES MENTALES -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-red">🧱</div>
+      <div>
+        <div class="section-title">BLOQUEADORES MENTALES DEL AGENTE</div>
+        <div class="section-sub">Miedos que te frenan y cómo superarlos</div>
+      </div>
+    </div>
+
+    <div class="card card-red">
+      <div class="card-title">"Es invasivo preguntar cuánto gana alguien"</div>
+      <p><strong>Realidad:</strong> Solo es invasivo si no has creado confianza antes.</p>
+      <p><strong>Solución:</strong> Permiso anticipado. "Vamos a hablar de algo más personal: tu economía. No necesito saber al céntimo, solo entender tu situación general. ¿Te parece bien?" — Nadie dice que no.</p>
+    </div>
+
+    <div class="card card-red">
+      <div class="card-title">"Y si se ofende y se va"</div>
+      <p><strong>Realidad:</strong> Si se ofende por preguntas profesionales hechas con respeto, no tenía intención real. Mejor perderlo ahora que perder 2 horas.</p>
+      <p><strong>Solución:</strong> Enmarca dentro del servicio. "Para recomendarte lo adecuado, necesito entender tu capacidad económica. No busco datos de banco, solo saber si hablamos de 100, 300 o 500 €/mes."</p>
+    </div>
+
+    <div class="card card-red">
+      <div class="card-title">"No sé qué hacer con los silencios incómodos"</div>
+      <p><strong>Realidad:</strong> Los silencios NO son incómodos. Son momentos de procesamiento emocional.</p>
+      <p><strong>Solución:</strong> CÁLLATE Y ESPERA. Cuenta hasta 10. Si llegan los 15-20 segundos sin respuesta: "Veo que es una pregunta difícil de responder..."</p>
+    </div>
+  </div>
+
+  <!-- DEEP: ERRORES FATALES -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-red">💀</div>
+      <div>
+        <div class="section-title">ERRORES FATALES QUE DESTRUYEN LA VENTA</div>
+        <div class="section-sub">Evítalos siempre</div>
+      </div>
+    </div>
+
+    <div class="card card-red">
+      <div class="card-title">Hablar de características en lugar de beneficios</div>
+      <div class="vs-grid">
+        <div class="vs-col bad">
+          <div class="vs-label">Fatal</div>
+          <p style="font-size:14px;color:var(--text2)">"Este Plan Creciente tiene gestión 50/50 de Goldman Sachs con garantías desde día 1."</p>
+        </div>
+        <div class="vs-col good">
+          <div class="vs-label">Correcto</div>
+          <p style="font-size:14px;color:var(--text2)">"Si aportas 200 €/mes durante 10 años, llegas con 30.000 € que te dan 300 € extra cada mes para siempre. ¿Qué harías con esos 300 €?"</p>
+        </div>
+      </div>
+      <p style="font-size:14px;color:var(--amber)"><strong>Regla:</strong> Nadie compra "gestión Goldman Sachs". Compran tranquilidad en la vejez.</p>
+    </div>
+
+    <div class="card card-red">
+      <div class="card-title">No cuantificar el dolor</div>
+      <div class="vs-grid">
+        <div class="vs-col bad">
+          <div class="vs-label">Abstracto</div>
+          <p style="font-size:14px;color:var(--text2)">"Si no puedes trabajar, estarías en problemas."</p>
+        </div>
+        <div class="vs-col good">
+          <div class="vs-label">Concreto</div>
+          <p style="font-size:14px;color:var(--text2)">"Si no puedes trabajar 6 meses y tus gastos son 2.000 €/mes, son 12.000 € que no van a entrar. ¿De dónde salen?"</p>
+        </div>
+      </div>
+      <p style="font-size:14px;color:var(--amber)"><strong>Regla:</strong> El dolor abstracto no vende. El dolor con número específico sí.</p>
+    </div>
+
+    <div class="card card-red">
+      <div class="card-title">Competir por precio</div>
+      <p><strong>Cliente:</strong> "En otra compañía me sale más barato."</p>
+      <p><strong>Nunca:</strong> "Sí, pero nosotros tenemos mejor servicio."</p>
+      <p><strong>Siempre:</strong> "¿Qué coberturas tiene? ¿Cuánto te cubre al mes? ¿Durante cuánto tiempo? Tus gastos son Z €. ¿Cómo cubres la diferencia?"</p>
+      <p style="font-size:14px;color:var(--amber)"><strong>Regla:</strong> Nunca compares precio vs precio. Compara cobertura vs cobertura.</p>
+    </div>
+  </div>
+
+  <!-- DEEP: AUTOEVALUACIÓN -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-green">✅</div>
+      <div>
+        <div class="section-title">AUTOEVALUACIÓN POST-ENTREVISTA</div>
+        <div class="section-sub">Responde después de cada ADN</div>
+      </div>
+    </div>
+
+    <div class="checklist" id="checklist">
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Apertura:</strong> ¿Conseguí que se sintiera cómodo en los primeros 3 minutos?</div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Apertura:</strong> ¿Establecí que mi rol es ayudar, no vender?</div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Descubrimiento:</strong> ¿El cliente verbalizó sus problemas con sus propias palabras?</div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Descubrimiento:</strong> ¿Usé más preguntas que afirmaciones?</div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Descubrimiento:</strong> ¿Respeté los silencios sin interrumpir?</div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Soluciones:</strong> ¿Presenté DESPUÉS de que viera el problema?</div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Soluciones:</strong> ¿Usé los números del cliente, no estadísticas generales?</div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Cierre:</strong> ¿El cliente tomó la decisión por sí mismo?</div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Cierre:</strong> ¿Manejé objeciones identificando la razón real?</div></div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Cierre:</strong> ¿Terminé con próximos pasos claros?</div></div>
+    </div>
+
+    <div class="card" style="text-align:center; margin-top:12px;">
+      <p style="font-size:14px;color:var(--text3)">9-10 ✓ = <span style="color:var(--green);font-weight:700">Asesor experto</span> · 7-8 = <span style="color:var(--blue);font-weight:700">Competente</span> · 5-6 = <span style="color:var(--amber);font-weight:700">En desarrollo</span> · &lt;5 = <span style="color:var(--red);font-weight:700">Vendedor, no asesor</span></p>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- .content -->
+
+<!-- ══ FOOTER ══ -->
+<div class="footer">
+  <div class="footer-brand">GUÍA MAESTRA ADN · <span>Fede Fontanals</span> · Punto Naranja NN Xàtiva</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── TABS ──────────────────────────────────────
+function switchLevel(level) {
+  document.querySelectorAll('.level-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.level-content').forEach(c => c.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.getElementById('level-' + level).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── COLLAPSE ─────────────────────────────────
+function toggleCollapse(trigger) {
+  const body = trigger.nextElementSibling;
+  const isOpen = trigger.classList.contains('open');
+
+  // Close all others
+  document.querySelectorAll('.collapse-trigger.open').forEach(t => {
+    if (t !== trigger) {
+      t.classList.remove('open');
+      t.nextElementSibling.classList.remove('open');
+    }
+  });
+
+  trigger.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+
+// ── CHECKLIST ────────────────────────────────
+function toggleCheck(box) {
+  box.classList.toggle('checked');
+  const total = document.querySelectorAll('.check-box').length;
+  const checked = document.querySelectorAll('.check-box.checked').length;
+  if (checked === total) {
+    showToast('🎉 10/10 — ¡Asesor experto!');
+  } else if (checked > 0) {
+    showToast(checked + '/' + total + ' completados');
+  }
+}
+
+// ── TOAST ────────────────────────────────────
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2200);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estrategia Inmobiliarias · NN Hipotecas · Cullera</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Karla:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --nn:#FF6200;--nn2:#FF8533;--nn3:#FFB380;
+  --ab:#005A9C;--ab2:#1a75b8;
+  --bg:#FAFAF8;--bg2:#F5F3EE;--bg3:#EDE9E0;
+  --dark:#0D1117;--dark2:#1A1F26;
+  --text:#1a1a2e;--text2:#4a4a6a;--text3:#8a8aaa;
+  --border:#E0DDD5;--border2:#C8C4BB;
+  --card:#FFFFFF;
+  --green:#0a7c5c;--green-pale:#E8F7F2;
+  --red:#c0392b;--red-pale:#FEF0EF;
+  --amber:#7d5a00;--amber-pale:#FFF8E6;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Karla',sans-serif;
+  background:var(--bg);color:var(--text);
+  font-size:15px;line-height:1.6;
+}
+
+/* ─── HERO ─── */
+.hero{
+  background:var(--dark);
+  min-height:280px;
+  padding:3rem 2rem 2.5rem;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:flex-end;
+}
+.hero-bg-text{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(80px,18vw,180px);
+  color:rgba(255,255,255,0.04);
+  white-space:nowrap;letter-spacing:8px;
+  pointer-events:none;user-select:none;
+}
+.hero-accent-line{
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--nn),var(--nn2),transparent);
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(255,98,0,0.15);border:1px solid rgba(255,98,0,0.3);
+  color:var(--nn2);padding:4px 14px;border-radius:4px;
+  font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  margin-bottom:1rem;width:fit-content;
+}
+.hero h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(36px,7vw,64px);
+  color:white;line-height:1;
+  letter-spacing:2px;
+  margin-bottom:0.75rem;
+}
+.hero h1 span{color:var(--nn)}
+.hero-sub{
+  font-size:14px;color:rgba(255,255,255,0.5);
+  max-width:520px;margin-bottom:1.5rem;font-weight:300;
+}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap}
+.hpill{
+  padding:4px 12px;border-radius:3px;
+  font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+}
+.hpill-ing{background:rgba(255,98,0,0.15);border:1px solid rgba(255,98,0,0.3);color:var(--nn2)}
+.hpill-ab{background:rgba(91,163,217,0.12);border:1px solid rgba(91,163,217,0.25);color:#5ba3d9}
+.hpill-v{background:rgba(29,158,117,0.12);border:1px solid rgba(29,158,117,0.25);color:#1d9e75}
+
+/* ─── NAV ─── */
+.nav-outer{
+  background:var(--dark2);border-bottom:2px solid var(--nn);
+  position:sticky;top:0;z-index:100;
+}
+.nav{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.nav::-webkit-scrollbar{height:0}
+.nav-btn{
+  padding:15px 20px;font-family:'Karla',sans-serif;font-size:11px;font-weight:700;
+  color:rgba(255,255,255,0.4);background:none;border:none;
+  cursor:pointer;white-space:nowrap;transition:all 0.2s;
+  letter-spacing:0.1em;text-transform:uppercase;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+}
+.nav-btn:hover{color:rgba(255,255,255,0.75)}
+.nav-btn.active{color:var(--nn);border-bottom-color:var(--nn)}
+
+/* ─── CONTENT ─── */
+.content{max-width:820px;margin:0 auto;padding:2.5rem 1.5rem 5rem}
+.section{display:none;animation:slideIn 0.2s ease}
+.section.active{display:block}
+@keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.eyebrow{
+  font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--nn);margin-bottom:0.5rem;
+}
+.section-title{
+  font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:1px;
+  color:var(--text);margin-bottom:0.5rem;line-height:1.1;
+}
+.section-intro{font-size:14px;color:var(--text2);margin-bottom:1.75rem;max-width:600px;line-height:1.6}
+
+/* ─── CARDS ─── */
+.card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:8px;padding:1.25rem 1.5rem;margin-bottom:1rem;
+  transition:box-shadow 0.2s,border-color 0.2s;
+}
+.card:hover{box-shadow:0 2px 12px rgba(0,0,0,0.06);border-color:var(--border2)}
+.card-title{
+  font-family:'Karla',sans-serif;font-size:14px;font-weight:700;
+  color:var(--text);margin-bottom:0.75rem;
+}
+.card-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:0.5rem}
+
+/* ─── SCRIPT BLOCKS ─── */
+.script{
+  background:var(--dark);border-radius:8px;
+  padding:1.25rem 1.5rem;margin-bottom:1rem;
+  position:relative;overflow:hidden;
+}
+.script::before{
+  content:'"';position:absolute;top:-14px;left:14px;
+  font-size:80px;color:rgba(255,98,0,0.1);
+  font-family:Georgia,serif;line-height:1;pointer-events:none;
+}
+.script-label{
+  font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--nn);margin-bottom:10px;
+}
+.script-text{
+  font-size:13px;color:rgba(255,255,255,0.82);
+  line-height:1.75;font-style:italic;
+}
+.script-text strong{color:white;font-style:normal;font-weight:600}
+
+/* ─── HIGHLIGHT BOXES ─── */
+.hbox{border-radius:8px;padding:1rem 1.25rem;margin-bottom:1rem}
+.hbox-title{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.5rem}
+.hbox-text{font-size:13px;line-height:1.65;color:var(--text)}
+.hbox-orange{background:rgba(255,98,0,0.06);border:1px solid rgba(255,98,0,0.18);border-left:3px solid var(--nn)}
+.hbox-orange .hbox-title{color:var(--nn)}
+.hbox-blue{background:var(--ab-pale);border:1px solid rgba(0,90,156,0.2);border-left:3px solid var(--ab)}
+.hbox-blue .hbox-title{color:var(--ab)}
+.hbox-green{background:var(--green-pale);border:1px solid rgba(10,124,92,0.2);border-left:3px solid var(--green)}
+.hbox-green .hbox-title{color:var(--green)}
+.hbox-warn{background:var(--amber-pale);border:1px solid rgba(125,90,0,0.2);border-left:3px solid var(--amber)}
+.hbox-warn .hbox-title{color:var(--amber)}
+.hbox-dark{background:var(--dark);border:none}
+.hbox-dark .hbox-title{color:var(--nn2)}
+.hbox-dark .hbox-text{color:rgba(255,255,255,0.75)}
+
+/* ─── LISTAS ─── */
+ul.clean{list-style:none}
+ul.clean li{
+  padding:7px 0 7px 18px;position:relative;
+  font-size:13px;border-bottom:1px solid var(--border);line-height:1.5;
+}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:'›';position:absolute;left:0;
+  color:var(--nn);font-size:16px;line-height:1.4;font-weight:700;
+}
+
+/* ─── BADGES ─── */
+.badge{
+  display:inline-block;font-size:10px;font-weight:700;
+  padding:2px 8px;border-radius:3px;margin:2px 2px 2px 0;
+  letter-spacing:0.03em;
+}
+.b-ing{background:rgba(255,98,0,0.1);color:#cc4f00;border:1px solid rgba(255,98,0,0.2)}
+.b-ab{background:rgba(0,90,156,0.08);color:var(--ab);border:1px solid rgba(0,90,156,0.15)}
+.b-ok{background:var(--green-pale);color:var(--green);border:1px solid rgba(10,124,92,0.2)}
+.b-no{background:var(--red-pale);color:var(--red);border:1px solid rgba(192,57,43,0.2)}
+.b-key{background:var(--bg3);color:var(--text2);border:1px solid var(--border)}
+
+/* ─── BARRERAS ACCORDION ─── */
+.barrier{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:8px;margin-bottom:8px;overflow:hidden;cursor:pointer;
+  transition:border-color 0.2s;
+}
+.barrier:hover{border-color:var(--border2)}
+.barrier.open{border-color:rgba(255,98,0,0.3)}
+.barrier-q{
+  padding:12px 16px;font-size:13px;font-weight:600;color:var(--text);
+  display:flex;justify-content:space-between;align-items:center;
+  background:var(--bg2);
+}
+.barrier-q .ico{
+  color:var(--nn);font-size:20px;font-weight:300;
+  transition:transform 0.2s;flex-shrink:0;margin-left:12px;line-height:1;
+}
+.barrier.open .barrier-q .ico{transform:rotate(45deg)}
+.barrier-a{
+  display:none;padding:12px 16px;font-size:13px;color:var(--text2);
+  line-height:1.7;border-top:1px solid var(--border);
+}
+.barrier.open .barrier-a{display:block}
+.barrier-resp{
+  margin-top:10px;padding:8px 12px;
+  background:rgba(255,98,0,0.05);border-left:3px solid var(--nn);
+  border-radius:0 5px 5px 0;font-style:italic;
+  font-size:12px;color:var(--text);
+}
+
+/* ─── TIMELINE ─── */
+.tl-item{display:flex;gap:14px;align-items:flex-start;padding-bottom:18px;position:relative}
+.tl-item:not(:last-child)::after{
+  content:'';position:absolute;left:19px;top:40px;bottom:0;
+  width:1px;background:var(--border2);
+}
+.tl-dot{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--nn);color:white;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;z-index:1;
+}
+.tl-body{flex:1;padding-top:8px}
+.tl-tag{
+  display:inline-block;font-size:10px;font-weight:700;
+  padding:2px 8px;border-radius:3px;
+  background:var(--nn);color:white;letter-spacing:0.06em;
+  text-transform:uppercase;margin-bottom:5px;
+}
+.tl-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px}
+.tl-desc{font-size:12px;color:var(--text2);line-height:1.55}
+
+/* ─── PROPUESTA GRID ─── */
+.prop-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem}
+.prop-item{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:8px;padding:1rem;
+  border-top:3px solid var(--nn);
+}
+.prop-icon{font-size:22px;margin-bottom:8px}
+.prop-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.prop-desc{font-size:11px;color:var(--text2);line-height:1.5}
+
+/* ─── DATA ROWS ─── */
+.data-row{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;gap:12px;
+}
+.data-row:last-child{border-bottom:none}
+.data-label{color:var(--text2);flex-shrink:0}
+.data-val{font-weight:600;color:var(--text);text-align:right}
+.data-val.win{color:var(--green)}
+.data-val.warn{color:var(--amber)}
+
+/* ─── FOOTER ─── */
+.footer{
+  text-align:center;padding:2rem 1.5rem;
+  font-size:10px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;
+  border-top:1px solid var(--border);margin-top:2rem;
+  background:var(--bg2);
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-accent-line"></div>
+  <div class="hero-bg-text">INMOBILIARIAS</div>
+  <div class="hero-eyebrow">Estrategia comercial · Oficina NN Cullera</div>
+  <h1>Hipotecas<br><span>para inmobiliarias</span></h1>
+  <p class="hero-sub">Guión completo para entrar, posicionarse y construir relaciones duraderas con las inmobiliarias de la zona costera.</p>
+  <div class="hero-pills">
+    <span class="hpill hpill-ing">ING Grupo NN</span>
+    <span class="hpill hpill-ab">Abanca Partner</span>
+    <span class="hpill hpill-v">Datos reales · Abril 2026</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-outer">
+  <div class="nav">
+    <button class="nav-btn active" onclick="showTab('problema',this)">El problema</button>
+    <button class="nav-btn" onclick="showTab('propuesta',this)">Qué ofrecemos</button>
+    <button class="nav-btn" onclick="showTab('guion',this)">Guión</button>
+    <button class="nav-btn" onclick="showTab('barreras',this)">Barreras</button>
+    <button class="nav-btn" onclick="showTab('acuerdo',this)">Acuerdo largo plazo</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════ TAB: EL PROBLEMA ═══════════════ -->
+<div class="section active" id="t-problema">
+  <div class="eyebrow">Por dónde empezar</div>
+  <div class="section-title">El ciclo que hay que entender</div>
+  <div class="section-intro">El gerente de la inmobiliaria ya tiene banco. Lleva años con ese acuerdo. Para entrar, hay que entender exactamente qué hace que ese ciclo sea tan difícil de romper — y dónde está la grieta.</div>
+
+  <div class="card">
+    <div class="card-label">Por qué el acuerdo banco–inmobiliaria es tan resistente</div>
+    <ul class="clean">
+      <li>El banco les da visibilidad, herramientas, a veces patrocinio de eventos o señalización</li>
+      <li>El director de banco los conoce por su nombre — hay relación personal cultivada durante años</li>
+      <li>El cliente les pregunta «¿con qué banco trabajáis?» y ellos quieren dar una respuesta rápida, fiable y sin pensar</li>
+      <li>Cambiar de proveedor tiene coste de fricción — si no hay motivo claro y concreto, no se mueven</li>
+      <li>Han aprendido que los «nuevos proveedores» suelen desaparecer o decepcionar en el primer caso difícil</li>
+    </ul>
+  </div>
+
+  <div class="hbox hbox-orange">
+    <div class="hbox-title">La estrategia correcta — no competir, complementar</div>
+    <div class="hbox-text">El error fatal es presentarse como alternativa al banco con quien ya trabajan. Eso activa defensas. El movimiento correcto es entrar como <strong>el recurso para los casos que su banco no puede resolver</strong>. Eso no les pide que rompan nada — solo que nos llamen cuando su opción habitual falla.</div>
+  </div>
+
+  <div class="hbox hbox-blue">
+    <div class="hbox-title">La grieta — el nicho que casi ningún banco cubre</div>
+    <div class="hbox-text"><strong>Abanca concede hipoteca a personas sin residencia fiscal en España</strong>, incluso con ingresos en dólares, libras, francos suizos o pesos mexicanos. Muy pocas entidades hacen esto. En Cullera y la costa valenciana — con compradores europeos, latinos, segunda residencia — este perfil es más habitual de lo que parece. <strong>Cada vez que su banco dice «no» a un extranjero, nosotros podemos decir «vamos a verlo».</strong></div>
+  </div>
+</div>
+
+<!-- ═══════════════ TAB: PROPUESTA ═══════════════ -->
+<div class="section" id="t-propuesta">
+  <div class="eyebrow">Propuesta de valor</div>
+  <div class="section-title">Qué le ofrecemos a la inmobiliaria</div>
+  <div class="section-intro">Lo que hace que un gerente de inmobiliaria diga «vale, te doy una oportunidad» no es el producto en sí — es percibir que nuestra presencia le va a <em>resolver problemas que ahora mismo no tiene resueltos</em>.</div>
+
+  <div class="prop-grid">
+    <div class="prop-item">
+      <div class="prop-icon">🌍</div>
+      <div class="prop-title">Clientes no residentes</div>
+      <div class="prop-desc">Abanca financia a extranjeros sin residencia española. Ingresos en USD, GBP, CHF, MXN admitidos. El nicho más desatendido de la costa.</div>
+    </div>
+    <div class="prop-item">
+      <div class="prop-icon">⚡</div>
+      <div class="prop-title">Respuesta en 24–48h</div>
+      <div class="prop-desc">Primera orientación de viabilidad en menos de dos días. La inmobiliaria no pierde una venta por esperas indefinidas.</div>
+    </div>
+    <div class="prop-item">
+      <div class="prop-icon">🔀</div>
+      <div class="prop-title">Dos entidades reales</div>
+      <div class="prop-desc">ING y Abanca. No somos monoentidad. Si una no puede, probamos la otra. El cliente tiene más opciones que yendo solo a su banco.</div>
+    </div>
+    <div class="prop-item">
+      <div class="prop-icon">🤝</div>
+      <div class="prop-title">Sin pedir exclusividad</div>
+      <div class="prop-desc">No les pedimos que rompan nada. Solo que nos usen para los casos donde su opción habitual no llega. Sin compromisos ni fricciones.</div>
+    </div>
+    <div class="prop-item">
+      <div class="prop-icon">📋</div>
+      <div class="prop-title">Acompañamiento total</div>
+      <div class="prop-desc">Hipoteca + seguro de vida + seguro de hogar. Un único interlocutor para todo el proceso. El comprador queda atendido de principio a fin.</div>
+    </div>
+    <div class="prop-item">
+      <div class="prop-icon">🏗️</div>
+      <div class="prop-title">Autopromoción</div>
+      <div class="prop-desc">Abanca financia autopromoción (construir la propia vivienda) si tiene licencia y proyecto. Algo que pocas entidades hacen.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Qué gana la inmobiliaria concretamente</div>
+    <ul class="clean">
+      <li>Cierra ventas que antes perdía por denegaciones bancarias a extranjeros</li>
+      <li>Ofrece a sus compradores una segunda opinión sin comprometerse con ningún banco</li>
+      <li>Tiene un interlocutor que acompaña al comprador post-firma — menos llamadas de seguimiento a ellos</li>
+      <li>Cubre el nicho de compradores no residentes en costa sin tener que derivarlos a otro sitio</li>
+      <li>Nunca le va a costar nada — es un servicio adicional que les suma, no les resta</li>
+    </ul>
+  </div>
+
+  <div class="hbox hbox-green">
+    <div class="hbox-title">Datos reales del producto que respaldan la conversación</div>
+    <div class="hbox-text">
+      <strong>ING:</strong> proceso 100% digital con gestor personal · sin gastos de formalización (notaría, registro, gestoría, IAJD los asume ING) · hasta 40 años de plazo · hasta 100% financiación para menores de 36 años.
+      <br><br>
+      <strong>Abanca:</strong> hasta 90% del valor de tasación · admite no residentes con ingresos en USD/GBP/CHF/MXN · financia autopromoción · bonificación máxima del –0,70% en el tipo por vinculación.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ TAB: GUIÓN ═══════════════ -->
+<div class="section" id="t-guion">
+  <div class="eyebrow">Primera visita o llamada</div>
+  <div class="section-title">Guión completo</div>
+  <div class="section-intro">Cada bloque tiene un objetivo concreto. No hay que usarlos todos ni en este orden — se adaptan según cómo responde el gerente. La clave es escuchar más que hablar.</div>
+
+  <div class="script">
+    <div class="script-label">Apertura — los primeros 30 segundos</div>
+    <div class="script-text">«Buenas tardes, soy [nombre], de la oficina NN de Cullera. Os llamo porque trabajamos con hipotecas de ING y Abanca y me gustaría conoceros. <strong>No vengo a quitaros vuestro banco</strong> — vengo a hablaros de algo que puede ser útil para los casos donde vuestro banco habitual no puede ayudar. ¿Tenéis cinco minutos?»</div>
+  </div>
+
+  <div class="script">
+    <div class="script-label">Si dicen «ya tenemos banco» — redirigir sin confrontar</div>
+    <div class="script-text">«Perfecto, y así debe ser. Lo que os propongo no cambia eso en nada. Mi pregunta es: <strong>¿cuántas operaciones perdéis al año porque llega un comprador extranjero, sin residencia en regla, o con un perfil que vuestro banco no aprueba?</strong> Para esos casos concretos, yo tengo una entidad que puede resolverlos.»</div>
+  </div>
+
+  <div class="script">
+    <div class="script-label">Presentación del diferencial — 2 minutos máximo</div>
+    <div class="script-text">«Trabajamos con dos entidades: <strong>ING</strong>, que es parte del mismo grupo que nosotros, proceso muy ágil, sin gastos de formalización para el cliente; y <strong>Abanca</strong>, que tiene algo poco habitual — concede hipoteca a personas sin residencia fiscal en España, incluso con ingresos en dólares o libras. En esta zona, con el perfil de comprador que viene a la costa... ¿os llegan compradores extranjeros?»</div>
+  </div>
+
+  <div class="script">
+    <div class="script-label">Cierre de la visita — propuesta de prueba sin riesgo</div>
+    <div class="script-text">«Lo que os propongo es muy sencillo: <strong>la próxima vez que tengáis un comprador al que vuestro banco no pueda atender bien, me lo comentáis antes de perder la operación</strong>. Yo os digo en 24–48 horas si puedo ayudar o no. Si puedo, todos ganamos. Si no puedo, os lo digo con la misma claridad. Sin compromisos, sin exclusividades.»</div>
+  </div>
+
+  <div class="script">
+    <div class="script-label">Cierre alternativo — si hay interés pero no urgencia</div>
+    <div class="script-text">«Entiendo que no hay prisa. Quedaos con mi contacto y, cuando llegue ese caso difícil — el comprador que el banco no acepta, el extranjero, la autopromoción — llamadme antes de decirle que no al cliente. No os va a costar nada y puede que salvemos la venta.»</div>
+  </div>
+
+  <div class="hbox hbox-orange">
+    <div class="hbox-title">La pregunta más poderosa de toda la visita</div>
+    <div class="hbox-text">«¿Cuántas ventas habéis perdido este año porque el comprador no consiguió hipoteca?» — Esta pregunta ancla la conversación en dolor real, no en argumentos abstractos. Si dicen «alguna», ahí está la puerta abierta.</div>
+  </div>
+</div>
+
+<!-- ═══════════════ TAB: BARRERAS ═══════════════ -->
+<div class="section" id="t-barreras">
+  <div class="eyebrow">Manejo de objeciones</div>
+  <div class="section-title">Barreras habituales</div>
+  <div class="section-intro">Toca cada barrera para ver el análisis y la respuesta recomendada.</div>
+
+  <div class="barrier" onclick="toggleBarrier(this)">
+    <div class="barrier-q">«Tenemos un acuerdo cerrado con [banco], no podemos cambiar» <span class="ico">+</span></div>
+    <div class="barrier-a">
+      El acuerdo existe y tiene valor — no lo cuestionamos. Lo que ofrecemos es completamente diferente: ser la opción para los casos que ese banco rechaza. Un acuerdo exclusivo con un banco no impide tener un recurso para los no residentes, los perfiles complejos o los que el sistema automático del banco descarta. De hecho, tener esa opción les hace más completos sin cambiar nada de lo que ya tienen.
+      <div class="barrier-resp">«Perfecto. Entonces somos complementarios, no competidores. ¿Me llamáis la próxima vez que os llegue un caso que ellos no puedan resolver?»</div>
+    </div>
+  </div>
+
+  <div class="barrier" onclick="toggleBarrier(this)">
+    <div class="barrier-q">«Nuestros clientes son todos españoles, no tenemos extranjeros» <span class="ico">+</span></div>
+    <div class="barrier-a">
+      Puede que hoy sea así. Pero en zona costera como Cullera, la composición de compradores está cambiando. Ciudadanos europeos comunitarios que trabajan aquí pero no han tramitado el certificado de registro, familias latinoamericanas con trabajo estable y ahorro, inversores de segunda residencia... Un solo caso cerrado que de otra forma se habría perdido ya justifica tener el contacto guardado.
+      <div class="barrier-resp">«Guardad mi contacto. Si en los próximos meses os llega algo así, en 24 horas os digo si puedo ayudar o no.»</div>
+    </div>
+  </div>
+
+  <div class="barrier" onclick="toggleBarrier(this)">
+    <div class="barrier-q">«No queremos complicarnos con más intermediarios» <span class="ico">+</span></div>
+    <div class="barrier-a">
+      Objeción completamente legítima. La respuesta es simplificar al máximo la propuesta: no pedimos integración de sistemas, no pedimos cambio de proceso, no pedimos formularios. Solo pedimos que nos envíen un WhatsApp o una llamada cuando tengan un caso difícil. Nosotros hacemos el resto y les informamos del resultado.
+      <div class="barrier-resp">«No os complico nada. Un WhatsApp cuando tengáis un caso difícil, yo os respondo en 24 horas. No hay nada más.»</div>
+    </div>
+  </div>
+
+  <div class="barrier" onclick="toggleBarrier(this)">
+    <div class="barrier-q">«¿Qué comisión nos dais a nosotros?» <span class="ico">+</span></div>
+    <div class="barrier-a">
+      Esta pregunta es una señal muy positiva — significa que están pensando en la relación. Hay que ser transparente: el modelo base es que la inmobiliaria nos deriva el contacto y nosotros gestionamos todo. Si el volumen lo justifica, se puede explorar una estructura de colaboración más formal. Importante: <strong>consultar con Antonio o la estructura NN antes de comprometerse a cifras concretas</strong>.
+      <div class="barrier-resp">«Es una buena pregunta. Déjame consultarlo con mi responsable y os doy una respuesta concreta en un par de días. ¿Os parece bien?»</div>
+    </div>
+  </div>
+
+  <div class="barrier" onclick="toggleBarrier(this)">
+    <div class="barrier-q">«Ya lo hemos intentado antes con otro intermediario y no funcionó» <span class="ico">+</span></div>
+    <div class="barrier-a">
+      Esta objeción revela una expectativa fallida en el pasado. No hay que defenderla ni minimizarla — hay que entender qué pasó y diferenciarse claramente. La diferencia clave es que somos parte del grupo NN (la misma empresa que ING) y que tenemos acceso a Abanca para no residentes — algo que la mayoría de intermediarios no tienen.
+      <div class="barrier-resp">«Cuéntame qué pasó, me interesa saber. Lo que yo ofrezco tiene una diferencia concreta: soy parte del grupo NN-ING, no soy un broker externo. Y para los no residentes, tenemos algo que la mayoría no tiene.»</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ TAB: ACUERDO ═══════════════ -->
+<div class="section" id="t-acuerdo">
+  <div class="eyebrow">Visión largo plazo</div>
+  <div class="section-title">Construir la relación</div>
+  <div class="section-intro">El acuerdo con una inmobiliaria no se cierra en la primera visita. Se construye caso a caso, con resultados reales. Esta es la hoja de ruta.</div>
+
+  <div class="tl-item">
+    <div class="tl-dot">1</div>
+    <div class="tl-body">
+      <div class="tl-tag">Mes 1</div>
+      <div class="tl-title">Visita de presentación</div>
+      <div class="tl-desc">Objetivo único: que te guarden el contacto y sepan para qué sirves. Sin presión de cierre. Dejar material sencillo (tarjeta o QR con el portal de propuestas). El gerente debe saber en 2 minutos qué haces y cuándo llamarte.</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-dot">2</div>
+    <div class="tl-body">
+      <div class="tl-tag">Primer caso — el momento crítico</div>
+      <div class="tl-title">Respuesta rápida y resultado honesto</div>
+      <div class="tl-desc">Cuando llegue el primer caso, responder en menos de 24 horas aunque la respuesta sea «no puedo ayudar». Ser claro y rápido en los dos sentidos. <strong>Este primer caso decide la relación para el año siguiente.</strong> Un resultado positivo vale más que diez visitas comerciales.</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-dot">3</div>
+    <div class="tl-body">
+      <div class="tl-tag">Mes 2–3</div>
+      <div class="tl-title">Revisita o café — sin objetivo comercial explícito</div>
+      <div class="tl-desc">No para vender, sino para ver cómo fue la experiencia. Pedir referidos activamente: «¿Conoces a otra inmobiliaria de la zona a quien pueda ser útil lo que hacemos?» Cada inmobiliaria satisfecha puede abrir dos o tres puertas más.</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-dot">4</div>
+    <div class="tl-body">
+      <div class="tl-tag">Mes 3+</div>
+      <div class="tl-title">Acuerdo estable de colaboración</div>
+      <div class="tl-desc">Si el volumen lo justifica: comunicación regular (WhatsApp, reunión mensual), materiales compartidos, presencia en sus eventos de puertas abiertas. En este punto ya no eres «el de las hipotecas» — eres parte de su ecosistema de proveedores de confianza.</div>
+    </div>
+  </div>
+
+  <div class="hbox hbox-orange">
+    <div class="hbox-title">Mapa de inmobiliarias en Cullera y zona — cómo priorizar</div>
+    <div class="hbox-text">
+      <span class="badge b-ab">Prioridad alta: Cartel en inglés, alemán, holandés → clientela no residente confirmada</span><br><br>
+      <span class="badge b-ab">Prioridad alta: Inmobiliarias cerca del puerto o primera línea → perfil inversor</span><br><br>
+      <span class="badge b-key">Media: Franquicias (RE/MAX, Keller Williams) → decisión en gerente local, proceso más largo</span><br><br>
+      <span class="badge b-ok">Rápida entrada: Agencias independientes locales → gerente es el dueño, decide en el acto, relación más personal</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Material de apoyo para dejar en la visita</div>
+    <ul class="clean">
+      <li>Tarjeta personal con nombre, móvil y QR del portal de propuestas (fedefonta08.github.io/propuestas-nn)</li>
+      <li>Un párrafo escrito con el diferencial de Abanca para no residentes — algo que puedan enseñar a sus compradores</li>
+      <li>Un ejemplo real: «Para un comprador sin residencia, con contrato de trabajo, Abanca puede llegar al 90% del valor de tasación» — concreto, no genérico</li>
+      <li>Tu número de WhatsApp personal para respuesta rápida — más eficaz que email para este tipo de relación</li>
+    </ul>
+  </div>
+
+  <div class="hbox hbox-dark">
+    <div class="hbox-title">La frase que resume toda la estrategia</div>
+    <div class="hbox-text">«No te pido que cambies de banco. Te pido que me llames antes de decirle que no a un cliente. Si puedo ayudar, lo hago en 24 horas. Si no puedo, te lo digo igual de rápido. Sin compromisos, sin exclusividades, sin complicaciones.»</div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<div class="footer">
+  Estrategia comercial · Nationale-Nederlanden · Hipotecas ING y Abanca<br>
+  Oficina Cullera · Zona costera valenciana · Abril 2026 · Datos verificados documentación oficial
+</div>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('t-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function toggleBarrier(el) {
+  el.classList.toggle('open');
+}
+</script>
+</body>
+</html>
