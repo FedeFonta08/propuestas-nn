@@ -1472,19 +1472,17 @@ function toast(msg, tipo) {
 // INIT — Construir filtros dinámicos y cargar mes actual
 // ══════════════════════════════════════════════════════════════
 (function init() {
-  // Construir opciones del selector de meses (solo actuales y futuros)
   const sel = document.getElementById('filter-select');
-  const mesActual = new Date().getMonth();
+  const mesActualIdx = new Date().getMonth();
+  
   let opts = '<option value="actual">Mes actual + siguiente</option>';
-  for (const [mes, nombre] of Object.entries(TABS_MESES)) {
-    const m = parseInt(mes);
-    if (m >= mesActual) {
-      opts += `<option value="${m}">${nombre}</option>`;
+  MESES.forEach((nombre, i) => {
+    if (i >= mesActualIdx) {
+      opts += `<option value="${i}">${nombre.toUpperCase()}</option>`;
     }
-  }
+  });
   sel.innerHTML = opts;
 
-  // Cargar contactos del mes actual
   aplicarFiltro();
 })();
 
