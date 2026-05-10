@@ -582,38 +582,62 @@ body::before {
 .c-teal   { background: #CCFBF1; color: #0F766E; }
 .c-red    { background: #FEE2E2; color: #991B1B; }
 
-/* ── RADAR COMERCIAL ────────────────────────── */
+/* ── RADAR COMERCIAL (Pulsadores Expandibles Premium) ── */
 .radar-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .radar-card {
   background: #FFFFFF;
   border: 1.5px solid rgba(0,0,0,0.10);
   border-radius: var(--r);
-  padding: 14px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  transition: box-shadow 0.15s;
+  padding: 0;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
 }
 
-.radar-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.radar-card:hover {
+  border-color: var(--orange);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201,77,0,0.12);
+}
 
-.radar-card-top {
+.radar-card.expanded {
+  border-color: var(--orange);
+  background: #FFFBF9;
+}
+
+.radar-card-header {
+  padding: 14px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 15px;
+}
+
+.radar-card-info {
+  flex: 1;
+  min-width: 0;
 }
 
 .radar-producto {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 700;
-  color: var(--text);
-  flex: 1;
+  color: #111827;
+  display: block;
+}
+
+.radar-brief {
+  font-size: 12px;
+  color: var(--text3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 400px;
 }
 
 .radar-badge {
@@ -625,45 +649,71 @@ body::before {
   letter-spacing: 0.3px;
 }
 
-.badge-activa   { background: #DCFCE7; color: #15803D; }
-.badge-urgente  { background: #FEF3C7; color: #92400E; }
-.badge-cambio   { background: #DBEAFE; color: #1D4ED8; }
-.badge-otro     { background: #F3F4F6; color: #4B5563; }
-
-.radar-tipo {
-  font-size: 11px;
+.radar-card-chevron {
+  font-size: 12px;
   color: var(--text3);
-  font-weight: 500;
+  transition: transform 0.3s;
 }
 
-.radar-desc {
-  font-size: 12px;
-  color: var(--text2);
-  line-height: 1.5;
-}
-
-.radar-accion {
-  font-size: 12px;
+.radar-card.expanded .radar-card-chevron {
+  transform: rotate(180deg);
   color: var(--orange);
-  font-weight: 600;
-  line-height: 1.4;
-  padding-top: 4px;
+}
+
+.radar-card-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-out;
+  padding: 0 18px;
+}
+
+.radar-card.expanded .radar-card-details {
+  max-height: 800px;
+  padding: 0 18px 18px;
   border-top: 1px solid rgba(0,0,0,0.06);
+  margin-top: 0;
+  padding-top: 18px;
 }
 
-.radar-meta {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+.radar-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 15px;
 }
 
-.radar-tag {
+.radar-detail-item {
+  background: rgba(0,0,0,0.02);
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+.radar-detail-label {
   font-size: 10px;
-  background: rgba(201,77,0,0.08);
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.radar-detail-val {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.radar-accion-premium {
+  margin-top: 15px;
+  background: rgba(201, 77, 0, 0.05);
+  border-left: 4px solid var(--orange);
+  padding: 12px 15px;
+  border-radius: 0 10px 10px 0;
+}
+
+.radar-accion-premium .radar-detail-val {
   color: var(--orange);
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-weight: 500;
+  font-size: 14px;
 }
 
 .radar-loading {
@@ -1204,57 +1254,74 @@ async function cargarRadarDinamico() {
     const text = await res.text();
     const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
     const rows = json.table.rows;
-    if (!rows || rows.length < 2) return;
+    if (!rows || rows.length === 0) return;
     
-    // Agrupación Inteligente para evitar duplicados
-    const agrupados = rows.slice(1).reduce((acc, r) => {
+    // Agrupación Inteligente (Procesando desde la primera fila real de datos)
+    const agrupados = rows.reduce((acc, r) => {
       const val = idx => (r.c && r.c[idx]) ? String(r.c[idx].v || '').trim() : '';
       const prod = val(0);
       
-      // Filtros: ignorar cabeceras y filas de metadatos
-      if (!prod || prod.toLowerCase() === 'producto' || prod.toLowerCase().includes('actualizaci')) return acc;
+      if (!prod || prod.toLowerCase().includes('producto') || prod.toLowerCase().includes('actualizaci')) return acc;
       
       if (!acc[prod]) {
         acc[prod] = {
           producto: prod, tipo: val(1), desc: [val(2)], fin: val(4),
-          dto: val(6), accion: [val(8)], estado: val(9) || '🟢 ACTIVA'
+          dto: val(6), accion: [val(8)], estado: val(9) || 'ACTIVA'
         };
       } else {
-        // Fusionar descripciones y acciones si el producto ya existe
         if (val(2) && !acc[prod].desc.includes(val(2))) acc[prod].desc.push(val(2));
         if (val(8) && !acc[prod].accion.includes(val(8))) acc[prod].accion.push(val(8));
         if (!acc[prod].fin && val(4)) acc[prod].fin = val(4);
-        if (!acc[prod].dto && val(6)) acc[prod].dto = val(6);
       }
       return acc;
     }, {});
 
     const campanas = Object.values(agrupados);
 
-    container.innerHTML = campanas.map(c => `
-      <div class="radar-card">
-        <div class="card-badge ${c.estado.includes('ACTIVA') ? 'bg-green' : 'bg-blue'}">${c.estado}</div>
-        <h3 class="card-title">${c.producto}</h3>
-        <p class="card-subtitle">${c.tipo}</p>
-        <div class="card-desc">
-          ${c.desc.map(d => `<p>• ${d}</p>`).join('')}
-        </div>
-        <div class="card-meta">
-          <div class="meta-item"><span>📅 Hasta:</span> <b>${c.fin || 'Indefinido'}</b></div>
-          <div class="meta-item"><span>🏷️ Dto:</span> <b>${c.dto || 'Consultar'}</b></div>
-        </div>
-        <div class="card-action">
-          <span class="action-icon">🎯</span>
-          <div class="action-text">
-            ${c.accion.map(a => `<p>${a}</p>`).join('')}
+    container.innerHTML = campanas.map(c => {
+      const bClass = badgeClass(c.estado);
+      const bLabel = badgeLabel(c.estado);
+      
+      return `
+      <div class="radar-card" onclick="this.classList.toggle('expanded')">
+        <div class="radar-card-header">
+          <div class="radar-card-info">
+            <span class="radar-producto">${c.producto}</span>
+            <span class="radar-brief">${c.desc[0]}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div class="radar-badge ${bClass}">${bLabel}</div>
+            <div class="radar-card-chevron">▼</div>
           </div>
         </div>
-      </div>
-    `).join('');
+        <div class="radar-card-details">
+          <div class="radar-detail-label">Descripción completa</div>
+          <div class="radar-desc" style="margin-bottom:15px;">
+            ${c.desc.map(d => `<p style="margin-bottom:4px">• ${d}</p>`).join('')}
+          </div>
+          <div class="radar-detail-grid">
+            <div class="radar-detail-item">
+              <span class="radar-detail-label">Vencimiento</span>
+              <span class="radar-detail-val">📅 ${c.fin || 'Indefinido'}</span>
+            </div>
+            <div class="radar-detail-item">
+              <span class="radar-detail-label">Beneficio</span>
+              <span class="radar-detail-val">🏷️ ${c.dto || 'Consultar'}</span>
+            </div>
+          </div>
+          <div class="radar-accion-premium">
+            <span class="radar-detail-label">Acción Comercial ADN</span>
+            <div class="radar-detail-val">
+              ${c.accion.map(a => `<p>🎯 ${a}</p>`).join('')}
+            </div>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
     
     const countEl = document.getElementById('radar-count');
     if (countEl) countEl.textContent = `${campanas.length} campañas activas`;
-  } catch (e) { console.error('Error cargando Radar:', e); }
+  } catch (e) { console.error('Error cargando Radar Dinámico:', e); }
 }
 
 document.addEventListener('DOMContentLoaded', cargarRadarDinamico);
@@ -1368,25 +1435,39 @@ function cargarRadar() {
   const campanasOrdenadas = [...CAMPANAS_ACTIVAS].sort((a,b) => orden(a.estado) - orden(b.estado));
 
   grid.innerHTML = campanasOrdenadas.map(c => {
-    const tags = [
-      c.fin && c.fin !== 'indefinido' ? `⏰ Hasta ${c.fin}` : '',
-      c.cupo && c.cupo !== 'Sin cupo' ? `📊 ${c.cupo}` : '',
-      c.dto && c.dto !== '—' ? `🏷️ ${c.dto}` : ''
-    ]
-      .filter(Boolean)
-      .map(t => `<span class="radar-tag">${t}</span>`)
-      .join('');
+    const bClass = badgeClass(c.estado);
+    const bLabel = badgeLabel(c.estado);
     
     return `
-      <div class="radar-card">
-        <div class="radar-card-top">
-          <div class="radar-producto">${c.producto}</div>
-          <div class="radar-badge ${badgeClass(c.estado)}">${badgeLabel(c.estado)}</div>
+      <div class="radar-card" onclick="this.classList.toggle('expanded')">
+        <div class="radar-card-header">
+          <div class="radar-card-info">
+            <span class="radar-producto">${c.producto}</span>
+            <span class="radar-brief">${c.desc}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div class="radar-badge ${bClass}">${bLabel}</div>
+            <div class="radar-card-chevron">▼</div>
+          </div>
         </div>
-        <div class="radar-tipo">${c.tipo}</div>
-        <div class="radar-desc">${c.desc}</div>
-        ${tags ? `<div class="radar-meta">${tags}</div>` : ''}
-        ${c.accion ? `<div class="radar-accion">→ ${c.accion}</div>` : ''}
+        <div class="radar-card-details">
+          <div class="radar-detail-label">Detalles de la campaña</div>
+          <div class="radar-desc" style="margin-bottom:15px;">${c.desc}</div>
+          <div class="radar-detail-grid">
+            <div class="radar-detail-item">
+              <span class="radar-detail-label">Vencimiento</span>
+              <span class="radar-detail-val">📅 ${c.fin || 'Indefinido'}</span>
+            </div>
+            <div class="radar-detail-item">
+              <span class="radar-detail-label">Beneficio</span>
+              <span class="radar-detail-val">🏷️ ${c.dto || 'Consultar'}</span>
+            </div>
+          </div>
+          <div class="radar-accion-premium">
+            <span class="radar-detail-label">Acción Comercial ADN</span>
+            <div class="radar-detail-val">🎯 ${c.accion}</div>
+          </div>
+        </div>
       </div>`;
   }).join('');
 

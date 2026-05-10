@@ -444,39 +444,159 @@
         .result-btn.cita { color: #FCD34D; }
         .result-btn.cita.active-r { background: rgba(252, 211, 77, 0.1); border-color: #FCD34D; }
 
-        /* ── RADAR COMERCIAL (Lifting) ── */
+        /* ── RADAR COMERCIAL (Lifting Premium) ── */
         .radar-box {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
             overflow: hidden;
+            margin-bottom: 1rem;
         }
 
         .radar-header {
-            padding: 12px 20px;
+            padding: 14px 20px;
             background: rgba(255, 255, 255, 0.02);
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
+            transition: background 0.2s;
         }
+
+        .radar-header:hover { background: rgba(255, 255, 255, 0.04); }
 
         .radar-title {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 16px;
+            font-size: 18px;
             color: var(--text-dim);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .radar-body {
-            padding: 1.5rem;
+            padding: 1rem;
             display: none;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        .radar-box.open .radar-body { display: block; }
+        .radar-box.open .radar-body { display: flex; }
+
+        /* Pulsadores (Radar Items) */
+        .radar-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .radar-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(201, 77, 0, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .radar-item.expanded {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--nn-orange);
+        }
+
+        .radar-item-header {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .radar-item-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .radar-item-prod {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 18px;
+            color: var(--nn-orange);
+            letter-spacing: 0.5px;
+        }
+
+        .radar-item-short {
+            font-size: 11px;
+            color: var(--text-dimmer);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+
+        .radar-item-badge {
+            font-size: 9px;
+            font-weight: 800;
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .radar-item-chevron {
+            font-size: 12px;
+            color: var(--text-dimmer);
+            transition: transform 0.3s;
+        }
+
+        .radar-item.expanded .radar-item-chevron {
+            transform: rotate(180deg);
+            color: var(--nn-orange);
+        }
+
+        .radar-item-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease-out;
+            background: rgba(0, 0, 0, 0.15);
+            padding: 0 16px;
+        }
+
+        .radar-item.expanded .radar-item-details {
+            max-height: 500px;
+            padding: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .radar-detail-section {
+            margin-bottom: 12px;
+        }
+
+        .radar-detail-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--text-dimmer);
+            font-weight: 700;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .radar-detail-content {
+            font-size: 13px;
+            color: #E2E8F0;
+            line-height: 1.5;
+        }
+
+        .radar-action-box {
+            background: rgba(201, 77, 0, 0.1);
+            border-left: 3px solid var(--nn-orange);
+            padding: 10px 12px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
 
         /* ── UTILS ── */
         .toast {
@@ -879,21 +999,28 @@
             const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
             const rows = json.table.rows;
 
-            if (!rows || rows.length < 2) {
+            if (!rows || rows.length === 0) {
                 body.innerHTML = '<p style="color: var(--text-dimmer); font-size: 12px;">No hay campañas activas.</p>';
                 return;
             }
 
-            // Fusión inteligente de duplicados
-            const agrupados = rows.slice(1).reduce((acc, r) => {
+            // Fusión inteligente de duplicados (Corregido: procesamos desde rows[0] si no es cabecera)
+            const agrupados = rows.reduce((acc, r) => {
                 const val = idx => (r.c && r.c[idx]) ? String(r.c[idx].v || '').trim() : '';
                 const prod = val(0);
-                if (!prod || prod.toLowerCase() === 'producto' || prod.toLowerCase().includes('actualizaci')) return acc;
+                
+                // Filtros: ignorar cabeceras y metadatos
+                if (!prod || prod.toLowerCase().includes('producto') || prod.toLowerCase().includes('actualizaci')) return acc;
                 
                 if (!acc[prod]) {
                     acc[prod] = {
-                        producto: prod, desc: [val(2)], fin: val(4),
-                        dto: val(6), accion: [val(8)], estado: val(9) || '🟢 ACTIVA'
+                        producto: prod, 
+                        tipo: val(1),
+                        desc: [val(2)], 
+                        fin: val(4),
+                        dto: val(6), 
+                        accion: [val(8)], 
+                        estado: val(9) || 'ACTIVA'
                     };
                 } else {
                     if (val(2) && !acc[prod].desc.includes(val(2))) acc[prod].desc.push(val(2));
@@ -905,31 +1032,67 @@
 
             const campanas = Object.values(agrupados);
 
-            body.innerHTML = campanas.map(c => `
-                <div style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05);">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-                        <span style="font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--nn-orange);">${c.producto}</span>
-                        <span style="font-size: 9px; font-weight: 800; color: #fff; background: ${c.estado.includes('ACTIVA') ? 'var(--accent-green)' : 'var(--nn-orange)'}; padding: 2px 6px; border-radius: 4px;">${c.estado}</span>
-                    </div>
-                    <div style="font-size: 13px; color: #E2E8F0; line-height: 1.4; margin-bottom: 10px;">
-                        ${c.desc.map(d => `<p style="margin-bottom:4px">• ${d}</p>`).join('')}
-                    </div>
-                    <div style="display: flex; gap: 15px; font-size: 11px; color: var(--text-dimmer); margin-bottom: 10px;">
-                        <span>📅 Fin: <b>${c.fin || 'Indefinido'}</b></span>
-                        <span>🏷️ Dto: <b>${c.dto || 'Consultar'}</b></span>
-                    </div>
-                    <div style="background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 6px; border-left: 3px solid var(--nn-orange);">
-                        <div style="font-size: 12px; color: #fff; font-weight: 600;">
-                            ${c.accion.map(a => `<p>🎯 ${a}</p>`).join('')}
+            if (campanas.length === 0) {
+                body.innerHTML = '<p style="color: var(--text-dimmer); font-size: 12px;">No hay campañas activas filtradas.</p>';
+                return;
+            }
+
+            body.innerHTML = campanas.map(c => {
+                const badgeColor = c.estado.includes('ACTIVA') ? 'var(--accent-green)' : 'var(--nn-orange)';
+                const finText = c.fin ? `Fin: ${c.fin}` : 'Indefinido';
+                
+                return `
+                    <div class="radar-item" onclick="toggleRadarItem(this)">
+                        <div class="radar-item-header">
+                            <div class="radar-item-main">
+                                <span class="radar-item-prod">${c.producto}</span>
+                                <span class="radar-item-short">${c.desc[0]}</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span class="radar-item-badge" style="background: ${badgeColor}">${c.estado}</span>
+                                <span class="radar-item-chevron">▼</span>
+                            </div>
+                        </div>
+                        <div class="radar-item-details">
+                            <div class="radar-detail-section">
+                                <span class="radar-detail-label">Descripción del Beneficio</span>
+                                <div class="radar-detail-content">
+                                    ${c.desc.map(d => `<p style="margin-bottom:6px">• ${d}</p>`).join('')}
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+                                <div class="radar-detail-section">
+                                    <span class="radar-detail-label">Fecha Límite</span>
+                                    <div class="radar-detail-content">📅 ${finText}</div>
+                                </div>
+                                <div class="radar-detail-section">
+                                    <span class="radar-detail-label">Descuento / Bonus</span>
+                                    <div class="radar-detail-content">🏷️ ${c.dto || 'Consultar'}</div>
+                                </div>
+                            </div>
+                            <div class="radar-detail-section">
+                                <span class="radar-detail-label">Acción Recomendada</span>
+                                <div class="radar-action-box">
+                                    ${c.accion.map(a => `<div class="radar-detail-content" style="font-weight: 600; color: #fff;">🎯 ${a}</div>`).join('')}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
 
         } catch (e) {
             console.error('Error cargando Radar:', e);
-            body.innerHTML = '<p style="color: var(--accent-red); font-size: 12px;">⚠️ Error de conexión.</p>';
+            body.innerHTML = '<p style="color: var(--accent-red); font-size: 12px;">⚠️ Error de conexión al radar.</p>';
         }
+    }
+
+    function toggleRadarItem(el) {
+        const isExpanded = el.classList.contains('expanded');
+        // Cerrar otros
+        document.querySelectorAll('.radar-item').forEach(item => item.classList.remove('expanded'));
+        // Abrir este si no estaba abierto
+        if (!isExpanded) el.classList.add('expanded');
     }
 
     // Cargar al inicio
