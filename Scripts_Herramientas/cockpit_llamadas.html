@@ -499,6 +499,96 @@ body {
 .toast.warn { background: var(--am); }
 
 /* ══════════════════════════════════════════════════════════════
+   RADAR INTEL CARD
+   ══════════════════════════════════════════════════════════════ */
+.radar-intel {
+  background: var(--card);
+  border-radius: var(--rad-lg);
+  box-shadow: var(--shadow);
+  border: 1.5px solid var(--nn);
+  overflow: hidden;
+  animation: fadeIn 0.35s ease forwards;
+}
+.radar-intel-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 16px;
+  background: linear-gradient(90deg, var(--nn-l) 0%, #FFF9F5 100%);
+  border-bottom: 1px solid var(--brd);
+}
+.radar-pulse {
+  width: 9px; height: 9px;
+  background: var(--nn); border-radius: 50%;
+  animation: radarPulse 1.8s infinite;
+  flex-shrink: 0;
+}
+@keyframes radarPulse {
+  0%,100% { opacity:1; transform: scale(1); }
+  50% { opacity:0.4; transform: scale(0.8); }
+}
+.radar-intel-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px; letter-spacing: 0.8px;
+  color: var(--nn); flex: 1;
+}
+.radar-intel-badge {
+  font-size: 10px; font-weight: 700;
+  padding: 2px 9px; border-radius: 20px;
+  background: var(--nn); color: var(--white);
+  letter-spacing: 0.3px;
+}
+.radar-intel-body { padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+.radar-camp-row {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: var(--white); border: 1px solid var(--brd);
+  border-left: 3px solid var(--nn);
+  border-radius: var(--rad); padding: 10px 12px;
+}
+.radar-camp-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.radar-camp-info { flex: 1; min-width: 0; }
+.radar-camp-name {
+  font-size: 13px; font-weight: 700; color: var(--tx);
+  margin-bottom: 3px;
+}
+.radar-camp-desc {
+  font-size: 12px; color: var(--tx2); line-height: 1.5;
+}
+.radar-camp-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+.radar-camp-tag {
+  font-size: 10px; font-weight: 600;
+  padding: 1px 8px; border-radius: 10px;
+  background: var(--nn-l); color: var(--nn-d);
+}
+.radar-oro {
+  background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+  border: 1.5px solid #F59E0B;
+  border-radius: var(--rad); padding: 10px 14px;
+}
+.radar-oro-label {
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.8px;
+  color: #92400E; margin-bottom: 5px;
+  display: flex; align-items: center; gap: 5px;
+}
+.radar-oro-text {
+  font-size: 13px; color: #1C1917; line-height: 1.6;
+  font-style: italic;
+}
+.radar-intel-empty {
+  padding: 12px 16px;
+  font-size: 12px; color: var(--tx3); text-align: center;
+}
+.radar-intel-loading {
+  padding: 12px 16px;
+  font-size: 12px; color: var(--tx3); text-align: center;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.radar-spinner {
+  display: inline-block; width: 12px; height: 12px;
+  border: 2px solid var(--brd2); border-top-color: var(--nn);
+  border-radius: 50%; animation: spin 0.7s linear infinite;
+}
+
+/* ══════════════════════════════════════════════════════════════
    RESPONSIVE
    ══════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
@@ -667,6 +757,9 @@ body {
           </div>
         </div>
       </div>
+
+      <!-- RADAR INTEL CARD — se inyecta por JS al seleccionar contacto -->
+      <div id="radar-intel-card" style="display:none"></div>
 
       <!-- RESULT CARD -->
       <div class="result-card">
@@ -862,6 +955,37 @@ body {
 // CONFIGURACIÓN Y SEGURIDAD
 // ══════════════════════════════════════════════════════════════
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxpYhW-S9OvA3w1NTR_Mu6GHffGTtHKE1ENKgoM98ySB8gyxt-j4BbaKF7Mk48grrcr_g/exec';
+
+// ── RADAR COMERCIAL — configuración ──────────────────────────
+const RADAR_SHEET_ID = '16RFegu-rNY2dWOkO0pt97OElUdSDOO6gC0n3cyKSuUk';
+const RADAR_TAB      = 'Campañas Activas';
+const RADAR_URL      = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(RADAR_TAB)}`;
+
+// Cache de campañas para no hacer fetch en cada contacto
+let radarCampanas = null; // null = sin cargar | [] = cargado sin datos | [...] = datos
+let radarCargando = false;
+
+// Mapa buyer persona → segmentos del Radar (palabras clave a buscar en col Segmento)
+const BUYER_SEGMENTO_MAP = {
+  'SENIOR':      ['senior', 'mayor', 'jubil', 'senior s5', 's5'],
+  'FAMILIA':     ['familia', 'familiar', 'hijo', 'protección'],
+  'AUTÓNOMO':    ['autónomo', 'autonomo', 'emprendedor', 'negocio'],
+  'JOVEN AHORRO':['joven', 'ahorro', 'millennial', 'sialp'],
+  'PLANIFICADOR':['planific', 'jubil', 'sialp', 'pensión', 'creciente'],
+};
+
+// Preguntas de apertura "Oro Puro" por tipo de campaña/producto
+const APERTURAS_ORO = {
+  'senior':      '"¿Sabes lo que te costaría hoy una residencia privada o atención domiciliaria si la necesitaras? Muchos de mis clientes se han llevado una sorpresa..."',
+  'contigo senior': '"¿Tienes claro cómo estarías cubierto si en algún momento no pudieras valerte por ti mismo? Te lo pregunto porque hay algo que muy poca gente conoce..."',
+  'salud':       '"¿Cuánto tiempo llevas esperando para ver a un especialista por la Seguridad Social? Te pregunto porque a muchos clientes les cambia la respuesta muy rápido."',
+  'vida':        '"Si tú faltaras mañana, ¿sabes exactamente cuánto tiempo podría vivir tu familia con sus ahorros actuales?"',
+  'ahorro':      '"¿Sabes cuánto vas a cobrar de pensión cuando te jubiles? Hay una calculadora oficial... y el número suele sorprender."',
+  'sialp':       '"¿Sabes que hay un producto que te permite ahorrar con ventaja fiscal y disponer del dinero cuando quieras, sin penalizaciones? Muy poca gente lo conoce."',
+  'hogar':       '"¿Cuándo fue la última vez que revisaste a fondo qué cubre realmente tu seguro de hogar? Muchos descubren agujeros importantes cuando ya es tarde."',
+  'autonomo':    '"Si mañana te lesionas y no puedes trabajar 3 meses, ¿de dónde sale el dinero para pagar tus gastos fijos? ¿Tienes algo concreto para eso?"',
+  'default':     '"Solo te llamo un momento porque vi algo que podría interesarte mucho — y creo que en 2 minutos lo entiendes completamente."',
+};
 
 // Validar token maestro al entrar
 let MASTER_TOKEN = localStorage.getItem('nn_master_token');
@@ -1253,7 +1377,171 @@ function selContacto(id) {
 
   // Scroll to top of main
   document.getElementById('main-area').scrollTop = 0;
+
+  // Mostrar inteligencia Radar para este contacto
+  renderRadarIntel(c);
 }
+
+// ══════════════════════════════════════════════════════════════
+// RADAR INTEL — Cargar campañas y cruzar con contacto activo
+// ══════════════════════════════════════════════════════════════
+async function cargarRadarSilencioso() {
+  if (radarCampanas !== null || radarCargando) return;
+  radarCargando = true;
+  try {
+    const res  = await fetch(RADAR_URL);
+    const text = await res.text();
+    const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
+    const rows = json.table.rows;
+    radarCampanas = rows
+      .slice(1)
+      .filter(r => r.c && r.c[0] && r.c[0].v)
+      .map(r => ({
+        producto:  String(r.c[0]?.v || ''),
+        tipo:      String(r.c[1]?.v || ''),
+        desc:      String(r.c[2]?.v || ''),
+        fin:       String(r.c[4]?.v || ''),
+        cupo:      String(r.c[5]?.v || ''),
+        dto:       String(r.c[6]?.v || ''),
+        segmento:  String(r.c[7]?.v || ''),
+        accion:    String(r.c[8]?.v || ''),
+        estado:    String(r.c[9]?.v || ''),
+      }))
+      .filter(c => {
+        const e = c.estado.toUpperCase();
+        return e.includes('ACTIVA') || e.includes('URGENTE') || e.includes('CAMBIO');
+      });
+    console.log(`[Radar] ${radarCampanas.length} campañas activas cargadas.`);
+    // Si hay un contacto ya seleccionado, actualizar el panel
+    if (contactoActivo) renderRadarIntel(contactoActivo);
+  } catch(e) {
+    radarCampanas = [];
+    console.warn('[Radar] Error cargando campañas:', e);
+  }
+  radarCargando = false;
+}
+
+function getKeywordsForBuyer(buyer) {
+  if (!buyer) return [];
+  const b = buyer.toUpperCase().trim();
+  for (const [key, keywords] of Object.entries(BUYER_SEGMENTO_MAP)) {
+    if (b.includes(key)) return keywords;
+  }
+  return [];
+}
+
+function matchCampanasForContacto(contacto) {
+  if (!radarCampanas || !radarCampanas.length) return [];
+  const keywords = getKeywordsForBuyer(contacto.buyer);
+  const polizaL  = (contacto.poliza || '').toLowerCase();
+  const prodNNL  = (contacto.productoNN || '').toLowerCase();
+  const necesL   = (contacto.necesidad || '').toLowerCase();
+
+  return radarCampanas.filter(c => {
+    const seg = c.segmento.toLowerCase();
+    const prod = c.producto.toLowerCase();
+    // 1. Cruzar por segmento del Radar contra buyer persona keywords
+    if (keywords.some(k => seg.includes(k))) return true;
+    // 2. Cruzar por producto NN recomendado
+    if (prodNNL && prod.includes(prodNNL.split(' ')[0])) return true;
+    // 3. Cruzar por póliza Santalucía
+    if (polizaL.includes('decesos') && (seg.includes('senior') || prod.includes('senior'))) return true;
+    // 4. Cruzar por necesidad
+    if (necesL && (seg.includes(necesL.split(' ')[0]) || prod.includes(necesL.split(' ')[0]))) return true;
+    return false;
+  });
+}
+
+function getAperturaOro(campana) {
+  const prod = (campana.producto + ' ' + campana.tipo).toLowerCase();
+  for (const [key, apertura] of Object.entries(APERTURAS_ORO)) {
+    if (prod.includes(key)) return apertura;
+  }
+  return APERTURAS_ORO['default'];
+}
+
+function getBadgeClass(estado) {
+  const e = (estado || '').toUpperCase();
+  if (e.includes('URGENTE')) return 'background:#FEF3C7;color:#92400E';
+  if (e.includes('ACTIVA'))  return 'background:#DCFCE7;color:#15803D';
+  return 'background:#DBEAFE;color:#1D4ED8';
+}
+
+function renderRadarIntel(contacto) {
+  const card = document.getElementById('radar-intel-card');
+
+  // Si el Radar aún está cargando, mostrar spinner
+  if (radarCampanas === null) {
+    card.style.display = 'block';
+    card.innerHTML = `
+      <div class="radar-intel">
+        <div class="radar-intel-header">
+          <div class="radar-pulse"></div>
+          <div class="radar-intel-title">📡 RADAR COMERCIAL — Inteligencia de Campaña</div>
+        </div>
+        <div class="radar-intel-loading"><div class="radar-spinner"></div> Cargando campañas activas…</div>
+      </div>`;
+    return;
+  }
+
+  const campanas = matchCampanasForContacto(contacto);
+  const buyerLabel = contacto.buyer || 'sin segmento';
+
+  if (!campanas.length) {
+    // Sin campaña activa para este perfil — panel discreto
+    card.style.display = 'block';
+    card.innerHTML = `
+      <div class="radar-intel" style="border-color:var(--brd2)">
+        <div class="radar-intel-header" style="background:var(--white)">
+          <div style="width:9px;height:9px;background:var(--tx3);border-radius:50%;flex-shrink:0"></div>
+          <div class="radar-intel-title" style="color:var(--tx3)">📡 Radar Comercial — Sin campaña activa para ${buyerLabel}</div>
+        </div>
+        <div class="radar-intel-empty">No hay campaña activa asignada a este buyer persona. Aborda la necesidad principal según ADN.</div>
+      </div>`;
+    return;
+  }
+
+  // Construir HTML del panel de inteligencia
+  const campHtml = campanas.slice(0, 2).map(c => {
+    const tags = [c.fin ? `⏰ ${c.fin}` : '', c.dto && c.dto !== '—' ? `🏷️ ${c.dto}` : '', c.cupo && c.cupo !== 'Sin cupo' ? `📊 ${c.cupo}` : '']
+      .filter(Boolean)
+      .map(t => `<span class="radar-camp-tag">${t}</span>`)
+      .join('');
+    const apertura = getAperturaOro(c);
+    const badgeStyle = getBadgeClass(c.estado);
+    return `
+      <div class="radar-camp-row">
+        <div class="radar-camp-icon">🎯</div>
+        <div class="radar-camp-info">
+          <div class="radar-camp-name">
+            ${c.producto}
+            <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:6px;${badgeStyle}">${c.estado}</span>
+          </div>
+          <div class="radar-camp-desc">${c.desc || c.tipo}</div>
+          ${tags ? `<div class="radar-camp-tags">${tags}</div>` : ''}
+          ${c.accion ? `<div style="font-size:11px;color:var(--nn);font-weight:600;margin-top:4px">→ ${c.accion}</div>` : ''}
+        </div>
+      </div>
+      <div class="radar-oro">
+        <div class="radar-oro-label">✨ Pregunta de apertura recomendada</div>
+        <div class="radar-oro-text">${apertura}</div>
+      </div>`;
+  }).join('');
+
+  card.style.display = 'block';
+  card.innerHTML = `
+    <div class="radar-intel">
+      <div class="radar-intel-header">
+        <div class="radar-pulse"></div>
+        <div class="radar-intel-title">📡 RADAR — Campaña para ${buyerLabel}</div>
+        <div class="radar-intel-badge">${campanas.length} activa${campanas.length > 1 ? 's' : ''}</div>
+      </div>
+      <div class="radar-intel-body">${campHtml}</div>
+    </div>`;
+}
+
+// Arrancar carga silenciosa del Radar al cargar la página
+cargarRadarSilencioso();
 
 // Mapear pólizas Santalucía → productos NN
 function mapPolizaToNN(poliza) {
