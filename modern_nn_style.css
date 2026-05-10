@@ -1,0 +1,98 @@
+/* 
+   ✨ MODERN NN DESIGN SYSTEM (v1.0) 
+   Premium, High-Contrast & Glassmorphism 
+*/
+
+:root {
+  /* NN Corporate Colors */
+  --nn-orange: #C94D00;
+  --nn-orange-light: #E85C0D;
+  --nn-orange-bg: #FFF8F5;
+  
+  /* UI Colors */
+  --bg-main: #F5F5F0;
+  --bg-card: #FFFFFF;
+  --bg-glass: rgba(255, 255, 255, 0.7);
+  
+  /* Typography */
+  --text-primary: #000000; /* Pure black for high contrast */
+  --text-secondary: #374151;
+  --text-muted: #6B7280;
+  
+  /* Borders & Shadows */
+  --border-radius: 16px;
+  --border-color: rgba(0, 0, 0, 0.12);
+  --shadow-premium: 0 10px 30px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-orange: 0 10px 25px -5px rgba(201, 77, 0, 0.15);
+}
+
+/* Glassmorphism Utility */
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Premium Card Style */
+.premium-card {
+  background: var(--bg-card);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-premium);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.12);
+  border-color: var(--nn-orange);
+}
+
+/* Animated Progress Bars */
+.progress-container {
+  height: 12px;
+  background: #E5E7EB;
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--nn-orange), var(--nn-orange-light));
+  border-radius: 100px;
+  transition: width 1.5s ease-out;
+}
+
+/* Typography Overrides */
+h1, h2, h3, .bebas {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 1.5px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* Buttons */
+.btn-nn {
+  background: var(--nn-orange);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.btn-nn:hover {
+  background: var(--nn-orange-light);
+  transform: scale(1.02);
+  box-shadow: var(--shadow-orange);
+}

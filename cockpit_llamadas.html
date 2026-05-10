@@ -225,8 +225,11 @@ body {
 
 /* Call card */
 .call-card {
-  background: var(--card); border-radius: var(--rad-lg);
-  box-shadow: var(--shadow); border: 1px solid var(--brd);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: var(--rad-lg);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   overflow: hidden;
 }
 .cc-header {
@@ -874,39 +877,21 @@ const PVM_OBJ = 10291;
 const PVM_KEY = 'nn_pvm_2026';
 const SESION_KEY = 'nn_cockpit_sesion';
 
-// ── Pestañas reales del Cerebro de la Bestia ─────────────────
-// Clave = mes (0-indexed: 0=enero ... 11=diciembre)
-// Valor = nombre EXACTO de la pestaña en el Sheet
-const TABS_MESES = {
-  4:  'MAYO',
-  5:  'JUNIO',
-  6:  'JULIO',
-  7:  'AGOSTO',
-  8:  'SEPTIEMBRE',
-  9:  'OCTUBRE',
-  10: 'NOVIEMBRE',
-  11: 'DICIEMBRE'
-};
-
-// Columnas del Sheet DESPUÉS del setup (A=0 ... M=12)
-// Orden real: las 9 originales + 4 nuevas añadidas por el script
+// ── Mapeo Columnas CRM MAESTRO (Estructura 54 columnas) ──────
 const COL = {
   NOMBRE: 0,      // A — Nombre completo
   TELEFONO: 1,    // B — Teléfono móvil
-  LOCALIDAD: 2,   // C — Localidad
-  POLIZA_SL: 3,   // D — Póliza Santalucía (Decesos, Hogar, Vida...)
-  FECHA_VTO: 4,   // E — Fecha vencimiento (dd/mm)
-  ESTADO: 5,      // F — Estado comercial
-  NECESIDAD: 6,   // G — Necesidad principal
-  PRODUCTO_NN: 7, // H — Producto NN recomendado
-  RESULTADO: 8,   // I — Resultado última llamada
-  BUYER: 9,       // J — Buyer Persona (añadida por setup)
-  EMAIL: 10,      // K — Email (añadida por setup)
-  NOTAS: 11,      // L — Notas (añadida por setup)
-  ULT_LLAMADA: 12 // M — Última llamada (añadida por setup)
+  LOCALIDAD: 4,   // E — Localidad
+  MES_VTO: 8,     // I — Próximo vencimiento mes
+  PRODUCTOS: 9,   // J — Productos actuales
+  POLIZA_1: 10,   // K — Póliza 1
+  VTO_1: 11,      // L — Vto 1
+  RESULTADO: 42,  // AQ — Resultado última llamada
+  OBSERVACIONES: 48, // AW — Observaciones (Mapa de Empatía)
+  BUYER: 49       // AX — Buyer Persona
 };
 
-// Campos mínimos para datos "completos" → si faltan, alerta visita presencial
+// Campos críticos para alerta de visita
 const CAMPOS_CRITICOS = [COL.TELEFONO, COL.LOCALIDAD, COL.BUYER];
 
 // ══════════════════════════════════════════════════════════════
@@ -974,12 +959,11 @@ renderSesion();
 // ══════════════════════════════════════════════════════════════
 // CARGAR CONTACTOS DESDE GOOGLE SHEETS (Visualization API)
 // ══════════════════════════════════════════════════════════════
-async function cargarContactos(tabName) {
+async function cargarContactos(filtroMes = 'actual') {
   const el = document.getElementById('contact-list');
-  el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--tx3);font-size:13px">⏳ Cargando contactos...</div>';
+  el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--tx3);font-size:13px">⏳ Consultando Maestro...</div>';
 
-  const encoded = encodeURIComponent(tabName);
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encoded}`;
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=CRM%20MAESTRO`;
 
   try {
     const res = await fetch(url);
@@ -989,10 +973,25 @@ async function cargarContactos(tabName) {
 
     if (!rows || rows.length < 2) { renderLista([]); return; }
 
-    contactos = rows.slice(1).filter(r => r.c && r.c[0] && r.c[0].v).map((r, i) => {
-      const val = idx => (r.c[idx] && r.c[idx].v) ? String(r.c[idx].v).trim() : '';
+    const mesActualIdx = new Date().getMonth();
+    const mesSiguienteIdx = (mesActualIdx + 1) % 12;
+    const mesActualNombre = MESES[mesActualIdx].toUpperCase();
+    const mesSiguienteNombre = MESES[mesSiguienteIdx].toUpperCase();
 
-      // Contar campos críticos vacíos
+    contactos = rows.slice(1).map((r, i) => {
+      const val = idx => (r.c && r.c[idx] && r.c[idx].v) ? String(r.c[idx].v).trim() : '';
+      
+      const mesVtoRow = val(COL.MES_VTO).toUpperCase();
+      let matchesFilter = false;
+      
+      if (filtroMes === 'actual') {
+        matchesFilter = (mesVtoRow === mesActualNombre || mesVtoRow === mesSiguienteNombre);
+      } else {
+        matchesFilter = (mesVtoRow === MESES[parseInt(filtroMes)].toUpperCase());
+      }
+
+      if (!matchesFilter && modoActual === 'vto') return null;
+
       const camposVacios = CAMPOS_CRITICOS.filter(c => !val(c)).length;
 
       return {
@@ -1000,21 +999,21 @@ async function cargarContactos(tabName) {
         nombre:       val(COL.NOMBRE),
         telefono:     val(COL.TELEFONO),
         localidad:    val(COL.LOCALIDAD),
-        poliza:       val(COL.POLIZA_SL),
-        vto:          val(COL.FECHA_VTO),
-        estado:       val(COL.ESTADO),
-        necesidad:    val(COL.NECESIDAD),
-        productoNN:   val(COL.PRODUCTO_NN),
+        poliza:       val(COL.POLIZA_1),
+        vto:          val(COL.VTO_1),
         resultado:    val(COL.RESULTADO),
         buyer:        val(COL.BUYER),
-        email:        val(COL.EMAIL),
-        notas:        val(COL.NOTAS),
-        ultLlamada:   val(COL.ULT_LLAMADA),
+        notas:        val(COL.OBSERVACIONES),
         datosIncompletos: camposVacios > 0,
-        camposVacios: camposVacios,
         hecho: sesion.hechos.includes(val(COL.NOMBRE))
       };
-    });
+    }).filter(c => c !== null);
+
+    renderLista(contactos);
+  } catch(e) {
+    el.innerHTML = '<div style="padding:16px;text-align:center;color:var(--r)">⚠️ Error conexión Maestro.</div>';
+  }
+}
 
     // Ordenar: primero los que tienen datos incompletos (necesitan visita),
     // luego por fecha de vencimiento más próxima
@@ -1116,18 +1115,15 @@ function setMode(modo) {
 
   const sel = document.getElementById('filter-select');
   if (modo === 'vto') {
-    // Generar opciones dinámicas solo para meses actuales y futuros
-    const mesActual = new Date().getMonth(); // 0-indexed
+    const mesActualIdx = new Date().getMonth();
     let opts = '<option value="actual">Mes actual + siguiente</option>';
-    for (const [mes, nombre] of Object.entries(TABS_MESES)) {
-      const m = parseInt(mes);
-      if (m >= mesActual) { // Solo meses actuales o futuros
-        opts += `<option value="${m}">${nombre}</option>`;
+    for (let i = 0; i < 12; i++) {
+      if (i >= mesActualIdx) {
+        opts += `<option value="${i}">${MESES[i].toUpperCase()}</option>`;
       }
     }
     sel.innerHTML = opts;
   } else {
-    // Modo localidad: extraer localidades únicas de contactos cargados
     const locs = [...new Set(contactos.map(c => c.localidad).filter(Boolean))].sort();
     sel.innerHTML = '<option value="todas">Todas las localidades</option>' +
       locs.map(l => `<option value="${l}">${l}</option>`).join('');
@@ -1137,32 +1133,9 @@ function setMode(modo) {
 
 function aplicarFiltro() {
   const val = document.getElementById('filter-select').value;
-
   if (modoActual === 'vto') {
-    if (val === 'actual') {
-      // Detectar mes actual → cargar esa pestaña (o la siguiente disponible)
-      const mesActual = new Date().getMonth();
-      let tabName = TABS_MESES[mesActual];
-
-      // Si no existe pestaña para este mes, buscar la siguiente
-      if (!tabName) {
-        for (let m = mesActual + 1; m <= 11; m++) {
-          if (TABS_MESES[m]) { tabName = TABS_MESES[m]; break; }
-        }
-      }
-
-      if (tabName) {
-        cargarContactos(tabName);
-      } else {
-        document.getElementById('contact-list').innerHTML =
-          '<div style="padding:20px;text-align:center;color:var(--tx3);font-size:12px">No hay pestañas de meses futuros configuradas</div>';
-      }
-    } else {
-      const tabName = TABS_MESES[parseInt(val)];
-      if (tabName) cargarContactos(tabName);
-    }
+    cargarContactosMaster(val);
   } else {
-    // En modo localidad, re-renderiza la lista existente con el filtro
     renderLista(contactos);
   }
 }
@@ -1205,11 +1178,17 @@ function selContacto(id) {
   if (c.buyer) detailParts.push(`Buyer: ${c.buyer}`);
   document.getElementById('cc-detail').innerHTML = detailParts.join(' · ') || '—';
 
-  // Notas previas
-  let notasTxt = '';
-  if (c.notas) notasTxt = c.notas;
-  if (c.productoNN) notasTxt += (notasTxt ? ' · ' : '') + 'Producto NN: ' + c.productoNN;
-  document.getElementById('cc-notas').textContent = notasTxt;
+  // Notas de Empatía (Col AW del CRM)
+  const notasEl = document.getElementById('cc-notas');
+  if (c.notas) {
+    notasEl.innerHTML = `<div style="background:var(--nn-l);padding:8px;border-radius:8px;border-left:4px solid var(--nn);margin-top:8px">
+      <span style="font-size:10px;text-transform:uppercase;color:var(--nn);display:block;margin-bottom:2px">🧠 Mapa de Empatía / Notas:</span>
+      ${c.notas}
+    </div>`;
+    notasEl.style.display = 'block';
+  } else {
+    notasEl.style.display = 'none';
+  }
 
   // Warning datos incompletos → proponer visita presencial
   const warnEl = document.getElementById('cc-warn');

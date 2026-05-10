@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DESPEGUE PREMIUM — Panel NN · Fede</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modern_nn_style.css">
+<style>
+/* Additional specific styles for the dashboard */
+.radar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.radar-card {
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.radar-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--nn-orange);
+}
+
+.radar-card.urgente::before {
+  background: #B91C1C;
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.radar-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-activa { background: #DCFCE7; color: #15803D; }
+.badge-urgente { background: #FEE2E2; color: #B91C1C; }
+.badge-info { background: #DBEAFE; color: #1D4ED8; }
+
+.radar-producto {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  margin: 10px 0 5px;
+  color: var(--text-primary);
+}
+
+.radar-segmento {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--nn-orange);
+  text-transform: uppercase;
+}
+
+.radar-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+  min-height: 42px;
+}
+
+.radar-adn {
+  background: var(--nn-orange-bg);
+  border-left: 3px solid var(--nn-orange);
+  padding: 10px;
+  border-radius: 0 8px 8px 0;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.radar-adn-title {
+  font-weight: 700;
+  font-size: 10px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  color: var(--nn-orange);
+}
+
+.hero-section {
+  padding: 60px 20px;
+  background-image: radial-gradient(circle at 0% 0%, rgba(201, 77, 0, 0.05) 0%, transparent 50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-title h1 {
+  font-size: 72px;
+  line-height: 0.9;
+  margin: 0;
+}
+
+.hero-title span {
+  color: var(--nn-orange);
+}
+
+.pvm-widget {
+  width: 350px;
+  padding: 30px;
+}
+
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 70px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--nn-orange);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-text-top {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.logo-text-bottom {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+</style>
+</head>
+<body class="bg-main">
+
+<nav class="nav-bar glass">
+  <div class="logo-container">
+    <div class="logo-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+      </svg>
+    </div>
+    <div>
+      <div class="logo-text-top">DESPEGUE <span>PREMIUM</span></div>
+      <div class="logo-text-bottom">Ecosistema ADN · Federico Fontanals</div>
+    </div>
+  </div>
+  <div id="reloj" class="bebas" style="font-size: 24px;">--:--:--</div>
+</nav>
+
+<section class="hero-section">
+  <div class="hero-title">
+    <div style="font-size: 14px; font-weight: 700; color: var(--nn-orange); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">Agente Dinamizador</div>
+    <h1>FEDE,<br><span>TUS RESULTADOS<br>NOS DEFINEN</span></h1>
+  </div>
+  
+  <div class="pvm-widget premium-card glass">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px;">
+      <div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">PVM Acumulado</div>
+        <div id="pvm-pts" class="bebas" style="font-size: 48px; line-height: 1; color: var(--nn-orange);">0</div>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Meta 2026</div>
+        <div class="bebas" style="font-size: 24px; line-height: 1;">10.291</div>
+      </div>
+    </div>
+    
+    <div class="progress-container">
+      <div id="pvm-bar" class="progress-fill" style="width: 0%"></div>
+    </div>
+    
+    <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 12px; font-weight: 600;">
+      <span id="pvm-pct">0% Completado</span>
+      <span id="pvm-falta" style="color: var(--nn-orange);">Faltan 10.291 pts</span>
+    </div>
+  </div>
+</section>
+
+<main style="max-width: 1200px; margin: 0 auto; padding: 0 20px 60px;">
+  
+  <!-- 📡 RADAR COMERCIAL DINÁMICO -->
+  <div style="display: flex; align-items: center; gap: 15px; margin: 40px 0 20px;">
+    <div class="bebas" style="font-size: 32px;">📡 RADAR COMERCIAL</div>
+    <div style="flex: 1; height: 2px; background: var(--border-color);"></div>
+    <div id="radar-status" style="font-size: 12px; color: var(--text-muted); font-weight: 600;">Cargando inteligencia...</div>
+  </div>
+  
+  <div id="radar-grid" class="radar-grid">
+    <!-- Se rellena dinámicamente -->
+    <div class="premium-card" style="padding: 40px; text-align: center; grid-column: 1/-1;">
+      <div style="font-size: 24px; margin-bottom: 10px;">⏳</div>
+      <div class="bebas">Sincronizando con el Cerebro de la Bestia...</div>
+    </div>
+  </div>
+
+  <!-- ⚡ HERRAMIENTAS RÁPIDAS -->
+  <div class="bebas" style="font-size: 32px; margin: 60px 0 20px;">⚡ HERRAMIENTAS DE ALTO IMPACTO</div>
+  <div class="radar-grid">
+    <a href="modo_enfoque_pro_v3_RGPD.html" class="premium-card glass" style="padding: 20px; text-decoration: none; color: inherit; display: flex; align-items: center; gap: 20px;">
+      <div style="font-size: 32px;">🎯</div>
+      <div>
+        <div class="bebas" style="font-size: 20px;">Modo Enfoque Pro</div>
+        <div style="font-size: 12px; color: var(--text-muted);">Guiones ADN & Objeciones</div>
+      </div>
+    </a>
+    <a href="cockpit_llamadas.html" class="premium-card glass" style="padding: 20px; text-decoration: none; color: inherit; display: flex; align-items: center; gap: 20px;">
+      <div style="font-size: 32px;">🎛️</div>
+      <div>
+        <div class="bebas" style="font-size: 20px;">Cockpit Comercial</div>
+        <div style="font-size: 12px; color: var(--text-muted);">Control de llamadas & CRM</div>
+      </div>
+    </a>
+    <a href="Briefing_Lunes_ADN.html" class="premium-card glass" style="padding: 20px; text-decoration: none; color: inherit; display: flex; align-items: center; gap: 20px;">
+      <div style="font-size: 32px;">🧠</div>
+      <div>
+        <div class="bebas" style="font-size: 20px;">Briefing IA ADN</div>
+        <div style="font-size: 12px; color: var(--text-muted);">Traducción semanal de campañas</div>
+      </div>
+    </a>
+  </div>
+
+</main>
+
+<script>
+// ── RELOJ ─────────────────────────────────────
+function actualizarReloj() {
+  const now = new Date();
+  document.getElementById('reloj').textContent = now.toLocaleTimeString('es-ES');
+}
+setInterval(actualizarReloj, 1000);
+actualizarReloj();
+
+// ── PVM ──────────────────────────────────────
+const PVM_OBJETIVO = 10291;
+function renderPVM(pts) {
+  const pct = Math.min(Math.round(pts / PVM_OBJETIVO * 100), 100);
+  const falta = Math.max(PVM_OBJETIVO - pts, 0);
+
+  document.getElementById('pvm-pts').textContent = pts.toLocaleString('es-ES');
+  document.getElementById('pvm-pct').textContent = pct + '% Completado';
+  document.getElementById('pvm-falta').textContent = `Faltan ${falta.toLocaleString('es-ES')} pts`;
+  
+  setTimeout(() => {
+    document.getElementById('pvm-bar').style.width = pct + '%';
+  }, 500);
+}
+
+// Cargar PVM desde localStorage
+const actualPVM = parseInt(localStorage.getItem('nn_pvm_2026') || '0');
+renderPVM(actualPVM);
+
+// ── RADAR DINÁMICO ───────────────────────────
+async function cargarRadar() {
+  const grid = document.getElementById('radar-grid');
+  const status = document.getElementById('radar-status');
+  
+  try {
+    // Intentamos cargar el JSON generado por Python
+    const response = await fetch('radar_db.json');
+    if (!response.ok) throw new Error('No se encontró radar_db.json');
+    
+    const db = await response.json();
+    status.textContent = `Última actualización: ${db.ultima_actualizacion}`;
+    
+    if (db.campanas.length === 0) {
+      grid.innerHTML = '<div class="premium-card" style="padding:40px; text-align:center; grid-column:1/-1;">No hay campañas activas esta semana.</div>';
+      return;
+    }
+    
+    grid.innerHTML = db.campanas.map(c => {
+      const esUrgente = c.Estado && c.Estado.includes('URGENTE');
+      return `
+        <div class="premium-card radar-card ${esUrgente ? 'urgente' : ''}">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div class="radar-segmento">🎯 ${c.Segmento_objetivo || 'General'}</div>
+            <div class="radar-badge ${esUrgente ? 'badge-urgente' : 'badge-activa'}">${c.Estado || 'ACTIVA'}</div>
+          </div>
+          <div class="radar-producto">${c.Producto}</div>
+          <div class="radar-desc">${c.Descripcion_del_beneficio || ''}</div>
+          
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px;">
+            ${c.Fecha_fin ? `<span style="font-size:10px; background:#F3F4F6; padding:2px 8px; border-radius:4px; font-weight:600;">⏰ Hasta ${c.Fecha_fin}</span>` : ''}
+            ${c.Descuento_Bonus ? `<span style="font-size:10px; background:var(--nn-orange-bg); color:var(--nn-orange); padding:2px 8px; border-radius:4px; font-weight:600;">🏷️ ${c.Descuento_Bonus}</span>` : ''}
+          </div>
+          
+          ${c.Vulnerabilidad_Detectada ? `
+          <div class="radar-adn">
+            <div class="radar-adn-title">🔪 Vulnerabilidad (ADN)</div>
+            <div style="font-style: italic;">${c.Vulnerabilidad_Detectada}</div>
+          </div>` : ''}
+          
+          ${c.Pregunta_Apertura ? `
+          <div style="margin-top:15px; border-top:1px solid var(--border-color); padding-top:10px;">
+            <div class="radar-adn-title" style="color:var(--text-secondary);">🗣️ Apertura Consultiva</div>
+            <div style="font-weight:600; color:var(--nn-orange);">"${c.Pregunta_Apertura}"</div>
+          </div>` : ''}
+        </div>
+      `;
+    }).join('');
+    
+  } catch (err) {
+    console.error(err);
+    status.textContent = 'Usando datos locales (offline)';
+    // Fallback a datos estáticos si el JSON falla (usamos los de index.html original)
+    grid.innerHTML = '<div class="premium-card" style="padding:40px; text-align:center; grid-column:1/-1;">Error al sincronizar datos dinámicos. Por favor, ejecuta el "Botón Despegue".</div>';
+  }
+}
+
+cargarRadar();
+</script>
+</body>
+</html>
