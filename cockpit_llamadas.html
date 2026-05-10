@@ -1009,19 +1009,10 @@ async function cargarContactos(filtroMes = 'actual') {
       };
     }).filter(c => c !== null);
 
-    renderLista(contactos);
-  } catch(e) {
-    el.innerHTML = '<div style="padding:16px;text-align:center;color:var(--r)">⚠️ Error conexión Maestro.</div>';
-  }
-}
-
-    // Ordenar: primero los que tienen datos incompletos (necesitan visita),
-    // luego por fecha de vencimiento más próxima
+    // Ordenar: primero los que tienen datos incompletos (necesitan visita)
     contactos.sort((a, b) => {
-      // Incompletos primero si no tienen resultado previo
       if (a.datosIncompletos && !a.resultado && !b.datosIncompletos) return -1;
       if (!a.datosIncompletos && b.datosIncompletos && !b.resultado) return 1;
-      // Luego por vencimiento
       return 0;
     });
 
@@ -1030,10 +1021,9 @@ async function cargarContactos(filtroMes = 'actual') {
     console.warn('Error cargando contactos:', e);
     el.innerHTML =
       `<div style="padding:16px;text-align:center;color:var(--r);font-size:12px">
-        ⚠️ No se pudo conectar con la pestaña <b>"${tabName}"</b>.<br>
-        Comprueba que existe y que el Sheet tiene permisos públicos.
+        ⚠️ Error conexión Maestro.
         <br><br>
-        <a href="https://docs.google.com/spreadsheets/d/${SHEET_ID}" target="_blank" style="color:var(--nn)">Abrir Sheet directamente →</a>
+        <a href="https://docs.google.com/spreadsheets/d/${SHEET_ID}" target="_blank" style="color:var(--nn)">Abrir Sheet →</a>
       </div>`;
   }
 }
