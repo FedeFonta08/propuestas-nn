@@ -2,13 +2,37 @@
 .env
 .env.*
 
-# Credenciales de Google APIs
+# ============================================
+# CARPETAS LOCALES — NO SUBIR A GITHUB
+# ============================================
+CRM_Contactos/
+Campanas_Promociones/
+Contratos_Polizas/
+Estrategia_Analisis/
+Formacion/
+Marketing_Branding/
+PTD_Transformacion/
+Plantillas_Excel/
+Presentaciones/
+Productos_Guias/
+Propuestas_Clientes/
+Reclutamiento_CV/
+Scripts_Herramientas/
+
+# ============================================
+# CREDENCIALES Y TOKENS — NUNCA SUBIR
+# ============================================
 credentials.json
 token.json
+token_drive.json
+*.json
+!package.json
+!package-lock.json
 
 # Python
 __pycache__/
 *.pyc
+*.py
 
 # IDE y OS
 .vscode/
