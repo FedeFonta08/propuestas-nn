@@ -961,7 +961,7 @@ renderSesion();
 // ══════════════════════════════════════════════════════════════
 async function cargarContactos(filtroMes = 'actual') {
   const el = document.getElementById('contact-list');
-  el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--tx3);font-size:13px">⏳ Consultando Maestro...</div>';
+  el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--tx3);font-size:13px"><span class="spinner" style="border-top-color:var(--nn)"></span><br>Consultando Maestro...</div>';
 
   const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=CRM%20MAESTRO`;
 
@@ -971,7 +971,10 @@ async function cargarContactos(filtroMes = 'actual') {
     const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
     const rows = json.table.rows;
 
-    if (!rows || rows.length < 2) { renderLista([]); return; }
+    if (!rows || rows.length < 2) { 
+      el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--tx3)">El Maestro está vacío</div>';
+      return; 
+    }
 
     const mesActualIdx = new Date().getMonth();
     const mesSiguienteIdx = (mesActualIdx + 1) % 12;
@@ -1009,6 +1012,15 @@ async function cargarContactos(filtroMes = 'actual') {
       };
     }).filter(c => c !== null);
 
+    if (contactos.length === 0) {
+      el.innerHTML = `<div style="padding:20px;text-align:center;color:var(--tx2);font-size:12px">
+        📭 No hay vencimientos de <b>${filtroMes === 'actual' ? 'Mayo/Junio' : MESES[filtroMes].toUpperCase()}</b> en el Maestro.<br><br>
+        <span style="color:var(--tx3);font-size:11px">Asegúrate de que la <b>Columna I</b> del CRM MAESTRO tenga el nombre del mes.</span>
+      </div>`;
+      document.getElementById('sb-count').textContent = '0 contactos';
+      return;
+    }
+
     // Ordenar: primero los que tienen datos incompletos (necesitan visita)
     contactos.sort((a, b) => {
       if (a.datosIncompletos && !a.resultado && !b.datosIncompletos) return -1;
@@ -1018,13 +1030,8 @@ async function cargarContactos(filtroMes = 'actual') {
 
     renderLista(contactos);
   } catch(e) {
-    console.warn('Error cargando contactos:', e);
-    el.innerHTML =
-      `<div style="padding:16px;text-align:center;color:var(--r);font-size:12px">
-        ⚠️ Error conexión Maestro.
-        <br><br>
-        <a href="https://docs.google.com/spreadsheets/d/${SHEET_ID}" target="_blank" style="color:var(--nn)">Abrir Sheet →</a>
-      </div>`;
+    console.warn('Error:', e);
+    el.innerHTML = '<div style="padding:16px;text-align:center;color:var(--r)">⚠️ Error conexión CRM.</div>';
   }
 }
 
