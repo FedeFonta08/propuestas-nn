@@ -1131,7 +1131,7 @@ function setMode(modo) {
 function aplicarFiltro() {
   const val = document.getElementById('filter-select').value;
   if (modoActual === 'vto') {
-    cargarContactosMaster(val);
+    cargarContactos(val);
   } else {
     renderLista(contactos);
   }

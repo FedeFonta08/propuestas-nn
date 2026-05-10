@@ -1193,6 +1193,43 @@ const RADAR_SHEET_ID = '16lui0o9wPYe9tL-9PaU6_H2heG8uIBYrCIL9vvfpdC0';
 const RADAR_LINK     = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}`;
 
 // Datos inline del Radar Comercial (última actualización: 10/05/2026 · Entre Nosotros #561)
+async function cargarRadarDinamico() {
+  const container = document.getElementById('radar-grid');
+  if (!container) return;
+  const url = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}/gviz/tq?tqx=out:json&sheet=RADAR%20COMERCIAL`;
+  try {
+    const res = await fetch(url);
+    const text = await res.text();
+    const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
+    const rows = json.table.rows;
+    if (!rows || rows.length < 2) return;
+    const campanas = rows.slice(1).map(r => {
+      const val = idx => (r.c && r.c[idx]) ? String(r.c[idx].v || '') : '';
+      return {
+        producto: val(0), tipo: val(1), desc: val(2), inicio: val(3), fin: val(4),
+        cupo: val(5), dto: val(6), segmento: val(7), accion: val(8), estado: val(9) || '🟢 ACTIVA'
+      };
+    }).filter(c => c.producto);
+    container.innerHTML = campanas.map(c => `
+      <div class="radar-card">
+        <div class="card-badge ${c.estado.includes('ACTIVA') ? 'bg-green' : 'bg-blue'}">${c.estado}</div>
+        <h3 class="card-title">${c.producto}</h3>
+        <p class="card-subtitle">${c.tipo}</p>
+        <p class="card-desc">${c.desc}</p>
+        <div class="card-meta">
+          <div class="meta-item"><span>📅 Hasta:</span> <b>${c.fin}</b></div>
+          <div class="meta-item"><span>🏷️ Dto:</span> <b>${c.dto}</b></div>
+        </div>
+        <div class="card-action">
+          <span class="action-icon">🎯</span>
+          <p class="action-text">${c.accion}</p>
+        </div>
+      </div>
+    `).join('');
+  } catch (e) { console.error('Error cargando Radar:', e); }
+}
+document.addEventListener('DOMContentLoaded', cargarRadarDinamico);
+
 const CAMPANAS_ACTIVAS = [
   {
     producto: 'Contigo Senior',

@@ -864,11 +864,66 @@
         setTimeout(() => t.classList.remove('show'), 2500);
     }
 
-    // ── RADAR COMERCIAL INTEGRATION (Legacy Bridge) ──
-    // Aquí podrías integrar el script del Radar anterior para que inyecte datos en #radar-body-content
-    // Por simplicidad en este lifting, mantenemos el placeholder activo
-    
-    init();
+    // ── RADAR COMERCIAL INTEGRATION (Carga Dinámica) ──
+    const RADAR_SHEET_ID = '16lui0o9wPYe9tL-9PaU6_H2heG8uIBYrCIL9vvfpdC0';
+
+    async function cargarRadar() {
+        const body = document.getElementById('radar-body-content');
+        if (!body) return;
+
+        const url = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}/gviz/tq?tqx=out:json&sheet=RADAR%20COMERCIAL`;
+        
+        try {
+            const res = await fetch(url);
+            const text = await res.text();
+            const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
+            const rows = json.table.rows;
+
+            if (!rows || rows.length < 2) {
+                body.innerHTML = '<p style="color: var(--text-dimmer); font-size: 12px;">No hay campañas activas en el Maestro.</p>';
+                return;
+            }
+
+            const campanas = rows.slice(1).map(r => {
+                const val = idx => (r.c && r.c[idx]) ? String(r.c[idx].v || '') : '';
+                return {
+                    producto: val(0),
+                    desc: val(2),
+                    fin: val(4),
+                    dto: val(6),
+                    accion: val(8),
+                    estado: val(9) || '🟢 ACTIVA'
+                };
+            }).filter(c => c.producto);
+
+            body.innerHTML = campanas.map(c => `
+                <div style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                        <span style="font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--nn-orange);">${c.producto}</span>
+                        <span style="font-size: 9px; font-weight: 800; color: #fff; background: ${c.estado.includes('ACTIVA') ? 'var(--accent-green)' : 'var(--nn-orange)'}; padding: 2px 6px; border-radius: 4px;">${c.estado}</span>
+                    </div>
+                    <p style="font-size: 13px; color: #E2E8F0; line-height: 1.4; margin-bottom: 10px;">${c.desc}</p>
+                    <div style="display: flex; gap: 15px; font-size: 11px; color: var(--text-dimmer); margin-bottom: 10px;">
+                        <span>📅 Fin: <b>${c.fin}</b></span>
+                        <span>🏷️ Dto: <b>${c.dto}</b></span>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 6px; border-left: 3px solid var(--nn-orange);">
+                        <p style="font-size: 12px; color: #fff; font-weight: 600;">🎯 Acción: ${c.accion}</p>
+                    </div>
+                </div>
+            `).join('');
+
+        } catch (e) {
+            console.error('Error cargando Radar:', e);
+            body.innerHTML = '<p style="color: var(--accent-red); font-size: 12px;">⚠️ Error de conexión con el CRM Maestro.</p>';
+        }
+    }
+
+    // Cargar al inicio
+    document.addEventListener('DOMContentLoaded', () => {
+        cargarRadar();
+        init();
+    });
 </script>
 
 </body>
