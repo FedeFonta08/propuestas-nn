@@ -584,6 +584,12 @@ body {
       <div class="hdr-title">COCKPIT DE LLAMADAS</div>
       <div class="hdr-sub">Punto Naranja · NN Xàtiva</div>
     </div>
+    <div style="margin-left: 15px; border-left: 1px solid var(--brd); padding-left: 15px;">
+      <select id="agente-selector" onchange="setAgenteActivo(this.value)" style="padding: 5px 10px; border-radius: 6px; border: 1.5px solid var(--nn); font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700; background: var(--nn-l); color: var(--nn); cursor: pointer; outline: none;">
+        <option value="FEDE">👤 FEDE</option>
+        <option value="ROSIANE">👤 ROSIANE</option>
+      </select>
+    </div>
   </div>
   <div class="hdr-stats">
     <div class="stat"><div class="stat-n" id="st-llamadas" style="color:var(--nn)">0</div><div class="stat-l">Llamadas</div></div>
@@ -1524,8 +1530,19 @@ function renderMarcador(m) {
 }
 
 // Detectar agente activo (Fede = predeterminado; podría hacerse seleccionable)
+// Detectar agente activo
 function getAgenteActivo() {
-  return localStorage.getItem('nn_agente_activo') || 'FEDE';
+  return document.getElementById('agente-selector').value;
+}
+
+function setAgenteActivo(agente) {
+  localStorage.setItem('nn_agente_activo', agente);
+  toast(`Sesión activa: ${agente}`, 'ok');
+  // Resaltar en el marcador
+  document.querySelectorAll('.agent-block').forEach(b => {
+    b.style.borderColor = b.innerText.includes(agente) ? 'var(--nn)' : 'rgba(255,255,255,0.1)';
+    b.style.background = b.innerText.includes(agente) ? 'rgba(255,102,0,0.1)' : 'rgba(255,255,255,0.05)';
+  });
 }
 
 async function registrarActividadMaestro(tipoResultado) {
@@ -1728,6 +1745,11 @@ function toast(msg, tipo) {
   sel.innerHTML = opts;
 
   aplicarFiltro();
+
+  // Cargar agente previo
+  const prev = localStorage.getItem('nn_agente_activo') || 'FEDE';
+  document.getElementById('agente-selector').value = prev;
+  setAgenteActivo(prev);
 })();
 
 </script>
