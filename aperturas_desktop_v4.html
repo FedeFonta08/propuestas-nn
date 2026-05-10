@@ -988,65 +988,54 @@
     const RADAR_SHEET_ID = '16lui0o9wPYe9tL-9PaU6_H2heG8uIBYrCIL9vvfpdC0';
 
     async function cargarRadar() {
-        const body = document.getElementById('radar-body-content');
+        const body = document.getElementById('radar-body');
         if (!body) return;
 
-        const url = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}/gviz/tq?tqx=out:json&sheet=RADAR%20COMERCIAL`;
-        
+        const url = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}/gviz/tq?tqx=out:json&sheet=RADAR%20COMERCIAL&headers=0&range=A3:J100`;
+
         try {
             const res = await fetch(url);
             const text = await res.text();
             const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
             const rows = json.table.rows;
-
             if (!rows || rows.length === 0) {
                 body.innerHTML = '<p style="color: var(--text-dimmer); font-size: 12px;">No hay campañas activas.</p>';
                 return;
             }
 
-            // Fusión inteligente de duplicados (Corregido: procesamos desde rows[0] si no es cabecera)
-            const agrupados = rows.reduce((acc, r) => {
+            // Mapeo directo de todas las filas (evitando agrupación excesiva para no perder ofertas individuales)
+            const campanas = rows.map(r => {
                 const val = idx => (r.c && r.c[idx]) ? String(r.c[idx].v || '').trim() : '';
-                const prod = val(0);
-                
-                // Filtros: ignorar cabeceras y metadatos
-                if (!prod || prod.toLowerCase().includes('producto') || prod.toLowerCase().includes('actualizaci')) return acc;
-                
-                if (!acc[prod]) {
-                    acc[prod] = {
-                        producto: prod, 
-                        tipo: val(1),
-                        desc: [val(2)], 
-                        fin: val(4),
-                        dto: val(6), 
-                        accion: [val(8)], 
-                        estado: val(9) || 'ACTIVA'
-                    };
-                } else {
-                    if (val(2) && !acc[prod].desc.includes(val(2))) acc[prod].desc.push(val(2));
-                    if (val(8) && !acc[prod].accion.includes(val(8))) acc[prod].accion.push(val(8));
-                    if (!acc[prod].fin && val(4)) acc[prod].fin = val(4);
-                }
-                return acc;
-            }, {});
-
-            const campanas = Object.values(agrupados);
+                return {
+                    producto: val(0),
+                    tipo: val(1),
+                    desc: val(2),
+                    inicio: val(3),
+                    fin: val(4),
+                    dto: val(6),
+                    accion: val(8),
+                    estado: val(9) || 'ACTIVA'
+                };
+            }).filter(c => c.producto && 
+                           !c.producto.toLowerCase().includes('producto') && 
+                           !c.producto.toLowerCase().includes('actualizaci') &&
+                           !c.producto.toLowerCase().includes('radar comercial'));
 
             if (campanas.length === 0) {
-                body.innerHTML = '<p style="color: var(--text-dimmer); font-size: 12px;">No hay campañas activas filtradas.</p>';
+                body.innerHTML = '<p style="color: var(--text-dimmer); font-size: 12px;">No hay campañas activas disponibles.</p>';
                 return;
             }
 
             body.innerHTML = campanas.map(c => {
                 const badgeColor = c.estado.includes('ACTIVA') ? 'var(--accent-green)' : 'var(--nn-orange)';
-                const finText = c.fin ? `Fin: ${c.fin}` : 'Indefinido';
+                const finText = c.fin ? `Vto: ${c.fin}` : 'Indefinido';
                 
                 return `
                     <div class="radar-item" onclick="toggleRadarItem(this)">
                         <div class="radar-item-header">
                             <div class="radar-item-main">
                                 <span class="radar-item-prod">${c.producto}</span>
-                                <span class="radar-item-short">${c.desc[0]}</span>
+                                <span class="radar-item-short">${c.desc}</span>
                             </div>
                             <div style="display: flex; align-items: center; gap: 10px;">
                                 <span class="radar-item-badge" style="background: ${badgeColor}">${c.estado}</span>
@@ -1057,12 +1046,13 @@
                             <div class="radar-detail-section">
                                 <span class="radar-detail-label">Descripción del Beneficio</span>
                                 <div class="radar-detail-content">
-                                    ${c.desc.map(d => `<p style="margin-bottom:6px">• ${d}</p>`).join('')}
+                                    <p style="margin-bottom:6px">• ${c.desc}</p>
+                                    ${c.tipo ? `<p style="font-size:11px; opacity:0.8;">📌 Tipo: ${c.tipo}</p>` : ''}
                                 </div>
                             </div>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
                                 <div class="radar-detail-section">
-                                    <span class="radar-detail-label">Fecha Límite</span>
+                                    <span class="radar-detail-label">Temporalidad</span>
                                     <div class="radar-detail-content">📅 ${finText}</div>
                                 </div>
                                 <div class="radar-detail-section">
@@ -1073,7 +1063,7 @@
                             <div class="radar-detail-section">
                                 <span class="radar-detail-label">Acción Recomendada</span>
                                 <div class="radar-action-box">
-                                    ${c.accion.map(a => `<div class="radar-detail-content" style="font-weight: 600; color: #fff;">🎯 ${a}</div>`).join('')}
+                                    <div class="radar-detail-content" style="font-weight: 600; color: #fff;">🎯 ${c.accion}</div>
                                 </div>
                             </div>
                         </div>

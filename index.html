@@ -1247,7 +1247,7 @@ async function cargarRadarDinamico() {
   const container = document.getElementById('radar-grid');
   if (!container) return;
   
-  const url = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}/gviz/tq?tqx=out:json&sheet=RADAR%20COMERCIAL`;
+  const url = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}/gviz/tq?tqx=out:json&sheet=RADAR%20COMERCIAL&headers=0&range=A3:J100`;
   
   try {
     const res = await fetch(url);
@@ -1256,27 +1256,22 @@ async function cargarRadarDinamico() {
     const rows = json.table.rows;
     if (!rows || rows.length === 0) return;
     
-    // Agrupación Inteligente (Procesando desde la primera fila real de datos)
-    const agrupados = rows.reduce((acc, r) => {
+    // Mapeo directo (Cada fila es una ficha)
+    const campanas = rows.map(r => {
       const val = idx => (r.c && r.c[idx]) ? String(r.c[idx].v || '').trim() : '';
-      const prod = val(0);
-      
-      if (!prod || prod.toLowerCase().includes('producto') || prod.toLowerCase().includes('actualizaci')) return acc;
-      
-      if (!acc[prod]) {
-        acc[prod] = {
-          producto: prod, tipo: val(1), desc: [val(2)], fin: val(4),
-          dto: val(6), accion: [val(8)], estado: val(9) || 'ACTIVA'
-        };
-      } else {
-        if (val(2) && !acc[prod].desc.includes(val(2))) acc[prod].desc.push(val(2));
-        if (val(8) && !acc[prod].accion.includes(val(8))) acc[prod].accion.push(val(8));
-        if (!acc[prod].fin && val(4)) acc[prod].fin = val(4);
-      }
-      return acc;
-    }, {});
-
-    const campanas = Object.values(agrupados);
+      return {
+        producto: val(0),
+        tipo: val(1),
+        desc: val(2),
+        fin: val(4),
+        dto: val(6),
+        accion: val(8),
+        estado: val(9) || 'ACTIVA'
+      };
+    }).filter(c => c.producto && 
+                   !c.producto.toLowerCase().includes('producto') && 
+                   !c.producto.toLowerCase().includes('actualizaci') &&
+                   !c.producto.toLowerCase().includes('radar comercial'));
 
     container.innerHTML = campanas.map(c => {
       const bClass = badgeClass(c.estado);
@@ -1287,7 +1282,7 @@ async function cargarRadarDinamico() {
         <div class="radar-card-header">
           <div class="radar-card-info">
             <span class="radar-producto">${c.producto}</span>
-            <span class="radar-brief">${c.desc[0]}</span>
+            <span class="radar-brief">${c.desc}</span>
           </div>
           <div style="display: flex; align-items: center; gap: 10px;">
             <div class="radar-badge ${bClass}">${bLabel}</div>
@@ -1295,10 +1290,8 @@ async function cargarRadarDinamico() {
           </div>
         </div>
         <div class="radar-card-details">
-          <div class="radar-detail-label">Descripción completa</div>
-          <div class="radar-desc" style="margin-bottom:15px;">
-            ${c.desc.map(d => `<p style="margin-bottom:4px">• ${d}</p>`).join('')}
-          </div>
+          <div class="radar-detail-label">Detalles de la campaña</div>
+          <div class="radar-desc" style="margin-bottom:15px;">• ${c.desc}</div>
           <div class="radar-detail-grid">
             <div class="radar-detail-item">
               <span class="radar-detail-label">Vencimiento</span>
@@ -1311,9 +1304,7 @@ async function cargarRadarDinamico() {
           </div>
           <div class="radar-accion-premium">
             <span class="radar-detail-label">Acción Comercial ADN</span>
-            <div class="radar-detail-val">
-              ${c.accion.map(a => `<p>🎯 ${a}</p>`).join('')}
-            </div>
+            <div class="radar-detail-val">🎯 ${c.accion}</div>
           </div>
         </div>
       </div>`;
