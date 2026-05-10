@@ -880,21 +880,30 @@
             const rows = json.table.rows;
 
             if (!rows || rows.length < 2) {
-                body.innerHTML = '<p style="color: var(--text-dimmer); font-size: 12px;">No hay campañas activas en el Maestro.</p>';
+                body.innerHTML = '<p style="color: var(--text-dimmer); font-size: 12px;">No hay campañas activas.</p>';
                 return;
             }
 
-            const campanas = rows.slice(1).map(r => {
-                const val = idx => (r.c && r.c[idx]) ? String(r.c[idx].v || '') : '';
-                return {
-                    producto: val(0),
-                    desc: val(2),
-                    fin: val(4),
-                    dto: val(6),
-                    accion: val(8),
-                    estado: val(9) || '🟢 ACTIVA'
-                };
-            }).filter(c => c.producto);
+            // Fusión inteligente de duplicados
+            const agrupados = rows.slice(1).reduce((acc, r) => {
+                const val = idx => (r.c && r.c[idx]) ? String(r.c[idx].v || '').trim() : '';
+                const prod = val(0);
+                if (!prod || prod.toLowerCase() === 'producto' || prod.toLowerCase().includes('actualizaci')) return acc;
+                
+                if (!acc[prod]) {
+                    acc[prod] = {
+                        producto: prod, desc: [val(2)], fin: val(4),
+                        dto: val(6), accion: [val(8)], estado: val(9) || '🟢 ACTIVA'
+                    };
+                } else {
+                    if (val(2) && !acc[prod].desc.includes(val(2))) acc[prod].desc.push(val(2));
+                    if (val(8) && !acc[prod].accion.includes(val(8))) acc[prod].accion.push(val(8));
+                    if (!acc[prod].fin && val(4)) acc[prod].fin = val(4);
+                }
+                return acc;
+            }, {});
+
+            const campanas = Object.values(agrupados);
 
             body.innerHTML = campanas.map(c => `
                 <div style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05);">
@@ -902,20 +911,24 @@
                         <span style="font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--nn-orange);">${c.producto}</span>
                         <span style="font-size: 9px; font-weight: 800; color: #fff; background: ${c.estado.includes('ACTIVA') ? 'var(--accent-green)' : 'var(--nn-orange)'}; padding: 2px 6px; border-radius: 4px;">${c.estado}</span>
                     </div>
-                    <p style="font-size: 13px; color: #E2E8F0; line-height: 1.4; margin-bottom: 10px;">${c.desc}</p>
+                    <div style="font-size: 13px; color: #E2E8F0; line-height: 1.4; margin-bottom: 10px;">
+                        ${c.desc.map(d => `<p style="margin-bottom:4px">• ${d}</p>`).join('')}
+                    </div>
                     <div style="display: flex; gap: 15px; font-size: 11px; color: var(--text-dimmer); margin-bottom: 10px;">
-                        <span>📅 Fin: <b>${c.fin}</b></span>
-                        <span>🏷️ Dto: <b>${c.dto}</b></span>
+                        <span>📅 Fin: <b>${c.fin || 'Indefinido'}</b></span>
+                        <span>🏷️ Dto: <b>${c.dto || 'Consultar'}</b></span>
                     </div>
                     <div style="background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 6px; border-left: 3px solid var(--nn-orange);">
-                        <p style="font-size: 12px; color: #fff; font-weight: 600;">🎯 Acción: ${c.accion}</p>
+                        <div style="font-size: 12px; color: #fff; font-weight: 600;">
+                            ${c.accion.map(a => `<p>🎯 ${a}</p>`).join('')}
+                        </div>
                     </div>
                 </div>
             `).join('');
 
         } catch (e) {
             console.error('Error cargando Radar:', e);
-            body.innerHTML = '<p style="color: var(--accent-red); font-size: 12px;">⚠️ Error de conexión con el CRM Maestro.</p>';
+            body.innerHTML = '<p style="color: var(--accent-red); font-size: 12px;">⚠️ Error de conexión.</p>';
         }
     }
 

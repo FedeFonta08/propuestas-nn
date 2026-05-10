@@ -1196,38 +1196,67 @@ const RADAR_LINK     = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}
 async function cargarRadarDinamico() {
   const container = document.getElementById('radar-grid');
   if (!container) return;
+  
   const url = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}/gviz/tq?tqx=out:json&sheet=RADAR%20COMERCIAL`;
+  
   try {
     const res = await fetch(url);
     const text = await res.text();
     const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
     const rows = json.table.rows;
     if (!rows || rows.length < 2) return;
-    const campanas = rows.slice(1).map(r => {
-      const val = idx => (r.c && r.c[idx]) ? String(r.c[idx].v || '') : '';
-      return {
-        producto: val(0), tipo: val(1), desc: val(2), inicio: val(3), fin: val(4),
-        cupo: val(5), dto: val(6), segmento: val(7), accion: val(8), estado: val(9) || '🟢 ACTIVA'
-      };
-    }).filter(c => c.producto);
+    
+    // Agrupación Inteligente para evitar duplicados
+    const agrupados = rows.slice(1).reduce((acc, r) => {
+      const val = idx => (r.c && r.c[idx]) ? String(r.c[idx].v || '').trim() : '';
+      const prod = val(0);
+      
+      // Filtros: ignorar cabeceras y filas de metadatos
+      if (!prod || prod.toLowerCase() === 'producto' || prod.toLowerCase().includes('actualizaci')) return acc;
+      
+      if (!acc[prod]) {
+        acc[prod] = {
+          producto: prod, tipo: val(1), desc: [val(2)], fin: val(4),
+          dto: val(6), accion: [val(8)], estado: val(9) || '🟢 ACTIVA'
+        };
+      } else {
+        // Fusionar descripciones y acciones si el producto ya existe
+        if (val(2) && !acc[prod].desc.includes(val(2))) acc[prod].desc.push(val(2));
+        if (val(8) && !acc[prod].accion.includes(val(8))) acc[prod].accion.push(val(8));
+        if (!acc[prod].fin && val(4)) acc[prod].fin = val(4);
+        if (!acc[prod].dto && val(6)) acc[prod].dto = val(6);
+      }
+      return acc;
+    }, {});
+
+    const campanas = Object.values(agrupados);
+
     container.innerHTML = campanas.map(c => `
       <div class="radar-card">
         <div class="card-badge ${c.estado.includes('ACTIVA') ? 'bg-green' : 'bg-blue'}">${c.estado}</div>
         <h3 class="card-title">${c.producto}</h3>
         <p class="card-subtitle">${c.tipo}</p>
-        <p class="card-desc">${c.desc}</p>
+        <div class="card-desc">
+          ${c.desc.map(d => `<p>• ${d}</p>`).join('')}
+        </div>
         <div class="card-meta">
-          <div class="meta-item"><span>📅 Hasta:</span> <b>${c.fin}</b></div>
-          <div class="meta-item"><span>🏷️ Dto:</span> <b>${c.dto}</b></div>
+          <div class="meta-item"><span>📅 Hasta:</span> <b>${c.fin || 'Indefinido'}</b></div>
+          <div class="meta-item"><span>🏷️ Dto:</span> <b>${c.dto || 'Consultar'}</b></div>
         </div>
         <div class="card-action">
           <span class="action-icon">🎯</span>
-          <p class="action-text">${c.accion}</p>
+          <div class="action-text">
+            ${c.accion.map(a => `<p>${a}</p>`).join('')}
+          </div>
         </div>
       </div>
     `).join('');
+    
+    const countEl = document.getElementById('radar-count');
+    if (countEl) countEl.textContent = `${campanas.length} campañas activas`;
   } catch (e) { console.error('Error cargando Radar:', e); }
 }
+
 document.addEventListener('DOMContentLoaded', cargarRadarDinamico);
 
 const CAMPANAS_ACTIVAS = [
