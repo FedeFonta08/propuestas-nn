@@ -64,8 +64,8 @@ const url = SCRIPT_URL + '?payload=' + encodeURIComponent(JSON.stringify(data));
 
 ### Radar Comercial NN (Google Sheet)
 
-- **ID:** `16lui0o9wPYe9tL-9PaU6_H2heG8uIBYrCIL9vvfpdC0`
-- **3 pestañas:** RADAR COMERCIAL | NOVEDADES PRODUCTO | DASHBOARD AGENCIA
+- **ID:** `1mYKiIdoglAxzFwJOE_0V8CyHwNUsKkh_oPtkUKg4GCQ`
+- **3 pestañas:** Campañas Activas | Novedades Producto | Historial Entre Nosotros
 - **Actualización:** Semanal (viernes)
 - **Integración:** Panel DESPEGUE sincroniza automáticamente con datos inline
 
