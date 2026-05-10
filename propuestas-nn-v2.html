@@ -357,6 +357,32 @@ const PRODS = {
     ],
   },
 
+  proteccionplus: {
+    fase: 'f1', ico: '🛡️', nom: 'Protección PLUS',
+    sub: 'Capital decreciente con prima constante. Obligatoria asociación a ahorro. IPA integrada con adelanto de capital.',
+    tit: n => `La protección de ${n} <em>que blindará sus ahorros</em> pase lo que pase.`,
+    greet: n => `Hola <strong>${n}</strong>,<br><br>Protección PLUS es el escudo perfecto para tu estrategia de inversión. Es un seguro de vida con <strong>capital decreciente y prima constante</strong>, diseñado específicamente para complementar planes como SIALP o Contigo Futuro. En caso de Invalidez Permanente Absoluta (IPA), el capital se adelanta al 100%, garantizando tu estabilidad financiera y la de tus proyectos.`,
+    hb: { t: 'hbp', x: '<strong>Protección inteligente:</strong> Capital decreciente que se ajusta a tus necesidades reales (menos deuda, más ahorro acumulado) manteniendo una prima fija y muy competitiva desde el primer día.' },
+    sts: [{ v: 'IPA', l: 'Indemnización directa' }, { v: 'Constant', l: 'Prima invariable' }, { v: 'Saving', l: 'Vinculado a ahorro' }],
+    covs: [
+      { n: 'Fallecimiento por cualquier causa', c: 'Capital decreciente anual', p: '✓', k: true, t: 'base' },
+      { n: 'Invalidez Permanente Absoluta (IPA)', c: 'Adelanto del 100% capital', p: '✓', k: true, t: 'clave' },
+      { n: 'Prima constante por contrato', c: 'Sin subidas por edad', p: '✓', k: false },
+      { n: 'Obligatoria asociación a plan de ahorro', c: 'SIALP / Flexible / Futuro', p: '✓', k: false },
+      { n: 'Exclusión IPA por patología previa', c: 'Según declaración salud', p: '✓', k: false },
+    ],
+    pendiente: false,
+    totalDesc: 'Prima constante definida en contratación · Vinculado a producto de ahorro base',
+    prima: 'Consultar',
+    cierre: n => `<strong>${n}</strong>, proteger tu ahorro ante cualquier imprevisto es la base de un plan financiero sólido.`,
+    objeciones: [
+      { q: '¿Por qué decrece el capital?', a: 'Porque a medida que pasa el tiempo, tus necesidades de protección suelen disminuir: tus hijos crecen, tus deudas bajan y, sobre todo, tu capital acumulado en el plan de ahorro asociado aumenta. Esto permite que la prima sea mucho más económica y, lo más importante, constante (no sube con la edad).' },
+      { q: '¿Qué pasa si tengo un accidente y no puedo trabajar?', a: 'Si sufres una IPA (Invalidez Permanente Absoluta), recibes el 100% del capital asegurado en ese momento de forma directa. Esto te permite cubrir tus gastos inmediatos y asegurar que tu plan de ahorro no se detenga por falta de ingresos.' },
+      { q: '¿Puedo contratarlo sin un plan de ahorro?', a: 'No, Protección PLUS es un producto complementario diseñado para blindar un plan de ahorro de Nationale-Nederlanden. Si buscas un seguro de vida independiente con capital fijo, tu producto es Vida Familia.' },
+      { q: '¿La prima sube cada año como en otros seguros?', a: 'No. Una de las grandes ventajas de Protección PLUS es que la prima es constante por contrato. Pagas lo mismo hoy que dentro de 10 años, lo que te permite planificar tu economía sin sorpresas de renovaciones al alza por edad.' },
+    ],
+  },
+
   // ── FASE 2: SALUD, VIDA Y ACCIDENTES ──────────────────────────────
 
   saludvida: {
@@ -733,7 +759,7 @@ const PRODS = {
 // PORTADA
 // ═══════════════════════════════════════════════════════════════
 const PORTADA_FASES = {
-  'Fase 1 · Ahorro e Inversión 💰': ['sialp','flexible','garantizado','flexicuenta','ahorrogarantizado','futuro'],
+  'Fase 1 · Ahorro e Inversión 💰': ['sialp','flexible','garantizado','flexicuenta','ahorrogarantizado','futuro','proteccionplus'],
   'Fase 2 · Salud, Vida y Accidentes ❤️': ['saludvida','saludcompleto','saludcopago','vidafamilia','senior','accidentes'],
   'Fase 3 · Hogar y Automóvil 🏠': ['hogar','auto'],
   'Fase 4 · Pensiones 🏦': ['ppsa','duplo'],

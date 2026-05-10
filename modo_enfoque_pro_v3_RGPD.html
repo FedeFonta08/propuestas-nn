@@ -1347,14 +1347,14 @@ let agentPrevCompany = '';
 // PERFILES POR ROL
 // ══════════════════════════════════════════════════════════
 const PROFILES_FEDE = [
-  { id:'autonomo',  emoji:'💼', label:'Autónomo',      sub:'PPSA · ILT' },
-  { id:'familia',   emoji:'👨‍👩‍👧', label:'Familia',       sub:'Salud · Vida' },
-  { id:'senior',    emoji:'🧓', label:'Senior 55+',    sub:'Contigo Senior' },
-  { id:'ahorro',    emoji:'💰', label:'Ahorro',        sub:'SIALP · Creciente' },
-  { id:'excliente', emoji:'🔄', label:'Ex-Santalucía', sub:'Sorpresa' },
-  { id:'cartera',   emoji:'📋', label:'Cartera NN',    sub:'Revisión' },
-  { id:'ilt',       emoji:'🛡️', label:'Autónomo ILT',  sub:'Baja laboral' },
-  { id:'sialp',     emoji:'📈', label:'SIALP Fiscal',  sub:'Plan Creciente' }
+  { id:'autonomo',    emoji:'💼', label:'Autónomo',        sub:'PPSA · ILT' },
+  { id:'familia',     emoji:'👨‍👩‍👧', label:'Familia',         sub:'Salud · Vida' },
+  { id:'senior',      emoji:'🧓', label:'Senior 55+',      sub:'Contigo Senior' },
+  { id:'ahorro',      emoji:'💰', label:'Ahorro',          sub:'SIALP · Creciente' },
+  { id:'excliente',   emoji:'🔄', label:'Ex-Santalucía',   sub:'Sorpresa' },
+  { id:'cartera',     emoji:'📋', label:'Cartera NN',      sub:'Revisión' },
+  { id:'hipoteca',    emoji:'🏠', label:'Hipoteca',        sub:'ING · Abanca' },
+  { id:'pyme',        emoji:'🏢', label:'Empresa / PYME',  sub:'Pyme · Comercios' }
 ];
 
 function getAgentProfiles() {
@@ -1362,14 +1362,14 @@ function getAgentProfiles() {
     ? { id:'redpersonal',  emoji:'👋', label:'Red personal',    sub:'Amigos · Familia · Conocidos' }
     : { id:'excagente',    emoji:'🔄', label:'Mis ex-clientes', sub:'Cartera de ' + (agentPrevCompany || 'compañía anterior') };
   return [
-    { id:'autonomo',     emoji:'💼', label:'Autónomo',       sub:'PPSA · ILT' },
-    { id:'familia',      emoji:'👨‍👩‍👧', label:'Familia',        sub:'Salud · Vida' },
-    { id:'senior',       emoji:'🧓', label:'Senior 55+',     sub:'Contigo Senior' },
-    { id:'ahorro',       emoji:'💰', label:'Ahorro',         sub:'SIALP · Creciente' },
+    { id:'autonomo',     emoji:'💼', label:'Autónomo',        sub:'PPSA · ILT' },
+    { id:'familia',      emoji:'👨‍👩‍👧', label:'Familia',         sub:'Salud · Vida' },
+    { id:'senior',       emoji:'🧓', label:'Senior 55+',      sub:'Contigo Senior' },
+    { id:'ahorro',       emoji:'💰', label:'Ahorro',          sub:'SIALP · Creciente' },
     slot5,
-    { id:'referenciado', emoji:'🤝', label:'Referenciado',   sub:'Contacto de colega' },
-    { id:'ilt',          emoji:'🛡️', label:'Autónomo ILT',   sub:'Baja laboral' },
-    { id:'sialp',        emoji:'📈', label:'SIALP Fiscal',   sub:'Plan Creciente' }
+    { id:'referenciado', emoji:'🤝', label:'Referenciado',    sub:'Contacto de colega' },
+    { id:'hipoteca',     emoji:'🏠', label:'Hipoteca',        sub:'ING · Abanca' },
+    { id:'pyme',         emoji:'🏢', label:'Empresa / PYME',  sub:'Pyme · Comercios' }
   ];
 }
 
@@ -1558,6 +1558,50 @@ const SCRIPTS = {
     }
   },
 
+  // ── HIPOTECA — ING / ABANCA ───────────────────────────
+  hipoteca: {
+    tag: 'Hipoteca · ING / Abanca',
+    campaign: null,
+    fede: {
+      paragraphs: [
+        '"Hola <span class="dyn-name">[Nombre]</span>. Soy Fede, Delegado de Nationale-Nederlanden para Xàtiva y La Costera. Te llamo porque trabajamos con dos hipotecas muy concretas que están dando mucho de qué hablar en la comarca — ING y Abanca — y tengo un motivo para pensar que te puede interesar."',
+        '"Te hago una pregunta rápida: ¿tienes hipoteca ahora mismo o estás pensando en comprar? <em>(Pausa)</em> Lo pregunto porque muchos vecinos de aquí están consiguiendo condiciones mucho mejores haciendo una subrogación, o bien consiguiendo financiación al 100% si son menores de 36 años. Y hay un detalle que casi nadie sabe: con ING, el banco asume los gastos de notaría, registro, gestoría e IAJD. Solo pagas la tasación."',
+        '"No quiero darte cifras por teléfono porque depende totalmente de tu situación: cuánto te queda por pagar, a qué tipo estás ahora. Lo que sí puedo hacer es sentarme contigo 20 minutos, hacer los números reales de tu caso y decirte si tiene sentido mover ficha o si estás bien donde estás. ¿Te viene mejor el martes o el miércoles?"'
+      ],
+      note: 'ING: 0€ apertura, gastos asumidos por banco, hasta 100% si <36 años. ABANCA: Hipoteca Mari Carmen Fija Valor (la única que mejoró en abril 2026, resto suben). PVM bajo — prospección secundaria. No mencionar ABANCA hasta saber si el cliente ya tiene hipoteca con banco.'
+    },
+    agent: {
+      paragraphs: [
+        '"Hola <span class="dyn-name">[Nombre]</span>. Soy <span class="dyn-agent">[Agente]</span>, del equipo de Nationale-Nederlanden en la zona. Te llamo porque tenemos acceso a condiciones hipotecarias muy específicas que no todo el mundo conoce."',
+        '"¿Tienes hipoteca ahora mismo o estás pensando en comprar? <em>(Pausa)</em> Te pregunto porque con ING el banco asume todos los gastos de formalización — notaría, registro, gestoría e IAJD. Y si tienes menos de 36 años y la vivienda vale menos de 400.000€, pueden financiar hasta el 100%. No es lo habitual."',
+        '"No te voy a dar cifras por teléfono porque depende de tu situación. Pero sí puedo decirte en 20 minutos si te conviene mover ficha o si ya estás bien donde estás. ¿Martes o miércoles?"'
+      ],
+      note: 'Prospección secundaria — bajo PVM. Solo recomendar ING Naranja (digital) o ABANCA Hipoteca Mari Carmen Fija Valor. No mencionar otras modalidades ABANCA (subieron precio).'
+    }
+  },
+
+  // ── EMPRESA / PYME ─────────────────────────────────────
+  pyme: {
+    tag: 'Empresa · PYME · Comercio',
+    campaign: null,
+    fede: {
+      paragraphs: [
+        '"Hola <span class="dyn-name">[Nombre]</span>. Soy Fede, Delegado de Nationale-Nederlanden para Xàtiva y La Costera. Te llamo porque estamos contactando con empresarios y autónomos con negocio de la zona para presentar algo muy concreto."',
+        '"Tenemos dos productos que están muy demandados entre empresas pequeñas: uno es un seguro colectivo de vida y accidentes para tus empleados sin examen médico — que además te puede obligar el convenio colectivo — y el otro es un multirriesgo para el local que calcula la propuesta en 3 minutos. También, si tienes autónomos en plantilla, hay un instrumento fiscal para deducirles hasta 5.750€ anuales del IRPF. No sé si ya lo tienes cubierto, de ahí la llamada."',
+        '"Mi propuesta es simple: 20 minutos de reunión, sin compromiso. Te enseño los dos o tres puntos que más impacto pueden tener en tu negocio y decides tú. ¿Cuándo tienes un hueco esta semana?"'
+      ],
+      note: 'Productos clave: Contigo Pyme (vida colectiva empleados), Comercios NN-Caser (multirriesgo negocio), PPSA (deducción fiscal autónomos). Preguntar primero cuántos empleados tiene. Si tiene menos de 5 empleados — ir primero por Comercios o su propio PPSA.'
+    },
+    agent: {
+      paragraphs: [
+        '"Hola <span class="dyn-name">[Nombre]</span>. Soy <span class="dyn-agent">[Agente]</span>, del equipo de Nationale-Nederlanden en la comarca. Te llamo porque estamos trabajando con empresarios y negocios de la zona."',
+        '"¿Tienes empleados en tu negocio? <em>(Pausa)</em> Te pregunto porque muchos convenios colectivos obligan a tener un seguro de vida colectivo para los trabajadores, y no todo el mundo lo sabe. Además, si eres autónomo, hay un instrumento para deducirte hasta 5.750€ al año del IRPF que tu gestoría puede que ya no te haya mencionado. Y también tenemos un seguro para el local que se calcula en 3 minutos."',
+        '"Son 20 minutos para ver si alguno de estos puntos te aplica. Si no te encaja nada, me dices que no y tan amigos. ¿Cuándo tienes un hueco esta semana?"'
+      ],
+      note: 'Preguntar siempre cuántos empleados tiene. Si es solamente él: ir por PPSA + Comercios. Si tiene plantilla: Contigo Pyme + Comercios. Producto de riesgo (vida colectiva) = cuenta para PVM.'
+    }
+  },
+
   // ── MIS EX-CLIENTES — solo agentes con cartera previa ─
   excagente: {
     tag: 'Mis ex-clientes · Presentación',
@@ -1640,58 +1684,59 @@ function getScript() {
 const OBJECTIONS = [
   {
     q: 'No tengo tiempo / Estoy muy liado',
-    a: '"Lo entiendo perfectamente. Por eso son solo 20 minutos, reloj en mano. Y si en los primeros 5 minutos ve que no le aporta nada, lo dejamos ahí sin problema. Incluso puedo pasarme por su zona de trabajo a la hora del descanso. ¿Le viene mejor mañana o pasado?"'
+    a: '"Lo entiendo perfectamente, [Nombre], y precisamente por eso no le pido más de 20 minutos, reloj en mano. Si en los primeros 5 minutos ve que no le aporta nada, lo dejamos ahí. Me desplazo yo a su zona de trabajo o donde le venga bien entre gestión y gestión. Mi objetivo es que se lleve la información y decida con calma. ¿Le viene mejor mañana o pasado?"'
   },
   {
     q: 'Ya tengo seguro / Ya tengo algo en el banco',
-    a: '"Perfecto, eso es lo ideal. Justo por eso quiero verlo: la mayoría de gente de aquí tiene productos que creen que cubren unas cosas… y luego no. En 20 minutos revisamos lo que ya tiene y le digo si está bien o si hay algo que mejorar. Si está todo correcto, me alegro y se queda igual. ¿Le viene mejor mañana o pasado?"'
+    a: '"Perfecto — eso es lo ideal. Justo por eso quiero verlo: la mayoría de personas en Xàtiva tienen contratado algo que creen que les cubre todo… y cuando miramos los números reales, hay huecos importantes. En 20 minutos revisamos lo que ya tiene y le digo con total transparencia si está bien o si hay algo que mejorar. Si todo está perfecto, me alegro y se queda exactamente igual. ¿Le viene mejor mañana o pasado?"'
   },
   {
     q: 'No quiero contratar nada',
-    a: '"Perfecto, porque yo tampoco quiero que contrate nada hoy. Solo quiero que tenga claro qué tiene y qué no. Le dejo un resumen por escrito con su foto real de protección y usted decide con calma. ¿Le va bien que lo veamos un día de estos?"'
+    a: '"Me parece una decisión muy sensata. De hecho, yo tampoco vengo a venderle nada hoy. Mi trabajo es que usted tenga su Chequeo de Protección por escrito —su foto real, no la de un folleto genérico— y luego usted decide con calma y sin presión. La reunión no le compromete a nada, es pura información técnica. ¿Le va bien que lo veamos un momento?"'
   },
   {
     q: '¿Cuánto cuesta?',
-    a: '"Depende totalmente de su caso: su edad, su situación familiar, lo que ya tiene. Por eso hacemos la reunión: para que usted vea los números reales de SU caso, no cifras genéricas. Lo importante es que primero vea si lo necesita. ¿Le viene mejor mañana o pasado?"'
+    a: '"Depende totalmente de su caso: su edad, situación familiar y lo que ya tiene cubierto. Darle una cifra ahora sería inventarme un número. Por eso hacemos la reunión de 20 min: para que vea el precio real de SU caso. Lo importante es que primero vea si lo necesita y si le encaja. ¿Le viene mejor mañana o pasado?"'
   },
   {
     q: 'No me interesa / No lo necesito',
-    a: '"Entiendo, puede ser que no sea para usted. Solo una cosa: si mañana tiene un accidente o una baja larga, ¿tiene claro quién se encarga de todo? Si quiere, lo vemos 20 minutos y decide usted con los números delante. Si no le aporta nada, me dice que no y tan amigos."'
+    a: '"Puede que tenga razón. Solo le hago una pregunta: si mañana tiene un imprevisto o una baja larga, ¿sabe exactamente cuánto cobraría y cuánto tiempo aguantaría su economía familiar? <em>(Pausa)</em> Si lo tiene claro, estupendo. Si no, son 20 minutos para que lo sepa con certeza. Usted decide."'
   },
   {
     q: 'Envíemelo por email / WhatsApp',
-    a: '"Claro, puedo mandarle un par de páginas ahora mismo. Pero la experiencia me dice que en 20 minutos le explico mucho mejor y le resuelvo todas las dudas. ¿Qué le parece si le mando primero la info y quedamos para verlo juntos?"'
+    a: '"Claro, le puedo mandar un dossier. Pero siendo honesto: un PDF no le va a decir si lo que ya tiene es suficiente para su caso particular. En 20 minutos cara a cara le doy la información masticada y resolvemos dudas. ¿Qué le parece si le mando algo breve y luego nos vemos un momento?"'
+  },
+  {
+    q: 'Protección PLUS: ¿Por qué baja el capital?',
+    a: '"Es la clave de este producto, [Nombre]. En lugar de que la cuota suba cada año con su edad (como en los seguros normales), aquí la cuota se queda fija y lo que baja es el capital. ¿Por qué? Porque a medida que pasan los años, usted tiene menos deudas o más ahorros, y necesita menos capital de seguro. Es la forma más inteligente de pagar solo por el riesgo que realmente tiene. ¿Le gustaría ver cómo quedan sus números?"'
+  },
+  {
+    q: 'Protección PLUS: Ya tengo mi plan de ahorro',
+    a: '"Precisamente por eso se lo cuento. Protección PLUS no es para ahorrar, es el escudo que blinda su ahorro. Si usted tiene un plan a 10 años y mañana pasa algo, este producto garantiza que ese dinero llegue a su familia íntegro, como si hubiera terminado el plan. Es la diferencia entre tener una hucha y tener una hucha blindada. ¿Nos vemos 20 min y se lo enseño?"'
   },
   {
     q: 'A mi edad ya no necesito estas cosas',
-    a: '"Precisamente, <span class="dyn-name">[Nombre]</span>. Esto no es un producto de esos que ojalá nunca use. Es algo que va a usar: el podólogo, el dentista, el chequeo. Son cosas del día a día. Y si algún día pasa algo, tiene la tranquilidad de que no va a depender de nadie para que le echen una mano en casa."'
+    a: '"Precisamente por eso le llamo. Lo que le cuento no es un seguro de esos que ojalá nunca use. Es algo para el día a día aquí en la comarca: podólogo, limpieza dental, chequeo preventivo... Y si algún día tiene un tropezón en casa, le mandan ayuda real (limpieza, compra, peluquería). Con 20 minutos le enseño cómo funciona el servicio. ¿Le viene bien?"'
   },
   {
-    q: 'Tengo que hablarlo con mi pareja / mis hijos',
-    a: '"Me parece estupendo. De hecho, si quiere, cuando nos sentemos a verlo pueden estar ellos delante también. Así lo ven todos juntos y deciden en familia con los números encima de la mesa. ¿Cuándo podríamos quedar?"'
+    q: 'Tengo que hablarlo con mi pareja / familia',
+    a: '"Me parece estupendo — es una decisión de familia. De hecho, si quiere, cuando nos sentemos a verlo pueden estar todos delante. Así lo ven juntos con los números encima de la mesa y deciden en familia. No hay que decidir nada ese día. ¿Cuándo podríamos quedar?"'
   },
   {
-    q: 'Ya me llamaron de otra compañía / Estoy harto de llamadas',
-    a: '"Lo entiendo perfectamente, y precisamente por eso le llamo así: sin rollo, sin presión. No soy un call center. Soy el agente que lleva la zona de Xàtiva, estoy aquí en la comarca, y mi objetivo es que tenga claro qué tiene y qué le falta. Si no le aporto nada, no vuelvo a llamar. ¿Me da 20 minutos?"',
-    fedeExtra: '"Lo entiendo perfectamente, y precisamente por eso le llamo así: sin rollo, sin presión. No soy un call center. Soy el delegado que lleva la zona de Xàtiva y La Costera, estoy aquí en la comarca, y mi objetivo es que tenga claro qué tiene y qué le falta. Si no le aporto nada, no vuelvo a llamar. ¿Me da 20 minutos?"'
-  },
-  {
-    q: 'Lo del ahorro/pensión ya lo lleva mi banco',
-    a: '"Genial, así empezamos con algo. Solo una cosa: ¿su banco le ha explicado alguna vez que hay productos donde los beneficios no pagan impuestos a los 5 años? No le pido que deje su banco. Solo que compare con datos en 20 minutos. Si después prefiere seguir como está, estupendo. Pero al menos habrá decidido con toda la información encima de la mesa."'
+    q: 'Ya me llamaron de otra compañía / Estoy harto',
+    a: '"Le entiendo perfectamente, y precisamente por eso le llamo yo directamente: sin rollos, sin presión. Soy Fede Fontanals, el Delegado que lleva personalmente Xàtiva y La Costera —estoy aquí en la comarca, no en un call center. Mi objetivo es presentarme y ver si le puedo ser útil. Si no le aporto nada, no vuelvo a molestarle. ¿Me da 20 minutos?"'
   },
   {
     q: '¿Dónde está vuestra oficina?',
-    a: '"Ahora mismo estamos en pleno proceso de configuración del Punto Naranja para toda la comarca. Para su comodidad, me desplazo yo directamente. Podemos quedar en su casa, en su trabajo, o si lo prefiere tomamos un café en el centro. Lo que a usted le resulte más cómodo."',
-    fedeOnly: false
+    a: '"Ahora mismo el Punto Naranja de Xàtiva está en proceso de instalación. Pero para lo que le propongo no necesita moverse usted: me desplazo yo directamente. Podemos quedar en su casa, en su trabajo o en una cafetería del centro. Lo que a usted le resulte más cómodo. ¿Mañana o pasado?"'
   },
   {
-    q: 'Estoy muy bien en Santalucía',
-    a: '"¡Me parece fantástico! Mi objetivo no es que cancele allí. El tema es que ahora toco áreas que antes no podía ofrecerle: optimización fiscal, campañas de Sanitas, ahorro gestionado profesionalmente. Solo quiero que sepa qué herramientas tiene a su disposición ahora. ¿Nos vemos el martes?"',
-    fedeOnly: true
+    q: '¿Qué es Nationale-Nederlanden?',
+    a: '"Es normal que no le suene el nombre — es holandés. Llevamos más de 160 años en seguros y en España somos la compañía que está detrás de ING. Lo que nos hace diferentes es que tiene un delegado local, con cara y nombre, que se desplaza por la comarca. No un 900 desde Madrid. Soy esa persona para usted. ¿Nos tomamos un café?"'
   },
   {
-    q: '¿Qué es Nationale-Nederlanden? No os conozco',
-    a: '"Es normal, el nombre suena holandés porque lo es. NN lleva más de 160 años en seguros y está en 18 países. En España es la compañía detrás de ING — seguro que ING sí le suena. Lo que hacemos diferente es que tenemos un agente local, cara a cara en la comarca, no un 900 desde Madrid. ¿Le apetece conocer cómo trabajamos tomando un café?"'
+    q: '¿Y si no puedo pagar más adelante?',
+    a: '"Muy buena pregunta. Precisamente por eso trabajamos con productos flexibles. Si su situación cambia, tiene opciones: puede pausar aportaciones o ajustar coberturas. No le voy a presentar nada que sea una trampa. La idea es que tenga protección cuando la necesita, sin ataduras que no le encajen. ¿Le vemos un momento?"'
   }
 ];
 // ══════════════════════════════════════════════════════════
