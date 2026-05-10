@@ -31,8 +31,8 @@ TAB_ACTIVIDAD = 'Actividad Agentes'
 # FEDE:    fila 7 → Llamadas | fila 8 → Contactos | fila 9 → Reuniones
 # ROSIANE: fila 16 → Llamadas | fila 17 → Contactos | fila 18 → Reuniones
 FILAS_AGENTE = {
-    'FEDE':    {'llamadas': 7,  'contactos': 8,  'reuniones': 9},
-    'ROSIANE': {'llamadas': 16, 'contactos': 17, 'reuniones': 18},
+    'FEDE':    {'llamadas': 7,  'contactos': 8,  'reuniones': 9,  'presupuestos': 10},
+    'ROSIANE': {'llamadas': 16, 'contactos': 17, 'reuniones': 18, 'presupuestos': 19},
 }
 
 # Columna por día: B=2(LUN), C=3(MAR), D=4(MIE), E=5(JUE), F=6(VIE)
@@ -75,16 +75,24 @@ def registrar_actividad(agente, resultado, dia):
             total += int(v) if isinstance(v, (int, float)) else 0
         ws.cell(row=fila, column=COL_TOTAL).value = total
 
+    # Siempre: +1 llamada
     sumar(filas['llamadas'], col_dia)
     recalc_total(filas['llamadas'])
 
-    if resultado in ('contactado', 'cita_fijada'):
+    # Si contactado, cita o presupuesto: +1 contacto
+    if resultado in ('contactado', 'cita_fijada', 'presupuesto_enviado'):
         sumar(filas['contactos'], col_dia)
         recalc_total(filas['contactos'])
 
+    # Si cita: +1 reunión
     if resultado == 'cita_fijada':
         sumar(filas['reuniones'], col_dia)
         recalc_total(filas['reuniones'])
+
+    # Si presupuesto enviado: +1 presupuesto
+    if resultado == 'presupuesto_enviado':
+        sumar(filas['presupuestos'], col_dia)
+        recalc_total(filas['presupuestos'])
 
     wb.save(EXCEL_PATH)
     wb.close()

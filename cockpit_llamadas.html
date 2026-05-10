@@ -349,7 +349,7 @@ body {
   font-family: 'Bebas Neue', sans-serif; font-size: 15px;
   letter-spacing: 0.5px; color: var(--tx2); margin-bottom: 10px;
 }
-.res-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 12px; }
+.res-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 12px; }
 .res-btn {
   padding: 10px 6px; border-radius: var(--rad);
   border: 1.5px solid var(--brd); background: var(--white);
@@ -617,6 +617,7 @@ body {
         <div class="metric-chip"><div class="metric-val" id="m-fede-llamadas">—</div><div class="metric-lbl">📞 Llam.</div></div>
         <div class="metric-chip"><div class="metric-val" id="m-fede-contactos">—</div><div class="metric-lbl">✅ Cont.</div></div>
         <div class="metric-chip"><div class="metric-val" id="m-fede-reuniones">—</div><div class="metric-lbl">🤝 Reun.</div></div>
+        <div class="metric-chip"><div class="metric-val" id="m-fede-presupuestos">—</div><div class="metric-lbl">📋 Pres.</div></div>
       </div>
       <div class="agent-bar-wrap">
         <div class="agent-bar-track"><div class="agent-bar-fill" id="bar-fede" style="width:0%;background:var(--nn)"></div></div>
@@ -630,6 +631,7 @@ body {
         <div class="metric-chip"><div class="metric-val" id="m-ros-llamadas">—</div><div class="metric-lbl">📞 Llam.</div></div>
         <div class="metric-chip"><div class="metric-val" id="m-ros-contactos">—</div><div class="metric-lbl">✅ Cont.</div></div>
         <div class="metric-chip"><div class="metric-val" id="m-ros-reuniones">—</div><div class="metric-lbl">🤝 Reun.</div></div>
+        <div class="metric-chip"><div class="metric-val" id="m-ros-presupuestos">—</div><div class="metric-lbl">📋 Pres.</div></div>
       </div>
       <div class="agent-bar-wrap">
         <div class="agent-bar-track"><div class="agent-bar-fill" id="bar-ros" style="width:0%;background:#818CF8"></div></div>
@@ -762,6 +764,9 @@ body {
           </div>
           <div class="res-btn" data-v="llamar_despues" onclick="selResultado(this)">
             <span class="res-ico">🔄</span><span class="res-txt">Llamar después</span>
+          </div>
+          <div class="res-btn" data-v="presupuesto_enviado" onclick="selResultado(this)">
+            <span class="res-ico">📋</span><span class="res-txt">Presupuesto</span>
           </div>
         </div>
 
@@ -1444,8 +1449,8 @@ async function guardarResultado() {
 
 // Estructura de planes semanales por defecto (se sobreescribe si el Sheet devuelve datos)
 const PLAN_SEMANAL = {
-  FEDE:    { llamadas: 20, contactos: 8, reuniones: 3 },
-  ROSIANE: { llamadas: 10, contactos: 4, reuniones: 1 }
+  FEDE:    { llamadas: 20, contactos: 8, reuniones: 3, presupuestos: 5 },
+  ROSIANE: { llamadas: 10, contactos: 4, reuniones: 1, presupuestos: 2 }
 };
 
 // Actividad acumulada de la semana (persiste en localStorage)
@@ -1462,23 +1467,23 @@ function cargarMarcador() {
     const d = JSON.parse(localStorage.getItem(MARCADOR_KEY) || '{}');
     const semActual = getSemana();
     if (d.semana !== semActual) {
-      // Nueva semana: reset
-      const nuevo = { semana: semActual, FEDE: {llamadas:0,contactos:0,reuniones:0}, ROSIANE: {llamadas:0,contactos:0,reuniones:0} };
+      const nuevo = { semana: semActual, FEDE: {llamadas:0,contactos:0,reuniones:0,presupuestos:0}, ROSIANE: {llamadas:0,contactos:0,reuniones:0,presupuestos:0} };
       localStorage.setItem(MARCADOR_KEY, JSON.stringify(nuevo));
       return nuevo;
     }
     return d;
   } catch(e) {
-    return { semana: getSemana(), FEDE: {llamadas:0,contactos:0,reuniones:0}, ROSIANE: {llamadas:0,contactos:0,reuniones:0} };
+    return { semana: getSemana(), FEDE: {llamadas:0,contactos:0,reuniones:0,presupuestos:0}, ROSIANE: {llamadas:0,contactos:0,reuniones:0,presupuestos:0} };
   }
 }
 
 function guardarMarcadorLocal(agente, tipo) {
   const m = cargarMarcador();
-  if (!m[agente]) m[agente] = {llamadas:0,contactos:0,reuniones:0};
+  if (!m[agente]) m[agente] = {llamadas:0,contactos:0,reuniones:0,presupuestos:0};
   m[agente].llamadas++;
-  if (tipo === 'contactado' || tipo === 'cita_fijada') m[agente].contactos++;
+  if (tipo === 'contactado' || tipo === 'cita_fijada' || tipo === 'presupuesto_enviado') m[agente].contactos++;
   if (tipo === 'cita_fijada') m[agente].reuniones++;
+  if (tipo === 'presupuesto_enviado') m[agente].presupuestos = (m[agente].presupuestos || 0) + 1;
   localStorage.setItem(MARCADOR_KEY, JSON.stringify(m));
   renderMarcador(m);
 }
@@ -1489,19 +1494,20 @@ function renderMarcador(m) {
   document.getElementById('marcador-semana-num').textContent = sem;
 
   ['FEDE', 'ROSIANE'].forEach(ag => {
-    const real = m[ag] || {llamadas:0,contactos:0,reuniones:0};
+    const real = m[ag] || {llamadas:0,contactos:0,reuniones:0,presupuestos:0};
     const plan = PLAN_SEMANAL[ag];
     const pfx  = ag === 'FEDE' ? 'fede' : 'ros';
 
     const pct = plan.llamadas > 0 ? Math.min(Math.round(real.llamadas / plan.llamadas * 100), 100) : 0;
     const cls = pct >= 75 ? 'ok' : pct >= 40 ? 'warn' : 'low';
 
-    document.getElementById(`m-${pfx}-llamadas`).textContent  = `${real.llamadas}/${plan.llamadas}`;
-    document.getElementById(`m-${pfx}-llamadas`).className    = `metric-val ${cls}`;
-    document.getElementById(`m-${pfx}-contactos`).textContent = `${real.contactos}/${plan.contactos}`;
-    document.getElementById(`m-${pfx}-reuniones`).textContent = `${real.reuniones}/${plan.reuniones}`;
-    document.getElementById(`bar-${pfx}`).style.width         = pct + '%';
-    document.getElementById(`pct-${pfx}`).textContent         = pct + '% del plan semanal';
+    document.getElementById(`m-${pfx}-llamadas`).textContent     = `${real.llamadas}/${plan.llamadas}`;
+    document.getElementById(`m-${pfx}-llamadas`).className       = `metric-val ${cls}`;
+    document.getElementById(`m-${pfx}-contactos`).textContent    = `${real.contactos}/${plan.contactos}`;
+    document.getElementById(`m-${pfx}-reuniones`).textContent    = `${real.reuniones}/${plan.reuniones}`;
+    document.getElementById(`m-${pfx}-presupuestos`).textContent = `${real.presupuestos||0}/${plan.presupuestos}`;
+    document.getElementById(`bar-${pfx}`).style.width            = pct + '%';
+    document.getElementById(`pct-${pfx}`).textContent            = pct + '% del plan semanal';
   });
 
   const msgs = [
