@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;800&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
             --nn-orange: #EE7F00;
@@ -18,6 +19,69 @@
             --nn-glass-border: rgba(255, 255, 255, 0.2);
             --nn-shadow: 0 30px 60px rgba(0,0,0,0.5);
             --nn-shadow-card: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        /* Export Actions Overlay */
+        .card-actions {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .ad-card:hover .card-actions {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .action-btn {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .action-btn:hover {
+            background: var(--nn-orange);
+            transform: scale(1.1);
+        }
+
+        .action-btn i {
+            font-size: 1.1rem;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--nn-orange);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 100px;
+            font-weight: 700;
+            z-index: 1000;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
         }
 
         * {
@@ -462,6 +526,10 @@
             
             <!-- CARD: SALUD + VIDA -->
             <div class="ad-card stagger-1">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
                 <div class="badge-offer">12,5% DTO</div>
                 <div class="header-zone">
                     <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
@@ -498,6 +566,10 @@
 
             <!-- CARD: SIALP -->
             <div class="ad-card stagger-2">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
                 <div class="header-zone">
                     <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
                 </div>
@@ -529,6 +601,10 @@
 
             <!-- CARD: MIHOGAR -->
             <div class="ad-card stagger-3">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
                 <div class="header-zone">
                     <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
                 </div>
@@ -565,6 +641,10 @@
             
             <!-- CARD: CONTIGO SENIOR -->
             <div class="ad-card stagger-4">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
                 <div class="badge-offer">6 MESES GRATIS</div>
                 <div class="header-zone">
                     <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
@@ -601,6 +681,10 @@
 
             <!-- CARD: FLEXIBLE -->
             <div class="ad-card" style="animation-delay: 1s">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
                 <div class="header-zone">
                     <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
                 </div>
@@ -632,6 +716,10 @@
 
             <!-- CARD: PPSA AUTONOMOS -->
             <div class="ad-card" style="animation-delay: 1.2s">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
                 <div class="header-zone">
                     <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
                 </div>
@@ -672,6 +760,10 @@
 
             <!-- CARD: CONTIGO AUTÓNOMO -->
             <div class="ad-card" style="animation-delay: 1.4s">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
                 <div class="header-zone">
                     <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
                 </div>
@@ -703,6 +795,10 @@
 
             <!-- CARD: CONTIGO FAMILIA -->
             <div class="ad-card" style="animation-delay: 1.6s">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
                 <div class="header-zone">
                     <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
                 </div>
@@ -734,6 +830,10 @@
 
             <!-- CARD: MAXIPLAN INVERSIÓN PREMIUM -->
             <div class="ad-card" style="animation-delay: 1.8s">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
                 <div class="badge-offer">INVERSIÓN PRO</div>
                 <div class="header-zone">
                     <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
@@ -770,6 +870,10 @@
 
             <!-- CARD: PROTECCIÓN PLUS -->
             <div class="ad-card" style="animation-delay: 2s">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
                 <div class="header-zone">
                     <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
                 </div>
@@ -809,19 +913,64 @@
         <button class="nav-btn" onclick="window.location.href='index.html'" style="color:var(--nn-orange)">Dashboard</button>
     </div>
 
+    <div id="toast" class="toast">¡Imagen copiada al portapapeles!</div>
+
     <script>
         function scrollToId(id, btn) {
             const element = document.getElementById(id);
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                
-                // Update active state
                 document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
             }
         }
-    </script>
 
+        async function exportCard(cardElement, action) {
+            const originalTransform = cardElement.style.transform;
+            cardElement.style.transform = 'none'; // Reset transform for clean capture
+            
+            // Hide actions during capture
+            const actions = cardElement.querySelector('.card-actions');
+            actions.style.display = 'none';
+
+            try {
+                const canvas = await html2canvas(cardElement, {
+                    scale: 3, // High quality
+                    useCORS: true,
+                    backgroundColor: null,
+                    borderRadius: 28
+                });
+
+                if (action === 'download') {
+                    const link = document.createElement('a');
+                    const productName = cardElement.querySelector('.product-label').innerText.replace(/\s+/g, '_');
+                    link.download = `Anuncio_NN_${productName}.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                    showToast('Imagen descargada correctamente');
+                } else if (action === 'copy') {
+                    canvas.toBlob(async (blob) => {
+                        const item = new ClipboardItem({ "image/png": blob });
+                        await navigator.clipboard.write([item]);
+                        showToast('¡Imagen copiada! Ya puedes pegarla en WhatsApp');
+                    });
+                }
+            } catch (err) {
+                console.error('Error exportando tarjeta:', err);
+                showToast('Error al exportar la imagen');
+            } finally {
+                cardElement.style.transform = originalTransform;
+                actions.style.display = 'flex';
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+    </script>
 </body>
 </html>
 
