@@ -101,7 +101,6 @@ def registrar_actividad(agente, resultado, dia):
     print(f'  [{hora}] OK {agente} | {resultado} | {dia} -> Excel actualizado')
     return {'ok': True, 'msg': f'{agente} {resultado} el {dia} registrado'}
 
-
 def get_marcador_data():
     try:
         wb = openpyxl.load_workbook(EXCEL_PATH, data_only=True)
@@ -126,19 +125,24 @@ def get_marcador_data():
 def get_pvm_data():
     try:
         wb = openpyxl.load_workbook(EXCEL_PATH, data_only=True)
+        # Intentar buscar en Dashboard o PVM
         sheet_name = 'Dashboard' if 'Dashboard' in wb.sheetnames else ('PVM' if 'PVM' in wb.sheetnames else None)
         if not sheet_name:
             return {'ok': False, 'error': 'Pestana PVM/Dashboard no encontrada'}
         
         ws = wb[sheet_name]
+        # Asumimos que el PVM actual está en una celda identificable. 
+        # Si no la conocemos, buscamos el texto "TOTAL PVM" o similar.
         current_pvm = 0
         for row in ws.iter_rows(min_row=1, max_row=20, min_col=1, max_col=10):
             for cell in row:
                 if cell.value and isinstance(cell.value, str) and 'TOTAL' in cell.value.upper() and 'PVM' in cell.value.upper():
+                    # El valor suele estar a la derecha
                     current_pvm = ws.cell(row=cell.row, column=cell.column + 1).value
                     break
             if current_pvm: break
         
+        # Si no se encuentra por búsqueda, probar celda fija común (ej: B2 en PVM)
         if not current_pvm and sheet_name == 'PVM':
             current_pvm = ws['B2'].value
 
@@ -146,7 +150,6 @@ def get_pvm_data():
         return {'ok': True, 'pvm': int(current_pvm or 0)}
     except Exception as e:
         return {'ok': False, 'error': str(e)}
-
 
 # ── SERVIDOR HTTP ─────────────────────────────────────────────
 class ActividadHandler(BaseHTTPRequestHandler):

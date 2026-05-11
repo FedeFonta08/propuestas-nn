@@ -1714,17 +1714,9 @@ async function cargarMarcadorDesdeSheet() {
     const rows = json.table?.rows;
     if (!rows || rows.length < 7) { renderMarcador(); return; }
 
-    // Estructura de la pestaña "Actividad Agentes":
-    // Fila 6 (idx 5): FEDE - Llamadas     | cols LUN(1)..VIE(5), TOTAL(6)
-    // Fila 7 (idx 6): FEDE - Contactos
-    // Fila 8 (idx 7): FEDE - Reuniones
-    // Fila 15(idx14): ROSIANE - Llamadas
-    // Fila 16(idx15): ROSIANE - Contactos
-    // Fila 17(idx16): ROSIANE - Reuniones
     const gv = (row, col) => { try { return parseInt(rows[row]?.c[col]?.v || 0); } catch(e) { return 0; } };
 
     const m = cargarMarcador();
-    // Totales de la semana (columna 6 = TOTAL)
     m.FEDE.llamadas    = gv(5, 6)  || m.FEDE.llamadas;
     m.FEDE.contactos   = gv(6, 6)  || m.FEDE.contactos;
     m.FEDE.reuniones   = gv(7, 6)  || m.FEDE.reuniones;
@@ -1735,7 +1727,6 @@ async function cargarMarcadorDesdeSheet() {
     localStorage.setItem(MARCADOR_KEY, JSON.stringify(m));
     renderMarcador(m);
   } catch(e) {
-    // Si el Sheet no es público o falla, usar datos locales
     renderMarcador();
   }
 }
