@@ -620,6 +620,7 @@ body {
           </div>
           <div class="cc-actions">
             <button class="btn-sm btn-wa" id="btn-wa" onclick="copiarWA()" title="Copiar WhatsApp previo">WA</button>
+            <button class="btn-sm btn-panel" onclick="togglePanel('panel-docs')" title="Ver documentación de productos" style="background:var(--nn-l); border-color:var(--nn); color:var(--nn)">DOCS</button>
             <button class="btn-sm btn-adn" onclick="togglePanel('panel-adn')">ADN</button>
           </div>
         </div>
@@ -849,6 +850,76 @@ body {
   </div>
 
   <button class="btn-nc-save" id="btn-nc-save" onclick="guardarNuevoContacto()">GUARDAR CONTACTO</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL DOCUMENTACIÓN (BIBLIOTECA)
+     ══════════════════════════════════════════════════════════════ -->
+<div class="slide-panel" id="panel-docs">
+  <button class="sp-close" onclick="cerrarPaneles()">✕</button>
+  <div class="sp-title">Biblioteca de Inteligencia</div>
+  
+  <div style="font-size:12px; color:var(--tx3); margin-bottom:15px; border-bottom:1px solid var(--brd); padding-bottom:10px;">
+    Consulta rápida de productos y condiciones oficiales.
+  </div>
+
+  <!-- SECCIÓN: AHORRO (SIALP) -->
+  <div class="adn-step">
+    <div class="adn-num">Fase 1 · Ahorro e Inversión</div>
+    <div style="font-size:14px; font-weight:700; color:var(--tx); margin-bottom:8px;">Plan Creciente SIALP</div>
+    
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <a href="docs/fase1-ahorro/sialp/NN_Plan-Creciente-Sialp-Folleto.pdf" target="_blank" style="text-decoration:none; display:flex; align-items:center; gap:10px; padding:10px; background:var(--nn-l); border-radius:10px; border:1px solid var(--nn);">
+        <span style="font-size:20px;">📄</span>
+        <div>
+          <div style="font-size:12px; font-weight:700; color:var(--nn);">Folleto Comercial</div>
+          <div style="font-size:10px; color:var(--nn-d);">Ideal para explicar al cliente</div>
+        </div>
+      </a>
+
+      <a href="docs/fase1-ahorro/sialp/KID_ENE24_PLAN_CRECIENTE_SIALP.pdf" target="_blank" style="text-decoration:none; display:flex; align-items:center; gap:10px; padding:10px; background:var(--white); border-radius:10px; border:1px solid var(--brd);">
+        <span style="font-size:20px;">📊</span>
+        <div>
+          <div style="font-size:12px; font-weight:700; color:var(--tx);">Ficha Técnica (KID)</div>
+          <div style="font-size:10px; color:var(--tx3);">Datos técnicos y rentabilidades</div>
+        </div>
+      </a>
+
+      <a href="docs/fase1-ahorro/sialp/Ficha Comparativa Plan Creciente.pdf" target="_blank" style="text-decoration:none; display:flex; align-items:center; gap:10px; padding:10px; background:var(--white); border-radius:10px; border:1px solid var(--brd);">
+        <span style="font-size:20px;">🔄</span>
+        <div>
+          <div style="font-size:12px; font-weight:700; color:var(--tx);">Comparativa Creciente</div>
+          <div style="font-size:10px; color:var(--tx3);">Argumentos contra la competencia</div>
+        </div>
+      </a>
+
+      <a href="docs/fase1-ahorro/sialp/NN_Plan-Creciente-Sialp-Condiciones-Generales.pdf" target="_blank" style="text-decoration:none; display:flex; align-items:center; gap:10px; padding:10px; background:var(--white); border-radius:10px; border:1px solid var(--brd);">
+        <span style="font-size:20px;">⚖️</span>
+        <div>
+          <div style="font-size:12px; font-weight:700; color:var(--tx);">Condiciones Generales</div>
+          <div style="font-size:10px; color:var(--tx3);">Detalle legal completo</div>
+        </div>
+      </a>
+
+      <a href="docs/fase1-ahorro/sialp/Infografía SIALP.png" target="_blank" style="text-decoration:none; display:flex; align-items:center; gap:10px; padding:10px; background:var(--b-l); border-radius:10px; border:1px solid var(--b);">
+        <span style="font-size:20px;">🖼️</span>
+        <div>
+          <div style="font-size:12px; font-weight:700; color:var(--b);">Infografía Visual</div>
+          <div style="font-size:10px; color:var(--b);">Para compartir por WhatsApp</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- SECCIÓN: SALUD (Próximamente) -->
+  <div class="adn-step" style="opacity:0.6;">
+    <div class="adn-num">Fase 2 · Salud</div>
+    <div style="font-size:13px; color:var(--tx3); font-style:italic;">Pendiente de indexar documentos seleccionados...</div>
+  </div>
+
+  <div style="margin-top:20px; padding:12px; background:var(--bg); border-radius:10px; font-size:11px; color:var(--tx3); line-height:1.5;">
+    💡 <b>Tip de Fede:</b> Abre los documentos <u>antes</u> de llamar si ves que el Radar sugiere un producto de ahorro. La confianza se nota en la voz.
+  </div>
 </div>
 
 <!-- OVERLAY -->
