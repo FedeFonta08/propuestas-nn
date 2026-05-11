@@ -102,6 +102,52 @@ def registrar_actividad(agente, resultado, dia):
     return {'ok': True, 'msg': f'{agente} {resultado} el {dia} registrado'}
 
 
+def get_marcador_data():
+    try:
+        wb = openpyxl.load_workbook(EXCEL_PATH, data_only=True)
+        if TAB_ACTIVIDAD not in wb.sheetnames:
+            return {'ok': False, 'error': 'Pestana no encontrada'}
+        
+        ws = wb[TAB_ACTIVIDAD]
+        data = {'ok': True, 'FEDE': {}, 'ROSIANE': {}}
+        
+        for ag, filas in FILAS_AGENTE.items():
+            data[ag] = {
+                'llamadas':     int(ws.cell(row=filas['llamadas'], column=COL_TOTAL).value or 0),
+                'contactos':    int(ws.cell(row=filas['contactos'], column=COL_TOTAL).value or 0),
+                'reuniones':    int(ws.cell(row=filas['reuniones'], column=COL_TOTAL).value or 0),
+                'presupuestos': int(ws.cell(row=filas['presupuestos'], column=COL_TOTAL).value or 0)
+            }
+        wb.close()
+        return data
+    except Exception as e:
+        return {'ok': False, 'error': str(e)}
+
+def get_pvm_data():
+    try:
+        wb = openpyxl.load_workbook(EXCEL_PATH, data_only=True)
+        sheet_name = 'Dashboard' if 'Dashboard' in wb.sheetnames else ('PVM' if 'PVM' in wb.sheetnames else None)
+        if not sheet_name:
+            return {'ok': False, 'error': 'Pestana PVM/Dashboard no encontrada'}
+        
+        ws = wb[sheet_name]
+        current_pvm = 0
+        for row in ws.iter_rows(min_row=1, max_row=20, min_col=1, max_col=10):
+            for cell in row:
+                if cell.value and isinstance(cell.value, str) and 'TOTAL' in cell.value.upper() and 'PVM' in cell.value.upper():
+                    current_pvm = ws.cell(row=cell.row, column=cell.column + 1).value
+                    break
+            if current_pvm: break
+        
+        if not current_pvm and sheet_name == 'PVM':
+            current_pvm = ws['B2'].value
+
+        wb.close()
+        return {'ok': True, 'pvm': int(current_pvm or 0)}
+    except Exception as e:
+        return {'ok': False, 'error': str(e)}
+
+
 # ── SERVIDOR HTTP ─────────────────────────────────────────────
 class ActividadHandler(BaseHTTPRequestHandler):
 
@@ -123,6 +169,10 @@ class ActividadHandler(BaseHTTPRequestHandler):
                     resultado = data.get('resultado', ''),
                     dia       = data.get('dia', '')
                 )
+            elif data.get('accion') == 'get_marcador':
+                result = get_marcador_data()
+            elif data.get('accion') == 'get_pvm':
+                result = get_pvm_data()
             else:
                 result = {'ok': False, 'error': 'Accion desconocida'}
 

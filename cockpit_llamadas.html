@@ -1084,8 +1084,21 @@ actualizarReloj();
 // ══════════════════════════════════════════════════════════════
 function cargarPVM() { try { return parseInt(localStorage.getItem(PVM_KEY) || '0'); } catch(e) { return 0; } }
 
-function renderPVM() {
-  const pts = cargarPVM();
+async function renderPVM() {
+  let pts = cargarPVM();
+  
+  // Intentar cargar desde el servidor local (Excel)
+  try {
+    const res = await fetch(ACTIVIDAD_SCRIPT_URL + '?payload=' + encodeURIComponent(JSON.stringify({ accion: 'get_pvm' })));
+    const data = await res.json();
+    if (data.ok) {
+      pts = data.pvm;
+      localStorage.setItem(PVM_KEY, pts);
+    }
+  } catch(e) {
+    console.info('Servidor local no disponible para PVM');
+  }
+
   const pct = Math.min(Math.round(pts / PVM_OBJ * 100), 100);
   document.getElementById('pvm-fill').style.width = pct + '%';
   document.getElementById('pvm-txt').textContent = pts.toLocaleString('es-ES') + ' / ' + PVM_OBJ.toLocaleString('es-ES');
@@ -1309,8 +1322,11 @@ function aplicarFiltro() {
 // SELECCIONAR CONTACTO
 // ══════════════════════════════════════════════════════════════
 function selContacto(id) {
-  const c = contactos[id];
-  if (!c) return;
+  const c = contactos.find(x => x.id === id);
+  if (!c) {
+    console.error('Contacto no encontrado con ID:', id);
+    return;
+  }
 
   contactoActivo = c;
   resultadoSel = null;
@@ -1642,12 +1658,55 @@ async function registrarActividadMaestro(tipoResultado) {
   }
 }
 
-// Cargar datos reales desde el SISTEMA MAESTRO (Actividad Agentes) via gviz
+// Cargar datos reales desde el SISTEMA MAESTRO (Actividad Agentes)
 async function cargarMarcadorDesdeSheet() {
+  // 1. INTENTAR SERVIDOR LOCAL (Excel) primero
+  try {
+    const res = await fetch(ACTIVIDAD_SCRIPT_URL + '?payload=' + encodeURIComponent(JSON.stringify({ accion: 'get_marcador' })));
+    const data = await res.json();
+    if (data.ok) {
+      const m = cargarMarcador();
+      ['FEDE', 'ROSIANE'].forEach(ag => {
+        if (data[ag]) m[ag] = data[ag];
+      });
+      localStorage.setItem(MARCADOR_KEY, JSON.stringify(m));
+      renderMarcador(m);
+      console.log('Marcador cargado desde Excel local');
+      return; // Éxito local
+    }
+  } catch(e) {
+    console.info('Servidor local no disponible para lectura, intentando Google Sheets...');
+  }
+
+  // 2. RESPALDO: Google Sheets (Visualization API)
   try {
     const url = `https://docs.google.com/spreadsheets/d/${SISTEMA_MAESTRO_ID}/gviz/tq?tqx=out:json&sheet=Actividad%20Agentes`;
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 3000);
+    const res  = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    
+    const text = await res.text();
+    const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
+    const rows = json.table?.rows;
+    if (!rows || rows.length < 7) { renderMarcador(); return; }
+
+    const gv = (row, col) => { try { return parseInt(rows[row]?.c[col]?.v || 0); } catch(e) { return 0; } };
+
+    const m = cargarMarcador();
+    m.FEDE.llamadas    = gv(5, 6)  || m.FEDE.llamadas;
+    m.FEDE.contactos   = gv(6, 6)  || m.FEDE.contactos;
+    m.FEDE.reuniones   = gv(7, 6)  || m.FEDE.reuniones;
+    m.ROSIANE.llamadas  = gv(14, 6) || m.ROSIANE.llamadas;
+    m.ROSIANE.contactos = gv(15, 6) || m.ROSIANE.contactos;
+    m.ROSIANE.reuniones = gv(16, 6) || m.ROSIANE.reuniones;
+
+    localStorage.setItem(MARCADOR_KEY, JSON.stringify(m));
+    renderMarcador(m);
+  } catch(e) {
+    renderMarcador();
+  }
+}
     const res  = await fetch(url, { signal: controller.signal });
     clearTimeout(timeoutId);
     const text = await res.text();
