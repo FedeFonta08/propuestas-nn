@@ -186,10 +186,9 @@
             box-shadow: 
                 0 10px 30px rgba(0,0,0,0.3),
                 0 1px 1px rgba(255,255,255,0.1) inset;
-            transition: all 0.6s cubic-bezier(0.2, 1, 0.2, 1);
+            transition: transform 0.4s cubic-bezier(0.2, 1, 0.2, 1);
             cursor: pointer;
             color: var(--nn-anthracite);
-            transform-style: preserve-3d;
         }
 
         .ad-card:hover {
@@ -926,66 +925,62 @@
         }
 
         async function exportCard(cardElement, action) {
-            // Show loading toast
-            showToast('Generando imagen de alta calidad...');
+            showToast('📸 Preparando captura de alta calidad...');
 
-            // Prepare for capture
+            // Actions and original styles
             const actions = cardElement.querySelector('.card-actions');
-            const originalTransform = cardElement.style.transform;
-            const originalTransition = cardElement.style.transition;
+            const originalStyle = cardElement.getAttribute('style') || '';
             
-            // Temporary style reset for clean capture
+            // 1. Aggressive Reset
             cardElement.style.transform = 'none';
             cardElement.style.transition = 'none';
-            actions.style.opacity = '0';
+            cardElement.style.animation = 'none';
+            cardElement.style.opacity = '1';
+            cardElement.style.visibility = 'visible';
+            cardElement.style.transformStyle = 'flat';
+            
+            // Hide actions
             actions.style.display = 'none';
 
-            // Wait a frame for browser to render reset styles
-            await new Promise(r => requestAnimationFrame(r));
+            // 2. Wait for browser to settle (Crucial for complex CSS)
+            await new Promise(r => setTimeout(r, 150));
 
             try {
                 const canvas = await html2canvas(cardElement, {
-                    scale: 2, // 2x is safer and still high quality
+                    scale: 2,
                     useCORS: true,
-                    allowTaint: false,
+                    allowTaint: true,
                     backgroundColor: '#ffffff',
-                    logging: false,
-                    onclone: (clonedDoc) => {
-                        // Ensure cloned actions are hidden
-                        const clonedActions = clonedDoc.querySelector('.card-actions');
-                        if (clonedActions) clonedActions.style.display = 'none';
-                    }
+                    imageTimeout: 15000,
+                    removeContainer: true,
+                    ignoreElements: (el) => el.classList.contains('card-actions')
                 });
 
                 if (action === 'download') {
-                    const productName = cardElement.querySelector('.product-label').innerText.replace(/\s+/g, '_');
+                    const label = cardElement.querySelector('.product-label');
+                    const name = label ? label.innerText.replace(/\s+/g, '_') : 'Anuncio';
                     const link = document.createElement('a');
-                    link.download = `Anuncio_NN_${productName}.png`;
+                    link.download = `NN_${name}.png`;
                     link.href = canvas.toDataURL('image/png', 1.0);
-                    document.body.appendChild(link);
                     link.click();
-                    document.body.removeChild(link);
-                    showToast('✅ Imagen guardada');
+                    showToast('✅ ¡Guardado!');
                 } else if (action === 'copy') {
                     canvas.toBlob(async (blob) => {
                         try {
                             const item = new ClipboardItem({ "image/png": blob });
                             await navigator.clipboard.write([item]);
-                            showToast('✅ ¡Copiada! Pégala en WhatsApp');
-                        } catch (copyErr) {
-                            console.error('Clipboard error:', copyErr);
-                            showToast('❌ Error al copiar (Prueba descargar)');
+                            showToast('✅ ¡Copiado! Pégalo en WhatsApp');
+                        } catch (e) {
+                            showToast('❌ Error: Pulsa Descargar');
                         }
                     }, 'image/png');
                 }
             } catch (err) {
-                console.error('Export error:', err);
-                showToast('❌ Error de generación');
+                console.error(err);
+                showToast('❌ Fallo en captura');
             } finally {
-                // Restore original styles
-                cardElement.style.transform = originalTransform;
-                cardElement.style.transition = originalTransition;
-                actions.style.opacity = '';
+                // Restore
+                cardElement.setAttribute('style', originalStyle);
                 actions.style.display = 'flex';
             }
         }
