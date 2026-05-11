@@ -1025,10 +1025,6 @@ body {
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxpYhW-S9OvA3w1NTR_Mu6GHffGTtHKE1ENKgoM98ySB8gyxt-j4BbaKF7Mk48grrcr_g/exec';
 
 // ── SISTEMA MAESTRO (actividad agentes) ──────────────────────
-// El Excel está local → usamos servidor_actividad.py en localhost:5151
-// Para arrancar: python servidor_actividad.py (en la carpeta propuestas-nn-repo)
-const SISTEMA_MAESTRO_ID = '1qshgFOXh-SOuTxgeY95ORfXsC71kwF7O';
-const ACTIVIDAD_SCRIPT_URL = 'http://localhost:5151';
 
 // Validar token maestro al entrar
 let MASTER_TOKEN = localStorage.getItem('nn_master_token');
@@ -1037,7 +1033,7 @@ if (!MASTER_TOKEN) {
   if (MASTER_TOKEN) localStorage.setItem('nn_master_token', MASTER_TOKEN);
 }
 const SHEET_ID = '16lui0o9wPYe9tL-9PaU6_H2heG8uIBYrCIL9vvfpdC0';
-const SISTEMA_MAESTRO_ID = '1Xp8_U2r6uYl7S_uH_H6n4f8z1p-m8l3_9S-Lz5eQZ0'; // ID corregido según histórico
+const SISTEMA_MAESTRO_ID = '1Xp8_U2r6uYl7S_uH_H6n4f8z1p-m8l3_9S-Lz5eQZ0';
 const ACTIVIDAD_SCRIPT_URL = 'http://localhost:5151';
 const PVM_OBJ = 10291;
 const PVM_KEY = 'nn_pvm_2026';
