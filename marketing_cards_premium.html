@@ -385,8 +385,9 @@
             font-weight: 800;
             font-size: 0.78rem;
             color: var(--nn-anthracite);
-            line-height: 1;
+            line-height: 1.2;
             margin-bottom: 2px;
+            white-space: nowrap;
         }
 
         .agent-contact {
@@ -394,6 +395,8 @@
             color: #444;
             font-weight: 700;
             letter-spacing: -0.1px;
+            line-height: 1;
+            white-space: nowrap;
         }
 
         .partner-logo-container {
@@ -930,25 +933,36 @@
             const actions = cardElement.querySelector('.card-actions');
             const originalStyle = cardElement.getAttribute('style') || '';
             
-            // Temporary preparation for clean capture
+            // Critical: Force fixed dimensions for the capture engine to prevent reflow
+            const width = 320;
+            const height = 569;
+
+            // Temporary preparation
             cardElement.style.transform = 'none';
             cardElement.style.transition = 'none';
             cardElement.style.animation = 'none';
+            cardElement.style.width = width + 'px';
+            cardElement.style.height = height + 'px';
             actions.style.display = 'none';
 
-            // Allow UI to update and fonts to settle
-            await new Promise(r => setTimeout(r, 150));
+            // Allow UI to update
+            await new Promise(r => setTimeout(r, 200));
 
             try {
-                // Use html-to-image (SVG-based engine, much more reliable)
+                // Use html-to-image with strict dimensions
                 const dataUrl = await htmlToImage.toPng(cardElement, {
-                    quality: 1.0,
-                    pixelRatio: 2,
-                    backgroundColor: '#ffffff',
+                    width: width,
+                    height: height,
                     style: {
                         transform: 'none',
-                        borderRadius: '28px'
-                    }
+                        margin: '0',
+                        padding: '0',
+                        borderRadius: '28px',
+                        left: '0',
+                        top: '0'
+                    },
+                    pixelRatio: 3, // Higher quality for sharing
+                    backgroundColor: '#ffffff'
                 });
 
                 if (action === 'download') {
@@ -971,9 +985,9 @@
                 }
             } catch (err) {
                 console.error('Export Error:', err);
-                showToast('❌ Error. Intenta de nuevo');
+                showToast('❌ Error de renderizado');
             } finally {
-                // Restore original styles
+                // Restore original styles exactly
                 cardElement.setAttribute('style', originalStyle);
                 actions.style.display = 'flex';
             }
