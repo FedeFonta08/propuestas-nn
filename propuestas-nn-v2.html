@@ -34,8 +34,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-h
 .aav img{width:100%;height:100%;object-fit:cover}
 .an{font-size:13px;font-weight:600;color:#fff}
 .ar{font-size:11px;color:rgba(255,255,255,.6);margin-top:1px}
-.ac{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
-.ac a{font-size:11px;color:rgba(255,255,255,.7);text-decoration:none;transition:color .15s;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.ac{margin-left:auto;display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;padding-right:20px}
+.ac a{font-size:11px;color:rgba(255,255,255,.7);text-decoration:none;transition:color .15s;white-space:nowrap;display:flex;align-items:center;gap:6px;justify-content:center}
 .ac a:hover{color:var(--o)}
 .body{background:var(--wh);padding:32px 36px}
 .greet{font-size:15px;color:var(--tx);line-height:1.75;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--br)}
@@ -781,7 +781,7 @@ const PORTADA_FASES = {
 // ═══════════════════════════════════════════════════════════════
 function q(k,d=''){return new URLSearchParams(window.location.search).get(k)||d;}
 function strip(){
-  return`<div class="astrip"><div class="aav"><img src="https://cdn.jsdelivr.net/gh/FedeFonta08/propuestas-nn/fede_profile_github.jpg" alt="F" onerror="this.parentElement.innerHTML='F'"></div><div><div class="an">Federico Fontanals</div><div class="ar">Agente Dinamizador · Punto Naranja · Nationale-Nederlanden<br>Xàtiva · La Costera</div></div><div class="ac"><a href="tel:+34680507186"><span>📞</span> 680 507 186</a><a href="mailto:federico.fontanals@nnespana.es"><span>✉️</span> federico.fontanals@nnespana.es</a></div></div>`;
+  return`<div class="astrip"><div class="aav"><img src="https://cdn.jsdelivr.net/gh/FedeFonta08/propuestas-nn/fede_profile_github.jpg" alt="F" onerror="this.parentElement.innerHTML='F'"></div><div><div class="an">Federico Fontanals</div><div class="ar">Agente Dinamizador · Punto Naranja<br><span style="white-space:nowrap">Nationale-Nederlanden</span><br>Xàtiva · La Costera</div></div><div class="ac"><a href="tel:+34680507186"><span>📞</span> 680 507 186</a><a href="mailto:federico.fontanals@nnespana.es"><span>✉️</span> federico.fontanals@nnespana.es</a></div></div>`;
 }
 function foot(){
   return`<div class="foot fi"><div class="foot-section"><div class="foot-label">Nationale-Nederlanden Vida y Generales</div><div class="foot-content">Av. de Bruselas, 16 · Parque Arroyo de la Vega · 28108 Alcobendas (Madrid)<br><a href="tel:+34916026000">☎️ +34 91 602 60 00</a></div></div><div class="foot-section"><div class="foot-label">Derechos RGPD/LOPDGDD</div><div class="foot-content"><a href="mailto:seleccion.redcomercial@nnespana.com?subject=Ejercicio%20derechos%20ARCO">Ejercer derechos ARCO</a> · <a href="mailto:dpo@nnespana.es">DPO</a><br><a href="https://www.aepd.es/" target="_blank">Reclamaciones ante AEPD</a></div></div><div class="foot-agent"><div class="foot-agent-name">🟠 Federico Fontanals</div><div class="foot-agent-title">Agente Dinamizador Punto Naranja · Xàtiva</div><div class="foot-agent-contact"><div class="foot-agent-contact-item"><span class="foot-agent-contact-icon">📧</span><a href="mailto:federico.fontanals@nnespana.es">Email</a></div><div class="foot-agent-contact-item"><span class="foot-agent-contact-icon">☎️</span><a href="tel:+34680507186">Llamada</a></div></div><div class="foot-disclaimer">Documento informativo no contractual · Datos verificados de condiciones generales y documentación oficial Nationale-Nederlanden</div></div></div>`;
@@ -858,7 +858,7 @@ function renderProd(p, nombre, prima){
     <div class="body fi">
       <div class="greet">${p.greet(n)}</div>
       <span class="fbadge ${f.fb}">${f.ico} ${f.label}</span>
-      ${deadlineH}${gapH}${hbH}${stH}${covsH}${objecH}${totalH}
+      ${deadlineH}${gapH}${hbH}${stH}${covsH}${totalH}${objecH}
       ${p.extras ? exts() : ''}
       <div class="dv"></div>
       <div class="cierre">${p.cierre(n)}</div>
