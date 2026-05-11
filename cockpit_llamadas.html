@@ -1707,29 +1707,6 @@ async function cargarMarcadorDesdeSheet() {
     renderMarcador();
   }
 }
-    const res  = await fetch(url, { signal: controller.signal });
-    clearTimeout(timeoutId);
-    const text = await res.text();
-    const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
-    const rows = json.table?.rows;
-    if (!rows || rows.length < 7) { renderMarcador(); return; }
-
-    const gv = (row, col) => { try { return parseInt(rows[row]?.c[col]?.v || 0); } catch(e) { return 0; } };
-
-    const m = cargarMarcador();
-    m.FEDE.llamadas    = gv(5, 6)  || m.FEDE.llamadas;
-    m.FEDE.contactos   = gv(6, 6)  || m.FEDE.contactos;
-    m.FEDE.reuniones   = gv(7, 6)  || m.FEDE.reuniones;
-    m.ROSIANE.llamadas  = gv(14, 6) || m.ROSIANE.llamadas;
-    m.ROSIANE.contactos = gv(15, 6) || m.ROSIANE.contactos;
-    m.ROSIANE.reuniones = gv(16, 6) || m.ROSIANE.reuniones;
-
-    localStorage.setItem(MARCADOR_KEY, JSON.stringify(m));
-    renderMarcador(m);
-  } catch(e) {
-    renderMarcador();
-  }
-}
 
 // Init marcador al cargar con TIMEOUT de seguridad para no bloquear el Cockpit
 renderMarcador();
