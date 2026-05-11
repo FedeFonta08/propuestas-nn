@@ -1037,7 +1037,7 @@ if (!MASTER_TOKEN) {
   if (MASTER_TOKEN) localStorage.setItem('nn_master_token', MASTER_TOKEN);
 }
 const SHEET_ID = '16lui0o9wPYe9tL-9PaU6_H2heG8uIBYrCIL9vvfpdC0';
-const SISTEMA_MAESTRO_ID = '16lui0o9wPYe9tL-9PaU6_H2heG8uIBYrCIL9vvfpdC0';
+const SISTEMA_MAESTRO_ID = '1Xp8_U2r6uYl7S_uH_H6n4f8z1p-m8l3_9S-Lz5eQZ0'; // ID corregido según histórico
 const ACTIVIDAD_SCRIPT_URL = 'http://localhost:5151';
 const PVM_OBJ = 10291;
 const PVM_KEY = 'nn_pvm_2026';
@@ -1676,9 +1676,16 @@ async function cargarMarcadorDesdeSheet() {
   }
 }
 
-// Init marcador al cargar
+// Init marcador al cargar con TIMEOUT de seguridad para no bloquear el Cockpit
 renderMarcador();
-cargarMarcadorDesdeSheet();
+// Intentar cargar datos reales, pero si falla o tarda, no bloqueamos el inicio
+Promise.race([
+  cargarMarcadorDesdeSheet(),
+  new Promise((_, reject) => setTimeout(() => reject('Timeout'), 3000))
+]).catch(err => {
+  console.warn('SISTEMA MAESTRO offline o lento:', err);
+  renderMarcador(); // Cargar con datos locales
+});
 
 function siguienteContacto() {
   const siguiente = contactos.find(c => !c.hecho && c.nombre !== contactoActivo?.nombre);
