@@ -1132,7 +1132,13 @@ async function cargarContactos(filtroMes = 'actual') {
   const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=CRM%20MAESTRO`;
 
   try {
-    const res = await fetch(url);
+    // Timeout de seguridad de 4 segundos para la carga de contactos
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 4000);
+
+    const res = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeoutId);
+
     const text = await res.text();
     const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
     const rows = json.table.rows;
@@ -1644,7 +1650,10 @@ async function registrarActividadMaestro(tipoResultado) {
 async function cargarMarcadorDesdeSheet() {
   try {
     const url = `https://docs.google.com/spreadsheets/d/${SISTEMA_MAESTRO_ID}/gviz/tq?tqx=out:json&sheet=Actividad%20Agentes`;
-    const res  = await fetch(url);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3000);
+    const res  = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeoutId);
     const text = await res.text();
     const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
     const rows = json.table?.rows;
