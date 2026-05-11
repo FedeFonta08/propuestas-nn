@@ -29,10 +29,17 @@ token_drive.json
 !package.json
 !package-lock.json
 
-# Python
+# Python - Quitamos *.py para que TUS SCRIPTS sí se guarden como copia de seguridad
 __pycache__/
 *.pyc
-*.py
+
+# Bloqueo total de archivos de datos (aunque estén fuera de las carpetas)
+*.xlsx
+*.xls
+*.csv
+*.pdf
+*.zip
+*.rar
 
 # IDE y OS
 .vscode/

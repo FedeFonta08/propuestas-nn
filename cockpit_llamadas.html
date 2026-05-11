@@ -349,7 +349,7 @@ body {
   font-family: 'Bebas Neue', sans-serif; font-size: 15px;
   letter-spacing: 0.5px; color: var(--tx2); margin-bottom: 10px;
 }
-.res-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 12px; }
+.res-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 12px; }
 .res-btn {
   padding: 10px 6px; border-radius: var(--rad);
   border: 1.5px solid var(--brd); background: var(--white);
@@ -486,6 +486,46 @@ body {
 .overlay.show { display: block; }
 
 /* ══════════════════════════════════════════════════════════════
+   MARCADOR SEMANAL
+   ══════════════════════════════════════════════════════════════ */
+.marcador-bar {
+  background: #0D1117; border-bottom: 2px solid var(--nn);
+  padding: 10px 20px; display: flex; align-items: center; gap: 20px;
+  flex-wrap: wrap;
+}
+.marcador-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 14px;
+  color: var(--nn); letter-spacing: 1px; white-space: nowrap;
+  display: flex; align-items: center; gap: 6px;
+}
+.marcador-agents { display: flex; gap: 16px; flex: 1; flex-wrap: wrap; }
+.agent-block {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.05); border-radius: 8px;
+  padding: 6px 12px; border: 1px solid rgba(255,255,255,0.1);
+  min-width: 260px;
+}
+.agent-name {
+  font-family: 'Bebas Neue', sans-serif; font-size: 13px;
+  color: #fff; letter-spacing: 0.5px; white-space: nowrap;
+}
+.agent-metrics { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.metric-chip {
+  display: flex; flex-direction: column; align-items: center;
+  min-width: 44px;
+}
+.metric-val { font-size: 15px; font-weight: 700; color: #fff; line-height: 1; }
+.metric-val.ok { color: #34D399; }
+.metric-val.warn { color: #FBBF24; }
+.metric-val.low { color: #F87171; }
+.metric-lbl { font-size: 9px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.5px; }
+.agent-bar-wrap { flex: 1; min-width: 80px; }
+.agent-bar-track { height: 5px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+.agent-bar-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+.agent-bar-pct { font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+.agent-msg { font-size: 10px; color: rgba(255,255,255,0.5); font-style: italic; white-space: nowrap; }
+.marcador-semana { font-size: 10px; color: rgba(255,255,255,0.35); white-space: nowrap; }
+/* ══════════════════════════════════════════════════════════════
    TOAST
    ══════════════════════════════════════════════════════════════ */
 .toast {
@@ -544,6 +584,12 @@ body {
       <div class="hdr-title">COCKPIT DE LLAMADAS</div>
       <div class="hdr-sub">Punto Naranja · NN Xàtiva</div>
     </div>
+    <div style="margin-left: 15px; border-left: 1px solid var(--brd); padding-left: 15px;">
+      <select id="agente-selector" onchange="setAgenteActivo(this.value)" style="padding: 5px 10px; border-radius: 6px; border: 1.5px solid var(--nn); font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700; background: var(--nn-l); color: var(--nn); cursor: pointer; outline: none;">
+        <option value="FEDE">👤 FEDE</option>
+        <option value="ROSIANE">👤 ROSIANE</option>
+      </select>
+    </div>
   </div>
   <div class="hdr-stats">
     <div class="stat"><div class="stat-n" id="st-llamadas" style="color:var(--nn)">0</div><div class="stat-l">Llamadas</div></div>
@@ -562,6 +608,44 @@ body {
   <div class="pvm-label">PVM MES</div>
   <div class="pvm-track"><div class="pvm-fill" id="pvm-fill" style="width:0%"></div></div>
   <div class="pvm-txt" id="pvm-txt">0 / 10.291</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     MARCADOR SEMANAL EN VIVO
+     ══════════════════════════════════════════════════════════════ -->
+<div class="marcador-bar" id="marcador-bar">
+  <div class="marcador-title">📊 SEMANA <span id="marcador-semana-num">—</span></div>
+  <div class="marcador-agents" id="marcador-agents">
+    <!-- FEDE -->
+    <div class="agent-block">
+      <div class="agent-name">👤 FEDE</div>
+      <div class="agent-metrics">
+        <div class="metric-chip"><div class="metric-val" id="m-fede-llamadas">—</div><div class="metric-lbl">📞 Llam.</div></div>
+        <div class="metric-chip"><div class="metric-val" id="m-fede-contactos">—</div><div class="metric-lbl">✅ Cont.</div></div>
+        <div class="metric-chip"><div class="metric-val" id="m-fede-reuniones">—</div><div class="metric-lbl">🤝 Reun.</div></div>
+        <div class="metric-chip"><div class="metric-val" id="m-fede-presupuestos">—</div><div class="metric-lbl">📋 Pres.</div></div>
+      </div>
+      <div class="agent-bar-wrap">
+        <div class="agent-bar-track"><div class="agent-bar-fill" id="bar-fede" style="width:0%;background:var(--nn)"></div></div>
+        <div class="agent-bar-pct" id="pct-fede">Cargando...</div>
+      </div>
+    </div>
+    <!-- ROSIANE -->
+    <div class="agent-block">
+      <div class="agent-name">👤 ROSIANE</div>
+      <div class="agent-metrics">
+        <div class="metric-chip"><div class="metric-val" id="m-ros-llamadas">—</div><div class="metric-lbl">📞 Llam.</div></div>
+        <div class="metric-chip"><div class="metric-val" id="m-ros-contactos">—</div><div class="metric-lbl">✅ Cont.</div></div>
+        <div class="metric-chip"><div class="metric-val" id="m-ros-reuniones">—</div><div class="metric-lbl">🤝 Reun.</div></div>
+        <div class="metric-chip"><div class="metric-val" id="m-ros-presupuestos">—</div><div class="metric-lbl">📋 Pres.</div></div>
+      </div>
+      <div class="agent-bar-wrap">
+        <div class="agent-bar-track"><div class="agent-bar-fill" id="bar-ros" style="width:0%;background:#818CF8"></div></div>
+        <div class="agent-bar-pct" id="pct-ros">Cargando...</div>
+      </div>
+    </div>
+  </div>
+  <div class="marcador-semana" id="marcador-msg">⏳ Cargando datos del SISTEMA MAESTRO...</div>
 </div>
 
 <!-- ══════════════════════════════════════════════════════════════
@@ -687,6 +771,9 @@ body {
           </div>
           <div class="res-btn" data-v="llamar_despues" onclick="selResultado(this)">
             <span class="res-ico">🔄</span><span class="res-txt">Llamar después</span>
+          </div>
+          <div class="res-btn" data-v="presupuesto_enviado" onclick="selResultado(this)">
+            <span class="res-ico">📋</span><span class="res-txt">Presupuesto</span>
           </div>
         </div>
 
@@ -936,6 +1023,12 @@ body {
 // CONFIGURACIÓN Y SEGURIDAD
 // ══════════════════════════════════════════════════════════════
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxpYhW-S9OvA3w1NTR_Mu6GHffGTtHKE1ENKgoM98ySB8gyxt-j4BbaKF7Mk48grrcr_g/exec';
+
+// ── SISTEMA MAESTRO (actividad agentes) ──────────────────────
+// El Excel está local → usamos servidor_actividad.py en localhost:5151
+// Para arrancar: python servidor_actividad.py (en la carpeta propuestas-nn-repo)
+const SISTEMA_MAESTRO_ID = '1qshgFOXh-SOuTxgeY95ORfXsC71kwF7O';
+const ACTIVIDAD_SCRIPT_URL = 'http://localhost:5151';
 
 // Validar token maestro al entrar
 let MASTER_TOKEN = localStorage.getItem('nn_master_token');
@@ -1409,6 +1502,9 @@ async function guardarResultado() {
       sesion.hechos.push(contactoActivo.nombre);
       guardarSesion();
 
+      // ── NUEVO: Registrar en SISTEMA MAESTRO ─────────────
+      await registrarActividadMaestro(resultadoSel);
+
       // Mark as done & go next
       contactoActivo.hecho = true;
       renderLista(contactos);
@@ -1423,6 +1519,164 @@ async function guardarResultado() {
   btn.disabled = false;
   btn.innerHTML = 'GUARDAR Y SIGUIENTE CONTACTO';
 }
+
+// ══════════════════════════════════════════════════════════════
+// MARCADOR SEMANAL — SISTEMA MAESTRO
+// ══════════════════════════════════════════════════════════════
+
+// Estructura de planes semanales por defecto (se sobreescribe si el Sheet devuelve datos)
+const PLAN_SEMANAL = {
+  FEDE:    { llamadas: 20, contactos: 8, reuniones: 3, presupuestos: 5 },
+  ROSIANE: { llamadas: 10, contactos: 4, reuniones: 1, presupuestos: 2 }
+};
+
+// Actividad acumulada de la semana (persiste en localStorage)
+const MARCADOR_KEY = 'nn_marcador_semana';
+
+function getSemana() {
+  const now = new Date();
+  const start = new Date(now.getFullYear(), 0, 1);
+  return Math.ceil(((now - start) / 86400000 + start.getDay() + 1) / 7);
+}
+
+function cargarMarcador() {
+  try {
+    const d = JSON.parse(localStorage.getItem(MARCADOR_KEY) || '{}');
+    const semActual = getSemana();
+    if (d.semana !== semActual) {
+      const nuevo = { semana: semActual, FEDE: {llamadas:0,contactos:0,reuniones:0,presupuestos:0}, ROSIANE: {llamadas:0,contactos:0,reuniones:0,presupuestos:0} };
+      localStorage.setItem(MARCADOR_KEY, JSON.stringify(nuevo));
+      return nuevo;
+    }
+    return d;
+  } catch(e) {
+    return { semana: getSemana(), FEDE: {llamadas:0,contactos:0,reuniones:0,presupuestos:0}, ROSIANE: {llamadas:0,contactos:0,reuniones:0,presupuestos:0} };
+  }
+}
+
+function guardarMarcadorLocal(agente, tipo) {
+  const m = cargarMarcador();
+  if (!m[agente]) m[agente] = {llamadas:0,contactos:0,reuniones:0,presupuestos:0};
+  m[agente].llamadas++;
+  if (tipo === 'contactado' || tipo === 'cita_fijada' || tipo === 'presupuesto_enviado') m[agente].contactos++;
+  if (tipo === 'cita_fijada') m[agente].reuniones++;
+  if (tipo === 'presupuesto_enviado') m[agente].presupuestos = (m[agente].presupuestos || 0) + 1;
+  localStorage.setItem(MARCADOR_KEY, JSON.stringify(m));
+  renderMarcador(m);
+}
+
+function renderMarcador(m) {
+  if (!m) m = cargarMarcador();
+  const sem = m.semana || getSemana();
+  document.getElementById('marcador-semana-num').textContent = sem;
+
+  ['FEDE', 'ROSIANE'].forEach(ag => {
+    const real = m[ag] || {llamadas:0,contactos:0,reuniones:0,presupuestos:0};
+    const plan = PLAN_SEMANAL[ag];
+    const pfx  = ag === 'FEDE' ? 'fede' : 'ros';
+
+    const pct = plan.llamadas > 0 ? Math.min(Math.round(real.llamadas / plan.llamadas * 100), 100) : 0;
+    const cls = pct >= 75 ? 'ok' : pct >= 40 ? 'warn' : 'low';
+
+    document.getElementById(`m-${pfx}-llamadas`).textContent     = `${real.llamadas}/${plan.llamadas}`;
+    document.getElementById(`m-${pfx}-llamadas`).className       = `metric-val ${cls}`;
+    document.getElementById(`m-${pfx}-contactos`).textContent    = `${real.contactos}/${plan.contactos}`;
+    document.getElementById(`m-${pfx}-reuniones`).textContent    = `${real.reuniones}/${plan.reuniones}`;
+    document.getElementById(`m-${pfx}-presupuestos`).textContent = `${real.presupuestos||0}/${plan.presupuestos}`;
+    document.getElementById(`bar-${pfx}`).style.width            = pct + '%';
+    document.getElementById(`pct-${pfx}`).textContent            = pct + '% del plan semanal';
+  });
+
+  const msgs = [
+    { th: 100, txt: '🏆 Plan cumplido — ¡Semana perfecta!' },
+    { th: 75,  txt: '🔥 Muy cerca — ¡Un último empujón!' },
+    { th: 50,  txt: '🟢 Buen ritmo, sigamos' },
+    { th: 25,  txt: '🟡 A medio camino — ¡Vamos!' },
+    { th: 0,   txt: '🔴 Arrancando — ¡A por ello!' }
+  ];
+  const fedePct = PLAN_SEMANAL.FEDE.llamadas > 0
+    ? Math.round((m.FEDE?.llamadas || 0) / PLAN_SEMANAL.FEDE.llamadas * 100) : 0;
+  const msg = msgs.find(x => fedePct >= x.th) || msgs[msgs.length - 1];
+  document.getElementById('marcador-msg').textContent = msg.txt;
+}
+
+// Detectar agente activo (Fede = predeterminado; podría hacerse seleccionable)
+// Detectar agente activo
+function getAgenteActivo() {
+  return document.getElementById('agente-selector').value;
+}
+
+function setAgenteActivo(agente) {
+  localStorage.setItem('nn_agente_activo', agente);
+  toast(`Sesión activa: ${agente}`, 'ok');
+  // Resaltar en el marcador
+  document.querySelectorAll('.agent-block').forEach(b => {
+    b.style.borderColor = b.innerText.includes(agente) ? 'var(--nn)' : 'rgba(255,255,255,0.1)';
+    b.style.background = b.innerText.includes(agente) ? 'rgba(255,102,0,0.1)' : 'rgba(255,255,255,0.05)';
+  });
+}
+
+async function registrarActividadMaestro(tipoResultado) {
+  const agente = getAgenteActivo();
+
+  // 1. Actualizar marcador local de inmediato (sin esperar red)
+  guardarMarcadorLocal(agente, tipoResultado);
+
+  // 2. Enviar al servidor Python local (servidor_actividad.py en localhost:5151)
+  try {
+    const dia = ['DOM','LUN','MAR','MIE','JUE','VIE','SAB'][new Date().getDay()];
+    await fetch(ACTIVIDAD_SCRIPT_URL + '?payload=' + encodeURIComponent(JSON.stringify({
+      accion: 'registrar_actividad',
+      agente: agente,
+      resultado: tipoResultado,
+      dia: dia,
+      semana: getSemana()
+    })), { method: 'GET', redirect: 'follow' });
+  } catch(e) {
+    // El servidor no está corriendo → datos guardados solo en local (OK)
+    console.info('servidor_actividad.py no disponible — actividad guardada localmente:', e.message);
+  }
+}
+
+// Cargar datos reales desde el SISTEMA MAESTRO (Actividad Agentes) via gviz
+async function cargarMarcadorDesdeSheet() {
+  try {
+    const url = `https://docs.google.com/spreadsheets/d/${SISTEMA_MAESTRO_ID}/gviz/tq?tqx=out:json&sheet=Actividad%20Agentes`;
+    const res  = await fetch(url);
+    const text = await res.text();
+    const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
+    const rows = json.table?.rows;
+    if (!rows || rows.length < 7) { renderMarcador(); return; }
+
+    // Estructura de la pestaña "Actividad Agentes":
+    // Fila 6 (idx 5): FEDE - Llamadas     | cols LUN(1)..VIE(5), TOTAL(6)
+    // Fila 7 (idx 6): FEDE - Contactos
+    // Fila 8 (idx 7): FEDE - Reuniones
+    // Fila 15(idx14): ROSIANE - Llamadas
+    // Fila 16(idx15): ROSIANE - Contactos
+    // Fila 17(idx16): ROSIANE - Reuniones
+    const gv = (row, col) => { try { return parseInt(rows[row]?.c[col]?.v || 0); } catch(e) { return 0; } };
+
+    const m = cargarMarcador();
+    // Totales de la semana (columna 6 = TOTAL)
+    m.FEDE.llamadas    = gv(5, 6)  || m.FEDE.llamadas;
+    m.FEDE.contactos   = gv(6, 6)  || m.FEDE.contactos;
+    m.FEDE.reuniones   = gv(7, 6)  || m.FEDE.reuniones;
+    m.ROSIANE.llamadas  = gv(14, 6) || m.ROSIANE.llamadas;
+    m.ROSIANE.contactos = gv(15, 6) || m.ROSIANE.contactos;
+    m.ROSIANE.reuniones = gv(16, 6) || m.ROSIANE.reuniones;
+
+    localStorage.setItem(MARCADOR_KEY, JSON.stringify(m));
+    renderMarcador(m);
+  } catch(e) {
+    // Si el Sheet no es público o falla, usar datos locales
+    renderMarcador();
+  }
+}
+
+// Init marcador al cargar
+renderMarcador();
+cargarMarcadorDesdeSheet();
 
 function siguienteContacto() {
   const siguiente = contactos.find(c => !c.hecho && c.nombre !== contactoActivo?.nombre);
@@ -1562,6 +1816,11 @@ function toast(msg, tipo) {
   sel.innerHTML = opts;
 
   aplicarFiltro();
+
+  // Cargar agente previo
+  const prev = localStorage.getItem('nn_agente_activo') || 'FEDE';
+  document.getElementById('agente-selector').value = prev;
+  setAgenteActivo(prev);
 })();
 
 </script>
