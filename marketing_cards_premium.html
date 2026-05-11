@@ -926,40 +926,66 @@
         }
 
         async function exportCard(cardElement, action) {
-            const originalTransform = cardElement.style.transform;
-            cardElement.style.transform = 'none'; // Reset transform for clean capture
-            
-            // Hide actions during capture
+            // Show loading toast
+            showToast('Generando imagen de alta calidad...');
+
+            // Prepare for capture
             const actions = cardElement.querySelector('.card-actions');
+            const originalTransform = cardElement.style.transform;
+            const originalTransition = cardElement.style.transition;
+            
+            // Temporary style reset for clean capture
+            cardElement.style.transform = 'none';
+            cardElement.style.transition = 'none';
+            actions.style.opacity = '0';
             actions.style.display = 'none';
+
+            // Wait a frame for browser to render reset styles
+            await new Promise(r => requestAnimationFrame(r));
 
             try {
                 const canvas = await html2canvas(cardElement, {
-                    scale: 3, // High quality
+                    scale: 2, // 2x is safer and still high quality
                     useCORS: true,
-                    backgroundColor: null,
-                    borderRadius: 28
+                    allowTaint: false,
+                    backgroundColor: '#ffffff',
+                    logging: false,
+                    onclone: (clonedDoc) => {
+                        // Ensure cloned actions are hidden
+                        const clonedActions = clonedDoc.querySelector('.card-actions');
+                        if (clonedActions) clonedActions.style.display = 'none';
+                    }
                 });
 
                 if (action === 'download') {
-                    const link = document.createElement('a');
                     const productName = cardElement.querySelector('.product-label').innerText.replace(/\s+/g, '_');
+                    const link = document.createElement('a');
                     link.download = `Anuncio_NN_${productName}.png`;
-                    link.href = canvas.toDataURL('image/png');
+                    link.href = canvas.toDataURL('image/png', 1.0);
+                    document.body.appendChild(link);
                     link.click();
-                    showToast('Imagen descargada correctamente');
+                    document.body.removeChild(link);
+                    showToast('✅ Imagen guardada');
                 } else if (action === 'copy') {
                     canvas.toBlob(async (blob) => {
-                        const item = new ClipboardItem({ "image/png": blob });
-                        await navigator.clipboard.write([item]);
-                        showToast('¡Imagen copiada! Ya puedes pegarla en WhatsApp');
-                    });
+                        try {
+                            const item = new ClipboardItem({ "image/png": blob });
+                            await navigator.clipboard.write([item]);
+                            showToast('✅ ¡Copiada! Pégala en WhatsApp');
+                        } catch (copyErr) {
+                            console.error('Clipboard error:', copyErr);
+                            showToast('❌ Error al copiar (Prueba descargar)');
+                        }
+                    }, 'image/png');
                 }
             } catch (err) {
-                console.error('Error exportando tarjeta:', err);
-                showToast('Error al exportar la imagen');
+                console.error('Export error:', err);
+                showToast('❌ Error de generación');
             } finally {
+                // Restore original styles
                 cardElement.style.transform = originalTransform;
+                cardElement.style.transition = originalTransition;
+                actions.style.opacity = '';
                 actions.style.display = 'flex';
             }
         }
