@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;800&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
     <style>
         :root {
             --nn-orange: #EE7F00;
@@ -925,35 +925,30 @@
         }
 
         async function exportCard(cardElement, action) {
-            showToast('📸 Preparando captura de alta calidad...');
+            showToast('📸 Procesando diseño premium...');
 
-            // Actions and original styles
             const actions = cardElement.querySelector('.card-actions');
             const originalStyle = cardElement.getAttribute('style') || '';
             
-            // 1. Aggressive Reset
+            // Temporary preparation for clean capture
             cardElement.style.transform = 'none';
             cardElement.style.transition = 'none';
             cardElement.style.animation = 'none';
-            cardElement.style.opacity = '1';
-            cardElement.style.visibility = 'visible';
-            cardElement.style.transformStyle = 'flat';
-            
-            // Hide actions
             actions.style.display = 'none';
 
-            // 2. Wait for browser to settle (Crucial for complex CSS)
+            // Allow UI to update and fonts to settle
             await new Promise(r => setTimeout(r, 150));
 
             try {
-                const canvas = await html2canvas(cardElement, {
-                    scale: 2,
-                    useCORS: true,
-                    allowTaint: true,
+                // Use html-to-image (SVG-based engine, much more reliable)
+                const dataUrl = await htmlToImage.toPng(cardElement, {
+                    quality: 1.0,
+                    pixelRatio: 2,
                     backgroundColor: '#ffffff',
-                    imageTimeout: 15000,
-                    removeContainer: true,
-                    ignoreElements: (el) => el.classList.contains('card-actions')
+                    style: {
+                        transform: 'none',
+                        borderRadius: '28px'
+                    }
                 });
 
                 if (action === 'download') {
@@ -961,25 +956,24 @@
                     const name = label ? label.innerText.replace(/\s+/g, '_') : 'Anuncio';
                     const link = document.createElement('a');
                     link.download = `NN_${name}.png`;
-                    link.href = canvas.toDataURL('image/png', 1.0);
+                    link.href = dataUrl;
                     link.click();
-                    showToast('✅ ¡Guardado!');
+                    showToast('✅ ¡Imagen guardada!');
                 } else if (action === 'copy') {
-                    canvas.toBlob(async (blob) => {
-                        try {
-                            const item = new ClipboardItem({ "image/png": blob });
-                            await navigator.clipboard.write([item]);
-                            showToast('✅ ¡Copiado! Pégalo en WhatsApp');
-                        } catch (e) {
-                            showToast('❌ Error: Pulsa Descargar');
-                        }
-                    }, 'image/png');
+                    const blob = await (await fetch(dataUrl)).blob();
+                    try {
+                        const item = new ClipboardItem({ "image/png": blob });
+                        await navigator.clipboard.write([item]);
+                        showToast('✅ ¡Copiado! Pégala en WhatsApp');
+                    } catch (e) {
+                        showToast('❌ Usa el botón de Descargar');
+                    }
                 }
             } catch (err) {
-                console.error(err);
-                showToast('❌ Fallo en captura');
+                console.error('Export Error:', err);
+                showToast('❌ Error. Intenta de nuevo');
             } finally {
-                // Restore
+                // Restore original styles
                 cardElement.setAttribute('style', originalStyle);
                 actions.style.display = 'flex';
             }
