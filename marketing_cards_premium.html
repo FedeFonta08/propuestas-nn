@@ -254,13 +254,13 @@
         }
 
         .cta-zone {
-            height: 18%;
+            height: 20%;
             background: linear-gradient(135deg, var(--nn-orange-dark), var(--nn-orange));
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 10px 20px;
+            padding: 15px 20px;
             text-align: center;
             color: white;
             position: relative;
@@ -269,23 +269,30 @@
 
         .cta-highlight {
             font-weight: 800;
-            font-size: 1.2rem;
-            margin-bottom: 4px;
-            letter-spacing: 1px;
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-transform: uppercase;
         }
 
         .cta-subtext {
-            font-size: 0.9rem;
-            font-weight: 400;
-            background: rgba(255,255,255,0.15);
-            padding: 2px 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            background: rgba(255,255,255,0.18);
+            padding: 6px 16px;
             border-radius: 100px;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.1);
+            white-space: nowrap;
+            display: inline-block;
+            max-width: 90%;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
 
         .footer-zone {
-            height: 12%;
+            height: 10%;
             background: #FFFFFF;
             display: flex;
             flex-direction: column;
@@ -299,44 +306,46 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .agent-info {
             display: flex;
             flex-direction: column;
+            justify-content: center;
         }
 
         .agent-name {
             font-weight: 800;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--nn-anthracite);
             line-height: 1;
+            margin-bottom: 2px;
         }
 
         .agent-contact {
-            font-size: 0.75rem;
-            color: #555;
-            font-weight: 600;
-            margin-top: 2px;
+            font-size: 0.7rem;
+            color: #444;
+            font-weight: 700;
+            letter-spacing: -0.2px;
         }
 
         .partner-logo-container {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
         }
 
         .partner-label {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-weight: 800;
-            color: #aaa;
+            color: #bbb;
             text-transform: uppercase;
         }
 
         .partner-brand {
             font-weight: 900;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #0055a5;
             letter-spacing: -0.5px;
         }
@@ -344,14 +353,15 @@
         .claim {
             width: 100%;
             text-align: center;
-            font-size: 0.48rem;
-            color: #bbb;
+            font-size: 0.45rem;
+            color: #ccc;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
+            letter-spacing: 1.5px;
             font-weight: 700;
             margin-top: 4px;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid #f8f8f8;
             padding-top: 4px;
+            line-height: 1.2;
         }
 
         /* Badge */
