@@ -173,6 +173,11 @@ async function copyImage(cardId) {
         setTimeout(() => btn.innerHTML = originalText, 2000);
     }
 }
+
+function openWA(url) {
+    // Forzar la apertura en la misma ventana nombrada
+    window.open(url, 'whatsapp_fede_main');
+}
 </script>
 </body>
 </html>
@@ -205,7 +210,8 @@ async function copyImage(cardId) {
             tel_clean = '34' + tel_clean
         
         encoded_msg = urllib.parse.quote(msg)
-        wa_url = f"https://wa.me/{tel_clean}?text={encoded_msg}"
+        # Usar api.whatsapp.com que es mas estable para reutilizar pestañas
+        wa_url = f"https://api.whatsapp.com/send?phone={tel_clean}&text={encoded_msg}"
         
         card_id = p['tel'] if p['tel'] else p['nombre'].replace(" ","")
         
@@ -230,7 +236,7 @@ async function copyImage(cardId) {
   <div class="card-body">
     <div class="msg-box">{msg}</div>
     <div class="actions">
-      <a href="{wa_url}" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
+      <button onclick="openWA('{wa_url}')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
       <button onclick="copyImage('{card_id}')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
     <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
@@ -248,7 +254,7 @@ async function copyImage(cardId) {
 
     with open(OUTPUT_HTML, 'w', encoding='utf-8') as f:
         f.write(final_html)
-    print(f"HTML INTERACTIVO actualizado en: {OUTPUT_HTML}")
+    print(f"HTML INTERACTIVE actualizado en: {OUTPUT_HTML}")
 
 def main():
     rows = get_crm_data()
