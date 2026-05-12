@@ -18,6 +18,8 @@ Productos_Guias/
 Propuestas_Clientes/
 Reclutamiento_CV/
 Scripts_Herramientas/
+!Scripts_Herramientas/Felicitaciones_Cumple_NN.html
+!Scripts_Herramientas/birthday_automation_calendar.py
 
 # ============================================
 # CREDENCIALES Y TOKENS — NUNCA SUBIR
