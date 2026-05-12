@@ -201,7 +201,8 @@ function safeSend(id, msg, url) {
         if len(tel_clean) == 9 and tel_clean.startswith(('6', '7', '8', '9')):
             tel_clean = '34' + tel_clean
             
-        wa_url = f"https://wa.me/{tel_clean}"
+        # Most compatible official format
+        wa_url = f"https://api.whatsapp.com/send?phone={tel_clean}"
         card_id = p['tel'] if p['tel'] else p['nombre'].replace(" ","")
         msg_js = msg.replace("'", "\\'").replace('"', '\\"')
         
