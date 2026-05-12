@@ -3,6 +3,7 @@ import datetime
 import os
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
+import urllib.parse
 
 # CONFIG
 TOKEN_PATH = 'd:/Users/ffont/Downloads/06_NATIONALE_NEDERLANDEN/Scripts_Herramientas/token_drive.json'
@@ -93,7 +94,8 @@ def generate_html(today_list, week_list):
         else:
             msg = f"¡Hola {p['nombre']}! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!"
         
-        wa_url = f"https://wa.me/{p['tel'].replace(' ', '').replace('+', '')}?text={msg}"
+        encoded_msg = urllib.parse.quote(msg)
+        wa_url = f"https://api.whatsapp.com/send?phone={p['tel'].replace(' ', '').replace('+', '')}&text={encoded_msg}"
         card_id = p['tel'] if p['tel'] else p['nombre'].replace(" ","")
         
         return f"""
