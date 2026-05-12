@@ -49,12 +49,12 @@ def fuzzy_match(name, rows):
     name = name.lower()
     for row in rows:
         if not row: continue
-        full_name = (row[0] + " " + (row[1] if len(row) > 1 else "")).lower()
+        full_name = row[0].lower()
         if name in full_name or full_name in name:
             return {
                 "nombre": row[0],
-                "apellidos": row[1] if len(row) > 1 else "",
-                "tel": row[3] if len(row) > 3 else "",
+                "apellidos": "", # Already in nombre in this CRM format
+                "tel": row[1] if len(row) > 1 else "",
                 "buyer": row[48] if len(row) > 48 else "Cliente"
             }
     return None
