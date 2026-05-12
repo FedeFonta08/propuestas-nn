@@ -50,7 +50,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 
 .actions { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: auto; }
 .btn { width: 100%; padding: 14px; border-radius: 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; text-align: center; cursor: pointer; text-decoration: none; border: none; }
-.btn-wa { background: var(--green); color: #fff; }
+.btn-wa { background: var(--green); color: #fff; display: block; }
 .btn-copy-img { background: #fff; color: var(--nn); border: 2px solid var(--nn); }
 
 .tip { font-size: 11px; color: var(--muted); text-align: center; margin-top: 10px; font-weight: 600; }
@@ -60,7 +60,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 
 <div class="header">
     <img src="assets/fede_avatar.jpg" class="fede-avatar">
-    <h1>Felicitaciones <em>Automáticas.</em></h1>
+    <h1>Felicitaciones <em>Unificadas.</em></h1>
 </div>
 
 <div class="summary-bar">
@@ -68,7 +68,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="sum-item"><span class="sum-n">21</span><span class="sum-l">Próximos 7 días</span></div>
 </div>
 
-<div class="section-title">Envíos de Hoy — Pestaña Inteligente</div>
+<div class="section-title">Envíos de Hoy — Pestaña Única</div>
 <div class="grid">
   
 <div class="card">
@@ -91,10 +91,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Amparo Gimenez Torres! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34647259499&text=%C2%A1Hola%20Amparo%20Gimenez%20Torres%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34647259499?text=%C2%A1Hola%20Amparo%20Gimenez%20Torres%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34647259499')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -118,10 +118,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Fernando Aranda Arguello! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34649293874&text=%C2%A1Hola%20Fernando%20Aranda%20Arguello%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34649293874?text=%C2%A1Hola%20Fernando%20Aranda%20Arguello%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34649293874')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -145,10 +145,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Javier López Esteve! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34679966091&text=%C2%A1Hola%20Javier%20L%C3%B3pez%20Esteve%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34679966091?text=%C2%A1Hola%20Javier%20L%C3%B3pez%20Esteve%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34679966091')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -172,10 +172,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Maria Josefa Cano Crespo! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34671337510&text=%C2%A1Hola%20Maria%20Josefa%20Cano%20Crespo%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34671337510?text=%C2%A1Hola%20Maria%20Josefa%20Cano%20Crespo%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34671337510')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -204,10 +204,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Jose Arturo Tormo Sanchis! Soy Fede de Nationale-Nederlanden. Me he acordado de que hoy es el cumple de Andrea Tormo. ¡Muchísimas felicidades para el peque y para vosotros! Que paséis un gran día.</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34665456973&text=%C2%A1Hola%20Jose%20Arturo%20Tormo%20Sanchis%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Me%20he%20acordado%20de%20que%20hoy%20es%20el%20cumple%20de%20Andrea%20Tormo.%20%C2%A1Much%C3%ADsimas%20felicidades%20para%20el%20peque%20y%20para%20vosotros%21%20Que%20pas%C3%A9is%20un%20gran%20d%C3%ADa.')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34665456973?text=%C2%A1Hola%20Jose%20Arturo%20Tormo%20Sanchis%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Me%20he%20acordado%20de%20que%20hoy%20es%20el%20cumple%20de%20Andrea%20Tormo.%20%C2%A1Much%C3%ADsimas%20felicidades%20para%20el%20peque%20y%20para%20vosotros%21%20Que%20pas%C3%A9is%20un%20gran%20d%C3%ADa." target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34665456973')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -231,10 +231,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Angel Urio Reig Calabuig! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34636071861&text=%C2%A1Hola%20Angel%20Urio%20Reig%20Calabuig%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34636071861?text=%C2%A1Hola%20Angel%20Urio%20Reig%20Calabuig%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34 636 07 18 61')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -258,10 +258,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Jose Luis Olmeda Villar! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34962210517&text=%C2%A1Hola%20Jose%20Luis%20Olmeda%20Villar%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34962210517?text=%C2%A1Hola%20Jose%20Luis%20Olmeda%20Villar%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34 962 21 05 17')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -285,10 +285,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Maria Dolores Martí Cardos! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34635336770&text=%C2%A1Hola%20Maria%20Dolores%20Mart%C3%AD%20Cardos%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34635336770?text=%C2%A1Hola%20Maria%20Dolores%20Mart%C3%AD%20Cardos%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34 635 33 67 70')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -312,10 +312,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Amparo Pérez Sanegre! Soy Fede de Nationale-Nederlanden. Me he acordado de que hoy es el cumple de Pablo Garcia. ¡Muchísimas felicidades para el peque y para vosotros! Que paséis un gran día.</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34639042093&text=%C2%A1Hola%20Amparo%20P%C3%A9rez%20Sanegre%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Me%20he%20acordado%20de%20que%20hoy%20es%20el%20cumple%20de%20Pablo%20Garcia.%20%C2%A1Much%C3%ADsimas%20felicidades%20para%20el%20peque%20y%20para%20vosotros%21%20Que%20pas%C3%A9is%20un%20gran%20d%C3%ADa.')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34639042093?text=%C2%A1Hola%20Amparo%20P%C3%A9rez%20Sanegre%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Me%20he%20acordado%20de%20que%20hoy%20es%20el%20cumple%20de%20Pablo%20Garcia.%20%C2%A1Much%C3%ADsimas%20felicidades%20para%20el%20peque%20y%20para%20vosotros%21%20Que%20pas%C3%A9is%20un%20gran%20d%C3%ADa." target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34 639 04 20 93')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -339,10 +339,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Ángel Carmona García! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34615467781&text=%C2%A1Hola%20%C3%81ngel%20Carmona%20Garc%C3%ADa%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34615467781?text=%C2%A1Hola%20%C3%81ngel%20Carmona%20Garc%C3%ADa%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34615467781')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -366,10 +366,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Maria Dolores Gaya Tormo! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34676362362&text=%C2%A1Hola%20Maria%20Dolores%20Gaya%20Tormo%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34676362362?text=%C2%A1Hola%20Maria%20Dolores%20Gaya%20Tormo%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34676362362')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -393,10 +393,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Concepcion Montserrat Pont Chafer! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34649380349&text=%C2%A1Hola%20Concepcion%20Montserrat%20Pont%20Chafer%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34649380349?text=%C2%A1Hola%20Concepcion%20Montserrat%20Pont%20Chafer%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34649380349')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -420,10 +420,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Maria José Rubio Tudela! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34696874954&text=%C2%A1Hola%20Maria%20Jos%C3%A9%20Rubio%20Tudela%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34696874954?text=%C2%A1Hola%20Maria%20Jos%C3%A9%20Rubio%20Tudela%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34696874954')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -447,10 +447,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Rebeca Gorrita Samuel! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34722762687&text=%C2%A1Hola%20Rebeca%20Gorrita%20Samuel%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34722762687?text=%C2%A1Hola%20Rebeca%20Gorrita%20Samuel%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34722762687')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -474,10 +474,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Ángeles Moreno Peiro! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34637491676&text=%C2%A1Hola%20%C3%81ngeles%20Moreno%20Peiro%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34637491676?text=%C2%A1Hola%20%C3%81ngeles%20Moreno%20Peiro%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34 637 49 16 76')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -501,10 +501,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Mari Carmen Gracia Díaz! Soy Fede de Nationale-Nederlanden. Me he acordado de que hoy es el cumple de Carla González. ¡Muchísimas felicidades para el peque y para vosotros! Que paséis un gran día.</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34655181408&text=%C2%A1Hola%20Mari%20Carmen%20Gracia%20D%C3%ADaz%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Me%20he%20acordado%20de%20que%20hoy%20es%20el%20cumple%20de%20Carla%20Gonz%C3%A1lez.%20%C2%A1Much%C3%ADsimas%20felicidades%20para%20el%20peque%20y%20para%20vosotros%21%20Que%20pas%C3%A9is%20un%20gran%20d%C3%ADa.')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34655181408?text=%C2%A1Hola%20Mari%20Carmen%20Gracia%20D%C3%ADaz%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Me%20he%20acordado%20de%20que%20hoy%20es%20el%20cumple%20de%20Carla%20Gonz%C3%A1lez.%20%C2%A1Much%C3%ADsimas%20felicidades%20para%20el%20peque%20y%20para%20vosotros%21%20Que%20pas%C3%A9is%20un%20gran%20d%C3%ADa." target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34655181408')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -528,10 +528,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Carmen Sanchez Molina! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34678182104&text=%C2%A1Hola%20Carmen%20Sanchez%20Molina%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34678182104?text=%C2%A1Hola%20Carmen%20Sanchez%20Molina%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34678182104')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -555,10 +555,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Maria García Francés! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34609964942&text=%C2%A1Hola%20Maria%20Garc%C3%ADa%20Franc%C3%A9s%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34609964942?text=%C2%A1Hola%20Maria%20Garc%C3%ADa%20Franc%C3%A9s%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34 609 96 49 42')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -582,10 +582,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Alexis Molto Mestre! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34666758851&text=%C2%A1Hola%20Alexis%20Molto%20Mestre%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34666758851?text=%C2%A1Hola%20Alexis%20Molto%20Mestre%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34666758851')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -609,10 +609,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Antonio García Díaz! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34625547264&text=%C2%A1Hola%20Antonio%20Garc%C3%ADa%20D%C3%ADaz%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34625547264?text=%C2%A1Hola%20Antonio%20Garc%C3%ADa%20D%C3%ADaz%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34 625 54 72 64')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -636,10 +636,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Dolores Bustamante Pardo! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34619645485&text=%C2%A1Hola%20Dolores%20Bustamante%20Pardo%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34619645485?text=%C2%A1Hola%20Dolores%20Bustamante%20Pardo%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34 619 64 54 85')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -663,10 +663,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Elena Solomon! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=&text=%C2%A1Hola%20Elena%20Solomon%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/?text=%C2%A1Hola%20Elena%20Solomon%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('ElenaSolomon')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -690,10 +690,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Yolanda! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34654187544&text=%C2%A1Hola%20Yolanda%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34654187544?text=%C2%A1Hola%20Yolanda%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34 654 18 75 44')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -717,10 +717,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola José Joaquín Oltra Moscardó! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=34671553352&text=%C2%A1Hola%20Jos%C3%A9%20Joaqu%C3%ADn%20Oltra%20Moscard%C3%B3%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/34671553352?text=%C2%A1Hola%20Jos%C3%A9%20Joaqu%C3%ADn%20Oltra%20Moscard%C3%B3%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('+34 671 55 33 52')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -744,10 +744,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="card-body">
     <div class="msg-box">¡Hola Ricardo Ortega Fernández! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWhatsApp('https://api.whatsapp.com/send?phone=&text=%C2%A1Hola%20Ricardo%20Ortega%20Fern%C3%A1ndez%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="https://wa.me/?text=%C2%A1Hola%20Ricardo%20Ortega%20Fern%C3%A1ndez%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('RicardoOrtegaFernández')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         
@@ -785,11 +785,6 @@ async function copyImage(cardId) {
         btn.innerHTML = '❌ Error (Usa Click Derecho)';
         setTimeout(() => btn.innerHTML = originalText, 2000);
     }
-}
-
-function openWhatsApp(url) {
-    // Usar un nombre de ventana fijo para reutilizar la misma pestaña
-    window.open(url, 'whatsapp_tab');
 }
 </script>
 </body>

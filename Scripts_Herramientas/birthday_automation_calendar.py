@@ -112,7 +112,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 
 .actions { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: auto; }
 .btn { width: 100%; padding: 14px; border-radius: 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; text-align: center; cursor: pointer; text-decoration: none; border: none; }
-.btn-wa { background: var(--green); color: #fff; }
+.btn-wa { background: var(--green); color: #fff; display: block; }
 .btn-copy-img { background: #fff; color: var(--nn); border: 2px solid var(--nn); }
 
 .tip { font-size: 11px; color: var(--muted); text-align: center; margin-top: 10px; font-weight: 600; }
@@ -122,7 +122,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 
 <div class="header">
     <img src="assets/fede_avatar.jpg" class="fede-avatar">
-    <h1>Felicitaciones <em>Automáticas.</em></h1>
+    <h1>Felicitaciones <em>Unificadas.</em></h1>
 </div>
 
 <div class="summary-bar">
@@ -130,7 +130,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="sum-item"><span class="sum-n">{{week_count}}</span><span class="sum-l">Próximos 7 días</span></div>
 </div>
 
-<div class="section-title">Envíos de Hoy — Pestaña Inteligente</div>
+<div class="section-title">Envíos de Hoy — Pestaña Única</div>
 <div class="grid">
   {{today_cards}}
 </div>
@@ -173,11 +173,6 @@ async function copyImage(cardId) {
         setTimeout(() => btn.innerHTML = originalText, 2000);
     }
 }
-
-function openWhatsApp(url) {
-    // Usar un nombre de ventana fijo para reutilizar la misma pestaña
-    window.open(url, 'whatsapp_tab');
-}
 </script>
 </body>
 </html>
@@ -210,7 +205,7 @@ function openWhatsApp(url) {
             tel_clean = '34' + tel_clean
         
         encoded_msg = urllib.parse.quote(msg)
-        wa_url = f"https://api.whatsapp.com/send?phone={tel_clean}&text={encoded_msg}"
+        wa_url = f"https://wa.me/{tel_clean}?text={encoded_msg}"
         
         card_id = p['tel'] if p['tel'] else p['nombre'].replace(" ","")
         
@@ -235,10 +230,10 @@ function openWhatsApp(url) {
   <div class="card-body">
     <div class="msg-box">{msg}</div>
     <div class="actions">
-      <button onclick="openWhatsApp('{wa_url}')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <a href="{wa_url}" target="whatsapp_fede" class="btn btn-wa">1. Enviar (Pestaña Única)</a>
       <button onclick="copyImage('{card_id}')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
+    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
   </div>
 </div>
         """
