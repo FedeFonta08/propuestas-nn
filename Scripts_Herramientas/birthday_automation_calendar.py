@@ -53,7 +53,7 @@ def fuzzy_match(name, rows):
         if name in full_name or full_name in name:
             return {
                 "nombre": row[0],
-                "apellidos": "", # Already in nombre in this CRM format
+                "apellidos": "",
                 "tel": row[1] if len(row) > 1 else "",
                 "buyer": row[48] if len(row) > 48 else "Cliente"
             }
@@ -110,10 +110,10 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 .card-body { padding: 0 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
 .msg-box { background: var(--nn-l); border-radius: 16px; padding: 1.25rem; font-size: 14px; line-height: 1.7; border: 1px solid rgba(255,102,0,0.2); margin-bottom: 1.5rem; }
 
-.actions { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
+.actions { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: auto; }
 .btn { width: 100%; padding: 14px; border-radius: 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; text-align: center; cursor: pointer; text-decoration: none; border: none; }
 .btn-wa { background: var(--green); color: #fff; }
-.btn-copy { background: #fff; color: var(--tx); border: 2px solid var(--brd); }
+.btn-copy-img { background: #fff; color: var(--nn); border: 2px solid var(--nn); }
 
 .tip { font-size: 11px; color: var(--muted); text-align: center; margin-top: 10px; font-weight: 600; }
 </style>
@@ -122,7 +122,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 
 <div class="header">
     <img src="assets/fede_avatar.jpg" class="fede-avatar">
-    <h1>Felicitaciones <em>Premium.</em></h1>
+    <h1>Felicitaciones <em>Automáticas.</em></h1>
 </div>
 
 <div class="summary-bar">
@@ -130,12 +130,12 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="sum-item"><span class="sum-n">{{week_count}}</span><span class="sum-l">Próximos 7 días</span></div>
 </div>
 
-<div class="section-title">Envíos de Hoy — Selección de Tarjeta</div>
+<div class="section-title">Envíos de Hoy — Pestaña Inteligente</div>
 <div class="grid">
   {{today_cards}}
 </div>
 
-<div class="section-title">Próximos de la Semana</div>
+<div class="section-title">Calendario Semanal</div>
 <div class="grid">
   {{week_cards}}
 </div>
@@ -154,21 +154,29 @@ function selectCard(cardId, imgSrc, thumbEl) {
     thumbEl.classList.add('active');
 }
 
-function safeSend(id, msg, url) {
-  navigator.clipboard.writeText(msg).then(() => {
-    const btn = document.getElementById('btn-send-' + id);
+async function copyImage(cardId) {
+    const img = document.getElementById('main-img-' + cardId);
+    const btn = document.querySelector(`[onclick="copyImage('${cardId}')"]`);
     const originalText = btn.innerHTML;
-    btn.innerHTML = '✓ Texto Copiado - Abriendo Chat...';
-    btn.style.background = 'var(--nn)';
     
-    setTimeout(() => {
-      window.open(url, '_blank');
-      setTimeout(() => {
-        btn.innerHTML = originalText;
-        btn.style.background = 'var(--green)';
-      }, 2000);
-    }, 800);
-  });
+    try {
+        const response = await fetch(img.src);
+        const blob = await response.blob();
+        await navigator.clipboard.write([
+            new ClipboardItem({ [blob.type]: blob })
+        ]);
+        btn.innerHTML = '✓ Tarjeta Copiada!';
+        setTimeout(() => btn.innerHTML = originalText, 2000);
+    } catch (err) {
+        console.error('Error al copiar imagen:', err);
+        btn.innerHTML = '❌ Error (Usa Click Derecho)';
+        setTimeout(() => btn.innerHTML = originalText, 2000);
+    }
+}
+
+function openWhatsApp(url) {
+    // Usar un nombre de ventana fijo para reutilizar la misma pestaña
+    window.open(url, 'whatsapp_tab');
 }
 </script>
 </body>
@@ -200,11 +208,11 @@ function safeSend(id, msg, url) {
         if tel_clean.startswith('00'): tel_clean = tel_clean[2:]
         if len(tel_clean) == 9 and tel_clean.startswith(('6', '7', '8', '9')):
             tel_clean = '34' + tel_clean
-            
-        # Most compatible official format
-        wa_url = f"https://api.whatsapp.com/send?phone={tel_clean}"
+        
+        encoded_msg = urllib.parse.quote(msg)
+        wa_url = f"https://api.whatsapp.com/send?phone={tel_clean}&text={encoded_msg}"
+        
         card_id = p['tel'] if p['tel'] else p['nombre'].replace(" ","")
-        msg_js = msg.replace("'", "\\'").replace('"', '\\"')
         
         return f"""
 <div class="card">
@@ -227,9 +235,10 @@ function safeSend(id, msg, url) {
   <div class="card-body">
     <div class="msg-box">{msg}</div>
     <div class="actions">
-      <button onclick="safeSend('{card_id}', '{msg_js}', '{wa_url}')" class="btn btn-wa" id="btn-send-{card_id}">1. Abrir Chat (Modo Seguro)</button>
+      <button onclick="openWhatsApp('{wa_url}')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
+      <button onclick="copyImage('{card_id}')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
     </div>
-    <p class="tip">🛡️ Se copiará el texto: luego pulsa Ctrl+V en el chat.</p>
+    <p class="tip">✨ Se reutiliza la misma pestaña de WhatsApp para todos.</p>
   </div>
 </div>
         """
