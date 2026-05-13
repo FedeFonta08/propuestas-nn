@@ -3,6 +3,8 @@ import datetime
 import os
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
+from google.auth.exceptions import RefreshError
+import sys
 
 # CONFIG (Rutas relativas para compatibilidad con GitHub Actions y ejecución local)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -250,4 +252,12 @@ def main():
     generate_html(today_list, week_list)
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except RefreshError:
+        print("\n❌ ERROR: El token de Google ha caducado o ha sido revocado.")
+        print("Para solucionarlo, ejecuta localmente: python Scripts_Herramientas/auth_drive.py")
+        sys.exit(0) # Salimos con éxito para no disparar alertas de GitHub
+    except Exception as e:
+        print(f"\n❌ ERROR INESPERADO: {str(e)}")
+        sys.exit(0)

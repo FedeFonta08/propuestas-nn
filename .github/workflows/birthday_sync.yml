@@ -1,12 +1,12 @@
 name: Sincronización Diaria de Cumpleaños
 
 on:
-  schedule:
-    - cron: '0 6 * * *' # Todos los días a las 06:00 UTC (08:00 AM España)
-  push:
-    branches:
-      - main
-  workflow_dispatch: # Permite ejecutarlo manualmente desde GitHub
+#  schedule:
+#    - cron: '0 6 * * *' # Todos los días a las 06:00 UTC
+#  push:
+#    branches:
+#      - main
+  workflow_dispatch: # Solo manual desde GitHub
 
 jobs:
   update-birthdays:
