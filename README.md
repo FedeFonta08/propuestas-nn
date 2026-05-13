@@ -35,18 +35,42 @@ El **Ecosistema Despegue** es una infraestructura de **Ingeniería Comercial** d
 
 ---
 
+---
+
 ## 🛠️ Herramientas del Ecosistema
 
-| # | Herramienta | Archivo | Estado | Propósito |
-|---|-------------|---------|--------|-----------|
-| 1 | 🎯 **Panel DESPEGUE** | [`index.html`](https://fedefonta08.github.io/propuestas-nn/) | 🟢 Live | Dashboard principal: PVM, sprint activo, Radar Comercial NN con pulsadores expandibles |
-| 2 | 📡 **Sistema Aperturas Pro** | [`aperturas_desktop_v4.html`](https://fedefonta08.github.io/propuestas-nn/aperturas_desktop_v4.html) | 🟢 Live | Workflow de llamadas: 8 perfiles psicológicos, cronómetro, Radar integrado, estadísticas |
-| 3 | 📞 **Cockpit de Llamadas** | [`cockpit_llamadas.html`](https://fedefonta08.github.io/propuestas-nn/cockpit_llamadas.html) | 🟢 Live | Cola de contactos por vencimiento, guion ADN dinámico, registro de resultados |
-| 4 | 🎬 **Modo Enfoque Pro** | [`modo_enfoque_pro_v3_RGPD.html`](https://fedefonta08.github.io/propuestas-nn/modo_enfoque_pro_v3_RGPD.html) | 🟢 Live | Call scripting consultivo + objeciones accordion + sincronización CRM |
-| 5 | 📋 **Portal Propuestas v2** | [`propuestas-nn-v2.html`](https://fedefonta08.github.io/propuestas-nn/propuestas-nn-v2.html) | 🟢 Live | Propuestas personalizadas por URL (28 productos NN) · RGPD integrado |
-| 6 | ⚙️ **Generador de URLs** | [`generador_urls_propuestas.html`](https://fedefonta08.github.io/propuestas-nn/generador_urls_propuestas.html) | 🟢 Live | Genera URLs de propuestas + template email listo para copiar |
-| 7 | 👥 **CRM Panel v2** | [`nn_crm_panel_v2.html`](https://fedefonta08.github.io/propuestas-nn/nn_crm_panel_v2.html) | 🟢 Live | Gestión de 965 contactos ex-Santalucía, búsqueda, historial |
-| 8 | 🤝 **Pipeline Reclutamiento** | [`Reclutamiento_NN_v2_RGPD.html`](https://fedefonta08.github.io/propuestas-nn/Reclutamiento_NN_v2_RGPD.html) | 🟢 Live | Gestión candidatos (objetivo: 4–5 agentes antes sept 2026) |
+El sistema se divide en cuatro capas operativas para cubrir todo el ciclo de la venta consultiva.
+
+### 1️⃣ Núcleo Operativo (Dashboards de Venta)
+| Herramienta | Archivo | Estado | Propósito |
+|-------------|---------|--------|-----------|
+| 🎯 **Panel DESPEGUE** | [`index.html`](https://fedefonta08.github.io/propuestas-nn/) | 🟢 Live | Dashboard principal: PVM, Radar Comercial y acceso rápido. |
+| 📡 **Sistema Aperturas Pro** | [`aperturas_desktop_v4.html`](https://fedefonta08.github.io/propuestas-nn/aperturas_desktop_v4.html) | 🟢 Live | Workflow de llamadas: 8 perfiles psicológicos y cronómetro. |
+| 📞 **Cockpit de Llamadas** | [`cockpit_llamadas.html`](https://fedefonta08.github.io/propuestas-nn/cockpit_llamadas.html) | 🟢 Live | Cola de contactos por vencimiento y guion ADN dinámico. |
+| 🎬 **Modo Enfoque Pro** | [`modo_enfoque_pro_v3_RGPD.html`](https://fedefonta08.github.io/propuestas-nn/modo_enfoque_pro_v3_RGPD.html) | 🟢 Live | Call scripting con objeciones accordion y sincronización CRM. |
+
+### 2️⃣ Marketing & Captación (Generadores de Impacto)
+| Herramienta | Archivo | Estado | Propósito |
+|-------------|---------|--------|-----------|
+| 🖼️ **Marketing Cards** | [`marketing_cards_premium.html`](https://fedefonta08.github.io/propuestas-nn/marketing_cards_premium.html) | 🟢 Live | Kit de Social Media: genera imágenes premium para WhatsApp/RRSS. |
+| 📋 **Portal Propuestas v2** | [`propuestas-nn-v2.html`](https://fedefonta08.github.io/propuestas-nn/propuestas-nn-v2.html) | 🟢 Live | Landing pages personalizadas para 28 productos NN. |
+| ⚙️ **Generador de URLs** | [`generador_urls_propuestas.html`](https://fedefonta08.github.io/propuestas-nn/generador_urls_propuestas.html) | 🟢 Live | Automatiza la creación de enlaces y plantillas de email. |
+| 🎂 **Felicita NN** | [`Felicitaciones_Cumple_NN.html`](https://fedefonta08.github.io/propuestas-nn/Scripts_Herramientas/Felicitaciones_Cumple_NN.html) | 🟢 Live | Sistema de fidelización y felicitación vía WhatsApp. |
+
+### 3️⃣ Inteligencia & Análisis (El Cerebro de la Bestia)
+| Herramienta | Archivo | Estado | Propósito |
+|-------------|---------|--------|-----------|
+| 👥 **CRM Panel v2** | [`nn_crm_panel_v2.html`](https://fedefonta08.github.io/propuestas-nn/nn_crm_panel_v2.html) | 🟢 Live | Gestión de 965 contactos con búsqueda avanzada e historial. |
+| 🤝 **Pipeline Recluta** | [`Reclutamiento_NN_v2_RGPD.html`](https://fedefonta08.github.io/propuestas-nn/Reclutamiento_NN_v2_RGPD.html) | 🟢 Live | Seguimiento de candidatos y expansión del equipo. |
+| 📰 **Briefing ADN** | [`Briefing_Lunes_ADN.html`](https://fedefonta08.github.io/propuestas-nn/Briefing_Lunes_ADN.html) | 🟢 Live | Traducción de campañas a narrativa de vulnerabilidad ADN. |
+| 🐍 **Motor Python** | [`enviar_campana_nn.py`](#) | ⚙️ Interno | Scripts de automatización, limpieza de CRM y envíos masivos. |
+
+### 4️⃣ Simuladores de Autoridad (Consultoría Técnica)
+| Herramienta | Archivo | Estado | Propósito |
+|-------------|---------|--------|-----------|
+| 💎 **Interés Compuesto** | [`interes_compuesto_NN.html`](https://fedefonta08.github.io/propuestas-nn/Scripts_Herramientas/interes_compuesto_NN.html) | 🟢 Live | Calculadora premium para proyectar el futuro financiero. |
+| 🧮 **Calculadora PVM** | [`calculadora_pvm_nn.html`](https://fedefonta08.github.io/propuestas-nn/Scripts_Herramientas/calculadora_pvm_nn.html) | 🟢 Live | Control de objetivos, puntos y comisiones en tiempo real. |
+| 🌲 **Árbol de Decisión** | [`arbol_decision_producto_nn.html`](https://fedefonta08.github.io/propuestas-nn/Scripts_Herramientas/arbol_decision_producto_nn.html) | 🟢 Live | Selector inteligente de producto según el perfil del cliente. |
 
 ---
 
