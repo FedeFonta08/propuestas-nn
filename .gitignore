@@ -17,10 +17,13 @@ Presentaciones/
 Productos_Guias/
 Propuestas_Clientes/
 Reclutamiento_CV/
+
+# Carpeta de Herramientas - Solo subimos los HTML/Assets necesarios para GitHub Pages
 Scripts_Herramientas/
-!Scripts_Herramientas/Felicitaciones_Cumple_NN.html
-!Scripts_Herramientas/birthday_automation_calendar.py
+!Scripts_Herramientas/*.html
+!Scripts_Herramientas/*.py
 !Scripts_Herramientas/assets/
+!Scripts_Herramientas/assets/**
 
 # ============================================
 # CREDENCIALES Y TOKENS — NUNCA SUBIR
