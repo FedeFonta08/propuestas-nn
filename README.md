@@ -302,6 +302,12 @@ Eventos: clicks propuestas · registros CRM · llamadas · citas
 
 ---
 
+## 💡 Reconocimiento Especial
+
+Este ecosistema digital no habría nacido sin el impulso de **Alejandro Fontanals**, por "obligarme" (con visión y persistencia) a introducirme en el fascinante mundo de la **Inteligencia Artificial**. Gracias a esa visión, hoy operamos con un sistema de vanguardia que redefine la consultoría de seguros de alta autoridad.
+
+---
+
 ## 🚀 Roadmap
 
 - [x] Radar Comercial dinámico con pulsadores expandibles
