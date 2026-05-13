@@ -144,10 +144,10 @@ const PRODS = {
   // ── FASE 1: AHORRO E INVERSIÓN ──────────────────────────────────
   sialp:{
     fase:'Fase 1 · Ahorro e Inversión',fb:'fbp',ico:'📊',col:'p',
-    nom:'Plan Creciente SIALP',
+    nom:'SIALP',
     sub:'Seguro de Ahorro a Largo Plazo. Exención fiscal total a partir del año 5. Garantía diaria del 85% de las primas pagadas.',
     tit:(n,b)=>b?`El ahorro de ${b} <em>exento de impuestos</em> con garantía diaria del 85%.`:`El ahorro de ${n} <em>exento de impuestos</em> con garantía diaria del 85%.`,
-    greet:(n,b)=>b?`Hola <strong>${n}</strong>,<br><br>Este es el ahorro que hemos preparado para <strong>${b}</strong>. El Plan Creciente SIALP combina gestión de inversión y exención fiscal: <strong>garantía diaria del 85% del mayor valor alcanzado, nunca inferior al 85% de las primas pagadas</strong>. A partir del 5º año, los rendimientos están completamente exentos de tributación en el IRPF.`:`Hola <strong>${n}</strong>,<br><br>El Plan Creciente SIALP combina gestión de inversión y exención fiscal: <strong>garantía diaria del 85% del mayor valor alcanzado, nunca inferior al 85% de las primas pagadas</strong>. Y a partir del 5º año, los rendimientos están completamente exentos de tributación en el IRPF.`,
+    greet:(n,b)=>b?`Hola <strong>${n}</strong>,<br><br>Este es el ahorro que hemos preparado para <strong>${b}</strong>. El SIALP combina gestión de inversión y exención fiscal: <strong>garantía diaria del 85% del mayor valor alcanzado, nunca inferior al 85% de las primas pagadas</strong>. A partir del 5º año, los rendimientos están completamente exentos de tributación en el IRPF.`:`Hola <strong>${n}</strong>,<br><br>El SIALP combina gestión de inversión y exención fiscal: <strong>garantía diaria del 85% del mayor valor alcanzado, nunca inferior al 85% de las primas pagadas</strong>. Y a partir del 5º año, los rendimientos están completamente exentos de tributación en el IRPF.`,
     hb:{t:'hbp',x:'<strong>Garantía real (fuente: Condiciones Generales):</strong> Capital garantizado = 85% del mayor valor alcanzado por la inversión. Nunca inferior al 85% de las primas pagadas. Exención fiscal total de rendimientos a partir del año 5. Aportación máxima legal: 5.000 €/año.'},
     sts:[{v:'85%',l:'Garantía mínima primas'},{v:'5.000 €',l:'Aportación máx. anual'},{v:'Año 5+',l:'Exención fiscal total'}],
     covs:[
@@ -245,7 +245,7 @@ const PRODS = {
     sub:'Seguro de vida complementario a productos de ahorro (SIALP, Contigo Futuro, Duplo). Cubre el capital previsto si fallece antes de llegar al objetivo.',
     tit:n=>`El ahorro de ${n} <em>protegido incluso si falta</em> antes del vencimiento.`,
     greet:n=>`Hola <strong>${n}</strong>,<br><br>Protección Plus asegura que el capital que ${n} está ahorrando llegue a su destino aunque falte antes del vencimiento. <strong>Si fallece o invalida, el seguro cubre el capital que tenía previsto acumular</strong> en su SIALP, Contigo Futuro o Plan de Pensiones.`,
-    hb:{t:'hbp',x:'<strong>Funciona así (FAQs oficiales):</strong> Se asocia obligatoriamente a Plan Creciente SIALP, Contigo Futuro o Sistema Duplo. Prima de ahorro entre 600 € y 5.000 €/año. Edad máxima contratación: 60 años. Hasta 20% de descuento para clientes con varios ahorros sin Protección Plus.'},
+    hb:{t:'hbp',x:'<strong>Funciona así (FAQs oficiales):</strong> Se asocia obligatoriamente a SIALP, Contigo Futuro o Sistema Duplo. Prima de ahorro entre 600 € y 5.000 €/año. Edad máxima contratación: 60 años. Hasta 20% de descuento para clientes con varios ahorros sin Protección Plus.'},
     sts:[{v:'600-5.000€',l:'Prima ahorro anual asegurada'},{v:'60 años',l:'Edad máx. contratación'},{v:'20%',l:'Dto. clientes multi-ahorro'}],
     covs:[
       {n:'Cobertura fallecimiento decreciente',c:'Obligatoria',p:'Desde consultar',k:true,t:'base'},
