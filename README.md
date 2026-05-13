@@ -60,7 +60,7 @@ El sistema se divide en cuatro capas operativas para cubrir todo el ciclo de la 
 ### 3️⃣ Inteligencia & Análisis (El Cerebro de la Bestia)
 | Herramienta | Archivo | Estado | Propósito |
 |-------------|---------|--------|-----------|
-| 👥 **CRM Panel v2** | [`nn_crm_panel_v2.html`](https://fedefonta08.github.io/propuestas-nn/nn_crm_panel_v2.html) | 🟢 Live | Gestión de 965 contactos con búsqueda avanzada e historial. |
+| 👥 **CRM Panel v2** | [`nn_crm_panel_v2.html`](https://fedefonta08.github.io/propuestas-nn/nn_crm_panel_v2.html) | 🟢 Live | Gestión de base de datos de contactos con búsqueda avanzada e historial. |
 | 🤝 **Pipeline Recluta** | [`Reclutamiento_NN_v2_RGPD.html`](https://fedefonta08.github.io/propuestas-nn/Reclutamiento_NN_v2_RGPD.html) | 🟢 Live | Seguimiento de candidatos y expansión del equipo. |
 | 📰 **Briefing ADN** | [`Briefing_Lunes_ADN.html`](https://fedefonta08.github.io/propuestas-nn/Briefing_Lunes_ADN.html) | 🟢 Live | Traducción de campañas a narrativa de vulnerabilidad ADN. |
 | 🐍 **Motor Python** | [`enviar_campana_nn.py`](#) | ⚙️ Interno | Scripts de automatización, limpieza de CRM y envíos masivos. |
@@ -85,15 +85,15 @@ El sistema se divide en cuatro capas operativas para cubrir todo el ciclo de la 
                          ▼
 ┌─────────────────────────────────────────────────────────┐
 │              GOOGLE SHEETS — FUENTE DE VERDAD           │
-│  CRM Maestro (965 contactos) · Radar Comercial NN       │
-│  ID: 16lui0o9wPYe9tL-9PaU6_H2heG8uIBYrCIL9vvfpdC0     │
+│  CRM Maestro (Base de Datos) · Radar Comercial NN       │
+│  ID: [SISTEMA PROTEGIDO]                                │
 └────────────────────────┬────────────────────────────────┘
                          │ Apps Script Backend
                          ▼
 ┌─────────────────────────────────────────────────────────┐
 │              GOOGLE CALENDAR + GMAIL                    │
 │        Citas · Eventos · Briefing Lunes ADN             │
-└─────────────────────────────────────────────────────────┘
+└────────────────────────┬────────────────────────────────┘
                          │ Git push
                          ▼
 ┌─────────────────────────────────────────────────────────┐
@@ -102,39 +102,21 @@ El sistema se divide en cuatro capas operativas para cubrir todo el ciclo de la 
 └─────────────────────────────────────────────────────────┘
 ```
 
-### Regla de Oro del Ecosistema
-
-| Capa | Dónde vive | Qué contiene |
-|------|-----------|--------------|
-| **Datos** | Google Drive / Sheets | CRM Maestro, campañas, PVM, contactos |
-| **Código** | GitHub (este repo) | UI, scripts, propuestas, workflows |
-| **Protocolo de cambio** | `git add → commit → push` | **Sin push = sin despliegue** |
-
 ---
 
-## 📡 Radar Comercial NN — Campañas Activas (Mayo 2026)
+## 📡 Radar Comercial NN — Campañas Activas
 
-> El Radar se carga dinámicamente desde Google Sheets en tiempo real. Cada fila del Excel genera una **ficha pulsador expandible** con la acción comercial ADN asociada.
+> El Radar se carga dinámicamente desde el **Ecosistema Maestro** en tiempo real. Cada fila del Excel genera una **ficha pulsador expandible** con la acción comercial ADN asociada. 
 
-| Producto | Campaña | Beneficio | Estado |
-|----------|---------|-----------|--------|
-| Salud Completo / Copago | Descuento autonomía comercial | **4% dto** primera anualidad (hasta 260 asegurados) | 🟢 ACTIVA |
-| Salud Completo / Copago | Descuento Anual | **12,5% dto** primera anualidad, acumulable | 🟢 ACTIVA |
-| PC SIALP | Ampliación edad | Contratación hasta **75 años**, vencimiento 85 | 🟢 ACTIVA |
-| PC SIALP + Contigo Futuro | Indexación automática 5% | Argumento anti-inflación en primas regulares | 🟢 ACTIVA |
-| AGE / Plan Creciente | Mejora tipos | **+40pb** → 2,40% AGE / 2,60% AGE VIP | 🟢 ACTIVA |
-| Contigo Senior | Bonificación prima | **6 meses gratis** primer año — hasta 29/05/2026 | 🟢 ACTIVA |
-| Contigo Familia | Descuento vitalicio | **25% de por vida** para profesionales de colectivos | 🟢 ACTIVA |
-| Hipotecas ABANCA | Actualización precios | Solo recomendar Mari Carmen Fija Valor | 🔵 INFORMATIVA |
-| Hipoteca ABANCA | Incentivo agente | **250 € / 500 €** por hipoteca formalizada | 🟡 BAJA PRIORIDAD |
+Por motivos de confidencialidad estratégica y cumplimiento de normativa de competencia, el contenido detallado de las campañas (descuentos, tipos de interés específicos y promociones temporales) solo es accesible para personal autorizado a través de las herramientas autenticadas del ecosistema.
 
 ---
 
 ## 📊 Base de Datos CRM Maestro
 
-- **965 contactos** ex-Santalucía (prospectos fríos NN — NO son clientes activos)
-- **51 columnas × 8 pestañas** | Actualización semanal (viernes)
-- **ID del Sheet:** `16lui0o9wPYe9tL-9PaU6_H2heG8uIBYrCIL9vvfpdC0`
+- **Base de Datos Principal**: Gestión de prospectos y contactos del ecosistema.
+- **Estructura**: 51 columnas × 8 pestañas | Actualización semanal.
+- **ID del Sheet**: [PROTEGIDO - Solo acceso autorizado]
 
 ### Segmentación Buyer Persona
 
@@ -311,8 +293,6 @@ Eventos: clicks propuestas · registros CRM · llamadas · citas
 | Persona | Rol | Email | Teléfono |
 |---------|-----|-------|----------|
 | **Federico Fontanals** | Agente Dinamizador | federico.fontanals@nnespana.es | +34 680 507 186 |
-| **Antonio Morote** | Coordinador Valencia | antonio.morote@nnespana.es | (reporte semanal) |
-| **Ricardo Montaner** | Manager Territorial Levante | ricardo.montaner@nnespana.es | (soporte) |
 | **NN DPO** | Protección de Datos | dpo@nnespana.es | +34 91 602 60 00 |
 
 ---
