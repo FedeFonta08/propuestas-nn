@@ -4,13 +4,20 @@ import os
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
-# CONFIG
-TOKEN_PATH = 'd:/Users/ffont/Downloads/06_NATIONALE_NEDERLANDEN/Scripts_Herramientas/token_drive.json'
+# CONFIG (Rutas relativas para compatibilidad con GitHub Actions y ejecución local)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+TOKEN_PATH = os.path.join(BASE_DIR, 'token_drive.json')
 SHEET_ID = '16lui0o9wPYe9tL-9PaU6_H2heG8uIBYrCIL9vvfpdC0'
-OUTPUT_HTML = 'd:/Users/ffont/Downloads/06_NATIONALE_NEDERLANDEN/Scripts_Herramientas/Felicitaciones_Cumple_NN.html'
+OUTPUT_HTML = os.path.join(BASE_DIR, 'Felicitaciones_Cumple_NN.html')
 
 def get_data():
-    creds = Credentials.from_authorized_user_file(TOKEN_PATH)
+    # Intenta leer desde el archivo local, si no, usa la variable de entorno (para GitHub Actions)
+    if os.path.exists(TOKEN_PATH):
+        creds = Credentials.from_authorized_user_file(TOKEN_PATH)
+    else:
+        token_data = json.loads(os.environ.get('GOOGLE_TOKEN_JSON'))
+        creds = Credentials.from_authorized_user_info(token_data)
+        
     service = build('sheets', 'v4', credentials=creds)
     sheet = service.spreadsheets()
     result = sheet.values().get(spreadsheetId=SHEET_ID, range="'CRM MAESTRO'!A3:AY2500").execute()
