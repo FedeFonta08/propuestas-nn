@@ -135,15 +135,14 @@ Cada herramienta del ecosistema tiene los guiones, objeciones y árboles de deci
 ## 📋 Catálogo de Productos NN (28 total)
 
 <details>
-<summary><b>Fase 1 — Ahorro e Inversión (7 productos)</b></summary>
+<summary><b>Fase 1 — Ahorro e Inversión (6 productos)</b></summary>
 
 1. **Plan SIALP** — exención fiscal total año 5 · [Guía](https://fedefonta08.github.io/propuestas-nn/guias-comerciales/Gu%C3%ADa%20Maestra%20Profesional%20SIALP%20-%20Punto%20Naranja%20X%C3%A0tiva.pdf)
-2. **Plan Flexible** — unit linked internacional
-3. **Plan Garantizado** — 90/100/110% capital según plazo
-4. **Flexicuenta** — ahorro remunerado sin penalización
-5. **Plan Ahorro Garantizado** — rentabilidad fija en contrato
-6. **Contigo Futuro** — garantía diaria 80% máximo histórico
-7. **Sistema Duplo** — plan pensiones individual
+2. **Plan Garantizado** — 90/100/110% capital según plazo
+3. **Flexicuenta** — ahorro remunerado sin penalización
+4. **Plan Ahorro Garantizado** — rentabilidad fija en contrato
+5. **Contigo Futuro** — garantía diaria 80% máximo histórico
+6. **Sistema Duplo** — plan pensiones individual
 </details>
 
 <details>
