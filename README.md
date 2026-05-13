@@ -1,18 +1,27 @@
 <div align="center">
 
-<img src="https://cdn.jsdelivr.net/gh/FedeFonta08/propuestas-nn/fede_profile_github.jpg" width="100" style="border-radius:50%" alt="Fede Fontanals"/>
+<img src="https://fedefonta08.github.io/propuestas-nn/assets/agent_header_bar.png" width="800" alt="Federico Fontanals - Nationale-Nederlanden"/>
 
-# 🟠 ECOSISTEMA COMERCIAL — PUNTO NARANJA XÀTIVA
-
-**Federico Fontanals** · Agente Dinamizador · Nationale-Nederlanden · La Costera, Valencia
+# 🟠 ECOSISTEMA DESPEGUE — INTELIGENCIA COMERCIAL
+### Punto Naranja Xàtiva · Alta Consultoría de Protección
 
 [![GitHub Pages](https://img.shields.io/badge/LIVE-GitHub%20Pages-FF6600?style=for-the-badge&logo=github)](https://fedefonta08.github.io/propuestas-nn/)
-[![Última actualización](https://img.shields.io/badge/Actualizado-Mayo%202026-orange?style=for-the-badge)](#)
-[![RGPD](https://img.shields.io/badge/RGPD-Compliant-green?style=for-the-badge)](#-cumplimiento-rgpdlopdgdd)
-[![Herramientas](https://img.shields.io/badge/Herramientas-8%20activas-blue?style=for-the-badge)](#-herramientas-del-ecosistema)
+[![Estado](https://img.shields.io/badge/SISTEMA-Operativo-32CD32?style=for-the-badge)](#)
+[![Actualización](https://img.shields.io/badge/Versión-3.2%20Pro-blue?style=for-the-badge)](#)
 
-> *"No estoy aquí para venderte nada. Estoy aquí para descubrir si tienes algún agujero en tu protección que no has visto."*  
-> — Metodología ADN · Mayéutica Financiera
+> *"No estamos aquí para vender. Estamos aquí para diagnosticar y blindar lo que realmente importa."*  
+> — **Metodología ADN · Mayéutica Financiera**
+
+---
+
+### 🛡️ Partners de Confianza Institucional
+
+<div align="center">
+  <img src="https://fedefonta08.github.io/propuestas-nn/assets/logo_nn_comercial.png" height="50" alt="Nationale-Nederlanden"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://fedefonta08.github.io/propuestas-nn/assets/logo_sanitas.jpg" height="50" alt="Sanitas"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://fedefonta08.github.io/propuestas-nn/assets/logo_caser.jpg" height="50" alt="Caser"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://fedefonta08.github.io/propuestas-nn/assets/logo_mutua.png" height="50" alt="Mutua Madrileña"/>
+</div>
 
 </div>
 
@@ -20,9 +29,9 @@
 
 ## 🧠 ¿Qué es el Ecosistema Despegue?
 
-El **Ecosistema Despegue** es una suite de herramientas de inteligencia comercial construida desde cero para maximizar la productividad diaria de un agente de Nationale-Nederlanden. Integra datos en tiempo real desde Google Sheets (CRM Maestro + Radar Comercial), automatización de scripts de venta, gestión de llamadas y propuestas personalizadas, todo desplegado como aplicación web accesible desde cualquier dispositivo.
+El **Ecosistema Despegue** es una infraestructura de **Ingeniería Comercial** diseñada para transformar la venta reactiva en una consultoría de alta autoridad. No es solo un repositorio de herramientas; es el centro de mando que integra datos en tiempo real, automatización de scripts y gestión inteligente de contactos bajo la metodología ADN.
 
-**No es un CRM genérico. Es una herramienta construida para un solo objetivo: más citas, más conversiones, menos fricción.**
+**El objetivo es simple: Eliminar la fricción, maximizar la conversión y profesionalizar cada interacción.**
 
 ---
 
@@ -116,53 +125,64 @@ El **Ecosistema Despegue** es una suite de herramientas de inteligencia comercia
 
 ---
 
-## 🎯 Metodología ADN — El Motor de Todo
+---
 
-El sistema no es solo una herramienta. Es la extensión digital de la **Metodología ADN de Venta Consultiva** (Mayéutica Financiera):
+## 🏛️ Solidez y Autoridad Institucional
 
-```
-1. APERTURA     → Permiso para diagnosticar, no para vender
-2. DESCUBRIMIENTO → Sus números, no los tuyos
-3. CONCIENCIA   → Activar el dolor del "¿qué pasa si...?"
-4. RECAPITULACIÓN → "Tú has dicho que..." — imbatible
-5. CIERRE NATURAL → La solución emerge sola
-```
+> No solo somos tecnología; nos apoyamos en la solvencia de un gigante con más de 160 años de historia.
 
-Cada herramienta del ecosistema tiene los guiones, objeciones y árboles de decisión integrados. El agente solo necesita enfocarse en escuchar.
+<div align="center">
+  <img src="https://fedefonta08.github.io/propuestas-nn/assets/why_nn_cards.png" width="700" alt="Por qué elegir Nationale-Nederlanden"/>
+</div>
 
 ---
 
-## 📋 Catálogo de Productos NN (28 total)
+## 🎯 Metodología ADN — El Motor de la Consultoría
 
-<details>
-<summary><b>Fase 1 — Ahorro e Inversión (6 productos)</b></summary>
+El sistema no es solo una herramienta. Es la extensión digital de la **Metodología ADN de Venta Consultiva** (Mayéutica Financiera):
 
-1. **SIALP** — exención fiscal total año 5 · [Guía](https://fedefonta08.github.io/propuestas-nn/guias-comerciales/Gu%C3%ADa%20Maestra%20Profesional%20SIALP%20-%20Punto%20Naranja%20X%C3%A0tiva.pdf)
-2. **Plan Garantizado** — 90/100/110% capital según plazo
-3. **Flexicuenta** — ahorro remunerado sin penalización
-4. **Plan Ahorro Garantizado** — rentabilidad fija en contrato
-5. **Contigo Futuro** — garantía diaria 80% máximo histórico
-6. **Sistema Duplo** — plan pensiones individual
+1. **APERTURA**      → Permiso para diagnosticar, no para vender.
+2. **DESCUBRIMIENTO** → Sus números, no los tuyos.
+3. **CONCIENCIA**    → Activar el valor de la protección real.
+4. **RECAPITULACIÓN** → "Tú has dicho que..." — la clave de la autoridad.
+5. **CIERRE NATURAL** → La solución emerge como una necesidad lógica.
+
+Cada herramienta del ecosistema tiene los guiones, objeciones y árboles de decisión integrados para que el agente se enfoque 100% en la escucha activa.
+
+---
+
+## 📋 Catálogo Estratégico de Soluciones
+
+<details open>
+<summary><b>🛡️ Protección Salud y Vida (Pilar Maestro)</b></summary>
+
+<div align="center">
+  <img src="https://fedefonta08.github.io/propuestas-nn/assets/infographic_pillar.png" width="600" alt="Infografía Salud y Vida"/>
+</div>
+
+1. **Plan Salud + Vida** — El híbrido perfecto: Sanitas + Vida con ventajas exclusivas.
+2. **Seguro Salud Completo** — Medicina de élite sin esperas, 12,5% descuento.
+3. **Salud Copago** — Máxima eficiencia en costes, 4% descuento adicional.
+4. **Vida y Familia** — Blindaje total con cobertura de cáncer de mama incluida.
+5. **Contigo Senior 55+** — Independencia y servicios de autonomía (6 meses bonificados).
 </details>
 
 <details>
-<summary><b>Fase 2 — Salud, Vida y Accidentes (6 productos)</b></summary>
+<summary><b>📈 Ahorro, Inversión y Futuro</b></summary>
 
-1. **Plan Salud + Vida** — híbrido Sanitas + Vida, 1er año gratis
-2. **Seguro Salud Completo** — medicina privada Sanitas, 12,5% dto
-3. **Salud Copago** — Sanitas con copago reducido, 4% dto autonomía
-4. **Seguro Vida y Familia** — protección cáncer mama incluido
-5. **Contigo Senior 55+** — asistencia + capital + servicios autonomía · **6 meses bonificados**
-6. **Accidentes LiderPlus** — 90K € u 50K€ desde 74,77 €/año
+1. **SIALP** — Exención fiscal total al 5º año. [Ver Guía](https://fedefonta08.github.io/propuestas-nn/guias-comerciales/Gu%C3%ADa%20Maestra%20Profesional%20SIALP%20-%20Punto%20Naranja%20X%C3%A0tiva.pdf)
+2. **Plan Garantizado** — Seguridad absoluta con capital creciente.
+3. **Flexicuenta** — El pulmón de ahorro disponible sin penalizaciones.
+4. **Contigo Futuro** — Protección de máximos históricos (Garantía 80%).
+5. **Sistema Duplo** — Optimización fiscal en planes de pensiones.
 </details>
 
 <details>
-<summary><b>Fases 3–6 — Hogar, Automóvil, Pensiones, Empresa, Hipotecas (15 productos)</b></summary>
+<summary><b>🏠 Hogar, Hipotecas y Empresa</b></summary>
 
-- **Hogar:** MiHogar Seguro · Seguro Coche y Moto
-- **Pensiones:** PPSA (deducción 5.750 €/año) · Duplo
-- **Empresa:** Contigo Autónomo · ILT · Contigo Pyme · Seguro Comercios · Salud Copago Autónomos
-- **Hipotecas:** ABANCA (sin comisión apertura) · ING Naranja (100% digital, ING asume todos los gastos)
+- **Hipotecas:** Acuerdos exclusivos con **ABANCA** e **ING** (sin comisiones de apertura).
+- **Hogar:** MiHogar Seguro con coberturas premium integradas.
+- **Empresa:** Contigo Autónomo, ILT y soluciones específicas para PYMES.
 </details>
 
 ---
