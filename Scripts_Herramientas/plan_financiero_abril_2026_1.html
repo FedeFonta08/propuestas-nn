@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan Financiero Abril 2026 — Fede Fontanals</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0f14;
+  --bg2: #13171f;
+  --bg3: #1a1f2b;
+  --bg4: #222938;
+  --border: #2a3242;
+  --border2: #353e52;
+  --txt: #e8ecf4;
+  --txt2: #9aa3b8;
+  --txt3: #6b758a;
+  --green: #34d399;
+  --green-bg: rgba(52,211,153,.08);
+  --green-bd: rgba(52,211,153,.25);
+  --red: #f87171;
+  --red-bg: rgba(248,113,113,.07);
+  --red-bd: rgba(248,113,113,.25);
+  --amber: #fbbf24;
+  --amber-bg: rgba(251,191,36,.07);
+  --amber-bd: rgba(251,191,36,.25);
+  --blue: #60a5fa;
+  --blue-bg: rgba(96,165,250,.07);
+  --blue-bd: rgba(96,165,250,.25);
+  --nn-orange: #ea6b0c;
+  --nn-orange-soft: rgba(234,107,12,.12);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --font: 'DM Sans', -apple-system, system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--txt);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 24px 18px 60px;
+}
+
+/* HEADER */
+.header {
+  margin-bottom: 28px;
+  position: relative;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  left: 0;
+  width: 48px;
+  height: 3px;
+  background: var(--nn-orange);
+  border-radius: 3px;
+}
+.header h1 {
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--txt);
+  margin-bottom: 4px;
+}
+.header .sub {
+  font-size: 0.85rem;
+  color: var(--txt3);
+  font-weight: 400;
+}
+.header .sub span {
+  color: var(--nn-orange);
+  font-weight: 600;
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  background: var(--bg2);
+  border-radius: 12px;
+  padding: 4px;
+  border: 1px solid var(--border);
+}
+.tab {
+  flex: 1;
+  padding: 12px 10px;
+  border: none;
+  border-radius: 10px;
+  font-family: var(--font);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: transparent;
+  color: var(--txt3);
+  transition: all .2s;
+}
+.tab:hover { color: var(--txt2); }
+.tab.on {
+  background: var(--bg4);
+  color: var(--txt);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+
+/* PANES */
+.pane { display: none; animation: fadeIn .3s ease; }
+.pane.on { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* SECTION TITLE */
+.stt {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--txt3);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin: 22px 0 10px;
+}
+.stt:first-child { margin-top: 0; }
+
+/* CARDS */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 4px 16px;
+  margin-bottom: 12px;
+}
+
+/* ROWS */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+  gap: 10px;
+}
+.row:last-child { border-bottom: none; }
+.row .lbl {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--txt);
+  flex: 1;
+}
+.row .sub-label {
+  font-size: 0.76rem;
+  color: var(--txt3);
+  margin-top: 2px;
+  font-weight: 400;
+}
+
+/* EDITABLE AMOUNTS */
+.amt {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  min-width: 100px;
+  text-align: right;
+  white-space: nowrap;
+}
+.amt-edit {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  width: 100px;
+  text-align: right;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  color: var(--red);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.amt-edit:focus {
+  border-color: var(--nn-orange);
+  box-shadow: 0 0 0 3px var(--nn-orange-soft);
+}
+.amt-edit.pos { color: var(--green); }
+
+.neg { color: var(--red); }
+.pos, .ok { color: var(--green); }
+.warn { color: var(--amber); }
+.info { color: var(--blue); }
+
+/* TOTAL ROW */
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-top: 1px solid var(--border2);
+  margin-top: 2px;
+}
+
+/* TIPS / ALERTS */
+.tip {
+  border-left: 3px solid var(--blue);
+  padding: 13px 16px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  background: var(--blue-bg);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--txt);
+}
+.tip.ok { border-color: var(--green); background: var(--green-bg); }
+.tip.warn { border-color: var(--amber); background: var(--amber-bg); }
+.tip.red { border-color: var(--red); background: var(--red-bg); }
+.tip strong { font-weight: 700; }
+
+/* PROGRESS BAR */
+.bar-wrap {
+  background: var(--bg4);
+  border-radius: 6px;
+  height: 10px;
+  overflow: hidden;
+  margin: 8px 0 4px;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width .5s ease;
+}
+
+/* ESCENARIOS */
+.escenario {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-bottom: 10px;
+  transition: border-color .2s;
+}
+.escenario:hover { border-color: var(--border2); }
+.esc-titulo {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--txt2);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.esc-importe {
+  font-family: var(--mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+.esc-sub {
+  font-size: 0.78rem;
+  color: var(--txt3);
+}
+
+/* EDIT HINT */
+.edit-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--nn-orange-soft);
+  border: 1px solid rgba(234,107,12,.2);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 18px;
+  font-size: 0.82rem;
+  color: var(--nn-orange);
+  font-weight: 500;
+}
+.edit-hint svg { flex-shrink: 0; }
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  .container { padding: 16px 12px 48px; }
+  .header h1 { font-size: 1.35rem; }
+  .amt-edit { width: 88px; font-size: 0.88rem; padding: 5px 8px; }
+  .esc-importe { font-size: 1.25rem; }
+  .tab { font-size: 0.8rem; padding: 10px 6px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>Plan Financiero Abril 2026</h1>
+    <div class="sub">Fede Fontanals · <span>Punto Naranja NN</span> · Xàtiva</div>
+  </div>
+
+  <div class="edit-hint">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    Toca cualquier importe para editarlo — los totales se recalculan solos
+  </div>
+
+  <div class="tabs">
+    <button class="tab on" onclick="switchTab('abril')">Abril real</button>
+    <button class="tab" onclick="switchTab('plan')">Plan de pagos</button>
+    <button class="tab" onclick="switchTab('futuro')">Hacia 3.000 €</button>
+  </div>
+
+  <!-- ========== PESTAÑA 1: ABRIL REAL ========== -->
+  <div class="pane on" id="p-abril">
+
+    <div class="tip warn">Números reales, sin maquillar. Ver la realidad es el primer paso para cambiarla.</div>
+
+    <div class="stt">Ingreso disponible — 15 de abril</div>
+    <div class="card">
+      <div class="row">
+        <div><div class="lbl">Cobro NN (neto, IRPF descontado)</div></div>
+        <input class="amt-edit pos" data-group="ingreso" value="1600" onchange="calc()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div><div class="lbl">Saldo actual en cuenta</div><div class="sub-label">estimado</div></div>
+        <input class="amt-edit pos" data-group="ingreso" value="140" onchange="calc()" onfocus="this.select()">
+      </div>
+      <div class="total-row">
+        <span>Total disponible</span>
+        <span class="amt pos" id="t-ingreso">1.740 €</span>
+      </div>
+    </div>
+
+    <div class="stt">Gastos fijos ineludibles</div>
+    <div class="card">
+      <div class="row">
+        <div class="lbl">Autónomo SS</div>
+        <input class="amt-edit" data-group="fijos" value="282" onchange="calc()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div><div class="lbl">SS aplazada (mes 1/8)</div></div>
+        <input class="amt-edit" data-group="fijos" value="105" onchange="calc()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div class="lbl">Teléfono + Internet (Avanza)</div>
+        <input class="amt-edit" data-group="fijos" value="44" onchange="calc()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div class="lbl">Responsabilidad Civil</div>
+        <input class="amt-edit" data-group="fijos" value="100" onchange="calc()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div class="lbl">Alimentación básica mes</div>
+        <input class="amt-edit" data-group="fijos" value="160" onchange="calc()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div><div class="lbl">Tarjeta de crédito</div><div class="sub-label">vence 5 de mayo</div></div>
+        <input class="amt-edit" data-group="fijos" value="36.59" onchange="calc()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div><div class="lbl">PayPal — móvil nuevo</div><div class="sub-label">pago 10 de mayo</div></div>
+        <input class="amt-edit" data-group="fijos" value="99.99" onchange="calc()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div class="lbl">Octopus Energy</div>
+        <input class="amt-edit" data-group="fijos" value="60" onchange="calc()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div class="lbl">Diésel coche</div>
+        <input class="amt-edit" data-group="fijos" value="100" onchange="calc()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div><div class="lbl">Fede nene</div><div class="sub-label">prioridad máxima</div></div>
+        <input class="amt-edit" data-group="fijos" value="80" onchange="calc()" onfocus="this.select()">
+      </div>
+      <div class="total-row">
+        <span>Total fijos</span>
+        <span class="amt neg" id="t-fijos">–1.067,58 €</span>
+      </div>
+    </div>
+
+    <div class="stt">Queda tras gastos fijos</div>
+    <div class="card">
+      <div class="row">
+        <div class="lbl">Disponible tras fijos</div>
+        <span class="amt warn" id="t-disponible1">672,42 €</span>
+      </div>
+      <div class="bar-wrap"><div class="bar-fill" id="bar-disponible1" style="width:39%;background:var(--amber)"></div></div>
+    </div>
+
+    <div class="stt">Deudas urgentes — vencen antes del 4 de mayo</div>
+    <div class="card">
+      <div class="row">
+        <div><div class="lbl">IVTM Vehículo</div><div class="sub-label">Diputació — recargo si no se paga</div></div>
+        <input class="amt-edit" data-group="urgente" value="130" onchange="calc()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div><div class="lbl">Basuras Xàtiva</div><div class="sub-label">Diputació — recargo si no se paga</div></div>
+        <input class="amt-edit" data-group="urgente" value="66" onchange="calc()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div><div class="lbl">Agua alcantarillado</div><div class="sub-label">Diputació — recargo si no se paga</div></div>
+        <input class="amt-edit" data-group="urgente" value="112" onchange="calc()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div><div class="lbl">Comunidad 1er trimestre</div><div class="sub-label">relación vecinal</div></div>
+        <input class="amt-edit" data-group="urgente" value="80" onchange="calc()" onfocus="this.select()">
+      </div>
+      <div class="total-row">
+        <span>Total urgente</span>
+        <span class="amt neg" id="t-urgente">–388,00 €</span>
+      </div>
+    </div>
+
+    <div class="stt">Balance final de abril</div>
+    <div class="card" style="border-color:var(--border2)">
+      <div class="row">
+        <div class="lbl">Disponible tras fijos</div>
+        <span class="amt" id="b-disp">672,42 €</span>
+      </div>
+      <div class="row">
+        <div class="lbl">Deudas urgentes pagadas</div>
+        <span class="amt neg" id="b-urgente">–388,00 €</span>
+      </div>
+      <div class="total-row">
+        <span>Libre para llegar al 15 de mayo</span>
+        <span class="amt" id="b-final">284,42 €</span>
+      </div>
+    </div>
+
+    <div class="tip red" id="tip-balance"><strong>La realidad sin maquillar:</strong> quedan <span id="tip-libre">284</span> € para sobrevivir hasta el próximo cobro. IBI (315 €), Consorcio COR (119 €) y Agua 2025 (201 €) se aplazan a mayo.</div>
+
+    <div class="tip ok"><strong>Lo que sí controlas:</strong> deudas con recargo pagadas. Fede nene cobra. Comida cubierta. Coche con combustible. Luz pagada. Y cada llamada que hagas hoy se convierte en cobro el 15 de mayo.</div>
+  </div>
+
+  <!-- ========== PESTAÑA 2: PLAN DE PAGOS ========== -->
+  <div class="pane" id="p-plan">
+
+    <div class="tip ok">Las deudas con fecha límite van primero. Las que no tienen recargo inminente esperan al cobro de mayo o junio.</div>
+
+    <div class="stt">Abril — antes del 4 de mayo (obligatorio)</div>
+    <div class="card">
+      <div class="row">
+        <div><div class="lbl">IVTM Vehículo</div><div class="sub-label">sede.dival.es/pagorecibo</div></div>
+        <input class="amt-edit" data-group="plan-abr" value="130" onchange="calcPlan()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div><div class="lbl">Basuras Xàtiva</div><div class="sub-label">sede.dival.es/pagorecibo</div></div>
+        <input class="amt-edit" data-group="plan-abr" value="66" onchange="calcPlan()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div><div class="lbl">Agua alcantarillado</div><div class="sub-label">sede.dival.es/pagorecibo</div></div>
+        <input class="amt-edit" data-group="plan-abr" value="112" onchange="calcPlan()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div class="lbl">Comunidad 1er trimestre</div>
+        <input class="amt-edit" data-group="plan-abr" value="80" onchange="calcPlan()" onfocus="this.select()">
+      </div>
+      <div class="total-row">
+        <span>Total abril urgente</span>
+        <span class="amt neg" id="tp-abr">–388,00 €</span>
+      </div>
+    </div>
+
+    <div class="stt">Principios de mayo — cargos automáticos</div>
+    <div class="card">
+      <div class="row">
+        <div><div class="lbl">Tarjeta de crédito</div><div class="sub-label">5 de mayo</div></div>
+        <input class="amt-edit" data-group="plan-may-auto" value="36.59" onchange="calcPlan()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div><div class="lbl">PayPal — móvil nuevo</div><div class="sub-label">10 de mayo</div></div>
+        <input class="amt-edit" data-group="plan-may-auto" value="99.99" onchange="calcPlan()" onfocus="this.select()">
+      </div>
+      <div class="total-row">
+        <span>Total cargos mayo</span>
+        <span class="amt neg" id="tp-may-auto">–136,58 €</span>
+      </div>
+    </div>
+
+    <div class="stt">Mayo — con el cobro del 15</div>
+    <div class="card">
+      <div class="row">
+        <div><div class="lbl">IBI 2025</div><div class="sub-label">aplazado desde abril</div></div>
+        <input class="amt-edit" data-group="plan-may" value="315" onchange="calcPlan()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div class="lbl">Consorcio COR 2025</div>
+        <input class="amt-edit" data-group="plan-may" value="119" onchange="calcPlan()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div class="lbl">Agua 2025 (201 €)</div>
+        <input class="amt-edit" data-group="plan-may" value="201" onchange="calcPlan()" onfocus="this.select()">
+      </div>
+      <div class="total-row">
+        <span>Total mayo</span>
+        <span class="amt warn" id="tp-may">–635,00 €</span>
+      </div>
+    </div>
+
+    <div class="stt">Junio en adelante</div>
+    <div class="card">
+      <div class="row">
+        <div><div class="lbl">PayPal — móvil nuevo (2/?)</div><div class="sub-label">10 de junio</div></div>
+        <input class="amt-edit" data-group="plan-jun" value="99.99" onchange="calcPlan()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div class="lbl">Agua 2025 (58,95 €)</div>
+        <input class="amt-edit" data-group="plan-jun" value="58.95" onchange="calcPlan()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div class="lbl">Agua 2024 (dos recibos)</div>
+        <input class="amt-edit" data-group="plan-jun" value="119" onchange="calcPlan()" onfocus="this.select()">
+      </div>
+      <div class="row">
+        <div class="lbl">Seguro comunidad anual</div>
+        <input class="amt-edit" data-group="plan-jun" value="96" onchange="calcPlan()" onfocus="this.select()">
+      </div>
+      <div class="total-row">
+        <span>Total junio</span>
+        <span class="amt" id="tp-jun">–373,94 €</span>
+      </div>
+    </div>
+
+    <div class="tip ok"><strong>El camino de salida:</strong> si entre abril y mayo cierras 2-3 operaciones más (Salud 12,5 %, Hogar o Vida), el cobro del 15 de mayo sube a 2.000–2.200 €. Con eso absorbes los 635 € aplazados y empiezas mes con colchón real.</div>
+
+    <div class="tip ok">Si mantienes este ritmo, en julio tienes todas las deudas liquidadas y empiezas a construir colchón real. Eso es un cambio de vida en 3 meses.</div>
+  </div>
+
+  <!-- ========== PESTAÑA 3: HACIA 3.000 € ========== -->
+  <div class="pane" id="p-futuro">
+
+    <div class="tip ok">1.600 € es el suelo. Cada póliza que cierras lo sube. Aquí tienes la escalera.</div>
+
+    <div class="stt">Escenarios de cobro según producción</div>
+
+    <div class="escenario">
+      <div class="esc-titulo">Ahora mismo — base mínima</div>
+      <div class="esc-importe warn">~1.600 € netos</div>
+      <div class="esc-sub">Comisiones base sin bonificaciones de equipo</div>
+      <div class="bar-wrap"><div class="bar-fill" style="width:35%;background:var(--amber)"></div></div>
+    </div>
+
+    <div class="escenario">
+      <div class="esc-titulo">Con 2-3 operaciones más al mes</div>
+      <div class="esc-importe info">~2.000–2.200 € netos</div>
+      <div class="esc-sub">Salud, Hogar o Vida cerrados con ADN bien hecho</div>
+      <div class="bar-wrap"><div class="bar-fill" style="width:52%;background:var(--blue)"></div></div>
+    </div>
+
+    <div class="escenario">
+      <div class="esc-titulo">Objetivo septiembre — con 1 agente activo</div>
+      <div class="esc-importe pos">~2.500–2.800 € netos</div>
+      <div class="esc-sub">Producción propia + bonus Punto Naranja + red</div>
+      <div class="bar-wrap"><div class="bar-fill" style="width:68%;background:var(--green)"></div></div>
+    </div>
+
+    <div class="escenario" style="border-color:var(--green-bd)">
+      <div class="esc-titulo">Objetivo final — 4-5 agentes activos</div>
+      <div class="esc-importe pos">~3.000–3.200 € netos</div>
+      <div class="esc-sub">Red consolidada + Punto Naranja pleno</div>
+      <div class="bar-wrap"><div class="bar-fill" style="width:100%;background:var(--green)"></div></div>
+    </div>
+
+    <div class="stt">Lo que puedes hacer ahora mismo para subir el cobro de mayo</div>
+    <div class="card">
+      <div class="row">
+        <div><div class="lbl">Llamadas de esta semana — vencimientos abril</div><div class="sub-label">53 contactos urgentes en tu CRM</div></div>
+        <span class="amt pos">+puntos</span>
+      </div>
+      <div class="row">
+        <div><div class="lbl">Campaña Salud 12,5% — tiempo limitado</div><div class="sub-label">Argumento perfecto para llamar ahora</div></div>
+        <span class="amt pos">+puntos</span>
+      </div>
+      <div class="row">
+        <div><div class="lbl">Activar Rosiane esta semana</div><div class="sub-label">Cada póliza suya suma a tu red</div></div>
+        <span class="amt pos">+bonus red</span>
+      </div>
+      <div class="row">
+        <div><div class="lbl">Un ADN bien hecho = propuesta real</div><div class="sub-label">Gastos anuales hogar nunca en cero</div></div>
+        <span class="amt pos">+cierre</span>
+      </div>
+    </div>
+
+    <div class="tip ok">Cada llamada que haces hoy se convierte en dinero el 15 de mayo. No hay atajo más directo que ese.</div>
+  </div>
+
+</div>
+
+<script>
+// Tab switching
+function switchTab(id) {
+  document.querySelectorAll('.tab').forEach((t, i) => {
+    const ids = ['abril', 'plan', 'futuro'];
+    t.classList.toggle('on', ids[i] === id);
+  });
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('on'));
+  document.getElementById('p-' + id).classList.add('on');
+}
+
+// Format number as Spanish currency
+function fmt(n) {
+  return n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+}
+
+// Sum inputs by group — siempre devuelve valor positivo (valor absoluto)
+function sumGroup(group) {
+  let total = 0;
+  document.querySelectorAll(`input[data-group="${group}"]`).forEach(el => {
+    total += parseFloat(el.value.replace(',', '.')) || 0;
+  });
+  return total;
+}
+
+// Calculate Abril tab
+function calc() {
+  const ingreso = sumGroup('ingreso');   // 1740 (positivo)
+  const fijos = sumGroup('fijos');       // 1067.58 (positivo)
+  const urgente = sumGroup('urgente');   // 388 (positivo)
+
+  // Mostrar totales
+  document.getElementById('t-ingreso').textContent = fmt(ingreso);
+  document.getElementById('t-fijos').textContent = '–' + fmt(fijos);
+  document.getElementById('t-urgente').textContent = '–' + fmt(urgente);
+
+  // Disponible = ingreso - fijos
+  const disponible = ingreso - fijos;
+  document.getElementById('t-disponible1').textContent = fmt(disponible);
+  document.getElementById('b-disp').textContent = fmt(disponible);
+
+  // Barra de progreso
+  const pct = Math.max(0, Math.min(100, (disponible / ingreso) * 100));
+  const bar = document.getElementById('bar-disponible1');
+  bar.style.width = pct + '%';
+
+  if (disponible > ingreso * 0.5) {
+    bar.style.background = 'var(--green)';
+    document.getElementById('t-disponible1').className = 'amt pos';
+  } else if (disponible > ingreso * 0.2) {
+    bar.style.background = 'var(--amber)';
+    document.getElementById('t-disponible1').className = 'amt warn';
+  } else {
+    bar.style.background = 'var(--red)';
+    document.getElementById('t-disponible1').className = 'amt neg';
+  }
+
+  // Balance final = disponible - urgente
+  document.getElementById('b-urgente').textContent = '–' + fmt(urgente);
+
+  const final = disponible - urgente;
+  const elFinal = document.getElementById('b-final');
+  elFinal.textContent = fmt(final);
+  elFinal.className = 'amt ' + (final > 400 ? 'pos' : final > 150 ? 'warn' : 'neg');
+
+  document.getElementById('tip-libre').textContent = Math.round(final);
+}
+
+// Calculate Plan de Pagos tab
+function calcPlan() {
+  ['plan-abr', 'plan-may-auto', 'plan-may', 'plan-jun'].forEach(g => {
+    const total = sumGroup(g);
+    const id = 'tp-' + g.replace('plan-', '');
+    const el = document.getElementById(id);
+    if (el) el.textContent = '–' + fmt(total);
+  });
+}
+
+// Init
+calc();
+calcPlan();
+</script>
+</body>
+</html>

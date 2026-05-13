@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador URLs Propuestas NN · Fede Fontanals</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --o: #C94D00;
+  --orange-l: #E85C0D;
+  --dark: #1C1714;
+  --bg: #F5F5F0;
+  --white: #FFFFFF;
+  --text: #111827;
+  --text2: #374151;
+  --text3: #6B7280;
+  --border: rgba(0,0,0,0.10);
+  --green: #16A34A;
+  --red: #B91C1C;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.header {
+  background: var(--dark);
+  color: white;
+  padding: 32px 28px;
+  border-radius: 16px 16px 0 0;
+  margin-bottom: 0;
+}
+
+.header h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+
+.header p {
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 1.5;
+}
+
+.content {
+  background: white;
+  padding: 32px;
+  border-radius: 0 0 16px 16px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text2);
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px 14px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--o);
+}
+
+.form-group.full {
+  grid-column: 1 / -1;
+}
+
+.section-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--o);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.product-option {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-option label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: var(--bg);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+.product-option input[type="radio"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--o);
+}
+
+.product-option label:hover {
+  background: rgba(201, 77, 0, 0.05);
+  border-color: var(--o);
+}
+
+.preview-section {
+  background: var(--bg);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.preview-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text2);
+  margin-bottom: 12px;
+}
+
+.url-box {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  word-break: break-all;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 12px;
+  max-height: 80px;
+  overflow-y: auto;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.btn {
+  padding: 14px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-primary {
+  background: var(--o);
+  color: white;
+  box-shadow: 0 4px 12px rgba(201, 77, 0, 0.25);
+}
+
+.btn-primary:hover {
+  background: #A83D00;
+  box-shadow: 0 6px 16px rgba(201, 77, 0, 0.35);
+}
+
+.btn-secondary {
+  background: var(--border);
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.message {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  display: none;
+}
+
+.message.success {
+  background: #DCFCE7;
+  color: #166534;
+  border: 1px solid #BBF7D0;
+  display: block;
+}
+
+.message.info {
+  background: #DBEAFE;
+  color: #1E40AF;
+  border: 1px solid #BFDBFE;
+  display: block;
+}
+
+.email-template {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.email-template h4 {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text2);
+  margin-bottom: 12px;
+}
+
+.email-content {
+  background: white;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.6;
+  font-family: 'Courier New', monospace;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+  
+  .actions {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>🎯 Generador URLs Propuestas</h1>
+    <p>Crea enlaces personalizados para enviar propuestas a tus clientes · Copiar, compartir y cerrar</p>
+  </div>
+  
+  <div class="content">
+    
+    <div id="message" class="message"></div>
+    
+    <!-- DATOS CLIENTE -->
+    <div class="section-title">📋 Datos del Cliente</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Nombre del Cliente *</label>
+        <input type="text" id="nombre" placeholder="Salvador, María, Juan..." required>
+      </div>
+      <div class="form-group">
+        <label>Prima Mensual / Referencia</label>
+        <input type="text" id="prima" placeholder="39,94 €/mes" value="">
+      </div>
+    </div>
+    
+    <!-- PRODUCTO -->
+    <div class="section-title">🛡️ Selecciona Producto</div>
+    <div class="form-grid full">
+      <div class="products-grid" id="productosGrid"></div>
+    </div>
+    
+    <!-- VISTA PREVIA URL -->
+    <div class="preview-section">
+      <div class="preview-title">🔗 URL Generada</div>
+      <div class="url-box" id="urlPreview">Completa los datos para ver la URL...</div>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="copiarURL()">📋 Copiar URL</button>
+        <button class="btn btn-secondary" onclick="abrirPropuesta()">🔍 Ver Propuesta</button>
+      </div>
+    </div>
+    
+    <!-- EMAIL TEMPLATE -->
+    <div class="email-template">
+      <h4>📧 Email Sugerido para Enviar</h4>
+      <div class="email-content" id="emailTemplate">Completa los datos para ver la plantilla de email...</div>
+      <div style="margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <button class="btn btn-primary" onclick="copiarEmail()">📋 Copiar Email</button>
+        <button class="btn btn-secondary" onclick="abrirGmail()">📧 Abrir en Gmail</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<script>
+// Productos disponibles
+const PRODUCTOS = {
+  sialp: { ico: '📊', nom: 'SIALP', desc: 'Ahorro a largo plazo' },
+  garantizado: { ico: '🔒', nom: 'Plan Garantizado de Inversión', desc: 'Inversión con garantía' },
+  flexicuenta: { ico: '💰', nom: 'Flexicuenta Asegurada', desc: 'Ahorro remunerado' },
+  ahorrogarantizado: { ico: '🏦', nom: 'Ahorro Garantizado Extra', desc: 'Ahorro con rentabilidad' },
+  futuro: { ico: '📈', nom: 'Contigo Futuro', desc: 'Plan ahorro sostenible' },
+  saludvida: { ico: '❤️', nom: 'Plan Salud+Vida', desc: 'Salud + Vida en uno' },
+  saludcompleto: { ico: '🏥', nom: 'Salud Completo', desc: 'Medicina privada' },
+  vidafamilia: { ico: '👨‍👩‍👧', nom: 'Vida y Familia', desc: 'Protección económica' },
+  senior: { ico: '🧓', nom: 'Contigo Senior', desc: 'Protección +55' },
+  accidentes: { ico: '⚡', nom: 'Accidentes LiderPlus', desc: 'Por accidente' },
+  hogar: { ico: '🏠', nom: 'MiHogar Seguro', desc: 'Multirriesgo vivienda' },
+  auto: { ico: '🚗', nom: 'Seguro Coche y Moto', desc: 'Vehículo' },
+  ppsa: { ico: '💼', nom: 'PPSA', desc: 'Plan pensiones autónomos' },
+  autonomo: { ico: '🚐', nom: 'Contigo Autónomo', desc: 'ILT + vida autónomos' },
+  ilt: { ico: '🩹', nom: 'Baja Laboral (ILT)', desc: 'Indemnización diaria' },
+  pyme: { ico: '🏢', nom: 'Contigo Pyme', desc: 'Vida colectiva empleados' },
+  comercios: { ico: '🏪', nom: 'Seguro Comercios', desc: 'Multirriesgo negocio' },
+  hipotecaabanca: { ico: '🏦', nom: 'Hipoteca ABANCA', desc: 'Préstamo hipotecario' },
+  hipotecaing: { ico: '🟠', nom: 'Hipoteca ING', desc: 'Hipoteca digital' },
+};
+
+function init() {
+  const grid = document.getElementById('productosGrid');
+  for (const [key, prod] of Object.entries(PRODUCTOS)) {
+    const html = `
+      <div class="product-option">
+        <input type="radio" name="producto" id="prod_${key}" value="${key}" onchange="actualizarURL()">
+        <label for="prod_${key}">${prod.ico} ${prod.nom}</label>
+      </div>
+    `;
+    grid.innerHTML += html;
+  }
+  
+  // Listeners
+  document.getElementById('nombre').addEventListener('input', actualizarURL);
+  document.getElementById('prima').addEventListener('input', actualizarURL);
+}
+
+function actualizarURL() {
+  const nombre = document.getElementById('nombre').value.trim();
+  const producto = document.querySelector('input[name="producto"]:checked')?.value || '';
+  const prima = document.getElementById('prima').value.trim();
+  
+  const baseURL = 'https://fedefonta08.github.io/propuestas-nn/propuestas-nn-v2.html';
+  let url = baseURL;
+  const params = [];
+  
+  if (producto) params.push(`producto=${producto}`);
+  if (nombre) params.push(`nombre=${encodeURIComponent(nombre)}`);
+  if (prima) params.push(`prima=${encodeURIComponent(prima)}`);
+  
+  if (params.length > 0) {
+    url += '?' + params.join('&');
+  }
+  
+  document.getElementById('urlPreview').textContent = url;
+  actualizarEmail(nombre, producto, prima, url);
+}
+
+function actualizarEmail(nombre, producto, prima, url) {
+  const prod = PRODUCTOS[producto] || {};
+  const prodNom = prod.nom || 'tu propuesta';
+  
+  const email = `Asunto: Tu propuesta personalizada · Nationale-Nederlanden · ${prodNom}
+
+───────────────────────────────────────────
+
+Hola ${nombre || 'cliente'},
+
+Como te prometí, aquí está tu propuesta calculada en directo:
+
+👉 VER TU PROPUESTA PERSONALIZADA
+${url}
+
+La propuesta ya incluye:
+✓ Tu nombre personalizado
+✓ Producto: ${prodNom}
+${prima ? `✓ Prima: ${prima}` : ''}
+
+¿Dudas? Hablamos por teléfono cuando quieras.
+
+Un saludo,
+
+Federico Fontanals
+Agente Dinamizador · Punto Naranja
+Nationale-Nederlanden Vida y Generales
+Xàtiva · La Costera
+
+📞 680 507 186
+📧 federico.fontanals@nnespana.es`;
+
+  document.getElementById('emailTemplate').textContent = email;
+}
+
+function copiarURL() {
+  const url = document.getElementById('urlPreview').textContent;
+  if (url.includes('Completa') || url.includes('?')) {
+    navigator.clipboard.writeText(url);
+    mostrarMensaje('✓ URL copiada al portapapeles', 'success');
+  }
+}
+
+function copiarEmail() {
+  const email = document.getElementById('emailTemplate').textContent;
+  if (!email.includes('Completa')) {
+    navigator.clipboard.writeText(email);
+    mostrarMensaje('✓ Email copiado al portapapeles', 'success');
+  }
+}
+
+function abrirPropuesta() {
+  const url = document.getElementById('urlPreview').textContent;
+  if (url.includes('?')) {
+    window.open(url, '_blank');
+  }
+}
+
+function abrirGmail() {
+  const nombre = document.getElementById('nombre').value.trim();
+  const email = document.getElementById('emailTemplate').textContent;
+  
+  if (nombre && !email.includes('Completa')) {
+    const subject = encodeURIComponent(`Tu propuesta personalizada NN`);
+    const body = encodeURIComponent(email);
+    window.open(`https://mail.google.com/mail/?ui=2&fs=1&to=&su=${subject}&body=${body}`, '_blank');
+  }
+}
+
+function mostrarMensaje(texto, tipo) {
+  const msg = document.getElementById('message');
+  msg.textContent = texto;
+  msg.className = `message ${tipo}`;
+  setTimeout(() => msg.className = 'message', 3000);
+}
+
+// Init
+window.addEventListener('DOMContentLoaded', init);
+</script>
+
+</body>
+</html>

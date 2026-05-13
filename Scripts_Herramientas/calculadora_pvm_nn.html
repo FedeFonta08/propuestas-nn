@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora PVM — Nationale-Nederlanden</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--nn:#FF6200;--bg:#FFFFFF;--bg2:#F5F5F3;--text:#1a1a1a;--text2:#6b6b6b;--text3:#999;--border:#e0e0e0;--radius:10px;--radius-lg:14px;--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+@media(prefers-color-scheme:dark){:root{--bg:#1a1a1a;--bg2:#2a2a2a;--text:#e8e8e8;--text2:#a0a0a0;--text3:#777;--border:#3a3a3a}}
+body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px;max-width:700px;margin:0 auto;line-height:1.6}
+h1{font-size:20px;font-weight:600;margin-bottom:4px}
+.subtitle{font-size:13px;color:var(--text2);margin-bottom:24px}
+.field{display:flex;flex-direction:column;gap:4px;flex:1;min-width:140px}
+.field label{font-size:13px;color:var(--text2);font-weight:500}
+.field select,.field input{font-size:15px;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font);transition:border-color .2s}
+.field select:focus,.field input:focus{outline:none;border-color:var(--nn)}
+.field select:disabled,.field input:disabled{opacity:.5;cursor:not-allowed}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:24px 0}
+.card{background:var(--bg2);border-radius:var(--radius);padding:14px}
+.card .label{font-size:12px;color:var(--text2);margin-bottom:4px}
+.card .value{font-size:22px;font-weight:600}
+.card .sub{font-size:12px;color:var(--text2);margin-top:4px}
+.bar-wrap{margin:16px 0}
+.bar-bg{height:28px;background:var(--bg2);border-radius:14px;overflow:hidden;position:relative}
+.bar-fill{height:100%;background:var(--nn);border-radius:14px;transition:width .4s ease;min-width:2px}
+.bar-label{font-size:13px;color:var(--text2);margin-top:6px;text-align:right}
+.badge{display:inline-block;font-size:11px;padding:3px 10px;border-radius:var(--radius);font-weight:600}
+.badge-risk{background:#E1F5EE;color:#085041}
+.badge-norisk{background:var(--bg2);color:var(--text2)}
+@media(prefers-color-scheme:dark){.badge-risk{background:#085041;color:#9FE1CB}}
+.note{font-size:13px;color:var(--text2);margin-top:20px;line-height:1.6;padding:12px 14px;background:var(--bg2);border-radius:var(--radius)}
+.header-bar{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--nn)}
+.nn-logo{width:8px;height:32px;background:var(--nn);border-radius:4px}
+</style>
+</head>
+<body>
+<div class="header-bar">
+<div class="nn-logo"></div>
+<div><h1>Calculadora PVM</h1><div class="subtitle">Nationale-Nederlanden · Estatus J5 · Marco de Operaciones 2026</div></div>
+</div>
+
+<div class="row">
+<div class="field" style="flex:2">
+<label>Producto</label>
+<select id="producto">
+<option value="sialp">SIALP (pp fija 2.000€)</option>
+<option value="contigo_futuro_1000">Contigo Futuro (pp fija 1.000€)</option>
+<option value="contigo_futuro_1300">Contigo Futuro (pp fija 1.300€)</option>
+<option value="contigo_futuro_1700">Contigo Futuro (pp fija 1.700€)</option>
+<option value="contigo_futuro_2000">Contigo Futuro (pp fija 2.000€)</option>
+<option value="contigo_familia">Contigo Familia</option>
+<option value="contigo_autonomo">Contigo Autónomo (ILT)</option>
+<option value="salud_completo">Salud Completo</option>
+<option value="salud_copago">Salud Completo Copago</option>
+<option value="salud_copago_auto">Salud Completo Copago Autónomo</option>
+<option value="contigo_senior">Contigo Senior (55-70)</option>
+<option value="contigo_senior_71">Contigo Senior (71-75)</option>
+<option value="contigo_senior_76">Contigo Senior (76-80)</option>
+<option value="proteccion_plus">Protección Plus</option>
+<option value="prevision_constante">Previsión Familiar Constante</option>
+<option value="prevision_decreciente">Previsión Familiar Decreciente</option>
+<option value="liderplus">Líder Plus Accidentes</option>
+<option value="mihogar">MiHogar Seguro</option>
+<option value="vida_hip_ing">Vida + Hipoteca ING</option>
+<option value="hogar_hip_ing">Hogar + Hipoteca ING</option>
+<option value="vida_hip_abanca_bon">Vida + Hipoteca Abanca Bonificada</option>
+<option value="hogar_hip_abanca_bon">Hogar + Hipoteca Abanca Bonificada</option>
+<option value="ppi_periodico">PPI Aportaciones Periódicas</option>
+<option value="ppsa_periodico">PPSA Aportaciones Periódicas</option>
+</select>
+</div>
+</div>
+
+<div class="row">
+<div class="field">
+<label>Prima (€/recibo)</label>
+<input type="number" id="prima" min="0" step="0.01" placeholder="ej: 50">
+</div>
+<div class="field">
+<label>Frecuencia de pago</label>
+<select id="frecuencia">
+<option value="12">Mensual (×12)</option>
+<option value="4">Trimestral (×4)</option>
+<option value="2">Semestral (×2)</option>
+<option value="1">Anual (×1)</option>
+</select>
+</div>
+</div>
+
+<div class="results">
+<div class="card"><div class="label">Prima anualizada</div><div class="value" id="r_pa">—</div></div>
+<div class="card"><div class="label">PVM generado</div><div class="value" id="r_pvm" style="color:var(--nn)">—</div><div class="sub" id="r_pct"></div></div>
+<div class="card"><div class="label">Tipo producto</div><div class="value" id="r_risk">—</div></div>
+<div class="card"><div class="label">Ops para 10.291 pts</div><div class="value" id="r_ops">—</div></div>
+</div>
+
+<div class="bar-wrap">
+<div class="bar-bg"><div class="bar-fill" id="bar_fill" style="width:0%"></div></div>
+<div class="bar-label" id="bar_label">0 / 10.291 pts</div>
+</div>
+
+<div class="note" id="nota"></div>
+
+<script>
+const P={
+sialp:{pvm:100,fixed:2000,risk:false,nota:'Prima periódica fija: 2.000€/año. Las primas que superen esta cantidad se consideran Primas Únicas.'},
+contigo_futuro_1000:{pvm:100,fixed:1000,risk:false,nota:'Prima periódica fija: 1.000€/año.'},
+contigo_futuro_1300:{pvm:100,fixed:1300,risk:false,nota:'Prima periódica fija: 1.300€/año.'},
+contigo_futuro_1700:{pvm:100,fixed:1700,risk:false,nota:'Prima periódica fija: 1.700€/año.'},
+contigo_futuro_2000:{pvm:100,fixed:2000,risk:false,nota:'Prima periódica fija: 2.000€/año.'},
+contigo_familia:{pvm:400,fixed:null,risk:true,nota:'Producto de riesgo. Si se anula en 2ª anualidad, se deduce el 75% del PVM. Duración mín. 10 años para evitar corrección (10%/año).'},
+contigo_autonomo:{pvm:200,fixed:null,risk:true,nota:'Garantía ILT. Producto de riesgo. La emisión de ILT en pólizas Contigo Familia existentes cuenta siempre como Nueva Producción.'},
+salud_completo:{pvm:150,fixed:null,risk:true,nota:'Producto de riesgo (coaseguro NN + Sanitas). Campaña activa: 12,5% dto. Informar RGPD Sanitas antes de continuar.'},
+salud_copago:{pvm:200,fixed:null,risk:true,nota:'Producto de riesgo con copago. Campaña 12,5% dto acumulable con descuentos de zona.'},
+salud_copago_auto:{pvm:120,fixed:null,risk:true,nota:'Modalidad copago para autónomos. Producto de riesgo.'},
+contigo_senior:{pvm:300,fixed:null,risk:true,nota:'Edad 55-70 años. PVM 300%. Producto de riesgo. Mapeo natural desde Decesos Santalucía.'},
+contigo_senior_71:{pvm:246,fixed:null,risk:true,nota:'Edad 71-75 años. PVM corregido: 82% de 300% = 246%.'},
+contigo_senior_76:{pvm:210,fixed:null,risk:true,nota:'Edad 76-80 años. PVM corregido: 70% de 300% = 210%.'},
+proteccion_plus:{pvm:400,fixed:null,risk:true,nota:'Producto de riesgo. Corrección si duración póliza < 10 años (10%/año).'},
+prevision_constante:{pvm:240,fixed:null,risk:true,nota:'Previsión Familiar modalidad constante. Producto de riesgo.'},
+prevision_decreciente:{pvm:140,fixed:null,risk:false,nota:'Previsión Familiar modalidad decreciente. Corrección si duración pago < 10 años.'},
+liderplus:{pvm:400,fixed:null,risk:true,nota:'Producto de riesgo. PVM 400%.'},
+mihogar:{pvm:150,fixed:null,risk:true,nota:'Producto de riesgo (generales). PVM 150%.'},
+vida_hip_ing:{pvm:350,fixed:null,risk:true,nota:'Vida vinculada a hipoteca ING. Producto de riesgo. Comisión agente: 125€ pago único.'},
+hogar_hip_ing:{pvm:200,fixed:null,risk:true,nota:'Hogar vinculado a hipoteca ING. Producto de riesgo.'},
+vida_hip_abanca_bon:{pvm:280,fixed:null,risk:true,nota:'Vida + Hipoteca Abanca Bonificada. Producto de riesgo.'},
+hogar_hip_abanca_bon:{pvm:160,fixed:null,risk:true,nota:'Hogar + Hipoteca Abanca Bonificada. Producto de riesgo.'},
+ppi_periodico:{pvm:100,fixed:null,risk:false,nota:'PPI aportaciones periódicas. Corrección por edad del partícipe (a partir de 57 años).'},
+ppsa_periodico:{pvm:40,fixed:null,risk:false,nota:'PPSA aportaciones periódicas. PVM 40%.'}
+};
+const OBJ=10291;
+const prod=document.getElementById('producto');
+const prima=document.getElementById('prima');
+const freq=document.getElementById('frecuencia');
+function calc(){
+const p=P[prod.value];
+const v=parseFloat(prima.value)||0;
+const f=parseInt(freq.value);
+let pa;
+if(p.fixed){pa=p.fixed;prima.value=Math.round((p.fixed/f)*100)/100;prima.disabled=true}
+else{pa=v*f;prima.disabled=false}
+const pvm=Math.round(pa*(p.pvm/100));
+document.getElementById('r_pa').textContent=pa>0?pa.toLocaleString('es-ES')+'€':'—';
+document.getElementById('r_pvm').textContent=pvm>0?pvm.toLocaleString('es-ES')+' pts':'—';
+const pct=pvm>0?Math.round(pvm/OBJ*1000)/10:0;
+document.getElementById('r_pct').textContent=pvm>0?pct+'% del objetivo mensual':'';
+document.getElementById('r_risk').innerHTML=p.risk?'<span class="badge badge-risk">Riesgo</span>':'<span class="badge badge-norisk">No riesgo</span>';
+const ops=pvm>0?Math.ceil(OBJ/pvm):0;
+document.getElementById('r_ops').textContent=pvm>0?ops+' ops':'—';
+document.getElementById('bar_fill').style.width=Math.min(100,pct)+'%';
+document.getElementById('bar_label').textContent=pvm.toLocaleString('es-ES')+' / 10.291 pts ('+pct+'%)';
+document.getElementById('nota').textContent=p.nota;
+}
+prod.addEventListener('change',calc);
+prima.addEventListener('input',calc);
+freq.addEventListener('change',calc);
+calc();
+</script>
+</body>
+</html>

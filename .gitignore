@@ -19,7 +19,7 @@ Propuestas_Clientes/
 Reclutamiento_CV/
 
 # Carpeta de Herramientas - Solo subimos los HTML/Assets necesarios para GitHub Pages
-Scripts_Herramientas/
+Scripts_Herramientas/*
 !Scripts_Herramientas/*.html
 !Scripts_Herramientas/*.py
 !Scripts_Herramientas/assets/

@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Comercial — Contigo Autónomo · Salva Costa</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E85D26;
+    --orange-light: #FBF0EC;
+    --orange-mid: #F4A07A;
+    --orange-dark: #C44A18;
+    --green: #0F6E56;
+    --green-light: #E4F4EF;
+    --text: #1A1A1A;
+    --text-2: #5A5A5A;
+    --text-3: #9A9A9A;
+    --border: #E8E8E8;
+    --bg: #FAFAFA;
+    --white: #FFFFFF;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 24px 16px 40px;
+  }
+
+  .page { max-width: 820px; margin: 0 auto; }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .logo-circle {
+    width: 40px; height: 40px;
+    background: var(--orange);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .header-text h1 { font-size: 18px; font-weight: 600; color: var(--text); }
+  .header-text p { font-size: 13px; color: var(--text-3); margin-top: 2px; }
+  .header-date {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--text-3);
+    font-family: 'DM Mono', monospace;
+    text-align: right;
+  }
+
+  /* FATHER CALLOUT — lo nuevo */
+  .father-callout {
+    background: var(--text);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .father-icon {
+    width: 40px; height: 40px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .father-callout h2 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .father-callout p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.6;
+  }
+  .father-callout p strong { color: rgba(255,255,255,0.9); font-weight: 500; }
+  .father-script {
+    margin-top: 10px;
+    background: rgba(232,93,38,0.2);
+    border-left: 2px solid var(--orange);
+    padding: 10px 12px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    font-style: italic;
+    line-height: 1.55;
+  }
+
+  /* SECTION TITLE */
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+
+  /* PROFILE */
+  .profile-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .profile-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+  }
+  .profile-item .label { font-size: 11px; color: var(--text-3); margin-bottom: 4px; }
+  .profile-item .value { font-size: 14px; font-weight: 500; color: var(--text); }
+  .profile-item .value.risk { color: var(--orange); }
+
+  /* GAP SECTION */
+  .gap-section { margin-bottom: 24px; }
+  .alert-strip {
+    background: var(--orange-light);
+    border: 1px solid var(--orange-mid);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    font-size: 13.5px;
+    color: var(--orange-dark);
+    line-height: 1.6;
+  }
+  .alert-strip strong { font-weight: 600; }
+
+  .gap-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .gap-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    text-align: center;
+  }
+  .gap-card .gc-amount {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+  }
+  .gap-card .gc-label { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+  .gap-card.gap-highlight {
+    border-color: var(--orange);
+    background: var(--orange-light);
+  }
+  .gap-card.gap-highlight .gc-amount { color: var(--orange); }
+
+  /* COBERTURAS */
+  .coverages-section { margin-bottom: 24px; }
+  .cov-table { width: 100%; border-collapse: collapse; }
+  .cov-table th {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0 0 8px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+  .cov-table th:last-child { text-align: right; }
+  .cov-table td {
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13.5px;
+    color: var(--text);
+    vertical-align: middle;
+  }
+  .cov-table td:nth-child(2) { text-align: center; color: var(--text-2); font-family: 'DM Mono', monospace; font-size: 13px; }
+  .cov-table td:last-child { text-align: right; font-weight: 600; color: var(--orange); font-family: 'DM Mono', monospace; }
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .tag-green { background: var(--green-light); color: var(--green); }
+  .tag-orange { background: var(--orange-light); color: var(--orange-dark); }
+  .cov-table tr.total-row td {
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: none;
+    padding-top: 12px;
+  }
+  .cov-table tr.total-row td:last-child { color: var(--orange); font-size: 16px; }
+
+  /* TABS DE ARGUMENTO */
+  .tabs-section { margin-bottom: 24px; }
+  .tabs-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .tab-btn {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: left;
+  }
+  .tab-btn .tb-micro { font-size: 10px; color: var(--text-3); margin-bottom: 3px; }
+  .tab-btn .tb-label { font-size: 13px; font-weight: 500; color: var(--text); }
+  .tab-btn.active {
+    border-color: var(--orange);
+    background: var(--orange-light);
+  }
+  .tab-btn.active .tb-micro, .tab-btn.active .tb-label { color: var(--orange-dark); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active {
+    display: block;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+  }
+  .tab-panel .tp-head { font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .tab-panel .tp-script {
+    font-size: 13px;
+    color: var(--text-2);
+    font-style: italic;
+    line-height: 1.6;
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    border-left: 3px solid var(--orange);
+  }
+  .tab-panel .tp-note { font-size: 12px; color: var(--text-3); }
+  .tab-panel .tp-note span { color: var(--text-2); font-weight: 500; }
+
+  /* PASOS */
+  .steps-section { margin-bottom: 24px; }
+  .steps-list { display: flex; flex-direction: column; gap: 8px; }
+  .step-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 13px 16px;
+  }
+  .step-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-body { font-size: 13.5px; color: var(--text); line-height: 1.55; }
+  .step-body strong { font-weight: 600; }
+  .step-body .step-note { font-size: 12px; color: var(--text-3); margin-top: 3px; }
+
+  /* EXTRAS */
+  .extras-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .extra-card {
+    background: var(--green-light);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .extra-ico {
+    width: 32px; height: 32px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+  .extra-title { font-size: 13.5px; font-weight: 600; color: var(--green); }
+  .extra-desc { font-size: 12px; color: #2A6454; margin-top: 2px; line-height: 1.4; }
+
+  /* TOTAL FINAL */
+  .final-bar {
+    background: var(--orange);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .final-bar .fb-left {}
+  .final-bar .fb-tag { font-size: 11px; color: rgba(255,255,255,0.65); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 4px; }
+  .final-bar .fb-desc { font-size: 13px; color: rgba(255,255,255,0.8); }
+  .final-bar .fb-price { font-size: 34px; font-weight: 600; color: #fff; font-family: 'DM Mono', monospace; }
+  .final-bar .fb-sub { font-size: 12px; color: rgba(255,255,255,0.6); text-align: right; }
+
+  /* FOOTER */
+  .footer {
+    font-size: 11px;
+    color: var(--text-3);
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    padding-top: 8px;
+  }
+
+  /* OBJECIONES */
+  .obj-section { margin-bottom: 24px; }
+  .obj-grid { display: flex; flex-direction: column; gap: 8px; }
+  .obj-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  .obj-q {
+    padding: 12px 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text);
+    user-select: none;
+  }
+  .obj-q:hover { background: var(--bg); }
+  .obj-q .arrow { font-size: 11px; color: var(--text-3); transition: transform 0.2s; }
+  .obj-a {
+    display: none;
+    padding: 0 16px 14px;
+    font-size: 13px;
+    color: var(--text-2);
+    font-style: italic;
+    line-height: 1.6;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+  .obj-item.open .obj-a { display: block; }
+  .obj-item.open .arrow { transform: rotate(180deg); }
+
+  /* Divider */
+  .divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+  @media (max-width: 600px) {
+    .profile-grid { grid-template-columns: 1fr 1fr; }
+    .gap-row { grid-template-columns: 1fr; }
+    .tabs-nav { grid-template-columns: 1fr; }
+    .extras-row { grid-template-columns: 1fr; }
+    .final-bar { flex-direction: column; gap: 12px; text-align: center; }
+    .father-callout { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo-circle">N</div>
+    <div class="header-text">
+      <h1>Guía Comercial · Contigo Autónomo</h1>
+      <p>Salva Costa Bello · Punto Naranja NN Xàtiva · Fede</p>
+    </div>
+    <div class="header-date">02 / 04 / 2026<br>Reunión con Salvador Costa</div>
+  </div>
+
+  <!-- FATHER CALLOUT — pieza clave para esta reunión -->
+  <div class="father-callout">
+    <div class="father-icon">👨‍👦</div>
+    <div>
+      <h2>Contexto de la reunión: hablas con el padre</h2>
+      <p>
+        <strong>Salvador Costa</strong> (el padre, jubilado) ya tiene el Plan Salud + Vida en proceso para él, Salvita y Vicky. Hoy la conversación es diferente: le presentas la protección laboral de <strong>su hijo</strong> como autónomo repartidor. No le hablas de seguros — le hablas de <strong>qué pasa si su hijo no puede trabajar.</strong>
+      </p>
+      <p style="margin-top:8px">Salvador ha pasado por prótesis de rodilla, prótesis de cadera y hernia discal. <strong>Sabe perfectamente qué es quedarse sin poder trabajar</strong> y qué significa perder ingresos de golpe. Úsalo.</p>
+      <div class="father-script">
+        "Salvador, tú ya sabes lo que es no poder trabajar. Con la rodilla, con la cadera. Tu hijo conduce una furgoneta ocho horas al día. Si mañana tiene un accidente, la Seguridad Social le paga 720 euros al mes. Él necesita 900 para pagar sus gastos. Ese agujero de 180 euros al mes lo cubre esto — por menos de 40 euros mensuales."
+      </div>
+    </div>
+  </div>
+
+  <!-- PERFIL DEL ASEGURADO -->
+  <div class="section-label">Perfil del asegurado</div>
+  <div class="profile-grid">
+    <div class="profile-item">
+      <div class="label">Nombre</div>
+      <div class="value">Salva Costa Bello</div>
+    </div>
+    <div class="profile-item">
+      <div class="label">Edad</div>
+      <div class="value">20 años</div>
+    </div>
+    <div class="profile-item">
+      <div class="label">Profesión</div>
+      <div class="value risk">Repartidor furgoneta</div>
+    </div>
+    <div class="profile-item">
+      <div class="label">Régimen SS</div>
+      <div class="value">Autónomo · RETA</div>
+    </div>
+    <div class="profile-item">
+      <div class="label">Ingresos netos</div>
+      <div class="value">1.750 €/mes</div>
+    </div>
+    <div class="profile-item">
+      <div class="label">Riesgo principal</div>
+      <div class="value risk">Accidente de tráfico laboral</div>
+    </div>
+  </div>
+
+  <!-- GAP DEL RETA -->
+  <div class="gap-section">
+    <div class="section-label">El problema real: el agujero del RETA</div>
+    <div class="alert-strip">
+      Si Salva tiene un accidente mañana y no puede repartir, la Seguridad Social le paga <strong>720,59 €/mes</strong>. Sus gastos fijos son <strong>900 €/mes</strong>. Hay un agujero de <strong>179 €/mes</strong> que nadie cubre. Nadie, salvo esto.
+    </div>
+    <div class="gap-row">
+      <div class="gap-card">
+        <div class="gc-amount">900 €</div>
+        <div class="gc-label">Gastos fijos mensuales</div>
+      </div>
+      <div class="gap-card">
+        <div class="gc-amount">721 €</div>
+        <div class="gc-label">Prestación RETA en baja</div>
+      </div>
+      <div class="gap-card gap-highlight">
+        <div class="gc-amount">179 €</div>
+        <div class="gc-label">Sin cubrir cada mes</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- COBERTURAS -->
+  <div class="coverages-section">
+    <div class="section-label">Coberturas cotizadas · Contigo Autónomo</div>
+    <table class="cov-table">
+      <thead>
+        <tr>
+          <th>Cobertura</th>
+          <th style="text-align:center">Capital</th>
+          <th style="text-align:right">Prima/mes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fallecimiento <span class="tag tag-green">base obligatoria</span></td>
+          <td>16.000 €</td>
+          <td>5,25 €</td>
+        </tr>
+        <tr>
+          <td>Fallecimiento plus</td>
+          <td>50.000 €</td>
+          <td>1,34 €</td>
+        </tr>
+        <tr>
+          <td>Fallecimiento por accidente <span class="tag tag-orange">clave repartidor</span></td>
+          <td>60.000 €</td>
+          <td>5,04 €</td>
+        </tr>
+        <tr>
+          <td>Fallecimiento acc. circulación <span class="tag tag-orange">clave repartidor</span></td>
+          <td>60.000 €</td>
+          <td>2,82 €</td>
+        </tr>
+        <tr>
+          <td>Invalidez permanente absoluta</td>
+          <td>40.000 €</td>
+          <td>2,86 €</td>
+        </tr>
+        <tr>
+          <td>Invalidez permanente total</td>
+          <td>20.000 €</td>
+          <td>3,83 €</td>
+        </tr>
+        <tr>
+          <td>Incapacidad laboral temporal (ILT) <span class="tag tag-orange">clave repartidor</span></td>
+          <td>30 €/día</td>
+          <td>15,13 €</td>
+        </tr>
+        <tr>
+          <td>Capital enfermedad grave</td>
+          <td>10.000 €</td>
+          <td>0,74 €</td>
+        </tr>
+        <tr>
+          <td>Capital primer diagnóstico de cáncer</td>
+          <td>10.000 €</td>
+          <td>0,77 €</td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="2">Total · descuento hábitos saludables −10% aplicado</td>
+          <td>39,94 €</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ARGUMENTO SEGÚN PERFIL -->
+  <div class="tabs-section">
+    <div class="section-label">Argumento según cómo responda el padre</div>
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="showTab(0)">
+        <div class="tb-micro">Si está receptivo</div>
+        <div class="tb-label">Papá preocupado</div>
+      </button>
+      <button class="tab-btn" onclick="showTab(1)">
+        <div class="tb-micro">Si lo ve caro</div>
+        <div class="tb-label">Objeción de precio</div>
+      </button>
+      <button class="tab-btn" onclick="showTab(2)">
+        <div class="tb-micro">Si lo aplaza</div>
+        <div class="tb-label">Lo piensa</div>
+      </button>
+    </div>
+
+    <div class="tab-panel active" id="tp0">
+      <div class="tp-head">Papá preocupado — está abierto</div>
+      <div class="tp-script">"Salvador, tú ya sabes lo que es no poder trabajar. Con la rodilla, con la cadera. Tu hijo conduce una furgoneta ocho horas al día. Si mañana tiene un accidente, el Estado le paga 720 euros. Él necesita 900. Por 40 euros al mes le cerramos ese agujero. Y si tiene un accidente grave de tráfico, en vez de dejarle sin nada, le dejamos 60.000 euros para rehacer su vida. ¿Cuándo quieres que empiece?"</div>
+      <div class="tp-note">Objetivo: <span>ir directo al cierre, no dar más vueltas</span></div>
+    </div>
+    <div class="tab-panel" id="tp1">
+      <div class="tp-head">Objeción de precio — lo ve caro</div>
+      <div class="tp-script">"¿Caro? Son 1,33 euros al día. Tu hijo conduce la furgoneta cada día. Si tiene un accidente y está 3 meses sin trabajar y sin este seguro, pierde 1.750 euros al mes. Tres meses son más de 5.000 euros perdidos. Frente a eso, 40 euros al mes no es un gasto — es el precio de que su negocio siga en pie."</div>
+      <div class="tp-note">Objetivo: <span>convertir el precio en coste de oportunidad</span></div>
+    </div>
+    <div class="tab-panel" id="tp2">
+      <div class="tp-head">Lo aplaza — lo va a pensar</div>
+      <div class="tp-script">"Salvador, lo entiendo. Pero hay una pregunta que no puede esperar: si mañana Salva tiene un accidente con la furgoneta, ¿quién paga su cuota de autónomo ese mes? ¿Quién paga su alquiler? Hoy no tiene respuesta. Con este seguro, sí. El seguro empieza el día 1. ¿Lo firmamos hoy?"</div>
+      <div class="tp-note">Objetivo: <span>anclar en el presente, no en lo hipotético</span></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CÓMO RELLENAR EL EXPEDIENTE -->
+  <div class="steps-section">
+    <div class="section-label">Cómo rellenar el expediente — paso a paso</div>
+    <div class="steps-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Tipo de protección:</strong> seleccionar "Protección para actividad profesional" en la primera pantalla.
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Datos personales:</strong> soltero · autónomo · RETA · 2 años cotizados · régimen fiscal general · sin hijos.
+          <div class="step-note">Verificar fecha de nacimiento antes de continuar. Un error invalida la cotización.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Ingresos:</strong> 1.750 €/mes × 12 pagas = 21.000 €/año. Ahorro: 0. Gastos anuales: 0.
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>Gastos fijos del negocio:</strong> introducir 900 €/mes. El sistema calcula automáticamente que la prestación RETA (720,59 €) no cubre y muestra el gap de 179 €.
+          <div class="step-note">Este es el argumento visual más potente — déjalo que lo vea el padre.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <strong>Grupo profesional:</strong> marcar el segundo — trabajo manual sin maquinaria, con desplazamientos. Descripción: "Repartidor en Furgoneta".
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <strong>Hábitos de salud:</strong> no fumador · declara deporte → activa descuento −10% automático sobre fallecimiento plus, IPA y enfermedad grave.
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">7</div>
+        <div class="step-body">
+          <strong>Declaración de salud:</strong> marcar SÍ si cumple todos los puntos. Salva es joven y sano — previsiblemente sin incidencias. Si hay algún punto dudoso, no marcar SÍ y dejar que el sistema derive a cuestionario ampliado.
+          <div class="step-note">Una declaración falsa puede invalidar el pago en el siniestro. Ser siempre honesto.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">8</div>
+        <div class="step-body">
+          <strong>ILT:</strong> 30 €/día. Franquicia recomendada: 8 días. Optimiza prima/cobertura para un repartidor joven.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- OBJECIONES DESPLEGABLES -->
+  <div class="obj-section">
+    <div class="section-label">Objeciones frecuentes</div>
+    <div class="obj-grid">
+      <div class="obj-item">
+        <div class="obj-q" onclick="toggleObj(this)">
+          "El RETA ya le cubre"
+          <span class="arrow">▼</span>
+        </div>
+        <div class="obj-a">"El RETA le cubre desde el cuarto día de baja y le paga el 60% de su base. Si su base es 1.000€, cobra 600€. Sus gastos son 900€. Hay 300€ al mes que el RETA no llega. Exactamente eso cubre este seguro."</div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-q" onclick="toggleObj(this)">
+          "Ya tiene un seguro de vida"
+          <span class="arrow">▼</span>
+        </div>
+        <div class="obj-a">"¿Ese seguro le paga mientras está vivo pero no puede trabajar? La mayoría de seguros de vida solo pagan al fallecimiento. Contigo Autónomo le paga los 30 euros al día desde el primer accidente. Es completamente diferente."</div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-q" onclick="toggleObj(this)">
+          "Es muy caro para lo que gana"
+          <span class="arrow">▼</span>
+        </div>
+        <div class="obj-a">"Son 40 euros al mes — 1,33 euros al día. Si está 3 meses de baja sin seguro, pierde más de 5.000 euros. El seguro cuesta 480 euros al año. La pregunta no es si puede pagarlo — la pregunta es si puede permitirse no tenerlo."</div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-q" onclick="toggleObj(this)">
+          "No le va a pasar nada, es joven"
+          <span class="arrow">▼</span>
+        </div>
+        <div class="obj-a">"Precisamente porque es joven, la prima es mínima. Y precisamente porque conduce cada día, el riesgo es real. Los accidentes de tráfico laborales son la primera causa de siniestro en autónomos repartidores. Ser joven no protege de eso."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- EXTRAS GRATUITOS -->
+  <div class="section-label">Incluido sin coste adicional</div>
+  <div class="extras-row">
+    <div class="extra-card">
+      <div class="extra-ico">🩺</div>
+      <div>
+        <div class="extra-title">App Salud — gratis</div>
+        <div class="extra-desc">Chat médico 24h con múltiples especialidades. Respuesta inmediata desde el móvil.</div>
+      </div>
+    </div>
+    <div class="extra-card">
+      <div class="extra-ico">⚖️</div>
+      <div>
+        <div class="extra-title">App Legal — gratis</div>
+        <div class="extra-desc">Asesoramiento jurídico ilimitado: tráfico, autónomos, laboral. Respuesta en menos de 2 min.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRECIO FINAL -->
+  <div class="final-bar">
+    <div class="fb-left">
+      <div class="fb-tag">Prima estimada mensual</div>
+      <div class="fb-desc">Con descuento hábitos saludables −10% · Contigo Autónomo · Salva Costa</div>
+    </div>
+    <div>
+      <div class="fb-price">39,94 €</div>
+      <div class="fb-sub">Capital total: 266.000 €</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Expediente: 71032_639105872136193500 · Fecha efecto: 02/04/2026 · Prima estimada pendiente de confirmación profesión exacta
+  </div>
+
+</div>
+
+<script>
+  function showTab(i) {
+    document.querySelectorAll('.tab-btn').forEach((b, j) => b.classList.toggle('active', i === j));
+    document.querySelectorAll('.tab-panel').forEach((p, j) => p.classList.toggle('active', i === j));
+  }
+
+  function toggleObj(el) {
+    const item = el.parentElement;
+    item.classList.toggle('open');
+  }
+</script>
+</body>
+</html>

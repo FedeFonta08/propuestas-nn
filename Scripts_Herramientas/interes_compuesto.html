@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Interés Compuesto</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue-dark: #0C447C;
+    --blue-mid: #185FA5;
+    --blue-light: #B5D4F4;
+    --blue-pale: #E6F1FB;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5F5E5A;
+    --text-muted: #888780;
+    --bg: #f7f5f0;
+    --surface: #ffffff;
+    --border: rgba(0,0,0,0.08);
+    --accent: #185FA5;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  header {
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+  }
+
+  .label-top {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 520px;
+  }
+
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+
+  .metric {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    transition: border-color 0.2s;
+  }
+
+  .metric:first-child {
+    border-left: 3px solid var(--accent);
+  }
+
+  .metric-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .metric-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .metric:first-child .metric-value {
+    color: var(--blue-mid);
+  }
+
+  .controls {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: grid;
+    gap: 1.1rem;
+  }
+
+  .control-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 90px;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .control-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    background: var(--blue-pale);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--blue-mid);
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px var(--blue-mid);
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+
+  input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--blue-mid);
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px var(--blue-mid);
+    cursor: pointer;
+  }
+
+  .control-value {
+    font-size: 14px;
+    font-weight: 500;
+    text-align: right;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .chart-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .chart-legend {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+
+  .chart-inner {
+    position: relative;
+    height: 280px;
+    width: 100%;
+  }
+
+  .explanation {
+    background: var(--blue-pale);
+    border-left: 3px solid var(--blue-mid);
+    border-radius: 0 12px 12px 0;
+    padding: 1.1rem 1.25rem;
+    font-size: 13px;
+    color: var(--blue-dark);
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+
+  .explanation strong {
+    font-weight: 500;
+  }
+
+  .formula-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .formula-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    min-width: 70px;
+  }
+
+  .formula {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+  }
+
+  .formula span {
+    color: var(--blue-mid);
+  }
+
+  footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2rem;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 500px) {
+    .metrics { grid-template-columns: 1fr; }
+    .control-row { grid-template-columns: 100px 1fr 80px; }
+    h1 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <p class="label-top">Herramienta financiera</p>
+    <h1>Interés<br>Compuesto</h1>
+    <p class="subtitle">El dinero que ganas genera, a su vez, más dinero. Ajusta los parámetros y observa cómo crece tu capital en el tiempo.</p>
+  </header>
+
+  <div class="metrics">
+    <div class="metric">
+      <p class="metric-label">Capital final</p>
+      <p class="metric-value" id="final-val">—</p>
+    </div>
+    <div class="metric">
+      <p class="metric-label">Intereses ganados</p>
+      <p class="metric-value" id="interest-val">—</p>
+    </div>
+    <div class="metric">
+      <p class="metric-label">Multiplicador</p>
+      <p class="metric-value" id="mult-val">—</p>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="control-row">
+      <label class="control-label">Capital inicial</label>
+      <input type="range" min="1000" max="50000" step="1000" value="10000" id="principal" />
+      <span class="control-value" id="principal-out">10.000 €</span>
+    </div>
+    <div class="control-row">
+      <label class="control-label">Tasa anual</label>
+      <input type="range" min="1" max="15" step="0.5" value="6" id="rate" />
+      <span class="control-value" id="rate-out">6%</span>
+    </div>
+    <div class="control-row">
+      <label class="control-label">Años</label>
+      <input type="range" min="1" max="40" step="1" value="20" id="years" />
+      <span class="control-value" id="years-out">20 años</span>
+    </div>
+    <div class="control-row">
+      <label class="control-label">Aportación mensual</label>
+      <input type="range" min="0" max="1000" step="50" value="0" id="monthly" />
+      <span class="control-value" id="monthly-out">0 €/mes</span>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#185FA5;"></div> Capital total</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#B5D4F4;"></div> Capital aportado</div>
+    </div>
+    <div class="chart-inner">
+      <canvas id="chart"></canvas>
+    </div>
+  </div>
+
+  <div class="explanation" id="explanation-box">—</div>
+
+  <div class="formula-box">
+    <span class="formula-label">Fórmula</span>
+    <span class="formula">C × (1 + <span>r</span>)<sup>t</sup> &nbsp;+&nbsp; aportaciones</span>
+  </div>
+
+  <footer>Calculadora educativa · Los resultados son estimaciones y no constituyen asesoramiento financiero</footer>
+
+</div>
+
+<script>
+let chart;
+
+function fmtEur(n) {
+  return new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
+}
+
+function calc() {
+  const P = parseFloat(document.getElementById('principal').value);
+  const r = parseFloat(document.getElementById('rate').value) / 100;
+  const y = parseInt(document.getElementById('years').value);
+  const m = parseFloat(document.getElementById('monthly').value);
+
+  const labels = [], totalData = [], investedData = [];
+
+  for (let t = 0; t <= y; t++) {
+    const compound = P * Math.pow(1 + r, t);
+    const monthlyFV = m > 0 ? m * 12 * ((Math.pow(1 + r, t) - 1) / r) : 0;
+    labels.push(t === 0 ? 'Hoy' : `Año ${t}`);
+    totalData.push(Math.round(compound + monthlyFV));
+    investedData.push(Math.round(P + m * 12 * t));
+  }
+
+  const finalTotal = totalData[totalData.length - 1];
+  const finalInvested = investedData[investedData.length - 1];
+  const mult = (finalTotal / P).toFixed(1);
+
+  document.getElementById('final-val').textContent = fmtEur(finalTotal);
+  document.getElementById('interest-val').textContent = fmtEur(finalTotal - finalInvested);
+  document.getElementById('mult-val').textContent = mult + '×';
+
+  const P2 = parseFloat(document.getElementById('principal').value);
+  const r2 = parseFloat(document.getElementById('rate').value);
+  const y2 = parseInt(document.getElementById('years').value);
+  const m2 = parseFloat(document.getElementById('monthly').value);
+  let msg = `Con <strong>${fmtEur(P2)}</strong> al <strong>${r2}%</strong> anual durante <strong>${y2} años</strong>`;
+  if (m2 > 0) msg += ` y aportando <strong>${m2} €/mes</strong>`;
+  msg += `, tu dinero se multiplica <strong>${mult} veces</strong>. `;
+  msg += `Los intereses generan ${fmtEur(finalTotal - finalInvested)} — dinero que nunca tuviste que trabajar para ganar.`;
+  document.getElementById('explanation-box').innerHTML = msg;
+
+  return { labels, totalData, investedData };
+}
+
+function render() {
+  const { labels, totalData, investedData } = calc();
+
+  if (chart) {
+    chart.data.labels = labels;
+    chart.data.datasets[0].data = totalData;
+    chart.data.datasets[1].data = investedData;
+    chart.update('none');
+    return;
+  }
+
+  chart = new Chart(document.getElementById('chart'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Capital total',
+          data: totalData,
+          borderColor: '#185FA5',
+          backgroundColor: 'rgba(24,95,165,0.1)',
+          fill: true,
+          tension: 0.35,
+          pointRadius: 0,
+          borderWidth: 2.5
+        },
+        {
+          label: 'Aportado',
+          data: investedData,
+          borderColor: '#B5D4F4',
+          backgroundColor: 'rgba(181,212,244,0.08)',
+          fill: true,
+          tension: 0,
+          pointRadius: 0,
+          borderWidth: 1.5,
+          borderDash: [5, 4]
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#fff',
+          borderColor: 'rgba(0,0,0,0.1)',
+          borderWidth: 1,
+          titleColor: '#1a1a1a',
+          bodyColor: '#5F5E5A',
+          padding: 10,
+          callbacks: {
+            label: ctx => ' ' + fmtEur(ctx.parsed.y)
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { maxTicksLimit: 9, font: { size: 11, family: 'DM Sans' }, color: '#888780' }
+        },
+        y: {
+          grid: { color: 'rgba(0,0,0,0.05)' },
+          ticks: {
+            font: { size: 11, family: 'DM Sans' }, color: '#888780',
+            callback: v => {
+              if (v >= 1000000) return (v/1000000).toFixed(1) + 'M €';
+              if (v >= 1000) return (v/1000).toFixed(0) + 'K €';
+              return v + ' €';
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+const formatters = {
+  principal: v => Number(v).toLocaleString('es-ES') + ' €',
+  rate: v => v + '%',
+  years: v => v + ' años',
+  monthly: v => v + ' €/mes'
+};
+
+['principal','rate','years','monthly'].forEach(id => {
+  document.getElementById(id).addEventListener('input', function() {
+    document.getElementById(id + '-out').textContent = formatters[id](this.value);
+    render();
+  });
+});
+
+render();
+</script>
+</body>
+</html>

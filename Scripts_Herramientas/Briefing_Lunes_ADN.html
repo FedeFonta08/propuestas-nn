@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing ADN Lunes · NN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --orange: #B33600; /* Naranja más oscuro para mayor contraste */
+            --orange-l: #D94A00;
+            --dark: #EAEAEA; /* Fondo general un poco más oscuro para contrastar con las tarjetas blancas */
+            --navy: #000000; /* Texto principal en negro puro */
+            --text2: #111111; /* Texto secundario casi negro */
+            --card-bg: #FFFFFF;
+            --card-border: rgba(0,0,0,0.3); /* Bordes más oscuros */
+        }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--dark);
+            color: var(--navy);
+            margin: 0;
+            padding: 2rem;
+            background-image: radial-gradient(ellipse 80% 50% at 10% 0%, rgba(201,77,0,0.04) 0%, transparent 60%);
+        }
+        .header { max-width: 1000px; margin: 0 auto 2rem; border-bottom: 3px solid var(--orange); padding-bottom: 1rem; }
+        .logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 1.5px; color: var(--navy); }
+        .logo-text span { color: var(--orange); }
+        .subtitle { font-size: 13px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+        .card { background: var(--card-bg); border: 2px solid var(--orange); border-radius: 14px; padding: 1.5rem; box-shadow: 0 8px 24px rgba(201,77,0,0.08); position: relative; overflow: hidden; }
+        .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--orange); }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+        .badge { background: #FFF8F5; color: var(--orange); padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border: 1px solid rgba(201,77,0,0.2); }
+        .producto { font-family: 'Bebas Neue', sans-serif; font-size: 26px; line-height: 1.1; margin-top: 8px; }
+        .segmento { color: #16A34A; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+        .novedad { font-size: 14px; color: var(--text2); margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--card-border); }
+        
+        .adn-box { background: #F9FAFB; border-left: 4px solid var(--navy); padding: 1rem; margin-bottom: 1rem; border-radius: 0 8px 8px 0; }
+        .adn-title { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--navy); margin-bottom: 4px; }
+        .adn-text { font-size: 14px; color: var(--text2); }
+        
+        .apertura-box { background: #FFF8F5; border: 1.5px solid rgba(201,77,0,0.3); border-radius: 8px; padding: 1rem; }
+        .apertura-title { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--orange); margin-bottom: 6px; }
+        .apertura-text { font-size: 15px; font-weight: 600; font-style: italic; color: var(--navy); line-height: 1.4; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="subtitle">Briefing Semanal para Agentes</div>
+        <div class="logo-text">TRADUCCIÓN ADN · <span>PANEL NN</span></div>
+    </div>
+    <div class="grid">
+
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <div class="segmento">🎯 Familias con hijos pertenecientes a colectivos profesionales.</div>
+                    <div class="producto">Contigo Familia</div>
+                </div>
+                <div class="badge">🟢 ACTIVA</div>
+            </div>
+            <div class="novedad">25% de descuento de por vida en el seguro Contigo Familia para profesionales de determinados colectivos, incluyendo clientes y clientes de cartera.</div>
+            
+            <div class="adn-box">
+                <div class="adn-title">🔪 Vulnerabilidad Detectada (Bisturí ADN)</div>
+                <div class="adn-text">¿Quién paga la universidad y las facturas si tú faltas mañana?</div>
+            </div>
+            
+            <div class="apertura-box">
+                <div class="apertura-title">🗣️ Pregunta de Apertura Consultiva</div>
+                <div class="apertura-text">"Si mañana, por una situación inesperada, tus ingresos desaparecieran, ¿cómo te asegurarías de que tus hijos pudieran continuar con su educación y mantener la estabilidad que tienen hoy?"</div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
