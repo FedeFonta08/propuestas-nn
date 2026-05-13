@@ -178,35 +178,50 @@ Cada herramienta del ecosistema tiene los guiones, objeciones y árboles de deci
 ## 📋 Catálogo Estratégico de Soluciones
 
 <details open>
-<summary><b>🛡️ Protección Salud y Vida (Pilar Maestro)</b></summary>
+<summary><b>💰 Fase 1: Ahorro e Inversión</b></summary>
 
-<div align="center">
-  <img src="https://fedefonta08.github.io/propuestas-nn/assets/infographic_pillar.png" width="600" alt="Infografía Salud y Vida"/>
-</div>
-
-1. **Plan Salud + Vida** — El híbrido perfecto: Sanitas + Vida con ventajas exclusivas.
-2. **Seguro Salud Completo** — Medicina de élite sin esperas, 12,5% descuento.
-3. **Salud Copago** — Máxima eficiencia en costes, 4% descuento adicional.
-4. **Vida y Familia** — Blindaje total con cobertura de cáncer de mama incluida.
-5. **Contigo Senior 55+** — Independencia y servicios de autonomía (6 meses bonificados).
+- **SIALP:** Ahorro a largo plazo con exención fiscal total (año 5+). [Ver Guía](https://fedefonta08.github.io/propuestas-nn/guias-comerciales/Gu%C3%ADa%20Maestra%20Profesional%20SIALP%20-%20Punto%20Naranja%20X%C3%A0tiva.pdf)
+- **Flexicuenta:** Pulmón de ahorro con disponibilidad total e inmediata.
+- **Contigo Futuro:** Inversión ESG con garantía diaria del 80% del máximo.
+- **Plan Garantizado:** Inversión con protección contractual (90/100/110%).
+- **Ahorro Garantizado Extra:** Rentabilidad mínima fija por contrato.
+- **Protección PLUS:** El escudo que blinda tus ahorros ante imprevistos.
 </details>
 
 <details>
-<summary><b>📈 Ahorro, Inversión y Futuro</b></summary>
+<summary><b>❤️ Fase 2: Salud, Vida y Accidentes</b></summary>
 
-1. **SIALP** — Exención fiscal total al 5º año. [Ver Guía](https://fedefonta08.github.io/propuestas-nn/guias-comerciales/Gu%C3%ADa%20Maestra%20Profesional%20SIALP%20-%20Punto%20Naranja%20X%C3%A0tiva.pdf)
-2. **Plan Garantizado** — Seguridad absoluta con capital creciente.
-3. **Flexicuenta** — El pulmón de ahorro disponible sin penalizaciones.
-4. **Contigo Futuro** — Protección de máximos históricos (Garantía 80%).
-5. **Sistema Duplo** — Optimización fiscal en planes de pensiones.
+- **Plan Salud + Vida:** El híbrido Sanitas + Vida (Vida gratis 1er año).
+- **Seguro Salud Completo:** Medicina de élite Sanitas sin esperas.
+- **Salud Copago:** Máxima eficiencia asistencial al menor coste.
+- **Vida y Familia:** Blindaje total con cobertura específica de cáncer de mama.
+- **Contigo Senior (+55):** Protección e independencia (6 meses bonificados).
+- **Accidentes LiderPlus:** Capital directo inmediato ante infortunios.
 </details>
 
 <details>
-<summary><b>🏠 Hogar, Hipotecas y Empresa</b></summary>
+<summary><b>💼 Fase 5: Profesional y Empresa</b></summary>
 
-- **Hipotecas:** Acuerdos exclusivos con **ABANCA** e **ING** (sin comisiones de apertura).
-- **Hogar:** MiHogar Seguro con coberturas premium integradas.
-- **Empresa:** Contigo Autónomo, ILT y soluciones específicas para PYMES.
+- **Contigo Autónomo:** Protección integral (ILT, Invalidez, Fallecimiento).
+- **Seguro ILT (Baja):** Indemnización diaria configurable (10€ a 200€/día).
+- **Contigo Pyme:** Seguros colectivos para empleados (retención de talento).
+- **Seguro Comercios:** Multirriesgo NN-Caser con garantía de continuidad.
+- **Salud Autónomos:** Asistencia Sanitas deducible 100% en el IRPF.
+</details>
+
+<details>
+<summary><b>🏦 Fase 4: Pensiones y Futuro</b></summary>
+
+- **PPSA (Autónomos):** La mayor deducción fiscal (hasta 5.750€/año).
+- **Sistema Duplo:** Plan de pensiones con gestión dinámica Goldman Sachs.
+</details>
+
+<details>
+<summary><b>🏠 Fase 3 & 6: Patrimonio e Hipotecas</b></summary>
+
+- **Hipotecas:** Acuerdos exclusivos **ABANCA** e **ING** (0€ apertura).
+- **Hogar:** MiHogar Seguro con asistencia "Manitas" y testamento online.
+- **Automóvil:** Alianza NN + Mutua Madrileña (valor a nuevo 2 años).
 </details>
 
 ---
