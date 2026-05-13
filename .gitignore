@@ -1,10 +1,48 @@
-# Entorno y variables
-.env
-.env.*
+# ============================================
+# 🟠 ECOSISTEMA DESPEGUE — CONFIGURACIÓN GIT
+# ============================================
 
-# ============================================
-# CARPETAS LOCALES — NO SUBIR A GITHUB
-# ============================================
+# 1. Bloqueo de Lenguajes y Herramientas Locales
+*.py
+*.pyc
+*.bat
+*.sh
+*.exe
+__pycache__/
+requirements.txt
+
+# 2. Bloqueo de Datos y Credenciales (Seguridad Crítica)
+*.json
+*.xlsx
+*.xls
+*.csv
+*.env
+*.env.*
+*.txt
+*.log
+credentials.json
+token*.json
+Contraseña*.txt
+
+# 3. Bloqueo de Documentación de Trabajo e IDE
+*.md
+!README.md
+.vscode/
+.idea/
+.DS_Store
+desktop.ini
+
+# 4. Bloqueo de Borradores y Pruebas HTML (Purga de Ruido)
+# Ignoramos todos los HTML que NO sean herramientas Core
+COPIADOR_*.html
+PARA_ENVIO_*.html
+PROPUESTA_*.html
+PRUEBA_*.html
+preview_*.html
+fede_photo_*.txt
+log_envio.txt
+
+# 5. CARPETAS LOCALES — NO SUBIR A GITHUB
 CRM_Contactos/
 Campanas_Promociones/
 Contratos_Polizas/
@@ -17,39 +55,18 @@ Presentaciones/
 Productos_Guias/
 Propuestas_Clientes/
 Reclutamiento_CV/
+scratch/
 
-# Carpeta de Herramientas - Solo subimos los HTML/Assets necesarios para GitHub Pages
+# 6. PERMITIR SOLO CARPETAS NECESARIAS PARA GITHUB PAGES
+!assets/
+!docs/
+!guias-comerciales/
+!.github/
+
+# Carpeta de Herramientas - Bloqueamos todo lo interno
 Scripts_Herramientas/*
 !Scripts_Herramientas/*.html
-!Scripts_Herramientas/*.py
 !Scripts_Herramientas/assets/
 !Scripts_Herramientas/assets/**
-
-# ============================================
-# CREDENCIALES Y TOKENS — NUNCA SUBIR
-# ============================================
-credentials.json
-token.json
-token_drive.json
-*.json
-!package.json
-!package-lock.json
-
-# Python - Quitamos *.py para que TUS SCRIPTS sí se guarden como copia de seguridad
-__pycache__/
-*.pyc
-
-# Bloqueo total de archivos de datos (aunque estén fuera de las carpetas)
-*.xlsx
-*.xls
-*.csv
-*.pdf
-*.zip
-*.rar
-
-# IDE y OS
-.vscode/
-.idea/
-.DS_Store
-desktop.ini
-config.js
+# Bloqueo explícito de scripts en esa carpeta
+Scripts_Herramientas/*.py
