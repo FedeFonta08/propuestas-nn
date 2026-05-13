@@ -203,6 +203,17 @@ function formatearPrecio(precio) {
   return precio;
 }
 
+// FUNCIÓN FORMATEAR CAPITAL
+function formatearCapital(cap) {
+  if (!cap) return '';
+  if (cap.includes('€')) return cap;
+  if (/^\d+/.test(cap)) {
+    const num = cap.replace(/\D/g, '');
+    return new Intl.NumberFormat('es-ES').format(num) + ' €';
+  }
+  return cap;
+}
+
 const FASES = {
   'f1': { label: 'Fase 1 · Ahorro e Inversión', ico: '💰', col: 'p', fb: 'fbp', sl: 'slp' },
   'f2': { label: 'Fase 2 · Salud, Vida y Accidentes', ico: '❤️', col: 'o', fb: 'fbo', sl: 'slo' },
@@ -787,11 +798,20 @@ function priceClass(c){return `c${colMap(c)}`;}
 // ═══════════════════════════════════════════════════════════════
 // RENDER PRODUCTO
 // ═══════════════════════════════════════════════════════════════
-function renderProd(p, nombre, prima){
+function renderProd(p, nombre, prima, capitales){
   const n = nombre || 'tu propuesta';
   const pf = formatearPrecio(prima || p.prima || 'Consultar');
+  const cf = formatearCapital(capitales);
   const f = FASES[p.fase];
   const KC = keyClass(f.col), TC = tagClass(f.col), PC = priceClass(f.col);
+
+  // Reemplazar capitales en coberturas si existen
+  const covs = p.covs ? p.covs.map(c => {
+    if (cf && (c.c === 'Capital a elegir' || c.c === 'Capital a asegurar')) {
+      return { ...c, c: cf };
+    }
+    return c;
+  }) : null;
 
   const gapH = p.gap ? `
     <div class="sl slo">El agujero real del RETA</div>
@@ -806,13 +826,22 @@ function renderProd(p, nombre, prima){
 
   const deadlineH = p.deadline ? `<div class="deadline-badge"><div class="db-ico">${p.deadline.ico}</div><div class="db-main"><div class="db-badge">${p.deadline.badge}</div><div class="db-loss">${p.deadline.loss}</div></div></div>` : '';
 
-  const covsH = p.covs ? `
+  const covsH = covs ? `
     <div class="sl sl${colMap(f.col)}">Qué incluye tu propuesta</div>
-    <div class="cl">${p.covs.map(c=>`
+    <div class="cl">${covs.map(c=>`
       <div class="cr ${c.k ? KC : ''}">
         <span class="cn">${c.n}${c.k?`<span class="tag ${TC}">${c.t}</span>`:''}</span>
         <div class="crr"><span class="cc">${c.c}</span><span class="cp ${PC}">${c.p}</span></div>
       </div>`).join('')}</div>` : '';
+
+  const capitalesH = cf ? `
+    <div class="sl sl${colMap(f.col)}">Capital propuesto</div>
+    <div class="st-row">
+      <div class="stc" style="grid-column: 1 / -1; background: var(--ol); border-color: var(--om); padding: 20px 14px;">
+        <div class="stv" style="color: var(--o); font-size: 28px; margin-bottom: 6px;">${cf}</div>
+        <div class="stl" style="font-size: 13px; font-weight: 500; color: var(--tx);">Capital principal de protección</div>
+      </div>
+    </div>` : '';
 
   const objecH = p.objeciones ? `
       <div class="faq-hed">Preguntas frecuentes · Resolvemos tus dudas</div>
@@ -838,7 +867,7 @@ function renderProd(p, nombre, prima){
     <div class="body fi">
       <div class="greet">${p.greet(n)}</div>
       <span class="fbadge ${f.fb}">${f.ico} ${f.label}</span>
-      ${deadlineH}${gapH}${hbH}${stH}${covsH}${totalH}${objecH}
+      ${deadlineH}${gapH}${hbH}${capitalesH}${stH}${covsH}${totalH}${objecH}
       ${p.extras ? exts() : ''}
       <div class="dv"></div>
       <div class="cierre">${p.cierre(n)}</div>
@@ -947,10 +976,11 @@ function main(){
   const sec = q('seccion'), prod = q('producto').toLowerCase();
   const nombre = q('nombre') || q('name');
   const prima = q('prima') || q('price');
+  const capitales = q('capitales') || q('capital');
   const app = document.getElementById('app');
 
   if(sec === 'agente') app.innerHTML = renderAgente(nombre);
-  else if(prod && PRODS[prod]) app.innerHTML = renderProd(PRODS[prod], nombre, prima);
+  else if(prod && PRODS[prod]) app.innerHTML = renderProd(PRODS[prod], nombre, prima, capitales);
   else app.innerHTML = renderPortada();
 }
 

@@ -316,6 +316,10 @@ body {
         <label>Prima Mensual / Referencia</label>
         <input type="text" id="prima" placeholder="39,94 €/mes" value="">
       </div>
+      <div class="form-group full">
+        <label>Capitales Asegurados (Opcional)</label>
+        <input type="text" id="capitales" placeholder="Ej: 100.000€ Vida / 50.000€ Invalidez" value="">
+      </div>
     </div>
     
     <!-- PRODUCTO -->
@@ -390,12 +394,14 @@ function init() {
   // Listeners
   document.getElementById('nombre').addEventListener('input', actualizarURL);
   document.getElementById('prima').addEventListener('input', actualizarURL);
+  document.getElementById('capitales').addEventListener('input', actualizarURL);
 }
 
 function actualizarURL() {
   const nombre = document.getElementById('nombre').value.trim();
   const producto = document.querySelector('input[name="producto"]:checked')?.value || '';
   const prima = document.getElementById('prima').value.trim();
+  const capitales = document.getElementById('capitales').value.trim();
   
   const baseURL = 'https://fedefonta08.github.io/propuestas-nn/propuestas-nn-v2.html';
   let url = baseURL;
@@ -404,16 +410,17 @@ function actualizarURL() {
   if (producto) params.push(`producto=${producto}`);
   if (nombre) params.push(`nombre=${encodeURIComponent(nombre)}`);
   if (prima) params.push(`prima=${encodeURIComponent(prima)}`);
+  if (capitales) params.push(`capitales=${encodeURIComponent(capitales)}`);
   
   if (params.length > 0) {
     url += '?' + params.join('&');
   }
   
   document.getElementById('urlPreview').textContent = url;
-  actualizarEmail(nombre, producto, prima, url);
+  actualizarEmail(nombre, producto, prima, capitales, url);
 }
 
-function actualizarEmail(nombre, producto, prima, url) {
+function actualizarEmail(nombre, producto, prima, capitales, url) {
   const prod = PRODUCTOS[producto] || {};
   const prodNom = prod.nom || 'tu propuesta';
   
@@ -432,6 +439,7 @@ La propuesta ya incluye:
 ✓ Tu nombre personalizado
 ✓ Producto: ${prodNom}
 ${prima ? `✓ Prima: ${prima}` : ''}
+${capitales ? `✓ Capitales: ${capitales}` : ''}
 
 ¿Dudas? Hablamos por teléfono cuando quieras.
 
