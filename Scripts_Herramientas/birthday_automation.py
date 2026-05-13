@@ -51,12 +51,14 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 .card { background: #fff; border-radius: 24px; border: 1px solid var(--brd); overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.04); display: flex; flex-direction: column; }
 
 /* SELECTOR DE IMAGEN */
-.image-selector { padding: 10px; background: #f8fafc; border-bottom: 1px solid var(--brd); display: flex; gap: 8px; justify-content: center; }
-.thumb-opt { width: 40px; height: 40px; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; object-fit: cover; }
-.thumb-opt:hover { border-color: var(--nn); }
-.thumb-opt.active { border-color: var(--nn); transform: scale(1.1); }
+.image-selector { padding: 15px 10px; background: #f8fafc; border-bottom: 1px solid var(--brd); display: flex; gap: 12px; justify-content: center; }
+.opt-container { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.thumb-opt { width: 44px; height: 44px; border-radius: 10px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; object-fit: cover; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.thumb-opt:hover { border-color: var(--nn); transform: translateY(-2px); }
+.thumb-opt.active { border-color: var(--nn); transform: scale(1.1); box-shadow: 0 4px 12px rgba(255,102,0,0.3); }
+.opt-label { font-size: 9px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
 
-.card-img-wrap { position: relative; width: 100%; height: 240px; background: #eee; overflow: hidden; }
+.card-img-wrap { position: relative; width: 100%; height: 260px; background: #f1f5f9; overflow: hidden; }
 .card-img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s; }
 
 .card-header { padding: 1.5rem; display: flex; align-items: center; gap: 15px; }
@@ -68,12 +70,12 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 .card-body { padding: 0 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
 .msg-box { background: var(--nn-l); border-radius: 16px; padding: 1.25rem; font-size: 14px; line-height: 1.7; border: 1px solid rgba(255,102,0,0.2); margin-bottom: 1.5rem; }
 
-.actions { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
+.actions { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: auto; }
 .btn { width: 100%; padding: 14px; border-radius: 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; text-align: center; cursor: pointer; text-decoration: none; border: none; }
-.btn-wa { background: var(--green); color: #fff; }
-.btn-copy { background: #fff; color: var(--tx); border: 2px solid var(--brd); }
+.btn-wa { background: var(--green); color: #fff; display: block; }
+.btn-copy { background: #fff; color: var(--nn); border: 2px solid var(--nn); }
 
-.tip { font-size: 11px; color: var(--muted); text-align: center; margin-top: 10px; }
+.tip { font-size: 11px; color: var(--muted); text-align: center; margin-top: 10px; font-weight: 600; }
 </style>
 </head>
 <body>
@@ -152,10 +154,22 @@ function copyMsg(id, msg) {
         return f"""
 <div class="card">
   <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt {"active" if default_img=="assets/fede_card.png" else ""}" onclick="selectCard('{card_id}', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt {"active" if default_img=="assets/senior.png" else ""}" onclick="selectCard('{card_id}', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt {"active" if default_img=="assets/adulto.png" else ""}" onclick="selectCard('{card_id}', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt {"active" if default_img=="assets/hijo.png" else ""}" onclick="selectCard('{card_id}', 'assets/hijo.png', this)" title="Familiar / Hijo">
+    <div class="opt-container">
+      <img src="assets/fede_card.png" class="thumb-opt {"active" if default_img=="assets/fede_card.png" else ""}" onclick="selectCard('{card_id}', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <span class="opt-label">Fede</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/senior.png" class="thumb-opt {"active" if default_img=="assets/senior.png" else ""}" onclick="selectCard('{card_id}', 'assets/senior.png', this)" title="Senior">
+      <span class="opt-label">Senior</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/adulto.png" class="thumb-opt {"active" if default_img=="assets/adulto.png" else ""}" onclick="selectCard('{card_id}', 'assets/adulto.png', this)" title="Adulto">
+      <span class="opt-label">Adulto</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/hijo.png" class="thumb-opt {"active" if default_img=="assets/hijo.png" else ""}" onclick="selectCard('{card_id}', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <span class="opt-label">Fami</span>
+    </div>
   </div>
   <div class="card-img-wrap">
     <img src="{default_img}" id="main-img-{card_id}" class="card-img" alt="Tarjeta">

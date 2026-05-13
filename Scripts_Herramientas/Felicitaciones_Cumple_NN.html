@@ -31,6 +31,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 
 .card { background: #fff; border-radius: 24px; border: 1px solid var(--brd); overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.04); display: flex; flex-direction: column; }
 
+/* SELECTOR DE IMAGEN */
 .image-selector { padding: 15px 10px; background: #f8fafc; border-bottom: 1px solid var(--brd); display: flex; gap: 12px; justify-content: center; }
 .opt-container { display: flex; flex-direction: column; align-items: center; gap: 5px; }
 .thumb-opt { width: 44px; height: 44px; border-radius: 10px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; object-fit: cover; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
@@ -53,7 +54,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 .actions { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: auto; }
 .btn { width: 100%; padding: 14px; border-radius: 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; text-align: center; cursor: pointer; text-decoration: none; border: none; }
 .btn-wa { background: var(--green); color: #fff; display: block; }
-.btn-copy-img { background: #fff; color: var(--nn); border: 2px solid var(--nn); }
+.btn-copy { background: #fff; color: var(--nn); border: 2px solid var(--nn); }
 
 .tip { font-size: 11px; color: var(--muted); text-align: center; margin-top: 10px; font-weight: 600; }
 </style>
@@ -62,706 +63,721 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 
 <div class="header">
     <img src="assets/fede_avatar.jpg" class="fede-avatar">
-    <h1>Felicitaciones <em>Unificadas.</em></h1>
+    <h1>Felicitaciones <em>Premium.</em></h1>
 </div>
 
 <div class="summary-bar">
-  <div class="sum-item"><span class="sum-n" style="color:var(--nn)">4</span><span class="sum-l">Hoy</span></div>
-  <div class="sum-item"><span class="sum-n">21</span><span class="sum-l">Próximos 7 días</span></div>
+  <div class="sum-item"><span class="sum-n" style="color:var(--nn)">1</span><span class="sum-l">Hoy</span></div>
+  <div class="sum-item"><span class="sum-n">17</span><span class="sum-l">Próximos 7 días</span></div>
 </div>
 
-<div class="section-title">Envíos de Hoy — Pestaña Única</div>
+<div class="section-title">Envíos de Hoy — Selección de Tarjeta</div>
 <div class="grid">
   
 <div class="card">
   <div class="image-selector">
     <div class="opt-container">
-      <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34647259499', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <img src="assets/fede_card.png" class="thumb-opt " onclick="selectCard('+34609148712', 'assets/fede_card.png', this)" title="Fede Personalizada">
       <span class="opt-label">Fede</span>
     </div>
     <div class="opt-container">
-      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34647259499', 'assets/senior.png', this)" title="Senior">
+      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34609148712', 'assets/senior.png', this)" title="Senior">
       <span class="opt-label">Senior</span>
     </div>
     <div class="opt-container">
-      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34647259499', 'assets/adulto.png', this)" title="Adulto">
+      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34609148712', 'assets/adulto.png', this)" title="Adulto">
       <span class="opt-label">Adulto</span>
     </div>
     <div class="opt-container">
-      <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34647259499', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <img src="assets/hijo.png" class="thumb-opt active" onclick="selectCard('+34609148712', 'assets/hijo.png', this)" title="Familiar / Hijo">
       <span class="opt-label">Fami</span>
     </div>
   </div>
   <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34647259499" class="card-img" alt="Tarjeta">
+    <img src="assets/hijo.png" id="main-img-+34609148712" class="card-img" alt="Tarjeta">
   </div>
   <div class="card-header">
-    <div class="avatar-small">A</div>
+    <div class="avatar-small">M(</div>
     <div class="info">
-      <div class="name">Amparo Gimenez Torres </div>
-      <div class="buyer">HOGAR 15/7 Y DECESOS 5/10. TIENE 2 COCHES Y 2 MOTOS</div>
+      <div class="name">Maria Elvira (Hijo Alex)</div>
+      <div class="buyer">HIJO / FAMILIA</div>
     </div>
   </div>
   <div class="card-body">
-    <div class="msg-box">¡Hola Amparo Gimenez Torres! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
+    <div class="msg-box">¡Hola Maria Elvira! Me he acordado de que hoy es el cumpleaños de tu hijo Alex. ¡Muchísimas felicidades para él y para ti también! Espero que lo disfrutéis mucho en familia. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34647259499&text=%C2%A1Hola%20Amparo%20Gimenez%20Torres%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34647259499')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
+      <a href="https://wa.me/34609148712?text=¡Hola Maria Elvira! Me he acordado de que hoy es el cumpleaños de tu hijo Alex. ¡Muchísimas felicidades para él y para ti también! Espero que lo disfrutéis mucho en familia. ¡Un fuerte abrazo!" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <button id="btn-copy-+34609148712" class="btn btn-copy" onclick="copyMsg('+34609148712', '¡Hola Maria Elvira! Me he acordado de que hoy es el cumpleaños de tu hijo Alex. ¡Muchísimas felicidades para él y para ti también! Espero que lo disfrutéis mucho en familia. ¡Un fuerte abrazo!')">2. Copiar Texto</button>
     </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
-  </div>
-</div>
-        
-<div class="card">
-  <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34649293874', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34649293874', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34649293874', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34649293874', 'assets/hijo.png', this)" title="Familiar / Hijo">
-  </div>
-  <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34649293874" class="card-img" alt="Tarjeta">
-  </div>
-  <div class="card-header">
-    <div class="avatar-small">F</div>
-    <div class="info">
-      <div class="name">Fernando Aranda Arguello </div>
-      <div class="buyer">DECESOS11 1/7</div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="msg-box">¡Hola Fernando Aranda Arguello! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
-    <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34649293874&text=%C2%A1Hola%20Fernando%20Aranda%20Arguello%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34649293874')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
-    </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
-  </div>
-</div>
-        
-<div class="card">
-  <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34679966091', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34679966091', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34679966091', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34679966091', 'assets/hijo.png', this)" title="Familiar / Hijo">
-  </div>
-  <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34679966091" class="card-img" alt="Tarjeta">
-  </div>
-  <div class="card-header">
-    <div class="avatar-small">J</div>
-    <div class="info">
-      <div class="name">Javier López Esteve </div>
-      <div class="buyer">DECESOS Y HOGAR</div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="msg-box">¡Hola Javier López Esteve! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
-    <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34679966091&text=%C2%A1Hola%20Javier%20L%C3%B3pez%20Esteve%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34679966091')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
-    </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
-  </div>
-</div>
-        
-<div class="card">
-  <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34671337510', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34671337510', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34671337510', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34671337510', 'assets/hijo.png', this)" title="Familiar / Hijo">
-  </div>
-  <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34671337510" class="card-img" alt="Tarjeta">
-  </div>
-  <div class="card-header">
-    <div class="avatar-small">M</div>
-    <div class="info">
-      <div class="name">Maria Josefa Cano Crespo </div>
-      <div class="buyer">SEGURO HOGAR 5/3 Y DECESOS33 26/6</div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="msg-box">¡Hola Maria Josefa Cano Crespo! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
-    <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34671337510&text=%C2%A1Hola%20Maria%20Josefa%20Cano%20Crespo%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34671337510')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
-    </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
+    <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
   </div>
 </div>
         
 </div>
 
-<div class="section-title">Calendario Semanal</div>
+<div class="section-title">Próximos de la Semana</div>
 <div class="grid">
   
 <div class="card">
   <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt " onclick="selectCard('+34665456973', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34665456973', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34665456973', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt active" onclick="selectCard('+34665456973', 'assets/hijo.png', this)" title="Familiar / Hijo">
+    <div class="opt-container">
+      <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('info@estuchesmedol.com', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <span class="opt-label">Fede</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('info@estuchesmedol.com', 'assets/senior.png', this)" title="Senior">
+      <span class="opt-label">Senior</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('info@estuchesmedol.com', 'assets/adulto.png', this)" title="Adulto">
+      <span class="opt-label">Adulto</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('info@estuchesmedol.com', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <span class="opt-label">Fami</span>
+    </div>
   </div>
   <div class="card-img-wrap">
-    <img src="assets/hijo.png" id="main-img-+34665456973" class="card-img" alt="Tarjeta">
+    <img src="assets/fede_card.png" id="main-img-info@estuchesmedol.com" class="card-img" alt="Tarjeta">
   </div>
   <div class="card-header">
-    <div class="avatar-small">A</div>
+    <div class="avatar-small">A+</div>
     <div class="info">
-      <div class="name">Andrea Tormo </div>
-      <div class="buyer">HIJO DE JOSE ARTURO TORMO SANCHIS</div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="msg-box">¡Hola Jose Arturo Tormo Sanchis! Soy Fede de Nationale-Nederlanden. Me he acordado de que hoy es el cumple de Andrea Tormo. ¡Muchísimas felicidades para el peque y para vosotros! Que paséis un gran día.</div>
-    <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34665456973&text=%C2%A1Hola%20Jose%20Arturo%20Tormo%20Sanchis%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Me%20he%20acordado%20de%20que%20hoy%20es%20el%20cumple%20de%20Andrea%20Tormo.%20%C2%A1Much%C3%ADsimas%20felicidades%20para%20el%20peque%20y%20para%20vosotros%21%20Que%20pas%C3%A9is%20un%20gran%20d%C3%ADa.')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34665456973')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
-    </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
-  </div>
-</div>
-        
-<div class="card">
-  <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34 636 07 18 61', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34 636 07 18 61', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34 636 07 18 61', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34 636 07 18 61', 'assets/hijo.png', this)" title="Familiar / Hijo">
-  </div>
-  <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34 636 07 18 61" class="card-img" alt="Tarjeta">
-  </div>
-  <div class="card-header">
-    <div class="avatar-small">A</div>
-    <div class="info">
-      <div class="name">Angel Urio Reig Calabuig </div>
-      <div class="buyer">SOLO VIDA. VIVE CON SU MADRE.</div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="msg-box">¡Hola Angel Urio Reig Calabuig! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
-    <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34636071861&text=%C2%A1Hola%20Angel%20Urio%20Reig%20Calabuig%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34 636 07 18 61')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
-    </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
-  </div>
-</div>
-        
-<div class="card">
-  <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34 962 21 05 17', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34 962 21 05 17', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34 962 21 05 17', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34 962 21 05 17', 'assets/hijo.png', this)" title="Familiar / Hijo">
-  </div>
-  <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34 962 21 05 17" class="card-img" alt="Tarjeta">
-  </div>
-  <div class="card-header">
-    <div class="avatar-small">J</div>
-    <div class="info">
-      <div class="name">Jose Luis Olmeda Villar </div>
-      <div class="buyer">SOLO DECESOS11  1/12</div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="msg-box">¡Hola Jose Luis Olmeda Villar! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
-    <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34962210517&text=%C2%A1Hola%20Jose%20Luis%20Olmeda%20Villar%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34 962 21 05 17')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
-    </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
-  </div>
-</div>
-        
-<div class="card">
-  <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34 635 33 67 70', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34 635 33 67 70', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34 635 33 67 70', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34 635 33 67 70', 'assets/hijo.png', this)" title="Familiar / Hijo">
-  </div>
-  <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34 635 33 67 70" class="card-img" alt="Tarjeta">
-  </div>
-  <div class="card-header">
-    <div class="avatar-small">M</div>
-    <div class="info">
-      <div class="name">Maria Dolores Martí Cardos </div>
-      <div class="buyer">DECESOS 11 1/7, HOGAR VTO. 7/10</div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="msg-box">¡Hola Maria Dolores Martí Cardos! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
-    <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34635336770&text=%C2%A1Hola%20Maria%20Dolores%20Mart%C3%AD%20Cardos%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34 635 33 67 70')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
-    </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
-  </div>
-</div>
-        
-<div class="card">
-  <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt " onclick="selectCard('+34 639 04 20 93', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34 639 04 20 93', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34 639 04 20 93', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt active" onclick="selectCard('+34 639 04 20 93', 'assets/hijo.png', this)" title="Familiar / Hijo">
-  </div>
-  <div class="card-img-wrap">
-    <img src="assets/hijo.png" id="main-img-+34 639 04 20 93" class="card-img" alt="Tarjeta">
-  </div>
-  <div class="card-header">
-    <div class="avatar-small">P</div>
-    <div class="info">
-      <div class="name">Pablo Garcia </div>
-      <div class="buyer">HIJO DE AMPARO PÉREZ SANEGRE</div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="msg-box">¡Hola Amparo Pérez Sanegre! Soy Fede de Nationale-Nederlanden. Me he acordado de que hoy es el cumple de Pablo Garcia. ¡Muchísimas felicidades para el peque y para vosotros! Que paséis un gran día.</div>
-    <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34639042093&text=%C2%A1Hola%20Amparo%20P%C3%A9rez%20Sanegre%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Me%20he%20acordado%20de%20que%20hoy%20es%20el%20cumple%20de%20Pablo%20Garcia.%20%C2%A1Much%C3%ADsimas%20felicidades%20para%20el%20peque%20y%20para%20vosotros%21%20Que%20pas%C3%A9is%20un%20gran%20d%C3%ADa.')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34 639 04 20 93')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
-    </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
-  </div>
-</div>
-        
-<div class="card">
-  <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34615467781', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34615467781', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34615467781', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34615467781', 'assets/hijo.png', this)" title="Familiar / Hijo">
-  </div>
-  <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34615467781" class="card-img" alt="Tarjeta">
-  </div>
-  <div class="card-header">
-    <div class="avatar-small">Á</div>
-    <div class="info">
-      <div class="name">Ángel Carmona García </div>
-      <div class="buyer">SU HOGAR 31/12. HOGAR ALQUILER 8/2. CHALET 8/2. SEGUROS COCHE CAIXA ONTINYENT. SEGUROS DECESOS OCASO. SU MUJER FALTO.</div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="msg-box">¡Hola Ángel Carmona García! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
-    <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34615467781&text=%C2%A1Hola%20%C3%81ngel%20Carmona%20Garc%C3%ADa%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34615467781')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
-    </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
-  </div>
-</div>
-        
-<div class="card">
-  <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34676362362', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34676362362', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34676362362', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34676362362', 'assets/hijo.png', this)" title="Familiar / Hijo">
-  </div>
-  <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34676362362" class="card-img" alt="Tarjeta">
-  </div>
-  <div class="card-header">
-    <div class="avatar-small">M</div>
-    <div class="info">
-      <div class="name">Maria Dolores Gaya Tormo </div>
-      <div class="buyer">DECESOS33</div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="msg-box">¡Hola Maria Dolores Gaya Tormo! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
-    <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34676362362&text=%C2%A1Hola%20Maria%20Dolores%20Gaya%20Tormo%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34676362362')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
-    </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
-  </div>
-</div>
-        
-<div class="card">
-  <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34649380349', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34649380349', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34649380349', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34649380349', 'assets/hijo.png', this)" title="Familiar / Hijo">
-  </div>
-  <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34649380349" class="card-img" alt="Tarjeta">
-  </div>
-  <div class="card-header">
-    <div class="avatar-small">C</div>
-    <div class="info">
-      <div class="name">Concepcion Montserrat Pont Chafer </div>
-      <div class="buyer">HOGAR VALENCIA 19/10</div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="msg-box">¡Hola Concepcion Montserrat Pont Chafer! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
-    <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34649380349&text=%C2%A1Hola%20Concepcion%20Montserrat%20Pont%20Chafer%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34649380349')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
-    </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
-  </div>
-</div>
-        
-<div class="card">
-  <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34696874954', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34696874954', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34696874954', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34696874954', 'assets/hijo.png', this)" title="Familiar / Hijo">
-  </div>
-  <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34696874954" class="card-img" alt="Tarjeta">
-  </div>
-  <div class="card-header">
-    <div class="avatar-small">M</div>
-    <div class="info">
-      <div class="name">Maria José Rubio Tudela </div>
-      <div class="buyer">SOLO TENÍAMOS SEGURO DE MASCOTA. TIENE UN PISO EN PROPIEDAD PARA ALQUILAR</div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="msg-box">¡Hola Maria José Rubio Tudela! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
-    <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34696874954&text=%C2%A1Hola%20Maria%20Jos%C3%A9%20Rubio%20Tudela%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34696874954')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
-    </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
-  </div>
-</div>
-        
-<div class="card">
-  <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34722762687', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34722762687', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34722762687', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34722762687', 'assets/hijo.png', this)" title="Familiar / Hijo">
-  </div>
-  <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34722762687" class="card-img" alt="Tarjeta">
-  </div>
-  <div class="card-header">
-    <div class="avatar-small">R</div>
-    <div class="info">
-      <div class="name">Rebeca Gorrita Samuel </div>
-      <div class="buyer">VIDA 8/11 Y DE DECESOS33 23/6. SE HA IDO A VIVIR A BURJASSOT</div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="msg-box">¡Hola Rebeca Gorrita Samuel! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
-    <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34722762687&text=%C2%A1Hola%20Rebeca%20Gorrita%20Samuel%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34722762687')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
-    </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
-  </div>
-</div>
-        
-<div class="card">
-  <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34 637 49 16 76', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34 637 49 16 76', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34 637 49 16 76', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34 637 49 16 76', 'assets/hijo.png', this)" title="Familiar / Hijo">
-  </div>
-  <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34 637 49 16 76" class="card-img" alt="Tarjeta">
-  </div>
-  <div class="card-header">
-    <div class="avatar-small">Á</div>
-    <div class="info">
-      <div class="name">Ángeles Moreno Peiro </div>
-      <div class="buyer">VIDA 15/10, HOGAR 11/6 Y DECESOS 1/2</div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="msg-box">¡Hola Ángeles Moreno Peiro! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
-    <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34637491676&text=%C2%A1Hola%20%C3%81ngeles%20Moreno%20Peiro%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34 637 49 16 76')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
-    </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
-  </div>
-</div>
-        
-<div class="card">
-  <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt " onclick="selectCard('+34655181408', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34655181408', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34655181408', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt active" onclick="selectCard('+34655181408', 'assets/hijo.png', this)" title="Familiar / Hijo">
-  </div>
-  <div class="card-img-wrap">
-    <img src="assets/hijo.png" id="main-img-+34655181408" class="card-img" alt="Tarjeta">
-  </div>
-  <div class="card-header">
-    <div class="avatar-small">C</div>
-    <div class="info">
-      <div class="name">Carla González </div>
-      <div class="buyer">HIJO DE MARI CARMEN GRACIA DÍAZ</div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="msg-box">¡Hola Mari Carmen Gracia Díaz! Soy Fede de Nationale-Nederlanden. Me he acordado de que hoy es el cumple de Carla González. ¡Muchísimas felicidades para el peque y para vosotros! Que paséis un gran día.</div>
-    <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34655181408&text=%C2%A1Hola%20Mari%20Carmen%20Gracia%20D%C3%ADaz%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Me%20he%20acordado%20de%20que%20hoy%20es%20el%20cumple%20de%20Carla%20Gonz%C3%A1lez.%20%C2%A1Much%C3%ADsimas%20felicidades%20para%20el%20peque%20y%20para%20vosotros%21%20Que%20pas%C3%A9is%20un%20gran%20d%C3%ADa.')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34655181408')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
-    </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
-  </div>
-</div>
-        
-<div class="card">
-  <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34678182104', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34678182104', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34678182104', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34678182104', 'assets/hijo.png', this)" title="Familiar / Hijo">
-  </div>
-  <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34678182104" class="card-img" alt="Tarjeta">
-  </div>
-  <div class="card-header">
-    <div class="avatar-small">C</div>
-    <div class="info">
-      <div class="name">Carmen Sanchez Molina </div>
-      <div class="buyer">DECESOS33 1/10</div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="msg-box">¡Hola Carmen Sanchez Molina! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
-    <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34678182104&text=%C2%A1Hola%20Carmen%20Sanchez%20Molina%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34678182104')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
-    </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
-  </div>
-</div>
-        
-<div class="card">
-  <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34 609 96 49 42', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34 609 96 49 42', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34 609 96 49 42', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34 609 96 49 42', 'assets/hijo.png', this)" title="Familiar / Hijo">
-  </div>
-  <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34 609 96 49 42" class="card-img" alt="Tarjeta">
-  </div>
-  <div class="card-header">
-    <div class="avatar-small">M</div>
-    <div class="info">
-      <div class="name">Maria García Francés </div>
-      <div class="buyer">SOLO DECESOS. VTO PISO EN AGOSTO</div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="msg-box">¡Hola Maria García Francés! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
-    <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34609964942&text=%C2%A1Hola%20Maria%20Garc%C3%ADa%20Franc%C3%A9s%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34 609 96 49 42')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
-    </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
-  </div>
-</div>
-        
-<div class="card">
-  <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34666758851', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34666758851', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34666758851', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34666758851', 'assets/hijo.png', this)" title="Familiar / Hijo">
-  </div>
-  <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34666758851" class="card-img" alt="Tarjeta">
-  </div>
-  <div class="card-header">
-    <div class="avatar-small">A</div>
-    <div class="info">
-      <div class="name">Alexis Molto Mestre </div>
-      <div class="buyer">PONE QUE ES REPARTIDOR DE ANGELA. SOLO SEGURO DE AHORROS. TUVO DECESOS Y VIDA A NOMBRE DE SU MUJER</div>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="msg-box">¡Hola Alexis Molto Mestre! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
-    <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34666758851&text=%C2%A1Hola%20Alexis%20Molto%20Mestre%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34666758851')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
-    </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
-  </div>
-</div>
-        
-<div class="card">
-  <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34 625 54 72 64', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34 625 54 72 64', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34 625 54 72 64', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34 625 54 72 64', 'assets/hijo.png', this)" title="Familiar / Hijo">
-  </div>
-  <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34 625 54 72 64" class="card-img" alt="Tarjeta">
-  </div>
-  <div class="card-header">
-    <div class="avatar-small">A</div>
-    <div class="info">
-      <div class="name">Antonio García Díaz </div>
-      <div class="buyer">HOGAR 20/1.</div>
+      <div class="name">Antonio García Díaz +34 625 54 72 64</div>
+      <div class="buyer">Hogar 20/1.</div>
     </div>
   </div>
   <div class="card-body">
     <div class="msg-box">¡Hola Antonio García Díaz! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34625547264&text=%C2%A1Hola%20Antonio%20Garc%C3%ADa%20D%C3%ADaz%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34 625 54 72 64')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
+      <a href="https://wa.me/info@estuchesmedol.com?text=¡Hola Antonio García Díaz! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <button id="btn-copy-info@estuchesmedol.com" class="btn btn-copy" onclick="copyMsg('info@estuchesmedol.com', '¡Hola Antonio García Díaz! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!')">2. Copiar Texto</button>
     </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
+    <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
   </div>
 </div>
         
 <div class="card">
   <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34 619 64 54 85', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34 619 64 54 85', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34 619 64 54 85', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34 619 64 54 85', 'assets/hijo.png', this)" title="Familiar / Hijo">
+    <div class="opt-container">
+      <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('bpaviabeneto@gmail.com', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <span class="opt-label">Fede</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('bpaviabeneto@gmail.com', 'assets/senior.png', this)" title="Senior">
+      <span class="opt-label">Senior</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('bpaviabeneto@gmail.com', 'assets/adulto.png', this)" title="Adulto">
+      <span class="opt-label">Adulto</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('bpaviabeneto@gmail.com', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <span class="opt-label">Fami</span>
+    </div>
   </div>
   <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34 619 64 54 85" class="card-img" alt="Tarjeta">
+    <img src="assets/fede_card.png" id="main-img-bpaviabeneto@gmail.com" class="card-img" alt="Tarjeta">
   </div>
   <div class="card-header">
-    <div class="avatar-small">D</div>
+    <div class="avatar-small">C+</div>
     <div class="info">
-      <div class="name">Dolores Bustamante Pardo </div>
-      <div class="buyer">DECESOS11 1/10</div>
+      <div class="name">Carlos Vicente Montagud Carbonell +34633221411</div>
+      <div class="buyer">Seguro de Hogar 15/1, Vida Ella 15/1 Vida él 15/1 y Decesos 1/10</div>
     </div>
   </div>
   <div class="card-body">
-    <div class="msg-box">¡Hola Dolores Bustamante Pardo! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
+    <div class="msg-box">¡Hola Carlos Vicente Montagud Carbonell! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34619645485&text=%C2%A1Hola%20Dolores%20Bustamante%20Pardo%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34 619 64 54 85')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
+      <a href="https://wa.me/bpaviabeneto@gmail.com?text=¡Hola Carlos Vicente Montagud Carbonell! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <button id="btn-copy-bpaviabeneto@gmail.com" class="btn btn-copy" onclick="copyMsg('bpaviabeneto@gmail.com', '¡Hola Carlos Vicente Montagud Carbonell! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!')">2. Copiar Texto</button>
     </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
+    <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
   </div>
 </div>
         
 <div class="card">
   <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('ElenaSolomon', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('ElenaSolomon', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('ElenaSolomon', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('ElenaSolomon', 'assets/hijo.png', this)" title="Familiar / Hijo">
+    <div class="opt-container">
+      <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('riorfer@gmail.com', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <span class="opt-label">Fede</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('riorfer@gmail.com', 'assets/senior.png', this)" title="Senior">
+      <span class="opt-label">Senior</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('riorfer@gmail.com', 'assets/adulto.png', this)" title="Adulto">
+      <span class="opt-label">Adulto</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('riorfer@gmail.com', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <span class="opt-label">Fami</span>
+    </div>
   </div>
   <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-ElenaSolomon" class="card-img" alt="Tarjeta">
+    <img src="assets/fede_card.png" id="main-img-riorfer@gmail.com" class="card-img" alt="Tarjeta">
   </div>
   <div class="card-header">
-    <div class="avatar-small">E</div>
+    <div class="avatar-small">R+</div>
     <div class="info">
-      <div class="name">Elena Solomon </div>
-      <div class="buyer"></div>
+      <div class="name">Ricardo Fernández +34646622719</div>
+      <div class="buyer">Decesos33 16/4, Hogar 1/11, Vida 11/1 y Vida ella  11/1</div>
     </div>
   </div>
   <div class="card-body">
-    <div class="msg-box">¡Hola Elena Solomon! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
+    <div class="msg-box">¡Hola Ricardo Fernández! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=&text=%C2%A1Hola%20Elena%20Solomon%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('ElenaSolomon')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
+      <a href="https://wa.me/riorfer@gmail.com?text=¡Hola Ricardo Fernández! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <button id="btn-copy-riorfer@gmail.com" class="btn btn-copy" onclick="copyMsg('riorfer@gmail.com', '¡Hola Ricardo Fernández! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!')">2. Copiar Texto</button>
     </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
+    <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
   </div>
 </div>
         
 <div class="card">
   <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34 654 18 75 44', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34 654 18 75 44', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34 654 18 75 44', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34 654 18 75 44', 'assets/hijo.png', this)" title="Familiar / Hijo">
+    <div class="opt-container">
+      <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('angelillocarmona@gmail.com', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <span class="opt-label">Fede</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('angelillocarmona@gmail.com', 'assets/senior.png', this)" title="Senior">
+      <span class="opt-label">Senior</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('angelillocarmona@gmail.com', 'assets/adulto.png', this)" title="Adulto">
+      <span class="opt-label">Adulto</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('angelillocarmona@gmail.com', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <span class="opt-label">Fami</span>
+    </div>
   </div>
   <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34 654 18 75 44" class="card-img" alt="Tarjeta">
+    <img src="assets/fede_card.png" id="main-img-angelillocarmona@gmail.com" class="card-img" alt="Tarjeta">
   </div>
   <div class="card-header">
-    <div class="avatar-small">Y</div>
+    <div class="avatar-small">Á+</div>
     <div class="info">
-      <div class="name">Yolanda </div>
-      <div class="buyer">DECESOS 9/10, VIDA 5/12 HOGAR 1/1 Y NEGOCIO</div>
+      <div class="name">Ángel Carmona García +34615467781</div>
+      <div class="buyer">Su Hogar 31/12. Hogar Alquiler 8/2. Chalet 8/2. Seguros coche Caixa Ontinyent. Seguros Decesos Ocaso. Su mujer falto.</div>
     </div>
   </div>
   <div class="card-body">
-    <div class="msg-box">¡Hola Yolanda! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
+    <div class="msg-box">¡Hola Ángel Carmona García! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34654187544&text=%C2%A1Hola%20Yolanda%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34 654 18 75 44')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
+      <a href="https://wa.me/angelillocarmona@gmail.com?text=¡Hola Ángel Carmona García! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <button id="btn-copy-angelillocarmona@gmail.com" class="btn btn-copy" onclick="copyMsg('angelillocarmona@gmail.com', '¡Hola Ángel Carmona García! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!')">2. Copiar Texto</button>
     </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
+    <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
   </div>
 </div>
         
 <div class="card">
   <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('+34 671 55 33 52', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('+34 671 55 33 52', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('+34 671 55 33 52', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('+34 671 55 33 52', 'assets/hijo.png', this)" title="Familiar / Hijo">
+    <div class="opt-container">
+      <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('angelesmpe@gmail.com', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <span class="opt-label">Fede</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('angelesmpe@gmail.com', 'assets/senior.png', this)" title="Senior">
+      <span class="opt-label">Senior</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('angelesmpe@gmail.com', 'assets/adulto.png', this)" title="Adulto">
+      <span class="opt-label">Adulto</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('angelesmpe@gmail.com', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <span class="opt-label">Fami</span>
+    </div>
   </div>
   <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-+34 671 55 33 52" class="card-img" alt="Tarjeta">
+    <img src="assets/fede_card.png" id="main-img-angelesmpe@gmail.com" class="card-img" alt="Tarjeta">
   </div>
   <div class="card-header">
-    <div class="avatar-small">J</div>
+    <div class="avatar-small">Á+</div>
     <div class="info">
-      <div class="name">José Joaquín Oltra Moscardó </div>
-      <div class="buyer">HOGAR 5/12 Y DECESOS33 10/3 CON NOSOTROS</div>
+      <div class="name">Ángeles Moreno Peiro +34 637 49 16 76</div>
+      <div class="buyer">Vida 15/10, Hogar 11/6 y Decesos 1/2</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="msg-box">¡Hola Ángeles Moreno Peiro! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
+    <div class="actions">
+      <a href="https://wa.me/angelesmpe@gmail.com?text=¡Hola Ángeles Moreno Peiro! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <button id="btn-copy-angelesmpe@gmail.com" class="btn btn-copy" onclick="copyMsg('angelesmpe@gmail.com', '¡Hola Ángeles Moreno Peiro! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!')">2. Copiar Texto</button>
+    </div>
+    <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
+  </div>
+</div>
+        
+<div class="card">
+  <div class="image-selector">
+    <div class="opt-container">
+      <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('JoséJoaquínOltraMoscardó', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <span class="opt-label">Fede</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('JoséJoaquínOltraMoscardó', 'assets/senior.png', this)" title="Senior">
+      <span class="opt-label">Senior</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('JoséJoaquínOltraMoscardó', 'assets/adulto.png', this)" title="Adulto">
+      <span class="opt-label">Adulto</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('JoséJoaquínOltraMoscardó', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <span class="opt-label">Fami</span>
+    </div>
+  </div>
+  <div class="card-img-wrap">
+    <img src="assets/fede_card.png" id="main-img-JoséJoaquínOltraMoscardó" class="card-img" alt="Tarjeta">
+  </div>
+  <div class="card-header">
+    <div class="avatar-small">J+</div>
+    <div class="info">
+      <div class="name">José Joaquín Oltra Moscardó +34 671 55 33 52</div>
+      <div class="buyer">Hogar 5/12 y Decesos33 10/3 con nosotros</div>
     </div>
   </div>
   <div class="card-body">
     <div class="msg-box">¡Hola José Joaquín Oltra Moscardó! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=34671553352&text=%C2%A1Hola%20Jos%C3%A9%20Joaqu%C3%ADn%20Oltra%20Moscard%C3%B3%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('+34 671 55 33 52')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
+      <a href="https://wa.me/?text=¡Hola José Joaquín Oltra Moscardó! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <button id="btn-copy-JoséJoaquínOltraMoscardó" class="btn btn-copy" onclick="copyMsg('JoséJoaquínOltraMoscardó', '¡Hola José Joaquín Oltra Moscardó! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!')">2. Copiar Texto</button>
     </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
+    <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
   </div>
 </div>
         
 <div class="card">
   <div class="image-selector">
-    <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('RicardoOrtegaFernández', 'assets/fede_card.png', this)" title="Fede Personalizada">
-    <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('RicardoOrtegaFernández', 'assets/senior.png', this)" title="Senior">
-    <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('RicardoOrtegaFernández', 'assets/adulto.png', this)" title="Adulto">
-    <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('RicardoOrtegaFernández', 'assets/hijo.png', this)" title="Familiar / Hijo">
+    <div class="opt-container">
+      <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('rebeca1680@gmail.com', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <span class="opt-label">Fede</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('rebeca1680@gmail.com', 'assets/senior.png', this)" title="Senior">
+      <span class="opt-label">Senior</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('rebeca1680@gmail.com', 'assets/adulto.png', this)" title="Adulto">
+      <span class="opt-label">Adulto</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('rebeca1680@gmail.com', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <span class="opt-label">Fami</span>
+    </div>
   </div>
   <div class="card-img-wrap">
-    <img src="assets/fede_card.png" id="main-img-RicardoOrtegaFernández" class="card-img" alt="Tarjeta">
+    <img src="assets/fede_card.png" id="main-img-rebeca1680@gmail.com" class="card-img" alt="Tarjeta">
   </div>
   <div class="card-header">
-    <div class="avatar-small">R</div>
+    <div class="avatar-small">R+</div>
     <div class="info">
-      <div class="name">Ricardo Ortega Fernández </div>
-      <div class="buyer"></div>
+      <div class="name">Rebeca Gorrita Samuel +34722762687</div>
+      <div class="buyer">Vida 8/11 y de Decesos33 23/6. Se ha ido a vivir a Burjassot</div>
     </div>
   </div>
   <div class="card-body">
-    <div class="msg-box">¡Hola Ricardo Ortega Fernández! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
+    <div class="msg-box">¡Hola Rebeca Gorrita Samuel! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
     <div class="actions">
-      <button onclick="openWA('https://api.whatsapp.com/send?phone=&text=%C2%A1Hola%20Ricardo%20Ortega%20Fern%C3%A1ndez%21%20Soy%20Fede%20de%20Nationale-Nederlanden.%20Te%20deseo%20un%20muy%20feliz%20cumplea%C3%B1os%20y%20que%20pases%20un%20d%C3%ADa%20genial%20con%20los%20tuyos.%20%C2%A1Un%20fuerte%20abrazo%21')" class="btn btn-wa">1. Enviar (Pestaña Única)</button>
-      <button onclick="copyImage('RicardoOrtegaFernández')" class="btn btn-copy-img">2. Copiar Tarjeta Visual</button>
+      <a href="https://wa.me/rebeca1680@gmail.com?text=¡Hola Rebeca Gorrita Samuel! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <button id="btn-copy-rebeca1680@gmail.com" class="btn btn-copy" onclick="copyMsg('rebeca1680@gmail.com', '¡Hola Rebeca Gorrita Samuel! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!')">2. Copiar Texto</button>
     </div>
-    <p class="tip">🎯 Unificada: Todos los envíos van a la misma pestaña.</p>
+    <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
+  </div>
+</div>
+        
+<div class="card">
+  <div class="image-selector">
+    <div class="opt-container">
+      <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('MariaDoloresMartíCardos', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <span class="opt-label">Fede</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('MariaDoloresMartíCardos', 'assets/senior.png', this)" title="Senior">
+      <span class="opt-label">Senior</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('MariaDoloresMartíCardos', 'assets/adulto.png', this)" title="Adulto">
+      <span class="opt-label">Adulto</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('MariaDoloresMartíCardos', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <span class="opt-label">Fami</span>
+    </div>
+  </div>
+  <div class="card-img-wrap">
+    <img src="assets/fede_card.png" id="main-img-MariaDoloresMartíCardos" class="card-img" alt="Tarjeta">
+  </div>
+  <div class="card-header">
+    <div class="avatar-small">M+</div>
+    <div class="info">
+      <div class="name">Maria Dolores Martí Cardos +34 635 33 67 70</div>
+      <div class="buyer">Decesos 11 1/7, Hogar Vto. 7/10</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="msg-box">¡Hola Maria Dolores Martí Cardos! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
+    <div class="actions">
+      <a href="https://wa.me/?text=¡Hola Maria Dolores Martí Cardos! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <button id="btn-copy-MariaDoloresMartíCardos" class="btn btn-copy" onclick="copyMsg('MariaDoloresMartíCardos', '¡Hola Maria Dolores Martí Cardos! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!')">2. Copiar Texto</button>
+    </div>
+    <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
+  </div>
+</div>
+        
+<div class="card">
+  <div class="image-selector">
+    <div class="opt-container">
+      <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('karmensanchez9@hotmail.com', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <span class="opt-label">Fede</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('karmensanchez9@hotmail.com', 'assets/senior.png', this)" title="Senior">
+      <span class="opt-label">Senior</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('karmensanchez9@hotmail.com', 'assets/adulto.png', this)" title="Adulto">
+      <span class="opt-label">Adulto</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('karmensanchez9@hotmail.com', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <span class="opt-label">Fami</span>
+    </div>
+  </div>
+  <div class="card-img-wrap">
+    <img src="assets/fede_card.png" id="main-img-karmensanchez9@hotmail.com" class="card-img" alt="Tarjeta">
+  </div>
+  <div class="card-header">
+    <div class="avatar-small">C+</div>
+    <div class="info">
+      <div class="name">Carmen Sanchez Molina +34678182104</div>
+      <div class="buyer">Decesos33 1/10</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="msg-box">¡Hola Carmen Sanchez Molina! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
+    <div class="actions">
+      <a href="https://wa.me/karmensanchez9@hotmail.com?text=¡Hola Carmen Sanchez Molina! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <button id="btn-copy-karmensanchez9@hotmail.com" class="btn btn-copy" onclick="copyMsg('karmensanchez9@hotmail.com', '¡Hola Carmen Sanchez Molina! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!')">2. Copiar Texto</button>
+    </div>
+    <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
+  </div>
+</div>
+        
+<div class="card">
+  <div class="image-selector">
+    <div class="opt-container">
+      <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('conectamomo@hotmail.com', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <span class="opt-label">Fede</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('conectamomo@hotmail.com', 'assets/senior.png', this)" title="Senior">
+      <span class="opt-label">Senior</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('conectamomo@hotmail.com', 'assets/adulto.png', this)" title="Adulto">
+      <span class="opt-label">Adulto</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('conectamomo@hotmail.com', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <span class="opt-label">Fami</span>
+    </div>
+  </div>
+  <div class="card-img-wrap">
+    <img src="assets/fede_card.png" id="main-img-conectamomo@hotmail.com" class="card-img" alt="Tarjeta">
+  </div>
+  <div class="card-header">
+    <div class="avatar-small">C+</div>
+    <div class="info">
+      <div class="name">Concepcion Montserrat Pont Chafer +34649380349</div>
+      <div class="buyer">Hogar Valencia 19/10</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="msg-box">¡Hola Concepcion Montserrat Pont Chafer! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
+    <div class="actions">
+      <a href="https://wa.me/conectamomo@hotmail.com?text=¡Hola Concepcion Montserrat Pont Chafer! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <button id="btn-copy-conectamomo@hotmail.com" class="btn btn-copy" onclick="copyMsg('conectamomo@hotmail.com', '¡Hola Concepcion Montserrat Pont Chafer! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!')">2. Copiar Texto</button>
+    </div>
+    <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
+  </div>
+</div>
+        
+<div class="card">
+  <div class="image-selector">
+    <div class="opt-container">
+      <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('DoloresBustamantePardo', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <span class="opt-label">Fede</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('DoloresBustamantePardo', 'assets/senior.png', this)" title="Senior">
+      <span class="opt-label">Senior</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('DoloresBustamantePardo', 'assets/adulto.png', this)" title="Adulto">
+      <span class="opt-label">Adulto</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('DoloresBustamantePardo', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <span class="opt-label">Fami</span>
+    </div>
+  </div>
+  <div class="card-img-wrap">
+    <img src="assets/fede_card.png" id="main-img-DoloresBustamantePardo" class="card-img" alt="Tarjeta">
+  </div>
+  <div class="card-header">
+    <div class="avatar-small">D+</div>
+    <div class="info">
+      <div class="name">Dolores Bustamante Pardo +34 619 64 54 85</div>
+      <div class="buyer">Decesos11 1/10</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="msg-box">¡Hola Dolores Bustamante Pardo! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
+    <div class="actions">
+      <a href="https://wa.me/?text=¡Hola Dolores Bustamante Pardo! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <button id="btn-copy-DoloresBustamantePardo" class="btn btn-copy" onclick="copyMsg('DoloresBustamantePardo', '¡Hola Dolores Bustamante Pardo! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!')">2. Copiar Texto</button>
+    </div>
+    <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
+  </div>
+</div>
+        
+<div class="card">
+  <div class="image-selector">
+    <div class="opt-container">
+      <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('JoseLuisOlmedaVillar', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <span class="opt-label">Fede</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('JoseLuisOlmedaVillar', 'assets/senior.png', this)" title="Senior">
+      <span class="opt-label">Senior</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('JoseLuisOlmedaVillar', 'assets/adulto.png', this)" title="Adulto">
+      <span class="opt-label">Adulto</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('JoseLuisOlmedaVillar', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <span class="opt-label">Fami</span>
+    </div>
+  </div>
+  <div class="card-img-wrap">
+    <img src="assets/fede_card.png" id="main-img-JoseLuisOlmedaVillar" class="card-img" alt="Tarjeta">
+  </div>
+  <div class="card-header">
+    <div class="avatar-small">J+</div>
+    <div class="info">
+      <div class="name">Jose Luis Olmeda Villar +34 962 21 05 17</div>
+      <div class="buyer">Solo Decesos11  1/12</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="msg-box">¡Hola Jose Luis Olmeda Villar! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
+    <div class="actions">
+      <a href="https://wa.me/?text=¡Hola Jose Luis Olmeda Villar! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <button id="btn-copy-JoseLuisOlmedaVillar" class="btn btn-copy" onclick="copyMsg('JoseLuisOlmedaVillar', '¡Hola Jose Luis Olmeda Villar! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!')">2. Copiar Texto</button>
+    </div>
+    <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
+  </div>
+</div>
+        
+<div class="card">
+  <div class="image-selector">
+    <div class="opt-container">
+      <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('encantador1980@hotmail.com', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <span class="opt-label">Fede</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('encantador1980@hotmail.com', 'assets/senior.png', this)" title="Senior">
+      <span class="opt-label">Senior</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('encantador1980@hotmail.com', 'assets/adulto.png', this)" title="Adulto">
+      <span class="opt-label">Adulto</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('encantador1980@hotmail.com', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <span class="opt-label">Fami</span>
+    </div>
+  </div>
+  <div class="card-img-wrap">
+    <img src="assets/fede_card.png" id="main-img-encantador1980@hotmail.com" class="card-img" alt="Tarjeta">
+  </div>
+  <div class="card-header">
+    <div class="avatar-small">A+</div>
+    <div class="info">
+      <div class="name">Alexis Molto Mestre +34666758851</div>
+      <div class="buyer">Pone que es repartidor de Angela. Solo seguro de ahorros. Tuvo decesos y Vida a nombre de su mujer</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="msg-box">¡Hola Alexis Molto Mestre! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
+    <div class="actions">
+      <a href="https://wa.me/encantador1980@hotmail.com?text=¡Hola Alexis Molto Mestre! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <button id="btn-copy-encantador1980@hotmail.com" class="btn btn-copy" onclick="copyMsg('encantador1980@hotmail.com', '¡Hola Alexis Molto Mestre! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!')">2. Copiar Texto</button>
+    </div>
+    <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
+  </div>
+</div>
+        
+<div class="card">
+  <div class="image-selector">
+    <div class="opt-container">
+      <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('angelreig@gmail.com', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <span class="opt-label">Fede</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('angelreig@gmail.com', 'assets/senior.png', this)" title="Senior">
+      <span class="opt-label">Senior</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('angelreig@gmail.com', 'assets/adulto.png', this)" title="Adulto">
+      <span class="opt-label">Adulto</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('angelreig@gmail.com', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <span class="opt-label">Fami</span>
+    </div>
+  </div>
+  <div class="card-img-wrap">
+    <img src="assets/fede_card.png" id="main-img-angelreig@gmail.com" class="card-img" alt="Tarjeta">
+  </div>
+  <div class="card-header">
+    <div class="avatar-small">A+</div>
+    <div class="info">
+      <div class="name">Angel Urio Reig Calabuig +34 636 07 18 61</div>
+      <div class="buyer">Solo Vida. Vive con su madre.</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="msg-box">¡Hola Angel Urio Reig Calabuig! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
+    <div class="actions">
+      <a href="https://wa.me/angelreig@gmail.com?text=¡Hola Angel Urio Reig Calabuig! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <button id="btn-copy-angelreig@gmail.com" class="btn btn-copy" onclick="copyMsg('angelreig@gmail.com', '¡Hola Angel Urio Reig Calabuig! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!')">2. Copiar Texto</button>
+    </div>
+    <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
+  </div>
+</div>
+        
+<div class="card">
+  <div class="image-selector">
+    <div class="opt-container">
+      <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('MariaDoloresGayaTormo', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <span class="opt-label">Fede</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('MariaDoloresGayaTormo', 'assets/senior.png', this)" title="Senior">
+      <span class="opt-label">Senior</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('MariaDoloresGayaTormo', 'assets/adulto.png', this)" title="Adulto">
+      <span class="opt-label">Adulto</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('MariaDoloresGayaTormo', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <span class="opt-label">Fami</span>
+    </div>
+  </div>
+  <div class="card-img-wrap">
+    <img src="assets/fede_card.png" id="main-img-MariaDoloresGayaTormo" class="card-img" alt="Tarjeta">
+  </div>
+  <div class="card-header">
+    <div class="avatar-small">M+</div>
+    <div class="info">
+      <div class="name">Maria Dolores Gaya Tormo +34676362362</div>
+      <div class="buyer">Decesos33</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="msg-box">¡Hola Maria Dolores Gaya Tormo! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
+    <div class="actions">
+      <a href="https://wa.me/?text=¡Hola Maria Dolores Gaya Tormo! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <button id="btn-copy-MariaDoloresGayaTormo" class="btn btn-copy" onclick="copyMsg('MariaDoloresGayaTormo', '¡Hola Maria Dolores Gaya Tormo! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!')">2. Copiar Texto</button>
+    </div>
+    <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
+  </div>
+</div>
+        
+<div class="card">
+  <div class="image-selector">
+    <div class="opt-container">
+      <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('mgarciafrances@gmail.com', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <span class="opt-label">Fede</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('mgarciafrances@gmail.com', 'assets/senior.png', this)" title="Senior">
+      <span class="opt-label">Senior</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('mgarciafrances@gmail.com', 'assets/adulto.png', this)" title="Adulto">
+      <span class="opt-label">Adulto</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('mgarciafrances@gmail.com', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <span class="opt-label">Fami</span>
+    </div>
+  </div>
+  <div class="card-img-wrap">
+    <img src="assets/fede_card.png" id="main-img-mgarciafrances@gmail.com" class="card-img" alt="Tarjeta">
+  </div>
+  <div class="card-header">
+    <div class="avatar-small">M+</div>
+    <div class="info">
+      <div class="name">Maria García Francés +34 609 96 49 42</div>
+      <div class="buyer">Solo Decesos. Vto piso en Agosto</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="msg-box">¡Hola Maria García Francés! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
+    <div class="actions">
+      <a href="https://wa.me/mgarciafrances@gmail.com?text=¡Hola Maria García Francés! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <button id="btn-copy-mgarciafrances@gmail.com" class="btn btn-copy" onclick="copyMsg('mgarciafrances@gmail.com', '¡Hola Maria García Francés! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!')">2. Copiar Texto</button>
+    </div>
+    <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
+  </div>
+</div>
+        
+<div class="card">
+  <div class="image-selector">
+    <div class="opt-container">
+      <img src="assets/fede_card.png" class="thumb-opt active" onclick="selectCard('mjtudela123@gmail.com', 'assets/fede_card.png', this)" title="Fede Personalizada">
+      <span class="opt-label">Fede</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/senior.png" class="thumb-opt " onclick="selectCard('mjtudela123@gmail.com', 'assets/senior.png', this)" title="Senior">
+      <span class="opt-label">Senior</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/adulto.png" class="thumb-opt " onclick="selectCard('mjtudela123@gmail.com', 'assets/adulto.png', this)" title="Adulto">
+      <span class="opt-label">Adulto</span>
+    </div>
+    <div class="opt-container">
+      <img src="assets/hijo.png" class="thumb-opt " onclick="selectCard('mjtudela123@gmail.com', 'assets/hijo.png', this)" title="Familiar / Hijo">
+      <span class="opt-label">Fami</span>
+    </div>
+  </div>
+  <div class="card-img-wrap">
+    <img src="assets/fede_card.png" id="main-img-mjtudela123@gmail.com" class="card-img" alt="Tarjeta">
+  </div>
+  <div class="card-header">
+    <div class="avatar-small">M+</div>
+    <div class="info">
+      <div class="name">Maria José Rubio Tudela +34696874954</div>
+      <div class="buyer">Solo teníamos seguro de Mascota. Tiene un piso en propiedad para alquilar</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="msg-box">¡Hola Maria José Rubio Tudela! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!</div>
+    <div class="actions">
+      <a href="https://wa.me/mjtudela123@gmail.com?text=¡Hola Maria José Rubio Tudela! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <button id="btn-copy-mjtudela123@gmail.com" class="btn btn-copy" onclick="copyMsg('mjtudela123@gmail.com', '¡Hola Maria José Rubio Tudela! Soy Fede de Nationale-Nederlanden. Te deseo un muy feliz cumpleaños y que pases un día genial con los tuyos. ¡Un fuerte abrazo!')">2. Copiar Texto</button>
+    </div>
+    <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
   </div>
 </div>
         
@@ -776,34 +792,24 @@ function selectCard(cardId, imgSrc, thumbEl) {
         mainImg.style.opacity = '1';
     }, 150);
     
+    // Update active thumb
     const thumbs = thumbEl.parentElement.querySelectorAll('.thumb-opt');
     thumbs.forEach(t => t.classList.remove('active'));
     thumbEl.classList.add('active');
 }
 
-async function copyImage(cardId) {
-    const img = document.getElementById('main-img-' + cardId);
-    const btn = document.querySelector(`[onclick="copyImage('${cardId}')"]`);
-    const originalText = btn.innerHTML;
-    
-    try {
-        const response = await fetch(img.src);
-        const blob = await response.blob();
-        await navigator.clipboard.write([
-            new ClipboardItem({ [blob.type]: blob })
-        ]);
-        btn.innerHTML = '✓ Tarjeta Copiada!';
-        setTimeout(() => btn.innerHTML = originalText, 2000);
-    } catch (err) {
-        console.error('Error al copiar imagen:', err);
-        btn.innerHTML = '❌ Error (Usa Click Derecho)';
-        setTimeout(() => btn.innerHTML = originalText, 2000);
-    }
-}
-
-function openWA(url) {
-    // Forzar la apertura en la misma ventana nombrada
-    window.open(url, 'whatsapp_fede_main');
+function copyMsg(id, msg) {
+  navigator.clipboard.writeText(msg).then(() => {
+    const btn = document.getElementById('btn-copy-' + id);
+    btn.innerHTML = '✓ Copiado';
+    btn.style.background = 'var(--nn)';
+    btn.style.color = '#fff';
+    setTimeout(() => {
+      btn.innerHTML = 'Copiar Mensaje';
+      btn.style.background = '#fff';
+      btn.style.color = 'var(--tx)';
+    }, 2000);
+  });
 }
 </script>
 </body>
