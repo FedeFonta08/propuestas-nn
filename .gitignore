@@ -75,5 +75,6 @@ Scripts_Herramientas/*
 # Bloqueo explícito de scripts en esa carpeta
 Scripts_Herramientas/*.py
 
-# Re-permitir el script de automatización después del bloqueo general
+# Re-permitir scripts de automatización específicos
 !Scripts_Herramientas/birthday_automation.py
+!Scripts_Herramientas/auth_drive.py
