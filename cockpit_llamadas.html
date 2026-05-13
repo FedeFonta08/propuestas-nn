@@ -1230,7 +1230,7 @@ function renderLista(lista) {
   // Excluir los ya gestionados (pero dejarlos visibles en gris)
   const pendientes = lista.filter(c => !c.hecho);
   const hechos = lista.filter(c => c.hecho);
-  const mostrar = [...pendientes.slice(0, 15), ...hechos.slice(0, 3)];
+  const mostrar = [...pendientes, ...hechos.slice(0, 10)];
 
   document.getElementById('sb-count').textContent =
     pendientes.length + ' pendientes · ' + hechos.length + ' hechos';
