@@ -31,14 +31,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-h
 .htit{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:12px;position:relative;z-index:1}
 .htit em{color:var(--o);font-style:normal}
 .hsub{font-size:13px;color:rgba(255,255,255,.45);line-height:1.65;position:relative;z-index:1}
-.astrip{background:#2A2420;padding:14px 36px;display:flex;align-items:center;gap:12px;position:relative;z-index:1}
-.aav{width:38px;height:38px;border-radius:50%;background:var(--o);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:#fff}
+.astrip{background:#231E1B;padding:12px 36px;display:flex;align-items:center;gap:16px;position:relative;z-index:1;border-bottom:1px solid rgba(255,255,255,0.05);flex-wrap:wrap}
+.aav{width:42px;height:42px;border-radius:50%;background:var(--o);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:#fff;box-shadow:0 0 0 2px rgba(232,93,38,0.2)}
 .aav img{width:100%;height:100%;object-fit:cover}
-.an{font-size:13px;font-weight:600;color:#fff}
-.ar{font-size:11px;color:rgba(255,255,255,.6);margin-top:1px}
-.ac{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
-.ac a{font-size:11px;color:rgba(255,255,255,.7);text-decoration:none;transition:color .15s}
-.ac a:hover{color:var(--o)}
+.an{font-size:14px;font-weight:600;color:#fff;letter-spacing:0.2px}
+.ar{font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px;line-height:1.2}
+.ac{margin-left:auto;display:flex;align-items:center;gap:20px}
+.ac a{font-size:12px;color:rgba(255,255,255,0.8);text-decoration:none;transition:all .2s;display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace}
+.ac a:hover{color:var(--o);transform:translateY(-1px)}
+.aci{width:16px;height:16px;fill:var(--o);flex-shrink:0}
 .body{background:var(--wh);padding:32px 36px}
 .greet{font-size:15px;color:var(--tx);line-height:1.75;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--br)}
 .greet strong{font-weight:600;color:var(--dk)}
@@ -160,7 +161,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-h
   .total{flex-direction:column;gap:12px;text-align:center}
   .trs,.trp{text-align:center}
   .cc{display:none}
-  .ac{display:none}
+  .ac{margin-left:0;width:100%;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;margin-top:4px}
+  .astrip{padding-bottom:16px}
 }
 .deadline-badge{display:flex;align-items:flex-start;gap:12px;background:#C0392B;color:#fff;border-radius:var(--rs);padding:14px 16px;margin-bottom:20px}
 .db-ico{font-size:22px;flex-shrink:0;margin-top:2px}
@@ -891,7 +893,19 @@ const PORTADA_FASES = {
 // ═══════════════════════════════════════════════════════════════
 function q(k,d=''){return new URLSearchParams(window.location.search).get(k)||d;}
 function strip(){
-  return`<div class="astrip"><div class="aav"><img src="https://cdn.jsdelivr.net/gh/FedeFonta08/propuestas-nn/fede_profile_github.jpg" alt="F" onerror="this.parentElement.innerHTML='F'"></div><div><div class="an">Federico Fontanals</div><div class="ar">Agente Dinamizador · Punto Naranja · Nationale-Nederlanden Xàtiva · La Costera</div></div><div class="ac"><a href="tel:+34680507186">📞 680 507 186</a><a href="mailto:federico.fontanals@nnespana.es">✉️ nnespana.es</a></div></div>`;
+  const telIco = `<svg class="aci" viewBox="0 0 24 24"><path d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z"/></svg>`;
+  const mailIco = `<svg class="aci" viewBox="0 0 24 24"><path d="M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.11,4 20,4M20,8.22L12,13L4,8.22V6L12,10.78L20,6V8.22Z"/></svg>`;
+  return `<div class="astrip">
+    <div class="aav"><img src="https://cdn.jsdelivr.net/gh/FedeFonta08/propuestas-nn/fede_profile_github.jpg" alt="F" onerror="this.parentElement.innerHTML='F'"></div>
+    <div class="atxt">
+      <div class="an">Federico Fontanals</div>
+      <div class="ar">Agente Dinamizador · Punto Naranja · Nationale-Nederlanden</div>
+    </div>
+    <div class="ac">
+      <a href="tel:+34680507186">${telIco} 680 507 186</a>
+      <a href="mailto:federico.fontanals@nnespana.es">${mailIco} Email</a>
+    </div>
+  </div>`;
 }
 function foot(){
   return`<div class="foot fi"><div class="foot-section"><div class="foot-label">Nationale-Nederlanden Vida y Generales</div><div class="foot-content">Av. de Bruselas, 16 · Parque Arroyo de la Vega · 28108 Alcobendas (Madrid)<br><a href="tel:+34916026000">☎️ +34 91 602 60 00</a></div></div><div class="foot-section"><div class="foot-label">Derechos RGPD/LOPDGDD</div><div class="foot-content"><a href="mailto:seleccion.redcomercial@nnespana.com?subject=Ejercicio%20derechos%20ARCO">Ejercer derechos ARCO</a> · <a href="mailto:dpo@nnespana.es">DPO</a><br><a href="https://www.aepd.es/" target="_blank">Reclamaciones ante AEPD</a></div></div><div class="foot-agent"><div class="foot-agent-name">🟠 Federico Fontanals</div><div class="foot-agent-title">Agente Dinamizador Punto Naranja · Xàtiva</div><div class="foot-agent-contact"><div class="foot-agent-contact-item"><span class="foot-agent-contact-icon">📧</span><a href="mailto:federico.fontanals@nnespana.es">Email</a></div><div class="foot-agent-contact-item"><span class="foot-agent-contact-icon">☎️</span><a href="tel:+34680507186">Llamada</a></div></div><div class="foot-disclaimer">Documento informativo no contractual · Datos verificados de condiciones generales y documentación oficial Nationale-Nederlanden</div></div></div>`;
