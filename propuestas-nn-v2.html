@@ -36,8 +36,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-h
 .aav img{width:100%;height:100%;object-fit:cover}
 .an{font-size:13px;font-weight:600;color:#fff}
 .ar{font-size:11px;color:rgba(255,255,255,.6);margin-top:1px}
-.ac{margin-left:auto;display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;padding-right:20px}
-.ac a{font-size:11px;color:rgba(255,255,255,.7);text-decoration:none;transition:color .15s;white-space:nowrap;display:flex;align-items:center;gap:6px;justify-content:center}
+.ac{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.ac a{font-size:11px;color:rgba(255,255,255,.7);text-decoration:none;transition:color .15s}
 .ac a:hover{color:var(--o)}
 .body{background:var(--wh);padding:32px 36px}
 .greet{font-size:15px;color:var(--tx);line-height:1.75;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--br)}
@@ -205,17 +205,6 @@ function formatearPrecio(precio) {
   return precio;
 }
 
-// FUNCIÓN FORMATEAR CAPITAL
-function formatearCapital(cap) {
-  if (!cap) return '';
-  if (cap.includes('€')) return cap;
-  if (/^\d+/.test(cap)) {
-    const num = cap.replace(/\D/g, '');
-    return new Intl.NumberFormat('es-ES').format(num) + ' €';
-  }
-  return cap;
-}
-
 const FASES = {
   'f1': { label: 'Fase 1 · Ahorro e Inversión', ico: '💰', col: 'p', fb: 'fbp', sl: 'slp' },
   'f2': { label: 'Fase 2 · Salud, Vida y Accidentes', ico: '❤️', col: 'o', fb: 'fbo', sl: 'slo' },
@@ -230,10 +219,10 @@ const PRODS = {
   // ── FASE 1: AHORRO E INVERSIÓN ────────────────────────────────────
 
   sialp: {
-    fase: 'f1', ico: '📊', nom: 'SIALP',
+    fase: 'f1', ico: '📊', nom: 'Plan SIALP',
     sub: 'Seguro Individual de Ahorro a Largo Plazo. Exención fiscal total de rendimientos desde el año 5. Máx. 5.000 €/año.',
     tit: n => `El ahorro que hace crecer <em>el dinero de ${n}</em> sin pagar a Hacienda.`,
-    greet: n => `Hola <strong>${n}</strong>,<br><br>El SIALP (Plan Creciente) es la herramienta de ahorro más eficiente del mercado: <strong>exención fiscal total de los rendimientos generados a partir del año 5</strong>, con un límite legal de 5.000 € anuales y garantía dinámica del 85% del valor más alto alcanzado.`,
+    greet: n => `Hola <strong>${n}</strong>,<br><br>El Plan SIALP (Plan Creciente) es la herramienta de ahorro más eficiente del mercado: <strong>exención fiscal total de los rendimientos generados a partir del año 5</strong>, con un límite legal de 5.000 € anuales y garantía dinámica del 85% del valor más alto alcanzado.`,
     hb: { t: 'hbp', x: '<strong>Garantía dinámica única:</strong> El 85% del mayor valor histórico alcanzado queda siempre protegido (high-water mark). Aportación máxima 5.000 €/año. Sin tributación al rescatar pasado el año 5.' },
     sts: [{ v: '5.000 €', l: 'Aportación máx./año' }, { v: '85%', l: 'Garantía dinámica' }, { v: 'Año 5+', l: 'Exención fiscal' }],
     covs: [
@@ -252,10 +241,30 @@ const PRODS = {
       { q: '¿Puedo sacar el dinero antes del año 5?', a: 'Sí, puedes rescatar en cualquier momento. Antes del año 5 los rendimientos tributan como capital mobiliario (19–26% IRPF), con penalización de 1–2% en años 2–4. A partir del año 5: exención fiscal total del 100% de los rendimientos, sin penalización.' },
       { q: '¿En qué se diferencia de un depósito bancario?', a: 'Un depósito tributa siempre sus intereses (19–26% IRPF) sin importar cuánto tiempo lo mantengas. El SIALP desde el año 5 tiene exención fiscal total: te quedas el 100% de los rendimientos. Aportando 5.000 €/año durante 25 años con rentabilidad media del 5,12%, el ahorro fiscal estimado es de 27.467 €.' },
       { q: '¿Qué garantía real tengo si el mercado cae?', a: 'La garantía dinámica del 85% del máximo histórico (high-water mark) funciona cada día: una vez que tu inversión alcanza un valor alto, el 85% de ese valor queda blindado para siempre. En el peor escenario posible, siempre recuperas mínimo el 85% de todo lo aportado.' },
-      { q: '¿Solo puedo aportar 5.000 €/año?', a: 'Sí, 5.000 €/año es el límite legal del SIALP. Si quieres ahorrar más, lo complementamos con otros productos sin ese límite (Contigo Futuro). El SIALP maximiza la eficiencia fiscal dentro de esos 5.000 €.' },
+      { q: '¿Solo puedo aportar 5.000 €/año?', a: 'Sí, 5.000 €/año es el límite legal del SIALP. Si quieres ahorrar más, lo complementamos con otros productos sin ese límite (Plan Flexible, Contigo Futuro). El SIALP maximiza la eficiencia fiscal dentro de esos 5.000 €.' },
       { q: '¿Qué pasa si paro las aportaciones?', a: 'El producto sigue activo y la garantía se mantiene. Pero las aportaciones periódicas son clave: permiten recuperarse más rápido ante caídas del mercado y maximizan la exposición a renta variable cuando sube. Parar las aportaciones reduce el potencial del producto, especialmente si hay bajadas.' },
       { q: '¿Tiene sentido mantenerlo más allá del año 5?', a: 'Absolutamente. Mantenerlo más allá del año 5 supone aproximadamente +19% de rentabilidad adicional respecto a un producto equivalente que tribute por sus ganancias. Cuanto más tiempo permanezca, más beneficio fiscal acumulas sin pagar nada a Hacienda. El momento de mayor rentabilidad empieza en el año 5, no termina.' },
     ],
+  },
+
+  flexible: {
+    fase: 'f1', ico: '🌍', nom: 'Plan Flexible (Unit Linked)',
+    sub: 'Inversión internacional dinámica. 3 perfiles: Prudente, Equilibrado y Dinámico. Sin vencimiento fijo. Rescates parciales desde año 2.',
+    tit: n => `La inversión internacional que hace <em>trabajar el dinero de ${n}</em>.`,
+    greet: n => `Hola <strong>${n}</strong>,<br><br>El Plan Flexible adapta la estrategia de inversión a tu perfil: <strong>Prudente, Equilibrado o Dinámico</strong>. Gestión activa en mercados internacionales con ajuste automático entre renta variable y activos de protección, sin vencimiento fijo.`,
+    hb: { t: 'hbp', x: '<strong>Flexibilidad total:</strong> Suspensión temporal de primas sin penalización, aportaciones extraordinarias, rescates parciales desde el año 2 y posibilidad de cambiar perfil de inversión en cualquier momento.' },
+    covs: [
+      { n: 'Perfil Prudente — predominio renta fija', c: 'Bajo riesgo', p: '✓', k: true, t: 'perfil' },
+      { n: 'Perfil Equilibrado — mixto RF/RV', c: 'Riesgo moderado', p: '✓', k: true, t: 'perfil' },
+      { n: 'Perfil Dinámico — predominio RV global', c: 'Alto potencial', p: '✓', k: true, t: 'perfil' },
+      { n: 'Cobertura por fallecimiento', c: 'Valor inversión + capital', p: '✓', k: false },
+      { n: 'Rescate parcial', c: 'Desde año 2', p: '✓', k: false },
+      { n: 'Cambio de perfil', c: 'Sin coste', p: '✓', k: false },
+    ],
+    pendiente: false,
+    totalDesc: 'Prima mínima mensual a consultar · Sin vencimiento fijo · 3 perfiles de inversión',
+    prima: 'Consultar',
+    cierre: n => `<strong>${n}</strong>, tu dinero puede trabajar más que tú. Analizamos juntos el perfil que mejor te encaja.`,
   },
 
   garantizado: {
@@ -315,10 +324,10 @@ const PRODS = {
   },
 
   ahorrogarantizado: {
-    fase: 'f1', ico: '🏦', nom: 'Ahorro Garantizado Extra',
+    fase: 'f1', ico: '🏦', nom: 'Plan de Ahorro Garantizado',
     sub: 'Prima única desde 1.000 €. Rentabilidad mínima garantizada por contrato a 5 años. Garantía 100% del capital al vencimiento.',
     tit: n => `El ahorro de ${n} <em>con rentabilidad mínima garantizada</em> por contrato.`,
-    greet: n => `Hola <strong>${n}</strong>,<br><br>El Ahorro Garantizado Extra establece una <strong>rentabilidad mínima garantizada por contrato durante 5 años</strong>, con el 100% del capital asegurado al vencimiento. Prima única desde 1.000 € y edad máxima de contratación 80 años.`,
+    greet: n => `Hola <strong>${n}</strong>,<br><br>El Plan de Ahorro Garantizado establece una <strong>rentabilidad mínima garantizada por contrato durante 5 años</strong>, con el 100% del capital asegurado al vencimiento. Prima única desde 1.000 € y edad máxima de contratación 80 años.`,
     hb: { t: 'hbp', x: '<strong>Garantía contractual 100%:</strong> Capital 100% garantizado al vencimiento a 5 años. Rentabilidad mínima fija conocida desde el inicio. Inversión en renta fija privada europea (rating mínimo BBB-).' },
     sts: [{ v: '100%', l: 'Capital garantizado' }, { v: '5 años', l: 'Plazo fijo' }, { v: '1.000 €', l: 'Prima única mínima' }],
     covs: [
@@ -332,13 +341,13 @@ const PRODS = {
     pendiente: false,
     totalDesc: 'Prima única · Mínimo 1.000 € · Máximo 300.000 € · Costes ~1%/año',
     prima: 'Desde 1.000 €',
-    cierre: n => `<strong>${n}</strong>, la solidez del Grupo Nationale-Nederlanden y la certeza de una rentabilidad garantizada por contrato son los pilares de esta propuesta. Quedo a tu entera disposición para formalizar los detalles de tu inversión.`,
+    cierre: n => `<strong>${n}</strong>, saber exactamente cuánto vas a tener es el mayor activo de este producto. Hablamos.`,
     objeciones: [
       { q: '¿Puedo necesitar ese dinero antes de 5 años?', a: 'El primer año hay iliquidez total. Del año 2 al 5 puedes rescatar el 100% (no hay rescates parciales) pero SOLO en las ventanas de febrero, junio y octubre. Si rescatas antes del vencimiento, recibes el valor de mercado: si los tipos de interés han subido desde que contrataste, puedes recuperar menos de lo invertido. La garantía del 100% solo aplica si llegas al vencimiento.' },
       { q: '¿Qué diferencia hay con un depósito bancario?', a: 'Tres diferencias clave: 1) Diferimiento fiscal: en un depósito pagas impuestos cada año por los intereses; aquí solo tributas al rescate o vencimiento. 2) Seguro de vida incluido: fallecimiento cubre prima + interés acumulado, sin coste extra. 3) Ventaja sucesoria: en caso de fallecimiento, los herederos reciben el capital directamente sin que pase por herencia, con tributación más favorable.' },
       { q: '¿Y si Nationale-Nederlanden tiene problemas?', a: 'Doble capa de protección: 1) Solvencia del Grupo NN: ratio de capital muy por encima de mínimos regulatorios. 2) Consorcio de Compensación de Seguros: organismo público que garantiza las prestaciones en caso de insolvencia de la aseguradora. No es como un banco: las pólizas de seguro tienen protección específica adicional.' },
       { q: '¿Qué pasa si la inflación supera la rentabilidad garantizada?', a: 'Esa es la principal limitación de este producto. Si la inflación es del 4% y la rentabilidad garantizada del 2%, pierdes poder adquisitivo real. Este producto es un cimiento conservador para capital que NO puedes arriesgar, no una herramienta de crecimiento. Para batir inflación, necesitas asumir riesgo (renta variable, fondos mixtos).' },
-      { q: '¿Puedo hacer aportaciones adicionales?', a: 'No. Es prima única: un solo pago al inicio. Si quieres aportar más capital, debes contratar otro Ahorro Garantizado Extra independiente. Estrategia: algunos clientes hacen bloques de 5 años escalonados para tener vencimientos periódicos y mantener liquidez.' },
+      { q: '¿Puedo hacer aportaciones adicionales?', a: 'No. Es prima única: un solo pago al inicio. Si quieres aportar más capital, debes contratar otro Plan de Ahorro Garantizado independiente. Estrategia: algunos clientes hacen bloques de 5 años escalonados para tener vencimientos periódicos y mantener liquidez.' },
       { q: '¿Cómo puedo mejorar la rentabilidad garantizada?', a: 'Bonificación por vinculación: si tienes contratado Contigo Senior o Contigo Familia, el interés técnico garantizado puede mejorar. Consulta con tu delegado las condiciones de vinculación vigentes en el momento de contratación.' },
       { q: '¿Cuáles son los costes reales?', a: 'Coste de emisión: 0,60% único al contratar. Coste anual: 0,40% sobre el capital cada año. Total aproximado: ~1% anual integrado en la rentabilidad que ves. La rentabilidad garantizada que te muestran YA es neta de estos costes.' },
     ],
@@ -346,29 +355,29 @@ const PRODS = {
 
   futuro: {
     fase: 'f1', ico: '📈', nom: 'Contigo Futuro',
-    sub: 'Plan de Inversión Unit Linked con garantía diaria y creciente del 80% del valor máximo alcanzado. Sostenible ESG. Prima anual desde 1.000 €. IPA: exención de primas hasta los 67 años.',
-    tit: n => `El plan de ahorro que hace crecer el dinero de <em>${n}</em> con garantías diarias.`,
-    greet: n => `Hola <strong>${n}</strong>,<br><br>Contigo Futuro combina la inversión sostenible ESG con una característica única: <strong>garantía diaria y creciente del 80% del mayor valor alcanzado</strong>. Los beneficios generados se consolidan y protegen cada día. En caso de IPA, la prima queda exenta hasta los 67 años.`,
-    hb: { t: 'hbp', x: '<strong>Diferenciador único:</strong> Garantía diaria y creciente = 80% del valor histórico más alto protegido. Fondos sostenibles ESG. IPA: exención de primas hasta los 67 años. Fallecimiento: Saldo + 3.000 €.' },
-    sts: [{ v: '80%', l: 'Garantía creciente diaria' }, { v: 'ESG', l: 'Inversión sostenible' }, { v: 'IPA', l: 'Exención primas hasta 67 años' }],
+    sub: 'Unit Linked con garantía diaria y creciente del 80% del mayor valor alcanzado. ESG sostenible. Prima anual desde 1.000 €. IPA: exención de prima hasta los 67 años.',
+    tit: n => `El plan de ahorro que hace crecer <em>el dinero de ${n}</em> con garantías diarias.`,
+    greet: n => `Hola <strong>${n}</strong>,<br><br>Contigo Futuro combina inversión sostenible ESG con una característica única: <strong>garantía diaria y creciente del 80% del mayor valor alcanzado</strong>. Los beneficios generados quedan consolidados y protegidos cada día. En caso de IPA, la prima queda exenta hasta los 67 años.`,
+    hb: { t: 'hbp', x: '<strong>Diferencial único:</strong> Garantía diaria y creciente = 80% del mayor valor histórico protegido. Fondos sostenibles ESG. IPA: exención de prima hasta 67 años. Fallecimiento: Saldo + 3.000 €.' },
+    sts: [{ v: '80%', l: 'Garantía diaria creciente' }, { v: 'ESG', l: 'Inversión sostenible' }, { v: 'IPA', l: 'Prima exenta hasta 67 años' }],
     covs: [
       { n: 'Garantía diaria 80% del máximo histórico', c: 'Beneficios consolidados', p: '✓', k: true, t: 'único' },
       { n: 'Fallecimiento', c: 'Saldo participaciones + 3.000 €', p: '✓', k: true, t: 'clave' },
-      { n: 'IPA — exención de primas', c: 'Hasta los 67 años', p: '✓', k: false },
+      { n: 'IPA — exención de prima', c: 'Hasta los 67 años', p: '✓', k: false },
       { n: 'Inversión ESG (Art. 8 sostenible)', c: 'Fondos Amundi', p: '✓', k: false },
       { n: 'Riesgo SRI', c: 'Nivel 3 / 7 (bajo-medio)', p: '✓', k: false },
-      { n: 'Rescate sin penalización', c: 'Desde el año 5', p: '0%', k: false },
+      { n: 'Rescate sin penalización', c: 'Desde año 5', p: '0%', k: false },
     ],
     pendiente: false,
     totalDesc: 'Aportación mínima anual 1.000 € · Máximo 20.000 €/año · Horizonte recomendado 10 años',
     prima: 'Desde 1.000 €/año',
-    cierre: n => `<strong>${n}</strong>, invertir de forma ética y con garantías diarias. Empezamos con la aportación que tú elijas.`,
+    cierre: n => `<strong>${n}</strong>, invertir de forma ética y con garantías diarias. Empezamos con la aportación que elijas.`,
     objeciones: [
-      { q: '¿Qué pasa si el mercado cae justo después de contratar?', a: 'La garantía diaria del 80% del máximo histórico te protege desde el primer día. Si el mercado sube hasta 10.000 € y luego cae, el 80% (8.000 €) queda blindado para siempre. Nunca puedes perder más del 20% del máximo alcanzado, haga lo que haga el mercado.' },
-      { q: '¿Cuándo puedo recuperar el dinero?', a: 'En cualquier momento. No hay penalización por rescate anticipado, aunque el horizonte recomendado es de 10 años para maximizar el potencial de crecimiento. Disponibilidad total de liquidez.' },
-      { q: '¿En qué invierten los fondos?', a: 'En fondos Amundi bajo criterios ESG (Art. 8 SFDR): empresas con buenas prácticas ambientales, sociales y de gobernanza. Son fondos regulados y supervisados, con nivel de riesgo SRI 3/7 (bajo-medio), diversificados globalmente.' },
-      { q: '¿Qué ventaja real tiene sobre un fondo de inversión normal?', a: 'Un fondo estándar no garantiza nada: si baja un 40%, pierdes un 40%. Contigo Futuro garantiza el 80% del máximo diario alcanzado, además de un seguro de vida (+3.000 €) y exención de primas por IPA. Tienes crecimiento con una red de seguridad real.' },
-      { q: '¿Qué cobertura de fallecimiento tiene?', a: 'En caso de fallecimiento, los beneficiarios reciben el 100% del saldo de participaciones más un capital adicional de 3.000 €. Es una cobertura de vida integrada sin coste extra.' },
+      { q: '¿Qué pasa si el mercado cae justo después de contratar?', a: 'La garantía diaria del 80% del máximo histórico te protege desde el primer día. Si el mercado sube a 10.000 € y luego cae, el 80% (8.000 €) queda blindado para siempre. Nunca puedes perder más del 20% del máximo alcanzado, sin importar lo que haga el mercado.' },
+      { q: '¿Cuándo puedo recuperar el dinero?', a: 'En cualquier momento. No hay penalización por rescate anticipado, aunque el horizonte recomendado es 10 años para maximizar el potencial de crecimiento. La liquidez total está disponible siempre.' },
+      { q: '¿En qué invierten los fondos?', a: 'Fondos Amundi bajo criterios ESG (Art. 8 SFDR): empresas con buenas prácticas ambientales, sociales y de gobernanza. Son fondos regulados y supervisados, con riesgo SRI nivel 3/7 (bajo-medio), diversificados globalmente.' },
+      { q: '¿Qué ventaja real tiene sobre un fondo de inversión normal?', a: 'Un fondo estándar no garantiza nada: si baja un 40%, pierdes un 40%. Contigo Futuro garantiza el 80% del máximo alcanzado cada día, más cobertura de vida (+3.000 €) y exención de prima por IPA. Tienes crecimiento con red de seguridad real.' },
+      { q: '¿Qué cobertura de fallecimiento tiene?', a: 'En caso de fallecimiento, los beneficiarios reciben el 100% del saldo de participaciones más 3.000 € adicionales. Es una cobertura de vida integrada sin coste extra.' },
       { q: '¿Qué ocurre si sufro una invalidez permanente absoluta (IPA)?', a: 'Si sufres una IPA, la prima queda exenta hasta los 67 años: el producto sigue activo y creciendo sin que tengas que seguir aportando. Es una garantía de continuidad que muy pocos productos de ahorro ofrecen.' },
     ],
   },
@@ -384,7 +393,7 @@ const PRODS = {
       { n: 'Fallecimiento por cualquier causa', c: 'Capital decreciente anual', p: '✓', k: true, t: 'base' },
       { n: 'Invalidez Permanente Absoluta (IPA)', c: 'Adelanto del 100% capital', p: '✓', k: true, t: 'clave' },
       { n: 'Prima constante por contrato', c: 'Sin subidas por edad', p: '✓', k: false },
-      { n: 'Obligatoria asociación a plan de ahorro', c: 'SIALP / Contigo Futuro', p: '✓', k: false },
+      { n: 'Obligatoria asociación a plan de ahorro', c: 'SIALP / Flexible / Futuro', p: '✓', k: false },
       { n: 'Exclusión IPA por patología previa', c: 'Según declaración salud', p: '✓', k: false },
     ],
     pendiente: false,
@@ -434,7 +443,7 @@ const PRODS = {
   saludcompleto: {
     fase: 'f2', ico: '🏥', nom: 'Seguro de Salud Completo',
     sub: 'Cobertura médica total con acceso directo a la red Sanitas: +40.000 profesionales y +1.000 centros en toda España.',
-    tit: n => `La medicina privada de <em>${n}</em>, sin esperas and sin límites.`,
+    tit: n => `La medicina privada de <em>${n}</em>, sin esperas y sin límites.`,
     greet: n => `Hola <strong>${n}</strong>,<br><br>El Seguro de Salud Completo de Sanitas incluye <strong>medicina familiar, especialidades, pruebas diagnósticas, hospitalización, urgencias 24h y dental</strong>. Acceso directo sin listas de espera.`,
     hb: { t: 'hbo', x: '<strong>Red Sanitas:</strong> Más de 40.000 profesionales y 1.000 centros en toda España. Sin listas de espera. Sin burocracia. Acceso directo a cualquier especialidad.' },
     covs: [
@@ -473,7 +482,7 @@ const PRODS = {
   },
 
   vidafamilia: {
-    fase: 'f2', ico: '👨👩👧', nom: 'Seguro de Vida y Familia',
+    fase: 'f2', ico: '👨‍👩‍👧', nom: 'Seguro de Vida y Familia',
     sub: 'Protección económica ante fallecimiento o invalidez. Cobertura pionera para cáncer de mama incluida.',
     tit: n => `Si algo le pasara a ${n}, <em>su familia estaría protegida.</em>`,
     greet: n => `Hola <strong>${n}</strong>,<br><br>El Seguro de Vida y Familia garantiza que si algo te pasa, <strong>tu familia tiene el respaldo económico para seguir adelante</strong>: hipoteca cubierta, estudios garantizados, vida mantenida.`,
@@ -515,21 +524,31 @@ const PRODS = {
 
   accidentes: {
     fase: 'f2', ico: '⚡', nom: 'Seguro de Accidentes LiderPlus',
-    sub: 'Indemnización directa por fallecimiento e invalidez permanente por accidente. Opción A: 90.000 € → 134,59 €/año. Opción B: 50.000 € → 74,77 €/año.',
-    tit: n => `El respaldo inmediato de ${n} <em>ante cualquier accidente.</em>`,
-    greet: n => `Hola <strong>${n}</strong>,<br><br>El Seguro de Accidentes LiderPlus garantiza <strong>capital directo ante fallecimiento o invalidez permanente por accidente</strong>. Dos opciones claras y precios fijos.`,
-    hb: { t: 'hbo', x: '<strong>Dos opciones sin complicaciones:</strong> Opción A: 90.000 € para fallecimiento e invalidez permanente por 134,59 €/año. Opción B: 50.000 € por 74,77 €/año. Respuesta inmediata, sin burocracia.' },
-    sts: [{ v: '90.000 €', l: 'Capital máximo Opción A' }, { v: '134,59 €', l: 'Prima anual Opción A' }, { v: '74,77 €', l: 'Prima anual Opción B' }],
+    sub: 'Blindaje económico inmediato ante accidentes. Sin exámenes médicos. Hasta 90.000 € de capital directo desde solo 0,36 €/día.',
+    tit: n => `¿Y si el imprevisto de mañana estuviera <em>ya resuelto por ${n} hoy?</em>`,
+    greet: n => `Hola <strong>${n}</strong>,<br><br>Un accidente no avisa, pero sus consecuencias económicas sí se pueden neutralizar. LiderPlus Accidentes es la solución más directa y económica de Nationale-Nederlanden para que <strong>un imprevisto físico no se convierta en un desastre financiero</strong>.<br><br>Por menos de lo que cuesta un café al mes, blindas tu estabilidad y la de los tuyos con un capital directo inyectado en el momento que más lo necesitas.`,
+    hb: { t: 'hbo', x: '<strong>Protección de Grado Inmediato:</strong> Sin exámenes médicos, sin esperas y con capitales garantizados de hasta 90.000 €. Una decisión de 3 minutos que protege toda una vida.' },
+    sts: [{ v: '90.000 €', l: 'Capital Máximo' }, { v: '0,36 €/día', l: 'Coste Opción A' }, { v: '100% Digital', l: 'Contratación' }],
     covs: [
-      { n: 'Opción A — Fallecimiento por accidente', c: '90.000 €', p: '134,59 €/año', k: true, t: 'completa' },
-      { n: 'Opción A — Invalidez permanente', c: '90.000 €', p: 'Incluido', k: true, t: 'completa' },
-      { n: 'Opción B — Fallecimiento por accidente', c: '50.000 €', p: '74,77 €/año', k: false },
-      { n: 'Opción B — Invalidez permanente', c: '50.000 €', p: 'Incluido', k: false },
+      { n: 'Opción A — Fallecimiento por accidente', c: '90.000 € de capital', p: '134,59 €/año', k: true, t: 'completa' },
+      { n: 'Opción A — Invalidez Permanente Absoluta', c: '90.000 € de capital', p: 'Incluido', k: true, t: 'completa' },
+      { n: 'Opción B — Fallecimiento por accidente', c: '50.000 € de capital', p: '74,77 €/año', k: false },
+      { n: 'Opción B — Invalidez Permanente Absoluta', c: '50.000 € de capital', p: 'Incluido', k: false },
+      { n: 'Invalidez Permanente Parcial', c: 'Según baremo', p: '✓', k: false },
+      { n: 'Cobertura mundial 24h', c: 'En cualquier lugar', p: '✓', k: false },
     ],
     pendiente: false,
-    totalDesc: 'Opción A: 134,59 €/año · Opción B: 74,77 €/año · Prima fija sin sorpresas',
+    totalDesc: 'Opción A: 134,59 €/año · Opción B: 74,77 €/año · Contratación inmediata sin médicos',
     prima: 'Desde 74,77 €/año',
-    cierre: n => `<strong>${n}</strong>, por menos de 7 € al mes tienes respaldo económico inmediato ante el peor escenario.`,
+    cierre: n => `<strong>${n}</strong>, la pregunta no es si ocurrirá un accidente, sino si estarás preparado cuando ocurra. ¿Cerramos tu protección hoy?`,
+    objeciones: [
+      { q: '¿Es compatible con mi seguro de vida actual?', a: 'Totalmente. Es el complemento perfecto. Mientras el seguro de vida cubre cualquier causa, LiderPlus inyecta un capital EXTRA masivo en caso de accidente, donde los gastos suelen dispararse por adaptaciones o rehabilitación.' },
+      { q: '¿Tengo que pasar pruebas médicas?', a: 'No. Esa es la gran ventaja. Es de contratación inmediata. Solo necesitas declarar que estás en buen estado de salud actual. Sin analíticas ni visitas al médico.' },
+      { q: '¿Qué cubre exactamente la Invalidez Permanente?', a: 'Cubre desde la pérdida de movilidad total hasta baremos parciales (pérdida de un miembro, visión, etc.). Recibes el capital para que el dinero sea la última de tus preocupaciones mientras te recuperas.' },
+      { q: '¿El precio sube cada año por cumplir años?', a: 'El precio depende de tu profesión y el capital elegido, no tiene los saltos de prima por edad tan acusados como un seguro de salud. Es una de las primas más estables del mercado.' },
+      { q: '¿Y si el accidente ocurre fuera de España?', a: 'Estás cubierto las 24 horas del día, los 365 días del año, en cualquier lugar del mundo. Tu protección no tiene fronteras.' },
+      { q: '¿Cómo se cobra la indemnización?', a: 'De forma directa y rápida tras la acreditación del accidente. El objetivo es que dispongas de la liquidez necesaria para afrontar gastos imprevistos de forma inmediata.' }
+    ],
   },
 
   // ── FASE 3: HOGAR Y AUTOMÓVIL ─────────────────────────────────────
@@ -589,8 +608,6 @@ const PRODS = {
       { q: '¿Qué incluye la recuperación de puntos?', a: 'En caso de pérdida de puntos, el seguro cubre los gastos de matriculación al curso de sensibilización y reeducación vial, además de las tasas de examen, hasta los límites establecidos en la póliza.' },
     ],
     logoPartner: 'assets/logo_mutua.png',
-    partnerBadge: 'Alianza Estratégica con Mutua Madrileña',
-    partnerDesc: 'Precio cerrado desde el presupuesto · Sin consulta SINCO · 2 años de valor a nuevo.'
   },
 
   moto: {
@@ -699,7 +716,7 @@ const PRODS = {
     cierre: n => `<strong>${n}</strong>, por menos de 1,33 € al día tienes cubierto el peor escenario. Firmamos hoy.`,
     objeciones: [
       { q: 'Ya pago mucho a la Seguridad Social, ¿para qué necesito esto?', a: 'La SS paga 721 €/mes de media en baja por enfermedad. Si tus gastos fijos como autónomo son 900 €/mes (local, suministros, préstamos, familia), el agujero real es 179 €/mes que sale de tu bolsillo o de tus ahorros cada mes que dure la baja. Contigo Autónomo cubre exactamente ese agujero.' },
-      { q: '¿Qué diferencia real hay con la prestación por ILT de la SS?', a: 'La SS cubre el 60% de tu base reguladora a partir del día 4 (accidente) o día 4 (enfermedad), con límites máximos. Contigo Autónomo añade 30 €/día complementarios desde el primer día, más 266.000 € in capital por invalidez o fallecimiento. Son coberturas que se suman, no que se excluyen.' },
+      { q: '¿Qué diferencia real hay con la prestación por ILT de la SS?', a: 'La SS cubre el 60% de tu base reguladora a partir del día 4 (accidente) o día 4 (enfermedad), con límites máximos. Contigo Autónomo añade 30 €/día complementarios desde el primer día, más 266.000 € en capital por invalidez o fallecimiento. Son coberturas que se suman, no que se excluyen.' },
       { q: '¿Tengo que hacer un examen médico?', a: 'No hay examen médico para las coberturas estándar del producto. La contratación es ágil, con declaración de salud simplificada. Para capitales elevados en algunas coberturas puede requerirse información adicional, pero en la configuración base (39,94 €/mes) no.' },
       { q: '¿El descuento del 10% por hábitos saludables es real y cómo funciona?', a: 'Sí, es real y permanente si se mantienen los hábitos. Se aplica respondiendo a un cuestionario de salud (no fumador, IMC correcto, actividad física regular). El descuento del 10% se refleja directamente en la prima desde la contratación y se mantiene mientras los hábitos se conservan en las revisiones.' },
       { q: '¿Puedo cancelar si el negocio va mal?', a: 'Sí, el seguro es anual renovable. Si cesas como autónomo o la situación cambia, puedes dar de baja sin penalización. Pero ojo: volver a contratar después de una baja laboral o de edad avanzada es más caro (o puede implicar exclusiones). La cobertura vale más cuando se contrata sano y activo.' },
@@ -832,7 +849,7 @@ const PRODS = {
 // PORTADA
 // ═══════════════════════════════════════════════════════════════
 const PORTADA_FASES = {
-  'Fase 1 · Ahorro e Inversión 💰': ['sialp','garantizado','flexicuenta','ahorrogarantizado','futuro','proteccionplus'],
+  'Fase 1 · Ahorro e Inversión 💰': ['sialp','flexible','garantizado','flexicuenta','ahorrogarantizado','futuro','proteccionplus'],
   'Fase 2 · Salud, Vida y Accidentes ❤️': ['saludvida','saludcompleto','saludcopago','vidafamilia','senior','accidentes'],
   'Fase 3 · Hogar y Automóvil 🏠': ['hogar','auto'],
   'Fase 4 · Pensiones 🏦': ['ppsa','duplo'],
@@ -845,13 +862,13 @@ const PORTADA_FASES = {
 // ═══════════════════════════════════════════════════════════════
 function q(k,d=''){return new URLSearchParams(window.location.search).get(k)||d;}
 function strip(){
-  return`<div class="astrip"><div class="aav"><img src="https://cdn.jsdelivr.net/gh/FedeFonta08/propuestas-nn/fede_profile_github.jpg" alt="F" onerror="this.parentElement.innerHTML='F'"></div><div><div class="an">Federico Fontanals</div><div class="ar">Agente Dinamizador · Punto Naranja<br><span style="white-space:nowrap">Nationale-Nederlanden</span><br>Xàtiva · La Costera</div></div><div class="ac"><a href="tel:+34680507186"><span>📞</span> 680 507 186</a><a href="mailto:federico.fontanals@nnespana.es"><span>✉️</span> federico.fontanals@nnespana.es</a></div></div>`;
+  return`<div class="astrip"><div class="aav"><img src="https://cdn.jsdelivr.net/gh/FedeFonta08/propuestas-nn/fede_profile_github.jpg" alt="F" onerror="this.parentElement.innerHTML='F'"></div><div><div class="an">Federico Fontanals</div><div class="ar">Agente Dinamizador · Punto Naranja · Nationale-Nederlanden Xàtiva · La Costera</div></div><div class="ac"><a href="tel:+34680507186">📞 680 507 186</a><a href="mailto:federico.fontanals@nnespana.es">✉️ nnespana.es</a></div></div>`;
 }
 function foot(){
   return`<div class="foot fi"><div class="foot-section"><div class="foot-label">Nationale-Nederlanden Vida y Generales</div><div class="foot-content">Av. de Bruselas, 16 · Parque Arroyo de la Vega · 28108 Alcobendas (Madrid)<br><a href="tel:+34916026000">☎️ +34 91 602 60 00</a></div></div><div class="foot-section"><div class="foot-label">Derechos RGPD/LOPDGDD</div><div class="foot-content"><a href="mailto:seleccion.redcomercial@nnespana.com?subject=Ejercicio%20derechos%20ARCO">Ejercer derechos ARCO</a> · <a href="mailto:dpo@nnespana.es">DPO</a><br><a href="https://www.aepd.es/" target="_blank">Reclamaciones ante AEPD</a></div></div><div class="foot-agent"><div class="foot-agent-name">🟠 Federico Fontanals</div><div class="foot-agent-title">Agente Dinamizador Punto Naranja · Xàtiva</div><div class="foot-agent-contact"><div class="foot-agent-contact-item"><span class="foot-agent-contact-icon">📧</span><a href="mailto:federico.fontanals@nnespana.es">Email</a></div><div class="foot-agent-contact-item"><span class="foot-agent-contact-icon">☎️</span><a href="tel:+34680507186">Llamada</a></div></div><div class="foot-disclaimer">Documento informativo no contractual · Datos verificados de condiciones generales y documentación oficial Nationale-Nederlanden</div></div></div>`;
 }
 function socialProof(){
-  return`<div class="social-proof-container fi"><div class="sp-header"><div class="sp-title">¿Por qué elegir Nationale-Nederlanden?</div><div class="sp-subtitle">Solidez, experiencia y confianza</div></div><div class="sp-grid"><div class="sp-card"><div class="sp-icon">🏛️</div><div class="sp-stat-num">63 años</div><div class="sp-stat-txt">Presencia en España desde 1963</div><div class="sp-stat-sub">Generaciones de familias confían en nosotros</div></div><div class="sp-card"><div class="sp-icon">👥</div><div class="sp-stat-num">800K+</div><div class="sp-stat-txt">Clientes en España</div><div class="sp-stat-sub">Una de cada 50 familias españolas es cliente NN</div></div><div class="sp-card"><div class="sp-icon">⭐</div><div class="sp-stat-num">AA−</div><div class="sp-stat-txt">Calificación S&amp;P (Solvencia)</div><div class="sp-stat-sub">Standard &amp; Poor's: Capacidad sólida de pagar</div></div><div class="sp-card"><div class="sp-icon">✅</div><div class="sp-stat-num">98.5%</div><div class="sp-stat-txt">Siniestros pagados dentro de plazo</div><div class="sp-stat-sub">Sin demoras ni sorpresas</div></div><div class="sp-card"><div class="sp-icon">🌍</div><div class="sp-stat-num">11</div><div class="sp-stat-txt">Países europeos</div><div class="sp-stat-sub">Grupo Nationale-Nederlanden: presencia continental</div></div><div class="sp-card"><div class="sp-icon">💡</div><div class="sp-stat-num">100%</div><div class="sp-stat-txt">Digitalizado y mobile-first</div><div class="sp-stat-sub">Apps gratuitas: Salud + Legal incluidas</div></div></div><div class="sp-testimonials"><div class="sp-test-title">Lo que dicen nuestros clientes</div><div class="sp-test-grid"><div class="sp-test-card"><div class="sp-test-stars">⭐⭐⭐⭐⭐</div><div class="sp-test-quote">"Me salvó la vida. Sin Contigo Autónomo, habría quebrado."</div><div class="sp-test-author">Javier M. · Barcelona (Autónomo)</div></div><div class="sp-test-card"><div class="sp-test-stars">⭐⭐⭐⭐⭐</div><div class="sp-test-quote">"El pago fue en 3 días. Sin burocracia, sin sorpresas."</div><div class="sp-test-author">María L. · Valencia (Siniestro Hogar)</div></div><div class="sp-test-card"><div class="sp-test-stars">⭐⭐⭐⭐⭐</div><div class="sp-test-quote">"SIALP: el mejor ahorro sin tributar que conozco."</div><div class="sp-test-author">Carlos P. · Madrid (Planificador)</div></div></div></div></div>`;
+  return`<div class="social-proof-container fi"><div class="sp-header"><div class="sp-title">¿Por qué elegir Nationale-Nederlanden?</div><div class="sp-subtitle">Solidez, experiencia y confianza</div></div><div class="sp-grid"><div class="sp-card"><div class="sp-icon">🏛️</div><div class="sp-stat-num">63 años</div><div class="sp-stat-txt">Presencia en España desde 1963</div><div class="sp-stat-sub">Generaciones de familias confían en nosotros</div></div><div class="sp-card"><div class="sp-icon">👥</div><div class="sp-stat-num">800K+</div><div class="sp-stat-txt">Clientes en España</div><div class="sp-stat-sub">Una de cada 50 familias españolas es cliente NN</div></div><div class="sp-card"><div class="sp-icon">⭐</div><div class="sp-stat-num">AA−</div><div class="sp-stat-txt">Calificación S&amp;P (Solvencia)</div><div class="sp-stat-sub">Standard &amp; Poor's: Capacidad sólida de pagar</div></div><div class="sp-card"><div class="sp-icon">✅</div><div class="sp-stat-num">98.5%</div><div class="sp-stat-txt">Siniestros pagados dentro de plazo</div><div class="sp-stat-sub">Sin demoras ni sorpresas</div></div><div class="sp-card"><div class="sp-icon">🌍</div><div class="sp-stat-num">11</div><div class="sp-stat-txt">Países europeos</div><div class="sp-stat-sub">Grupo Nationale-Nederlanden: presencia continental</div></div><div class="sp-card"><div class="sp-icon">💡</div><div class="sp-stat-num">100%</div><div class="sp-stat-txt">Digitalizado y mobile-first</div><div class="sp-stat-sub">Apps gratuitas: Salud + Legal incluidas</div></div></div><div class="sp-testimonials"><div class="sp-test-title">Lo que dicen nuestros clientes</div><div class="sp-test-grid"><div class="sp-test-card"><div class="sp-test-stars">⭐⭐⭐⭐⭐</div><div class="sp-test-quote">"Me salvó la vida. Sin Contigo Autónomo, habría quebrado."</div><div class="sp-test-author">Javier M. · Barcelona (Autónomo)</div></div><div class="sp-test-card"><div class="sp-test-stars">⭐⭐⭐⭐⭐</div><div class="sp-test-quote">"El pago fue en 3 días. Sin burocracia, sin sorpresas."</div><div class="sp-test-author">María L. · Valencia (Siniestro Hogar)</div></div><div class="sp-test-card"><div class="sp-test-stars">⭐⭐⭐⭐⭐</div><div class="sp-test-quote">"Plan Creciente SIALP: el mejor ahorro sin tributar que conozco."</div><div class="sp-test-author">Carlos P. · Madrid (Planificador)</div></div></div></div></div>`;
 }
 function rgpdBanner(){
   return`<div class="rgpd-banner fi"><div class="rgpd-title">⚖️ Información sobre Protección de Datos (RGPD/LOPDGDD)</div><div class="rgpd-text"><strong>Responsable del tratamiento:</strong> Nationale-Nederlanden Vida y Nationale-Nederlanden Generales, Compañías de Seguros y Reaseguros, S.A.E. (Av. Bruselas, 16 · 28108 Alcobendas, Madrid).</div><div class="rgpd-text"><strong>Tus derechos ARCO-POL:</strong> Acceso, Rectificación, Cancelación, Oposición y Portabilidad de tus datos personales. Tienes derecho a revocar consentimiento para comunicaciones comerciales sin que afecte a contratos previos.</div><div class="rgpd-actions"><a href="mailto:seleccion.redcomercial@nnespana.com?subject=Ejercicio%20derechos%20ARCO%20RGPD&cc=dpo@nnespana.es" class="rgpd-action-btn">📧 Ejercer derechos ARCO</a><a href="https://www.nnespana.es/" target="_blank" class="rgpd-action-btn">📋 Política privacidad NN</a><a href="https://www.aepd.es/" target="_blank" class="rgpd-action-btn">⚖️ Reclamar AEPD</a><span style="font-size:11px;color:#9A8F87;display:block;margin-top:10px"><strong>Derecho de oposición:</strong> Responde a cualquier email con "BAJA" en el asunto para excluirte de comunicaciones comerciales · <strong>DPO:</strong> dpo@nnespana.es</span></div></div>`;
@@ -871,20 +888,11 @@ function priceClass(c){return `c${colMap(c)}`;}
 // ═══════════════════════════════════════════════════════════════
 // RENDER PRODUCTO
 // ═══════════════════════════════════════════════════════════════
-function renderProd(p, nombre, prima, capitales){
+function renderProd(p, nombre, prima){
   const n = nombre || 'tu propuesta';
   const pf = formatearPrecio(prima || p.prima || 'Consultar');
-  const cf = formatearCapital(capitales);
   const f = FASES[p.fase];
   const KC = keyClass(f.col), TC = tagClass(f.col), PC = priceClass(f.col);
-
-  // Reemplazar capitales en coberturas si existen
-  const covs = p.covs ? p.covs.map(c => {
-    if (cf && (c.c === 'Capital a elegir' || c.c === 'Capital a asegurar')) {
-      return { ...c, c: cf };
-    }
-    return c;
-  }) : null;
 
   const gapH = p.gap ? `
     <div class="sl slo">El agujero real del RETA</div>
@@ -899,22 +907,13 @@ function renderProd(p, nombre, prima, capitales){
 
   const deadlineH = p.deadline ? `<div class="deadline-badge"><div class="db-ico">${p.deadline.ico}</div><div class="db-main"><div class="db-badge">${p.deadline.badge}</div><div class="db-loss">${p.deadline.loss}</div></div></div>` : '';
 
-  const covsH = covs ? `
+  const covsH = p.covs ? `
     <div class="sl sl${colMap(f.col)}">Qué incluye tu propuesta</div>
-    <div class="cl">${covs.map(c=>`
+    <div class="cl">${p.covs.map(c=>`
       <div class="cr ${c.k ? KC : ''}">
         <span class="cn">${c.n}${c.k?`<span class="tag ${TC}">${c.t}</span>`:''}</span>
         <div class="crr"><span class="cc">${c.c}</span><span class="cp ${PC}">${c.p}</span></div>
       </div>`).join('')}</div>` : '';
-
-  const capitalesH = cf ? `
-    <div class="sl sl${colMap(f.col)}">Capital propuesto</div>
-    <div class="st-row">
-      <div class="stc" style="grid-column: 1 / -1; background: var(--ol); border-color: var(--om); padding: 20px 14px;">
-        <div class="stv" style="color: var(--o); font-size: 28px; margin-bottom: 6px;">${cf}</div>
-        <div class="stl" style="font-size: 13px; font-weight: 500; color: var(--tx);">Capital principal de protección</div>
-      </div>
-    </div>` : '';
 
   const objecH = p.objeciones ? `
       <div class="faq-hed">Preguntas frecuentes · Resolvemos tus dudas</div>
@@ -941,18 +940,7 @@ function renderProd(p, nombre, prima, capitales){
     <div class="body fi">
       <div class="greet">${p.greet(n)}</div>
       <span class="fbadge ${f.fb}">${f.ico} ${f.label}</span>
-      
-      ${p.logoPartner ? `
-      <div class="partner-card-body" style="background: #f9f9f9; border-radius: 12px; padding: 20px; margin: 20px 0; border: 1px solid #eee; display: flex; align-items: center; gap: 20px;">
-        <img src="${p.logoPartner}" style="height: 50px; width: auto; filter: grayscale(0.2);" alt="Partner">
-        <div>
-          <div style="font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 1px;">${p.partnerBadge || 'Partner Institucional'}</div>
-          <div style="font-size: 13px; color: #444; line-height: 1.4; margin-top: 4px;">${p.partnerDesc || 'Garantía de excelencia y respaldo líder en el sector.'}</div>
-        </div>
-      </div>
-      ` : ''}
-
-      ${deadlineH}${gapH}${hbH}${capitalesH}${stH}${covsH}${totalH}${objecH}
+      ${deadlineH}${gapH}${hbH}${stH}${covsH}${objecH}${totalH}
       ${p.extras ? exts() : ''}
       <div class="dv"></div>
       <div class="cierre">${p.cierre(n)}</div>
@@ -1061,11 +1049,10 @@ function main(){
   const sec = q('seccion'), prod = q('producto').toLowerCase();
   const nombre = q('nombre') || q('name');
   const prima = q('prima') || q('price');
-  const capitales = q('capitales') || q('capital');
   const app = document.getElementById('app');
 
   if(sec === 'agente') app.innerHTML = renderAgente(nombre);
-  else if(prod && PRODS[prod]) app.innerHTML = renderProd(PRODS[prod], nombre, prima, capitales);
+  else if(prod && PRODS[prod]) app.innerHTML = renderProd(PRODS[prod], nombre, prima);
   else app.innerHTML = renderPortada();
 }
 
