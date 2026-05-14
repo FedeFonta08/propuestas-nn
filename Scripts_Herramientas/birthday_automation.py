@@ -193,7 +193,7 @@ function copyMsg(id, msg) {
   <div class="card-body">
     <div class="msg-box">{msg}</div>
     <div class="actions">
-      <a href="{wa_url}" target="_blank" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
+      <a href="{wa_url}" target="whatsapp_chat" class="btn btn-wa">1. Enviar Texto WhatsApp</a>
       <button id="btn-copy-{card_id}" class="btn btn-copy" onclick="copyMsg('{card_id}', '{msg}')">2. Copiar Texto</button>
     </div>
     <p class="tip">🖼️ Selecciona arriba la imagen, Click derecho > Copiar y pega.</p>
