@@ -671,22 +671,31 @@ const PRODS = {
 
   duplo: {
     fase: 'f4', ico: '📊', nom: 'Sistema Duplo',
-    sub: 'Plan de pensiones individual con reducción de base imponible del IRPF. 2 fondos: Crecimiento Global (100% RV, comisión 1,5%) o Europa (20% RV + 80% RF, comisión 1,3%). Disponible para cualquier perfil.',
-    tit: n => `${n} paga menos impuestos hoy <em>mientras construye su futuro.</em>`,
-    greet: n => `Hola <strong>${n}</strong>,<br><br>El Sistema Duplo permite <strong>reducir la base imponible del IRPF</strong> mientras se construye capital para la jubilación. Elige entre dos fondos según tu perfil: Crecimiento Global (100% renta variable) o Europa (mixto 20% RV + 80% RF).`,
-    hb: { t: 'hbb', x: '<strong>Dos fondos, un objetivo:</strong> NN Crecimiento Global: 100% RV, comisión 1,5%. NN Europa: 20% RV + 80% RF, comisión 1,3%. Disponibilidad anticipada a partir de 10 años de antigüedad (desde 2025).' },
-    sts: [{ v: 'Reducción', l: 'Base imponible IRPF' }, { v: '1,3–1,5%', l: 'Comisión gestión' }, { v: '10 años', l: 'Liquidez anticipada' }],
+    sub: 'Plan de Pensiones Individual con máxima eficiencia fiscal. Reduce tu IRPF mientras construyes tu futuro con gestión profesional internacional.',
+    tit: n => `¿Le estás regalando dinero a Hacienda? <em>Recupéralo con Sistema Duplo, ${n}.</em>`,
+    greet: n => `Hola <strong>${n}</strong>,<br><br>Cada euro que aportas a tu Plan de Pensiones no es solo ahorro para el futuro, es un ahorro **real e inmediato** en tu declaración de la renta de este año. El Sistema Duplo te permite elegir o combinar dos estrategias (Crecimiento Global o Europa) para que tu inversión se adapte a tu perfil, con la seguridad de una gestión experta y la nueva liquidez legal a los 10 años.`,
+    hb: { t: 'hbb', x: '<strong>Beneficio Fiscal Directo:</strong> Reduce hasta 1.500 € de tu base imponible anual. Además, aprovecha la ventana de liquidez para aportaciones con más de 10 años de antigüedad, disponible desde 2025.' },
+    sts: [{ v: '1.500 €', l: 'Deducción Máx.' }, { v: '10 años', l: 'Liquidez Nueva' }, { v: '0 €', l: 'Coste Traspaso' }],
     covs: [
-      { n: 'NN Crecimiento Global', c: '100% Renta Variable global', p: '1,5%/año', k: true, t: 'dinámico' },
-      { n: 'NN Europa', c: '20% RV + 80% RF europeo', p: '1,3%/año', k: true, t: 'conservador' },
+      { n: 'NN Crecimiento Global (100% RV)', c: 'Perfil dinámico', p: '1,5%/año', k: true, t: 'potencial' },
+      { n: 'NN Europa (20% RV + 80% RF)', c: 'Perfil conservador', p: '1,3%/año', k: true, t: 'estable' },
       { n: 'Reducción base imponible IRPF', c: 'Hasta límites legales', p: '✓', k: false },
-      { n: 'Disponibilidad anticipada', c: 'Con 10+ años antigüedad (2025)', p: '✓', k: false },
-      { n: 'Contingencias: jubilación, IPA, fallecimiento', c: 'Cobro flexible', p: '✓', k: false },
+      { n: 'Liquidez aportaciones > 10 años', c: 'Disponible desde 2025', p: '✓', k: false },
+      { n: 'Traspaso desde otras entidades', c: 'Gratuito y gestionado', p: '✓', k: false },
+      { n: 'Cambio de fondo sin impacto fiscal', c: 'Flexibilidad total', p: '✓', k: false },
     ],
     pendiente: false,
-    totalDesc: 'Aportaciones libres periódicas o extraordinarias · Máximo según límites legales IRPF',
+    totalDesc: 'Aportaciones libres desde 30 € · Máximo 1.500 €/año · Gestión NN Investment Partners',
     prima: 'Aportación libre',
-    cierre: n => `<strong>${n}</strong>, ahorrar para la jubilación mientras pagas menos impuestos es siempre la decisión correcta.`,
+    cierre: n => `<strong>${n}</strong>, pagar menos impuestos mientras aseguras tu jubilación es la decisión financiera más inteligente. ¿Hacemos un cálculo de tu ahorro fiscal?`,
+    objeciones: [
+      { q: '¿Cuánto dinero puedo desgravarme exactamente cada año?', a: 'El límite legal para planes individuales es de 1.500 € anuales (o el 30% de tus rendimientos netos del trabajo, la cifra menor). Si aportas el máximo, Hacienda te devolverá una parte proporcional a tu tipo marginal de IRPF en tu próxima declaración.' },
+      { q: '¿Tengo que esperar a jubilarme para sacar el dinero?', a: 'Ya no es obligatorio. Además de jubilación, invalidez o enfermedad grave, desde 2025 puedes rescatar las aportaciones que tengan una antigüedad superior a 10 años. Tu plan de pensiones ahora es mucho más líquido y flexible.' },
+      { q: '¿Qué diferencia hay entre los dos fondos del Sistema Duplo?', a: 'Crecimiento Global invierte el 100% en renta variable para maximizar el potencial a largo plazo. Europa es más conservador, con un 20% en renta variable y un 80% en renta fija, ideal si buscas estabilidad y proteger lo acumulado.' },
+      { q: '¿Puedo traer mi plan de pensiones de otro banco?', a: 'Sí, y es un proceso totalmente gratuito. Nosotros nos encargamos de todo el trámite administrativo. Además, consulta nuestras campañas vigentes, ya que solemos bonificar los traspasos con capital extra.' },
+      { q: '¿Cómo tributa el dinero cuando lo rescato?', a: 'El rescate tributa como rendimiento del trabajo. Lo ideal es planificar el cobro para minimizar el impacto. Un dato clave: las aportaciones anteriores a 2007 pueden disfrutar de una reducción del 40% si se rescatan en forma de capital.' },
+      { q: '¿Y si quiero cambiar de perfil de riesgo en el futuro?', a: 'Tienes total libertad. Puedes mover tu saldo entre Crecimiento Global y Europa sin coste alguno y sin impacto fiscal, adaptando tu inversión a medida que te acerques a la edad de jubilación.' }
+    ],
   },
 
   // ── FASE 5: PROFESIONAL Y EMPRESA ────────────────────────────────
