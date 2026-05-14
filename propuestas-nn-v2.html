@@ -22,7 +22,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-h
 .g2{position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(232,93,38,.1) 0%,transparent 65%);border-radius:50%}
 .htop{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;position:relative;z-index:1}
 .hbrand{display:flex;align-items:center;gap:14px}
-.hlogo{height:34px;width:auto;display:block;filter:brightness(0) invert(1)}
+.hlogo{height:40px;width:auto;display:block}
 .hpartner{height:30px;width:auto;display:block;margin-left:auto;margin-right:12px;border-radius:4px}
 .bdot{display:none}
 .bname{display:none}
@@ -403,12 +403,12 @@ const PRODS = {
 
   saludvida: {
     fase: 'f2', ico: '❤️', nom: 'Plan Salud + Vida',
-    sub: 'La única solución híbrida: Medicina Sanitas + Seguro de Vida en un solo contrato. Vida GRATIS el primer año y 12,5% de descuento vitalicio.',
+    sub: 'La única solución híbrida: Medicina Sanitas + Seguro de Vida en un solo contrato. Vida GRATIS el primer año y 12,5% de descuento hasta el 1 de junio de 2026.',
     tit: n => `El blindaje total para <em>${n} y su familia</em>: Salud Sanitas + Vida NN.`,
-    deadline: { ico: '⏰', badge: 'DESCUENTO 12,5% SOLO HASTA 1 JUNIO 2026', loss: 'Si contratas después del 1 de junio de 2026, pierdes el 12,5% de descuento anual en tu prima de salud — ese ahorro ya no vuelve. La promoción aplica a pólizas con fecha efecto 1 de abril, 1 de mayo o 1 de junio de 2026.' },
-    greet: n => `Hola <strong>${n}</strong>,<br><br>¿Sabías que la mayoría de seguros te hacen elegir entre salud o vida? Nosotros hemos unido lo mejor de los dos mundos: <strong>te damos la medicina privada de Sanitas y el respaldo de un seguro de vida de Nationale-Nederlanden en un solo contrato</strong>. Y lo mejor: el seguro de vida te sale <strong>GRATIS el primer año</strong> y te aplicamos un <strong>12,5% de descuento anual</strong> si contratas antes de junio.`,
-    hb: { t: 'hbo', x: '<strong>Incomparable:</strong> Medicina privada Sanitas (sin listas de espera) + Seguro de Vida NN. El seguro de vida es GRATIS el primer año. Ahorro del 12,5% en la prima de salud para siempre si contratas ahora.' },
-    sts: [{ v: '12,5%', l: 'Descuento anual' }, { v: '0 €', l: 'Vida (1er año)' }, { v: '+40.000', l: 'Médicos Sanitas' }],
+    deadline: { ico: '⏰', badge: 'DESCUENTO 12,5% SOLO HASTA 1 JUNIO 2026', loss: 'Si contratas después del 1 de junio de 2026, pierdes el 12,5% de descuento anual en tu prima de salud. La promoción aplica a pólizas con fecha efecto 1 de abril, 1 de mayo o 1 de junio de 2026.' },
+    greet: n => `Hola <strong>${n}</strong>,<br><br>¿Sabías que la mayoría de seguros te hacen elegir entre salud o vida? Nosotros hemos unido lo mejor de los dos mundos: <strong>te damos la medicina privada de Sanitas y el respaldo de un seguro de vida de Nationale-Nederlanden en un solo contrato</strong>. Y lo mejor: el seguro de vida te sale <strong>GRATIS el primer año</strong> y te aplicamos un <strong>12,5% de descuento</strong> si contratas antes del 1 de junio.`,
+    hb: { t: 'hbo', x: '<strong>Incomparable:</strong> Medicina privada Sanitas (sin listas de espera) + Seguro de Vida NN. El seguro de vida es GRATIS el primer año. Ahorro del 12,5% en la prima de salud hasta el 1 de junio de 2026.' },
+    sts: [{ v: '12,5%', l: 'Descuento hasta junio' }, { v: '0 €', l: 'Vida (1er año)' }, { v: '+40.000', l: 'Médicos Sanitas' }],
     covs: [
       { n: 'Asistencia sanitaria completa Sanitas', c: 'Familia completa', p: 'Consultar', k: true, t: 'estrella' },
       { n: 'Seguro de vida — 1er año GRATIS', c: 'Capital a elegir', p: '0 € primer año', k: true, t: 'gratis' },
@@ -418,17 +418,17 @@ const PRODS = {
       { n: 'Cobertura dental completa Sanitas', c: 'Incluida', p: '✓', k: false },
     ],
     pendiente: false,
-    totalDesc: 'Prima variable según edad y zona · Vida gratis 12 meses · Descuento vitalicio 12,5%',
+    totalDesc: 'Prima variable según edad y zona · Vida gratis 12 meses · Descuento hasta el 1 de junio (12,5%)',
     prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, proteger la salud y la vida de tu familia en un solo paso es la decisión más inteligente. ¿Hablamos de las coberturas?`,
     objeciones: [
       { q: '¿Qué incluye exactamente la parte de Salud?', a: 'Incluye medicina primaria, especialistas, pruebas diagnósticas, hospitalización, urgencias 24h y cobertura dental. Todo con la red de Sanitas, la mejor valorada de España, sin listas de espera y con acceso directo a más de 40.000 profesionales.' },
       { q: '¿Cómo funciona eso de que el Seguro de Vida es gratis?', a: 'Al contratar el Plan Salud + Vida, Nationale-Nederlanden te bonifica el 100% de la prima del seguro de vida durante los primeros 12 meses. Tienes protección total por fallecimiento o invalidez desde el minuto uno sin pagar de más por ello.' },
-      { q: '¿Qué pasa con el descuento del 12,5%?', a: 'Es una promoción exclusiva. Si contratas con fecha efecto hasta el 1 de junio de 2026, mantendrás un descuento del 12,5% en tu prima de salud de forma vitalicia mientras mantengas el contrato. Es un ahorro masivo acumulado año tras año.' },
+      { q: '¿Qué pasa con el descuento del 12,5%?', a: 'Es una promoción exclusiva. Si contratas con fecha efecto hasta el 1 de junio de 2026, mantendrás un descuento del 12,5% en tu prima de salud. Es un ahorro masivo acumulado año tras año.' },
       { q: '¿Tengo que pasar reconocimiento médico?', a: 'Sanitas requiere una declaración de salud sencilla. En la mayoría de los casos no es necesario examen médico presencial. El proceso de contratación es 100% digital y muy ágil para que la protección sea inmediata.' },
       { q: '¿Puedo incluir a toda mi familia en el mismo plan?', a: 'Sí, y es lo ideal. El Plan Salud + Vida permite añadir a cónyuges e hijos, extendiendo la protección de salud de Sanitas y el seguro de vida a todos los miembros de la unidad familiar con condiciones preferenciales.' },
     ],
-    logoPartner: 'assets/logo_sanitas.jpg',
+    logoPartner: 'assets/ha-logo-sanitas.png',
   },
 
   saludcompleto: {
@@ -469,7 +469,7 @@ const PRODS = {
     totalDesc: 'Prima reducida · Copago solo al usar el servicio · Mismas coberturas Sanitas',
     prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, medicina privada de calidad sin que el coste fijo sea un problema.`,
-    logoPartner: 'assets/logo_sanitas.jpg',
+    logoPartner: 'assets/ha-logo-sanitas.png',
   },
 
   vidafamilia: {
@@ -510,7 +510,7 @@ const PRODS = {
     totalDesc: 'Prima variable según edad · Exclusivo mayores de 55 años',
     prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, mantener la independencia y la calidad de vida es lo más valioso. Este producto lo hace posible.`,
-    logoPartner: 'assets/logo_sanitas.jpg',
+    logoPartner: 'assets/ha-logo-sanitas.png',
   },
 
   accidentes: {
@@ -737,7 +737,7 @@ const PRODS = {
     totalDesc: 'Prima variable · Deducible como gasto profesional en IRPF · Optimización fiscal real',
     prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, medicina privada de calidad que además te ahorra impuestos. La decisión más inteligente como autónomo.`,
-    logoPartner: 'assets/logo_sanitas.jpg',
+    logoPartner: 'assets/ha-logo-sanitas.png',
   },
 
   // ── FASE 6: HIPOTECAS ─────────────────────────────────────────────
@@ -885,7 +885,7 @@ function renderProd(p, nombre, prima, capitales){
   return `
     <div class="hero fi"><div class="g1"></div><div class="g2"></div>
       <div class="htop">
-        <div class="hbrand"><img src="assets/logo_nn_comercial.png" alt="NN" class="hlogo"></div>
+        <div class="hbrand"><img src="assets/NN_Nat Ned__logo_01_rgb_fc_2400 (1).png" alt="NN" class="hlogo"></div>
         ${p.logoPartner ? `<img src="${p.logoPartner}" alt="Partner" class="hpartner">` : ''}
         <span class="hbadge">${p.ico} ${p.nom}</span>
       </div>
@@ -916,7 +916,7 @@ function renderAgente(nombre){
   return`
     <div class="hero fi"><div class="g1"></div><div class="g2"></div>
       <div class="htop">
-        <div class="hbrand"><img src="assets/logo_nn_comercial.png" alt="NN" class="hlogo"></div>
+        <div class="hbrand"><img src="assets/NN_Nat Ned__logo_01_rgb_fc_2400 (1).png" alt="NN" class="hlogo"></div>
         <span class="hbadge">🤝 Oportunidad de negocio</span>
       </div>
       <div class="hpt">Únete a la red Nationale-Nederlanden · Propuesta personalizada</div>
@@ -966,7 +966,7 @@ function renderAgente(nombre){
 function renderPortada(){
   let h = `
     <div class="hero fi"><div class="g1"></div><div class="g2"></div>
-      <div class="htop"><div class="hbrand"><img src="assets/logo_nn_comercial.png" alt="NN" class="hlogo"></div></div>
+      <div class="htop"><div class="hbrand"><img src="assets/NN_Nat Ned__logo_01_rgb_fc_2400 (1).png" alt="NN" class="hlogo"></div></div>
       <div class="hpt">Portal de Propuestas · Fede Fontanals</div>
       <h1 class="htit">Selecciona la <em>propuesta</em> que quieres ver.</h1>
       <p class="hsub">Cada propuesta se personaliza con el nombre y los datos del cliente.</p>
