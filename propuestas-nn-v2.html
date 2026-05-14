@@ -21,9 +21,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-h
 .g1{position:absolute;top:-80px;right:-80px;width:280px;height:280px;background:radial-gradient(circle,rgba(232,93,38,.22) 0%,transparent 65%);border-radius:50%}
 .g2{position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(232,93,38,.1) 0%,transparent 65%);border-radius:50%}
 .htop{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;position:relative;z-index:1}
-.hbrand{display:flex;align-items:center;gap:10px}
-.bdot{width:34px;height:34px;background:var(--o);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:#fff}
-.bname{font-size:12px;color:rgba(255,255,255,.4);letter-spacing:.07em;text-transform:uppercase}
+.hbrand{display:flex;align-items:center;gap:14px}
+.hlogo{height:34px;width:auto;display:block;filter:brightness(0) invert(1)}
+.hpartner{height:30px;width:auto;display:block;margin-left:auto;margin-right:12px;border-radius:4px}
+.bdot{display:none}
+.bname{display:none}
 .hbadge{font-size:10px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.45);padding:4px 10px;border-radius:20px;letter-spacing:.05em;text-transform:uppercase}
 .hpt{font-size:11px;color:var(--o);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;position:relative;z-index:1}
 .htit{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:12px;position:relative;z-index:1}
@@ -426,6 +428,7 @@ const PRODS = {
       { q: '¿Tengo que pasar reconocimiento médico?', a: 'Sanitas requiere una declaración de salud sencilla. En la mayoría de los casos no es necesario examen médico presencial. El proceso de contratación es 100% digital y muy ágil para que la protección sea inmediata.' },
       { q: '¿Puedo incluir a toda mi familia en el mismo plan?', a: 'Sí, y es lo ideal. El Plan Salud + Vida permite añadir a cónyuges e hijos, extendiendo la protección de salud de Sanitas y el seguro de vida a todos los miembros de la unidad familiar con condiciones preferenciales.' },
     ],
+    logoPartner: 'assets/logo_sanitas.jpg',
   },
 
   saludcompleto: {
@@ -446,6 +449,7 @@ const PRODS = {
     totalDesc: 'Prima variable según edad y zona · Red Sanitas completa · Sin carencias en urgencias',
     prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, con Sanitas tienes respuesta inmediata cuando la necesitas. Sin esperas, sin límites.`,
+    logoPartner: 'assets/logo_sanitas.jpg',
   },
 
   saludcopago: {
@@ -465,6 +469,7 @@ const PRODS = {
     totalDesc: 'Prima reducida · Copago solo al usar el servicio · Mismas coberturas Sanitas',
     prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, medicina privada de calidad sin que el coste fijo sea un problema.`,
+    logoPartner: 'assets/logo_sanitas.jpg',
   },
 
   vidafamilia: {
@@ -505,6 +510,7 @@ const PRODS = {
     totalDesc: 'Prima variable según edad · Exclusivo mayores de 55 años',
     prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, mantener la independencia y la calidad de vida es lo más valioso. Este producto lo hace posible.`,
+    logoPartner: 'assets/logo_sanitas.jpg',
   },
 
   accidentes: {
@@ -731,6 +737,7 @@ const PRODS = {
     totalDesc: 'Prima variable · Deducible como gasto profesional en IRPF · Optimización fiscal real',
     prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, medicina privada de calidad que además te ahorra impuestos. La decisión más inteligente como autónomo.`,
+    logoPartner: 'assets/logo_sanitas.jpg',
   },
 
   // ── FASE 6: HIPOTECAS ─────────────────────────────────────────────
@@ -878,7 +885,8 @@ function renderProd(p, nombre, prima, capitales){
   return `
     <div class="hero fi"><div class="g1"></div><div class="g2"></div>
       <div class="htop">
-        <div class="hbrand"><div class="bdot">N</div><span class="bname">Nationale-Nederlanden</span></div>
+        <div class="hbrand"><img src="assets/logo_nn_comercial.png" alt="NN" class="hlogo"></div>
+        ${p.logoPartner ? `<img src="${p.logoPartner}" alt="Partner" class="hpartner">` : ''}
         <span class="hbadge">${p.ico} ${p.nom}</span>
       </div>
       <div class="hpt">${p.nom} · Propuesta personalizada</div>
@@ -908,7 +916,7 @@ function renderAgente(nombre){
   return`
     <div class="hero fi"><div class="g1"></div><div class="g2"></div>
       <div class="htop">
-        <div class="hbrand"><div class="bdot">N</div><span class="bname">Nationale-Nederlanden</span></div>
+        <div class="hbrand"><img src="assets/logo_nn_comercial.png" alt="NN" class="hlogo"></div>
         <span class="hbadge">🤝 Oportunidad de negocio</span>
       </div>
       <div class="hpt">Únete a la red Nationale-Nederlanden · Propuesta personalizada</div>
@@ -958,7 +966,7 @@ function renderAgente(nombre){
 function renderPortada(){
   let h = `
     <div class="hero fi"><div class="g1"></div><div class="g2"></div>
-      <div class="htop"><div class="hbrand"><div class="bdot">N</div><span class="bname">Nationale-Nederlanden</span></div></div>
+      <div class="htop"><div class="hbrand"><img src="assets/logo_nn_comercial.png" alt="NN" class="hlogo"></div></div>
       <div class="hpt">Portal de Propuestas · Fede Fontanals</div>
       <h1 class="htit">Selecciona la <em>propuesta</em> que quieres ver.</h1>
       <p class="hsub">Cada propuesta se personaliza con el nombre y los datos del cliente.</p>
