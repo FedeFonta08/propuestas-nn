@@ -774,21 +774,31 @@ const PRODS = {
 
   comercios: {
     fase: 'f5', ico: '🏪', nom: 'Seguro para Comercios',
-    sub: 'Multirriesgo integral NN–Caser para negocios. Continente, contenido, RC, robo y garantía de continuidad del negocio.',
-    tit: n => `El negocio de ${n} protegido <em>ante cualquier imprevisto.</em>`,
-    greet: n => `Hola <strong>${n}</strong>,<br><br>El Seguro para Comercios NN–Caser protege tu inversión completa: <strong>local, mobiliario, existencias y garantía de continuidad del negocio</strong> si un siniestro obliga a cerrar temporalmente.`,
-    hb: { t: 'hbo', x: '<strong>Garantía crítica:</strong> Continuidad del negocio ante cierre temporal por incendio, robo o inundación. Presupuesto en 3 minutos. Tu inversión protegida al 100%.' },
+    sub: 'Multirriesgo integral NN–Caser para negocios. Protección total para tu local, mobiliario y la continuidad de tus ingresos pase lo que pase.',
+    tit: n => `Tu negocio es tu esfuerzo diario. <em>Que nada detenga la persiana de ${n}.</em>`,
+    greet: n => `Hola <strong>${n}</strong>,<br><br>Sabes mejor que nadie que en un comercio los imprevistos no solo cuestan dinero en reparaciones, sino que cada hora con la persiana bajada es una pérdida de beneficios real. <strong>El Seguro de Comercio NN–Caser no solo arregla los daños, sino que protege tu bolsillo</strong>: incluimos garantía de continuidad del negocio para que sigas ingresando mientras nosotros nos encargamos de que todo vuelva a la normalidad.`,
+    hb: { t: 'hbo', x: '<strong>Expertología Caser 24/7:</strong> Asistencia inmediata en fontanería, cerrajería y electricidad. Si tu negocio se detiene, nosotros lo ponemos en marcha en tiempo récord.' },
+    sts: [{ v: '24/7', l: 'Asistencia Urgente' }, { v: 'Garantizada', l: 'Continuidad Ingresos' }, { v: 'Modular', l: 'Pago a Medida' }],
     covs: [
-      { n: 'Continente (local y estructura)', c: 'Capital a asegurar', p: 'Consultar', k: true, t: 'base' },
-      { n: 'Contenido (mobiliario y existencias)', c: 'Capital a asegurar', p: 'Consultar', k: true, t: 'clave' },
-      { n: 'Garantía continuidad del negocio', c: 'Pérdida de beneficios', p: '✓', k: true, t: 'diferencial' },
-      { n: 'Responsabilidad civil', c: 'Incluida', p: '✓', k: false },
-      { n: 'Robo, incendio y daños por agua', c: 'Incluidos', p: '✓', k: false },
+      { n: 'Continente y Contenido', c: 'Protección integral local', p: 'Consultar', k: true, t: 'base' },
+      { n: 'Garantía de Continuidad (Lucro Cesante)', c: 'Ingresos protegidos', p: '✓', k: true, t: 'estrella' },
+      { n: 'Responsabilidad Civil Explotación', c: 'Daños a terceros', p: '✓', k: false },
+      { n: 'Daños por Agua, Fuego y Eléctricos', c: 'Cobertura total', p: '✓', k: false },
+      { n: 'Robo y Actos Vandálicos (Grafitis)', c: 'Interior y Fachada', p: '✓', k: false },
+      { n: 'Avería de Maquinaria y Equipos', c: 'Opcional según negocio', p: '✓', k: false },
     ],
     pendiente: false,
-    totalDesc: 'Prima variable según actividad, superficie y capitales · Valoración en 3 minutos',
+    totalDesc: 'Prima modular según actividad y capitales · Valoración experta en 3 minutos',
     prima: 'Consultar',
-    cierre: n => `<strong>${n}</strong>, un siniestro puede cerrar un negocio para siempre. Este seguro garantiza que no ocurra.`,
+    cierre: n => `<strong>${n}</strong>, un siniestro puede cerrar un negocio para siempre. Este seguro es la garantía de que el tuyo siempre volverá a abrir. ¿Lo valoramos?`,
+    objeciones: [
+      { q: '¿Qué cubre exactamente la "Continuidad del Negocio"?', a: 'Es la garantía más valiosa. Si un siniestro cubierto (como un incendio o inundación) te obliga a cerrar temporalmente, la póliza te compensa por los beneficios que dejas de percibir. Tu flujo de caja no se detiene aunque el local esté en obras.' },
+      { q: '¿Están cubiertos los grafitis o el vandalismo exterior?', a: 'Sí, disponemos de coberturas específicas para la limpieza de grafitis y la reparación de daños por actos vandálicos en fachadas y escaparates. Mantener la imagen impecable de tu negocio es parte de nuestra protección.' },
+      { q: '¿Mi maquinaria técnica también está segura?', a: 'Absolutamente. Si tu negocio depende de hornos, cámaras frigoríficas, ordenadores o maquinaria específica, podemos incluir la cobertura de Avería de Maquinaria para protegerte ante fallos eléctricos o roturas internas imprevistas.' },
+      { q: '¿Tengo asistencia de emergencia si se rompe una tubería o cerradura?', a: 'Sí, el servicio de Expertología Caser está disponible las 24 horas. Enviamos a los profesionales necesarios (fontaneros, cerrajeros, electricistas) de forma urgente para que el problema se resuelva antes de que afecte a tus clientes.' },
+      { q: '¿Cómo se valoran mis existencias y mobiliario?', a: 'Realizamos una valoración personalizada según tu inventario real. Además, el seguro cuenta con revalorización automática para que, con el paso de los años, nunca te quedes "corto" de capital asegurado ante un siniestro total.' },
+      { q: '¿Es muy caro para un comercio pequeño?', a: 'Al ser un seguro modular, solo pagas por lo que realmente necesitas. Ajustamos las garantías al tamaño y riesgo real de tu actividad, ofreciendo una protección premium a un precio muy competitivo para autónomos.' }
+    ],
   },
 
   saludautonomos: {
