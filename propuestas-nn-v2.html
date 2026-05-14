@@ -746,20 +746,30 @@ const PRODS = {
 
   pyme: {
     fase: 'f5', ico: '🏢', nom: 'Contigo Pyme',
-    sub: 'Seguro colectivo de vida y accidentes para empleados de PYME. Sin examen médico para la gran mayoría. Adaptado a convenios laborales.',
-    tit: n => `La empresa de ${n} <em>protege a sus empleados</em> desde hoy.`,
-    greet: n => `Hola <strong>${n}</strong>,<br><br>Contigo Pyme permite proteger a todos los empleados con <strong>vida y accidentes sin examen médico para la gran mayoría</strong>, cumpliendo con los convenios laborales y fidelizando talento.`,
-    hb: { t: 'hbo', x: '<strong>Sin examen médico:</strong> Para la gran mayoría de empleados. Plenamente adaptado a los convenios laborales vigentes. Beneficio social que retiene talento.' },
+    sub: 'Seguro colectivo de vida y accidentes para empleados de PYME. Sin exámenes médicos, 100% adaptado a convenios y con gestión digital.',
+    tit: n => `¿Es tu empresa un lugar seguro para trabajar? <em>Contigo Pyme lo garantiza.</em>`,
+    greet: n => `Hola <strong>${n}</strong>,<br><br>Gestionar una empresa ya es suficientemente complejo como para preocuparse por la letra pequeña de los convenios laborales. <strong>Contigo Pyme es el escudo total para tu equipo y tu tranquilidad legal</strong>: cumples con la normativa vigente y, además, ofreces un beneficio social de alto valor que ayuda a retener el talento en tu organización.<br><br>Y lo mejor: <strong>olvídate de los cuestionarios médicos</strong>. La gran mayoría de tu plantilla entra en cobertura de forma directa y automática, sin burocracia innecesaria.`,
+    hb: { t: 'hbo', x: '<strong>Cumplimiento Legal Garantizado:</strong> Adaptación automática a las actualizaciones de los convenios colectivos. Sin riesgos de sanciones y con la solvencia del Grupo NN (Rating AA-).' },
+    sts: [{ v: '100%', l: 'Adaptado a Convenio' }, { v: 'Cero', l: 'Trámites Médicos' }, { v: 'Deducible', l: 'Impuesto Sociedades' }],
     covs: [
-      { n: 'Seguro de vida colectivo empleados', c: 'Capital a definir', p: 'Consultar', k: true, t: 'base' },
-      { n: 'Sin examen médico (mayoría empleados)', c: 'Contratación directa', p: '✓', k: true, t: 'ventaja' },
-      { n: 'Cobertura accidentes laborales', c: 'Incluida', p: '✓', k: false },
-      { n: 'Adaptado a convenio colectivo', c: 'Obligaciones legales', p: '✓', k: false },
+      { n: 'Seguro de vida colectivo empleados', c: 'Capital según convenio', p: 'Consultar', k: true, t: 'base' },
+      { n: 'Accidentes laborales y enfermedad', c: 'Cobertura legal', p: '✓', k: true, t: 'clave' },
+      { n: 'Sin examen médico (gran mayoría)', c: 'Contratación directa', p: '✓', k: false },
+      { n: 'Actualización automática de convenio', c: 'Seguridad legal', p: '✓', k: false },
+      { n: 'Gestión 100% digital empleados', c: 'App y área privada', p: '✓', k: false },
     ],
     pendiente: false,
-    totalDesc: 'Prima por empleado · Según plantilla y coberturas elegidas',
+    totalDesc: 'Prima por empleado · Según plantilla y coberturas elegidas · Gastos deducibles',
     prima: 'Consultar',
-    cierre: n => `<strong>${n}</strong>, proteger a tu equipo es la mejor inversión. Lo formalizamos en una reunión sin compromiso.`,
+    cierre: n => `<strong>${n}</strong>, proteger a tu equipo es la mejor inversión para el futuro de tu negocio. ¿Hablamos de las condiciones de tu convenio?`,
+    objeciones: [
+      { q: '¿Tengo que asegurar a toda la plantilla obligatoriamente?', a: 'Sí, para cumplir con el convenio colectivo, la póliza debe cubrir a todos los trabajadores dados de alta en la empresa. Esto garantiza que no haya vacíos legales ante una inspección o siniestro.' },
+      { q: '¿Qué pasa si entra un nuevo empleado mañana?', a: 'El seguro es flexible. Las altas y bajas se gestionan de forma ágil a través del portal digital. En muchos casos, se realiza una regularización anual para simplificar al máximo tu carga administrativa.' },
+      { q: '¿Realmente no hay exámenes médicos?', a: 'Para la inmensa mayoría de las pymes y capitales estándar, Nationale-Nederlanden no exige cuestionarios ni pruebas de salud. Es una de las mayores ventajas competitivas de este producto.' },
+      { q: '¿Cubre solo accidentes laborales o también fuera del trabajo?', a: 'Tú eliges. Podemos configurar la póliza solo para el ámbito laboral (cumpliendo el mínimo legal) o ampliarla a 24 horas para que tus empleados estén protegidos también en su vida privada.' },
+      { q: '¿Qué ventajas fiscales tiene para la empresa?', a: 'Las primas pagadas por la empresa son un gasto deducible al 100% en el Impuesto de Sociedades. Es una forma eficiente de mejorar la retribución de tus empleados.' },
+      { q: '¿Y si el convenio cambia a mitad de año?', a: 'Nosotros nos encargamos. El producto está diseñado para actualizarse según las exigencias de los nuevos convenios publicados, asegurando que tu empresa nunca esté fuera de la legalidad.' }
+    ],
   },
 
   comercios: {
