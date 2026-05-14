@@ -229,25 +229,41 @@ def main():
     today_list = []
     week_list = []
     
-    # MANUAL OVERRIDES
-    elvira_msg = "¡Hola Maria Elvira! Me he acordado de que hoy es el cumpleaños de tu hijo Alex. ¡Muchísimas felicidades para él y para ti también! Espero que lo disfrutéis mucho en familia. ¡Un fuerte abrazo!"
-    today_list.append({
-        "nombre": "Maria Elvira", "apellidos": "(Hijo Alex)", "tel": "+34609148712", 
-        "cumple": "Hoy", "buyer": "HIJO / FAMILIA", 
-        "manual": True, "msg": elvira_msg
-    })
+    # MANUAL OVERRIDES (Solo si es necesario para fechas específicas)
+    # Ejemplo: if today.day == 14 and today.month == 5: today_list.append(...)
+
+    import re
+    def extract_tel(text):
+        if not text: return ""
+        # Busca patrones comunes de teléfonos españoles (+34..., 34..., 6..., 7...)
+        match = re.search(r'(\+34|34)?[67]\d{8}', text.replace(" ", ""))
+        if match:
+            num = match.group()
+            if num.startswith("6") or num.startswith("7"): num = "34" + num
+            if num.startswith("+"): num = num[1:]
+            return num
+        return ""
 
     for row in rows:
         if len(row) < 6: continue
-        nombre = row[0]; apellidos = row[1] if len(row) > 1 else ""; tel = row[3] if len(row) > 3 else ""; cumple_raw = row[5]
+        nombre = row[0]; apellidos = row[1] if len(row) > 1 else ""; raw_tel = row[3] if len(row) > 3 else ""; cumple_raw = row[5]
         buyer = row[48] if len(row) > 48 else "Cliente"
+        
+        # Intentar extraer teléfono de la columna dedicada
+        tel = extract_tel(raw_tel)
+        
+        # Si no hay teléfono en la columna 3, buscar en nombre o apellidos (común en este CRM)
+        if not tel:
+            tel = extract_tel(nombre + " " + apellidos)
+        
         if not cumple_raw: continue
         dt = parse_date(cumple_raw)
         if dt:
+            p_data = {"nombre": nombre, "apellidos": apellidos, "tel": tel, "cumple": cumple_raw, "buyer": buyer}
             if dt.month == target_month and dt.day == target_day:
-                if nombre != "Maria Elvira": today_list.append({"nombre": nombre, "apellidos": apellidos, "tel": tel, "cumple": cumple_raw, "buyer": buyer})
+                today_list.append(p_data)
             elif dt.month == target_month and target_day < dt.day <= target_day + 7:
-                week_list.append({"nombre": nombre, "apellidos": apellidos, "tel": tel, "cumple": cumple_raw, "buyer": buyer})
+                week_list.append(p_data)
 
     generate_html(today_list, week_list)
 
@@ -255,9 +271,11 @@ if __name__ == "__main__":
     try:
         main()
     except RefreshError:
-        print("\n❌ ERROR: El token de Google ha caducado o ha sido revocado.")
+        print("\n[!] ERROR: El token de Google ha caducado o ha sido revocado.")
         print("Para solucionarlo, ejecuta localmente: python Scripts_Herramientas/auth_drive.py")
-        sys.exit(0) # Salimos con éxito para no disparar alertas de GitHub
+        sys.exit(0) 
     except Exception as e:
-        print(f"\n❌ ERROR INESPERADO: {str(e)}")
+        print(f"\n[!] ERROR INESPERADO: {str(e)}")
+        import traceback
+        traceback.print_exc()
         sys.exit(0)

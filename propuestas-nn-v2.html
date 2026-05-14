@@ -563,23 +563,62 @@ const PRODS = {
   },
 
   auto: {
-    fase: 'f3', ico: '🚗', nom: 'Seguro de Coche y Moto',
-    sub: 'Alianza NN + Mutua Madrileña. Valor a nuevo los 2 primeros años. Asistencia desde km 0. Todo riesgo desde 250 € de franquicia.',
-    tit: n => `El vehículo de ${n} <em>protegido en cada kilómetro.</em>`,
-    greet: n => `Hola <strong>${n}</strong>,<br><br>Seguros de coche y moto con la alianza NN + Mutua Madrileña: <strong>valor a nuevo los 2 primeros años, asistencia en carretera desde km 0</strong> y tres modalidades de cobertura para cada necesidad y presupuesto.`,
-    hb: { t: 'hbt', x: '<strong>Alianza NN · Mutua Madrileña:</strong> Valor a nuevo (2 primeros años). Asistencia Autoclub Mutua desde km 0. Revisión anual gratuita. Gestión de multas y recuperación de puntos del carnet.' },
+    fase: 'f3', ico: '🚗', nom: 'Seguro de Coche',
+    sub: 'Alianza NN + Mutua Madrileña. Valor a nuevo los 2 primeros años. Asistencia Autoclub desde km 0. Sin variaciones de precio al contratar.',
+    tit: n => `El coche de ${n} <em>protegido por los nº1</em> en España.`,
+    greet: n => `Hola <strong>${n}</strong>,<br><br>Tu coche no es solo un vehículo, es tu movilidad diaria. Gracias a la alianza entre Nationale-Nederlanden y Mutua Madrileña, te ofrecemos un seguro donde <strong>el precio que te doy hoy es el que firmas, sin sorpresas de última hora</strong>. Con 2 años de valor a nuevo y la mejor asistencia en carretera del país.`,
+    hb: { t: 'hbt', x: '<strong>Compromiso Mutua:</strong> Valor a nuevo durante los 2 primeros años. Recambios originales garantizados. Recurso de multas y recuperación de puntos incluidos. Sin consulta SINCO (precio estable).' },
+    sts: [{ v: '2 años', l: 'Valor a nuevo' }, { v: '24h', l: 'Peritación rápida' }, { v: 'KM 0', l: 'Asistencia' }],
     covs: [
-      { n: 'Valor a nuevo', c: '2 primeros años', p: '✓', k: true, t: 'ventaja' },
-      { n: 'Asistencia en carretera', c: 'Desde km 0 · Autoclub Mutua', p: '✓', k: true, t: 'incluido' },
-      { n: 'Terceros básico (RC obligatoria)', c: 'Modalidad económica', p: '✓', k: false },
-      { n: 'Terceros ampliado (robo, incendio, lunas)', c: 'Modalidad intermedia', p: '✓', k: false },
-      { n: 'Todo riesgo con franquicia', c: '250 €, 550 € o 900 €', p: '✓', k: false },
-      { n: 'Revisión anual + gestión multas', c: 'Incluidos', p: '✓', k: false },
+      { n: 'Valor a nuevo (pérdida total)', c: 'Primeros 2 años', p: '✓', k: true, t: 'ventaja' },
+      { n: 'Asistencia en carretera Autoclub', c: 'Desde km 0 · 24/7', p: '✓', k: true, t: 'incluido' },
+      { n: 'Recuperación de puntos del carnet', c: 'Gestión y costes', p: '✓', k: true, t: 'tranquilidad' },
+      { n: 'Reparación con recambio original', c: 'Siempre garantizado', p: '✓', k: false },
+      { n: 'Recurso de multas online', c: 'Servicio incluido', p: '✓', k: false },
+      { n: 'Libre elección de taller (según mod)', c: 'Red Mutua o propio', p: '✓', k: false },
     ],
     pendiente: false,
-    totalDesc: 'Prima variable según vehículo, antigüedad y modalidad · Presupuesto sin compromiso en minutos',
+    totalDesc: 'Pago aplazado en 3 veces sin intereses · Precio cerrado desde el presupuesto',
     prima: 'Consultar',
-    cierre: n => `<strong>${n}</strong>, calculamos tu seguro de vehículo en minutos. Hablamos.`,
+    cierre: n => `<strong>${n}</strong>, tener tu coche en la Mutua con el respaldo de NN es la combinación ganadora. ¿Calculamos tu presupuesto?`,
+    objeciones: [
+      { q: '¿Es verdad que el precio no cambia al emitir la póliza?', a: 'Exacto. A diferencia de otras compañías, Mutua Madrileña no realiza "consulta SINCO" durante la contratación. Esto significa que la prima que calculamos en el presupuesto se mantiene idéntica en el momento de la firma, dándote total seguridad desde el primer minuto.' },
+      { q: '¿Qué pasa si mi coche tiene un siniestro total?', a: 'Si el coche tiene menos de 2 años de antigüedad, te indemnizamos por el VALOR A NUEVO. A partir del tercer año, aplicamos valor venal mejorado. Es una de las coberturas de pérdida total más potentes del mercado.' },
+      { q: '¿Cómo funciona la asistencia en carretera?', a: 'La presta Autoclub Mutua, la compañía de asistencia mejor valorada por los conductores en España. Tienes cobertura desde el kilómetro 0, tanto para el vehículo como para las personas, en toda Europa y países ribereños del Mediterráneo.' },
+      { q: '¿Puedo pagar el seguro poco a poco?', a: 'Sí, Mutua permite el pago aplazado en 3 veces sin ningún tipo de recargo ni intereses. Queremos que estar protegido sea fácil y no suponga un esfuerzo financiero de golpe.' },
+      { q: '¿Qué incluye la recuperación de puntos?', a: 'En caso de pérdida de puntos, el seguro cubre los gastos de matriculación al curso de sensibilización y reeducación vial, además de las tasas de examen, hasta los límites establecidos en la póliza.' },
+    ],
+    logoPartner: 'assets/logo_mutua.png',
+    partnerBadge: 'Alianza Estratégica con Mutua Madrileña',
+    partnerDesc: 'Precio cerrado desde el presupuesto · Sin consulta SINCO · 2 años de valor a nuevo.'
+  },
+
+  moto: {
+    fase: 'f3', ico: '🏍️', nom: 'Seguro de Moto',
+    sub: 'Protección específica para motoristas. Asistencia desde km 0. Cobertura de indumentaria y casco. Gestión de multas incluida.',
+    tit: n => `La libertad de <em>${n} sobre dos ruedas</em>, ahora blindada.`,
+    greet: n => `Hola <strong>${n}</strong>,<br><br>Sabemos que ir en moto es una filosofía de vida, pero también implica riesgos diferentes. Por eso, nuestro seguro de moto con Mutua Madrileña está <strong>diseñado por y para motoristas</strong>: asistencia desde el kilómetro 0 y protección para lo que más importa: tú y tu equipación.`,
+    hb: { t: 'hbt', x: '<strong>Especial Motoristas:</strong> Asistencia en viaje desde km 0. Cobertura opcional de casco y vestimenta técnica. Accidentes del conductor incluidos de serie. Gestión experta de multas.' },
+    sts: [{ v: 'KM 0', l: 'Asistencia inmediata' }, { v: 'Incluida', l: 'Gestión de multas' }, { v: 'Opcional', l: 'Casco y Ropa' }],
+    covs: [
+      { n: 'Asistencia en viaje desde KM 0', c: 'Para ti y tu moto', p: '✓', k: true, t: 'clave' },
+      { n: 'Accidentes individuales conductor', c: 'Capital garantizado', p: '✓', k: true, t: 'incluido' },
+      { n: 'Defensa jurídica y reclamación', c: 'Especializada', p: '✓', k: true, t: 'base' },
+      { n: 'Robo e Incendio (modalidad Plus)', c: 'Pérdida total', p: '✓', k: false },
+      { n: 'Indumentaria y casco (opcional)', c: 'Protección equipo', p: '✓', k: false },
+      { n: 'Gestión de multas y puntos', c: 'Servicio Mutua', p: '✓', k: false },
+    ],
+    pendiente: false,
+    totalDesc: 'Tres modalidades: Básico, Plus y Todo Riesgo · Fraccionamiento de pago sin recargo',
+    prima: 'Consultar',
+    cierre: n => `<strong>${n}</strong>, disfruta de la carretera con la tranquilidad de que Mutua y NN te cubren las espaldas. ¿Vemos qué modalidad te encaja mejor?`,
+    objeciones: [
+      { q: '¿Tengo asistencia si me quedo sin gasolina o pincho?', a: 'Sí, la asistencia de Autoclub Mutua es desde el kilómetro 0. Cubre pinchazos, falta de combustible e incluso pérdida de llaves. No te quedarás tirado en ninguna ruta.' },
+      { q: '¿Mi acompañante también está protegido?', a: 'Sí, la Responsabilidad Civil Obligatoria y Voluntaria cubre los daños que pueda sufrir el pasajero en caso de accidente. Tu seguridad y la de quien te acompaña es nuestra prioridad.' },
+      { q: '¿Qué cubre exactamente la protección de casco y ropa?', a: 'Es una cobertura opcional que te indemniza por los daños sufridos en tu vestimenta técnica (chaqueta, pantalones, botas, guantes) y el casco en caso de accidente. Sabemos que el equipo es caro y queremos ayudarte a reponerlo.' },
+      { q: '¿Hay diferentes niveles de franquicia en Todo Riesgo?', a: 'Sí, puedes elegir entre diferentes niveles de franquicia (generalmente 200€ o 400€) para ajustar la prima anual a tu presupuesto, manteniendo la máxima protección para tu moto.' },
+    ],
+    logoPartner: 'assets/logo_mutua.png',
   },
 
   // ── FASE 4: PENSIONES ─────────────────────────────────────────────
@@ -902,6 +941,17 @@ function renderProd(p, nombre, prima, capitales){
     <div class="body fi">
       <div class="greet">${p.greet(n)}</div>
       <span class="fbadge ${f.fb}">${f.ico} ${f.label}</span>
+      
+      ${p.logoPartner ? `
+      <div class="partner-card-body" style="background: #f9f9f9; border-radius: 12px; padding: 20px; margin: 20px 0; border: 1px solid #eee; display: flex; align-items: center; gap: 20px;">
+        <img src="${p.logoPartner}" style="height: 50px; width: auto; filter: grayscale(0.2);" alt="Partner">
+        <div>
+          <div style="font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 1px;">${p.partnerBadge || 'Partner Institucional'}</div>
+          <div style="font-size: 13px; color: #444; line-height: 1.4; margin-top: 4px;">${p.partnerDesc || 'Garantía de excelencia y respaldo líder en el sector.'}</div>
+        </div>
+      </div>
+      ` : ''}
+
       ${deadlineH}${gapH}${hbH}${capitalesH}${stH}${covsH}${totalH}${objecH}
       ${p.extras ? exts() : ''}
       <div class="dv"></div>
