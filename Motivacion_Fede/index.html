@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MISSION CONTROL - HUD</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="hud-container">
+        <!-- HEADER -->
+        <header class="hud-header">
+            <div class="header-left">
+                <h1>MISSION CONTROL</h1>
+                <p class="subtitle">ESTADO: GANANDO CONTROL | BITÁCORA ACTIVA</p>
+            </div>
+            <div class="header-center">
+                <div class="status-item">
+                    <span>Misiones: <span class="val green" id="mission-count">0</span></span>
+                    <div class="status-bar"><div class="fill green" style="width: 100%;"></div></div>
+                </div>
+                <div class="status-item">
+                    <span>Memoria: <span class="val gold" id="memory-status">LOCAL</span></span>
+                    <div class="status-bar"><div class="fill gold" style="width: 100%;"></div></div>
+                </div>
+                <div class="status-item">
+                    <span>Identidad: <span class="val orange" id="user-sign">LEO</span></span>
+                    <div class="status-bar"><div class="fill orange" style="width: 100%;"></div></div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="profile-badge">
+                    <div class="initials" id="initials-display">FF</div>
+                    <div class="profile-info">
+                        <span class="name" id="user-name-display">Fede Fontanals</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- TICKER DE RESILIENCIA -->
+        <div class="resilience-ticker">
+            <div class="ticker-content">
+                TUS PROBABILIDADES DE ÉXITO AUMENTAN CADA VEZ QUE INSISTES • EL TRABAJO MÁS DURO ES NO RENDIRSE • GANAR CONTROL ES EL RESULTADO DEL CONOCIMIENTO • NO TE RESIGNES • ¿QUIÉN DECIDES SER HOY?
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <button id="nav-today" class="active">HOY</button>
+            <button id="nav-history">BITÁCORA</button>
+        </nav>
+
+        <!-- MAIN GRID (HOY) -->
+        <div id="view-today" class="main-layout">
+            <aside class="col col-left">
+                <div class="section-header morning">
+                    <div class="icon">🚀</div>
+                    <div class="text">
+                        <h2>SISTEMA DE CONTROL</h2>
+                        <span>MAESTRÍA DIARIA</span>
+                    </div>
+                </div>
+                <div class="title-block">HOY ACCIONA</div>
+                <div class="action-list">
+                    <div class="card-input">
+                        <label>META DEL DÍA (SIMPLIFICA)</label>
+                        <textarea id="morning-goal" placeholder="¿Qué vas a conquistar hoy?"></textarea>
+                    </div>
+                    <div class="card-input">
+                        <label>FOCO COMERCIAL 8-IA</label>
+                        <select id="phase-8ia-goal" class="styled-select">
+                            <option value="Prospección / Leads">Prospección / Leads</option>
+                            <option value="Contacto / Llamadas">Contacto / Llamadas</option>
+                            <option value="Propuesta / Solución">Propuesta / Solución</option>
+                            <option value="Cierre / Firma">Cierre / Firma</option>
+                            <option value="Seguimiento / CRM">Seguimiento / CRM</option>
+                        </select>
+                    </div>
+                    <div class="card-input">
+                        <label>PASOS FÍSICOS (Salud)</label>
+                        <input type="number" id="step-goal" value="11000">
+                    </div>
+                    <div class="card-input">
+                        <label>IMPACTOS PREVISTOS (Comercial)</label>
+                        <input type="number" id="impacts-goal" value="20">
+                    </div>
+                    <button class="action-btn" onclick="saveMorning()">REGISTRAR DESPEGUE</button>
+                </div>
+            </aside>
+
+            <section class="col col-center">
+                <div class="mission-core">
+                    <h2 class="main-callout" id="main-quote">¿QUIÉN DECIDES SER HOY?</h2>
+                    <p class="secondary-callout" id="sec-quote">EL TRABAJO MÁS DURO ES NO RENDIRSE</p>
+                </div>
+
+                <!-- PANEL TÁCTICO MILITAR - PROTOCOLO LEO -->
+                <div id="leo-tactical-panel" class="leo-hud-overlay hidden">
+                    <div class="hud-scanner-line"></div>
+                    <div class="overlay-header">[ CONTROL DE ACCIÓN: PROTOCOLO LEO ACTIVADO ]</div>
+                    <div class="overlay-grid">
+                        <div class="overlay-item">
+                            <span class="lbl">PILOTO COMANDANTE</span>
+                            <span class="val">Federico Fontanals</span>
+                        </div>
+                        <div class="overlay-item">
+                            <span class="lbl">CONEXIÓN COSMOLÓGICA</span>
+                            <span class="val">Sol en Leo ☀️ / Ascendente Leo 🦁</span>
+                        </div>
+                        <div class="overlay-item">
+                            <span class="lbl">SOPORTE DE ACCIÓN</span>
+                            <span class="val">Fede Jr. 💎 (Prioridad Absoluta)</span>
+                        </div>
+                        <div class="overlay-item">
+                            <span class="lbl">ARMADURA MENTAL ACTIVADA</span>
+                            <span class="val" id="leo-dynamic-mantra">"La vida no te pregunta quién eras. Te pregunta quién decides ser hoy."</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="center-bottom-cards">
+                    <div class="mini-card clickable protocol-off" id="leo-card" onclick="toggleLeoProtocol()">
+                        <div class="icon" id="leo-icon">🦁</div>
+                        <span>IDENTIDAD</span>
+                        <span id="identity-label">Activar LEO</span>
+                    </div>
+                    <div class="mini-card">
+                        <div class="icon">💎</div>
+                        <span id="priority-label">FEDE</span>
+                        <span>Prioridad 1</span>
+                    </div>
+                    <div class="mini-card">
+                        <div class="icon">📈</div>
+                        <span>ÉXITO</span>
+                        <span>+Probabilidad</span>
+                    </div>
+                    <div class="mini-card">
+                        <div class="icon">🏗️</div>
+                        <span>PROCESO</span>
+                        <span>Abonar y Seguir</span>
+                    </div>
+                </div>
+
+                <div class="hub-links-container">
+                    <span class="hub-title">HERRAMIENTAS NN - LANZAMIENTO RÁPIDO</span>
+                    <div class="hub-links">
+                        <a href="../06_NATIONALE_NEDERLANDEN/cockpit_llamadas.html" class="hub-btn" target="_blank">📞 Cockpit Llamadas</a>
+                        <a href="../06_NATIONALE_NEDERLANDEN/generador_urls_propuestas.html" class="hub-btn" target="_blank">🔗 Generador Propuestas</a>
+                        <a href="../06_NATIONALE_NEDERLANDEN/nn_crm_panel_v2.html" class="hub-btn" target="_blank">📊 CRM Panel</a>
+                    </div>
+                </div>
+
+                <!-- ESCUDO MENTAL LEO (BLINDAJE ESTOICO) -->
+                <div class="mental-shield-container">
+                    <div class="mental-shield-widget">
+                        <span class="lbl">🧘‍♂️ ESCUDO MENTAL LEO · CONTROL DE CRISIS</span>
+                        <p class="shield-desc">Blindaje emocional estoico contra provocaciones y tensión laboral</p>
+                        <div class="shield-actions">
+                            <button class="shield-btn morning" onclick="openMeditationModal()">
+                                <span>🦁 Escudo Lionheart</span>
+                                <small>3 min • Despegue</small>
+                            </button>
+                            <button class="shield-btn panic" onclick="openResetModal()">
+                                <span>🚨 RESET EMOCIONAL</span>
+                                <small>1 min • Emergencia</small>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WIDGET DE FESTIVOS DE LA COMUNITAT VALENCIANA -->
+                <div class="holiday-card-container">
+                    <div class="holiday-widget" onclick="openHolidayModal()">
+                        <span class="lbl">📆 PRÓXIMO FESTIVO (C. VALENCIANA)</span>
+                        <div class="holiday-info">
+                            <span class="val" id="next-holiday-name">Cargando festivo...</span>
+                            <span class="countdown" id="next-holiday-countdown"></span>
+                        </div>
+                        <span class="view-all-link">Ver Calendario Completo 2026 ➡️</span>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="col col-right">
+                <div class="section-header evening">
+                    <div class="icon">🛡️</div>
+                    <div class="text">
+                        <h2>BALANCE DE CONTROL</h2>
+                        <span>RESUMEN DE VICTORIAS</span>
+                    </div>
+                </div>
+                <div class="title-block">RESILIENCIA</div>
+                <div class="action-list">
+                    <div class="card-input">
+                        <label>REFLEXIÓN (BAJONES Y LOGROS)</label>
+                        <textarea id="evening-reflection" placeholder="¿Cómo fue el proceso hoy?"></textarea>
+                    </div>
+                    <div class="card-input">
+                        <label>PASOS REALES (Salud)</label>
+                        <input type="number" id="steps-actual" placeholder="0">
+                    </div>
+                    <div class="card-input">
+                        <label>IMPACTOS REALES (Comercial)</label>
+                        <input type="number" id="impacts-actual" placeholder="0">
+                    </div>
+                    <div class="card-input">
+                        <label>SACOS DE ABONO (Rechazos / NOes)</label>
+                        <input type="number" id="abonos-actual" placeholder="0">
+                    </div>
+                    <button class="action-btn gold-btn" onclick="saveEvening()">CERRAR MISIÓN DIARIA</button>
+                    <button class="action-btn vault-btn" id="btn-audio-vault" onclick="openAudioVault()">🎙️ ABRIR BÓVEDA DE AUDIOS (Drive)</button>
+                </div>
+            </aside>
+        </div>
+
+        <!-- VIEW HISTORY -->
+        <div id="view-history" class="history-layout hidden">
+            <div class="title-block">BITÁCORA PROFESIONAL</div>
+            <div id="history-list" class="history-list"></div>
+        </div>
+
+        <!-- FOOTER HUD -->
+        <footer class="hud-footer">
+            <div class="footer-widget audio-player">
+                <span class="label">CENTRO DE AUDIO - MANTRAS</span>
+                <div class="player-container">
+                    <audio id="main-audio"></audio>
+                    <div class="audio-info">
+                        <span id="current-track">MAÑANA SERÁ HOY</span>
+                        <div class="visualizer" id="hud-visualizer">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <div class="audio-btns">
+                        <button onclick="playTrack('Mañana será HOY.mp3')" class="mini-btn">HOY</button>
+                        <button onclick="playTrack('NO TE RESIGNES.MP3')" class="mini-btn">RESISTE</button>
+                        <button id="play-pause-btn" onclick="toggleAudio()" class="play-btn">▶</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-widget system-info">
+                <span class="label">ESTADO PERSONAL</span>
+                <div class="info-grid">
+                    <div id="stat-1">Salud: 🔥</div>
+                    <div id="stat-2">Fede: 💎</div>
+                    <div id="stat-3">IA: 🚀</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- MODAL DE CALENDARIO DE FESTIVOS -->
+    <div id="holiday-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>CALENDARIO LABORAL C. VALENCIANA 2026</h2>
+                <span class="close-btn" onclick="closeHolidayModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc">Días festivos retribuidos y no recuperables oficiales de la Comunidad Valenciana para planificar tus misiones comerciales.</p>
+                <table class="holiday-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Día</th>
+                            <th>Festividad</th>
+                            <th>Tipo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="holiday-table-body">
+                        <!-- Inyectado dinámicamente desde JS -->
+                    </tbody>
+                </table>
+                <p class="modal-note">* Nota: Recuerda que a estos 12 días autonómicos y nacionales se suman los 2 festivos locales de tu municipio.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE RESET EMOCIONAL (BREATHING RESET) -->
+    <div id="reset-emocional-modal" class="modal hidden reset-modal">
+        <div class="modal-content reset-content">
+            <span class="close-btn" onclick="closeResetModal()">&times;</span>
+            <div class="reset-header">
+                <h2>🚨 ANCLAJE ESTOICO: RESET DE CABINA</h2>
+                <p class="reset-desc">Mantén el silencio absoluto. Fede Jr. 💎 te necesita libre y en control.</p>
+            </div>
+            <div class="reset-body">
+                <!-- Círculo de respiración táctica -->
+                <div class="breathing-circle-container">
+                    <div id="breathing-circle" class="breathing-circle"></div>
+                    <div id="breathing-state-text" class="breathing-state-text">INHALA...</div>
+                </div>
+                <div class="breathing-timer" id="breathing-timer">60s</div>
+                
+                <!-- Caja de Mantras -->
+                <div class="breathing-mantra-box">
+                    <span class="breathing-alert">⚠️ CADA SEGUNDO DE SILENCIO ES UNA VICTORIA. LAS PROVOCACIONES SON RUIDO INÚTIL.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE MEDITACIÓN ESCUDO LIONHEART -->
+    <div id="meditation-modal" class="modal hidden">
+        <div class="modal-content meditation-content">
+            <span class="close-btn" onclick="closeMeditationModal()">&times;</span>
+            <div class="modal-header">
+                <h2>🦁 ESCUDO LIONHEART (3 MINUTOS)</h2>
+                <p class="modal-desc">Meditación ligera estoica para blindar tu paz diaria</p>
+            </div>
+            <div class="modal-body text-center">
+                <!-- Estado de meditación -->
+                <div class="meditation-step-container">
+                    <div id="meditation-step-title" class="meditation-step-title">FASE 1: CONCENTRACIÓN Y CALMA</div>
+                    <div id="meditation-step-desc" class="meditation-step-desc">Respira hondo. Cierra los ojos. Conecta con tu fuerza interior. Tu mente se blinda para que nada ni nadie te altere.</div>
+                </div>
+                <div class="meditation-timer" id="meditation-timer">03:00</div>
+                <button class="action-btn gold-btn" id="btn-start-meditation" onclick="startMeditation()" style="width: 100%; margin-top: 15px;">INICIAR BLINDAJE MENTAL</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
