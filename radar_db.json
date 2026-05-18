@@ -298,6 +298,37 @@
       "Descripcion_del_beneficio": "Actualización de precios en hipotecas, con incrementos tanto en la parte fija como en la variable, aplicables a nuevos scorings desde el 11 de mayo.",
       "Vulnerabilidad_Detectada": "El miedo a que los tipos de interés suban y la cuota hipotecaria se vuelva inasumible, afectando significativamente la estabilidad financiera del hogar. La preocupación por el coste total de la hipoteca y los gastos asociados a su formalización.",
       "Pregunta_Apertura": "Con los tipos de interés en constante movimiento, ¿cómo te aseguras de que tu hipoteca no se convierta en una carga financiera inmanejable a largo plazo, y qué has considerado respecto a los gastos ocultos al formalizarla?"
+    },
+    {
+      "Producto": "RC PRO · Caser (Responsabilidad Civil)",
+      "Tipo_de_campaña": "Captación nuevo producto",
+      "Descripcion_del_beneficio": "Seguro de Responsabilidad Civil profesional y empresarial Caser. Hasta 3.000.000 € de cobertura automática. 3 modalidades (Básico, Estándar, Premium). Protección digital incluida de serie y extensión run-off de 24 meses al cancelar.",
+      "Fecha_inicio": null,
+      "Fecha_fin": null,
+      "Cupo_max": null,
+      "Descuento_Bonus": null,
+      "Segmento_objetivo": "Autónomos, profesionales liberales, empresarios y pymes de cualquier sector",
+      "Vulnerabilidad_Detectada": "El riesgo latente e invisible de que un error profesional, un daño accidental a un cliente o una reclamación laboral destruya el patrimonio personal o empresarial construido durante años, sin ninguna red de protección.",
+      "Pregunta_Apertura": "Si mañana un cliente tuyo te reclamara 200.000 € por un error en tu trabajo o un daño en su propiedad, ¿de dónde saldría ese dinero? ¿Tienes una RC Profesional que cubra esa situación?",
+      "Estado": "🟢 ACTIVA",
+      "Cambios_Catalogo": {
+        "id_producto": "rcpro",
+        "campos_a_actualizar": {
+          "descripcion_breve": "Responsabilidad Civil profesional y empresarial Caser. Hasta 3.000.000 € automáticos. Protección digital de serie. 3 modalidades: Básico, Estándar y Premium.",
+          "precio_base": "Consultar",
+          "detalles_adicionales": "Ámbito UE y Andorra · Cotización instantánea · Fraccionamiento semestral/trimestral · Run-off 24 meses al cancelar",
+          "estadisticas_clave": [
+            { "valor": "3.000.000 €", "etiqueta": "Cobertura automática" },
+            { "valor": "3 modalidades", "etiqueta": "Básico | Estándar | Premium" },
+            { "valor": "24 meses", "etiqueta": "Extensión run-off" }
+          ],
+          "coberturas_clave": [
+            { "cobertura": "RC Explotación", "concepto": "Daños a terceros en la actividad", "valor_limite": "Hasta 3.000.000 €", "es_clave": true, "tipo": "base" },
+            { "cobertura": "Protección Digital", "concepto": "Ciberseguridad y antifraude", "valor_limite": "Incluida", "es_clave": true, "tipo": "diferencial" },
+            { "cobertura": "RC Patronal", "concepto": "Daños a empleados", "valor_limite": "250.000 €/víctima (Estándar)", "es_clave": false, "tipo": "ampliación" }
+          ]
+        }
+      }
     }
   ],
   "novedades": [
@@ -496,13 +527,29 @@
       "Accion_sobre_CRM": "Ofrecer al segmento: Mayores de 55 años",
       "Impacto_segmento": "Mayores de 55 años",
       "Fuente": "Entre Nosotros #561"
+    },
+    {
+      "Producto": "RC PRO · Caser (Responsabilidad Civil)",
+      "Que_ha_cambiado": "Incorporación al catálogo del portal de propuestas. Nueva ficha completa en Fase 5 (Profesional y Empresa) con 8 preguntas frecuentes y copy de alto impacto basado en metodología 8 IAs.",
+      "Tipo": "🟢 Nuevo Producto",
+      "Vigente_desde": "18/05/2026",
+      "Afecta_guia_comercial": "SÍ",
+      "Accion_sobre_CRM": "Identificar autónomos y empresarios de la cartera sin RC Profesional. Priorizar contactos con actividad de prestación de servicios: consultores, arquitectos, ingenieros, asesores, informáticos, instaladores, comercios con empleados.",
+      "Impacto_segmento": "Autónomos, profesionales liberales y pymes.",
+      "Fuente": "Incorporación propia al catálogo · Caser RC General PRO",
+      "Cambios_Catalogo": {
+        "id_producto": "rcpro",
+        "campos_a_actualizar": {
+          "descripcion_breve": "Nuevo en catálogo. RC Profesional Caser hasta 3.000.000 € con protección digital incluida. 3 modalidades. Run-off 24 meses."
+        }
+      }
     }
   ],
   "historial": {
-    "N_Edicion": "561",
-    "Resumen_ejecutivo": "Se actualizan campañas clave como 'Ahorro + Salud' y 'Contigo Familia' para autónomos, se introducen bonificaciones para 'Contigo Senior', se ajustan precios hipotecarios ING y se lanzan iniciativas de mejora operativa y de incentivos para agentes.",
-    "Campañas_nuevas": "Campaña Ahorro + Salud (plazo ampliado), Contigo Familia para Autónomos (25% descuento excluyendo ILT), Contigo Autónomo (campaña específica con 25% descuento excluyendo ILT), Contigo Senior (6 meses bonificados), Plan de Referencias 2026.",
-    "Cambios_producto": "Actualización de precios en Hipotecas ING, nueva funcionalidad en Salesforce para cambio de cuenta bancaria, despliegue de ADO.",
-    "N_acciones": 9
+    "N_Edicion": "561+",
+    "Resumen_ejecutivo": "Se actualizan campañas clave como 'Ahorro + Salud' y 'Contigo Familia' para autónomos, se introducen bonificaciones para 'Contigo Senior', se ajustan precios hipotecarios ING, se lanzan iniciativas de mejora operativa y se incorpora RC PRO Caser al catálogo de productos del portal.",
+    "Campañas_nuevas": "Campaña Ahorro + Salud (plazo ampliado), Contigo Familia para Autónomos (25% descuento excluyendo ILT), Contigo Autónomo (campaña específica con 25% descuento excluyendo ILT), Contigo Senior (6 meses bonificados), Plan de Referencias 2026, RC PRO Caser (nuevo en catálogo).",
+    "Cambios_producto": "Actualización de precios en Hipotecas ING, nueva funcionalidad en Salesforce para cambio de cuenta bancaria, despliegue de ADO, incorporación de RC PRO Caser en Fase 5.",
+    "N_acciones": 10
   }
 }
