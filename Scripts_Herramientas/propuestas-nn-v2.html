@@ -342,21 +342,16 @@ const PRODS = {
 
   saludvida: {
     fase: 'f2', ico: '❤️', nom: 'Plan Salud + Vida',
-    sub: 'Solución híbrida única en el mercado: asistencia sanitaria Sanitas + seguro de vida en un contrato. Seguro de vida GRATIS el primer año. Descuento 12,5% anual hasta el 1 de junio 2026.',
+    sub: 'La única solución híbrida: Medicina Sanitas + Seguro de Vida en un solo contrato. Vida GRATIS el primer año y 12,5% de descuento en Salud hasta el 1 de junio de 2026.',
     tit: n => `La protección completa de <em>${n} y su familia</em> en un solo contrato.`,
     deadline: { ico: '⏰', badge: 'DESCUENTO 12,5% SOLO HASTA 1 JUNIO 2026', loss: 'Si contratas después del 1 de junio de 2026, pierdes el 12,5% de descuento anual en tu prima — ese ahorro ya no vuelve. La promoción aplica a pólizas con fecha efecto 1 abril, 1 mayo o 1 junio 2026.' },
     greet: n => `Hola <strong>${n}</strong>,<br><br>El producto estrella de Nationale-Nederlanden: <strong>medicina privada Sanitas más seguro de vida, con el seguro de vida gratis el primer año</strong>. La solución más completa del mercado para una familia.<br><br><strong>Atención, ${n}:</strong> el descuento del 12,5% en la prima anual solo se aplica a pólizas contratadas con fecha efecto hasta el 1 de junio de 2026. Si lo dejas para más adelante, ese ahorro desaparece para siempre y pagarás la prima completa desde el primer recibo.`,
     hb: { t: 'hbo', x: '<strong>Oferta única del mercado:</strong> Al contratar la cobertura de salud de Sanitas, el seguro de vida es GRATIS el primer año. Protección total con ahorro inmediato.' },
     covs: [
-      { n: 'Asistencia sanitaria completa Sanitas', c: 'Familia completa', p: 'Consultar', k: true, t: 'estrella' },
-      { n: 'Seguro de vida — 1er año GRATIS', c: 'Capital a elegir', p: '0 € primer año', k: true, t: 'gratis' },
-      { n: 'Medicina familiar y especialistas', c: 'Acceso directo', p: '✓', k: false },
-      { n: 'Hospitalización y urgencias 24h', c: 'Incluido', p: '✓', k: false },
-      { n: 'Pruebas diagnósticas', c: 'Sin límite', p: '✓', k: false },
-      { n: 'Cobertura dental', c: 'Incluida', p: '✓', k: false },
+      { n: 'Seguro de vida — 1er año GRATIS', c: 'Capital a elegir', p: '0 € primer año', k: true, t: 'gratis' }
     ],
     pendiente: false,
-    totalDesc: 'Prima variable según edad, zona y coberturas elegidas · Seguro de vida gratis el primer año',
+    totalDesc: 'Prima variable según edad y zona · Vida gratis 12 meses · Descuento del 12,5% en Salud hasta el 1 de junio de 2026.',
     prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, medicina privada Sanitas más vida gratis el primer año. La decisión que marca la diferencia para una familia.`,
   },
@@ -402,19 +397,16 @@ const PRODS = {
 
   vidafamilia: {
     fase: 'f2', ico: '👨‍👩‍👧', nom: 'Seguro de Vida y Familia',
-    sub: 'Protección económica ante fallecimiento o invalidez. Cobertura pionera para cáncer de mama incluida.',
+    sub: 'Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).',
     tit: n => `Si algo le pasara a ${n}, <em>su familia estaría protegida.</em>`,
     greet: n => `Hola <strong>${n}</strong>,<br><br>El Seguro de Vida y Familia garantiza que si algo te pasa, <strong>tu familia tiene el respaldo económico para seguir adelante</strong>: hipoteca cubierta, estudios garantizados, vida mantenida.`,
     hb: { t: 'hbo', x: '<strong>Cobertura pionera:</strong> Incluye protección específica para el cáncer de mama, además de las coberturas estándar de fallecimiento e invalidez permanente.' },
     covs: [
-      { n: 'Fallecimiento por cualquier causa', c: 'Capital a elegir', p: 'Consultar', k: true, t: 'base' },
-      { n: 'Invalidez permanente', c: 'Capital a elegir', p: 'Consultar', k: true, t: 'clave' },
-      { n: 'Protección específica cáncer de mama', c: 'Pionera en el mercado', p: '✓', k: true, t: 'único' },
-      { n: 'Fallecimiento por accidente', c: 'Capital adicional', p: 'Consultar', k: false },
+      { n: 'Incapacidad laboral temporal (ILT)', c: 'EXCLUIDA en esta campaña con descuento del 25%.', p: 'N/A', k: false, t: 'exclusión' }
     ],
     pendiente: false,
     extras: true,
-    totalDesc: 'Prima variable según edad y capitales elegidos',
+    totalDesc: 'Con descuento hábitos saludables −10% · Capital total: 266.000 € · *25% descuento vitalicio (excluye ILT)*',
     prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, la pregunta no es si puedes permitirte este seguro. La pregunta es si tu familia puede permitirse no tenerlo.`,
   },
@@ -426,16 +418,12 @@ const PRODS = {
     deadline: { ico: '🎁', badge: '6 MESES BONIFICADOS — Oferta válida mayo 2026', loss: 'Si esperas más allá de mayo de 2026, pierdes los 6 meses de prima bonificada — un ahorro real que no se recupera contratando después.' },
     greet: n => `Hola <strong>${n}</strong>,<br><br>Contigo Senior es el ecosistema diseñado específicamente para mayores de 55: <strong>capital por accidente hasta 65.000 €, asistencia Sanitas con geriatría y podología, y servicios reales de autonomía</strong> en el día a día.<br><br><strong>Atención, ${n}:</strong> la oferta de 6 meses bonificados es exclusiva de mayo 2026. Si contratas después, pagas desde el primer mes sin ese beneficio — una diferencia de más de media prima anual que ya no recuperas.`,
     hb: { t: 'hbo', x: '<strong>Servicios únicos de autonomía:</strong> Geriatría, podología, peluquería a domicilio, auxiliar en casa y acompañamiento a citas médicas. Más que un seguro — un servicio de vida.' },
-    sts: [{ v: '65.000 €', l: 'Capital máx. por accidente' }, { v: '+55 años', l: 'Edad de acceso' }, { v: 'Sanitas', l: 'Red asistencial' }],
+    sts: [{ v: '65.000 €', l: 'Capital máx. por accidente' }, { v: '+55 años', l: 'Edad de acceso' }, { v: 'Sanitas', l: 'Red asistencial' }, { v: '6 meses bonif.', l: 'Mayo 2026' }],
     covs: [
-      { n: 'Capital por accidente (según baremo)', c: 'Hasta 65.000 €', p: 'Consultar', k: true, t: 'clave' },
-      { n: 'Asistencia Sanitas — geriatría y podología', c: 'Incluida', p: '✓', k: true, t: 'diferencial' },
-      { n: 'Auxiliar a domicilio', c: 'Servicio real', p: '✓', k: false },
-      { n: 'Peluquería a domicilio', c: 'Incluida', p: '✓', k: false },
-      { n: 'Acompañamiento a citas médicas', c: 'Incluido', p: '✓', k: false },
+      { n: '6 meses bonificados', c: 'Mayo 2026', p: '✓', k: true, t: 'bonificación' }
     ],
     pendiente: false,
-    totalDesc: 'Prima variable según edad · Exclusivo mayores de 55 años',
+    totalDesc: 'Prima variable según edad · Exclusivo mayores de 55 años · 6 meses bonificados en mayo 2026',
     prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, mantener la independencia y la calidad de vida es lo más valioso. Este producto lo hace posible.`,
   },
@@ -559,26 +547,19 @@ const PRODS = {
 
   autonomo: {
     fase: 'f5', ico: '🚐', nom: 'Contigo Autónomo',
-    sub: 'Protección laboral integral para autónomos. ILT 30 €/día. Capital total 266.000 €. Descuento hábitos saludables −10%. Prima desde 39,94 €/mes.',
+    sub: 'Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).',
     tit: n => `La protección que <em>le falta a ${n}</em> como autónomo.`,
     greet: n => `Hola <strong>${n}</strong>,<br><br>Como autónomo, si no trabajas, no ingresas. <strong>Este seguro cubre el agujero entre lo que paga la SS y lo que necesitas para mantener tu negocio y tu vida.</strong>`,
     gap: true,
     gd: { g: '900€', r: '721€', h: '179€' },
     gls: ['Gastos fijos mensuales', 'Lo que paga la SS en baja', 'Sin cubrir cada mes. Hasta hoy.'],
     covs: [
-      { n: 'Incapacidad laboral temporal (ILT)', c: '30 €/día', p: '15,13 €', k: true, t: 'clave' },
-      { n: 'Fallecimiento por accidente', c: '60.000 €', p: '5,04 €', k: true, t: 'clave' },
-      { n: 'Fallecimiento acc. circulación', c: '60.000 €', p: '2,82 €', k: true, t: 'clave' },
-      { n: 'Fallecimiento', c: '16.000 €', p: '5,25 €', k: false },
-      { n: 'Fallecimiento plus', c: '50.000 €', p: '1,34 €', k: false },
-      { n: 'Invalidez permanente absoluta', c: '40.000 €', p: '2,86 €', k: false },
-      { n: 'Invalidez permanente total', c: '20.000 €', p: '3,83 €', k: false },
-      { n: 'Enfermedad grave + cáncer', c: '10.000 € c/u', p: '1,51 €', k: false },
+      { n: 'Incapacidad laboral temporal (ILT)', c: 'EXCLUIDA en esta campaña con descuento del 25%.', p: 'N/A', k: false, t: 'exclusión' }
     ],
     pendiente: false,
     extras: true,
-    totalDesc: 'Con descuento hábitos saludables −10% · Capital total: 266.000 €',
-    prima: '39,94 €/mes',
+    totalDesc: 'Con descuento hábitos saludables −10% · Capital total: 266.000 € · *25% descuento vitalicio (excluye ILT)*',
+    prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, por menos de 1,33 € al día tienes cubierto el peor escenario. Firmamos hoy.`,
     objeciones: [
       { q: 'Ya pago mucho a la Seguridad Social, ¿para qué necesito esto?', a: 'La SS paga 721 €/mes de media en baja por enfermedad. Si tus gastos fijos como autónomo son 900 €/mes (local, suministros, préstamos, familia), el agujero real es 179 €/mes que sale de tu bolsillo o de tus ahorros cada mes que dure la baja. Contigo Autónomo cubre exactamente ese agujero.' },
@@ -690,11 +671,11 @@ const PRODS = {
 
   hipotecaing: {
     fase: 'f6', ico: '🟠', nom: 'Hipoteca Naranja (ING)',
-    sub: '100% digital. Sin comisión de apertura. ING asume notaría, registro, gestoría e IAJD. Hasta 80% financiación (100% si <36 años y vivienda <400.000 €). Plazo hasta 40 años.',
+    sub: '100% digital. Sin comisión de apertura. ING asume notaría, registro, gestoría e IAJD. Hasta 80% financiación (100% si <36 años y vivienda <400.000 €). Plazo hasta 40 años. *Precios actualizados con incrementos para nuevos scorings desde el 11 de mayo*.',
     tit: n => `La hipoteca digital de ${n}, <em>sin complicaciones y sin costes de entrada.</em>`,
     greet: n => `Hola <strong>${n}</strong>,<br><br>La Hipoteca Naranja ING es <strong>100% digital, sin comisión de apertura y con todos los gastos de formalización asumidos por el banco</strong>: notaría, registro, gestoría e IAJD. Solo pagas la tasación.`,
     hb: { t: 'hbg', x: '<strong>Sin costes de entrada:</strong> ING asume notaría, registro, gestoría e IAJD. Solo pagas la tasación. Hasta 80% financiación (100% si <36 años y vivienda <400.000 €). Plazo hasta 40 años.' },
-    sts: [{ v: '0 €', l: 'Comisión apertura' }, { v: 'Hasta 100%', l: 'Financiación jóvenes <36' }, { v: '40 años', l: 'Plazo máximo' }],
+    sts: [{ v: 'Actualizado', l: 'Precios desde 11/05' }],
     covs: [
       { n: 'Sin comisión de apertura', c: '0 € al firmar', p: '✓', k: true, t: 'ventaja' },
       { n: 'Gastos ING asumidos', c: 'Notaría, registro, gestoría, IAJD', p: '✓', k: true, t: 'diferencial' },
@@ -704,7 +685,7 @@ const PRODS = {
       { n: 'Subrogación para mejorar hipoteca actual', c: 'Sencilla y digital', p: '✓', k: false },
     ],
     pendiente: false,
-    totalDesc: 'Solo pagas la tasación · 100% digital · Plazo máximo 40 años (75 años al finalizar)',
+    totalDesc: 'Solo pagas la tasación · 100% digital · Plazo máximo 40 años (75 años al finalizar) · *Precios actualizados con incrementos para nuevos scorings desde el 11 de mayo*.',
     prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, la hipoteca más ágil del mercado. Sin papeleos, sin costes de entrada.`,
   },

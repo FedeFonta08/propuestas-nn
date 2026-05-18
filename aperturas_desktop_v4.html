@@ -985,13 +985,13 @@
     }
 
     // ── RADAR COMERCIAL INTEGRATION (Carga Dinámica) ──
-    const RADAR_SHEET_ID = '16lui0o9wPYe9tL-9PaU6_H2heG8uIBYrCIL9vvfpdC0';
+    const RADAR_SHEET_ID = '1mYKiIdoglAxzFwJOE_0V8CyHwNUsKkh_oPtkUKg4GCQ';
 
     async function cargarRadar() {
         const body = document.getElementById('radar-body');
         if (!body) return;
 
-        const url = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}/gviz/tq?tqx=out:json&sheet=RADAR%20COMERCIAL&headers=0&range=A3:J100`;
+        const url = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('🟠 Campañas Activas')}&headers=0&range=A3:J100`;
 
         try {
             const res = await fetch(url);
