@@ -28,7 +28,7 @@ if not GEMINI_API_KEY:
     sys.exit(1)
 
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel('gemini-2.5-flash')
+model = genai.GenerativeModel('gemini-2.5-flash-lite')
 
 # Cargar Catálogo Maestro de Productos NN para el Escudo de Verificación
 catalogo_maestro = {}
@@ -110,7 +110,7 @@ def procesar_con_ia(texto_email):
     {catalogo_json}
     ==================================================================
 
-    REGLAS DE ORO OBLIGATORIAS (CRÍTICO):
+     REGLAS DE ORO OBLIGATORIAS (CRÍTICO):
     1. Trata 'Contigo Familia' y 'Contigo Autónomo' SIEMPRE como dos productos y campañas completamente distintos. Tienen coberturas y segmentos objetivo diferentes.
        - Si la campaña 'Contigo Familia' amplía su alcance a autónomos (descuento vitalicio 25%, excluyendo la cobertura ILT), debes generar DOS objetos distintos en 'Campañas_Activas':
          * Un objeto con "Producto": "Contigo Familia", dirigido al segmento familiar/particular general.
@@ -122,6 +122,7 @@ def procesar_con_ia(texto_email):
     5. **AUTO-ACTUALIZACIÓN DEL PORTAL (CRÍTICO)**: Si detectas que el correo corporativo anuncia un cambio permanente o muy significativo en las características, precios, descuentos o coberturas de un producto del catálogo (por ejemplo: una bonificación especial de 6 meses para Contigo Senior, un descuento del 12.5% para Salud + Vida, o la exclusión de ILT para Autónomos):
        - Debes rellenar la clave `"Cambios_Catalogo"` dentro de la campaña o novedad correspondiente.
        - Si no hay cambios en la estructura base del producto, la clave `"Cambios_Catalogo"` debe ser `null` u omitirse.
+    6. **EXHAUSTIVIDAD TOTAL (CRÍTICO)**: Extrae absolutamente TODAS las campañas y novedades contenidas en el correo. No resumas, omitas, ni agrupes diferentes novedades en una sola. Si el correo menciona la ampliación de la Campaña Ahorro + Salud (para los que contrataron SIALP o Contigo Futuro), debes extraerla obligatoriamente tanto en 'Campañas_Activas' como en 'Novedades_Producto'. Si menciona Salesforce, ADO, Hipotecas ING, Plan de Referencias 2026, Contigo Familia y Contigo Autónomo, debes extraer todos y cada uno de ellos por separado. No dejes absolutamente ningún tema fuera.
 
     Devuelve ESTRICTAMENTE un objeto JSON válido con las siguientes tres claves principales. No devuelvas ningún texto fuera del JSON.
 
@@ -325,27 +326,48 @@ def actualizar_google_sheets(datos, client):
         novedades_existentes = ws_nov.get_all_values()
         
         # Filtrar duplicados de la misma edición que vamos a meter hoy
+        # Usamos str(edicion_num) para atrapar cualquier formato ("561", "#561", "Entre Nosotros #561")
         rows_nov_keep = []
-        for r in novedades_existentes:
+        header = novedades_existentes[0] if novedades_existentes else []
+        
+        for r in novedades_existentes[1:]: # Omitimos cabecera para filtrar los datos
             if not r: continue
             fuente_fila = r[7].strip() if len(r) > 7 else ""
-            # Si contiene el número de edición actual, la eliminamos para sobreescribirla limpiamente
-            if edicion_num and f"#{edicion_num}" in fuente_fila:
+            if edicion_num and str(edicion_num) in fuente_fila:
                 continue
             rows_nov_keep.append(r)
-            
-        # Si eliminamos algo, limpiamos la hoja y re-escribimos lo que mantuvimos
-        if len(rows_nov_keep) < len(novedades_existentes):
-            print(f"🧹 Eliminando novedades previas de la edición #{edicion_num} para evitar duplicados...")
-            ws_nov.clear()
-            try:
-                ws_nov.update(rows_nov_keep)
-            except Exception:
-                ws_nov.update(rows_nov_keep, 'A1')
-            novs_existentes_set = set((row[0].strip().lower(), row[1].strip().lower()) for row in rows_nov_keep if len(row) >= 2)
-        else:
-            novs_existentes_set = set((row[0].strip().lower(), row[1].strip().lower()) for row in novedades_existentes if len(row) >= 2)
 
+        # Definir comparador semántico ultra-preciso
+        def son_similares(p1, c1, p2, c2):
+            def simplificar_prod(p):
+                p = p.lower()
+                if "ado" in p: return "ado"
+                if "salesforce" in p: return "salesforce"
+                if "ing" in p or "hipoteca" in p: return "hipotecas_ing"
+                if "vida y familia" in p or "contigo familia" in p: return "vida_familia"
+                if "autónomo" in p or "autonomo" in p: return "autonomo"
+                return p.strip()
+                
+            sp1 = simplificar_prod(p1)
+            sp2 = simplificar_prod(p2)
+            if sp1 != sp2:
+                return False
+                
+            words1 = set(re.findall(r'\w+', c1.lower()))
+            words2 = set(re.findall(r'\w+', c2.lower()))
+            stopwords = {'de', 'la', 'que', 'el', 'en', 'y', 'a', 'los', 'un', 'una', 'con', 'para', 'se', 'por', 'del', 'las', 'al'}
+            words1 -= stopwords
+            words2 -= stopwords
+            
+            if not words1 or not words2:
+                return False
+                
+            inter = words1.intersection(words2)
+            similarity = len(inter) / min(len(words1), len(words2))
+            return similarity > 0.4
+
+        # Procesar novedades extraídas del correo, realizando deduplicación semántica previa
+        nuevas_novs = []
         for nov in datos.get("Novedades_Producto", []):
             prod_nov = nov.get("Producto", "").strip()
             cambio_nov = nov.get("Que_ha_cambiado", "").strip()
@@ -355,7 +377,6 @@ def actualizar_google_sheets(datos, client):
             accion_nov = nov.get("Accion_sobre_CRM", "").strip()
             segmento_nov = nov.get("Impacto_segmento", "").strip()
             
-            # Garantizar que Fuente tenga el número de edición exacto
             fuente_nov = nov.get("Fuente", "").strip()
             if "entre nosotros" in fuente_nov.lower() and "#" not in fuente_nov:
                 if edicion_num:
@@ -363,18 +384,42 @@ def actualizar_google_sheets(datos, client):
             if not fuente_nov:
                 fuente_nov = fuente_actual
 
-            # Validación de Duplicidad
-            if (prod_nov.lower(), cambio_nov.lower()) in novs_existentes_set:
-                print(f"⚠️ Novedad ya existe (Duplicado saltado): {prod_nov}")
+            # Comprobar duplicidad exacta o semántica en lo que mantuvimos en la hoja
+            es_duplicado = False
+            for row in rows_nov_keep:
+                if len(row) >= 2:
+                    if son_similares(prod_nov, cambio_nov, row[0], row[1]):
+                        es_duplicado = True
+                        break
+            
+            # Comprobar duplicidad exacta o semántica con las novedades nuevas ya procesadas en esta ejecución
+            if not es_duplicado:
+                for n_added in nuevas_novs:
+                    if son_similares(prod_nov, cambio_nov, n_added[0], n_added[1]):
+                        es_duplicado = True
+                        break
+            
+            if es_duplicado:
+                print(f"⚠️ Novedad ya existe (Duplicado semántico/exacto saltado): {prod_nov}")
                 continue
 
-            ws_nov.append_row([
+            nuevas_novs.append([
                 prod_nov, cambio_nov, tipo_nov,
                 vigente_nov, afecta_nov, accion_nov,
                 segmento_nov, fuente_nov
             ])
-            novs_existentes_set.add((prod_nov.lower(), cambio_nov.lower()))
-            print(f"✅ Novedad insertada en la nube: {prod_nov}")
+            print(f"✅ Novedad lista para inserción limpia: {prod_nov}")
+
+        # Unir cabecera, novedades mantenidas y novedades nuevas
+        filas_finales = [header] + rows_nov_keep + nuevas_novs
+        
+        # Limpiar la hoja y actualizar todo atómicamente en una sola llamada de red
+        print(f"🧹 Realizando actualización atómica y limpia de Novedades (evitando duplicados de #{edicion_num})...")
+        ws_nov.clear()
+        try:
+            ws_nov.update(filas_finales)
+        except Exception:
+            ws_nov.update(filas_finales, 'A1')
 
         # 3. Historial (DASHBOARD AGENCIA)
         ws_hist = ws_camp

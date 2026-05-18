@@ -601,46 +601,11 @@
     ],
     "coberturas_clave": [
       {
-        "cobertura": "Asistencia sanitaria completa Sanitas",
-        "concepto": "Familia completa",
-        "valor_limite": "Consultar",
-        "es_clave": true,
-        "tipo": "estrella"
-      },
-      {
         "cobertura": "Seguro de vida — 1er año GRATIS",
         "concepto": "Capital a elegir",
         "valor_limite": "0 € primer año",
         "es_clave": true,
         "tipo": "gratis"
-      },
-      {
-        "cobertura": "Medicina familiar y especialistas",
-        "concepto": "Acceso directo",
-        "valor_limite": "✓",
-        "es_clave": false,
-        "tipo": ""
-      },
-      {
-        "cobertura": "Hospitalización y urgencias 24h",
-        "concepto": "Incluido",
-        "valor_limite": "✓",
-        "es_clave": false,
-        "tipo": ""
-      },
-      {
-        "cobertura": "Pruebas diagnósticas y digital Blua",
-        "concepto": "Sin límite",
-        "valor_limite": "✓",
-        "es_clave": false,
-        "tipo": ""
-      },
-      {
-        "cobertura": "Cobertura dental completa Sanitas",
-        "concepto": "Incluida",
-        "valor_limite": "✓",
-        "es_clave": false,
-        "tipo": ""
       }
     ],
     "faqs_objeciones": [
@@ -768,38 +733,22 @@
   "vidafamilia": {
     "id": "vidafamilia",
     "nombre_oficial": "Seguro de Vida y Familia",
-    "descripcion_breve": "Protección económica ante fallecimiento o invalidez. Cobertura pionera para cáncer de mama incluida.",
-    "precio_base": "Consultar",
-    "detalles_adicionales": "Prima variable según edad y capitales elegidos",
-    "estadisticas_clave": [],
+    "descripcion_breve": "Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
+    "precio_base": "39,94 €/mes",
+    "detalles_adicionales": "Con descuento hábitos saludables −10% · Capital total: 266.000 € · *25% descuento vitalicio (excluye ILT)*",
+    "estadisticas_clave": [
+      {
+        "valor": "25% vitalicio",
+        "etiqueta": "Descuento de prima"
+      }
+    ],
     "coberturas_clave": [
       {
-        "cobertura": "Fallecimiento por cualquier causa",
-        "concepto": "Capital a elegir",
-        "valor_limite": "Consultar",
-        "es_clave": true,
-        "tipo": "base"
-      },
-      {
-        "cobertura": "Invalidez permanente",
-        "concepto": "Capital a elegir",
-        "valor_limite": "Consultar",
-        "es_clave": true,
-        "tipo": "clave"
-      },
-      {
-        "cobertura": "Protección específica cáncer de mama",
-        "concepto": "Pionera en el mercado",
-        "valor_limite": "✓",
-        "es_clave": true,
-        "tipo": "único"
-      },
-      {
-        "cobertura": "Fallecimiento por accidente",
-        "concepto": "Capital adicional",
-        "valor_limite": "Consultar",
+        "cobertura": "Incapacidad laboral temporal (ILT)",
+        "concepto": "EXCLUIDA en esta campaña con descuento del 25%",
+        "valor_limite": "N/A",
         "es_clave": false,
-        "tipo": ""
+        "tipo": "exclusión"
       }
     ],
     "faqs_objeciones": []
@@ -1782,16 +1731,8 @@
     "detalles_adicionales": "Solo pagas la tasación · 100% digital · Plazo máximo 40 años (75 años al finalizar) · *Precios actualizados con incrementos para nuevos scorings desde el 11 de mayo*.",
     "estadisticas_clave": [
       {
-        "valor": "0 €",
-        "etiqueta": "Comisión apertura"
-      },
-      {
-        "valor": "Hasta 100%",
-        "etiqueta": "Financiación jóvenes <36"
-      },
-      {
-        "valor": "40 años",
-        "etiqueta": "Plazo máximo"
+        "valor": "Actualizado",
+        "etiqueta": "Precios desde 11/05"
       }
     ],
     "coberturas_clave": [
