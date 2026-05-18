@@ -17,37 +17,22 @@
     },
     {
       "Producto": "Contigo Familia",
-      "Tipo_de_campaña": "Ampliación de descuento",
-      "Descripcion_del_beneficio": "Descuento vitalicio del 25% sobre la prima. Excluye la cobertura de Incapacidad Laboral Temporal (ILT).",
-      "Fecha_inicio": null,
-      "Fecha_fin": null,
+      "Tipo_de_campaña": "Descuento vitalicio colectivos profesionales",
+      "Descripcion_del_beneficio": "25% de descuento vitalicio sobre la prima para Docentes/Profesores, Sanitarios (médicos, enfermeros, dentistas) e Ingenieros/Arquitectos. Acumulable: +10% hábitos saludables, +10% coberturas básicas ≥100.000€, +10% EE.GG./Cáncer ≥20.000€. Máximo: hasta 45% de ahorro total.",
+      "Fecha_inicio": "08/05/2026",
+      "Fecha_fin": "08/07/2026",
       "Cupo_max": null,
-      "Descuento_Bonus": "25%",
-      "Segmento_objetivo": "Autónomos",
-      "Vulnerabilidad_Detectada": "El riesgo de descapitalización o endeudamiento si una baja laboral impide trabajar durante un periodo prolongado, especialmente para autónomos con gastos fijos y una pensión pública insuficiente.",
-      "Pregunta_Apertura": "Si mañana tu negocio tiene que parar 3 meses por una baja, tus gastos siguen iguales pero tus ingresos cesan. ¿De dónde saldrían los 2.000€ que te faltarían cada mes para mantener tu nivel de vida?",
+      "Descuento_Bonus": "25% (acumulable hasta 45%)",
+      "Segmento_objetivo": "Docentes · Sanitarios (médicos/enfermeros) · Ingenieros y Arquitectos",
+      "Vulnerabilidad_Detectada": "Exposición económica familiar ante fallecimiento o invalidez del sustentador principal. Colectivos con alta conciencia de riesgo pero sin protección de vida adecuada.",
+      "Pregunta_Apertura": "Como profesor/médico/ingeniero, tu familia depende de ti. Si tú faltas mañana... ¿cómo vive tu familia el mes que viene? ¿Quién carga con el peso de la hipoteca y el futuro de los tuyos?",
       "Estado": "🟢 ACTIVA",
       "Cambios_Catalogo": {
         "id_producto": "vidafamilia",
         "campos_a_actualizar": {
-          "descripcion_breve": "Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
-          "precio_base": "Consultar",
-          "detalles_adicionales": "Con descuento hábitos saludables −10% · Capital total: 266.000 € · *25% descuento vitalicio (excluye ILT)*",
-          "estadisticas_clave": [
-            {
-              "valor": "25% vitalicio",
-              "etiqueta": "Descuento de prima"
-            }
-          ],
-          "coberturas_clave": [
-            {
-              "cobertura": "Incapacidad laboral temporal (ILT)",
-              "concepto": "EXCLUIDA en esta campaña con descuento del 25%.",
-              "valor_limite": "N/A",
-              "es_clave": false,
-              "tipo": "exclusión"
-            }
-          ]
+          "descripcion_breve": "25% descuento vitalicio para Docentes, Sanitarios e Ingenieros/Arquitectos. Válido hasta el 8 de julio de 2026. Acumulable hasta 45% de ahorro.",
+          "precio_base": "Desde 5,25 €/mes",
+          "detalles_adicionales": "25% dto. vitalicio colectivos (hasta 8 jul 2026) · Acumulable +10% hábitos · +10% coberturas · Desde 5,25 €/mes · Capital hasta 600.000 €"
         }
       }
     },
