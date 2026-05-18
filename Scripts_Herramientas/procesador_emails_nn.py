@@ -906,14 +906,22 @@ def main():
         print("🚀 Subiendo actualizaciones a GitHub Pages...")
         try:
             ruta_json = os.path.join(os.path.dirname(os.path.dirname(__file__)), "radar_db.json")
-            # Subir archivos clave
-            subprocess.run(["git", "add", "-f", "Briefing_Lunes_ADN.html", "procesador_emails_nn.py"], cwd=carpeta_scripts, check=False)
+            ruta_propuestas = os.path.join(os.path.dirname(os.path.dirname(__file__)), "propuestas-nn-v2.html")
+            
+            # Subir archivos clave del briefing y scripts
+            subprocess.run(["git", "add", "-f", "Briefing_Lunes_ADN.html", "procesador_emails_nn.py", "catalogo_maestro_productos.json"], cwd=carpeta_scripts, check=False)
+            
+            # Subir base de datos radar_db.json si existe
             if os.path.exists(ruta_json):
                 subprocess.run(["git", "add", "-f", "../radar_db.json"], cwd=carpeta_scripts, check=False)
+                
+            # Subir el portal de propuestas actualizado para que se refleje online
+            if os.path.exists(ruta_propuestas):
+                subprocess.run(["git", "add", "-f", "../propuestas-nn-v2.html"], cwd=carpeta_scripts, check=False)
             
-            subprocess.run(["git", "commit", "-m", "Auto-update Briefing and Radar DB"], cwd=carpeta_scripts, check=True)
+            subprocess.run(["git", "commit", "-m", "Auto-update Briefing, Radar DB, Catalog and Proposals Portal"], cwd=carpeta_scripts, check=True)
             subprocess.run(["git", "push"], cwd=carpeta_scripts, check=True)
-            print("✅ ¡Sincronización con GitHub completada! Tu panel online ya está actualizado.")
+            print("✅ ¡Sincronización con GitHub completada! Tu panel online y el portal de propuestas ya están actualizados.")
         except Exception as e:
             print(f"❌ Error al subir a GitHub: {e}")
 
