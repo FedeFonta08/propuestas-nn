@@ -582,13 +582,13 @@
   "saludvida": {
     "id": "saludvida",
     "nombre_oficial": "Plan Salud + Vida",
-    "descripcion_breve": "La única solución híbrida: Medicina Sanitas + Seguro de Vida en un solo contrato. Vida GRATIS el primer año y 12,5% de descuento hasta el 1 de junio de 2026.",
+    "descripcion_breve": "La única solución híbrida: Medicina Sanitas + Seguro de Vida en un solo contrato. Vida GRATIS el primer año y 12,5% de descuento en Salud hasta el 1 de junio de 2026.",
     "precio_base": "Consultar",
-    "detalles_adicionales": "Prima variable según edad y zona · Vida gratis 12 meses · Descuento hasta el 1 de junio (12,5%)",
+    "detalles_adicionales": "Prima variable según edad y zona · Vida gratis 12 meses · Descuento del 12,5% en Salud hasta el 1 de junio de 2026.",
     "estadisticas_clave": [
       {
         "valor": "12,5%",
-        "etiqueta": "Descuento hasta junio"
+        "etiqueta": "Descuento en Salud hasta junio 2026"
       },
       {
         "valor": "0 €",
@@ -734,7 +734,7 @@
     "id": "vidafamilia",
     "nombre_oficial": "Seguro de Vida y Familia",
     "descripcion_breve": "Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
-    "precio_base": "39,94 €/mes",
+    "precio_base": "Consultar",
     "detalles_adicionales": "Con descuento hábitos saludables −10% · Capital total: 266.000 € · *25% descuento vitalicio (excluye ILT)*",
     "estadisticas_clave": [
       {
@@ -1350,7 +1350,7 @@
     "id": "autonomo",
     "nombre_oficial": "Contigo Autónomo",
     "descripcion_breve": "Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
-    "precio_base": "39,94 €/mes",
+    "precio_base": "Consultar",
     "detalles_adicionales": "Con descuento hábitos saludables −10% · Capital total: 266.000 € · *25% descuento vitalicio (excluye ILT)*",
     "estadisticas_clave": [
       {

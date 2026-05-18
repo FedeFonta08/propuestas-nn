@@ -517,6 +517,8 @@ def exportar_json_dashboard(datos, campañas_viejas):
         print(f"❌ Error al exportar JSON: {e}")
 
 def generar_briefing_html(datos, campañas_viejas):
+    import datetime
+    fecha_hoy = datetime.datetime.now().strftime("%d/%m/%Y")
     print("🎨 Generando Briefing_Lunes_ADN.html en el repositorio público...")
     ruta_html = r"D:\Users\ffont\Downloads\06_NATIONALE_NEDERLANDEN\Scripts_Herramientas\Briefing_Lunes_ADN.html"
     
@@ -525,125 +527,443 @@ def generar_briefing_html(datos, campañas_viejas):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Briefing ADN Lunes · NN</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Briefing ADN Lunes · Nationale-Nederlanden</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {{
-            --orange: #B33600; /* Naranja más oscuro para mayor contraste */
-            --orange-l: #D94A00;
-            --dark: #EAEAEA; /* Fondo general un poco más oscuro para contrastar con las tarjetas blancas */
-            --navy: #000000; /* Texto principal en negro puro */
-            --text2: #111111; /* Texto secundario casi negro */
-            --card-bg: #FFFFFF;
-            --card-border: rgba(0,0,0,0.3); /* Bordes más oscuros */
+            --bg-gradient: linear-gradient(135deg, #070a13 0%, #02040a 100%);
+            --accent-orange: #ff5e1a;
+            --accent-orange-glow: rgba(255, 94, 26, 0.35);
+            --card-bg: rgba(15, 23, 42, 0.45);
+            --card-border: rgba(255, 255, 255, 0.06);
+            --card-hover-bg: rgba(30, 41, 59, 0.55);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --success-green: #10b981;
+            --success-bg: rgba(16, 185, 129, 0.1);
         }}
-        body {{
-            font-family: 'DM Sans', sans-serif;
-            background-color: var(--dark);
-            color: var(--navy);
+        
+        * {{
+            box-sizing: border-box;
             margin: 0;
-            padding: 2rem;
-            background-image: radial-gradient(ellipse 80% 50% at 10% 0%, rgba(201,77,0,0.04) 0%, transparent 60%);
+            padding: 0;
         }}
-        .header {{ max-width: 1000px; margin: 0 auto 2rem; border-bottom: 3px solid var(--orange); padding-bottom: 1rem; }}
-        .logo-text {{ font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 1.5px; color: var(--navy); }}
-        .logo-text span {{ color: var(--orange); }}
-        .subtitle {{ font-size: 13px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }}
         
-        .section-title {{ max-width: 1000px; margin: 3rem auto 1.5rem; font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--navy); letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }}
-        .section-desc {{ max-width: 1000px; margin: -1rem auto 2rem; font-size: 14px; color: var(--text2); background: #FFF8F5; border-left: 4px solid var(--orange); padding: 1rem; border-radius: 4px; }}
+        body {{
+            font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 3rem 2rem;
+            position: relative;
+            overflow-x: hidden;
+        }}
         
-        .grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }}
-        .card {{ background: var(--card-bg); border: 2px solid var(--orange); border-radius: 14px; padding: 1.5rem; box-shadow: 0 8px 24px rgba(201,77,0,0.08); position: relative; overflow: hidden; }}
-        .card.vieja {{ border-color: rgba(0,0,0,0.2); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }}
-        .card.vieja::before {{ background: #9CA3AF; }}
-        .card::before {{ content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--orange); }}
-        .card-header {{ display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }}
-        .badge {{ background: #FFF8F5; color: var(--orange); padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border: 1px solid rgba(201,77,0,0.2); }}
-        .card.vieja .badge {{ background: #F3F4F6; color: #4B5563; border-color: rgba(0,0,0,0.1); }}
-        .producto {{ font-family: 'Bebas Neue', sans-serif; font-size: 26px; line-height: 1.1; margin-top: 8px; }}
-        .segmento {{ color: #16A34A; font-size: 12px; font-weight: 700; text-transform: uppercase; }}
-        .novedad {{ font-size: 14px; color: var(--text2); margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--card-border); }}
+        /* Background glowing orbs */
+        body::before {{
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 94, 26, 0.08) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }}
         
-        .adn-box {{ background: #F9FAFB; border-left: 4px solid var(--navy); padding: 1rem; margin-bottom: 1rem; border-radius: 0 8px 8px 0; }}
-        .adn-title {{ font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--navy); margin-bottom: 4px; }}
-        .adn-text {{ font-size: 14px; color: var(--text2); }}
+        body::after {{
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.05) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }}
         
-        .apertura-box {{ background: #FFF8F5; border: 1.5px solid rgba(201,77,0,0.3); border-radius: 8px; padding: 1rem; }}
-        .apertura-title {{ font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--orange); margin-bottom: 6px; }}
-        .apertura-text {{ font-size: 15px; font-weight: 600; font-style: italic; color: var(--navy); line-height: 1.4; }}
+        .container {{
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }}
+        
+        /* Premium Header */
+        .header {{
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 28px;
+            padding: 2.5rem 3rem;
+            margin-bottom: 3.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }}
+        
+        .header-left {{
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }}
+        
+        .header-tag {{
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-orange);
+        }}
+        
+        .header-title {{
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }}
+        
+        .header-title span {{
+            background: linear-gradient(to right, #ff5e1a, #ffa17a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }}
+        
+        .header-date {{
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 0.6rem 1.2rem;
+            border-radius: 99px;
+            backdrop-filter: blur(10px);
+        }}
+        
+        /* Section styling */
+        .section-header {{
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            margin: 4rem auto 2rem;
+        }}
+        
+        .section-header.first {{
+            margin-top: 0;
+        }}
+        
+        .section-indicator {{
+            width: 6px;
+            height: 28px;
+            background: linear-gradient(to bottom, #ff5e1a, #ff9b70);
+            border-radius: 99px;
+            box-shadow: 0 0 10px var(--accent-orange-glow);
+        }}
+        
+        .section-title {{
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+            background: linear-gradient(to right, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }}
+        
+        .section-desc {{
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            background: rgba(255, 94, 26, 0.02);
+            border-left: 3px solid var(--accent-orange);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 16px 16px 0;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            max-width: 1200px;
+            border-top: 1px solid rgba(255, 94, 26, 0.05);
+            border-bottom: 1px solid rgba(255, 94, 26, 0.05);
+            border-right: 1px solid rgba(255, 94, 26, 0.05);
+        }}
+        
+        /* Responsive Grid */
+        .grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }}
+        
+        /* Premium Glass Card */
+        .card {{
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 2.25rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }}
+        
+        .card:hover {{
+            transform: translateY(-8px);
+            background: var(--card-hover-bg);
+            border-color: rgba(255, 94, 26, 0.3);
+            box-shadow: 
+                0 30px 60px -15px rgba(0, 0, 0, 0.6), 
+                0 0 25px 0 rgba(255, 94, 26, 0.12);
+        }}
+        
+        .card::before {{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-orange), transparent);
+            opacity: 0.6;
+        }}
+        
+        .card.vieja::before {{
+            background: linear-gradient(90deg, #64748b, transparent);
+        }}
+        
+        .card.vieja {{
+            opacity: 0.65;
+        }}
+        
+        .card.vieja:hover {{
+            opacity: 1;
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
+        }}
+        
+        .card-top {{
+            margin-bottom: 1.5rem;
+        }}
+        
+        .card-meta {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }}
+        
+        .card-segment {{
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--success-green);
+            background: var(--success-bg);
+            padding: 0.3rem 0.85rem;
+            border-radius: 99px;
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }}
+        
+        .card-status {{
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: rgba(255, 94, 26, 0.08);
+            color: var(--accent-orange);
+            padding: 0.25rem 0.65rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 94, 26, 0.2);
+        }}
+        
+        .card.vieja .card-status {{
+            background: rgba(148, 163, 184, 0.08);
+            color: #94a3b8;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }}
+        
+        .card-title {{
+            font-size: 1.45rem;
+            font-weight: 700;
+            line-height: 1.25;
+            letter-spacing: -0.015em;
+            color: #ffffff;
+            margin-bottom: 0.875rem;
+        }}
+        
+        .card-description {{
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 1.75rem;
+        }}
+        
+        /* Info blocks inside cards */
+        .info-section {{
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }}
+        
+        .info-box {{
+            background: rgba(7, 10, 19, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 1.2rem;
+            position: relative;
+        }}
+        
+        .info-box.opening {{
+            border-left: 3px solid var(--accent-orange);
+            background: rgba(255, 94, 26, 0.015);
+        }}
+        
+        .info-box.vulnerability {{
+            border-left: 3px solid #a855f7;
+            background: rgba(168, 85, 247, 0.01);
+        }}
+        
+        .info-box-label {{
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }}
+        
+        .info-box-label.vulnerability {{
+            color: #b55fe6;
+        }}
+        
+        .info-box-label.opening {{
+            color: var(--accent-orange);
+        }}
+        
+        .info-box-text {{
+            font-size: 0.875rem;
+            line-height: 1.55;
+            color: #e2e8f0;
+        }}
+        
+        .info-box-text.opening-quote {{
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-style: italic;
+            color: #ffffff;
+        }}
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="subtitle">Briefing Semanal para Agentes</div>
-        <div class="logo-text">TRADUCCIÓN ADN · <span>PANEL NN</span></div>
-    </div>
-    
-    <div class="section-title">✨ NOVEDADES DE LA SEMANA</div>
-    <div class="grid">
+    <div class="container">
+        <!-- Dashboard Header -->
+        <div class="header">
+            <div class="header-left">
+                <div class="header-tag">Boletín Inteligente Comercial</div>
+                <div class="header-title">Traducción ADN · <span>Panel NN</span></div>
+            </div>
+            <div class="header-date">📅 {fecha_hoy} · Sincronizado con Éxito</div>
+        </div>
+        
+        <!-- Novedades de la Semana -->
+        <div class="section-header first">
+            <div class="section-indicator"></div>
+            <div class="section-title">✨ NOVEDADES EXTRAÍDAS DE LA SEMANA</div>
+        </div>
+        
+        <div class="grid">
 """
     
     for camp in datos.get("Campañas_Activas", []):
         html += f"""
-        <div class="card">
-            <div class="card-header">
-                <div>
-                    <div class="segmento">🎯 {camp.get('Segmento_objetivo', '')}</div>
-                    <div class="producto">{camp.get('Producto', '')}</div>
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 {camp.get('Segmento_objetivo', '')}</div>
+                        <div class="card-status">{camp.get('Estado', 'Activa')}</div>
+                    </div>
+                    <div class="card-title">{camp.get('Producto', '')}</div>
+                    <div class="card-description">{camp.get('Descripcion_del_beneficio', '')}</div>
                 </div>
-                <div class="badge">{camp.get('Estado', 'Activa')}</div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">{camp.get('Vulnerabilidad_Detectada', '')}</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            "{camp.get('Pregunta_Apertura', '')}"
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="novedad">{camp.get('Descripcion_del_beneficio', '')}</div>
-            
-            <div class="adn-box">
-                <div class="adn-title">🔪 Vulnerabilidad Detectada (Bisturí ADN)</div>
-                <div class="adn-text">{camp.get('Vulnerabilidad_Detectada', '')}</div>
-            </div>
-            
-            <div class="apertura-box">
-                <div class="apertura-title">🗣️ Pregunta de Apertura Consultiva</div>
-                <div class="apertura-text">"{camp.get('Pregunta_Apertura', '')}"</div>
-            </div>
-        </div>
         """
         
     html += """
-    </div>
-    
-    <div class="section-title" style="margin-top: 4rem;">🔄 CAMPAÑAS EN RADAR</div>
-    <div class="section-desc">
-        <strong>Recuerda:</strong> Sabes que estas campañas siguen muy activas en nuestro Radar Comercial. 
-        Son extremadamente beneficiosas para ti y tus clientes. ¡No dejes de ofrecerlas!
-    </div>
-    <div class="grid">
+        </div>
+        
+        <!-- Campañas en Radar -->
+        <div class="section-header">
+            <div class="section-indicator" style="background: linear-gradient(to bottom, #64748b, #94a3b8);"></div>
+            <div class="section-title">🔄 OTRAS CAMPAÑAS ACTIVAS EN RADAR</div>
+        </div>
+        
+        <div class="section-desc">
+            <strong>Check comercial permanente:</strong> Estas campañas históricas siguen totalmente vigentes y operativas en nuestro Radar Comercial. Consúltalas y apóyate en sus argumentos para maximizar tus cierres en tus interacciones diarias.
+        </div>
+        
+        <div class="grid">
 """
 
     for camp in campañas_viejas:
         html += f"""
-        <div class="card vieja">
-            <div class="card-header">
-                <div>
-                    <div class="segmento">🎯 {camp.get('Segmento_objetivo', '')}</div>
-                    <div class="producto">{camp.get('Producto', '')}</div>
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 {camp.get('Segmento_objetivo', '')}</div>
+                        <div class="card-status">{camp.get('Estado', 'Activa')}</div>
+                    </div>
+                    <div class="card-title">{camp.get('Producto', '')}</div>
+                    <div class="card-description">{camp.get('Descripcion_del_beneficio', '')}</div>
                 </div>
-                <div class="badge">{camp.get('Estado', 'Activa')}</div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">{camp.get('Vulnerabilidad_Detectada', '')}</div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            "{camp.get('Pregunta_Apertura', '')}"
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="novedad">{camp.get('Descripcion_del_beneficio', '')}</div>
-            
-            <div class="adn-box">
-                <div class="adn-title">🔪 Vulnerabilidad Detectada (Bisturí ADN)</div>
-                <div class="adn-text">{camp.get('Vulnerabilidad_Detectada', '')}</div>
-            </div>
-            
-            <div class="apertura-box" style="background:#F9FAFB; border-color:rgba(0,0,0,0.1);">
-                <div class="apertura-title" style="color:var(--text2)">🗣️ Pregunta de Apertura Consultiva</div>
-                <div class="apertura-text">"{camp.get('Pregunta_Apertura', '')}"</div>
-            </div>
-        </div>
         """
 
     html += """
+        </div>
     </div>
 </body>
 </html>

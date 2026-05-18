@@ -414,17 +414,17 @@ const PRODS = {
 
   saludvida: {
     fase: 'f2', ico: '❤️', nom: 'Plan Salud + Vida',
-    sub: 'La única solución híbrida: Medicina Sanitas + Seguro de Vida en un solo contrato. Vida GRATIS el primer año y 12,5% de descuento hasta el 1 de junio de 2026.',
+    sub: 'La única solución híbrida: Medicina Sanitas + Seguro de Vida en un solo contrato. Vida GRATIS el primer año y 12,5% de descuento en Salud hasta el 1 de junio de 2026.',
     tit: n => `El blindaje total para <em>${n} y su familia</em>: Salud Sanitas + Vida NN.`,
     deadline: { ico: '⏰', badge: 'DESCUENTO 12,5% SOLO HASTA 1 JUNIO 2026', loss: 'Si contratas después del 1 de junio de 2026, pierdes el 12,5% de descuento anual en tu prima de salud. La promoción aplica a pólizas con fecha efecto 1 de abril, 1 de mayo o 1 de junio de 2026.' },
     greet: n => `Hola <strong>${n}</strong>,<br><br>¿Sabías que la mayoría de seguros te hacen elegir entre salud o vida? Nosotros hemos unido lo mejor de los dos mundos: <strong>te damos la medicina privada de Sanitas y el respaldo de un seguro de vida de Nationale-Nederlanden en un solo contrato</strong>. Y lo mejor: el seguro de vida te sale <strong>GRATIS el primer año</strong> y te aplicamos un <strong>12,5% de descuento</strong> si contratas antes del 1 de junio.`,
     hb: { t: 'hbo', x: '<strong>Incomparable:</strong> Medicina privada Sanitas (sin listas de espera) + Seguro de Vida NN. El seguro de vida es GRATIS el primer año. Ahorro del 12,5% en la prima de salud hasta el 1 de junio de 2026.' },
-    sts: [{ v: '12,5%', l: 'Descuento hasta junio' }, { v: '0 €', l: 'Vida (1er año)' }, { v: '+40.000', l: 'Médicos Sanitas' }],
+    sts: [{ v: '12,5%', l: 'Descuento en Salud hasta junio 2026' }, { v: '0 €', l: 'Vida (1er año)' }, { v: '+40.000', l: 'Médicos Sanitas' }],
     covs: [
       { n: 'Seguro de vida — 1er año GRATIS', c: 'Capital a elegir', p: '0 € primer año', k: true, t: 'gratis' }
     ],
     pendiente: false,
-    totalDesc: 'Prima variable según edad y zona · Vida gratis 12 meses · Descuento hasta el 1 de junio (12,5%)',
+    totalDesc: 'Prima variable según edad y zona · Vida gratis 12 meses · Descuento del 12,5% en Salud hasta el 1 de junio de 2026.',
     prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, proteger la salud y la vida de tu familia en un solo paso es la decisión más inteligente. ¿Hablamos de las coberturas?`,
     objeciones: [
@@ -490,7 +490,7 @@ const PRODS = {
     pendiente: false,
     extras: true,
     totalDesc: 'Con descuento hábitos saludables −10% · Capital total: 266.000 € · *25% descuento vitalicio (excluye ILT)*',
-    prima: '39,94 €/mes',
+    prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, la pregunta no es si puedes permitirte este seguro. La pregunta es si tu familia puede permitirse no tenerlo.`,
   },
 
@@ -708,7 +708,7 @@ const PRODS = {
     pendiente: false,
     extras: true,
     totalDesc: 'Con descuento hábitos saludables −10% · Capital total: 266.000 € · *25% descuento vitalicio (excluye ILT)*',
-    prima: '39,94 €/mes',
+    prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, por menos de 1,33 € al día tienes cubierto el peor escenario. Firmamos hoy.`,
     objeciones: [
       { q: 'Ya pago mucho a la Seguridad Social, ¿para qué necesito esto?', a: 'La SS paga 721 €/mes de media en baja por enfermedad. Si tus gastos fijos como autónomo son 900 €/mes (local, suministros, préstamos, familia), el agujero real es 179 €/mes que sale de tu bolsillo o de tus ahorros cada mes que dure la baja. Contigo Autónomo cubre exactamente ese agujero.' },
