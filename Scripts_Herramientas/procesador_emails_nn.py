@@ -205,6 +205,21 @@ def actualizar_google_sheets(datos, client):
                 except Exception:
                     ws_camp.update([fila_nueva], f"A{idx}:J{idx}") # Fallback for different gspread versions
                 print(f"🔄 Campaña actualizada en la nube: {prod_nombre}")
+                
+                # IMPORTANT: Si una campaña se actualiza, la metemos también en Novedades 
+                # para que el agente vea el cambio reflejado explícitamente.
+                if "Novedades_Producto" not in datos:
+                    datos["Novedades_Producto"] = []
+                datos["Novedades_Producto"].append({
+                    "Producto": f"Campaña Actualizada: {prod_nombre}",
+                    "Que_ha_cambiado": camp.get("Descripcion_del_beneficio", ""),
+                    "Tipo": "🟢 Campaña Modificada",
+                    "Vigente_desde": camp.get("Fecha_inicio", fecha_hoy),
+                    "Afecta_guia_comercial": "SÍ",
+                    "Accion_sobre_CRM": f"Ofrecer al segmento: {camp.get('Segmento_objetivo', '')}",
+                    "Impacto_segmento": camp.get("Segmento_objetivo", ""),
+                    "Fuente": "Entre Nosotros"
+                })
             else:
                 ws_camp.append_row(fila_nueva)
                 productos_existentes.append(prod_nombre.lower())

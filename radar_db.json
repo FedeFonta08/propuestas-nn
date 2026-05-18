@@ -1,30 +1,43 @@
 {
-  "ultima_actualizacion": "18/05/2026 13:58",
+  "ultima_actualizacion": "18/05/2026 15:26",
   "campanas": [
     {
       "Producto": "Salud (Campaña Ahorro + Salud)",
       "Tipo_de_campaña": "Ampliación de plazo",
-      "Descripcion_del_beneficio": "Plazo ampliado para formalizar el seguro de Salud hasta el 31 de mayo de 2026 para clientes que ya contrataron PC SIALP o Contigo Futuro en campaña, con fecha de efecto 1 de mayo o 1 de junio.",
-      "Fecha_inicio": "18/05/2026",
+      "Descripcion_del_beneficio": "Ampliación de plazo para contratar el seguro de Salud para clientes que ya han contratado PC SIALP o Contigo Futuro. Fecha de emisión hasta el 31 de mayo, fecha de efecto 1 de mayo y 1 de junio.",
+      "Fecha_inicio": "Anterior al 18/05/2026",
       "Fecha_fin": "31/05/2026",
-      "Cupo_max": "",
-      "Descuento_Bonus": "",
-      "Segmento_objetivo": "Clientes que ya contrataron PC SIALP o Contigo Futuro en campaña.",
-      "Vulnerabilidad_Detectada": "Miedo a listas de espera prolongadas ante diagnósticos graves en la sanidad pública, que podrían retrasar tratamientos vitales y generar ansiedad.",
-      "Pregunta_Apertura": "¿Qué pasaría si mañana te diagnostican algo grave y la sanidad pública te da cita para dentro de 4 meses? ¿Podrías asumir esa espera y la incertidumbre que conlleva, o buscarías alternativas inmediatas?",
+      "Cupo_max": null,
+      "Descuento_Bonus": null,
+      "Segmento_objetivo": "Clientes que han contratado PC SIALP o Contigo Futuro",
+      "Vulnerabilidad_Detectada": "Miedo a listas de espera prolongadas en la sanidad pública ante diagnósticos graves, poniendo en riesgo la salud y el bienestar familiar.",
+      "Pregunta_Apertura": "¿Qué pasaría si mañana te diagnostican algo y la sanidad pública te da cita para dentro de 4 meses? ¿Podrías permitírtelo?",
       "Estado": "🟢 ACTIVA"
     },
     {
       "Producto": "Contigo Familia",
       "Tipo_de_campaña": "Ampliación de segmento y descuento",
-      "Descripcion_del_beneficio": "25% de descuento vitalicio en la póliza Contigo Familia, ahora disponible también para autónomos (excluyendo la cobertura de Incapacidad Laboral Temporal - ILT).",
+      "Descripcion_del_beneficio": "25% de descuento vitalicio para autónomos, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
       "Fecha_inicio": "18/05/2026",
-      "Fecha_fin": "",
-      "Cupo_max": "",
+      "Fecha_fin": null,
+      "Cupo_max": null,
       "Descuento_Bonus": "25% vitalicio",
-      "Segmento_objetivo": "Autónomos (interesados en protección familiar, excl. ILT).",
-      "Vulnerabilidad_Detectada": "El riesgo inminente de que, si tú faltas, tu familia se enfrente a una grave inestabilidad económica, perdiendo el nivel de vida actual y la capacidad de afrontar gastos esenciales como la hipoteca.",
-      "Pregunta_Apertura": "Si tú, como autónomo, faltaras mañana... ¿cómo viviría tu familia el mes que viene? ¿Quién asumiría el peso de la hipoteca y los gastos diarios sin tus ingresos, manteniendo su nivel de vida?",
+      "Segmento_objetivo": "Autónomos (excluyendo cobertura ILT)",
+      "Vulnerabilidad_Detectada": "Exposición de la familia a la pérdida de ingresos vitales y la carga de deudas si el autónomo, como pilar económico, falta inesperadamente.",
+      "Pregunta_Apertura": "Si tú, como autónomo, faltas mañana... ¿cómo viviría tu familia el mes que viene sin tus ingresos? ¿Quién asumiría el peso de la hipoteca o los gastos del negocio sin tu presencia?",
+      "Estado": "🟢 ACTIVA"
+    },
+    {
+      "Producto": "Plan de Referencias 2026",
+      "Tipo_de_campaña": "Incentivo para agentes (reclutamiento)",
+      "Descripcion_del_beneficio": "Oportunidad de generar ingresos extra, acumular puntos y conseguir una plaza doble para el viaje de incentivo al recomendar nuevos talentos a la red.",
+      "Fecha_inicio": "18/05/2026",
+      "Fecha_fin": null,
+      "Cupo_max": null,
+      "Descuento_Bonus": "Ingresos extra, puntos, plaza doble viaje incentivo",
+      "Segmento_objetivo": "Agentes Nationale-Nederlanden",
+      "Vulnerabilidad_Detectada": "Oportunidad perdida de capitalizar la red de contactos profesionales para generar ingresos adicionales y recompensas de empresa, limitando el crecimiento personal y profesional del agente.",
+      "Pregunta_Apertura": "Tienes una red profesional extensa. ¿Estás maximizando su potencial para sumar ingresos extra y acceder a experiencias únicas que la empresa te ofrece por ello?",
       "Estado": "🟢 ACTIVA"
     },
     {
@@ -110,31 +123,61 @@
   ],
   "novedades": [
     {
-      "Producto": "Salesforce (Gestión de Pólizas)",
-      "Que_ha_cambiado": "Optimización del proceso para cambiar la cuenta bancaria de varias pólizas de un mismo cliente en un solo caso, eliminando la duplicidad de trámites.",
+      "Producto": "ADO (Evolución digital de la red)",
+      "Que_ha_cambiado": "Inicia la nueva fase de despliegue en 500 Agentes para impulsar la evolución digital de la red y el desarrollo profesional, liderado por Alex Bogman y Experiencia del Agente.",
       "Tipo": "🔵 Operativo",
       "Vigente_desde": "18/05/2026",
       "Afecta_guia_comercial": "NO",
-      "Accion_sobre_CRM": "Utilizar el nuevo proceso unificado en Salesforce para gestionar cambios de cuenta bancaria de múltiples pólizas de un cliente.",
-      "Impacto_segmento": "Clientes con múltiples pólizas.",
+      "Accion_sobre_CRM": "Estar atento a futuras comunicaciones para formación o acceso.",
+      "Impacto_segmento": "Agentes Nationale-Nederlanden",
+      "Fuente": "Entre Nosotros"
+    },
+    {
+      "Producto": "Salesforce (Proceso de cambio de cuenta bancaria)",
+      "Que_ha_cambiado": "Optimización del proceso de cambio de cuenta bancaria: ahora se puede realizar para múltiples pólizas en un solo caso, eliminando la duplicación de trámites.",
+      "Tipo": "🔵 Operativo",
+      "Vigente_desde": "18/05/2026",
+      "Afecta_guia_comercial": "NO",
+      "Accion_sobre_CRM": "Aplicar el nuevo proceso al cambiar cuentas bancarias de clientes con varias pólizas para ahorrar tiempo.",
+      "Impacto_segmento": "Agentes Nationale-Nederlanden (usuarios de Salesforce)",
       "Fuente": "Entre Nosotros"
     },
     {
       "Producto": "Hipotecas ING",
-      "Que_ha_cambiado": "Actualización de precios con incrementos tanto en la parte fija como en la variable. Aplica a nuevos scorings realizados a partir del 11 de mayo de 2026.",
+      "Que_ha_cambiado": "Actualización de precios con incrementos tanto en la parte fija como en la variable. Aplica a nuevos scorings realizados desde el 11 de mayo, no afectando expedientes en curso.",
       "Tipo": "🔴 Proceso Crítico",
       "Vigente_desde": "11/05/2026",
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Considerar los nuevos precios al generar ofertas o realizar nuevos scorings para hipotecas ING.",
-      "Impacto_segmento": "Potenciales nuevos clientes de hipotecas ING.",
+      "Accion_sobre_CRM": "Revisar y comunicar las nuevas condiciones de precios de hipotecas ING a los clientes potenciales, asegurándose de aplicar la fecha correcta para nuevos scorings.",
+      "Impacto_segmento": "Clientes potenciales interesados en hipotecas ING",
+      "Fuente": "Entre Nosotros"
+    },
+    {
+      "Producto": "Campaña Actualizada: Salud (Campaña Ahorro + Salud)",
+      "Que_ha_cambiado": "Ampliación de plazo para contratar el seguro de Salud para clientes que ya han contratado PC SIALP o Contigo Futuro. Fecha de emisión hasta el 31 de mayo, fecha de efecto 1 de mayo y 1 de junio.",
+      "Tipo": "🟢 Campaña Modificada",
+      "Vigente_desde": "Anterior al 18/05/2026",
+      "Afecta_guia_comercial": "SÍ",
+      "Accion_sobre_CRM": "Ofrecer al segmento: Clientes que han contratado PC SIALP o Contigo Futuro",
+      "Impacto_segmento": "Clientes que han contratado PC SIALP o Contigo Futuro",
+      "Fuente": "Entre Nosotros"
+    },
+    {
+      "Producto": "Campaña Actualizada: Contigo Familia",
+      "Que_ha_cambiado": "25% de descuento vitalicio para autónomos, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
+      "Tipo": "🟢 Campaña Modificada",
+      "Vigente_desde": "18/05/2026",
+      "Afecta_guia_comercial": "SÍ",
+      "Accion_sobre_CRM": "Ofrecer al segmento: Autónomos (excluyendo cobertura ILT)",
+      "Impacto_segmento": "Autónomos (excluyendo cobertura ILT)",
       "Fuente": "Entre Nosotros"
     }
   ],
   "historial": {
     "N_Edicion": "561",
-    "Resumen_ejecutivo": "La edición #561 de 'Entre Nosotros' extiende el plazo de la campaña 'Ahorro + Salud' y amplía la oferta de 'Contigo Familia' con un 25% de descuento vitalicio para autónomos. Se mejoran los procesos operativos en Salesforce para el cambio de cuenta bancaria y se anuncian cambios en la tarificación de Hipotecas ING, con incremento de precios para nuevos clientes.",
-    "Campañas_nuevas": "Campaña Ahorro + Salud (ampliación de plazo), Contigo Familia 25% para Autónomos",
-    "Cambios_producto": "Salesforce (Cambio de cuenta bancaria), Hipotecas ING (Actualización de precios)",
-    "N_acciones": 4
+    "Resumen_ejecutivo": "Este correo anuncia la ampliación del plazo para la campaña Ahorro+Salud y la inclusión de autónomos en Contigo Familia con un 25% de descuento. También detalla el despliegue de ADO en 500 agentes, la mejora en Salesforce para cambios de cuenta bancaria, y la actualización de precios en Hipotecas ING. Finalmente, se recuerda el Plan de Referencias 2026.",
+    "Campañas_nuevas": "Ahorro + Salud (ampliación plazo), Contigo Familia (ampliación segmento autónomos), Plan de Referencias 2026",
+    "Cambios_producto": "ADO (despliegue), Salesforce (proceso cambio de cuenta), Hipotecas ING (actualización de precios)",
+    "N_acciones": 6
   }
 }
