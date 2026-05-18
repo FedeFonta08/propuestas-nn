@@ -173,11 +173,10 @@ def actualizar_google_sheets(datos, client):
         sheet = client.open_by_key(SPREADSHEET_ID)
         fecha_hoy = datetime.datetime.now().strftime("%d/%m/%Y")
         
-        # 1. RADAR COMERCIAL (Integradas en RADAR COMERCIAL)
-        # Buscamos la hoja que contenga "RADAR"
+        # 1. RADAR COMERCIAL (Integradas en RADAR COMERCIAL o Campañas Activas)
         ws_camp = None
         for s in sheet.worksheets():
-            if "RADAR" in s.title.upper():
+            if "RADAR" in s.title.upper() or "CAMPA" in s.title.upper():
                 ws_camp = s
                 break
         if not ws_camp:
@@ -199,9 +198,12 @@ def actualizar_google_sheets(datos, client):
             ]
             
             if prod_nombre.lower() in productos_existentes:
-                # Actualizar (sumamos 1 porque Sheets empieza en 1)
+                # Actualizar
                 idx = productos_existentes.index(prod_nombre.lower()) + 1
-                ws_camp.update(f"A{idx}:J{idx}", [fila_nueva])
+                try:
+                    ws_camp.update(f"A{idx}:J{idx}", [fila_nueva])
+                except Exception:
+                    ws_camp.update([fila_nueva], f"A{idx}:J{idx}") # Fallback for different gspread versions
                 print(f"🔄 Campaña actualizada en la nube: {prod_nombre}")
             else:
                 ws_camp.append_row(fila_nueva)
