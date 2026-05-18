@@ -88,6 +88,10 @@ def procesar_con_ia(texto_email):
     {reglas_adn}
     ==============================
 
+    REGLAS DE ORO OBLIGATORIAS (CRÍTICO):
+    1. Trata 'Contigo Familia' y 'Contigo Autónomo' SIEMPRE como dos productos y campañas completamente distintos. Tienen coberturas y segmentos objetivo diferentes. ¡NUNCA los fusiones ni los agrupes en la misma fila!
+    2. Para cualquier novedad en 'Novedades_Producto', el campo 'Fuente' DEBE incluir el número de edición exacto del correo analizado (por ejemplo: 'Entre Nosotros #561' o 'Urgente 18/05/2026'). NUNCA uses texto genérico como 'Entre Nosotros'.
+
     Devuelve ESTRICTAMENTE un objeto JSON válido con las siguientes tres claves principales. No devuelvas ningún texto fuera del JSON.
 
     {{
@@ -208,6 +212,9 @@ def actualizar_google_sheets(datos, client):
                 
                 # IMPORTANT: Si una campaña se actualiza, la metemos también en Novedades 
                 # para que el agente vea el cambio reflejado explícitamente.
+                edicion_num = datos.get("Historial", {}).get("N_Edicion", "561")
+                fuente_campana = f"Entre Nosotros #{edicion_num}" if edicion_num else "Entre Nosotros"
+                
                 if "Novedades_Producto" not in datos:
                     datos["Novedades_Producto"] = []
                 datos["Novedades_Producto"].append({
@@ -218,7 +225,7 @@ def actualizar_google_sheets(datos, client):
                     "Afecta_guia_comercial": "SÍ",
                     "Accion_sobre_CRM": f"Ofrecer al segmento: {camp.get('Segmento_objetivo', '')}",
                     "Impacto_segmento": camp.get("Segmento_objetivo", ""),
-                    "Fuente": "Entre Nosotros"
+                    "Fuente": fuente_campana
                 })
             else:
                 ws_camp.append_row(fila_nueva)
@@ -255,13 +262,46 @@ def actualizar_google_sheets(datos, client):
             if "NOVEDADES" in s.title.upper():
                 ws_nov = s
                 break
+                
+        # Cargar novedades existentes para evitar duplicados
+        novedades_existentes = ws_nov.get_all_values()
+        novs_existentes_set = set()
+        for row in novedades_existentes:
+            if len(row) >= 2:
+                # Comparamos Producto y Qué ha cambiado (en minúsculas y sin espacios extras)
+                novs_existentes_set.add((row[0].strip().lower(), row[1].strip().lower()))
+                
         for nov in datos.get("Novedades_Producto", []):
+            prod_nov = nov.get("Producto", "").strip()
+            cambio_nov = nov.get("Que_ha_cambiado", "").strip()
+            tipo_nov = nov.get("Tipo", "").strip()
+            vigente_nov = nov.get("Vigente_desde", "").strip()
+            afecta_nov = nov.get("Afecta_guia_comercial", "").strip()
+            accion_nov = nov.get("Accion_sobre_CRM", "").strip()
+            segmento_nov = nov.get("Impacto_segmento", "").strip()
+            
+            # Garantizar que Fuente tenga el número de edición exacto
+            fuente_nov = nov.get("Fuente", "").strip()
+            if "entre nosotros" in fuente_nov.lower() and "#" not in fuente_nov:
+                edicion_num = datos.get("Historial", {}).get("N_Edicion", "")
+                if edicion_num:
+                    fuente_nov = f"Entre Nosotros #{edicion_num}"
+            if not fuente_nov:
+                edicion_num = datos.get("Historial", {}).get("N_Edicion", "")
+                fuente_nov = f"Entre Nosotros #{edicion_num}" if edicion_num else "Entre Nosotros"
+
+            # Validación de Duplicidad
+            if (prod_nov.lower(), cambio_nov.lower()) in novs_existentes_set:
+                print(f"⚠️ Novedad ya existe (Duplicado saltado): {prod_nov}")
+                continue
+
             ws_nov.append_row([
-                nov.get("Producto", ""), nov.get("Que_ha_cambiado", ""), nov.get("Tipo", ""),
-                nov.get("Vigente_desde", ""), nov.get("Afecta_guia_comercial", ""), nov.get("Accion_sobre_CRM", ""),
-                nov.get("Impacto_segmento", ""), nov.get("Fuente", "")
+                prod_nov, cambio_nov, tipo_nov,
+                vigente_nov, afecta_nov, accion_nov,
+                segmento_nov, fuente_nov
             ])
-            print(f"✅ Novedad insertada en la nube: {nov.get('Producto')}")
+            novs_existentes_set.add((prod_nov.lower(), cambio_nov.lower()))
+            print(f"✅ Novedad insertada en la nube: {prod_nov}")
 
         # 3. Historial (DASHBOARD AGENCIA)
         ws_hist = ws_camp
@@ -277,6 +317,25 @@ def actualizar_google_sheets(datos, client):
                 str(hist.get("N_acciones", "")), f"{fecha_hoy} · Gemini AI Automático"
             ])
             print(f"✅ Historial insertado en la nube.")
+
+        # 4. Formatear visualmente el Google Sheet para que se vea premium
+        print("🎨 Aplicando formato visual automático a las tablas (Wrap y Middle)...")
+        try:
+            # Formatear la pestaña de Campañas Activas (A2:J150)
+            ws_camp.format("A2:J150", {
+                "wrapStrategy": "WRAP",
+                "verticalAlignment": "MIDDLE",
+                "horizontalAlignment": "LEFT"
+            })
+            # Formatear la pestaña de Novedades Producto (A2:H150)
+            ws_nov.format("A2:H150", {
+                "wrapStrategy": "WRAP",
+                "verticalAlignment": "MIDDLE",
+                "horizontalAlignment": "LEFT"
+            })
+            print("✅ Formato aplicado con éxito (Wrap y alineación vertical completados).")
+        except Exception as fe:
+            print(f"⚠️ No se pudo formatear el Google Sheet: {fe}")
 
         print(f"\n✅ ¡GOOGLE DRIVE ACTUALIZADO CON ÉXITO!")
         
