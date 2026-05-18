@@ -836,6 +836,44 @@ const PRODS = {
     prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, la hipoteca más ágil del mercado. Sin papeleos, sin costes de entrada.`,
   },
+
+  // ── FASE 5: RC PRO ─────────────────────────────────────────────
+
+  rcpro: {
+    fase: 'f5', ico: '⚖️', nom: 'RC PRO · Caser (Responsabilidad Civil)',
+    sub: 'Protección profesional y empresarial contra reclamaciones de terceros. Hasta 3.000.000 € de cobertura automática. 3 modalidades: Básico, Estándar y Premium. Protección digital incluida.',
+    tit: n => `Si algo sale mal en el negocio de ${n}, <em>que no sea un problema económico.</em>`,
+    greet: n => `Hola <strong>${n}</strong>,<br><br>Un error, un daño accidental a un cliente, una reclamación de un empleado… Cualquier imprevisto en tu actividad puede derivar en una demanda millonaria. <strong>RC PRO Caser</strong> es el escudo que protege el patrimonio de tu negocio ante cualquier reclamación de terceros, con cobertura automática de hasta 3.000.000 € y protección digital incluida desde el primer día.`,
+    hb: { t: 'hbo', x: '<strong>Escudo total del negocio:</strong> Hasta 3.000.000 € de cobertura automática. Protección digital contra ciberataques y fraude incluida de serie. 24 meses de extensión del periodo de reclamación (run-off) al cancelar.' },
+    sts: [{ v: '3M€', l: 'Límite automático' }, { v: '3', l: 'Modalidades a medida' }, { v: '24m', l: 'Extensión run-off' }],
+    covs: [
+      { n: 'RC Explotación (daños a terceros)', c: 'Hasta 3.000.000 €', p: '✓', k: true, t: 'base' },
+      { n: 'Protección Digital', c: 'Ciberseguridad + antifraude', p: '✓', k: true, t: 'diferencial' },
+      { n: 'RC Locativa (local de negocio)', c: 'Daños al inmueble arrendado', p: '✓', k: true, t: 'clave' },
+      { n: 'RC Patronal (daños a empleados)', c: 'Estándar y Premium', p: '✓', k: false },
+      { n: 'RC Trabajos y Productos Realizados', c: 'Estándar y Premium', p: '✓', k: false },
+      { n: 'RC Contaminación Accidental', c: 'Estándar y Premium (500.000 €)', p: '✓', k: false },
+      { n: 'Daños Patrimoniales Primarios', c: 'Modalidad Premium (60.000 €)', p: '✓', k: false },
+      { n: 'Infracción protección de datos (RGPD)', c: 'Modalidad Premium', p: '✓', k: false },
+      { n: 'Fianzas y Defensa Jurídica', c: 'Todas las modalidades', p: '✓', k: false },
+      { n: 'Extensión Run-off al cancelar', c: '24 meses adicionales', p: '✓', k: false },
+    ],
+    pendiente: false,
+    totalDesc: 'Básico | Estándar | Premium · Cotización instantánea · Ámbito territorial UE · Prima anual fraccionable',
+    prima: 'Consultar',
+    cierre: n => `<strong>${n}</strong>, un solo siniestro sin cubrir puede arruinar años de trabajo. Calculamos la modalidad que mejor protege tu negocio, sin pagar de más.`,
+    objeciones: [
+      { q: '¿Qué es exactamente la Responsabilidad Civil profesional y por qué la necesito?', a: 'Es el seguro que paga cuando tu actividad profesional o empresarial causa un daño a un tercero (cliente, proveedor, empleado, viandante) y ese tercero te reclama. Sin RC PRO, la indemnización sale de tu bolsillo o del patrimonio de tu empresa. Con él, Caser asume la defensa jurídica y el pago de la indemnización hasta el límite contratado.' },
+      { q: '¿Cuánto cuesta y cómo se calcula la prima?', a: 'La prima depende de tu actividad (CNAE), la facturación anual, el número de empleados y la modalidad elegida (Básico, Estándar o Premium). Se obtiene cotización instantánea online. Puedes fraccionar en semestral (+2%) o trimestral (+4%) si la prima neta supera los 150 € anuales.' },
+      { q: '¿Qué diferencia hay entre Básico, Estándar y Premium?', a: 'Básico: RC Explotación + Protección Digital + Fianzas y Defensa. Estándar: añade RC Patronal (250.000 €/víctima), RC Trabajos y Productos, RC Contaminación Accidental (500.000 €). Premium: suma Daños Patrimoniales Primarios, Daños Medioambientales, infracción RGPD y retirada de productos en la UE. Para la mayoría de autónomos, el Estándar ofrece la mejor relación cobertura-precio.' },
+      { q: '¿Qué pasa si cancelo la póliza? ¿Me quedo desprotegido?', a: 'No. RC PRO Caser incluye una extensión de 24 meses del periodo de reclamación (run-off). Siniestros ocurridos mientras la póliza estaba activa pero reclamados hasta 24 meses después de cancelarla siguen cubiertos. Es una protección extraordinaria que muy pocas aseguradoras ofrecen.' },
+      { q: '¿La protección digital es un extra o está incluida?', a: 'Está incluida en todas las modalidades sin coste adicional. Cubre tu identidad digital, reputación online, contenidos profesionales, datos y dispone de alertas de fraude en tiempo real. En una era de ciberataques crecientes, es una cobertura que el mercado considera premium y aquí viene de serie.' },
+      { q: '¿Cubre también a mis empleados?', a: 'Sí, en las modalidades Estándar y Premium, la RC Patronal cubre los daños que tus empleados sufran como consecuencia de la actividad laboral. El límite es de hasta 250.000 € por víctima (450.000 € en Premium, equivalente al 25% del límite contratado). Incluye RC Cruzada entre empleados.' },
+      { q: '¿Se puede ampliar la cobertura si mi empresa crece?', a: 'Sí. El límite automático es de 3.000.000 €, pero se pueden contratar dobles o triples agregados anuales para actividades con mayor exposición. La póliza incluye regularización anual de parámetros variables (facturación, empleados) para garantizar que nunca estés infraasegurado.' },
+      { q: '¿Está cubierto en toda España o solo en mi zona?', a: 'El ámbito territorial estándar es la Unión Europea y Andorra. Para actividades con operaciones fuera de la UE, el Área Técnica puede ampliar la cobertura a nivel global previa evaluación. Si vendes o trabajas a nivel europeo, ya estás cubierto de serie.' },
+    ],
+  },
+
 };
 
 // ═══════════════════════════════════════════════════════════════
@@ -846,7 +884,7 @@ const PORTADA_FASES = {
   'Fase 2 · Salud, Vida y Accidentes ❤️': ['saludvida','saludcompleto','saludcopago','vidafamilia','senior','accidentes'],
   'Fase 3 · Hogar y Automóvil 🏠': ['hogar','auto'],
   'Fase 4 · Pensiones 🏦': ['ppsa','duplo'],
-  'Fase 5 · Profesional y Empresa 💼': ['autonomo','ilt','pyme','comercios','saludautonomos'],
+  'Fase 5 · Profesional y Empresa 💼': ['autonomo','ilt','pyme','comercios','saludautonomos','rcpro'],
   'Fase 6 · Hipotecas 🏡': ['hipotecaabanca','hipotecaing'],
 };
 
