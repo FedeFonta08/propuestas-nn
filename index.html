@@ -1242,18 +1242,7 @@ const FRASES = [
   ['"Nadie recuerda al agente que casi llegó al objetivo. Todos recuerdan al que lo superó."', '— Resultados finales'],
   ['"La llamada perfecta no existe. La llamada hecha sí."', '— Perfeccionismo vs acción'],
   ['"Cuando no sabes qué decir, di la verdad: Hola, soy Fede, te llamo porque creo que puedo ayudarte."', '— Honestidad brutal'],
-  ['"Los clientes no compran seguros. Compran tranquilidad. Véndeles lo segundo."', '— Venta emocional'],
-  ['"Si no estás incómodo, no estás creciendo. La zona de confort no paga 10.291 puntos al mes."', '— Zona de crecimiento'],
-  ['"Cada objeción es una pregunta disfrazada. Aprende a escuchar la pregunta real."', '— Manejo de objeciones'],
-  ['"El agente promedio hace 20 llamadas al día. El agente top hace 50. Tú decides en qué grupo estar."', '— Volumen de actividad'],
-  ['"No vendas lo que tienes. Vende lo que el cliente necesita. La diferencia es todo."', '— Enfoque en necesidades'],
-  ['"El secreto no es cerrar más. Es abrir mejor."', '— Técnica de apertura'],
-  ['"Fede de las 6 AM es más fuerte que Fede de las 11 AM. Aprovéchalo."', '— Energía matinal'],
-  ['"Los referidos no aparecen por suerte. Aparecen por excelencia en el servicio."', '— Calidad de servicio'],
-  ['"No esperes el momento perfecto. El momento perfecto es ahora, con el teléfono en la mano."', '— Timing perfecto'],
-  ['"965 contactos en la base. 4-5 agentes en septiembre. El plan está claro. Sólo falta ejecutar."', '— Objetivos 2026'],
-  ['"La primera llamada del día marca el ritmo de las siguientes 49."', '— Momentum diario'],
-  ['"Cuando piensas en rendirte, recuerda por qué empezaste. Fede a los 58 no se rinde."', '— Propósito personal']
+  ['"Si no estás incómodo, no estás creciendo. La zona de confort no paga 10.291 puntos al mes."', '— Zona de crecimiento']
 ];
 
 const frase = FRASES[new Date().getDay() % FRASES.length];
@@ -1264,101 +1253,91 @@ document.getElementById('frase-autor').textContent = frase[1];
 const RADAR_SHEET_ID = '1mYKiIdoglAxzFwJOE_0V8CyHwNUsKkh_oPtkUKg4GCQ';
 const RADAR_LINK     = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}`;
 
-// Datos inline del Radar Comercial (última actualización: 10/05/2026 · Entre Nosotros #561)
-async function cargarRadarDinamico() {
-  const container = document.getElementById('radar-grid');
-  if (!container) return;
-  
-  const url = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('🟠 Campañas Activas')}&headers=0&range=A3:J100`;
-  
-  try {
-    const res = await fetch(url);
-    const text = await res.text();
-    const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
-    const rows = json.table.rows;
-    if (!rows || rows.length === 0) return;
-    
-    // Mapeo directo (Cada fila es una ficha)
-    const campanas = rows.map(r => {
-      const val = idx => (r.c && r.c[idx]) ? String(r.c[idx].v || '').trim() : '';
-      return {
-        producto: val(0),
-        tipo: val(1),
-        desc: val(2),
-        fin: val(4),
-        dto: val(6),
-        accion: val(8),
-        estado: val(9) || 'ACTIVA'
-      };
-    }).filter(c => c.producto && 
-                   !c.producto.toLowerCase().includes('producto') && 
-                   !c.producto.toLowerCase().includes('actualizaci') &&
-                   !c.producto.toLowerCase().includes('radar comercial'));
-
-    container.innerHTML = campanas.map(c => {
-      const bClass = badgeClass(c.estado);
-      const bLabel = badgeLabel(c.estado);
-      
-      return `
-      <div class="radar-card" onclick="this.classList.toggle('expanded')">
-        <div class="radar-card-header">
-          <div class="radar-card-info">
-            <span class="radar-producto">${c.producto}</span>
-            <span class="radar-brief">${c.desc}</span>
-          </div>
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <div class="radar-badge ${bClass}">${bLabel}</div>
-            <div class="radar-card-chevron">▼</div>
-          </div>
-        </div>
-        <div class="radar-card-details">
-          <div class="radar-detail-label">Detalles de la campaña</div>
-          <div class="radar-desc" style="margin-bottom:15px;">• ${c.desc}</div>
-          <div class="radar-detail-grid">
-            <div class="radar-detail-item">
-              <span class="radar-detail-label">Vencimiento</span>
-              <span class="radar-detail-val">📅 ${c.fin || 'Indefinido'}</span>
-            </div>
-            <div class="radar-detail-item">
-              <span class="radar-detail-label">Beneficio</span>
-              <span class="radar-detail-val">🏷️ ${c.dto || 'Consultar'}</span>
-            </div>
-          </div>
-          <div class="radar-accion-premium">
-            <span class="radar-detail-label">Acción Comercial ADN</span>
-            <div class="radar-detail-val">🎯 ${c.accion}</div>
-          </div>
-        </div>
-      </div>`;
-    }).join('');
-    
-    const countEl = document.getElementById('radar-count');
-    if (countEl) countEl.textContent = `${campanas.length} campañas activas`;
-  } catch (e) { console.error('Error cargando Radar Dinámico:', e); }
-}
-
-document.addEventListener('DOMContentLoaded', cargarRadarDinamico);
-
+// Base de Datos Estática de Campañas de Respaldo (Totalmente al día)
 const CAMPANAS_ACTIVAS = [
   {
-    producto: 'Contigo Senior',
-    tipo: 'Bonificación prima',
-    desc: 'Bonificación 6 meses prima primer año para nuevos asegurados',
+    producto: 'Contigo Familia',
+    tipo: 'Descuento colectivos profesionales',
+    desc: '25% descuento vitalicio para Docentes, Sanitarios (médicos, enfermeros) e Ingenieros/Arquitectos. Acumulable hasta 45% de ahorro total.',
+    inicio: '08/05/2026',
+    fin: '08/07/2026',
+    dto: '25% vitalicio (hasta 45%)',
+    segmento: 'Docentes · Sanitarios · Ingenieros · Arquitectos',
+    accion: 'Prioridad máxima. Acreditar colectivo con documentación y adjuntar cupón firmado. Promoción válida hasta 8 de julio de 2026.',
+    estado: '🟢 ACTIVA'
+  },
+  {
+    producto: 'Contigo Autónomo',
+    tipo: 'Ampliación de descuento',
+    desc: 'Descuento vitalicio del 25% sobre la prima. Excluye específicamente la cobertura de Incapacidad Laboral Temporal (ILT).',
+    inicio: '18/05/2026',
+    fin: 'Indefinido',
+    dto: '25% vitalicio',
+    segmento: 'Autónomos',
+    accion: 'Ofrecer protección de invalidez y vida con 25% de ahorro. Excluye ILT (baja). Combinar con Seguro ILT si se busca baja diaria.',
+    estado: '🟢 ACTIVA'
+  },
+  {
+    producto: 'RC PRO · Caser',
+    tipo: 'Captación nuevo producto',
+    desc: 'Responsabilidad Civil profesional y empresarial Caser. Hasta 3.000.000 € de cobertura automática. Protección digital de serie.',
+    inicio: '18/05/2026',
+    fin: 'Indefinido',
+    dto: 'Cotización Exprés',
+    segmento: 'Pymes, autónomos y profesionales liberales',
+    accion: 'Nuevo producto estrella de catálogo. Ofrece 3 modalidades (Básico, Estándar, Premium) y extensión de 24 meses run-off.',
+    estado: '🟢 ACTIVA'
+  },
+  {
+    producto: 'Salud (Campaña Ahorro + Salud)',
+    tipo: 'Ampliación plazo de formalización',
+    desc: 'Permite formalizar seguro de Salud a clientes que contrataron SIALP o Contigo Futuro con emisión hasta el 31 de mayo de 2026.',
+    inicio: '18/05/2026',
+    fin: '31/05/2026',
+    dto: 'Ampliación emisión',
+    segmento: 'Clientes SIALP o Contigo Futuro',
+    accion: 'Campaña crítica que cierra este mes. Contactar clientes que tienen el ahorro pero les falta la Salud. Pólizas efecto 1 mayo / 1 junio.',
+    estado: '⚡ URGENTE'
+  },
+  {
+    producto: 'Hipoteca Naranja (ING)',
+    tipo: 'Actualización de precios',
+    desc: 'Subida generalizada de tipos de interés en hipotecas fijas y variables para nuevos scorings desde el 11 de mayo de 2026.',
+    inicio: '11/05/2026',
+    fin: 'Indefinido',
+    dto: 'Actualización precio',
+    segmento: 'Clientes en búsqueda activa de hipoteca',
+    accion: 'Advertir a clientes en prospección sobre la subida. No afecta a expedientes con scoring cerrado antes del 11 de mayo.',
+    estado: '⚡ URGENTE'
+  },
+  {
+    producto: 'Plan Salud + Vida',
+    tipo: 'Ampliación de promoción',
+    desc: 'Seguro de Vida GRATIS el primer año y 12,5% de descuento en Salud hasta el 1 de junio de 2026.',
+    inicio: '18/05/2026',
+    fin: '01/06/2026',
+    dto: 'Vida Gratis + 12,5% Salud',
+    segmento: 'Particulares y familias',
+    accion: 'Ofrecer la solución híbrida de medicina Sanitas + vida. Cierre de promoción muy próximo.',
+    estado: '🟢 ACTIVA'
+  },
+  {
+    producto: 'Contigo Senior (+55)',
+    tipo: 'Bonificación especial',
+    desc: '6 meses de prima bonificados en mayo de 2026. Ecosistema de protección integral con red asistencial Sanitas.',
     inicio: '04/05/2026',
     fin: '31/05/2026',
-    cupo: 'Sin cupo',
-    dto: '6 meses bonif.',
-    segmento: 'S5 Senior +60',
-    accion: 'Filtrar base 965 contactos 60+ años. Mapeo Decesos → Contigo Senior. PRIORIDAD ALTA.',
+    dto: '6 meses bonificados',
+    segmento: 'Mayores de 55 años',
+    accion: 'Filtrar base de datos contactos +55 años. Ofrecer cobertura de accidentes de 65.000 € y servicios reales de autonomía.',
     estado: '🟢 ACTIVA'
   },
   {
     producto: 'Salud Completo Copago',
     tipo: 'Descuento autonomía comercial',
-    desc: '4% dto en primera anualidad para nuevos clientes y nuevos asegurados',
+    desc: '4% dto en primera anualidad para nuevos clientes y nuevos asegurados.',
     inicio: '15/04/2026',
     fin: '30/06/2026',
-    cupo: 'Restan 145 asegurados',
     dto: '4% dto.',
     segmento: 'S2 Constructor · S3 Protector · S3A Autónomo',
     accion: 'Llamar contactos 28-50 años. Pólizas con efecto 1 junio. Queda poco cupo nacional.',
@@ -1367,96 +1346,127 @@ const CAMPANAS_ACTIVAS = [
   {
     producto: 'PC SIALP',
     tipo: 'Ampliación edad contratación',
-    desc: 'Nueva edad máx. contratación 75 años y vencimiento hasta 85 años',
+    desc: 'Nueva edad máx. contratación 75 años y vencimiento hasta 85 años.',
     inicio: '10/04/2026',
-    fin: 'indefinido',
-    cupo: 'Sin cupo',
-    dto: '—',
+    fin: 'Indefinido',
+    dto: 'Edad a 75 años',
     segmento: 'S4 Planificador · S5 Senior',
     accion: 'Llamar contactos 55-75 años. Novedad como excusa natural de contacto.',
     estado: '🟢 ACTIVA'
   },
   {
+    producto: 'PC SIALP + Contigo Futuro',
+    tipo: 'Indexación de primas regulares',
+    desc: 'Indexación automática del 5% en primas regulares para Nuevo Negocio. Excelente argumento contra la inflación.',
+    inicio: '27/04/2026',
+    fin: 'Indefinido',
+    dto: '5% indexación anti-inflación',
+    segmento: 'S3 Protector · S4 Planificador',
+    accion: 'Mencionar la protección anti-inflación en las presentaciones de ahorro para garantizar la rentabilidad a largo plazo.',
+    estado: '🟢 ACTIVA'
+  },
+  {
     producto: 'AGE / Plan Creciente',
-    tipo: 'Plan/Ahorro',
-    desc: 'Incremento tipos +40pb (2,40% AGE, 2,60% AGE VIP)',
+    tipo: 'Incremento de rentabilidad',
+    desc: 'Incremento tipos de interés +40pb (2,40% AGE, 2,60% AGE VIP).',
     inicio: '30/04/2026',
     fin: '31/12/2026',
-    cupo: 'Sin cupo',
-    dto: '+40 pb rent.',
+    dto: '+40 pb rentabilidad',
     segmento: 'S4 Planificador',
-    accion: 'Propuesta simulación + comparar con depósitos bancarios tradicionales.',
+    accion: 'Presentar simulación detallada y comparar la rentabilidad garantizada con depósitos bancarios tradicionales.',
     estado: '🟢 ACTIVA'
   },
   {
     producto: 'Hipotecas ABANCA',
     tipo: 'Actualización de precios',
-    desc: 'Mejora exclusiva en Hipoteca Mari Carmen Fija Valor. Resto modalidades suben.',
+    desc: 'Subida generalizada en todas las modalidades excepto en la Hipoteca Mari Carmen Fija Valor, que mejora tarifas.',
     inicio: '01/05/2026',
-    fin: 'indefinido',
-    cupo: 'Sin cupo',
-    dto: 'Mejor precio Fija',
+    fin: 'Indefinido',
+    dto: 'Mejora Fija Valor',
     segmento: 'S2 Constructor 30-45',
-    accion: 'Solo recomendar Hipoteca Mari Carmen Fija Valor. Novedad estratégica mayo.',
+    accion: 'Solo recomendar y promocionar la Hipoteca Mari Carmen Fija Valor. Descartar el resto por subida de precio.',
     estado: '🔵 INFORMATIVA'
+  },
+  {
+    producto: 'Plan de Referencias 2026',
+    tipo: 'Bonificación por talento',
+    desc: 'Recomienda nuevos talentos para el equipo de agentes. Gana dinero extra y suma puntos para el Viaje de Incentivos.',
+    inicio: '01/01/2026',
+    fin: '31/12/2026',
+    dto: 'Bonificación extra',
+    segmento: 'Agentes y colaboradores',
+    accion: 'Conversación de recomendación natural con clientes satisfechos y autónomos de la red.',
+    estado: '🟢 ACTIVA'
   }
 ];
 
 function badgeClass(estado) {
   if (!estado) return 'badge-otro';
   const e = estado.toUpperCase();
-  if (e.includes('FINALIZADA'))           return 'badge-otro';
+  if (e.includes('FINALIZADA') || e.includes('VENCIDA') || e.includes('INACTIVA')) return 'badge-otro';
   if (e.includes('BAJA PRIORIDAD'))       return 'badge-urgente';
   if (e.includes('INFORMATIVA'))          return 'badge-cambio';
   if (e.includes('URGENTE'))              return 'badge-urgente';
   if (e.includes('ACTIVA'))               return 'badge-activa';
   if (e.includes('CAMBIO'))               return 'badge-cambio';
-  return 'badge-otro';
+  return 'badge-activa';
 }
 
 function badgeLabel(estado) {
   if (!estado) return 'INFO';
   const e = estado.toUpperCase();
-  if (e.includes('FINALIZADA'))           return '⚫ FINALIZADA';
+  if (e.includes('FINALIZADA') || e.includes('VENCIDA') || e.includes('INACTIVA')) return '⚫ FINALIZADA';
   if (e.includes('BAJA PRIORIDAD'))       return '🟡 BAJA PRIORIDAD';
   if (e.includes('INFORMATIVA'))          return '🔵 INFORMATIVA';
   if (e.includes('URGENTE'))              return '⚡ URGENTE';
-  if (e.includes('ACTIVA'))              return '🟢 ACTIVA';
-  if (e.includes('CAMBIO'))              return '🔵 CAMBIO';
-  return estado.replace(/[🟢🟡🔵⚫🟠]/g, '').trim();
+  if (e.includes('ACTIVA'))               return '🟢 ACTIVA';
+  if (e.includes('CAMBIO'))               return '🔵 CAMBIO';
+  return estado.replace(/[🟢🟡🔵⚫]/g, '').trim();
 }
 
-function cargarRadar() {
-  const grid = document.getElementById('radar-grid');
-  const footer = document.getElementById('radar-footer');
-  
-  if (!CAMPANAS_ACTIVAS.length) {
-    grid.innerHTML = '<div class="radar-loading">Sin campañas activas esta semana.</div>';
-    return;
-  }
-
-  // Ordenar por prioridad: URGENTE → ACTIVA → INFORMATIVA → BAJA PRIORIDAD → FINALIZADA
+function ordenarCampanas(lista) {
   const orden = e => {
     const x = e.toUpperCase();
-    if (x.includes('FINALIZADA'))     return 99;
+    if (x.includes('FINALIZADA') || x.includes('VENCIDA') || x.includes('INACTIVA')) return 99;
     if (x.includes('BAJA PRIORIDAD')) return 3;
     if (x.includes('INFORMATIVA'))    return 2;
     if (x.includes('URGENTE'))        return 0;
     if (x.includes('ACTIVA'))         return 1;
     return 50;
   };
-  const campanasOrdenadas = [...CAMPANAS_ACTIVAS].sort((a,b) => orden(a.estado) - orden(b.estado));
+  return [...lista].sort((a,b) => orden(a.estado || a.Estado || '') - orden(b.estado || b.Estado || ''));
+}
 
-  grid.innerHTML = campanasOrdenadas.map(c => {
-    const bClass = badgeClass(c.estado);
-    const bLabel = badgeLabel(c.estado);
-    
+function renderRadarUI(campanas, origen) {
+  const grid = document.getElementById('radar-grid');
+  const footer = document.getElementById('radar-footer');
+  if (!grid) return;
+
+  if (!campanas || campanas.length === 0) {
+    grid.innerHTML = '<div class="radar-loading">No hay campañas disponibles.</div>';
+    return;
+  }
+
+  const ordenadas = ordenarCampanas(campanas);
+
+  grid.innerHTML = ordenadas.map(c => {
+    const prod = c.producto || c.Producto || 'Producto';
+    const tipo = c.tipo || c.Tipo_de_campaña || 'Campaña';
+    const desc = c.desc || c.Descripcion_del_beneficio || 'Descripción';
+    const fin = c.fin || c.Fecha_fin || 'Indefinido';
+    const dto = c.dto || c.Descuento_Bonus || 'Ver ficha';
+    const accion = c.accion || c.Pregunta_Apertura || c.Vulnerabilidad_Detectada || 'Sin acción comercial asociada.';
+    const estado = c.estado || c.Estado || '🟢 ACTIVA';
+
+    const bClass = badgeClass(estado);
+    const bLabel = badgeLabel(estado);
+
     return `
       <div class="radar-card" onclick="this.classList.toggle('expanded')">
         <div class="radar-card-header">
           <div class="radar-card-info">
-            <span class="radar-producto">${c.producto}</span>
-            <span class="radar-brief">${c.desc}</span>
+            <span class="radar-producto">${prod}</span>
+            <span class="radar-brief">${desc}</span>
           </div>
           <div style="display: flex; align-items: center; gap: 10px;">
             <div class="radar-badge ${bClass}">${bLabel}</div>
@@ -1464,31 +1474,105 @@ function cargarRadar() {
           </div>
         </div>
         <div class="radar-card-details">
-          <div class="radar-detail-label">Detalles de la campaña</div>
-          <div class="radar-desc" style="margin-bottom:15px;">${c.desc}</div>
+          <div class="radar-detail-label">Detalles de la campaña (${tipo})</div>
+          <div class="radar-desc" style="margin-bottom:15px; color:#374151">• ${desc}</div>
           <div class="radar-detail-grid">
             <div class="radar-detail-item">
               <span class="radar-detail-label">Vencimiento</span>
-              <span class="radar-detail-val">📅 ${c.fin || 'Indefinido'}</span>
+              <span class="radar-detail-val">📅 ${fin}</span>
             </div>
             <div class="radar-detail-item">
-              <span class="radar-detail-label">Beneficio</span>
-              <span class="radar-detail-val">🏷️ ${c.dto || 'Consultar'}</span>
+              <span class="radar-detail-label">Beneficio / Dto</span>
+              <span class="radar-detail-val">🏷️ ${dto}</span>
             </div>
           </div>
           <div class="radar-accion-premium">
-            <span class="radar-detail-label">Acción Comercial ADN</span>
-            <div class="radar-detail-val">🎯 ${c.accion}</div>
+            <span class="radar-detail-label">Estrategia Comercial ADN</span>
+            <div class="radar-detail-val">🎯 ${accion}</div>
           </div>
         </div>
       </div>`;
   }).join('');
 
   const now = new Date();
-  footer.innerHTML = `Última actualización: 10/05/2026 · <a href="${RADAR_LINK}" target="_blank">Radar Comercial NN</a> · ${campanasOrdenadas.length} campañas activas`;
+  const fechaStr = `${String(now.getDate()).padStart(2,'0')}/${String(now.getMonth()+1).padStart(2,'0')}/${now.getFullYear()}`;
+  footer.innerHTML = `Sincronización: <strong>${origen}</strong> (${fechaStr}) · <a href="${RADAR_LINK}" target="_blank">Radar Comercial Drive 🔗</a> · ${campanas.length} campañas`;
 }
 
-cargarRadar();
+// CARGA HÍBRIDA 3-VIAS (Local -> CDN -> Cloud Sheets -> Static Backup)
+async function inicializarRadarComercial() {
+  // 1. Intentar localmente radar_db.json
+  try {
+    const res = await fetch('radar_db.json?t=' + Date.now());
+    if (res.ok) {
+      const data = await res.json();
+      if (data.campanas && data.campanas.length > 0) {
+        renderRadarUI(data.campanas, '🟢 radar_db.json local');
+        console.log('Radar cargado exitosamente desde archivo local.');
+        return;
+      }
+    }
+  } catch (e) {
+    console.warn('CORS o fallo al leer local radar_db.json, probando CDN...');
+  }
+
+  // 2. Intentar CDN del repositorio Github
+  try {
+    const res = await fetch('https://cdn.jsdelivr.net/gh/FedeFonta08/propuestas-nn@main/radar_db.json?t=' + Date.now());
+    if (res.ok) {
+      const data = await res.json();
+      if (data.campanas && data.campanas.length > 0) {
+        renderRadarUI(data.campanas, '🌐 CDN GitHub en Vivo');
+        console.log('Radar cargado exitosamente desde CDN GitHub.');
+        return;
+      }
+    }
+  } catch (e) {
+    console.warn('Fallo al conectar con CDN Github, probando Google Sheets...');
+  }
+
+  // 3. Intentar Google Sheets live gviz
+  try {
+    const sheetUrl = `https://docs.google.com/spreadsheets/d/${RADAR_SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('🟠 Campañas Activas')}&headers=0&range=A3:J100`;
+    const res = await fetch(sheetUrl);
+    if (res.ok) {
+      const text = await res.text();
+      const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
+      const rows = json.table.rows;
+      if (rows && rows.length > 0) {
+        const campanas = rows.map(r => {
+          const val = idx => (r.c && r.c[idx]) ? String(r.c[idx].v || '').trim() : '';
+          return {
+            Producto: val(0),
+            Tipo_de_campaña: val(1),
+            Descripcion_del_beneficio: val(2),
+            Fecha_fin: val(4),
+            Descuento_Bonus: val(6),
+            Pregunta_Apertura: val(8),
+            Estado: val(9) || '🟢 ACTIVA'
+          };
+        }).filter(c => c.Producto && 
+                       !c.Producto.toLowerCase().includes('producto') && 
+                       !c.Producto.toLowerCase().includes('actualizaci') &&
+                       !c.Producto.toLowerCase().includes('radar comercial'));
+
+        if (campanas.length > 0) {
+          renderRadarUI(campanas, '📡 Google Sheets Live');
+          console.log('Radar cargado exitosamente desde Google Sheets.');
+          return;
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('Fallo total de red. Usando base de datos estática de respaldo.');
+  }
+
+  // 4. Fallback absoluto: Base estática de respaldo impecable
+  renderRadarUI(CAMPANAS_ACTIVAS, '💾 Base de Datos de Respaldo local');
+}
+
+document.addEventListener('DOMContentLoaded', inicializarRadarComercial);
+
 
 // ── EDICIÓN DIRECTA PVM ──────────────────────
 function mostrarEdicion() {
