@@ -1,30 +1,43 @@
 {
-  "ultima_actualizacion": "18/05/2026 15:37",
+  "ultima_actualizacion": "18/05/2026 15:43",
   "campanas": [
     {
       "Producto": "Salud (Campaña Ahorro + Salud)",
-      "Tipo_de_campaña": "Ampliación de plazo",
-      "Descripcion_del_beneficio": "Ampliación del plazo de contratación de la póliza de Salud para clientes que ya contrataron PC SIALP o Contigo Futuro. Fecha de emisión hasta el 31 de mayo y fecha de efecto 1 de mayo o 1 de junio.",
+      "Tipo_de_campaña": "Ampliación de Plazo",
+      "Descripcion_del_beneficio": "Ampliación del plazo de formalización para seguros de Salud a clientes que contrataron PC SIALP o Contigo Futuro en campaña. Fecha de emisión hasta el 31 de mayo, con efecto 1 de mayo o 1 de junio.",
       "Fecha_inicio": "18/05/2026",
       "Fecha_fin": "31/05/2026",
       "Cupo_max": "N/A",
       "Descuento_Bonus": "N/A",
-      "Segmento_objetivo": "Clientes que ya contrataron PC SIALP o Contigo Futuro.",
-      "Vulnerabilidad_Detectada": "Miedo a la incertidumbre y la ineficiencia del sistema público de salud ante diagnósticos o tratamientos urgentes, lo que podría comprometer su bienestar y la estabilidad financiera que ya están construyendo.",
-      "Pregunta_Apertura": "Ya has dado un paso crucial para asegurar tu futuro financiero con tu plan de ahorro/jubilación. Ahora bien, ¿qué sucedería si mañana te diagnostican una enfermedad grave y la sanidad pública te da una cita para especialistas o pruebas críticas dentro de varios meses? ¿Cómo gestionaría tu bienestar y tu productividad ese retraso, y cómo impactaría eso en la seguridad que ya estás construyendo?",
-      "Estado": "🟢 ACTIVA"
+      "Segmento_objetivo": "Clientes que ya contrataron PC SIALP o Contigo Futuro en campaña y aún no han formalizado su seguro de Salud.",
+      "Vulnerabilidad_Detectada": "Miedo a listas de espera de 4 meses ante diagnósticos graves que impacten severamente la calidad de vida y el bienestar familiar.",
+      "Pregunta_Apertura": "¿Qué pasaría si mañana te diagnostican algo grave y la sanidad pública te da cita para dentro de 4 meses? ¿Podrías permitirte esperar tanto, o afrontarías los costes de una alternativa privada de forma inmediata?",
+      "Estado": "⚡ URGENTE"
     },
     {
       "Producto": "Contigo Familia",
-      "Tipo_de_campaña": "Ampliación de segmento + Descuento",
-      "Descripcion_del_beneficio": "La campaña Contigo Familia con un 25% de descuento vitalicio, ahora incluye a autónomos. Se excluye la cobertura de Incapacidad Laboral Temporal (ILT) para este segmento.",
-      "Fecha_inicio": "18/05/2026",
-      "Fecha_fin": "",
+      "Tipo_de_campaña": "Descuento",
+      "Descripcion_del_beneficio": "25% de descuento vitalicio en la póliza.",
+      "Fecha_inicio": "Indefinida",
+      "Fecha_fin": "Indefinida",
       "Cupo_max": "N/A",
       "Descuento_Bonus": "25% vitalicio",
-      "Segmento_objetivo": "Autónomos",
-      "Vulnerabilidad_Detectada": "Exposición severa de la estabilidad económica familiar y de las deudas (hipotecas, créditos) si el autónomo fallece o sufre una invalidez, dejando a la familia sin la principal fuente de ingresos y con la responsabilidad de sus compromisos financieros.",
-      "Pregunta_Apertura": "Como autónomo, tu trabajo es el motor principal de tu hogar. ¿Qué pasaría si mañana tú faltaras o sufrieras una invalidez y tus ingresos se detuvieran de golpe? ¿De dónde sacarían tu familia el dinero para mantener su nivel de vida, pagar la hipoteca y todas las facturas, no solo el mes que viene, sino durante años? ¿Quién asumiría esa carga financiera tan abruptamente?",
+      "Segmento_objetivo": "Familias y particulares que buscan proteger la estabilidad económica de sus seres queridos.",
+      "Vulnerabilidad_Detectada": "Exposición de la estabilidad económica familiar: la pérdida inesperada del principal sustento podría dejar a tus seres queridos sin capacidad para cubrir gastos esenciales como la hipoteca o la educación a largo plazo.",
+      "Pregunta_Apertura": "Si tú faltas mañana... ¿cómo vive tu familia el mes que viene? ¿Quién carga con el peso de la hipoteca, los gastos diarios y el futuro de los tuyos?",
+      "Estado": "🟢 ACTIVA"
+    },
+    {
+      "Producto": "Contigo Autónomo",
+      "Tipo_de_campaña": "Ampliación de Alcance / Descuento",
+      "Descripcion_del_beneficio": "25% de descuento vitalicio en la póliza, dirigido específicamente a autónomos. EXCLUYE la cobertura de Incapacidad Laboral Temporal (ILT).",
+      "Fecha_inicio": "18/05/2026",
+      "Fecha_fin": "Indefinida",
+      "Cupo_max": "N/A",
+      "Descuento_Bonus": "25% vitalicio",
+      "Segmento_objetivo": "Autónomos que buscan protegerse frente a eventos de incapacidad permanente o fallecimiento, excluyendo la incapacidad temporal.",
+      "Vulnerabilidad_Detectada": "Riesgo crítico de patrimonio y futuro: Una incapacidad permanente o el fallecimiento del autónomo dejaría su negocio y familia sin ingresos estables, forzando a quemar ahorros o acumular deudas insostenibles para subsistir.",
+      "Pregunta_Apertura": "Como autónomo, si un evento grave te impidiera trabajar de forma permanente o llegases a faltar, ¿de dónde saldrían los ingresos para mantener tu nivel de vida y el de tu familia, o incluso para la continuidad de tu actividad económica?",
       "Estado": "🟢 ACTIVA"
     },
     {
@@ -110,61 +123,51 @@
   ],
   "novedades": [
     {
-      "Producto": "ADO (Agent Digital Evolution)",
-      "Que_ha_cambiado": "Despliegue del programa ADO en 500 agentes para impulsar la evolución digital y el desarrollo profesional de la red.",
+      "Producto": "Salesforce (Operativa General)",
+      "Que_ha_cambiado": "Optimización del proceso para el cambio de cuenta bancaria de clientes con múltiples pólizas. Ahora se realiza con un solo caso/trámite en Salesforce, ahorrando tiempo.",
       "Tipo": "🔵 Operativo",
       "Vigente_desde": "18/05/2026",
-      "Afecta_guia_comercial": "NO",
-      "Accion_sobre_CRM": "N/A (iniciativa interna de desarrollo)",
-      "Impacto_segmento": "Agentes (interno)",
-      "Fuente": "Entre Nosotros #561"
-    },
-    {
-      "Producto": "Salesforce (Gestión de Pólizas)",
-      "Que_ha_cambiado": "Mejora operativa que permite cambiar la cuenta bancaria de varias pólizas de un mismo cliente en un solo caso en Salesforce, evitando duplicidades.",
-      "Tipo": "🔵 Operativo",
-      "Vigente_desde": "18/05/2026",
-      "Afecta_guia_comercial": "NO",
-      "Accion_sobre_CRM": "Utilizar el nuevo proceso unificado en Salesforce para la gestión de cambios de cuenta bancaria de clientes con múltiples pólizas.",
-      "Impacto_segmento": "Agentes (mejora de eficiencia) y Clientes con múltiples pólizas (indirecto por agilidad).",
+      "Afecta_guia_comercial": "SÍ",
+      "Accion_sobre_CRM": "Aplicar el nuevo proceso simplificado en Salesforce para cambios de cuenta bancaria en clientes con varias pólizas.",
+      "Impacto_segmento": "Agentes (mejora operativa) y clientes con múltiples pólizas (proceso más ágil).",
       "Fuente": "Entre Nosotros #561"
     },
     {
       "Producto": "Hipotecas ING",
-      "Que_ha_cambiado": "Actualización de precios con incrementos tanto en la parte fija como en la variable. Los cambios aplican a nuevos scorings realizados desde el 11 de mayo y no afectan a expedientes en curso.",
+      "Que_ha_cambiado": "Actualización de precios con incrementos tanto en la parte fija como en la variable de las hipotecas. Estos cambios afectan a nuevos scorings realizados a partir del 11 de mayo de 2026 y no a expedientes en curso.",
       "Tipo": "🔴 Proceso Crítico",
       "Vigente_desde": "11/05/2026",
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Revisar y comunicar los nuevos precios de hipotecas ING a los clientes interesados y en proceso. Asegurar que los nuevos scorings reflejen la actualización de precios.",
-      "Impacto_segmento": "Clientes interesados en nuevas hipotecas ING.",
+      "Accion_sobre_CRM": "Revisar las nuevas tablas de precios de Hipotecas ING y aplicarlas a todos los nuevos scorings. Asegurar que los expedientes en curso no se vean afectados.",
+      "Impacto_segmento": "Potenciales nuevos clientes interesados en hipotecas ING.",
       "Fuente": "Entre Nosotros #561"
     },
     {
       "Producto": "Campaña Actualizada: Salud (Campaña Ahorro + Salud)",
-      "Que_ha_cambiado": "Ampliación del plazo de contratación de la póliza de Salud para clientes que ya contrataron PC SIALP o Contigo Futuro. Fecha de emisión hasta el 31 de mayo y fecha de efecto 1 de mayo o 1 de junio.",
+      "Que_ha_cambiado": "Ampliación del plazo de formalización para seguros de Salud a clientes que contrataron PC SIALP o Contigo Futuro en campaña. Fecha de emisión hasta el 31 de mayo, con efecto 1 de mayo o 1 de junio.",
       "Tipo": "🟢 Campaña Modificada",
       "Vigente_desde": "18/05/2026",
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Ofrecer al segmento: Clientes que ya contrataron PC SIALP o Contigo Futuro.",
-      "Impacto_segmento": "Clientes que ya contrataron PC SIALP o Contigo Futuro.",
+      "Accion_sobre_CRM": "Ofrecer al segmento: Clientes que ya contrataron PC SIALP o Contigo Futuro en campaña y aún no han formalizado su seguro de Salud.",
+      "Impacto_segmento": "Clientes que ya contrataron PC SIALP o Contigo Futuro en campaña y aún no han formalizado su seguro de Salud.",
       "Fuente": "Entre Nosotros #561"
     },
     {
       "Producto": "Campaña Actualizada: Contigo Familia",
-      "Que_ha_cambiado": "La campaña Contigo Familia con un 25% de descuento vitalicio, ahora incluye a autónomos. Se excluye la cobertura de Incapacidad Laboral Temporal (ILT) para este segmento.",
+      "Que_ha_cambiado": "25% de descuento vitalicio en la póliza.",
       "Tipo": "🟢 Campaña Modificada",
-      "Vigente_desde": "18/05/2026",
+      "Vigente_desde": "Indefinida",
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Ofrecer al segmento: Autónomos",
-      "Impacto_segmento": "Autónomos",
+      "Accion_sobre_CRM": "Ofrecer al segmento: Familias y particulares que buscan proteger la estabilidad económica de sus seres queridos.",
+      "Impacto_segmento": "Familias y particulares que buscan proteger la estabilidad económica de sus seres queridos.",
       "Fuente": "Entre Nosotros #561"
     }
   ],
   "historial": {
     "N_Edicion": "561",
-    "Resumen_ejecutivo": "El correo #561 de 'Entre Nosotros' extiende el plazo para contratar Salud dentro de la campaña Ahorro + Salud hasta el 31 de mayo. Además, la campaña Contigo Familia con 25% de descuento ahora incluye a autónomos. Se anuncian mejoras operativas para agentes en Salesforce y un ajuste de precios en Hipotecas ING con vigencia desde el 11 de mayo.",
-    "Campañas_nuevas": "Campaña Ahorro + Salud (ampliación de plazo), Contigo Familia para Autónomos (ampliación de segmento)",
-    "Cambios_producto": "ADO (despliegue interno), Salesforce (cambio de cuenta bancaria), Hipotecas ING (actualización de precios)",
+    "Resumen_ejecutivo": "Esta edición destaca la extensión del plazo de formalización para seguros de Salud en la campaña Ahorro + Salud. Se amplía la campaña 'Contigo Familia' para incluir a autónomos con un 25% de descuento vitalicio, excluyendo la cobertura ILT. Adicionalmente, se mejora la operativa en Salesforce para cambios de cuenta bancaria y se anuncian incrementos de precios en Hipotecas ING para nuevos scorings. También se impulsa una iniciativa de desarrollo digital y un plan de referencias de talento.",
+    "Campañas_nuevas": "Contigo Autónomo (extensión/segmento de Contigo Familia)",
+    "Cambios_producto": "Salud (ampliación de plazo en campaña), Salesforce (mejora operativa), Hipotecas ING (actualización de precios)",
     "N_acciones": 5
   }
 }

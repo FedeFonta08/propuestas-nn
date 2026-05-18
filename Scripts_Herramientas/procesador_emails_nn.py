@@ -89,7 +89,11 @@ def procesar_con_ia(texto_email):
     ==============================
 
     REGLAS DE ORO OBLIGATORIAS (CRÍTICO):
-    1. Trata 'Contigo Familia' y 'Contigo Autónomo' SIEMPRE como dos productos y campañas completamente distintos. Tienen coberturas y segmentos objetivo diferentes. ¡NUNCA los fusiones ni los agrupes en la misma fila!
+    1. Trata 'Contigo Familia' y 'Contigo Autónomo' SIEMPRE como dos productos y campañas completamente distintos. Tienen coberturas y segmentos objetivo diferentes.
+       - Si la campaña 'Contigo Familia' amplía su alcance a autónomos (descuento vitalicio 25%, excluyendo la cobertura ILT), debes generar DOS objetos distintos en 'Campañas_Activas':
+         * Un objeto con "Producto": "Contigo Familia", dirigido al segmento familiar/particular general.
+         * Otro objeto con "Producto": "Contigo Autónomo", dirigido específicamente al segmento de Autónomos, detallando que tiene el 25% de descuento vitalicio y excluyendo explícitamente la cobertura de Incapacidad Laboral Temporal (ILT).
+       ¡NUNCA los fusiones, no dejes uno solo y no los agrupes en la misma fila!
     2. Para cualquier novedad en 'Novedades_Producto', el campo 'Fuente' DEBE incluir el número de edición exacto del correo analizado (por ejemplo: 'Entre Nosotros #561' o 'Urgente 18/05/2026'). NUNCA uses texto genérico como 'Entre Nosotros'.
 
     Devuelve ESTRICTAMENTE un objeto JSON válido con las siguientes tres claves principales. No devuelvas ningún texto fuera del JSON.
@@ -263,14 +267,34 @@ def actualizar_google_sheets(datos, client):
                 ws_nov = s
                 break
                 
-        # Cargar novedades existentes para evitar duplicados
+        edicion_num = datos.get("Historial", {}).get("N_Edicion", "561")
+        fuente_actual = f"Entre Nosotros #{edicion_num}" if edicion_num else "Entre Nosotros"
+        
+        # Cargar novedades existentes
         novedades_existentes = ws_nov.get_all_values()
-        novs_existentes_set = set()
-        for row in novedades_existentes:
-            if len(row) >= 2:
-                # Comparamos Producto y Qué ha cambiado (en minúsculas y sin espacios extras)
-                novs_existentes_set.add((row[0].strip().lower(), row[1].strip().lower()))
-                
+        
+        # Filtrar duplicados de la misma edición que vamos a meter hoy
+        rows_nov_keep = []
+        for r in novedades_existentes:
+            if not r: continue
+            fuente_fila = r[7].strip() if len(r) > 7 else ""
+            # Si contiene el número de edición actual, la eliminamos para sobreescribirla limpiamente
+            if edicion_num and f"#{edicion_num}" in fuente_fila:
+                continue
+            rows_nov_keep.append(r)
+            
+        # Si eliminamos algo, limpiamos la hoja y re-escribimos lo que mantuvimos
+        if len(rows_nov_keep) < len(novedades_existentes):
+            print(f"🧹 Eliminando novedades previas de la edición #{edicion_num} para evitar duplicados...")
+            ws_nov.clear()
+            try:
+                ws_nov.update(rows_nov_keep)
+            except Exception:
+                ws_nov.update(rows_nov_keep, 'A1')
+            novs_existentes_set = set((row[0].strip().lower(), row[1].strip().lower()) for row in rows_nov_keep if len(row) >= 2)
+        else:
+            novs_existentes_set = set((row[0].strip().lower(), row[1].strip().lower()) for row in novedades_existentes if len(row) >= 2)
+
         for nov in datos.get("Novedades_Producto", []):
             prod_nov = nov.get("Producto", "").strip()
             cambio_nov = nov.get("Que_ha_cambiado", "").strip()
@@ -283,12 +307,10 @@ def actualizar_google_sheets(datos, client):
             # Garantizar que Fuente tenga el número de edición exacto
             fuente_nov = nov.get("Fuente", "").strip()
             if "entre nosotros" in fuente_nov.lower() and "#" not in fuente_nov:
-                edicion_num = datos.get("Historial", {}).get("N_Edicion", "")
                 if edicion_num:
                     fuente_nov = f"Entre Nosotros #{edicion_num}"
             if not fuente_nov:
-                edicion_num = datos.get("Historial", {}).get("N_Edicion", "")
-                fuente_nov = f"Entre Nosotros #{edicion_num}" if edicion_num else "Entre Nosotros"
+                fuente_nov = fuente_actual
 
             # Validación de Duplicidad
             if (prod_nov.lower(), cambio_nov.lower()) in novs_existentes_set:
@@ -309,6 +331,26 @@ def actualizar_google_sheets(datos, client):
             if "DASHBOARD" in s.title.upper() or "HISTORIAL" in s.title.upper():
                 ws_hist = s
                 break
+                
+        # Cargar historial existente
+        historial_existente = ws_hist.get_all_values()
+        rows_hist_keep = []
+        for r in historial_existente:
+            if not r: continue
+            edicion_fila = r[0].strip()
+            # Si coincide con la edición actual, la eliminamos para sobreescribir limpiamente
+            if edicion_fila == edicion_num:
+                continue
+            rows_hist_keep.append(r)
+            
+        if len(rows_hist_keep) < len(historial_existente):
+            print(f"🧹 Eliminando registro de historial previo para la edición #{edicion_num}...")
+            ws_hist.clear()
+            try:
+                ws_hist.update(rows_hist_keep)
+            except Exception:
+                ws_hist.update(rows_hist_keep, 'A1')
+
         hist = datos.get("Historial", {})
         if hist:
             ws_hist.append_row([
