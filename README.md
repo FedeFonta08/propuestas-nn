@@ -176,7 +176,7 @@ Cada herramienta del ecosistema tiene los guiones, objeciones y árboles de deci
 - **Plan Salud + Vida:** El híbrido Sanitas + Vida (Vida gratis 1er año).
 - **Seguro Salud Completo:** Medicina de élite Sanitas sin esperas.
 - **Salud Copago:** Máxima eficiencia asistencial al menor coste.
-- **Vida y Familia:** Blindaje total con cobertura específica de cáncer de mama.
+- **Contigo Familia:** Blindaje total con cobertura específica de cáncer de mama.
 - **Contigo Senior (+55):** Protección e independencia (6 meses bonificados).
 - **Accidentes LiderPlus:** Capital directo inmediato ante infortunios.
 </details>
