@@ -233,6 +233,11 @@ def actualizar_google_sheets(datos, client):
         sheet = client.open_by_key(SPREADSHEET_ID)
         fecha_hoy = datetime.datetime.now().strftime("%d/%m/%Y")
         
+        def safe_str(val):
+            if val is None:
+                return ""
+            return str(val).strip()
+        
         # 1. RADAR COMERCIAL (Integradas en RADAR COMERCIAL o Campañas Activas)
         ws_camp = None
         for s in sheet.worksheets():
@@ -243,12 +248,12 @@ def actualizar_google_sheets(datos, client):
             ws_camp = sheet.worksheet("RADAR COMERCIAL")
         
         registros_existentes = ws_camp.get_all_values()
-        productos_existentes = [row[0].strip().lower() if row else "" for row in registros_existentes]
+        productos_existentes = [safe_str(row[0]).lower() if row else "" for row in registros_existentes]
         
-        nuevas_campañas_nombres = [c.get("Producto", "").strip().lower() for c in datos.get("Campañas_Activas", [])]
+        nuevas_campañas_nombres = [safe_str(c.get("Producto", "")).lower() for c in datos.get("Campañas_Activas", [])]
 
         for camp in datos.get("Campañas_Activas", []):
-            prod_nombre = camp.get("Producto", "").strip()
+            prod_nombre = safe_str(camp.get("Producto", ""))
             fila_nueva = [
                 prod_nombre, camp.get("Tipo_de_campaña", ""), camp.get("Descripcion_del_beneficio", ""),
                 camp.get("Fecha_inicio", ""), camp.get("Fecha_fin", ""), camp.get("Cupo_max", ""),
@@ -290,8 +295,8 @@ def actualizar_google_sheets(datos, client):
                 
         # Extraer las campañas viejas que siguen activas para el HTML
         for row in registros_existentes[1:]:
-            if not row or not row[0].strip(): continue
-            prod_viejo = row[0].strip()
+            if not row or not safe_str(row[0]): continue
+            prod_viejo = safe_str(row[0])
             if prod_viejo.lower() not in nuevas_campañas_nombres:
                 estado_viejo = row[9] if len(row) > 9 else ""
                 if "FINALIZADA" not in estado_viejo.upper():
@@ -300,8 +305,8 @@ def actualizar_google_sheets(datos, client):
                     ap = ""
                     if " | Apertura: " in vul_ap:
                         partes = vul_ap.split(" | Apertura: ")
-                        vul = partes[0].replace("Vulnerabilidad: ", "").strip()
-                        ap = partes[1].strip() if len(partes) > 1 else ""
+                        vul = safe_str(partes[0].replace("Vulnerabilidad: ", ""))
+                        ap = safe_str(partes[1]) if len(partes) > 1 else ""
                     
                     campañas_viejas_para_html.append({
                         "Producto": prod_viejo,
@@ -325,14 +330,14 @@ def actualizar_google_sheets(datos, client):
         # Cargar novedades existentes
         novedades_existentes = ws_nov.get_all_values()
         
-        # Filtrar duplicados de la misma edición que vamos a meter hoy
+        # Filter duplicados de la misma edición que vamos a meter hoy
         # Usamos str(edicion_num) para atrapar cualquier formato ("561", "#561", "Entre Nosotros #561")
         rows_nov_keep = []
         header = novedades_existentes[0] if novedades_existentes else []
         
         for r in novedades_existentes[1:]: # Omitimos cabecera para filtrar los datos
             if not r: continue
-            fuente_fila = r[7].strip() if len(r) > 7 else ""
+            fuente_fila = safe_str(r[7]) if len(r) > 7 else ""
             if edicion_num and str(edicion_num) in fuente_fila:
                 continue
             rows_nov_keep.append(r)
@@ -346,7 +351,7 @@ def actualizar_google_sheets(datos, client):
                 if "ing" in p or "hipoteca" in p: return "hipotecas_ing"
                 if "vida y familia" in p or "contigo familia" in p: return "vida_familia"
                 if "autónomo" in p or "autonomo" in p: return "autonomo"
-                return p.strip()
+                return safe_str(p)
                 
             sp1 = simplificar_prod(p1)
             sp2 = simplificar_prod(p2)
@@ -369,15 +374,15 @@ def actualizar_google_sheets(datos, client):
         # Procesar novedades extraídas del correo, realizando deduplicación semántica previa
         nuevas_novs = []
         for nov in datos.get("Novedades_Producto", []):
-            prod_nov = nov.get("Producto", "").strip()
-            cambio_nov = nov.get("Que_ha_cambiado", "").strip()
-            tipo_nov = nov.get("Tipo", "").strip()
-            vigente_nov = nov.get("Vigente_desde", "").strip()
-            afecta_nov = nov.get("Afecta_guia_comercial", "").strip()
-            accion_nov = nov.get("Accion_sobre_CRM", "").strip()
-            segmento_nov = nov.get("Impacto_segmento", "").strip()
+            prod_nov = safe_str(nov.get("Producto", ""))
+            cambio_nov = safe_str(nov.get("Que_ha_cambiado", ""))
+            tipo_nov = safe_str(nov.get("Tipo", ""))
+            vigente_nov = safe_str(nov.get("Vigente_desde", ""))
+            afecta_nov = safe_str(nov.get("Afecta_guia_comercial", ""))
+            accion_nov = safe_str(nov.get("Accion_sobre_CRM", ""))
+            segmento_nov = safe_str(nov.get("Impacto_segmento", ""))
             
-            fuente_nov = nov.get("Fuente", "").strip()
+            fuente_nov = safe_str(nov.get("Fuente", ""))
             if "entre nosotros" in fuente_nov.lower() and "#" not in fuente_nov:
                 if edicion_num:
                     fuente_nov = f"Entre Nosotros #{edicion_num}"
@@ -433,7 +438,7 @@ def actualizar_google_sheets(datos, client):
         rows_hist_keep = []
         for r in historial_existente:
             if not r: continue
-            edicion_fila = r[0].strip()
+            edicion_fila = safe_str(r[0])
             # Si coincide con la edición actual, la eliminamos para sobreescribir limpiamente
             if edicion_fila == edicion_num:
                 continue

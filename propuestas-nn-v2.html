@@ -485,7 +485,7 @@ const PRODS = {
     greet: n => `Hola <strong>${n}</strong>,<br><br>El Seguro de Vida y Familia garantiza que si algo te pasa, <strong>tu familia tiene el respaldo económico para seguir adelante</strong>: hipoteca cubierta, estudios garantizados, vida mantenida.`,
     hb: { t: 'hbo', x: '<strong>Cobertura pionera:</strong> Incluye protección específica para el cáncer de mama, además de las coberturas estándar de fallecimiento e invalidez permanente.' },
     covs: [
-      { n: 'Incapacidad laboral temporal (ILT)', c: 'EXCLUIDA en esta campaña con descuento del 25%', p: 'N/A', k: false, t: 'exclusión' }
+      { n: 'Incapacidad laboral temporal (ILT)', c: 'EXCLUIDA en esta campaña con descuento del 25%.', p: 'N/A', k: false, t: 'exclusión' }
     ],
     pendiente: false,
     extras: true,
@@ -501,16 +501,16 @@ const PRODS = {
     deadline: { ico: '🎁', badge: '6 MESES BONIFICADOS — Oferta válida mayo 2026', loss: 'Si esperas más allá de mayo de 2026, pierdes los 6 meses de prima bonificada — un ahorro real que no se recupera contratando después.' },
     greet: n => `Hola <strong>${n}</strong>,<br><br>Contigo Senior es el ecosistema diseñado específicamente para mayores de 55: <strong>capital por accidente hasta 65.000 €, asistencia Sanitas con geriatría y podología, y servicios reales de autonomía</strong> en el día a día.<br><br><strong>Atención, ${n}:</strong> la oferta de 6 meses bonificados es exclusiva de mayo 2026. Si contratas después, pagas desde el primer mes sin ese beneficio — una diferencia de más de media prima anual que ya no recuperas.`,
     hb: { t: 'hbo', x: '<strong>Servicios únicos de autonomía:</strong> Geriatría, podología, peluquería a domicilio, auxiliar en casa y acompañamiento a citas médicas. Más que un seguro — un servicio de vida.' },
-    sts: [{ v: '65.000 €', l: 'Capital máx. por accidente' }, { v: '+55 años', l: 'Edad de acceso' }, { v: 'Sanitas', l: 'Red asistencial' }],
+    sts: [{ v: '65.000 €', l: 'Capital máx. por accidente' }, { v: '+55 años', l: 'Edad de acceso' }, { v: 'Sanitas', l: 'Red asistencial' }, { v: '6 meses bonif.', l: 'Mayo 2026' }],
     covs: [
       { n: 'Capital por accidente (según baremo)', c: 'Hasta 65.000 €', p: 'Consultar', k: true, t: 'clave' },
       { n: 'Asistencia Sanitas — geriatría y podología', c: 'Incluida', p: '✓', k: true, t: 'diferencial' },
       { n: 'Auxiliar a domicilio', c: 'Servicio real', p: '✓', k: false },
       { n: 'Peluquería a domicilio', c: 'Incluida', p: '✓', k: false },
-      { n: 'Acompañamiento a citas médicas', c: 'Incluido', p: '✓', k: false },
+      { n: 'Acompañamiento a citas médicas', c: 'Incluido', p: '✓', k: false }
     ],
     pendiente: false,
-    totalDesc: 'Prima variable según edad · Exclusivo mayores de 55 años',
+    totalDesc: 'Prima variable según edad · Exclusivo mayores de 55 años · 6 meses bonificados en mayo 2026',
     prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, mantener la independencia y la calidad de vida es lo más valioso. Este producto lo hace posible.`,
     logoPartner: 'assets/ha-logo-sanitas.png',
@@ -696,14 +696,14 @@ const PRODS = {
 
   autonomo: {
     fase: 'f5', ico: '🚐', nom: 'Contigo Autónomo',
-    sub: 'Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo cobertura de Incapacidad Laboral Temporal (ILT).',
+    sub: 'Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).',
     tit: n => `La protección que <em>le falta a ${n}</em> como autónomo.`,
     greet: n => `Hola <strong>${n}</strong>,<br><br>Como autónomo, si no trabajas, no ingresas. <strong>Este seguro cubre el agujero entre lo que paga la SS y lo que necesitas para mantener tu negocio y tu vida.</strong>`,
     gap: true,
     gd: { g: '900€', r: '721€', h: '179€' },
     gls: ['Gastos fijos mensuales', 'Lo que paga la SS en baja', 'Sin cubrir cada mes. Hasta hoy.'],
     covs: [
-      { n: 'Incapacidad laboral temporal (ILT)', c: 'EXCLUIDA en esta campaña con descuento del 25%', p: 'N/A', k: false, t: 'exclusión' }
+      { n: 'Incapacidad laboral temporal (ILT)', c: 'EXCLUIDA en esta campaña con descuento del 25%.', p: 'N/A', k: false, t: 'exclusión' }
     ],
     pendiente: false,
     extras: true,
@@ -841,7 +841,7 @@ const PRODS = {
 
   hipotecaing: {
     fase: 'f6', ico: '🟠', nom: 'Hipoteca Naranja (ING)',
-    sub: '100% digital. Sin comisión de apertura. ING asume notaría, registro, gestoría e IAJD. Hasta 80% financiación (100% si <36 años y vivienda <400.000 €). Plazo hasta 40 años. *Precios actualizados con incrementos desde el 11 de mayo para nuevos scorings*.',
+    sub: '100% digital. Sin comisión de apertura. ING asume notaría, registro, gestoría e IAJD. Hasta 80% financiación (100% si <36 años y vivienda <400.000 €). Plazo hasta 40 años. *Precios actualizados con incrementos para nuevos scorings desde el 11 de mayo*.',
     tit: n => `La hipoteca digital de ${n}, <em>sin complicaciones y sin costes de entrada.</em>`,
     greet: n => `Hola <strong>${n}</strong>,<br><br>La Hipoteca Naranja ING es <strong>100% digital, sin comisión de apertura y con todos los gastos de formalización asumidos por el banco</strong>: notaría, registro, gestoría e IAJD. Solo pagas la tasación.`,
     hb: { t: 'hbg', x: '<strong>Sin costes de entrada:</strong> ING asume notaría, registro, gestoría e IAJD. Solo pagas la tasación. Hasta 80% financiación (100% si <36 años y vivienda <400.000 €). Plazo hasta 40 años.' },

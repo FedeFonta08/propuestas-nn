@@ -745,7 +745,7 @@
     "coberturas_clave": [
       {
         "cobertura": "Incapacidad laboral temporal (ILT)",
-        "concepto": "EXCLUIDA en esta campaña con descuento del 25%",
+        "concepto": "EXCLUIDA en esta campaña con descuento del 25%.",
         "valor_limite": "N/A",
         "es_clave": false,
         "tipo": "exclusión"
@@ -758,7 +758,7 @@
     "nombre_oficial": "Contigo Senior (+55)",
     "descripcion_breve": "Ecosistema de protección integral para mayores de 55. Capital por accidente hasta 65.000 €. Asistencia Sanitas + servicios reales de autonomía. 6 meses bonificados en mayo 2026.",
     "precio_base": "Consultar",
-    "detalles_adicionales": "Prima variable según edad · Exclusivo mayores de 55 años",
+    "detalles_adicionales": "Prima variable según edad · Exclusivo mayores de 55 años · 6 meses bonificados en mayo 2026",
     "estadisticas_clave": [
       {
         "valor": "65.000 €",
@@ -771,6 +771,10 @@
       {
         "valor": "Sanitas",
         "etiqueta": "Red asistencial"
+      },
+      {
+        "valor": "6 meses bonif.",
+        "etiqueta": "Mayo 2026"
       }
     ],
     "coberturas_clave": [
@@ -1345,7 +1349,7 @@
   "autonomo": {
     "id": "autonomo",
     "nombre_oficial": "Contigo Autónomo",
-    "descripcion_breve": "Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo cobertura de Incapacidad Laboral Temporal (ILT).",
+    "descripcion_breve": "Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
     "precio_base": "39,94 €/mes",
     "detalles_adicionales": "Con descuento hábitos saludables −10% · Capital total: 266.000 € · *25% descuento vitalicio (excluye ILT)*",
     "estadisticas_clave": [
@@ -1357,7 +1361,7 @@
     "coberturas_clave": [
       {
         "cobertura": "Incapacidad laboral temporal (ILT)",
-        "concepto": "EXCLUIDA en esta campaña con descuento del 25%",
+        "concepto": "EXCLUIDA en esta campaña con descuento del 25%.",
         "valor_limite": "N/A",
         "es_clave": false,
         "tipo": "exclusión"
@@ -1726,7 +1730,7 @@
   "hipotecaing": {
     "id": "hipotecaing",
     "nombre_oficial": "Hipoteca Naranja (ING)",
-    "descripcion_breve": "100% digital. Sin comisión de apertura. ING asume notaría, registro, gestoría e IAJD. Hasta 80% financiación (100% si <36 años y vivienda <400.000 €). Plazo hasta 40 años. *Precios actualizados con incrementos desde el 11 de mayo para nuevos scorings*.",
+    "descripcion_breve": "100% digital. Sin comisión de apertura. ING asume notaría, registro, gestoría e IAJD. Hasta 80% financiación (100% si <36 años y vivienda <400.000 €). Plazo hasta 40 años. *Precios actualizados con incrementos para nuevos scorings desde el 11 de mayo*.",
     "precio_base": "Consultar",
     "detalles_adicionales": "Solo pagas la tasación · 100% digital · Plazo máximo 40 años (75 años al finalizar) · *Precios actualizados con incrementos para nuevos scorings desde el 11 de mayo*.",
     "estadisticas_clave": [
