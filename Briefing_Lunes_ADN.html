@@ -3,191 +3,1390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Briefing ADN Lunes · NN</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Briefing ADN Lunes · Nationale-Nederlanden</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --orange: #C94D00;
-            --orange-l: #E85C0D;
-            --dark: #F5F5F0;
-            --navy: #111827;
-            --text2: #374151;
-            --card-bg: #FFFFFF;
-            --card-border: rgba(0,0,0,0.12);
+            --bg-gradient: linear-gradient(135deg, #070a13 0%, #02040a 100%);
+            --accent-orange: #ff5e1a;
+            --accent-orange-glow: rgba(255, 94, 26, 0.35);
+            --card-bg: rgba(15, 23, 42, 0.45);
+            --card-border: rgba(255, 255, 255, 0.06);
+            --card-hover-bg: rgba(30, 41, 59, 0.55);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --success-green: #10b981;
+            --success-bg: rgba(16, 185, 129, 0.1);
         }
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background-color: var(--dark);
-            color: var(--navy);
-            margin: 0;
-            padding: 2rem;
-            background-image: radial-gradient(ellipse 80% 50% at 10% 0%, rgba(201,77,0,0.04) 0%, transparent 60%);
-        }
-        .header {
-            max-width: 1000px;
-            margin: 0 auto 2rem;
-            border-bottom: 3px solid var(--orange);
-            padding-bottom: 1rem;
-        }
-        .logo-text {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 32px;
-            letter-spacing: 1.5px;
-            color: var(--navy);
-        }
-        .logo-text span { color: var(--orange); }
-        .subtitle { font-size: 13px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
         
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 3rem 2rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Background glowing orbs */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 94, 26, 0.08) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.05) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Premium Header */
+        .header {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 28px;
+            padding: 2.5rem 3rem;
+            margin-bottom: 3.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+        
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .header-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-orange);
+        }
+        
+        .header-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-title span {
+            background: linear-gradient(to right, #ff5e1a, #ffa17a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-date {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 0.6rem 1.2rem;
+            border-radius: 99px;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Section styling */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            margin: 4rem auto 2rem;
+        }
+        
+        .section-header.first {
+            margin-top: 0;
+        }
+        
+        .section-indicator {
+            width: 6px;
+            height: 28px;
+            background: linear-gradient(to bottom, #ff5e1a, #ff9b70);
+            border-radius: 99px;
+            box-shadow: 0 0 10px var(--accent-orange-glow);
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+            background: linear-gradient(to right, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            background: rgba(255, 94, 26, 0.02);
+            border-left: 3px solid var(--accent-orange);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 16px 16px 0;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            max-width: 1200px;
+            border-top: 1px solid rgba(255, 94, 26, 0.05);
+            border-bottom: 1px solid rgba(255, 94, 26, 0.05);
+            border-right: 1px solid rgba(255, 94, 26, 0.05);
+        }
+        
+        /* Responsive Grid */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-            gap: 1.5rem;
-            max-width: 1000px;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
             margin: 0 auto;
         }
+        
+        /* Premium Glass Card */
         .card {
             background: var(--card-bg);
-            border: 2px solid var(--orange);
-            border-radius: 14px;
-            padding: 1.5rem;
-            box-shadow: 0 8px 24px rgba(201,77,0,0.08);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 2.25rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            background: var(--card-hover-bg);
+            border-color: rgba(255, 94, 26, 0.3);
+            box-shadow: 
+                0 30px 60px -15px rgba(0, 0, 0, 0.6), 
+                0 0 25px 0 rgba(255, 94, 26, 0.12);
+        }
+        
         .card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 4px;
-            background: var(--orange);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-orange), transparent);
+            opacity: 0.6;
         }
-        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
-        .badge {
-            background: #FFF8F5;
-            color: var(--orange);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 10px;
+        
+        .card.vieja::before {
+            background: linear-gradient(90deg, #64748b, transparent);
+        }
+        
+        .card.vieja {
+            opacity: 0.65;
+        }
+        
+        .card.vieja:hover {
+            opacity: 1;
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .card-top {
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .card-segment {
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid rgba(201,77,0,0.2);
+            letter-spacing: 0.05em;
+            color: var(--success-green);
+            background: var(--success-bg);
+            padding: 0.3rem 0.85rem;
+            border-radius: 99px;
+            border: 1px solid rgba(16, 185, 129, 0.1);
         }
-        .producto { font-family: 'Bebas Neue', sans-serif; font-size: 26px; line-height: 1.1; margin-top: 8px; }
-        .segmento { color: #16A34A; font-size: 12px; font-weight: 700; text-transform: uppercase; }
-        .novedad { font-size: 14px; color: var(--text2); margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--card-border); }
         
-        .adn-box {
-            background: #F9FAFB;
-            border-left: 4px solid var(--navy);
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 0 8px 8px 0;
-        }
-        .adn-title { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--navy); margin-bottom: 4px; }
-        .adn-text { font-size: 14px; color: var(--text2); }
-        
-        .apertura-box {
-            background: #FFF8F5;
-            border: 1.5px solid rgba(201,77,0,0.3);
+        .card-status {
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: rgba(255, 94, 26, 0.08);
+            color: var(--accent-orange);
+            padding: 0.25rem 0.65rem;
             border-radius: 8px;
-            padding: 1rem;
+            border: 1px solid rgba(255, 94, 26, 0.2);
         }
-        .apertura-title { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--orange); margin-bottom: 6px; }
-        .apertura-text { font-size: 15px; font-weight: 600; font-style: italic; color: var(--navy); line-height: 1.4; }
+        
+        .card.vieja .card-status {
+            background: rgba(148, 163, 184, 0.08);
+            color: #94a3b8;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        
+        .card-title {
+            font-size: 1.45rem;
+            font-weight: 700;
+            line-height: 1.25;
+            letter-spacing: -0.015em;
+            color: #ffffff;
+            margin-bottom: 0.875rem;
+        }
+        
+        .card-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 1.75rem;
+        }
+        
+        /* Info blocks inside cards */
+        .info-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .info-box {
+            background: rgba(7, 10, 19, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 1.2rem;
+            position: relative;
+        }
+        
+        .info-box.opening {
+            border-left: 3px solid var(--accent-orange);
+            background: rgba(255, 94, 26, 0.015);
+        }
+        
+        .info-box.vulnerability {
+            border-left: 3px solid #a855f7;
+            background: rgba(168, 85, 247, 0.01);
+        }
+        
+        .info-box-label {
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        
+        .info-box-label.vulnerability {
+            color: #b55fe6;
+        }
+        
+        .info-box-label.opening {
+            color: var(--accent-orange);
+        }
+        
+        .info-box-text {
+            font-size: 0.875rem;
+            line-height: 1.55;
+            color: #e2e8f0;
+        }
+        
+        .info-box-text.opening-quote {
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-style: italic;
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="subtitle">Briefing Semanal para Agentes</div>
-        <div class="logo-text">TRADUCCIÓN ADN · <span>PANEL NN</span></div>
-    </div>
-    <div class="grid">
+    <div class="container">
+        <!-- Dashboard Header -->
+        <div class="header">
+            <div class="header-left">
+                <div class="header-tag">Boletín Inteligente Comercial</div>
+                <div class="header-title">Traducción ADN · <span>Panel NN</span></div>
+            </div>
+            <div class="header-date">📅 18/05/2026 · Sincronizado con Éxito</div>
+        </div>
+        
+        <!-- Novedades de la Semana -->
+        <div class="section-header first">
+            <div class="section-indicator"></div>
+            <div class="section-title">✨ NOVEDADES EXTRAÍDAS DE LA SEMANA</div>
+        </div>
+        
+        <div class="grid">
 
-        <div class="card">
-            <div class="card-header">
-                <div>
-                    <div class="segmento">🎯 S3 Protector (quienes priorizan el bienestar y la seguridad económica de su familia a largo plazo), S2 Constructor (profesionales que buscan una planificación financiera robusta y protección patrimonial).</div>
-                    <div class="producto">Contigo Familia</div>
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Clientes que hayan contratado Plan SIALP o Contigo Futuro.</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Plan Salud + Vida</div>
+                    <div class="card-description">Los clientes que hayan contratado un Plan SIALP o Contigo Futuro pueden formalizar su seguro de Salud con fecha de emisión hasta el 31 de mayo, y fechas de efecto 1 de mayo y 1 de junio.</div>
                 </div>
-                <div class="badge">Campaña Activa</div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">El cliente que ya está protegiendo su futuro financiero (SIALP/Contigo Futuro) puede estar descuidando su salud o la de su familia, y el miedo a no poder acceder a atención médica de calidad o a tener costes imprevistos por enfermedad. También, el miedo a una baja prolongada que afecte su capacidad de ahorro futuro.</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            "¿Si mañana tuvieras un problema de salud grave y necesitaras atención médica urgente, ¿cómo te asegurarías de recibir la mejor atención sin esperas innecesarias y sin que esto merme tu plan de ahorro futuro?"
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="novedad">Campaña con 25% de descuento vitalicio para profesionales de colectivos específicos que cumplan requisitos de contratación. Una oportunidad relevante para clientes y clientes de cartera.</div>
-            
-            <div class="adn-box">
-                <div class="adn-title">🔪 Vulnerabilidad Detectada (Bisturí ADN)</div>
-                <div class="adn-text">La profunda inquietud por garantizar el futuro económico y la calidad de vida de la familia, incluso si el pilar financiero principal ya no puede proveerlo, especialmente en profesiones con alto sentido de responsabilidad y compromiso.</div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Familias y Particulares.</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Seguro de Vida y Familia</div>
+                    <div class="card-description">25% de descuento vitalicio en la prima. La campaña se amplía para incluir a autónomos, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">El miedo a no poder mantener el nivel de vida familiar en caso de fallecimiento o invalidez, dejando a la familia desprotegida financieramente. La preocupación por el futuro económico de los seres queridos ante un imprevisto.</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            "Si mañana faltaras, ¿cómo garantizarías que tu familia mantendría su nivel de vida actual durante los próximos años sin tu aportación económica principal?"
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="apertura-box">
-                <div class="apertura-title">🗣️ Pregunta de Apertura Consultiva</div>
-                <div class="apertura-text">"Más allá del día a día, ¿cuáles son sus mayores preocupaciones sobre la capacidad de su familia para mantener su nivel de vida deseado ante cualquier imprevisto futuro?"</div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Autónomos.</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Contigo Autónomo</div>
+                    <div class="card-description">25% de descuento vitalicio en la prima para autónomos, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">El riesgo que asumen los autónomos de quedarse sin ingresos ante una baja laboral por accidente o enfermedad, lo que podría llevarles a agotar sus ahorros o endeudarse para cubrir sus gastos fijos y personales. El miedo a la interrupción total de su actividad profesional y económica.</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            "Si mañana sufres un accidente o una enfermedad que te impide trabajar durante 3 meses, tus gastos fijos siguen corriendo, pero tus ingresos se detienen. ¿De dónde vas a sacar el dinero para mantener tu nivel de vida y tu negocio a flote durante ese tiempo?"
+                        </div>
+                    </div>
+                </div>
             </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Clientes que buscan financiación hipotecaria.</div>
+                        <div class="card-status">⚡ URGENTE</div>
+                    </div>
+                    <div class="card-title">Hipoteca Naranja (ING)</div>
+                    <div class="card-description">Actualización de precios en hipotecas, con incrementos tanto en la parte fija como en la variable, aplicables a nuevos scorings desde el 11 de mayo.</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">El miedo a que los tipos de interés suban y la cuota hipotecaria se vuelva inasumible, afectando significativamente la estabilidad financiera del hogar. La preocupación por el coste total de la hipoteca y los gastos asociados a su formalización.</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            "Con los tipos de interés en constante movimiento, ¿cómo te aseguras de que tu hipoteca no se convierta en una carga financiera inmanejable a largo plazo, y qué has considerado respecto a los gastos ocultos al formalizarla?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Mayores de 55 años.</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Contigo Senior (+55)</div>
+                    <div class="card-description">Se bonifican 6 meses de prima en mayo de 2026.</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">La preocupación por la seguridad económica y la salud al llegar a la tercera edad. El miedo a imprevistos médicos que requieran asistencia especial o a caídas accidentales que generen gastos elevados y limiten la autonomía personal.</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            "Conforme nos hacemos mayores, ¿cómo nos aseguramos de que un imprevisto, ya sea de salud o por un accidente, no comprometa nuestra independencia y bienestar, y si hemos pensado en los servicios que realmente nos ayudarían a mantener nuestra calidad de vida?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 </div>
+                        <div class="card-status"></div>
+                    </div>
+                    <div class="card-title">ltima actualización: 27/04/2026  ·  Entre Nosotros #559  ·  Fede Fontanals  · NN Xàtiva</div>
+                    <div class="card-description"></div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text"></div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            ""
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Segmento objetivo</div>
+                        <div class="card-status">Estado</div>
+                    </div>
+                    <div class="card-title">Producto</div>
+                    <div class="card-description">Descripción del beneficio</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Acción recomendada</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            ""
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 S2 Constructor · S3 Protector · S3A Autónomo</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Salud Completo Copago</div>
+                    <div class="card-description">4% dto en primera anualidad para nuevos clientes y nuevos asegurados</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Llamar contactos 28-50 años esta semana. Pólizas con efecto 1 mayo y 1 junio</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            ""
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 S4 Planificador · S5 Senior</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">PC SIALP</div>
+                    <div class="card-description">Nueva edad máx. contratación 75 años y vencimiento hasta 85 años</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Llamar contactos 55-75 años. Novedad como excusa natural de contacto</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            ""
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 </div>
+                        <div class="card-status"></div>
+                    </div>
+                    <div class="card-title">Contigo Senior</div>
+                    <div class="card-description">Ajustes de sostenibilidad técnica basados en siniestralidad 2025. Esencia sin cambios</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text"></div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            ""
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 S3 Protector · S4 Planificador</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">PC SIALP + Contigo Futuro</div>
+                    <div class="card-description">Indexación automática del 5% en primas regulares Nuevo Negocio. Argumento anti-inflación</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Mencionar protección anti-inflación en presentaciones ahorro. Argumento clave SIALP/PC.</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            ""
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 S2 Constructor 30-45</div>
+                        <div class="card-status">🔵 INFORMATIVA</div>
+                    </div>
+                    <div class="card-title">Hipotecas ABANCA</div>
+                    <div class="card-description">Todas las modalidades suben precio excepto Hipoteca Mari Carmen Fija Valor que mejora</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Solo recomendar Hipoteca Mari Carmen Fija Valor. NO promocionar resto modalidades.</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            ""
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 S2 Constructor 30-45</div>
+                        <div class="card-status">🟡 ACTIVA - baja prioridad</div>
+                    </div>
+                    <div class="card-title">Hipoteca ABANCA</div>
+                    <div class="card-description">250€ por 1ª hipoteca / 500€ si Top Valor >300k€</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Prospección secundaria. NO priorizar vs SIALP/PC. Bajo impacto PVM.</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            ""
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 S4 Planificador </div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">AGE / Plan Creciente</div>
+                    <div class="card-description">Incremento tipos +40pb (2,40% AGE, 2,60% AGE VIP)</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Propuesta simulación + comparar banco</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            ""
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Familias y particulares que buscan proteger la estabilidad económica de sus seres queridos.</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Contigo Familia</div>
+                    <div class="card-description">25% de descuento vitalicio en la póliza.</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Exposición de la estabilidad económica familiar: la pérdida inesperada del principal sustento podría dejar a tus seres queridos sin capacidad para cubrir gastos esenciales como la hipoteca o la educación a largo plazo.</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            "Si tú faltas mañana... ¿cómo vive tu familia el mes que viene? ¿Quién carga con el peso de la hipoteca, los gastos diarios y el futuro de los tuyos?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Clientes que ya contrataron PC SIALP o Contigo Futuro en campaña y aún no han formalizado su seguro de Salud.</div>
+                        <div class="card-status">⚡ URGENTE</div>
+                    </div>
+                    <div class="card-title">Salud (Campaña Ahorro + Salud)</div>
+                    <div class="card-description">Ampliación del plazo de formalización para seguros de Salud a clientes que contrataron PC SIALP o Contigo Futuro en campaña. Fecha de emisión hasta el 31 de mayo, con efecto 1 de mayo o 1 de junio.</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Miedo a listas de espera de 4 meses ante diagnósticos graves que impacten severamente la calidad de vida y el bienestar familiar.</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            "¿Qué pasaría si mañana te diagnostican algo grave y la sanidad pública te da cita para dentro de 4 meses? ¿Podrías permitirte esperar tanto, o afrontarías los costes de una alternativa privada de forma inmediata?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Agentes actuales</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Plan de Referencias 2026</div>
+                    <div class="card-description">Recomienda nuevos talentos y gana dinero, además de sumar puntos para conseguir una plaza doble al Viaje de Incentivo. Cada recomendación cuenta para obtener ingresos extra y experiencias únicas.</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">La búsqueda constante de nuevos clientes y la necesidad de generar ingresos adicionales de forma eficiente. El deseo de ser recompensado por la contribución al crecimiento de la red.</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            "¿Qué pasaría si pudieras no solo ampliar tu cartera de clientes, sino también generar ingresos extra y acceder a experiencias exclusivas simplemente por conectar a personas valiosas con Nationale-Nederlanden?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Clientes que han contratado Plan SIALP o Contigo Futuro</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Seguro de Salud Completo</div>
+                    <div class="card-description">Los clientes que hayan contratado Plan SIALP o Contigo Futuro en campaña, pueden formalizar su seguro de Salud con fecha de emisión hasta el 31 de mayo de 2026 y fecha de efecto 1 de mayo o 1 de junio de 2026.</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Miedo a listas de espera de 4 meses ante diagnósticos graves.</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            "¿Qué pasaría si mañana te diagnostican algo y la sanidad pública te da cita para dentro de 4 meses? ¿Podrías permitírtelo?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Clientes que hayan contratado SIALP</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Plan SIALP</div>
+                    <div class="card-description">Los clientes que contrataron SIALP pueden formalizar su seguro de Salud asociado hasta el 31 de mayo, beneficiándose de las condiciones de la campaña Ahorro + Salud.</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">La necesidad de asegurar la salud presente y futura sin comprometer el plan de ahorro a largo plazo. El miedo a que un gasto médico imprevisto obligue a desviar fondos destinados a la jubilación o a objetivos financieros a largo plazo.</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            "Si mañana necesitaras una atención médica especializada o una intervención quirúrgica que no cubre la sanidad pública, ¿cómo reaccionarías para asegurar tu bienestar sin que tu planificación de ahorro para la jubilación se vea mermada?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Clientes que hayan contratado Contigo Futuro</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Contigo Futuro</div>
+                    <div class="card-description">Los clientes que contrataron Contigo Futuro pueden formalizar su seguro de Salud asociado hasta el 31 de mayo, beneficiándose de las condiciones de la campaña Ahorro + Salud.</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">La necesidad de proteger el capital invertido a largo plazo frente a imprevistos de salud que puedan requerir gastos médicos elevados, comprometiendo la estrategia de acumulación y el objetivo de jubilación.</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            "Imagina que necesitas un tratamiento médico costoso o una cirugía compleja. ¿Cómo te aseguras de que tu inversión a largo plazo, destinada a tu futuro, no se vea drásticamente afectada por un gasto de salud imprevisto?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
         </div>
         
-        <div class="card">
-            <div class="card-header">
-                <div>
-                    <div class="segmento">🎯 S2 Constructor (individuos que buscan optimizar la rentabilidad de su capital con seguridad), S3 Protector (personas que desean salvaguardar y hacer crecer sus ahorros para objetivos futuros importantes).</div>
-                    <div class="producto">AGE y AGE VIP</div>
-                </div>
-                <div class="badge">Campaña Activa</div>
-            </div>
-            <div class="novedad">Incremento del tipo de interés en 40 puntos básicos, situándose en 2.40% (AGE) y 2.60% (AGE VIP), lo que refuerza su atractivo como soluciones de ahorro a medio plazo en el contexto actual de mercado.</div>
-            
-            <div class="adn-box">
-                <div class="adn-title">🔪 Vulnerabilidad Detectada (Bisturí ADN)</div>
-                <div class="adn-text">La frustración de ver los ahorros estancados o perdiendo valor frente a la inflación, la búsqueda de opciones seguras y rentables para proteger el capital a medio plazo y asegurar el cumplimiento de metas financieras futuras.</div>
-            </div>
-            
-            <div class="apertura-box">
-                <div class="apertura-title">🗣️ Pregunta de Apertura Consultiva</div>
-                <div class="apertura-text">"En el entorno económico actual, ¿cómo de seguro se siente de que sus estrategias de ahorro a medio plazo están generando el rendimiento esperado para sus metas?"</div>
-            </div>
+        <!-- Campañas en Radar -->
+        <div class="section-header">
+            <div class="section-indicator" style="background: linear-gradient(to bottom, #64748b, #94a3b8);"></div>
+            <div class="section-title">🔄 OTRAS CAMPAÑAS ACTIVAS EN RADAR</div>
         </div>
         
-        <div class="card">
-            <div class="card-header">
-                <div>
-                    <div class="segmento">🎯 S2 Constructor (inversores que buscan fundamentos sólidos para su estrategia de crecimiento patrimonial), S3 Protector (personas que desean asegurar el valor de sus inversiones a largo plazo frente a la incertidumbre).</div>
-                    <div class="producto">Unit Linked, PGI y GFU</div>
-                </div>
-                <div class="badge">Informativa</div>
-            </div>
-            <div class="novedad">Publicación del informe del primer trimestre de 2026, ofreciendo una visión completa del contexto económico, político y sectorial que influye en los mercados financieros, con un análisis del comportamiento de fondos y la importancia de la inversión a largo plazo.</div>
-            
-            <div class="adn-box">
-                <div class="adn-title">🔪 Vulnerabilidad Detectada (Bisturí ADN)</div>
-                <div class="adn-text">La incertidumbre y el temor a la volatilidad de los mercados que pueden comprometer los planes financieros futuros, y la necesidad de una estrategia de inversión clara y fundamentada que genere confianza y estabilidad a largo plazo.</div>
-            </div>
-            
-            <div class="apertura-box">
-                <div class="apertura-title">🗣️ Pregunta de Apertura Consultiva</div>
-                <div class="apertura-text">"Considerando la evolución actual de los mercados, ¿cómo de confiado se siente en la resiliencia y el potencial a largo plazo de sus actuales estrategias de inversión?"</div>
-            </div>
+        <div class="section-desc">
+            <strong>Check comercial permanente:</strong> Estas campañas históricas siguen totalmente vigentes y operativas en nuestro Radar Comercial. Consúltalas y apóyate en sus argumentos para maximizar tus cierres en tus interacciones diarias.
         </div>
         
-        <div class="card">
-            <div class="card-header">
-                <div>
-                    <div class="segmento">🎯 S3 Protector (familias y personas que priorizan la salud y buscan seguridad y acceso rápido a servicios médicos de calidad), S2 Constructor (profesionales que valoran la eficiencia y la personalización en su atención sanitaria).</div>
-                    <div class="producto">Seguro de Salud Privado</div>
+        <div class="grid">
+
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 </div>
+                        <div class="card-status"></div>
+                    </div>
+                    <div class="card-title">ltima actualización: 27/04/2026  ·  Entre Nosotros #559  ·  Fede Fontanals  · NN Xàtiva</div>
+                    <div class="card-description"></div>
                 </div>
-                <div class="badge">Informativa</div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text"></div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            ""
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="novedad">El Observatorio IDIS 2026 confirma que la sanidad privada es un sector en crecimiento y un elemento estructural del sistema sanitario español, reforzando la propuesta de valor del seguro de salud privado.</div>
-            
-            <div class="adn-box">
-                <div class="adn-title">🔪 Vulnerabilidad Detectada (Bisturí ADN)</div>
-                <div class="adn-text">La preocupación por la demora y la calidad en el acceso a servicios de salud, el anhelo de tener control y tranquilidad sobre la atención médica propia y familiar, y el deseo de asegurar un bienestar integral sin depender exclusivamente del sistema público.</div>
-            </div>
-            
-            <div class="apertura-box">
-                <div class="apertura-title">🗣️ Pregunta de Apertura Consultiva</div>
-                <div class="apertura-text">"¿Qué tan importante es para usted tener la tranquilidad de un acceso ágil y de alta calidad a la atención médica para su familia y para usted?"</div>
-            </div>
-        </div>
         
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Segmento objetivo</div>
+                        <div class="card-status">Estado</div>
+                    </div>
+                    <div class="card-title">Producto</div>
+                    <div class="card-description">Descripción del beneficio</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Acción recomendada</div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            ""
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 S2 Constructor · S3 Protector · S3A Autónomo</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Salud Completo Copago</div>
+                    <div class="card-description">4% dto en primera anualidad para nuevos clientes y nuevos asegurados</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Llamar contactos 28-50 años esta semana. Pólizas con efecto 1 mayo y 1 junio</div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            ""
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 S4 Planificador · S5 Senior</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">PC SIALP</div>
+                    <div class="card-description">Nueva edad máx. contratación 75 años y vencimiento hasta 85 años</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Llamar contactos 55-75 años. Novedad como excusa natural de contacto</div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            ""
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 </div>
+                        <div class="card-status"></div>
+                    </div>
+                    <div class="card-title">Contigo Senior</div>
+                    <div class="card-description">Ajustes de sostenibilidad técnica basados en siniestralidad 2025. Esencia sin cambios</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text"></div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            ""
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 S3 Protector · S4 Planificador</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">PC SIALP + Contigo Futuro</div>
+                    <div class="card-description">Indexación automática del 5% en primas regulares Nuevo Negocio. Argumento anti-inflación</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Mencionar protección anti-inflación en presentaciones ahorro. Argumento clave SIALP/PC.</div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            ""
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 S2 Constructor 30-45</div>
+                        <div class="card-status">🔵 INFORMATIVA</div>
+                    </div>
+                    <div class="card-title">Hipotecas ABANCA</div>
+                    <div class="card-description">Todas las modalidades suben precio excepto Hipoteca Mari Carmen Fija Valor que mejora</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Solo recomendar Hipoteca Mari Carmen Fija Valor. NO promocionar resto modalidades.</div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            ""
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 S2 Constructor 30-45</div>
+                        <div class="card-status">🟡 ACTIVA - baja prioridad</div>
+                    </div>
+                    <div class="card-title">Hipoteca ABANCA</div>
+                    <div class="card-description">250€ por 1ª hipoteca / 500€ si Top Valor >300k€</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Prospección secundaria. NO priorizar vs SIALP/PC. Bajo impacto PVM.</div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            ""
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 S4 Planificador </div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">AGE / Plan Creciente</div>
+                    <div class="card-description">Incremento tipos +40pb (2,40% AGE, 2,60% AGE VIP)</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Propuesta simulación + comparar banco</div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            ""
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Familias y particulares que buscan proteger la estabilidad económica de sus seres queridos.</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Contigo Familia</div>
+                    <div class="card-description">25% de descuento vitalicio en la póliza.</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Exposición de la estabilidad económica familiar: la pérdida inesperada del principal sustento podría dejar a tus seres queridos sin capacidad para cubrir gastos esenciales como la hipoteca o la educación a largo plazo.</div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            "Si tú faltas mañana... ¿cómo vive tu familia el mes que viene? ¿Quién carga con el peso de la hipoteca, los gastos diarios y el futuro de los tuyos?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Clientes que ya contrataron PC SIALP o Contigo Futuro en campaña y aún no han formalizado su seguro de Salud.</div>
+                        <div class="card-status">⚡ URGENTE</div>
+                    </div>
+                    <div class="card-title">Salud (Campaña Ahorro + Salud)</div>
+                    <div class="card-description">Ampliación del plazo de formalización para seguros de Salud a clientes que contrataron PC SIALP o Contigo Futuro en campaña. Fecha de emisión hasta el 31 de mayo, con efecto 1 de mayo o 1 de junio.</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Miedo a listas de espera de 4 meses ante diagnósticos graves que impacten severamente la calidad de vida y el bienestar familiar.</div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            "¿Qué pasaría si mañana te diagnostican algo grave y la sanidad pública te da cita para dentro de 4 meses? ¿Podrías permitirte esperar tanto, o afrontarías los costes de una alternativa privada de forma inmediata?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Agentes actuales</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Plan de Referencias 2026</div>
+                    <div class="card-description">Recomienda nuevos talentos y gana dinero, además de sumar puntos para conseguir una plaza doble al Viaje de Incentivo. Cada recomendación cuenta para obtener ingresos extra y experiencias únicas.</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">La búsqueda constante de nuevos clientes y la necesidad de generar ingresos adicionales de forma eficiente. El deseo de ser recompensado por la contribución al crecimiento de la red.</div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            "¿Qué pasaría si pudieras no solo ampliar tu cartera de clientes, sino también generar ingresos extra y acceder a experiencias exclusivas simplemente por conectar a personas valiosas con Nationale-Nederlanden?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Clientes que han contratado Plan SIALP o Contigo Futuro</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Seguro de Salud Completo</div>
+                    <div class="card-description">Los clientes que hayan contratado Plan SIALP o Contigo Futuro en campaña, pueden formalizar su seguro de Salud con fecha de emisión hasta el 31 de mayo de 2026 y fecha de efecto 1 de mayo o 1 de junio de 2026.</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">Miedo a listas de espera de 4 meses ante diagnósticos graves.</div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            "¿Qué pasaría si mañana te diagnostican algo y la sanidad pública te da cita para dentro de 4 meses? ¿Podrías permitírtelo?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Clientes que hayan contratado SIALP</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Plan SIALP</div>
+                    <div class="card-description">Los clientes que contrataron SIALP pueden formalizar su seguro de Salud asociado hasta el 31 de mayo, beneficiándose de las condiciones de la campaña Ahorro + Salud.</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">La necesidad de asegurar la salud presente y futura sin comprometer el plan de ahorro a largo plazo. El miedo a que un gasto médico imprevisto obligue a desviar fondos destinados a la jubilación o a objetivos financieros a largo plazo.</div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            "Si mañana necesitaras una atención médica especializada o una intervención quirúrgica que no cubre la sanidad pública, ¿cómo reaccionarías para asegurar tu bienestar sin que tu planificación de ahorro para la jubilación se vea mermada?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Clientes que hayan contratado Contigo Futuro</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Contigo Futuro</div>
+                    <div class="card-description">Los clientes que contrataron Contigo Futuro pueden formalizar su seguro de Salud asociado hasta el 31 de mayo, beneficiándose de las condiciones de la campaña Ahorro + Salud.</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">La necesidad de proteger el capital invertido a largo plazo frente a imprevistos de salud que puedan requerir gastos médicos elevados, comprometiendo la estrategia de acumulación y el objetivo de jubilación.</div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            "Imagina que necesitas un tratamiento médico costoso o una cirugía compleja. ¿Cómo te aseguras de que tu inversión a largo plazo, destinada a tu futuro, no se vea drásticamente afectada por un gasto de salud imprevisto?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
     </div>
 </body>
 </html>

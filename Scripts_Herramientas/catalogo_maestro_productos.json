@@ -779,39 +779,11 @@
     ],
     "coberturas_clave": [
       {
-        "cobertura": "Capital por accidente (según baremo)",
-        "concepto": "Hasta 65.000 €",
-        "valor_limite": "Consultar",
-        "es_clave": true,
-        "tipo": "clave"
-      },
-      {
-        "cobertura": "Asistencia Sanitas — geriatría y podología",
-        "concepto": "Incluida",
+        "cobertura": "6 meses bonificados",
+        "concepto": "Mayo 2026",
         "valor_limite": "✓",
         "es_clave": true,
-        "tipo": "diferencial"
-      },
-      {
-        "cobertura": "Auxiliar a domicilio",
-        "concepto": "Servicio real",
-        "valor_limite": "✓",
-        "es_clave": false,
-        "tipo": ""
-      },
-      {
-        "cobertura": "Peluquería a domicilio",
-        "concepto": "Incluida",
-        "valor_limite": "✓",
-        "es_clave": false,
-        "tipo": ""
-      },
-      {
-        "cobertura": "Acompañamiento a citas médicas",
-        "concepto": "Incluido",
-        "valor_limite": "✓",
-        "es_clave": false,
-        "tipo": ""
+        "tipo": "bonificación"
       }
     ],
     "faqs_objeciones": []

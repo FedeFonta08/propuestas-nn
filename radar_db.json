@@ -1,75 +1,67 @@
 {
-  "ultima_actualizacion": "18/05/2026 16:27",
+  "ultima_actualizacion": "18/05/2026 16:42",
   "campanas": [
     {
       "Producto": "Plan Salud + Vida",
-      "Tipo_de_campaña": "Ampliación de plazo y oferta combinada",
-      "Descripcion_del_beneficio": "Los clientes que hayan contratado SIALP o Contigo Futuro pueden formalizar su seguro de Salud con fecha de emisión hasta el 31 de mayo. Beneficio adicional: la póliza de Vida asociada es gratis el primer año y un 12,5% de descuento en Salud hasta el 1 de junio de 2026.",
+      "Tipo_de_campaña": "Ampliación de plazo",
+      "Descripcion_del_beneficio": "Los clientes que hayan contratado un Plan SIALP o Contigo Futuro pueden formalizar su seguro de Salud con fecha de emisión hasta el 31 de mayo, y fechas de efecto 1 de mayo y 1 de junio.",
       "Fecha_inicio": "01/05/2026",
       "Fecha_fin": "31/05/2026",
       "Cupo_max": null,
       "Descuento_Bonus": null,
-      "Segmento_objetivo": "Clientes que hayan contratado SIALP o Contigo Futuro",
-      "Vulnerabilidad_Detectada": "La preocupación por el alto coste de los servicios médicos privados y la necesidad de una protección de vida sólida, pero sin poder asumir un desembolso inicial elevado. El miedo a que una enfermedad grave o un accidente inesperado desestabilice las finanzas familiares.",
-      "Pregunta_Apertura": "Si mañana tuvieras un problema de salud importante, ¿cómo te asegurarías de recibir la mejor atención sin que suponga un descalabro financiero para ti y tu familia, teniendo además la tranquilidad de que tu vida está protegida?",
+      "Segmento_objetivo": "Clientes que hayan contratado Plan SIALP o Contigo Futuro.",
+      "Vulnerabilidad_Detectada": "El cliente que ya está protegiendo su futuro financiero (SIALP/Contigo Futuro) puede estar descuidando su salud o la de su familia, y el miedo a no poder acceder a atención médica de calidad o a tener costes imprevistos por enfermedad. También, el miedo a una baja prolongada que afecte su capacidad de ahorro futuro.",
+      "Pregunta_Apertura": "¿Si mañana tuvieras un problema de salud grave y necesitaras atención médica urgente, ¿cómo te asegurarías de recibir la mejor atención sin esperas innecesarias y sin que esto merme tu plan de ahorro futuro?",
+      "Estado": "🟢 ACTIVA",
+      "Cambios_Catalogo": null
+    },
+    {
+      "Producto": "Seguro de Vida y Familia",
+      "Tipo_de_campaña": "Ampliación de alcance",
+      "Descripcion_del_beneficio": "25% de descuento vitalicio en la prima. La campaña se amplía para incluir a autónomos, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
+      "Fecha_inicio": null,
+      "Fecha_fin": null,
+      "Cupo_max": null,
+      "Descuento_Bonus": "25%",
+      "Segmento_objetivo": "Familias y Particulares.",
+      "Vulnerabilidad_Detectada": "El miedo a no poder mantener el nivel de vida familiar en caso de fallecimiento o invalidez, dejando a la familia desprotegida financieramente. La preocupación por el futuro económico de los seres queridos ante un imprevisto.",
+      "Pregunta_Apertura": "Si mañana faltaras, ¿cómo garantizarías que tu familia mantendría su nivel de vida actual durante los próximos años sin tu aportación económica principal?",
       "Estado": "🟢 ACTIVA",
       "Cambios_Catalogo": {
-        "id_producto": "saludvida",
+        "id_producto": "vidafamilia",
         "campos_a_actualizar": {
-          "descripcion_breve": "La única solución híbrida: Medicina Sanitas + Seguro de Vida en un solo contrato. Vida GRATIS el primer año y 12,5% de descuento en Salud hasta el 1 de junio de 2026.",
+          "descripcion_breve": "Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
           "precio_base": "Consultar",
-          "detalles_adicionales": "Prima variable según edad y zona · Vida gratis 12 meses · Descuento del 12,5% en Salud hasta el 1 de junio de 2026.",
+          "detalles_adicionales": "Con descuento hábitos saludables −10% · Capital total: 266.000 € · *25% descuento vitalicio (excluye ILT)*",
           "estadisticas_clave": [
             {
-              "valor": "12,5%",
-              "etiqueta": "Descuento en Salud hasta junio 2026"
-            },
-            {
-              "valor": "0 €",
-              "etiqueta": "Vida (1er año)"
-            },
-            {
-              "valor": "+40.000",
-              "etiqueta": "Médicos Sanitas"
+              "valor": "25% vitalicio",
+              "etiqueta": "Descuento de prima"
             }
           ],
           "coberturas_clave": [
             {
-              "cobertura": "Seguro de vida — 1er año GRATIS",
-              "concepto": "Capital a elegir",
-              "valor_limite": "0 € primer año",
-              "es_clave": true,
-              "tipo": "gratis"
+              "cobertura": "Incapacidad laboral temporal (ILT)",
+              "concepto": "EXCLUIDA en esta campaña con descuento del 25%.",
+              "valor_limite": "N/A",
+              "es_clave": false,
+              "tipo": "exclusión"
             }
           ]
         }
       }
     },
     {
-      "Producto": "Seguro de Vida y Familia",
-      "Tipo_de_campaña": "Extensión de descuento vitalicio",
-      "Descripcion_del_beneficio": "Ampliación de la campaña \"Contigo Familia 25%\" para incluir a autónomos, ofreciendo un 25% de descuento vitalicio en la prima. Se excluye la cobertura de Incapacidad Laboral Temporal (ILT).",
-      "Fecha_inicio": null,
-      "Fecha_fin": null,
-      "Cupo_max": null,
-      "Descuento_Bonus": "25%",
-      "Segmento_objetivo": "Autónomos",
-      "Vulnerabilidad_Detectada": "El autónomo se enfrenta a un riesgo dual: la pérdida de ingresos por incapacidad o enfermedad, y la desprotección económica ante imprevistos graves (fallecimiento, invalidez), con la carga de mantener un negocio y una familia sin ingresos.",
-      "Pregunta_Apertura": "Si mañana un imprevisto te impidiera trabajar durante un tiempo, ¿cómo asegurarías la continuidad económica de tu hogar y el futuro de tu familia, sin tener que agotar tus ahorros o endeudarte?",
-      "Estado": "🟢 ACTIVA",
-      "Cambios_Catalogo": null
-    },
-    {
       "Producto": "Contigo Autónomo",
-      "Tipo_de_campaña": "Descuento vitalicio para autónomos",
-      "Descripcion_del_beneficio": "El seguro \"Contigo Autónomo\" ofrece un 25% de descuento vitalicio en la prima, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT). Diseñado para proteger al autónomo ante fallecimiento, invalidez, y otras contingencias graves.",
+      "Tipo_de_campaña": "Campaña específica para autónomos",
+      "Descripcion_del_beneficio": "25% de descuento vitalicio en la prima para autónomos, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
       "Fecha_inicio": null,
       "Fecha_fin": null,
       "Cupo_max": null,
       "Descuento_Bonus": "25%",
-      "Segmento_objetivo": "Autónomos RETA",
-      "Vulnerabilidad_Detectada": "El autónomo, a diferencia de un asalariado, carece de la protección social completa frente a imprevistos graves (fallecimiento, invalidez total o permanente). La pérdida de ingresos puede ser catastrófica, poniendo en riesgo la estabilidad financiera personal y familiar.",
-      "Pregunta_Apertura": "Si una enfermedad grave o un accidente te impidiera seguir ejerciendo tu actividad profesional para siempre, ¿cómo garantizarías el sustento de tu familia y el pago de tus deudas a largo plazo sin contar con un ingreso regular?",
+      "Segmento_objetivo": "Autónomos.",
+      "Vulnerabilidad_Detectada": "El riesgo que asumen los autónomos de quedarse sin ingresos ante una baja laboral por accidente o enfermedad, lo que podría llevarles a agotar sus ahorros o endeudarse para cubrir sus gastos fijos y personales. El miedo a la interrupción total de su actividad profesional y económica.",
+      "Pregunta_Apertura": "Si mañana sufres un accidente o una enfermedad que te impide trabajar durante 3 meses, tus gastos fijos siguen corriendo, pero tus ingresos se detienen. ¿De dónde vas a sacar el dinero para mantener tu nivel de vida y tu negocio a flote durante ese tiempo?",
       "Estado": "🟢 ACTIVA",
       "Cambios_Catalogo": {
         "id_producto": "autonomo",
@@ -96,46 +88,80 @@
       }
     },
     {
-      "Producto": "Plan SIALP",
-      "Tipo_de_campaña": "Ampliación de plazo de contratación",
-      "Descripcion_del_beneficio": "Los clientes que contrataron SIALP pueden formalizar su seguro de Salud asociado hasta el 31 de mayo, beneficiándose de las condiciones de la campaña Ahorro + Salud.",
-      "Fecha_inicio": "01/05/2026",
-      "Fecha_fin": "31/05/2026",
-      "Cupo_max": null,
-      "Descuento_Bonus": null,
-      "Segmento_objetivo": "Clientes que hayan contratado SIALP",
-      "Vulnerabilidad_Detectada": "La necesidad de asegurar la salud presente y futura sin comprometer el plan de ahorro a largo plazo. El miedo a que un gasto médico imprevisto obligue a desviar fondos destinados a la jubilación o a objetivos financieros a largo plazo.",
-      "Pregunta_Apertura": "Si mañana necesitaras una atención médica especializada o una intervención quirúrgica que no cubre la sanidad pública, ¿cómo reaccionarías para asegurar tu bienestar sin que tu planificación de ahorro para la jubilación se vea mermada?",
-      "Estado": "🟢 ACTIVA",
-      "Cambios_Catalogo": null
-    },
-    {
-      "Producto": "Contigo Futuro",
-      "Tipo_de_campaña": "Ampliación de plazo de contratación",
-      "Descripcion_del_beneficio": "Los clientes que contrataron Contigo Futuro pueden formalizar su seguro de Salud asociado hasta el 31 de mayo, beneficiándose de las condiciones de la campaña Ahorro + Salud.",
-      "Fecha_inicio": "01/05/2026",
-      "Fecha_fin": "31/05/2026",
-      "Cupo_max": null,
-      "Descuento_Bonus": null,
-      "Segmento_objetivo": "Clientes que hayan contratado Contigo Futuro",
-      "Vulnerabilidad_Detectada": "La necesidad de proteger el capital invertido a largo plazo frente a imprevistos de salud que puedan requerir gastos médicos elevados, comprometiendo la estrategia de acumulación y el objetivo de jubilación.",
-      "Pregunta_Apertura": "Imagina que necesitas un tratamiento médico costoso o una cirugía compleja. ¿Cómo te aseguras de que tu inversión a largo plazo, destinada a tu futuro, no se vea drásticamente afectada por un gasto de salud imprevisto?",
-      "Estado": "🟢 ACTIVA",
-      "Cambios_Catalogo": null
-    },
-    {
-      "Producto": "Plan de Referencias 2026",
-      "Tipo_de_campaña": "Incentivo por recomendación",
-      "Descripcion_del_beneficio": "Recomienda nuevos talentos y gana dinero, además de sumar puntos para conseguir una plaza doble al Viaje de Incentivo. Cada recomendación cuenta para obtener ingresos extra y experiencias únicas.",
-      "Fecha_inicio": null,
+      "Producto": "Hipoteca Naranja (ING)",
+      "Tipo_de_campaña": "Actualización de precios",
+      "Descripcion_del_beneficio": "Actualización de precios en hipotecas, con incrementos tanto en la parte fija como en la variable, aplicables a nuevos scorings desde el 11 de mayo.",
+      "Fecha_inicio": "11/05/2026",
       "Fecha_fin": null,
       "Cupo_max": null,
       "Descuento_Bonus": null,
-      "Segmento_objetivo": "Agentes actuales",
-      "Vulnerabilidad_Detectada": "La búsqueda constante de nuevos clientes y la necesidad de generar ingresos adicionales de forma eficiente. El deseo de ser recompensado por la contribución al crecimiento de la red.",
-      "Pregunta_Apertura": "¿Qué pasaría si pudieras no solo ampliar tu cartera de clientes, sino también generar ingresos extra y acceder a experiencias exclusivas simplemente por conectar a personas valiosas con Nationale-Nederlanden?",
+      "Segmento_objetivo": "Clientes que buscan financiación hipotecaria.",
+      "Vulnerabilidad_Detectada": "El miedo a que los tipos de interés suban y la cuota hipotecaria se vuelva inasumible, afectando significativamente la estabilidad financiera del hogar. La preocupación por el coste total de la hipoteca y los gastos asociados a su formalización.",
+      "Pregunta_Apertura": "Con los tipos de interés en constante movimiento, ¿cómo te aseguras de que tu hipoteca no se convierta en una carga financiera inmanejable a largo plazo, y qué has considerado respecto a los gastos ocultos al formalizarla?",
+      "Estado": "⚡ URGENTE",
+      "Cambios_Catalogo": {
+        "id_producto": "hipotecaing",
+        "campos_a_actualizar": {
+          "descripcion_breve": "100% digital. Sin comisión de apertura. ING asume notaría, registro, gestoría e IAJD. Hasta 80% financiación (100% si <36 años y vivienda <400.000 €). Plazo hasta 40 años. *Precios actualizados con incrementos para nuevos scorings desde el 11 de mayo*.",
+          "precio_base": "Consultar",
+          "detalles_adicionales": "Solo pagas la tasación · 100% digital · Plazo máximo 40 años (75 años al finalizar) · *Precios actualizados con incrementos para nuevos scorings desde el 11 de mayo*.",
+          "estadisticas_clave": [
+            {
+              "valor": "Actualizado",
+              "etiqueta": "Precios desde 11/05"
+            }
+          ],
+          "coberturas_clave": null
+        }
+      }
+    },
+    {
+      "Producto": "Contigo Senior (+55)",
+      "Tipo_de_campaña": "Bonificación",
+      "Descripcion_del_beneficio": "Se bonifican 6 meses de prima en mayo de 2026.",
+      "Fecha_inicio": "01/05/2026",
+      "Fecha_fin": "31/05/2026",
+      "Cupo_max": null,
+      "Descuento_Bonus": null,
+      "Segmento_objetivo": "Mayores de 55 años.",
+      "Vulnerabilidad_Detectada": "La preocupación por la seguridad económica y la salud al llegar a la tercera edad. El miedo a imprevistos médicos que requieran asistencia especial o a caídas accidentales que generen gastos elevados y limiten la autonomía personal.",
+      "Pregunta_Apertura": "Conforme nos hacemos mayores, ¿cómo nos aseguramos de que un imprevisto, ya sea de salud o por un accidente, no comprometa nuestra independencia y bienestar, y si hemos pensado en los servicios que realmente nos ayudarían a mantener nuestra calidad de vida?",
       "Estado": "🟢 ACTIVA",
-      "Cambios_Catalogo": null
+      "Cambios_Catalogo": {
+        "id_producto": "senior",
+        "campos_a_actualizar": {
+          "descripcion_breve": "Ecosistema de protección integral para mayores de 55. Capital por accidente hasta 65.000 €. Asistencia Sanitas + servicios reales de autonomía. 6 meses bonificados en mayo 2026.",
+          "precio_base": "Consultar",
+          "detalles_adicionales": "Prima variable según edad · Exclusivo mayores de 55 años · 6 meses bonificados en mayo 2026",
+          "estadisticas_clave": [
+            {
+              "valor": "65.000 €",
+              "etiqueta": "Capital máx. por accidente"
+            },
+            {
+              "valor": "+55 años",
+              "etiqueta": "Edad de acceso"
+            },
+            {
+              "valor": "Sanitas",
+              "etiqueta": "Red asistencial"
+            },
+            {
+              "valor": "6 meses bonif.",
+              "etiqueta": "Mayo 2026"
+            }
+          ],
+          "coberturas_clave": [
+            {
+              "cobertura": "6 meses bonificados",
+              "concepto": "Mayo 2026",
+              "valor_limite": "✓",
+              "es_clave": true,
+              "tipo": "bonificación"
+            }
+          ]
+        }
+      }
     },
     {
       "Producto": "ltima actualización: 27/04/2026  ·  Entre Nosotros #559  ·  Fede Fontanals  · NN Xàtiva",
@@ -226,6 +252,14 @@
       "Pregunta_Apertura": "¿Qué pasaría si mañana te diagnostican algo grave y la sanidad pública te da cita para dentro de 4 meses? ¿Podrías permitirte esperar tanto, o afrontarías los costes de una alternativa privada de forma inmediata?"
     },
     {
+      "Producto": "Plan de Referencias 2026",
+      "Segmento_objetivo": "Agentes actuales",
+      "Estado": "🟢 ACTIVA",
+      "Descripcion_del_beneficio": "Recomienda nuevos talentos y gana dinero, además de sumar puntos para conseguir una plaza doble al Viaje de Incentivo. Cada recomendación cuenta para obtener ingresos extra y experiencias únicas.",
+      "Vulnerabilidad_Detectada": "La búsqueda constante de nuevos clientes y la necesidad de generar ingresos adicionales de forma eficiente. El deseo de ser recompensado por la contribución al crecimiento de la red.",
+      "Pregunta_Apertura": "¿Qué pasaría si pudieras no solo ampliar tu cartera de clientes, sino también generar ingresos extra y acceder a experiencias exclusivas simplemente por conectar a personas valiosas con Nationale-Nederlanden?"
+    },
+    {
       "Producto": "Seguro de Salud Completo",
       "Segmento_objetivo": "Clientes que han contratado Plan SIALP o Contigo Futuro",
       "Estado": "🟢 ACTIVA",
@@ -234,44 +268,52 @@
       "Pregunta_Apertura": "¿Qué pasaría si mañana te diagnostican algo y la sanidad pública te da cita para dentro de 4 meses? ¿Podrías permitírtelo?"
     },
     {
-      "Producto": "Contigo Senior (+55)",
-      "Segmento_objetivo": "Mayores de 55 años.",
+      "Producto": "Plan SIALP",
+      "Segmento_objetivo": "Clientes que hayan contratado SIALP",
       "Estado": "🟢 ACTIVA",
-      "Descripcion_del_beneficio": "Se bonifican 6 meses de prima en mayo de 2026 para el ecosistema de protección integral para mayores de 55.",
-      "Vulnerabilidad_Detectada": "El miedo a una caída o enfermedad repentina que requiera asistencia médica especializada o reduzca la autonomía, sumado a la preocupación por los costes que esto pueda generar.",
-      "Pregunta_Apertura": "Si usted tuviera un accidente o necesitara asistencia médica especializada pronto, ¿cómo podría asegurarse de que sus gastos de salud y autonomía estén cubiertos mientras se beneficia de una bonificación de 6 meses en su póliza Senior?"
+      "Descripcion_del_beneficio": "Los clientes que contrataron SIALP pueden formalizar su seguro de Salud asociado hasta el 31 de mayo, beneficiándose de las condiciones de la campaña Ahorro + Salud.",
+      "Vulnerabilidad_Detectada": "La necesidad de asegurar la salud presente y futura sin comprometer el plan de ahorro a largo plazo. El miedo a que un gasto médico imprevisto obligue a desviar fondos destinados a la jubilación o a objetivos financieros a largo plazo.",
+      "Pregunta_Apertura": "Si mañana necesitaras una atención médica especializada o una intervención quirúrgica que no cubre la sanidad pública, ¿cómo reaccionarías para asegurar tu bienestar sin que tu planificación de ahorro para la jubilación se vea mermada?"
+    },
+    {
+      "Producto": "Contigo Futuro",
+      "Segmento_objetivo": "Clientes que hayan contratado Contigo Futuro",
+      "Estado": "🟢 ACTIVA",
+      "Descripcion_del_beneficio": "Los clientes que contrataron Contigo Futuro pueden formalizar su seguro de Salud asociado hasta el 31 de mayo, beneficiándose de las condiciones de la campaña Ahorro + Salud.",
+      "Vulnerabilidad_Detectada": "La necesidad de proteger el capital invertido a largo plazo frente a imprevistos de salud que puedan requerir gastos médicos elevados, comprometiendo la estrategia de acumulación y el objetivo de jubilación.",
+      "Pregunta_Apertura": "Imagina que necesitas un tratamiento médico costoso o una cirugía compleja. ¿Cómo te aseguras de que tu inversión a largo plazo, destinada a tu futuro, no se vea drásticamente afectada por un gasto de salud imprevisto?"
     }
   ],
   "novedades": [
     {
       "Producto": "Plan SIALP",
-      "Que_ha_cambiado": "Ampliación del plazo para contratar la póliza de Salud asociada dentro de la campaña Ahorro + Salud.",
+      "Que_ha_cambiado": "La campaña 'Ahorro + Salud' se amplía, permitiendo a los clientes que contrataron Plan SIALP formalizar su seguro de Salud hasta el 31 de mayo, con fechas de efecto 1 de mayo y 1 de junio.",
       "Tipo": "🟢 Mejora",
       "Vigente_desde": "18/05/2026",
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Informar a los clientes que contrataron SIALP sobre la nueva fecha límite para contratar la póliza de Salud.",
-      "Impacto_segmento": "Clientes que han contratado SIALP.",
+      "Accion_sobre_CRM": "Actualizar fechas de campañas asociadas en los perfiles de clientes que tengan SIALP y estén en proceso de Salud.",
+      "Impacto_segmento": "Clientes actuales y potenciales de Plan SIALP que no hayan formalizado aún su seguro de Salud.",
       "Fuente": "Entre Nosotros #561",
       "Cambios_Catalogo": null
     },
     {
       "Producto": "Contigo Futuro",
-      "Que_ha_cambiado": "Ampliación del plazo para contratar la póliza de Salud asociada dentro de la campaña Ahorro + Salud.",
+      "Que_ha_cambiado": "La campaña 'Ahorro + Salud' se amplía, permitiendo a los clientes que contrataron Contigo Futuro formalizar su seguro de Salud hasta el 31 de mayo, con fechas de efecto 1 de mayo y 1 de junio.",
       "Tipo": "🟢 Mejora",
       "Vigente_desde": "18/05/2026",
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Informar a los clientes que contrataron Contigo Futuro sobre la nueva fecha límite para contratar la póliza de Salud.",
-      "Impacto_segmento": "Clientes que han contratado Contigo Futuro.",
+      "Accion_sobre_CRM": "Actualizar fechas de campañas asociadas en los perfiles de clientes que tengan Contigo Futuro y estén en proceso de Salud.",
+      "Impacto_segmento": "Clientes actuales y potenciales de Contigo Futuro que no hayan formalizado aún su seguro de Salud.",
       "Fuente": "Entre Nosotros #561",
       "Cambios_Catalogo": null
     },
     {
       "Producto": "Contigo Familia",
-      "Que_ha_cambiado": "La campaña \"Contigo Familia 25%\" amplía su alcance e incluye a autónomos con un 25% de descuento vitalicio, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
+      "Que_ha_cambiado": "La campaña 'Contigo Familia 25% de descuento vitalicio' amplía su alcance e incluye a autónomos, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
       "Tipo": "🟢 Mejora",
       "Vigente_desde": "18/05/2026",
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Identificar y contactar a autónomos para ofrecerles el seguro \"Contigo Autónomo\" (antes Contigo Familia con descuento) destacando las coberturas y la exclusión de ILT.",
+      "Accion_sobre_CRM": "Crear una entrada específica en CRM para 'Contigo Autónomo' con el 25% de descuento vitalicio y la exclusión explícita de ILT. Asegurarse de que los comerciales segmenten correctamente a los autónomos para ofrecerles este producto.",
       "Impacto_segmento": "Autónomos.",
       "Fuente": "Entre Nosotros #561",
       "Cambios_Catalogo": {
@@ -300,34 +342,34 @@
     },
     {
       "Producto": "ADO",
-      "Que_ha_cambiado": "Despliegue en 500 Agentes para impulsar una forma distinta de trabajar, clave para la evolución digital y el desarrollo profesional de la red.",
+      "Que_ha_cambiado": "La iniciativa ADO se despliega en 500 Agentes para impulsar una forma distinta de trabajar, clave para la evolución digital de la red y su desarrollo profesional.",
       "Tipo": "🔵 Operativo",
       "Vigente_desde": "18/05/2026",
       "Afecta_guia_comercial": "NO",
-      "Accion_sobre_CRM": "Informar a los agentes sobre la iniciativa ADO y sus beneficios.",
+      "Accion_sobre_CRM": "Registrar la participación de los agentes en ADO y monitorizar su evolución digital.",
       "Impacto_segmento": "Agentes de la red.",
       "Fuente": "Entre Nosotros #561",
       "Cambios_Catalogo": null
     },
     {
       "Producto": "Salesforce",
-      "Que_ha_cambiado": "Optimización del proceso de cambio de cuenta bancaria para varias pólizas: ahora se realiza en un solo caso, reduciendo duplicidades y trámites.",
+      "Que_ha_cambiado": "Se optimiza el proceso de cambio de cuenta bancaria para varias pólizas en un solo caso, reduciendo la duplicidad de trámites.",
       "Tipo": "🔵 Operativo",
       "Vigente_desde": "18/05/2026",
       "Afecta_guia_comercial": "NO",
-      "Accion_sobre_CRM": "Asegurar que los agentes conocen y utilizan el nuevo proceso en Salesforce para la gestión de cuentas bancarias.",
-      "Impacto_segmento": "Agentes que utilizan Salesforce para la gestión de clientes.",
+      "Accion_sobre_CRM": "Asegurarse de que el equipo de soporte CRM esté al tanto de este cambio para resolver incidencias de forma más eficiente.",
+      "Impacto_segmento": "Agentes y personal de administración.",
       "Fuente": "Entre Nosotros #561",
       "Cambios_Catalogo": null
     },
     {
       "Producto": "Hipoteca Naranja (ING)",
-      "Que_ha_cambiado": "Actualización de precios en hipotecas, con incrementos tanto en tipos fijos como variables. Estos cambios aplican a nuevos scorings desde el 11 de mayo.",
+      "Que_ha_cambiado": "Actualización de precios en hipotecas ING, con incrementos en las partes fija y variable, aplicables a nuevos scorings desde el 11 de mayo. No afecta a expedientes en curso.",
       "Tipo": "🔴 Proceso Crítico",
       "Vigente_desde": "11/05/2026",
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Informar a los clientes interesados en hipotecas ING sobre la actualización de precios y que afecta a los nuevos scorings realizados a partir del 11 de mayo.",
-      "Impacto_segmento": "Clientes interesados en hipotecas.",
+      "Accion_sobre_CRM": "Informar a los agentes de la actualización de precios de las hipotecas ING y su fecha de aplicación. Revisar los presupuestos existentes y actualizar aquellos que aún no estén cerrados.",
+      "Impacto_segmento": "Clientes que buscan hipotecas.",
       "Fuente": "Entre Nosotros #561",
       "Cambios_Catalogo": {
         "id_producto": "hipotecaing",
@@ -341,87 +383,112 @@
               "etiqueta": "Precios desde 11/05"
             }
           ],
-          "coberturas_clave": []
+          "coberturas_clave": null
         }
       }
     },
     {
       "Producto": "Plan de Referencias 2026",
-      "Que_ha_cambiado": "Lanzamiento del Plan de Referencias 2026, que permite ganar dinero y sumar puntos para el Viaje de Incentivo a través de recomendaciones de talento.",
+      "Que_ha_cambiado": "El Plan de Referencias 2026 se activa, permitiendo a los agentes ganar dinero y conseguir una plaza doble para el Viaje de Incentivo por cada recomendación de talento.",
       "Tipo": "🟢 Mejora",
       "Vigente_desde": "18/05/2026",
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Promocionar activamente el Plan de Referencias 2026 entre los agentes para que lo utilicen y recomienden.",
+      "Accion_sobre_CRM": "Incentivar activamente la participación de los agentes en el Plan de Referencias. Crear recordatorios y seguimiento para las recomendaciones.",
       "Impacto_segmento": "Agentes de la red.",
       "Fuente": "Entre Nosotros #561",
       "Cambios_Catalogo": null
     },
     {
+      "Producto": "Contigo Senior (+55)",
+      "Que_ha_cambiado": "Se bonifican 6 meses de prima en mayo de 2026 para la campaña de Contigo Senior.",
+      "Tipo": "🟢 Mejora",
+      "Vigente_desde": "01/05/2026",
+      "Afecta_guia_comercial": "SÍ",
+      "Accion_sobre_CRM": "Notificar a los clientes existentes de Contigo Senior sobre esta bonificación. Utilizar esta campaña para atraer nuevos clientes en el segmento de +55.",
+      "Impacto_segmento": "Mayores de 55 años.",
+      "Fuente": "Entre Nosotros #561",
+      "Cambios_Catalogo": {
+        "id_producto": "senior",
+        "campos_a_actualizar": {
+          "descripcion_breve": "Ecosistema de protección integral para mayores de 55. Capital por accidente hasta 65.000 €. Asistencia Sanitas + servicios reales de autonomía. 6 meses bonificados en mayo 2026.",
+          "precio_base": "Consultar",
+          "detalles_adicionales": "Prima variable según edad · Exclusivo mayores de 55 años · 6 meses bonificados en mayo 2026",
+          "estadisticas_clave": [
+            {
+              "valor": "65.000 €",
+              "etiqueta": "Capital máx. por accidente"
+            },
+            {
+              "valor": "+55 años",
+              "etiqueta": "Edad de acceso"
+            },
+            {
+              "valor": "Sanitas",
+              "etiqueta": "Red asistencial"
+            },
+            {
+              "valor": "6 meses bonif.",
+              "etiqueta": "Mayo 2026"
+            }
+          ],
+          "coberturas_clave": [
+            {
+              "cobertura": "6 meses bonificados",
+              "concepto": "Mayo 2026",
+              "valor_limite": "✓",
+              "es_clave": true,
+              "tipo": "bonificación"
+            }
+          ]
+        }
+      }
+    },
+    {
       "Producto": "Campaña Actualizada: Plan Salud + Vida",
-      "Que_ha_cambiado": "Los clientes que hayan contratado SIALP o Contigo Futuro pueden formalizar su seguro de Salud con fecha de emisión hasta el 31 de mayo. Beneficio adicional: la póliza de Vida asociada es gratis el primer año y un 12,5% de descuento en Salud hasta el 1 de junio de 2026.",
+      "Que_ha_cambiado": "Los clientes que hayan contratado un Plan SIALP o Contigo Futuro pueden formalizar su seguro de Salud con fecha de emisión hasta el 31 de mayo, y fechas de efecto 1 de mayo y 1 de junio.",
       "Tipo": "🟢 Campaña Modificada",
       "Vigente_desde": "01/05/2026",
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Ofrecer al segmento: Clientes que hayan contratado SIALP o Contigo Futuro",
-      "Impacto_segmento": "Clientes que hayan contratado SIALP o Contigo Futuro",
-      "Fuente": "Entre Nosotros #561"
+      "Accion_sobre_CRM": "Ofrecer al segmento: Clientes que hayan contratado Plan SIALP o Contigo Futuro.",
+      "Impacto_segmento": "Clientes que hayan contratado Plan SIALP o Contigo Futuro.",
+      "Fuente": "Entre Nosotros ##561"
     },
     {
       "Producto": "Campaña Actualizada: Seguro de Vida y Familia",
-      "Que_ha_cambiado": "Ampliación de la campaña \"Contigo Familia 25%\" para incluir a autónomos, ofreciendo un 25% de descuento vitalicio en la prima. Se excluye la cobertura de Incapacidad Laboral Temporal (ILT).",
+      "Que_ha_cambiado": "25% de descuento vitalicio en la prima. La campaña se amplía para incluir a autónomos, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
       "Tipo": "🟢 Campaña Modificada",
       "Vigente_desde": null,
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Ofrecer al segmento: Autónomos",
-      "Impacto_segmento": "Autónomos",
-      "Fuente": "Entre Nosotros #561"
+      "Accion_sobre_CRM": "Ofrecer al segmento: Familias y Particulares.",
+      "Impacto_segmento": "Familias y Particulares.",
+      "Fuente": "Entre Nosotros ##561"
     },
     {
       "Producto": "Campaña Actualizada: Contigo Autónomo",
-      "Que_ha_cambiado": "El seguro \"Contigo Autónomo\" ofrece un 25% de descuento vitalicio en la prima, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT). Diseñado para proteger al autónomo ante fallecimiento, invalidez, y otras contingencias graves.",
+      "Que_ha_cambiado": "25% de descuento vitalicio en la prima para autónomos, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
       "Tipo": "🟢 Campaña Modificada",
       "Vigente_desde": null,
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Ofrecer al segmento: Autónomos RETA",
-      "Impacto_segmento": "Autónomos RETA",
-      "Fuente": "Entre Nosotros #561"
+      "Accion_sobre_CRM": "Ofrecer al segmento: Autónomos.",
+      "Impacto_segmento": "Autónomos.",
+      "Fuente": "Entre Nosotros ##561"
     },
     {
-      "Producto": "Campaña Actualizada: Plan SIALP",
-      "Que_ha_cambiado": "Los clientes que contrataron SIALP pueden formalizar su seguro de Salud asociado hasta el 31 de mayo, beneficiándose de las condiciones de la campaña Ahorro + Salud.",
+      "Producto": "Campaña Actualizada: Contigo Senior (+55)",
+      "Que_ha_cambiado": "Se bonifican 6 meses de prima en mayo de 2026.",
       "Tipo": "🟢 Campaña Modificada",
       "Vigente_desde": "01/05/2026",
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Ofrecer al segmento: Clientes que hayan contratado SIALP",
-      "Impacto_segmento": "Clientes que hayan contratado SIALP",
-      "Fuente": "Entre Nosotros #561"
-    },
-    {
-      "Producto": "Campaña Actualizada: Contigo Futuro",
-      "Que_ha_cambiado": "Los clientes que contrataron Contigo Futuro pueden formalizar su seguro de Salud asociado hasta el 31 de mayo, beneficiándose de las condiciones de la campaña Ahorro + Salud.",
-      "Tipo": "🟢 Campaña Modificada",
-      "Vigente_desde": "01/05/2026",
-      "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Ofrecer al segmento: Clientes que hayan contratado Contigo Futuro",
-      "Impacto_segmento": "Clientes que hayan contratado Contigo Futuro",
-      "Fuente": "Entre Nosotros #561"
-    },
-    {
-      "Producto": "Campaña Actualizada: Plan de Referencias 2026",
-      "Que_ha_cambiado": "Recomienda nuevos talentos y gana dinero, además de sumar puntos para conseguir una plaza doble al Viaje de Incentivo. Cada recomendación cuenta para obtener ingresos extra y experiencias únicas.",
-      "Tipo": "🟢 Campaña Modificada",
-      "Vigente_desde": null,
-      "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Ofrecer al segmento: Agentes actuales",
-      "Impacto_segmento": "Agentes actuales",
-      "Fuente": "Entre Nosotros #561"
+      "Accion_sobre_CRM": "Ofrecer al segmento: Mayores de 55 años.",
+      "Impacto_segmento": "Mayores de 55 años.",
+      "Fuente": "Entre Nosotros ##561"
     }
   ],
   "historial": {
-    "N_Edicion": "561",
-    "Resumen_ejecutivo": "Ampliación de plazo para campaña Salud + Ahorro, extensión del descuento vitalicio de Contigo Familia a autónomos (creando Contigo Autónomo), actualización de precios en hipotecas ING, y lanzamiento del Plan de Referencias 2026. Se optimiza el proceso de cambio de cuenta bancaria en Salesforce.",
-    "Campañas_nuevas": "Campaña Ahorro + Salud (amplitud plazo), Contigo Familia 25% para Autónomos (creación Contigo Autónomo), Plan de Referencias 2026.",
-    "Cambios_producto": "Contigo Familia ahora incluye autónomos (crea Contigo Autónomo), Hipoteca ING actualiza precios, SIALP y Contigo Futuro amplían plazo para contratar Salud.",
-    "N_acciones": 5
+    "N_Edicion": "#561",
+    "Resumen_ejecutivo": "Actualización de campañas clave: 'Ahorro + Salud' se amplía, 'Contigo Familia' se extiende a autónomos (con exclusión de ILT), se actualizan precios de hipotecas ING, y se introduce una bonificación para 'Contigo Senior'. Se lanzan el plan ADO y el Plan de Referencias 2026.",
+    "Campañas_nuevas": "Ampliación Campaña Ahorro + Salud, Campaña Contigo Familia para Autónomos, Bonificación Contigo Senior.",
+    "Cambios_producto": "Actualización precios Hipotecas ING, Extensión Contigo Familia a Autónomos (excluye ILT).",
+    "N_acciones": 8
   }
 }

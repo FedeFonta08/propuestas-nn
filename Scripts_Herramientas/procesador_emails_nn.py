@@ -520,7 +520,8 @@ def generar_briefing_html(datos, campañas_viejas):
     import datetime
     fecha_hoy = datetime.datetime.now().strftime("%d/%m/%Y")
     print("🎨 Generando Briefing_Lunes_ADN.html en el repositorio público...")
-    ruta_html = r"D:\Users\ffont\Downloads\06_NATIONALE_NEDERLANDEN\Scripts_Herramientas\Briefing_Lunes_ADN.html"
+    ruta_html = os.path.join(carpeta_scripts, "Briefing_Lunes_ADN.html")
+    ruta_html_root = os.path.join(os.path.dirname(carpeta_scripts), "Briefing_Lunes_ADN.html")
     
     html = f"""<!DOCTYPE html>
 <html lang="es">
@@ -970,7 +971,9 @@ def generar_briefing_html(datos, campañas_viejas):
 """
     with open(ruta_html, 'w', encoding='utf-8') as f:
         f.write(html)
-    print("✅ ¡Briefing Visual generado con éxito!")
+    with open(ruta_html_root, 'w', encoding='utf-8') as f:
+        f.write(html)
+    print("✅ ¡Briefing Visual generado con éxito en ambos directorios!")
 
 def verificar_y_mapear_productos(datos):
     global catalogo_maestro
@@ -1279,7 +1282,7 @@ def main():
             ruta_propuestas = os.path.join(os.path.dirname(os.path.dirname(__file__)), "propuestas-nn-v2.html")
             
             # Subir archivos clave del briefing y scripts
-            subprocess.run(["git", "add", "-f", "Briefing_Lunes_ADN.html", "procesador_emails_nn.py", "catalogo_maestro_productos.json"], cwd=carpeta_scripts, check=False)
+            subprocess.run(["git", "add", "-f", "Briefing_Lunes_ADN.html", "../Briefing_Lunes_ADN.html", "procesador_emails_nn.py", "catalogo_maestro_productos.json"], cwd=carpeta_scripts, check=False)
             
             # Subir base de datos radar_db.json si existe
             if os.path.exists(ruta_json):
