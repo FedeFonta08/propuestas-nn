@@ -28,11 +28,17 @@
         .logo-text span { color: var(--orange); }
         .subtitle { font-size: 13px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
         
+        .section-title { max-width: 1000px; margin: 3rem auto 1.5rem; font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--navy); letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
+        .section-desc { max-width: 1000px; margin: -1rem auto 2rem; font-size: 14px; color: var(--text2); background: #FFF8F5; border-left: 4px solid var(--orange); padding: 1rem; border-radius: 4px; }
+        
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
         .card { background: var(--card-bg); border: 2px solid var(--orange); border-radius: 14px; padding: 1.5rem; box-shadow: 0 8px 24px rgba(201,77,0,0.08); position: relative; overflow: hidden; }
+        .card.vieja { border-color: rgba(0,0,0,0.2); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+        .card.vieja::before { background: #9CA3AF; }
         .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--orange); }
         .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
         .badge { background: #FFF8F5; color: var(--orange); padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border: 1px solid rgba(201,77,0,0.2); }
+        .card.vieja .badge { background: #F3F4F6; color: #4B5563; border-color: rgba(0,0,0,0.1); }
         .producto { font-family: 'Bebas Neue', sans-serif; font-size: 26px; line-height: 1.1; margin-top: 8px; }
         .segmento { color: #16A34A; font-size: 12px; font-weight: 700; text-transform: uppercase; }
         .novedad { font-size: 14px; color: var(--text2); margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--card-border); }
@@ -51,29 +57,61 @@
         <div class="subtitle">Briefing Semanal para Agentes</div>
         <div class="logo-text">TRADUCCIÓN ADN · <span>PANEL NN</span></div>
     </div>
+    
+    <div class="section-title">✨ NOVEDADES DE LA SEMANA</div>
     <div class="grid">
 
         <div class="card">
             <div class="card-header">
                 <div>
-                    <div class="segmento">🎯 Familias con hijos pertenecientes a colectivos profesionales.</div>
-                    <div class="producto">Contigo Familia</div>
+                    <div class="segmento">🎯 Clientes que ya tienen PC SIALP o Contigo Futuro.</div>
+                    <div class="producto">Salud (dentro de Ahorro + Salud)</div>
                 </div>
-                <div class="badge">🟢 ACTIVA</div>
+                <div class="badge">⚡ URGENTE</div>
             </div>
-            <div class="novedad">25% de descuento de por vida en el seguro Contigo Familia para profesionales de determinados colectivos, incluyendo clientes y clientes de cartera.</div>
+            <div class="novedad">Clientes que hayan contratado PC SIALP o Contigo Futuro en campaña, pueden formalizar su seguro de Salud.</div>
             
             <div class="adn-box">
                 <div class="adn-title">🔪 Vulnerabilidad Detectada (Bisturí ADN)</div>
-                <div class="adn-text">¿Quién paga la universidad y las facturas si tú faltas mañana?</div>
+                <div class="adn-text">Miedo a que un problema de salud grave obligue a recurrir a la sanidad pública con largas esperas o genere gastos imprevistos que desvíen o comprometan los ahorros que ya están construyendo para su futuro con productos como SIALP o Contigo Futuro.</div>
             </div>
             
             <div class="apertura-box">
                 <div class="apertura-title">🗣️ Pregunta de Apertura Consultiva</div>
-                <div class="apertura-text">"Si mañana, por una situación inesperada, tus ingresos desaparecieran, ¿cómo te asegurarías de que tus hijos pudieran continuar con su educación y mantener la estabilidad que tienen hoy?"</div>
+                <div class="apertura-text">"Si tú o tu familia enfrentan un diagnóstico delicado, ¿podrían permitirse esperar meses para una cita con el especialista o una intervención en el sistema público, o verían comprometidos esos ahorros que con tanto esfuerzo están destinando a su bienestar futuro?"</div>
             </div>
         </div>
         
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <div class="segmento">🎯 Autónomos</div>
+                    <div class="producto">Contigo Familia</div>
+                </div>
+                <div class="badge">🟢 ACTIVA</div>
+            </div>
+            <div class="novedad">25% de descuento vitalicio para autónomos. Excluida la cobertura de Incapacidad Laboral Temporal (ILT).</div>
+            
+            <div class="adn-box">
+                <div class="adn-title">🔪 Vulnerabilidad Detectada (Bisturí ADN)</div>
+                <div class="adn-text">Miedo a que, en caso de fallecimiento o invalidez grave del autónomo, la familia quede desprotegida, sin el sustento económico principal para mantener su nivel de vida, cubrir la hipoteca o las deudas, poniendo en riesgo la estabilidad y el patrimonio familiar.</div>
+            </div>
+            
+            <div class="apertura-box">
+                <div class="apertura-title">🗣️ Pregunta de Apertura Consultiva</div>
+                <div class="apertura-text">"Como autónomo, si por un imprevisto mayor ya no pudieras generar ingresos, ¿cómo afrontaría tu familia el día a día, la hipoteca y los gastos esenciales? ¿De dónde saldría el dinero para asegurar su estabilidad económica a largo plazo sin tu aporte?"</div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div class="section-title" style="margin-top: 4rem;">🔄 CAMPAÑAS EN RADAR</div>
+    <div class="section-desc">
+        <strong>Recuerda:</strong> Sabes que estas campañas siguen muy activas en nuestro Radar Comercial. 
+        Son extremadamente beneficiosas para ti y tus clientes. ¡No dejes de ofrecerlas!
+    </div>
+    <div class="grid">
+
     </div>
 </body>
 </html>
