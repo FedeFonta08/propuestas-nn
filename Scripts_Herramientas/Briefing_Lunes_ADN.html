@@ -7,17 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            --accent-orange: #e85c0f;
-            --accent-orange-glow: rgba(232, 92, 15, 0.12);
-            --card-bg: #ffffff;
-            --card-border: rgba(0, 0, 0, 0.08);
-            --card-hover-bg: #fffbf9;
-            --text-primary: #0f172a;
-            --text-secondary: #334155;
-            --text-muted: #64748b;
-            --success-green: #0f766e;
-            --success-bg: rgba(15, 118, 110, 0.06);
+            --bg-gradient: linear-gradient(135deg, #070a13 0%, #02040a 100%);
+            --accent-orange: #ff5e1a;
+            --accent-orange-glow: rgba(255, 94, 26, 0.35);
+            --card-bg: rgba(15, 23, 42, 0.45);
+            --card-border: rgba(255, 255, 255, 0.06);
+            --card-hover-bg: rgba(30, 41, 59, 0.55);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --success-green: #10b981;
+            --success-bg: rgba(16, 185, 129, 0.1);
         }
         
         * {
@@ -36,7 +35,7 @@
             overflow-x: hidden;
         }
         
-        /* Background glowing orbs adjusted for warm light theme */
+        /* Background glowing orbs */
         body::before {
             content: '';
             position: absolute;
@@ -44,7 +43,7 @@
             right: -10%;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(232, 92, 15, 0.05) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 94, 26, 0.08) 0%, transparent 70%);
             z-index: 0;
             pointer-events: none;
         }
@@ -56,7 +55,7 @@
             left: -10%;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(14, 116, 144, 0.03) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.05) 0%, transparent 70%);
             z-index: 0;
             pointer-events: none;
         }
@@ -68,18 +67,18 @@
             z-index: 1;
         }
         
-        /* Premium Light Header */
+        /* Premium Header */
         .header {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(15, 23, 42, 0.4);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 28px;
             padding: 2.5rem 3rem;
             margin-bottom: 3.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
         
         .header-left {
@@ -100,19 +99,23 @@
             font-size: 2.25rem;
             font-weight: 800;
             letter-spacing: -0.02em;
-            color: #0f172a;
+            background: linear-gradient(to right, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .header-title span {
-            color: var(--accent-orange);
+            background: linear-gradient(to right, #ff5e1a, #ffa17a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .header-date {
             font-size: 0.875rem;
             font-weight: 600;
             color: var(--text-secondary);
-            background: rgba(0, 0, 0, 0.03);
-            border: 1px solid rgba(0, 0, 0, 0.06);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 0.6rem 1.2rem;
             border-radius: 99px;
             backdrop-filter: blur(10px);
@@ -135,29 +138,31 @@
             height: 28px;
             background: linear-gradient(to bottom, #ff5e1a, #ff9b70);
             border-radius: 99px;
-            box-shadow: 0 2px 8px var(--accent-orange-glow);
+            box-shadow: 0 0 10px var(--accent-orange-glow);
         }
         
         .section-title {
             font-size: 1.6rem;
             font-weight: 700;
             letter-spacing: -0.015em;
-            color: #0f172a;
+            background: linear-gradient(to right, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .section-desc {
             font-size: 0.95rem;
             color: var(--text-secondary);
-            background: rgba(232, 92, 15, 0.02);
-            border-left: 4px solid var(--accent-orange);
+            background: rgba(255, 94, 26, 0.02);
+            border-left: 3px solid var(--accent-orange);
             padding: 1.25rem 1.5rem;
             border-radius: 0 16px 16px 0;
             margin-bottom: 2.5rem;
             line-height: 1.6;
             max-width: 1200px;
-            border-top: 1px solid rgba(232, 92, 15, 0.05);
-            border-bottom: 1px solid rgba(232, 92, 15, 0.05);
-            border-right: 1px solid rgba(232, 92, 15, 0.05);
+            border-top: 1px solid rgba(255, 94, 26, 0.05);
+            border-bottom: 1px solid rgba(255, 94, 26, 0.05);
+            border-right: 1px solid rgba(255, 94, 26, 0.05);
         }
         
         /* Responsive Grid */
@@ -169,10 +174,11 @@
             margin: 0 auto;
         }
         
-        /* Premium Crisp Light Card */
+        /* Premium Glass Card */
         .card {
             background: var(--card-bg);
-            border: 1.5px solid var(--card-border);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
             border-radius: 24px;
             padding: 2.25rem;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -181,16 +187,15 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
         }
         
         .card:hover {
-            transform: translateY(-6px);
+            transform: translateY(-8px);
             background: var(--card-hover-bg);
-            border-color: rgba(232, 92, 15, 0.4);
+            border-color: rgba(255, 94, 26, 0.3);
             box-shadow: 
-                0 20px 40px -15px rgba(232, 92, 15, 0.08), 
-                0 0 20px 0 rgba(232, 92, 15, 0.04);
+                0 30px 60px -15px rgba(0, 0, 0, 0.6), 
+                0 0 25px 0 rgba(255, 94, 26, 0.12);
         }
         
         .card::before {
@@ -199,24 +204,23 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
+            height: 3px;
             background: linear-gradient(90deg, var(--accent-orange), transparent);
-            opacity: 0.8;
+            opacity: 0.6;
         }
         
         .card.vieja::before {
-            background: linear-gradient(90deg, #94a3b8, transparent);
+            background: linear-gradient(90deg, #64748b, transparent);
         }
         
         .card.vieja {
-            opacity: 0.75;
-            background: #f1f5f9;
+            opacity: 0.65;
         }
         
         .card.vieja:hover {
             opacity: 1;
-            border-color: rgba(0, 0, 0, 0.15);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
         }
         
         .card-top {
@@ -239,7 +243,7 @@
             background: var(--success-bg);
             padding: 0.3rem 0.85rem;
             border-radius: 99px;
-            border: 1px solid rgba(15, 118, 110, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.1);
         }
         
         .card-status {
@@ -247,17 +251,17 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            background: rgba(232, 92, 15, 0.08);
+            background: rgba(255, 94, 26, 0.08);
             color: var(--accent-orange);
             padding: 0.25rem 0.65rem;
             border-radius: 8px;
-            border: 1px solid rgba(232, 92, 15, 0.2);
+            border: 1px solid rgba(255, 94, 26, 0.2);
         }
         
         .card.vieja .card-status {
-            background: rgba(100, 116, 139, 0.08);
-            color: #475569;
-            border: 1px solid rgba(100, 116, 139, 0.2);
+            background: rgba(148, 163, 184, 0.08);
+            color: #94a3b8;
+            border: 1px solid rgba(148, 163, 184, 0.2);
         }
         
         .card-title {
@@ -265,7 +269,7 @@
             font-weight: 700;
             line-height: 1.25;
             letter-spacing: -0.015em;
-            color: #0f172a;
+            color: #ffffff;
             margin-bottom: 0.875rem;
         }
         
@@ -284,21 +288,21 @@
         }
         
         .info-box {
-            background: #f8fafc;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            background: rgba(7, 10, 19, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.03);
             border-radius: 16px;
             padding: 1.2rem;
             position: relative;
         }
         
         .info-box.opening {
-            border-left: 4px solid var(--accent-orange);
-            background: rgba(232, 92, 15, 0.015);
+            border-left: 3px solid var(--accent-orange);
+            background: rgba(255, 94, 26, 0.015);
         }
         
         .info-box.vulnerability {
-            border-left: 4px solid #7c3aed;
-            background: rgba(124, 58, 237, 0.01);
+            border-left: 3px solid #a855f7;
+            background: rgba(168, 85, 247, 0.01);
         }
         
         .info-box-label {
@@ -313,7 +317,7 @@
         }
         
         .info-box-label.vulnerability {
-            color: #6d28d9;
+            color: #b55fe6;
         }
         
         .info-box-label.opening {
@@ -323,14 +327,14 @@
         .info-box-text {
             font-size: 0.875rem;
             line-height: 1.55;
-            color: #334155;
+            color: #e2e8f0;
         }
         
         .info-box-text.opening-quote {
             font-size: 0.95rem;
             font-weight: 600;
             font-style: italic;
-            color: #0f172a;
+            color: #ffffff;
         }
     </style>
 </head>
@@ -342,7 +346,7 @@
                 <div class="header-tag">Boletín Inteligente Comercial</div>
                 <div class="header-title">Traducción ADN · <span>Panel NN</span></div>
             </div>
-            <div class="header-date">📅 18/05/2026 · Sincronizado con Éxito</div>
+            <div class="header-date">📅 19/05/2026 · Sincronizado con Éxito</div>
         </div>
         
         <!-- Novedades de la Semana -->
@@ -356,98 +360,11 @@
             <div class="card">
                 <div class="card-top">
                     <div class="card-meta">
-                        <div class="card-segment">🎯 Clientes que hayan contratado SIALP</div>
-                        <div class="card-status">🟢 ACTIVA</div>
-                    </div>
-                    <div class="card-title">Plan SIALP</div>
-                    <div class="card-description">Permite contratar el seguro de Salud asociado a la campaña Ahorro + Salud con fecha de emisión hasta el 31 de mayo y fecha de efecto 1 de mayo y 1 de junio.</div>
-                </div>
-                
-                <div class="info-section">
-                    <div class="info-box vulnerability">
-                        <div class="info-box-label vulnerability">
-                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
-                        </div>
-                        <div class="info-box-text">El miedo a perder la oportunidad de complementar un ahorro a largo plazo (SIALP) con una protección de salud esencial, debido a plazos de contratación ajustados.</div>
-                    </div>
-                    
-                    <div class="info-box opening">
-                        <div class="info-box-label opening">
-                            <span>🗣️</span> Pregunta de Apertura Consultiva
-                        </div>
-                        <div class="info-box-text opening-quote">
-                            "Si tu plan SIALP te da tranquilidad financiera a futuro, ¿cómo estás protegiendo tu salud presente para poder disfrutar de ese futuro?"
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="card">
-                <div class="card-top">
-                    <div class="card-meta">
-                        <div class="card-segment">🎯 Autónomos</div>
-                        <div class="card-status">🟢 ACTIVA</div>
-                    </div>
-                    <div class="card-title">Contigo Familia</div>
-                    <div class="card-description">Descuento vitalicio del 25% sobre la prima. Excluye la cobertura de Incapacidad Laboral Temporal (ILT).</div>
-                </div>
-                
-                <div class="info-section">
-                    <div class="info-box vulnerability">
-                        <div class="info-box-label vulnerability">
-                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
-                        </div>
-                        <div class="info-box-text">El riesgo de descapitalización o endeudamiento si una baja laboral impide trabajar durante un periodo prolongado, especialmente para autónomos con gastos fijos y una pensión pública insuficiente.</div>
-                    </div>
-                    
-                    <div class="info-box opening">
-                        <div class="info-box-label opening">
-                            <span>🗣️</span> Pregunta de Apertura Consultiva
-                        </div>
-                        <div class="info-box-text opening-quote">
-                            "Si mañana tu negocio tiene que parar 3 meses por una baja, tus gastos siguen iguales pero tus ingresos cesan. ¿De dónde saldrían los 2.000€ que te faltarían cada mes para mantener tu nivel de vida?"
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="card">
-                <div class="card-top">
-                    <div class="card-meta">
-                        <div class="card-segment">🎯 Autónomos</div>
-                        <div class="card-status">🟢 ACTIVA</div>
-                    </div>
-                    <div class="card-title">Contigo Autónomo</div>
-                    <div class="card-description">Descuento vitalicio del 25% sobre la prima. Excluye la cobertura de Incapacidad Laboral Temporal (ILT).</div>
-                </div>
-                
-                <div class="info-section">
-                    <div class="info-box vulnerability">
-                        <div class="info-box-label vulnerability">
-                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
-                        </div>
-                        <div class="info-box-text">La brecha de ingresos en caso de baja laboral prolongada, que puede llevar a quemar ahorros o endeudarse, ante una cobertura pública insuficiente.</div>
-                    </div>
-                    
-                    <div class="info-box opening">
-                        <div class="info-box-label opening">
-                            <span>🗣️</span> Pregunta de Apertura Consultiva
-                        </div>
-                        <div class="info-box-text opening-quote">
-                            "Si mañana una baja te deja sin ingresos durante 3 meses, y tus gastos no bajan, ¿de dónde vas a sacar el dinero para cubrir el déficit y mantener tu negocio a flote?"
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="card">
-                <div class="card-top">
-                    <div class="card-meta">
-                        <div class="card-segment">🎯 Particulares y familias</div>
+                        <div class="card-segment">🎯 Clientes que hayan contratado SIALP o Contigo Futuro</div>
                         <div class="card-status">🟢 ACTIVA</div>
                     </div>
                     <div class="card-title">Plan Salud + Vida</div>
-                    <div class="card-description">Seguro de Vida GRATIS el primer año y 12,5% de descuento en Salud hasta el 1 de junio de 2026.</div>
+                    <div class="card-description">Permite a clientes que hayan contratado SIALP o Contigo Futuro en campaña formalizar su seguro de Salud con fecha de emisión hasta el 31 de mayo y fecha de efecto 1 de mayo y 1 de junio.</div>
                 </div>
                 
                 <div class="info-section">
@@ -455,7 +372,7 @@
                         <div class="info-box-label vulnerability">
                             <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
                         </div>
-                        <div class="info-box-text">El miedo a tener que elegir entre una atención médica privada de calidad y una protección económica para la familia en caso de fallecimiento o invalidez, ante la percepción de que ambas son costosas.</div>
+                        <div class="info-box-text">La preocupación de no poder acceder a una salud privada de calidad o retrasos en diagnósticos graves por la saturación de la sanidad pública, sumado a la necesidad de proteger el patrimonio familiar ante imprevistos de salud.</div>
                     </div>
                     
                     <div class="info-box opening">
@@ -463,7 +380,7 @@
                             <span>🗣️</span> Pregunta de Apertura Consultiva
                         </div>
                         <div class="info-box-text opening-quote">
-                            "¿Qué pasaría si mañana un problema de salud grave te impide trabajar? ¿Cómo viviría tu familia el mes que viene si tu principal fuente de ingresos desaparece de repente?"
+                            "¿Si mañana te diagnostican algo grave, y la sanidad pública te da cita para dentro de 4 meses, ¿cómo protegerías tu bienestar y el de tu familia mientras tanto, y qué impacto tendría en tus finanzas no poder trabajar?"
                         </div>
                     </div>
                 </div>
@@ -472,11 +389,11 @@
             <div class="card">
                 <div class="card-top">
                     <div class="card-meta">
-                        <div class="card-segment">🎯 Mayores de 55 años</div>
+                        <div class="card-segment">🎯 Clientes familiares/particulares y ahora también autónomos.</div>
                         <div class="card-status">🟢 ACTIVA</div>
                     </div>
-                    <div class="card-title">Contigo Senior (+55)</div>
-                    <div class="card-description">6 meses bonificados en mayo de 2026.</div>
+                    <div class="card-title">Contigo Familia</div>
+                    <div class="card-description">Ofrece un 25% de descuento vitalicio en la prima. Ahora se amplía para incluir a autónomos, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).</div>
                 </div>
                 
                 <div class="info-section">
@@ -484,7 +401,7 @@
                         <div class="info-box-label vulnerability">
                             <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
                         </div>
-                        <div class="info-box-text">La preocupación por la salud y la seguridad ante imprevistos (accidentes, enfermedades) tras los 55 años, y el miedo a la dependencia o a no poder afrontar los gastos médicos o de asistencia personal.</div>
+                        <div class="info-box-text">La preocupación de no poder mantener el nivel de vida familiar ante un fallecimiento o invalidez, y para autónomos, el riesgo de que una baja laboral grave queme ahorros o genere endeudamiento, a pesar de que la ILT específica quede excluida en esta oferta.</div>
                     </div>
                     
                     <div class="info-box opening">
@@ -492,7 +409,36 @@
                             <span>🗣️</span> Pregunta de Apertura Consultiva
                         </div>
                         <div class="info-box-text opening-quote">
-                            "A partir de los 55, la tranquilidad no es solo tener ahorros, sino saber que ante un imprevisto de salud o un accidente, contarás con la asistencia necesaria para no comprometer tu calidad de vida. ¿Estás preparado para esa realidad?"
+                            "Si dejas de percibir tus ingresos mañana, ¿cuánto tiempo podrías mantener tu nivel de vida actual y el de tu familia antes de tener que hacer ajustes drásticos?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Autónomos.</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Contigo Autónomo</div>
+                    <div class="card-description">Ofrece un 25% de descuento vitalicio en la prima. Excluye la cobertura de Incapacidad Laboral Temporal (ILT).</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">El riesgo inminente para un autónomo de quemar ahorros o endeudarse si una baja laboral prolongada interrumpe sus ingresos, y la necesidad de una protección económica robusta ante fallecimiento o invalidez total.</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            "Si una incapacidad te impide trabajar durante 3 meses, tus gastos fijos siguen llegando, pero tus ingresos se detienen. ¿De dónde saldría el dinero para cubrir esos gastos y mantener tu negocio a flote, si no es de tus ahorros o pidiendo prestado?"
                         </div>
                     </div>
                 </div>
@@ -762,35 +708,6 @@
             <div class="card">
                 <div class="card-top">
                     <div class="card-meta">
-                        <div class="card-segment">🎯 Familias y particulares que buscan proteger la estabilidad económica de sus seres queridos.</div>
-                        <div class="card-status">🟢 ACTIVA</div>
-                    </div>
-                    <div class="card-title">Contigo Familia</div>
-                    <div class="card-description">25% de descuento vitalicio en la póliza.</div>
-                </div>
-                
-                <div class="info-section">
-                    <div class="info-box vulnerability">
-                        <div class="info-box-label vulnerability">
-                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
-                        </div>
-                        <div class="info-box-text">Exposición de la estabilidad económica familiar: la pérdida inesperada del principal sustento podría dejar a tus seres queridos sin capacidad para cubrir gastos esenciales como la hipoteca o la educación a largo plazo.</div>
-                    </div>
-                    
-                    <div class="info-box opening">
-                        <div class="info-box-label opening">
-                            <span>🗣️</span> Pregunta de Apertura Consultiva
-                        </div>
-                        <div class="info-box-text opening-quote">
-                            "Si tú faltas mañana... ¿cómo vive tu familia el mes que viene? ¿Quién carga con el peso de la hipoteca, los gastos diarios y el futuro de los tuyos?"
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="card">
-                <div class="card-top">
-                    <div class="card-meta">
                         <div class="card-segment">🎯 Clientes que ya contrataron PC SIALP o Contigo Futuro en campaña y aún no han formalizado su seguro de Salud.</div>
                         <div class="card-status">⚡ URGENTE</div>
                     </div>
@@ -849,6 +766,35 @@
             <div class="card">
                 <div class="card-top">
                     <div class="card-meta">
+                        <div class="card-segment">🎯 Autónomos</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Seguro de Vida y Familia</div>
+                    <div class="card-description">Descuento vitalicio del 25% sobre la prima. Excluye la cobertura de Incapacidad Laboral Temporal (ILT).</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">El riesgo de descapitalización o endeudamiento si una baja laboral impide trabajar durante un periodo prolongado, especialmente para autónomos con gastos fijos y una pensión pública insuficiente.</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            "Si mañana tu negocio tiene que parar 3 meses por una baja, tus gastos siguen iguales pero tus ingresos cesan. ¿De dónde saldrían los 2.000€ que te faltarían cada mes para mantener tu nivel de vida?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
                         <div class="card-segment">🎯 Clientes que han contratado Plan SIALP o Contigo Futuro</div>
                         <div class="card-status">🟢 ACTIVA</div>
                     </div>
@@ -878,6 +824,35 @@
             <div class="card">
                 <div class="card-top">
                     <div class="card-meta">
+                        <div class="card-segment">🎯 Clientes que hayan contratado SIALP</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Plan SIALP</div>
+                    <div class="card-description">Permite contratar el seguro de Salud asociado a la campaña Ahorro + Salud con fecha de emisión hasta el 31 de mayo y fecha de efecto 1 de mayo y 1 de junio.</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">El miedo a perder la oportunidad de complementar un ahorro a largo plazo (SIALP) con una protección de salud esencial, debido a plazos de contratación ajustados.</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            "Si tu plan SIALP te da tranquilidad financiera a futuro, ¿cómo estás protegiendo tu salud presente para poder disfrutar de ese futuro?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
                         <div class="card-segment">🎯 Clientes que hayan contratado Contigo Futuro</div>
                         <div class="card-status">🟢 ACTIVA</div>
                     </div>
@@ -899,6 +874,35 @@
                         </div>
                         <div class="info-box-text opening-quote">
                             "Imagina que necesitas un tratamiento médico costoso o una cirugía compleja. ¿Cómo te aseguras de que tu inversión a largo plazo, destinada a tu futuro, no se vea drásticamente afectada por un gasto de salud imprevisto?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Mayores de 55 años</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Contigo Senior (+55)</div>
+                    <div class="card-description">6 meses bonificados en mayo de 2026.</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">La preocupación por la salud y la seguridad ante imprevistos (accidentes, enfermedades) tras los 55 años, y el miedo a la dependencia o a no poder afrontar los gastos médicos o de asistencia personal.</div>
+                    </div>
+                    
+                    <div class="info-box opening">
+                        <div class="info-box-label opening">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote">
+                            "A partir de los 55, la tranquilidad no es solo tener ahorros, sino saber que ante un imprevisto de salud o un accidente, contarás con la asistencia necesaria para no comprometer tu calidad de vida. ¿Estás preparado para esa realidad?"
                         </div>
                     </div>
                 </div>
@@ -1211,35 +1215,6 @@
             <div class="card vieja">
                 <div class="card-top">
                     <div class="card-meta">
-                        <div class="card-segment">🎯 Familias y particulares que buscan proteger la estabilidad económica de sus seres queridos.</div>
-                        <div class="card-status">🟢 ACTIVA</div>
-                    </div>
-                    <div class="card-title">Contigo Familia</div>
-                    <div class="card-description">25% de descuento vitalicio en la póliza.</div>
-                </div>
-                
-                <div class="info-section">
-                    <div class="info-box vulnerability">
-                        <div class="info-box-label vulnerability">
-                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
-                        </div>
-                        <div class="info-box-text">Exposición de la estabilidad económica familiar: la pérdida inesperada del principal sustento podría dejar a tus seres queridos sin capacidad para cubrir gastos esenciales como la hipoteca o la educación a largo plazo.</div>
-                    </div>
-                    
-                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
-                        <div class="info-box-label opening" style="color: var(--text-secondary);">
-                            <span>🗣️</span> Pregunta de Apertura Consultiva
-                        </div>
-                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
-                            "Si tú faltas mañana... ¿cómo vive tu familia el mes que viene? ¿Quién carga con el peso de la hipoteca, los gastos diarios y el futuro de los tuyos?"
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="card vieja">
-                <div class="card-top">
-                    <div class="card-meta">
                         <div class="card-segment">🎯 Clientes que ya contrataron PC SIALP o Contigo Futuro en campaña y aún no han formalizado su seguro de Salud.</div>
                         <div class="card-status">⚡ URGENTE</div>
                     </div>
@@ -1298,6 +1273,35 @@
             <div class="card vieja">
                 <div class="card-top">
                     <div class="card-meta">
+                        <div class="card-segment">🎯 Autónomos</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Seguro de Vida y Familia</div>
+                    <div class="card-description">Descuento vitalicio del 25% sobre la prima. Excluye la cobertura de Incapacidad Laboral Temporal (ILT).</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">El riesgo de descapitalización o endeudamiento si una baja laboral impide trabajar durante un periodo prolongado, especialmente para autónomos con gastos fijos y una pensión pública insuficiente.</div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            "Si mañana tu negocio tiene que parar 3 meses por una baja, tus gastos siguen iguales pero tus ingresos cesan. ¿De dónde saldrían los 2.000€ que te faltarían cada mes para mantener tu nivel de vida?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
                         <div class="card-segment">🎯 Clientes que han contratado Plan SIALP o Contigo Futuro</div>
                         <div class="card-status">🟢 ACTIVA</div>
                     </div>
@@ -1327,6 +1331,35 @@
             <div class="card vieja">
                 <div class="card-top">
                     <div class="card-meta">
+                        <div class="card-segment">🎯 Clientes que hayan contratado SIALP</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Plan SIALP</div>
+                    <div class="card-description">Permite contratar el seguro de Salud asociado a la campaña Ahorro + Salud con fecha de emisión hasta el 31 de mayo y fecha de efecto 1 de mayo y 1 de junio.</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">El miedo a perder la oportunidad de complementar un ahorro a largo plazo (SIALP) con una protección de salud esencial, debido a plazos de contratación ajustados.</div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            "Si tu plan SIALP te da tranquilidad financiera a futuro, ¿cómo estás protegiendo tu salud presente para poder disfrutar de ese futuro?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
                         <div class="card-segment">🎯 Clientes que hayan contratado Contigo Futuro</div>
                         <div class="card-status">🟢 ACTIVA</div>
                     </div>
@@ -1348,6 +1381,35 @@
                         </div>
                         <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
                             "Imagina que necesitas un tratamiento médico costoso o una cirugía compleja. ¿Cómo te aseguras de que tu inversión a largo plazo, destinada a tu futuro, no se vea drásticamente afectada por un gasto de salud imprevisto?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card vieja">
+                <div class="card-top">
+                    <div class="card-meta">
+                        <div class="card-segment">🎯 Mayores de 55 años</div>
+                        <div class="card-status">🟢 ACTIVA</div>
+                    </div>
+                    <div class="card-title">Contigo Senior (+55)</div>
+                    <div class="card-description">6 meses bonificados en mayo de 2026.</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-box vulnerability">
+                        <div class="info-box-label vulnerability">
+                            <span>🔪</span> Vulnerabilidad Detectada (Bisturí ADN)
+                        </div>
+                        <div class="info-box-text">La preocupación por la salud y la seguridad ante imprevistos (accidentes, enfermedades) tras los 55 años, y el miedo a la dependencia o a no poder afrontar los gastos médicos o de asistencia personal.</div>
+                    </div>
+                    
+                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                        <div class="info-box-label opening" style="color: var(--text-secondary);">
+                            <span>🗣️</span> Pregunta de Apertura Consultiva
+                        </div>
+                        <div class="info-box-text opening-quote" style="color: var(--text-secondary);">
+                            "A partir de los 55, la tranquilidad no es solo tener ahorros, sino saber que ante un imprevisto de salud o un accidente, contarás con la asistencia necesaria para no comprometer tu calidad de vida. ¿Estás preparado para esa realidad?"
                         </div>
                     </div>
                 </div>

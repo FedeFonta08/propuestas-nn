@@ -395,17 +395,17 @@ const PRODS = {
 
   saludvida: {
     fase: 'f2', ico: '❤️', nom: 'Plan Salud + Vida',
-    sub: 'La única solución híbrida: Medicina Sanitas + Seguro de Vida en un solo contrato. Vida GRATIS el primer año y 12,5% de descuento en Salud hasta el 1 de junio de 2026.',
+    sub: 'La única solución híbrida: Medicina Sanitas + Seguro de Vida en un solo contrato. Vida GRATIS el primer año y 12,5% de descuento en Salud hasta el 1 de junio de 2026. Ampliación de plazo de contratación hasta el 31 de mayo.',
     tit: n => `El blindaje total para <em>${n} y su familia</em>: Salud Sanitas + Vida NN.`,
     deadline: { ico: '⏰', badge: 'DESCUENTO 12,5% SOLO HASTA 1 JUNIO 2026', loss: 'Si contratas después del 1 de junio de 2026, pierdes el 12,5% de descuento anual en tu prima de salud. La promoción aplica a pólizas con fecha efecto 1 de abril, 1 de mayo o 1 de junio de 2026.' },
     greet: n => `Hola <strong>${n}</strong>,<br><br>¿Sabías que la mayoría de seguros te hacen elegir entre salud o vida? Nosotros hemos unido lo mejor de los dos mundos: <strong>te damos la medicina privada de Sanitas y el respaldo de un seguro de vida de Nationale-Nederlanden en un solo contrato</strong>. Y lo mejor: el seguro de vida te sale <strong>GRATIS el primer año</strong> y te aplicamos un <strong>12,5% de descuento</strong> si contratas antes del 1 de junio.`,
     hb: { t: 'hbo', x: '<strong>Incomparable:</strong> Medicina privada Sanitas (sin listas de espera) + Seguro de Vida NN. El seguro de vida es GRATIS el primer año. Ahorro del 12,5% en la prima de salud hasta el 1 de junio de 2026.' },
-    sts: [{ v: '12,5%', l: 'Descuento en Salud hasta junio 2026' }, { v: '0 €', l: 'Vida (1er año)' }, { v: '+40.000', l: 'Médicos Sanitas' }],
+    sts: [{ v: '12,5%', l: 'Descuento en Salud hasta junio 2026' }, { v: '0 €', l: 'Vida (1er año)' }, { v: '+40.000', l: 'Médicos Sanitas' }, { v: '31/05/2026', l: 'Fecha límite emisión' }],
     covs: [
       { n: 'Seguro de vida — 1er año GRATIS', c: 'Capital a elegir', p: '0 € primer año', k: true, t: 'gratis' }
     ],
     pendiente: false,
-    totalDesc: 'Prima variable según edad y zona · Vida gratis 12 meses · Descuento del 12,5% en Salud hasta el 1 de junio de 2026.',
+    totalDesc: 'Prima variable según edad y zona · Vida gratis 12 meses · Descuento del 12,5% en Salud hasta el 1 de junio de 2026. Plazo de emisión ampliado hasta 31 de mayo.',
     prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, proteger la salud y la vida de tu familia en un solo paso es la decisión más inteligente. ¿Hablamos de las coberturas?`,
     objeciones: [
@@ -688,26 +688,20 @@ const PRODS = {
 
   autonomo: {
     fase: 'f5', ico: '🚐', nom: 'Contigo Autónomo',
-    sub: 'Protección laboral integral para autónomos. ILT 30 €/día + capital 266.000 €. Campaña activa: 25% descuento vitalicio (excluye ILT). Hábitos saludables: −10% adicional.',
+    sub: 'Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).',
     tit: n => `La protección que <em>le falta a ${n}</em> como autónomo.`,
     deadline: { ico: '🏷️', badge: '25% DESCUENTO VITALICIO — Campaña activa para autónomos (excluye ILT)', loss: 'Este descuento permanente sobre la prima es exclusivo de la campaña actual. Cuando finalice, el precio vuelve a tarifa estándar sin posibilidad de recuperar el beneficio.' },
     greet: n => `Hola <strong>${n}</strong>,<br><br>Como autónomo, si no trabajas, no ingresas. <strong>Contigo Autónomo cubre el agujero entre lo que paga la SS y lo que necesitas para mantener tu negocio y tu vida.</strong><br><br>⚠️ <strong>Campaña activa:</strong> 25% de descuento vitalicio sobre la prima — la cobertura de ILT queda excluida en esta modalidad de campaña. Si quieres añadir la baja laboral diaria, consulta el <strong>Seguro ILT Autónomos</strong> complementario.`,
     gap: true,
     gd: { g: '900€', r: '721€', h: '179€' },
     gls: ['Gastos fijos mensuales', 'Lo que paga la SS en baja', 'Sin cubrir cada mes. Hasta hoy.'],
-    sts: [{ v: '266.000 €', l: 'Capital total' }, { v: '25%', l: 'Dto. vitalicio' }, { v: '−10%', l: 'Hábitos saludables' }, { v: 'Desde día 1', l: 'Accidente' }],
+    sts: [{ v: '25% vitalicio', l: 'Descuento de prima' }],
     covs: [
-      { n: 'Fallecimiento por cualquier causa', c: 'Capital hasta 266.000 €', p: 'Incluido', k: true, t: 'base' },
-      { n: 'Invalidez Permanente Absoluta (IPA)', c: 'Por cualquier causa', p: 'Incluido', k: true, t: 'clave' },
-      { n: 'Invalidez Permanente Total (IPT)', c: 'Para tu profesión habitual', p: 'Incluido', k: false },
-      { n: 'Enfermedades graves (cáncer, infarto, ictus…)', c: 'Capital directo al diagnóstico', p: 'Incluido', k: true, t: 'diferencial' },
-      { n: 'ILT (Incapacidad Laboral Temporal)', c: 'EXCLUIDA en campaña 25%. Disponible con tarifa estándar', p: 'Excluida', k: false, t: 'exclusión' },
-      { n: 'Descuento hábitos saludables', c: 'No fumador + IMC correcto + actividad física', p: '−10% extra', k: true, t: 'diferencial' },
-      { n: 'Chat médico 24h (Meeting Doctors)', c: 'Consultas ilimitadas gratis', p: '✓ Gratis', k: false },
+      { n: 'Incapacidad laboral temporal (ILT)', c: 'EXCLUIDA en esta campaña con descuento del 25%.', p: 'N/A', k: false, t: 'exclusión' }
     ],
     pendiente: false,
     extras: true,
-    totalDesc: '25% descuento vitalicio (excluye ILT) · Hábitos saludables −10% adicional · Capital total 266.000 € · Chat médico y legal incluidos',
+    totalDesc: 'Con descuento hábitos saludables −10% · Capital total: 266.000 € · *25% descuento vitalicio (excluye ILT)*',
     prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, por menos de 1,33 € al día tienes cubierto el peor escenario. Firmamos hoy.`,
     objeciones: [
@@ -841,7 +835,7 @@ const PRODS = {
 
   hipotecaing: {
     fase: 'f6', ico: '🟠', nom: 'Hipoteca Naranja (ING)',
-    sub: '100% digital. Sin comisión de apertura. ING asume notaría, registro, gestoría e IAJD. Hasta 80% financiación (100% si <36 años y vivienda <400.000 €). Plazo hasta 40 años. *Precios actualizados con incrementos para nuevos scorings desde el 11 de mayo*.',
+    sub: '100% digital. Sin comisión de apertura. ING asume notaría, registro, gestoría e IAJD. Hasta 80% financiación (100% si <36 años y vivienda <400.000 €). Plazo hasta 40 años. Precios actualizados con incrementos para nuevos scorings desde el 11 de mayo.',
     tit: n => `La hipoteca digital de ${n}, <em>sin complicaciones y sin costes de entrada.</em>`,
     greet: n => `Hola <strong>${n}</strong>,<br><br>La Hipoteca Naranja ING es <strong>100% digital, sin comisión de apertura y con todos los gastos de formalización asumidos por el banco</strong>: notaría, registro, gestoría e IAJD. Solo pagas la tasación.`,
     hb: { t: 'hbg', x: '<strong>Sin costes de entrada:</strong> ING asume notaría, registro, gestoría e IAJD. Solo pagas la tasación. Hasta 80% financiación (100% si <36 años y vivienda <400.000 €). Plazo hasta 40 años.' },
@@ -864,11 +858,11 @@ const PRODS = {
 
   rcpro: {
     fase: 'f5', ico: '⚖️', nom: 'RC PRO · Caser (Responsabilidad Civil)',
-    sub: 'Protección profesional y empresarial contra reclamaciones de terceros. Hasta 3.000.000 € de cobertura automática. 3 modalidades: Básico, Estándar y Premium. Protección digital incluida.',
+    sub: '100% digital. Sin comisión de apertura. ING asume notaría, registro, gestoría e IAJD. Hasta 80% financiación (100% si <36 años y vivienda <400.000 €). Plazo hasta 40 años. Precios actualizados con incrementos para nuevos scorings desde el 11 de mayo.',
     tit: n => `Si algo sale mal en el negocio de ${n}, <em>que no sea un problema económico.</em>`,
     greet: n => `Hola <strong>${n}</strong>,<br><br>Un error, un daño accidental a un cliente, una reclamación de un empleado… Cualquier imprevisto en tu actividad puede derivar en una demanda millonaria. <strong>RC PRO Caser</strong> es el escudo que protege el patrimonio de tu negocio ante cualquier reclamación de terceros, con cobertura automática de hasta 3.000.000 € y protección digital incluida desde el primer día.`,
     hb: { t: 'hbo', x: '<strong>Escudo total del negocio:</strong> Hasta 3.000.000 € de cobertura automática. Protección digital contra ciberataques y fraude incluida de serie. 24 meses de extensión del periodo de reclamación (run-off) al cancelar.' },
-    sts: [{ v: '3M€', l: 'Límite automático' }, { v: '3', l: 'Modalidades a medida' }, { v: '24m', l: 'Extensión run-off' }],
+    sts: [{ v: 'Actualizado', l: 'Precios desde 11/05' }],
     covs: [
       { n: 'RC Explotación (daños a terceros)', c: 'Hasta 3.000.000 €', p: '✓', k: true, t: 'base' },
       { n: 'Protección Digital', c: 'Ciberseguridad + antifraude', p: '✓', k: true, t: 'diferencial' },
@@ -882,7 +876,7 @@ const PRODS = {
       { n: 'Extensión Run-off al cancelar', c: '24 meses adicionales', p: '✓', k: false },
     ],
     pendiente: false,
-    totalDesc: 'Básico | Estándar | Premium · Cotización instantánea · Ámbito territorial UE · Prima anual fraccionable',
+    totalDesc: 'Solo pagas la tasación · 100% digital · Plazo máximo 40 años (75 años al finalizar) · *Precios actualizados con incrementos para nuevos scorings desde el 11 de mayo*.',
     prima: 'Consultar',
     cierre: n => `<strong>${n}</strong>, un solo siniestro sin cubrir puede arruinar años de trabajo. Calculamos la modalidad que mejor protege tu negocio, sin pagar de más.`,
     objeciones: [

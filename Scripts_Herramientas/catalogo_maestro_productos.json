@@ -582,9 +582,9 @@
   "saludvida": {
     "id": "saludvida",
     "nombre_oficial": "Plan Salud + Vida",
-    "descripcion_breve": "La única solución híbrida: Medicina Sanitas + Seguro de Vida en un solo contrato. Vida GRATIS el primer año y 12,5% de descuento en Salud hasta el 1 de junio de 2026.",
+    "descripcion_breve": "La única solución híbrida: Medicina Sanitas + Seguro de Vida en un solo contrato. Vida GRATIS el primer año y 12,5% de descuento en Salud hasta el 1 de junio de 2026. Ampliación de plazo de contratación hasta el 31 de mayo.",
     "precio_base": "Consultar",
-    "detalles_adicionales": "Prima variable según edad y zona · Vida gratis 12 meses · Descuento del 12,5% en Salud hasta el 1 de junio de 2026.",
+    "detalles_adicionales": "Prima variable según edad y zona · Vida gratis 12 meses · Descuento del 12,5% en Salud hasta el 1 de junio de 2026. Plazo de emisión ampliado hasta 31 de mayo.",
     "estadisticas_clave": [
       {
         "valor": "12,5%",
@@ -597,6 +597,10 @@
       {
         "valor": "+40.000",
         "etiqueta": "Médicos Sanitas"
+      },
+      {
+        "valor": "31/05/2026",
+        "etiqueta": "Fecha límite emisión"
       }
     ],
     "coberturas_clave": [
@@ -1702,7 +1706,7 @@
   "hipotecaing": {
     "id": "hipotecaing",
     "nombre_oficial": "Hipoteca Naranja (ING)",
-    "descripcion_breve": "100% digital. Sin comisión de apertura. ING asume notaría, registro, gestoría e IAJD. Hasta 80% financiación (100% si <36 años y vivienda <400.000 €). Plazo hasta 40 años. *Precios actualizados con incrementos para nuevos scorings desde el 11 de mayo*.",
+    "descripcion_breve": "100% digital. Sin comisión de apertura. ING asume notaría, registro, gestoría e IAJD. Hasta 80% financiación (100% si <36 años y vivienda <400.000 €). Plazo hasta 40 años. Precios actualizados con incrementos para nuevos scorings desde el 11 de mayo.",
     "precio_base": "Consultar",
     "detalles_adicionales": "Solo pagas la tasación · 100% digital · Plazo máximo 40 años (75 años al finalizar) · *Precios actualizados con incrementos para nuevos scorings desde el 11 de mayo*.",
     "estadisticas_clave": [
