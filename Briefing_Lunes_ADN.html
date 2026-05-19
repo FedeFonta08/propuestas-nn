@@ -7,16 +7,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-gradient: linear-gradient(135deg, #070a13 0%, #02040a 100%);
-            --accent-orange: #ff5e1a;
-            --accent-orange-glow: rgba(255, 94, 26, 0.35);
-            --card-bg: rgba(15, 23, 42, 0.45);
-            --card-border: rgba(255, 255, 255, 0.06);
-            --card-hover-bg: rgba(30, 41, 59, 0.55);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --success-green: #10b981;
-            --success-bg: rgba(16, 185, 129, 0.1);
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            --accent-orange: #e85c0f;
+            --accent-orange-glow: rgba(232, 92, 15, 0.12);
+            --card-bg: #ffffff;
+            --card-border: rgba(0, 0, 0, 0.08);
+            --card-hover-bg: #fffbf9;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --success-green: #0f766e;
+            --success-bg: rgba(15, 118, 110, 0.06);
         }
         
         * {
@@ -35,7 +36,7 @@
             overflow-x: hidden;
         }
         
-        /* Background glowing orbs */
+        /* Background glowing orbs adjusted for warm light theme */
         body::before {
             content: '';
             position: absolute;
@@ -43,7 +44,7 @@
             right: -10%;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(255, 94, 26, 0.08) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(232, 92, 15, 0.05) 0%, transparent 70%);
             z-index: 0;
             pointer-events: none;
         }
@@ -55,7 +56,7 @@
             left: -10%;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.05) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(14, 116, 144, 0.03) 0%, transparent 70%);
             z-index: 0;
             pointer-events: none;
         }
@@ -67,18 +68,18 @@
             z-index: 1;
         }
         
-        /* Premium Header */
+        /* Premium Light Header */
         .header {
-            background: rgba(15, 23, 42, 0.4);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.06);
             border-radius: 28px;
             padding: 2.5rem 3rem;
             margin-bottom: 3.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
         }
         
         .header-left {
@@ -99,23 +100,19 @@
             font-size: 2.25rem;
             font-weight: 800;
             letter-spacing: -0.02em;
-            background: linear-gradient(to right, #ffffff, #cbd5e1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #0f172a;
         }
         
         .header-title span {
-            background: linear-gradient(to right, #ff5e1a, #ffa17a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--accent-orange);
         }
         
         .header-date {
             font-size: 0.875rem;
             font-weight: 600;
             color: var(--text-secondary);
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.06);
             padding: 0.6rem 1.2rem;
             border-radius: 99px;
             backdrop-filter: blur(10px);
@@ -138,31 +135,29 @@
             height: 28px;
             background: linear-gradient(to bottom, #ff5e1a, #ff9b70);
             border-radius: 99px;
-            box-shadow: 0 0 10px var(--accent-orange-glow);
+            box-shadow: 0 2px 8px var(--accent-orange-glow);
         }
         
         .section-title {
             font-size: 1.6rem;
             font-weight: 700;
             letter-spacing: -0.015em;
-            background: linear-gradient(to right, #ffffff, #e2e8f0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #0f172a;
         }
         
         .section-desc {
             font-size: 0.95rem;
             color: var(--text-secondary);
-            background: rgba(255, 94, 26, 0.02);
-            border-left: 3px solid var(--accent-orange);
+            background: rgba(232, 92, 15, 0.02);
+            border-left: 4px solid var(--accent-orange);
             padding: 1.25rem 1.5rem;
             border-radius: 0 16px 16px 0;
             margin-bottom: 2.5rem;
             line-height: 1.6;
             max-width: 1200px;
-            border-top: 1px solid rgba(255, 94, 26, 0.05);
-            border-bottom: 1px solid rgba(255, 94, 26, 0.05);
-            border-right: 1px solid rgba(255, 94, 26, 0.05);
+            border-top: 1px solid rgba(232, 92, 15, 0.05);
+            border-bottom: 1px solid rgba(232, 92, 15, 0.05);
+            border-right: 1px solid rgba(232, 92, 15, 0.05);
         }
         
         /* Responsive Grid */
@@ -174,11 +169,10 @@
             margin: 0 auto;
         }
         
-        /* Premium Glass Card */
+        /* Premium Crisp Light Card */
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--card-border);
+            border: 1.5px solid var(--card-border);
             border-radius: 24px;
             padding: 2.25rem;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -187,15 +181,16 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
         }
         
         .card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-6px);
             background: var(--card-hover-bg);
-            border-color: rgba(255, 94, 26, 0.3);
+            border-color: rgba(232, 92, 15, 0.4);
             box-shadow: 
-                0 30px 60px -15px rgba(0, 0, 0, 0.6), 
-                0 0 25px 0 rgba(255, 94, 26, 0.12);
+                0 20px 40px -15px rgba(232, 92, 15, 0.08), 
+                0 0 20px 0 rgba(232, 92, 15, 0.04);
         }
         
         .card::before {
@@ -204,23 +199,24 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
+            height: 4px;
             background: linear-gradient(90deg, var(--accent-orange), transparent);
-            opacity: 0.6;
+            opacity: 0.8;
         }
         
         .card.vieja::before {
-            background: linear-gradient(90deg, #64748b, transparent);
+            background: linear-gradient(90deg, #94a3b8, transparent);
         }
         
         .card.vieja {
-            opacity: 0.65;
+            opacity: 0.75;
+            background: #f1f5f9;
         }
         
         .card.vieja:hover {
             opacity: 1;
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
+            border-color: rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
         }
         
         .card-top {
@@ -243,7 +239,7 @@
             background: var(--success-bg);
             padding: 0.3rem 0.85rem;
             border-radius: 99px;
-            border: 1px solid rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(15, 118, 110, 0.1);
         }
         
         .card-status {
@@ -251,17 +247,17 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            background: rgba(255, 94, 26, 0.08);
+            background: rgba(232, 92, 15, 0.08);
             color: var(--accent-orange);
             padding: 0.25rem 0.65rem;
             border-radius: 8px;
-            border: 1px solid rgba(255, 94, 26, 0.2);
+            border: 1px solid rgba(232, 92, 15, 0.2);
         }
         
         .card.vieja .card-status {
-            background: rgba(148, 163, 184, 0.08);
-            color: #94a3b8;
-            border: 1px solid rgba(148, 163, 184, 0.2);
+            background: rgba(100, 116, 139, 0.08);
+            color: #475569;
+            border: 1px solid rgba(100, 116, 139, 0.2);
         }
         
         .card-title {
@@ -269,7 +265,7 @@
             font-weight: 700;
             line-height: 1.25;
             letter-spacing: -0.015em;
-            color: #ffffff;
+            color: #0f172a;
             margin-bottom: 0.875rem;
         }
         
@@ -288,21 +284,21 @@
         }
         
         .info-box {
-            background: rgba(7, 10, 19, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.03);
+            background: #f8fafc;
+            border: 1px solid rgba(0, 0, 0, 0.05);
             border-radius: 16px;
             padding: 1.2rem;
             position: relative;
         }
         
         .info-box.opening {
-            border-left: 3px solid var(--accent-orange);
-            background: rgba(255, 94, 26, 0.015);
+            border-left: 4px solid var(--accent-orange);
+            background: rgba(232, 92, 15, 0.015);
         }
         
         .info-box.vulnerability {
-            border-left: 3px solid #a855f7;
-            background: rgba(168, 85, 247, 0.01);
+            border-left: 4px solid #7c3aed;
+            background: rgba(124, 58, 237, 0.01);
         }
         
         .info-box-label {
@@ -317,7 +313,7 @@
         }
         
         .info-box-label.vulnerability {
-            color: #b55fe6;
+            color: #6d28d9;
         }
         
         .info-box-label.opening {
@@ -327,14 +323,14 @@
         .info-box-text {
             font-size: 0.875rem;
             line-height: 1.55;
-            color: #e2e8f0;
+            color: #334155;
         }
         
         .info-box-text.opening-quote {
             font-size: 0.95rem;
             font-weight: 600;
             font-style: italic;
-            color: #ffffff;
+            color: #0f172a;
         }
     </style>
 </head>
@@ -885,7 +881,7 @@
                         <div class="info-box-text">Llamar contactos 28-50 años esta semana. Pólizas con efecto 1 mayo y 1 junio</div>
                     </div>
                     
-                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                    <div class="info-box opening" style="border-left-color: rgba(0, 0, 0, 0.08); background: rgba(0,0,0,0.005);">
                         <div class="info-box-label opening" style="color: var(--text-secondary);">
                             <span>🗣️</span> Pregunta de Apertura Consultiva
                         </div>
@@ -914,7 +910,7 @@
                         <div class="info-box-text">Llamar contactos 55-75 años. Novedad como excusa natural de contacto</div>
                     </div>
                     
-                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                    <div class="info-box opening" style="border-left-color: rgba(0, 0, 0, 0.08); background: rgba(0,0,0,0.005);">
                         <div class="info-box-label opening" style="color: var(--text-secondary);">
                             <span>🗣️</span> Pregunta de Apertura Consultiva
                         </div>
@@ -944,7 +940,7 @@
                         <div class="info-box-text">Mencionar protección anti-inflación en presentaciones ahorro. Argumento clave SIALP/PC.</div>
                     </div>
                     
-                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                    <div class="info-box opening" style="border-left-color: rgba(0, 0, 0, 0.08); background: rgba(0,0,0,0.005);">
                         <div class="info-box-label opening" style="color: var(--text-secondary);">
                             <span>🗣️</span> Pregunta de Apertura Consultiva
                         </div>
@@ -973,7 +969,7 @@
                         <div class="info-box-text">Solo recomendar Hipoteca Mari Carmen Fija Valor. NO promocionar resto modalidades.</div>
                     </div>
                     
-                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                    <div class="info-box opening" style="border-left-color: rgba(0, 0, 0, 0.08); background: rgba(0,0,0,0.005);">
                         <div class="info-box-label opening" style="color: var(--text-secondary);">
                             <span>🗣️</span> Pregunta de Apertura Consultiva
                         </div>
@@ -1002,7 +998,7 @@
                         <div class="info-box-text">Prospección secundaria. NO priorizar vs SIALP/PC. Bajo impacto PVM.</div>
                     </div>
                     
-                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                    <div class="info-box opening" style="border-left-color: rgba(0, 0, 0, 0.08); background: rgba(0,0,0,0.005);">
                         <div class="info-box-label opening" style="color: var(--text-secondary);">
                             <span>🗣️</span> Pregunta de Apertura Consultiva
                         </div>
@@ -1031,7 +1027,7 @@
                         <div class="info-box-text">Propuesta simulación + comparar banco</div>
                     </div>
                     
-                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                    <div class="info-box opening" style="border-left-color: rgba(0, 0, 0, 0.08); background: rgba(0,0,0,0.005);">
                         <div class="info-box-label opening" style="color: var(--text-secondary);">
                             <span>🗣️</span> Pregunta de Apertura Consultiva
                         </div>
@@ -1060,7 +1056,7 @@
                         <div class="info-box-text">Miedo a listas de espera de 4 meses ante diagnósticos graves que impacten severamente la calidad de vida y el bienestar familiar.</div>
                     </div>
                     
-                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                    <div class="info-box opening" style="border-left-color: rgba(0, 0, 0, 0.08); background: rgba(0,0,0,0.005);">
                         <div class="info-box-label opening" style="color: var(--text-secondary);">
                             <span>🗣️</span> Pregunta de Apertura Consultiva
                         </div>
@@ -1089,7 +1085,7 @@
                         <div class="info-box-text">La búsqueda constante de nuevos clientes y la necesidad de generar ingresos adicionales de forma eficiente. El deseo de ser recompensado por la contribución al crecimiento de la red.</div>
                     </div>
                     
-                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                    <div class="info-box opening" style="border-left-color: rgba(0, 0, 0, 0.08); background: rgba(0,0,0,0.005);">
                         <div class="info-box-label opening" style="color: var(--text-secondary);">
                             <span>🗣️</span> Pregunta de Apertura Consultiva
                         </div>
@@ -1118,7 +1114,7 @@
                         <div class="info-box-text">El riesgo de descapitalización o endeudamiento si una baja laboral impide trabajar durante un periodo prolongado, especialmente para autónomos con gastos fijos y una pensión pública insuficiente.</div>
                     </div>
                     
-                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                    <div class="info-box opening" style="border-left-color: rgba(0, 0, 0, 0.08); background: rgba(0,0,0,0.005);">
                         <div class="info-box-label opening" style="color: var(--text-secondary);">
                             <span>🗣️</span> Pregunta de Apertura Consultiva
                         </div>
@@ -1147,7 +1143,7 @@
                         <div class="info-box-text">Miedo a listas de espera de 4 meses ante diagnósticos graves.</div>
                     </div>
                     
-                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                    <div class="info-box opening" style="border-left-color: rgba(0, 0, 0, 0.08); background: rgba(0,0,0,0.005);">
                         <div class="info-box-label opening" style="color: var(--text-secondary);">
                             <span>🗣️</span> Pregunta de Apertura Consultiva
                         </div>
@@ -1176,7 +1172,7 @@
                         <div class="info-box-text">El miedo a perder la oportunidad de complementar un ahorro a largo plazo (SIALP) con una protección de salud esencial, debido a plazos de contratación ajustados.</div>
                     </div>
                     
-                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                    <div class="info-box opening" style="border-left-color: rgba(0, 0, 0, 0.08); background: rgba(0,0,0,0.005);">
                         <div class="info-box-label opening" style="color: var(--text-secondary);">
                             <span>🗣️</span> Pregunta de Apertura Consultiva
                         </div>
@@ -1205,7 +1201,7 @@
                         <div class="info-box-text">La necesidad de proteger el capital invertido a largo plazo frente a imprevistos de salud que puedan requerir gastos médicos elevados, comprometiendo la estrategia de acumulación y el objetivo de jubilación.</div>
                     </div>
                     
-                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                    <div class="info-box opening" style="border-left-color: rgba(0, 0, 0, 0.08); background: rgba(0,0,0,0.005);">
                         <div class="info-box-label opening" style="color: var(--text-secondary);">
                             <span>🗣️</span> Pregunta de Apertura Consultiva
                         </div>
@@ -1234,7 +1230,7 @@
                         <div class="info-box-text">La preocupación por la salud y la seguridad ante imprevistos (accidentes, enfermedades) tras los 55 años, y el miedo a la dependencia o a no poder afrontar los gastos médicos o de asistencia personal.</div>
                     </div>
                     
-                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                    <div class="info-box opening" style="border-left-color: rgba(0, 0, 0, 0.08); background: rgba(0,0,0,0.005);">
                         <div class="info-box-label opening" style="color: var(--text-secondary);">
                             <span>🗣️</span> Pregunta de Apertura Consultiva
                         </div>
@@ -1263,7 +1259,7 @@
                         <div class="info-box-text">El miedo a que los tipos de interés suban y la cuota hipotecaria se vuelva inasumible, afectando significativamente la estabilidad financiera del hogar. La preocupación por el coste total de la hipoteca y los gastos asociados a su formalización.</div>
                     </div>
                     
-                    <div class="info-box opening" style="border-left-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.005);">
+                    <div class="info-box opening" style="border-left-color: rgba(0, 0, 0, 0.08); background: rgba(0,0,0,0.005);">
                         <div class="info-box-label opening" style="color: var(--text-secondary);">
                             <span>🗣️</span> Pregunta de Apertura Consultiva
                         </div>
