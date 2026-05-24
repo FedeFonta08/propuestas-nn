@@ -237,7 +237,7 @@ Todas las herramientas cumplen con:
 - ✅ **LSSI 34/2002** — Comercio electrónico
 
 **Responsables del tratamiento:** Nationale-Nederlanden Vida S.A.E. y Nationale-Nederlanden Generales S.A.E.  
-📍 Avda. de Bruselas, 16 · Parque Empresarial Arroyo de la Vega · 28108 Alcobendas (Madrid)
+📍 [Matriz NN - Acceso Interno]
 
 | Contacto RGPD | Email |
 |--------------|-------|
@@ -259,7 +259,7 @@ Deploy:  Automático tras cada push
 
 ### Google Apps Script Backend
 ```
-Endpoint: https://script.google.com/macros/s/AKfycbxpYhW-S9OvA3w1NTR_Mu6GHffGTtHKE1ENKgoM98ySB8gyxt-j4BbaKF7Mk48grrcr_g/exec
+Endpoint: https://script.google.com/macros/s/[ENDPOINT PROTEGIDO]/exec
 Acciones: buscar_contacto · ficha_contacto · registrar_llamada · crear_evento_calendar
 Zona:     Europe/Madrid
 ```
@@ -271,7 +271,7 @@ const url = SCRIPT_URL + '?payload=' + encodeURIComponent(JSON.stringify(data));
 
 ### GA4 Tracking
 ```
-ID: G-5P41S83SWG
+ID: [GA4 PRIVADO]
 Eventos: clicks propuestas · registros CRM · llamadas · citas
 ```
 
@@ -292,7 +292,7 @@ Eventos: clicks propuestas · registros CRM · llamadas · citas
 
 | Persona | Rol | Email | Teléfono |
 |---------|-----|-------|----------|
-| **Federico Fontanals** | Agente Dinamizador | federico.fontanals@nnespana.es | +34 680 507 186 |
+| **Federico Fontanals** | Agente Dinamizador | [CONTACTO: Ver políticas de privacidad] | [TELÉFONO: Contactar a través de NN] |
 | **NN DPO** | Protección de Datos | dpo@nnespana.es | +34 91 602 60 00 |
 
 ---
