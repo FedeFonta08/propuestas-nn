@@ -1033,7 +1033,7 @@ if (!MASTER_TOKEN) {
   if (MASTER_TOKEN) localStorage.setItem('nn_master_token', MASTER_TOKEN);
 }
 const SHEET_ID = '16lui0o9wPYe9tL-9PaU6_H2heG8uIBYrCIL9vvfpdC0';
-const SISTEMA_MAESTRO_ID = '1mYKiIdoglAxzFwJOE_0V8CyHwNUsKkh_oPtkUKg4GCQ';
+const SISTEMA_MAESTRO_ID = '1qshgFOXh-SOuTxgeY95ORfXsC71kwF7O';
 const ACTIVIDAD_SCRIPT_URL = 'http://localhost:5151';
 const PVM_OBJ = 10291;
 const PVM_KEY = 'nn_pvm_2026';
@@ -1680,7 +1680,7 @@ async function cargarMarcadorDesdeSheet() {
 
   // 2. RESPALDO: Google Sheets (Visualization API)
   try {
-    const url = `https://docs.google.com/spreadsheets/d/${SISTEMA_MAESTRO_ID}/gviz/tq?tqx=out:json&sheet=Actividad%20Agentes`;
+    const url = `https://docs.google.com/spreadsheets/d/${SISTEMA_MAESTRO_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('📞 Actividad Agentes')}`;
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 3000);
     const res  = await fetch(url, { signal: controller.signal });
