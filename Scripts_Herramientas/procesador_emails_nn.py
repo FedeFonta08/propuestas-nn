@@ -537,6 +537,19 @@ def generar_briefing_html(datos, campañas_viejas):
     ruta_html = os.path.join(carpeta_scripts, "Briefing_Lunes_ADN.html")
     ruta_html_root = os.path.join(os.path.dirname(carpeta_scripts), "Briefing_Lunes_ADN.html")
     
+    # Filtrar campañas activas e históricas para evitar dummies y placeholders
+    campanas_nuevas_filtradas = []
+    for c in datos.get("Campañas_Activas", []):
+        p = c.get("Producto", "").lower() if c.get("Producto") else ""
+        if p and "producto" not in p and "actualizaci" not in p and "radar comercial" not in p:
+            campanas_nuevas_filtradas.append(c)
+            
+    campanas_viejas_filtradas = []
+    for c in campañas_viejas:
+        p = c.get("Producto", "").lower() if c.get("Producto") else ""
+        if p and "producto" not in p and "actualizaci" not in p and "radar comercial" not in p:
+            campanas_viejas_filtradas.append(c)
+    
     html = f"""<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -893,7 +906,7 @@ def generar_briefing_html(datos, campañas_viejas):
         <div class="grid">
 """
     
-    for camp in datos.get("Campañas_Activas", []):
+    for camp in campanas_nuevas_filtradas:
         html += f"""
             <div class="card">
                 <div class="card-top">
@@ -941,7 +954,7 @@ def generar_briefing_html(datos, campañas_viejas):
         <div class="grid">
 """
 
-    for camp in campañas_viejas:
+    for camp in campanas_viejas_filtradas:
         html += f"""
             <div class="card vieja">
                 <div class="card-top">
