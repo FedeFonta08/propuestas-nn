@@ -568,6 +568,62 @@ body {
    ══════════════════════════════════════════════════════════════ */
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 .fade-in { animation: fadeIn 0.3s ease forwards; }
+
+/* Custom premium classes for Objections and Accordion */
+.badge-validar {
+  background: var(--nn-l);
+  color: var(--nn);
+  border: 1px solid var(--nn);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 5px;
+}
+.badge-reencuadrar {
+  background: var(--b-l);
+  color: var(--b);
+  border: 1px solid var(--b);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 5px;
+}
+.badge-proyectar {
+  background: var(--r-l);
+  color: var(--r);
+  border: 1px solid var(--r);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 5px;
+}
+.tactical-pause {
+  background: #FFFBEB;
+  border: 1px dashed #D97706;
+  color: #D97706;
+  padding: 8px;
+  border-radius: 6px;
+  margin: 10px 0;
+  font-size: 11px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.formatted-objection {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--tx);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 </style>
 </head>
 <body>
@@ -950,62 +1006,378 @@ body {
     Consulta rápida de productos y condiciones oficiales.
   </div>
 
-  <!-- SECCIÓN: AHORRO (SIALP) -->
-  <div class="adn-step">
-    <div class="adn-num">Fase 1 · Ahorro e Inversión</div>
-    <div style="font-size:14px; font-weight:700; color:var(--tx); margin-bottom:8px;">SIALP</div>
-    
-    <div style="display:flex; flex-direction:column; gap:8px;">
-      <a href="docs/fase1-ahorro/sialp/NN_Plan-Creciente-Sialp-Folleto.pdf" target="_blank" style="text-decoration:none; display:flex; align-items:center; gap:10px; padding:10px; background:var(--nn-l); border-radius:10px; border:1px solid var(--nn);">
-        <span style="font-size:20px;">📄</span>
-        <div>
-          <div style="font-size:12px; font-weight:700; color:var(--nn);">Folleto Comercial</div>
-          <div style="font-size:10px; color:var(--nn-d);">Ideal para explicar al cliente</div>
+  <div class="premium-accordion">
+    <!-- Acordeón 1: Contigo Futuro -->
+    <div class="acc-item">
+      <button class="acc-header" onclick="toggleAccItem(this)">
+        <span class="acc-icon">🟢</span>
+        <span class="acc-title">Contigo Futuro (~83€/mes)</span>
+        <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-content">
+        <div class="acc-inner">
+          <a href="D:/Users/ffont/Downloads/Contigo Futuro/NN_Contigo-Futuro-Folleto.pdf" target="_blank" class="doc-link main-link">
+            <span class="doc-icon">📄</span>
+            <div class="doc-info">
+              <span class="doc-name">Folleto Comercial</span>
+              <span class="doc-sub">Ideal para explicar al cliente (Inversión + 3.000€)</span>
+            </div>
+          </a>
+          <a href="D:/Users/ffont/Downloads/Contigo Futuro/Ficha-de-producto.pdf" target="_blank" class="doc-link">
+            <span class="doc-icon">📋</span>
+            <div class="doc-info">
+              <span class="doc-name">Ficha de Producto</span>
+              <span class="doc-sub">Detalles, coberturas e Invalidez IPA</span>
+            </div>
+          </a>
+          <a href="D:/Users/ffont/Downloads/Contigo Futuro/Ficha Comparativa Contigo Futuro.pdf" target="_blank" class="doc-link">
+            <span class="doc-icon">🔄</span>
+            <div class="doc-info">
+              <span class="doc-name">Ficha Comparativa</span>
+              <span class="doc-sub">Flanco contra decesos tradicionales</span>
+            </div>
+          </a>
+          <a href="D:/Users/ffont/Downloads/Contigo Futuro/FAQs Contigo Futuro.pdf" target="_blank" class="doc-link">
+            <span class="doc-icon">❓</span>
+            <div class="doc-info">
+              <span class="doc-name">Preguntas Frecuentes</span>
+              <span class="doc-sub">Dudas habituales sobre liquidez y rescate</span>
+            </div>
+          </a>
+          <a href="D:/Users/ffont/Downloads/Contigo Futuro/Argumentario Incremento Exposición ContigoFuturo.pdf" target="_blank" class="doc-link">
+            <span class="doc-icon">🔥</span>
+            <div class="doc-info">
+              <span class="doc-name">Argumentario de Venta</span>
+              <span class="doc-sub">Ganchos, aperturas y objeciones</span>
+            </div>
+          </a>
+          <a href="D:/Users/ffont/Downloads/Contigo Futuro/NN_Contigo-Futuro-Condiciones-Generales.pdf" target="_blank" class="doc-link">
+            <span class="doc-icon">⚖️</span>
+            <div class="doc-info">
+              <span class="doc-name">Condiciones Generales</span>
+              <span class="doc-sub">Detalle legal completo</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
+    </div>
 
-      <a href="docs/fase1-ahorro/sialp/KID_ENE24_PLAN_CRECIENTE_SIALP.pdf" target="_blank" style="text-decoration:none; display:flex; align-items:center; gap:10px; padding:10px; background:var(--white); border-radius:10px; border:1px solid var(--brd);">
-        <span style="font-size:20px;">📊</span>
-        <div>
-          <div style="font-size:12px; font-weight:700; color:var(--tx);">Ficha Técnica (KID)</div>
-          <div style="font-size:10px; color:var(--tx3);">Datos técnicos y rentabilidades</div>
+    <!-- Acordeón 2: SIALP Creciente -->
+    <div class="acc-item">
+      <button class="acc-header" onclick="toggleAccItem(this)">
+        <span class="acc-icon">🟡</span>
+        <span class="acc-title">SIALP Creciente (~166€/mes)</span>
+        <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-content">
+        <div class="acc-inner">
+          <a href="D:/Users/ffont/Downloads/SIALP COMPLETO/Folleto Plan Creciente Sialp.pdf" target="_blank" class="doc-link main-link">
+            <span class="doc-icon">📄</span>
+            <div class="doc-info">
+              <span class="doc-name">Folleto Comercial SIALP</span>
+              <span class="doc-sub">Exención fiscal 100% IRPF a los 5 años</span>
+            </div>
+          </a>
+          <a href="D:/Users/ffont/Downloads/SIALP COMPLETO/Ficha Plan Creciente Sialp.pdf" target="_blank" class="doc-link">
+            <span class="doc-icon">📋</span>
+            <div class="doc-info">
+              <span class="doc-name">Ficha Producto SIALP</span>
+              <span class="doc-sub">Estructura del Plan de Ahorro a Largo Plazo (PALP)</span>
+            </div>
+          </a>
+          <a href="D:/Users/ffont/Downloads/SIALP COMPLETO/Ficha Comparativa Plan Creciente Sialp.pdf" target="_blank" class="doc-link">
+            <span class="doc-icon">🔄</span>
+            <div class="doc-info">
+              <span class="doc-name">Ficha Comparativa SIALP</span>
+              <span class="doc-sub">Argumentos vs. Bancos y Competencia</span>
+            </div>
+          </a>
+          <a href="D:/Users/ffont/Downloads/SIALP COMPLETO/CC GG PLAN CRECIENTE SIALP.pdf" target="_blank" class="doc-link">
+            <span class="doc-icon">⚖️</span>
+            <div class="doc-info">
+              <span class="doc-name">Condiciones Generales SIALP</span>
+              <span class="doc-sub">Regulación del capital exento</span>
+            </div>
+          </a>
+          <a href="D:/Users/ffont/Downloads/SIALP COMPLETO/Preguntas Frecuentes Plan Creciente y Plan Creciente Sialp.pdf" target="_blank" class="doc-link">
+            <span class="doc-icon">❓</span>
+            <div class="doc-info">
+              <span class="doc-name">FAQs SIALP y Creciente</span>
+              <span class="doc-sub">Resolución rápida de dudas fiscales</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
+    </div>
 
-      <a href="docs/fase1-ahorro/sialp/Ficha Comparativa Plan Creciente.pdf" target="_blank" style="text-decoration:none; display:flex; align-items:center; gap:10px; padding:10px; background:var(--white); border-radius:10px; border:1px solid var(--brd);">
-        <span style="font-size:20px;">🔄</span>
-        <div>
-          <div style="font-size:12px; font-weight:700; color:var(--tx);">Comparativa Creciente</div>
-          <div style="font-size:10px; color:var(--tx3);">Argumentos contra la competencia</div>
+    <!-- Acordeón 3: Plan Creciente Estándar -->
+    <div class="acc-item">
+      <button class="acc-header" onclick="toggleAccItem(this)">
+        <span class="acc-icon">🔴</span>
+        <span class="acc-title">Plan Creciente Único (5.000€)</span>
+        <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-content">
+        <div class="acc-inner">
+          <a href="D:/Users/ffont/Downloads/SIALP COMPLETO/Folleto Plan Creciente.pdf" target="_blank" class="doc-link main-link">
+            <span class="doc-icon">📄</span>
+            <div class="doc-info">
+              <span class="doc-name">Folleto Comercial Creciente</span>
+              <span class="doc-sub">Aportación única y garantía creciente del 80-85%</span>
+            </div>
+          </a>
+          <a href="D:/Users/ffont/Downloads/SIALP COMPLETO/Ficha Plan Creciente.pdf" target="_blank" class="doc-link">
+            <span class="doc-icon">📋</span>
+            <div class="doc-info">
+              <span class="doc-name">Ficha Producto Creciente</span>
+              <span class="doc-sub">Detalle de garantías diarias HWM</span>
+            </div>
+          </a>
+          <a href="D:/Users/ffont/Downloads/SIALP COMPLETO/Ficha Comparativa Plan Creciente.pdf" target="_blank" class="doc-link">
+            <span class="doc-icon">🔄</span>
+            <div class="doc-info">
+              <span class="doc-name">Ficha Comparativa Creciente</span>
+              <span class="doc-sub">Blindaje patrimonial vs. Depósitos clásicos</span>
+            </div>
+          </a>
+          <a href="D:/Users/ffont/Downloads/SIALP COMPLETO/CC GG PLAN CRECIENTE.pdf" target="_blank" class="doc-link">
+            <span class="doc-icon">⚖️</span>
+            <div class="doc-info">
+              <span class="doc-name">Condiciones Generales Creciente</span>
+              <span class="doc-sub">Marco contractual completo</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
+    </div>
 
-      <a href="docs/fase1-ahorro/sialp/NN_Plan-Creciente-Sialp-Condiciones-Generales.pdf" target="_blank" style="text-decoration:none; display:flex; align-items:center; gap:10px; padding:10px; background:var(--white); border-radius:10px; border:1px solid var(--brd);">
-        <span style="font-size:20px;">⚖️</span>
-        <div>
-          <div style="font-size:12px; font-weight:700; color:var(--tx);">Condiciones Generales</div>
-          <div style="font-size:10px; color:var(--tx3);">Detalle legal completo</div>
+    <!-- Acordeón 4: Plan Salud + Vida -->
+    <div class="acc-item">
+      <button class="acc-header" onclick="toggleAccItem(this)">
+        <span class="acc-icon">🩺</span>
+        <span class="acc-title">Plan Salud + Vida (Sanitas)</span>
+        <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-content">
+        <div class="acc-inner">
+          <a href="D:/Users/ffont/Downloads/Importantes/guia_plan_salud_vida_v3.pdf" target="_blank" class="doc-link main-link" style="border-color:var(--b); background:var(--b-l);">
+            <span class="doc-icon" style="color:var(--b);">🏥</span>
+            <div class="doc-info">
+              <span class="doc-name" style="color:var(--b);">Guía Salud y Vida v3</span>
+              <span class="doc-sub" style="color:var(--b);">Catálogo médico y coberturas exclusivas</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
+    </div>
 
-      <a href="docs/fase1-ahorro/sialp/Infografía SIALP.png" target="_blank" style="text-decoration:none; display:flex; align-items:center; gap:10px; padding:10px; background:var(--b-l); border-radius:10px; border:1px solid var(--b);">
-        <span style="font-size:20px;">🖼️</span>
-        <div>
-          <div style="font-size:12px; font-weight:700; color:var(--b);">Infografía Visual</div>
-          <div style="font-size:10px; color:var(--b);">Para compartir por WhatsApp</div>
+    <!-- Acordeón 5: Contigo Familia -->
+    <div class="acc-item">
+      <button class="acc-header" onclick="toggleAccItem(this)">
+        <span class="acc-icon">👨‍👩‍👧‍👦</span>
+        <span class="acc-title">Contigo Familia</span>
+        <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-content">
+        <div class="acc-inner">
+          <a href="D:/Users/ffont/Downloads/Importantes/guia_contigo_familia_v3.pdf" target="_blank" class="doc-link main-link" style="border-color:var(--purple); background:var(--purple-l);">
+            <span class="doc-icon" style="color:var(--purple);">🛡️</span>
+            <div class="doc-info">
+              <span class="doc-name" style="color:var(--purple);">Guía Contigo Familia v3</span>
+              <span class="doc-sub" style="color:var(--purple);">Protección por accidentes, invalidez y capital</span>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
+    </div>
+
+    <!-- Acordeón 6: MiHogar / Hipoteca -->
+    <div class="acc-item">
+      <button class="acc-header" onclick="toggleAccItem(this)">
+        <span class="acc-icon">🏠</span>
+        <span class="acc-title">MiHogar / Hipoteca (ING · Abanca)</span>
+        <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-content">
+        <div class="acc-inner">
+          <div class="placeholder-info">
+            <span class="info-emoji">💡</span>
+            <div class="info-text">
+              <strong>Estrategia Hogar / Hipoteca:</strong>
+              <span class="info-sub">Utiliza MiHogar para reventar el precio del seguro de hogar que el cliente tiene atado al banco (ING / Abanca). El ahorro conseguido lo derivamos directamente a su <strong>Fondo de Previsión Familiar Activo</strong>.</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- SECCIÓN: SALUD (Próximamente) -->
-  <div class="adn-step" style="opacity:0.6;">
-    <div class="adn-num">Fase 2 · Salud</div>
-    <div style="font-size:13px; color:var(--tx3); font-style:italic;">Pendiente de indexar documentos seleccionados...</div>
-  </div>
+  <style>
+    /* Estilos del Acordeón Premium */
+    .premium-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .acc-item {
+      border: 1px solid var(--brd);
+      border-radius: var(--rad);
+      background: var(--card);
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .acc-item:hover {
+      border-color: var(--brd2);
+      box-shadow: var(--shadow);
+    }
+    .acc-header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 15px;
+      background: none;
+      border: none;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--tx);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+    .acc-header:hover {
+      background: var(--bg);
+    }
+    .acc-icon {
+      font-size: 16px;
+    }
+    .acc-title {
+      flex: 1;
+    }
+    .acc-arrow {
+      font-size: 10px;
+      color: var(--tx3);
+      transition: transform 0.3s ease;
+    }
+    .acc-item.open {
+      border-color: var(--nn);
+      box-shadow: var(--shadow-lg);
+    }
+    .acc-item.open .acc-arrow {
+      transform: rotate(180deg);
+      color: var(--nn);
+    }
+    .acc-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background: var(--bg);
+    }
+    .acc-inner {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .doc-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      background: var(--white);
+      border: 1px solid var(--brd);
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .doc-link:hover {
+      border-color: var(--brd2);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+    .doc-link.main-link {
+      background: var(--nn-l);
+      border-color: var(--nn);
+    }
+    .doc-link.main-link:hover {
+      background: var(--nn-ll);
+      border-color: var(--nn-d);
+    }
+    .doc-icon {
+      font-size: 20px;
+    }
+    .doc-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .doc-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--tx);
+    }
+    .doc-link.main-link .doc-name {
+      color: var(--nn);
+    }
+    .doc-sub {
+      font-size: 10px;
+      color: var(--tx2);
+      line-height: 1.2;
+    }
+    .doc-link.main-link .doc-sub {
+      color: var(--nn-d);
+    }
+    .placeholder-info {
+      display: flex;
+      gap: 10px;
+      padding: 12px;
+      background: var(--white);
+      border: 1px dashed var(--brd2);
+      border-radius: 8px;
+      font-size: 11px;
+      line-height: 1.4;
+      color: var(--tx2);
+    }
+    .info-emoji {
+      font-size: 16px;
+    }
+    .info-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .info-sub {
+      color: var(--tx3);
+    }
+  </style>
+
+  <script>
+    function toggleAccItem(btn) {
+      const item = btn.closest('.acc-item');
+      const content = item.querySelector('.acc-content');
+      const isOpen = item.classList.contains('open');
+      
+      // Cerrar otros
+      document.querySelectorAll('.acc-item').forEach(other => {
+        if (other !== item && other.classList.contains('open')) {
+          other.classList.remove('open');
+          other.querySelector('.acc-content').style.maxHeight = null;
+        }
+      });
+      
+      if (isOpen) {
+        item.classList.remove('open');
+        content.style.maxHeight = null;
+      } else {
+        item.classList.add('open');
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    }
+  </script>
 
   <div style="margin-top:20px; padding:12px; background:var(--bg); border-radius:10px; font-size:11px; color:var(--tx3); line-height:1.5;">
-    💡 <b>Tip de Fede:</b> Abre los documentos <u>antes</u> de llamar si ves que el Radar sugiere un producto de ahorro. La confianza se nota en la voz.
+    💡 <b>Tip de Fede:</b> Abre los documentos <u>antes</u> de llamar si ves que el Radar sugiere un producto de previsión. La seguridad y conocimiento se notan en la voz.
   </div>
 </div>
 
@@ -1388,16 +1760,30 @@ function selContacto(id) {
   const nombre = c.nombre.split(' ')[0];
   const tipoPoliza = c.poliza || 'protección';
   const mapeoProducto = mapPolizaToNN(c.poliza);
+  const isDecesos = c.poliza && c.poliza.toLowerCase().includes('decesos');
 
-  document.getElementById('script-text').innerHTML =
-    `"Hola <b>${nombre}</b>, soy Fede Fontanals de Nationale-Nederlanden en Xàtiva. ` +
-    `Te llamo porque veo que tienes <b>${tipoPoliza}</b> que vence ${c.vto ? 'el ' + c.vto : 'pronto'} ` +
-    `y quería asegurarme de que todo está en orden antes de la renovación. ¿Tienes un momentito?"`;
+  if (isDecesos) {
+    document.getElementById('script-text').innerHTML =
+      `"Hola <b>${nombre}</b>, soy Fede Fontanals, te llamo desde la oficina de Nationale-Nederlanden en Xàtiva. No te robo ni dos minutos, te lo prometo. Te llamo porque estamos realizando una campaña de <b>auditoría de costes de previsión familiar</b> en la comarca."`;
 
-  document.getElementById('script-si').innerHTML =
-    `<b>Si dice sí →</b> "Perfecto. Solo son 2 minutos. Voy a hacerte una pregunta: ` +
-    `¿tienes médico privado ahora mismo?"` +
-    (mapeoProducto ? `<br><br><b>Mapeo NN:</b> ${c.poliza} → <span style="color:var(--nn);font-weight:700">${mapeoProducto}</span>` : '');
+    document.getElementById('script-si').innerHTML =
+      `<b>Si dice sí →</b> "Perfecto. Muchos vecinos nos comentan que los recibos de sus seguros de decesos o entierros de toda la vida no paran de subir cada año y que, al final, es un dinero a fondo perdido que se queda la compañía. Mi trabajo no es venderte nada, sino entregarte un estudio para ver si estás tirando dinero.<br><br>` +
+      `Te hago una pregunta directa: en la póliza que tienes actualmente... ¿te has parado a calcular cuánto dinero habrás regalado si vives hasta los 85 años?<br><br>` +
+      `<div class="tactical-pause">🤫 Pausa táctica de 5 segundos en silencio - ¡No hables primero!</div><br>` +
+      `Justo por eso te llamo. Dejar el futuro resuelto no tiene por qué significar perder tus ahorros. Nosotros ayudamos a sustituir ese gasto a fondo perdido por un <b>Fondo de Previsión Familiar Activo</b>. Aportando <b>83€ al mes</b> (Contigo Futuro) o <b>166€/mes</b> (SIALP exento de IRPF), ese dinero es tuyo y crece con interés compuesto. Si mañana faltas, tus hijos reciben todo lo acumulado <b>más un cheque de 3.000€ en efectivo</b> de la compañía que paga el entierro. El entierro sale gratis, tus hijos heredan el 100% de tus ahorros libres de impuestos y la aseguradora no se queda nada. Y si vives muchos años, todo es tuyo para tu jubilación.<br><br>` +
+      `Esto por teléfono es imposible de ver en detalle. Nos sentamos 15 minutos, te enseño la simulación gráfica de los 83€ mensuales (o 166€ si prefieres la opción SIALP) y decides tú. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"` +
+      (mapeoProducto ? `<br><br><b>Mapeo NN:</b> ${c.poliza} → <span style="color:var(--nn);font-weight:700">${mapeoProducto}</span>` : '');
+  } else {
+    document.getElementById('script-text').innerHTML =
+      `"Hola <b>${nombre}</b>, soy Fede Fontanals de Nationale-Nederlanden en Xàtiva. ` +
+      `Te llamo porque veo que tienes <b>${tipoPoliza}</b> que vence ${c.vto ? 'el ' + c.vto : 'pronto'} ` +
+      `y quería asegurarme de que todo está en orden antes de la renovación. ¿Tienes un momentito?"`;
+
+    document.getElementById('script-si').innerHTML =
+      `<b>Si dice sí →</b> "Perfecto. Solo son 2 minutos. Voy a hacerte una pregunta: ` +
+      `¿tienes médico privado ahora mismo?"` +
+      (mapeoProducto ? `<br><br><b>Mapeo NN:</b> ${c.poliza} → <span style="color:var(--nn);font-weight:700">${mapeoProducto}</span>` : '');
+  }
 
   // Reset resultado
   document.querySelectorAll('.res-btn').forEach(b => b.classList.remove('active'));
@@ -1413,13 +1799,16 @@ function selContacto(id) {
 
   // Scroll to top of main
   document.getElementById('main-area').scrollTop = 0;
+
+  // Renderizar la pestaña de calificación
+  renderCalificar(c);
 }
 
 // Mapear pólizas Santalucía → productos NN
 function mapPolizaToNN(poliza) {
   if (!poliza) return '';
   const p = poliza.toLowerCase();
-  if (p.includes('decesos'))   return 'Contigo Senior / Plan Salud+Vida (según edad)';
+  if (p.includes('decesos'))   return 'Contigo Futuro (83€/m) / SIALP Creciente (166€/m) / Creciente Estándar (5.000€)';
   if (p.includes('hogar') || p.includes('chalet') || p.includes('casa')) return 'MiHogar Seguro';
   if (p.includes('vida'))      return 'Plan Salud+Vida / Protección Plus';
   if (p.includes('auto'))      return '(NN no ofrece auto — derivar a hipoteca o SIALP)';
@@ -1438,14 +1827,62 @@ function cambiarTab(btn, tabId) {
 
 // Objeciones
 const OBJECIONES = [
-  { label: 'Es caro', resp: '"¿Caro comparado con qué? Si mañana no puedes trabajar, pierdes X € al mes. Este producto te cubre Y €. ¿Qué es más caro: pagar 200 €/mes ahora o perder 2.000 €/mes si te pasa algo?"' },
-  { label: 'Déjame pensarlo', resp: '"Por supuesto. Pero antes: ¿qué parte no te ha quedado clara? ¿Es el precio, la necesidad, o el producto?" → "Si dentro de 6 meses tienes un accidente, ¿vas a pensar \'menos mal que contraté\' o \'por qué esperé\'?"' },
-  { label: 'Ya tengo seguro', resp: '"Perfecto. ¿Qué cobertura tienes? ¿Cuánto te cubre al mes si no puedes trabajar? ¿Durante cuánto tiempo? Tus gastos son Z € al mes. ¿Cómo cubres la diferencia?"' },
-  { label: 'Con mi pareja', resp: '"Me parece perfecto. De hecho, el análisis que hago incluye a los dos. ¿Cuándo podríais estar los dos disponibles 20 minutos?"' },
-  { label: 'No es el momento', resp: '"Entiendo. ¿Cuál sería el momento? Porque los accidentes no esperan al momento adecuado..."' },
-  { label: 'Por email', resp: '"Te lo puedo enviar, claro. Pero la propuesta sin el análisis personalizado no te va a decir nada. Son 15 minutos que pueden cambiar mucho la foto. ¿Cuándo tienes un hueco esta semana?"' },
-  { label: 'Familiar en seguros', resp: '"Qué bien. ¿Y ese familiar trabaja con Nationale-Nederlanden? Te lo pregunto porque hay productos específicos que solo tenemos nosotros, como el SIALP."' },
-  { label: 'Soy mayor para esto', resp: '"Al contrario, precisamente ahora es cuando más sentido tiene. ¿Sabes cuánto vas a cobrar de pensión cuando te jubiles?"' },
+  {
+    label: 'No tengo tiempo / Estoy muy liado',
+    resp: '<strong>[Validar]:</strong> "Lo entiendo perfectamente, [Nombre], sé que vas a mil...<br><strong>[Reencuadrar]:</strong> ...y precisamente por eso te llamo: el que no tiene tiempo es el que más necesita delegar su tranquilidad. Te aseguro que en 15 min de reloj te lo dejo masticado.<br><strong>[Proyectar]:</strong> Si mañana surge un imprevisto, ¿vas a pensar \'menos mal que le dediqué 15 minutos\' o \'por qué no saqué ese hueco\'? ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"'
+  },
+  {
+    label: 'Ya tengo seguro / Ya tengo algo en el banco',
+    resp: '<strong>[Validar]:</strong> "Excelente, eso demuestra que eres previsor y responsable, [Nombre]...<br><strong>[Reencuadrar]:</strong> ...y justo por eso te llamo. Muchos vecinos en Xàtiva pagan pólizas de previsión tradicionales a fondo perdido que suben de precio cada año y ofrecen un servicio cada vez peor. En 15 min revisamos tu cobertura y te enseño cómo tener un Fondo de Previsión Activo donde tu dinero es tuyo y tus hijos heredan tus ahorros más un cheque de 3.000€ para el entierro. Si todo está perfecto con tu banco, te lo diré yo mismo y te quedarás tranquilo gratis.<br><strong>[Proyectar]:</strong> ¿Prefieres seguir pagando a fondo perdido o ver si puedes empezar a rentabilizar tu dinero? ¿Martes o miércoles?"'
+  },
+  {
+    label: 'No quiero contratar nada',
+    resp: '<strong>[Validar]:</strong> "Me parece una decisión muy sensata, yo en tu lugar pensaría exactamente igual...<br><strong>[Reencuadrar]:</strong> ...de hecho, hoy no vengo a venderte nada. Mi trabajo hoy es entregarte tu estudio de costes de previsión familiar por escrito para que tengas la foto real de tu caso. Con esa información en la mano, tú decides lo que quieras con total tranquilidad.<br><strong>[Proyectar]:</strong> Tener la información es gratis, no tenerla es lo que sale caro cuando surge un problema. ¿Nos vemos un momento y le echamos un ojo? ¿Martes o miércoles?"'
+  },
+  {
+    label: '¿Cuánto cuesta?',
+    resp: '<strong>[Validar]:</strong> "Es una pregunta muy importante, el control del gasto familiar es clave...<br><strong>[Reencuadrar]:</strong> ...pero depende totalmente de tu caso: tu edad, situación y lo que ya tengas cubierto. Darte una cifra ahora sería inventármela. Trabajamos con huchas de ahorro de previsión de <strong>83€ al mes</strong> (Contigo Futuro) o <strong>166€/mes</strong> (SIALP exento de impuestos), pero lo importante es ver cuál se adapta a tu hucha.<br><strong>[Proyectar]:</strong> Lo importante no es la cuota, es asegurarte de que cada euro que aportas sea tuyo y no se lo regales a una aseguradora a fondo perdido. En 15 min te saco tu simulación exacta. ¿Te viene mejor martes o miércoles?"'
+  },
+  {
+    label: 'No me interesa / No lo necesito',
+    resp: '<strong>[Validar]:</strong> "Es normal que me digas eso, a muchos de mis clientes les pasaba igual antes de ver los números...<br><strong>[Reencuadrar]:</strong> ...solo te hago una pregunta: si mañana tienes una baja o un imprevisto de salud de 3 meses, ¿sabes exactamente cuánto te pagará la Seguridad Social y cuánto dinero perderás cada mes? ¿Y cuánto habrás regalado a tu seguro de entierro si vives hasta los 85 años?<br><strong>[Proyectar]:</strong> Si no tienes esa foto clara, estás asumiendo una apuesta muy cara. Son 15 min para despejar la incógnita y decidir tú. ¿Martes o miércoles?"'
+  },
+  {
+    label: 'Envíemelo por email / WhatsApp',
+    resp: '<strong>[Validar]:</strong> "Por supuesto, te lo puedo enviar sin problema...<br><strong>[Reencuadrar]:</strong> ...pero un folleto en PDF no te va a decir si estás tirando dinero en tus pólizas actuales o si tienes algún agujero en tu protección familiar. En 15 minutos sentados te hago el cálculo exacto de tu caso, te lo imprimo y ya lo tienes para siempre.<br><strong>[Proyectar]:</strong> Es la diferencia entre leer un diagnóstico genérico y tener una radiografía propia de tu realidad. ¿Qué te viene mejor, martes por la mañana o miércoles por la tarde?"'
+  },
+  {
+    label: 'Protección PLUS: ¿Por qué baja el capital?',
+    resp: '<strong>[Validar]:</strong> "Es una pregunta magnífica, casi todo el mundo se sorprende al principio...<br><strong>[Reencuadrar]:</strong> ...pero es la clave de su eficiencia: en lugar de subir la cuota cada año con tu edad (que es lo que hace que los seguros tradicionales se vuelvan impagables), la cuota se queda fija y barata para siempre, y lo que baja es el capital. ¿Por qué? Porque a medida que pasan los años tienes menos deudas (la hipoteca se reduce), tus hijos crecen y tienes más ahorros acumulados. Necesitas menos cobertura.<br><strong>[Proyectar]:</strong> Es la forma más inteligente de pagar solo por el riesgo real que tienes hoy, sin tirar dinero en coberturas que ya no necesitas. ¿Nos vemos un momento y te enseño tu curva exacta?"'
+  },
+  {
+    label: 'Protección PLUS: Ya tengo mi plan de ahorro',
+    resp: '<strong>[Validar]:</strong> "Fantástico, eso te sitúa en un nivel de responsabilidad muy alto...<br><strong>[Reencuadrar]:</strong> ...pero Protección PLUS no es para ahorrar, es el **escudo que blinda tu ahorro**. Si tienes un plan a 10 años y mañana pasa algo grave, Protección PLUS garantiza que ese capital llegue a tu familia íntegro desde el primer día, como si hubieras completado el plan de ahorro entero.<br><strong>[Proyectar]:</strong> Es la diferencia entre tener una hucha normal que se puede romper a mitad de camino y tener una hucha blindada. ¿Te va mejor martes o miércoles?"'
+  },
+  {
+    label: 'A mi edad ya no necesito estas cosas',
+    resp: '<strong>[Validar]:</strong> "Te entiendo perfectamente, y es lógico que lo pienses...<br><strong>[Reencuadrar]:</strong> ...pero este producto (Contigo Senior) no es el típico seguro de entierro para dejar en un cajón. Es un servicio para usar en el día a día aquí en la comarca: podólogo varias veces al año gratis, dentista, chequeos... y si tienes un tropezón en casa, te mandan ayuda real (limpieza, compra, peluquería a domicilio). Además de 6 meses bonificados ahora en mayo.<br><strong>[Proyectar]:</strong> Se trata de asegurar tu independencia y calidad de vida hoy, no solo el futuro. ¿Te va bien que me acerque 15 minutos a tu casa o nos tomamos un café en la Alameda?"'
+  },
+  {
+    label: 'Tengo que hablarlo con mi pareja / familia',
+    resp: '<strong>[Validar]:</strong> "Me parece una postura excelente, las decisiones de familia se toman en pareja...<br><strong>[Reencuadrar]:</strong> ...y de hecho, lo mejor es que en la reunión de 15 minutos estéis los dos delante. Así veis la simulación gráfica a la vez, resolvéis dudas de primera mano y nadie tiene que traducir tecnicismos al llegar a casa.<br><strong>[Proyectar]:</strong> Evita malentendidos y os da la foto real del patrimonio familiar al instante. ¿Qué os viene mejor, una tarde en casa de relax o una mañana?"'
+  },
+  {
+    label: 'Ya me llamaron de otra compañía / Estoy harto',
+    resp: '<strong>[Validar]:</strong> "Te entiendo y te pido disculpas, a mí también me aburre el spam telefónico de los call centers...<br><strong>[Reencuadrar]:</strong> ...pero yo no te llamo de una centralita de Madrid o Valencia. Soy Fede Fontanals, el Delegado que gestiona personalmente Xàtiva y La Costera. Mi objetivo es simplemente presentarme de forma profesional y transparente. Si tras el estudio rápido de 15 minutos ves que no te aporto valor, te lo digo claro, nos despedimos y no vuelvo a llamarte jamás.<br><strong>[Proyectar]:</strong> Es la diferencia de tener a alguien de confianza al lado con nombre y apellidos cuando hace falta. ¿Me das un voto de confianza y nos tomamos un café rápido de 15 min?"'
+  },
+  {
+    label: '¿Dónde está vuestra oficina?',
+    resp: '<strong>[Validar]:</strong> "Muy buena pregunta...<br><strong>[Reencuadrar]:</strong> ...el nuevo Punto Naranja de Xàtiva está en fase de instalación y apertura oficial. Pero para tu total comodidad, para esta auditoría de 15 minutos no hace falta que te desplaces tú: me muevo yo directamente y nos vemos en tu trabajo, en tu casa o en una cafetería céntrica, lo que prefieras.<br><strong>[Proyectar]:</strong> Te ahorras desplazamientos y aparcamiento. ¿Te viene mejor martes por la mañana o miércoles por la tarde?"'
+  },
+  {
+    label: '¿Qué es Nationale-Nederlanden?',
+    resp: '<strong>[Validar]:</strong> "Es una duda muy normal, el nombre es holandés y cuesta de pronunciar...<br><strong>[Reencuadrar]:</strong> ...pero llevamos más de 160 años asegurando familias en todo el mundo. En España somos el grupo financiero que ha estado históricamente detrás del banco ING. Lo que nos diferencia es que en lugar de un teléfono 900, tienes un gestor local aquí en Xàtiva con cara y ojos para asesorarte en persona.<br><strong>[Proyectar]:</strong> Tienes el músculo de una de las mayores aseguradoras globales y la cercanía de un vecino de confianza. ¿Nos sentamos un momento esta semana?"'
+  },
+  {
+    label: '¿Y si no puedo pagar más adelante?',
+    resp: '<strong>[Validar]:</strong> "Es una preocupación totalmente lógica y muy prudente por tu parte, [Nombre]...<br><strong>[Reencuadrar]:</strong> ...precisamente por eso trabajamos con el modelo de ahorro flexible (Contigo Futuro). Si tu situación económica cambia, puedes pausar las aportaciones, reducirlas al mínimo o incluso rescatar el capital a partir del primer año si necesitas liquidez urgente. No te voy a proponer ninguna trampa.<br><strong>[Proyectar]:</strong> Tienes total tranquilidad hoy por si las cosas van mal mañana. ¿Te viene bien ver los números y las opciones de flexibilidad en 15 min?"'
+  }
 ];
 
 function renderObjeciones() {
@@ -1460,8 +1897,173 @@ function mostrarObjecion(pill, idx) {
   document.querySelectorAll('.obj-pill').forEach(p => p.classList.remove('active'));
   pill.classList.add('active');
   const el = document.getElementById('obj-answer');
-  el.textContent = OBJECIONES[idx].resp;
+  
+  let raw = OBJECIONES[idx].resp;
+
+  // Si tiene el formato [Validar], [Reencuadrar], [Proyectar]
+  if (raw.includes('[Validar]') || raw.includes('<strong>[Validar]</strong>')) {
+    let formatted = raw
+      .replace(/\[Validar\]:?/g, '<span class="badge-validar">🤝 VALIDAR</span>')
+      .replace(/\[Reencuadrar\]:?/g, '<span class="badge-reencuadrar">🔄 REENCUADRAR</span>')
+      .replace(/\[Proyectar\]:?/g, '<span class="badge-proyectar">🎯 PROYECTAR</span>')
+      .replace(/<strong>\[Validar\]<\/strong>:?/g, '<span class="badge-validar">🤝 VALIDAR</span>')
+      .replace(/<strong>\[Reencuadrar\]<\/strong>:?/g, '<span class="badge-reencuadrar">🔄 REENCUADRAR</span>')
+      .replace(/<strong>\[Proyectar\]<\/strong>:?/g, '<span class="badge-proyectar">🎯 PROYECTAR</span>');
+
+    // Resaltar pausas
+    if (formatted.includes('Pausa táctica') || formatted.includes('pausa')) {
+      formatted = formatted.replace(
+        /(\(Pausa táctica[^)]+\))/ig, 
+        '<div class="tactical-pause">🤫 $1</div>'
+      );
+    }
+
+    el.innerHTML = `
+      <div class="formatted-objection">
+        ${formatted}
+      </div>
+    `;
+  } else {
+    el.innerHTML = raw;
+  }
   el.classList.add('show');
+}
+
+// ── CALIFICAR DINÁMICO ────────────────────────────────────────
+function renderCalificar(c) {
+  const el = document.getElementById('tab-calificar');
+  if (!el) return;
+  if (!c) {
+    el.innerHTML = '<div style="color:var(--tx3); text-align:center; padding:20px;">Selecciona un contacto para calificar</div>';
+    return;
+  }
+
+  const isDecesos = c.poliza && c.poliza.toLowerCase().includes('decesos');
+
+  if (isDecesos) {
+    el.innerHTML = `
+      <div class="qualify-title" style="font-weight: 700; color: var(--tx); font-size: 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+        🛡️ <span>Auditoría de Costes de Previsión Familiar</span>
+      </div>
+      <div style="font-size:12px; color:var(--tx2); margin-bottom:15px; background:var(--nn-l); padding:10px; border-radius:8px; border-left:3px solid var(--nn); line-height:1.4;">
+        Pregunta por su capacidad de ahorro e identifica el escalón del embudo que mejor encaja con su perfil para cerrar la cita:
+      </div>
+      
+      <div class="tier-selector-container" style="display:flex; flex-direction:column; gap:10px;">
+        <!-- Escalón 1 -->
+        <label class="tier-card" style="display:flex; gap:12px; padding:12px; border:1px solid var(--brd); border-radius:10px; cursor:pointer; background:var(--white); transition: all 0.2s ease;">
+          <input type="radio" name="tier-choice" value="1" checked onclick="selectTier(1)" style="margin-top:3px; accent-color:var(--nn);">
+          <div style="flex:1;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:12px; font-weight:700; color:var(--tx);">🟢 Escalón 1: Contigo Futuro</span>
+              <span style="font-size:11px; font-weight:700; color:var(--nn); background:var(--nn-l); padding:2px 6px; border-radius:4px;">~83€/mes</span>
+            </div>
+            <div style="font-size:10px; color:var(--tx3); margin-top:2px;">Para clase media-trabajadora / autónomos estándar</div>
+            <ul style="font-size:11px; color:var(--tx2); margin: 6px 0 0 15px; padding:0; line-height:1.4;">
+              <li>Mínimo anual 1.000€ fraccionado al 0%.</li>
+              <li><b>Flanco de Oro:</b> Entierro "Gratis" ➔ valor de la inversión MÁS 3.000€ (el cheque paga entierro y herederos se llevan 100% de ahorros intactos).</li>
+              <li><b>Exención (IPA):</b> NN asume la hucha si hay Invalidez Absoluta.</li>
+            </ul>
+          </div>
+        </label>
+
+        <!-- Escalón 2 -->
+        <label class="tier-card" style="display:flex; gap:12px; padding:12px; border:1px solid var(--brd); border-radius:10px; cursor:pointer; background:var(--white); transition: all 0.2s ease;">
+          <input type="radio" name="tier-choice" value="2" onclick="selectTier(2)" style="margin-top:3px; accent-color:var(--nn);">
+          <div style="flex:1;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:12px; font-weight:700; color:var(--tx);">🟡 Escalón 2: Plan Creciente SIALP</span>
+              <span style="font-size:11px; font-weight:700; color:var(--g); background:var(--g-l); padding:2px 6px; border-radius:4px;">~166€/mes</span>
+            </div>
+            <div style="font-size:10px; color:var(--tx3); margin-top:2px;">Para familias pudientes / directivos / autónomos consolidados</div>
+            <ul style="font-size:11px; color:var(--tx2); margin: 6px 0 0 15px; padding:0; line-height:1.4;">
+              <li>Mínimo anual 2.000€ fraccionado al 0%.</li>
+              <li><b>Flanco de Oro:</b> Exención fiscal 100% IRPF a los 5 años (PALP).</li>
+              <li><b>Garantía Diaria:</b> Asegura el 85% del valor máximo HWM.</li>
+            </ul>
+          </div>
+        </label>
+
+        <!-- Escalón 3 -->
+        <label class="tier-card" style="display:flex; gap:12px; padding:12px; border:1px solid var(--brd); border-radius:10px; cursor:pointer; background:var(--white); transition: all 0.2s ease;">
+          <input type="radio" name="tier-choice" value="3" onclick="selectTier(3)" style="margin-top:3px; accent-color:var(--nn);">
+          <div style="flex:1;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:12px; font-weight:700; color:var(--tx);">🔴 Escalón 3: Plan Creciente Estándar</span>
+              <span style="font-size:11px; font-weight:700; color:var(--b); background:var(--b-l); padding:2px 6px; border-radius:4px;">5.000€ Único</span>
+            </div>
+            <div style="font-size:10px; color:var(--tx3); margin-top:2px;">Para seniors (+55) con liquidez o cansados de pagar cuotas</div>
+            <ul style="font-size:11px; color:var(--tx2); margin: 6px 0 0 15px; padding:0; line-height:1.4;">
+              <li>Aportación única inicial desde 5.000€ (sin cuotas mensuales).</li>
+              <li><b>Flanco de Oro:</b> Dinero invirtiéndose. Al fallecer, herederos reciben Inversión + 3.000€ en efectivo (el entierro se paga y los 5.000€ regresan íntegros).</li>
+            </ul>
+          </div>
+        </label>
+      </div>
+
+      <div id="tier-pitch-box" style="margin-top:15px; padding:12px; background:var(--bg); border-radius:10px; border:1px solid var(--brd); font-size:12px; line-height:1.5;">
+        <!-- Se inyectará el pitch del escalón seleccionado aquí -->
+      </div>
+    `;
+    selectTier(1); // Seleccionar escalón 1 por defecto
+  } else {
+    // Default standard checklist
+    el.innerHTML = `
+      <div class="qualify-box">
+        <div class="qualify-q">¿Tienes médico privado ahora mismo?</div>
+        <div class="qualify-opts">
+          <b>NO →</b> Puerta completamente abierta. "Te cuento cómo puedes tener Sanitas al mejor precio..."<br>
+          <b>SÍ →</b> "¿Cuánto pagas al mes?" → Comparamos coberturas y precio<br>
+          <b>Solo SS →</b> "¿Cuánto esperas para ver a un especialista?" → Activar dolor de espera
+        </div>
+      </div>
+      <div style="margin-top:10px;padding:10px 14px;background:#FAFAF8;border:1px solid var(--brd);border-radius:var(--rad)">
+        <div style="font-size:11px;font-weight:700;color:var(--nn);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">Si el producto es SIALP / Plan Creciente</div>
+        <div style="font-size:13px;color:var(--tx);line-height:1.6">
+          "¿Sabes cuánto vas a cobrar de pensión cuando te jubiles?" → Silencio → "La brecha entre lo que necesitas y lo que tendrás puede ser de X € al mes durante 20-25 años."
+        </div>
+      </div>
+    `;
+  }
+}
+
+function selectTier(tier) {
+  const pitchBox = document.getElementById('tier-pitch-box');
+  if (!pitchBox) return;
+
+  // Resaltar tarjeta seleccionada
+  document.querySelectorAll('.tier-card').forEach((el, idx) => {
+    const isSelected = (idx + 1) === tier;
+    el.style.borderColor = isSelected ? 'var(--nn)' : 'var(--brd)';
+    el.style.background = isSelected ? 'var(--nn-ll)' : 'var(--white)';
+    el.style.boxShadow = isSelected ? 'var(--shadow)' : 'none';
+  });
+
+  let pitch = '';
+  if (tier === 1) {
+    pitch = `
+      <div style="font-weight:700; color:var(--nn); margin-bottom:4px; display:flex; align-items:center; gap:6px;">🎯 <span>PITCH RECOMENDADO CONTIGO FUTURO:</span></div>
+      <div style="color:var(--tx); font-style:italic;">
+        "Con el plan Contigo Futuro, aportando unos 83€ al mes, ese dinero no va a un cajón perdido. Se invierte y genera rentabilidad. El día de mañana, la compañía añade 3.000€ en efectivo de su propio bolsillo para el funeral, por lo que el entierro sale gratis y tus hijos heredan el 100% de tus ahorros acumulados intactos. ¿Te va mejor martes o miércoles para enseñarte cómo se blinda este ahorro?"
+      </div>
+    `;
+  } else if (tier === 2) {
+    pitch = `
+      <div style="font-weight:700; color:var(--g); margin-bottom:4px; display:flex; align-items:center; gap:6px;">🎯 <span>PITCH RECOMENDADO SIALP CRECIENTE:</span></div>
+      <div style="color:var(--tx); font-style:italic;">
+        "Con el Plan Creciente SIALP, aportando unos 166€ al mes, no solo proteges a tu familia sino que creamos un escudo fiscal: a los 5 años, el 100% de los rendimientos están exentos de impuestos por IRPF. Tienes liquidez total desde el primer año y un 85% de garantía de tu capital acumulado diaria. ¿Nos vemos un momento y simulamos tu ahorro libre de impuestos?"
+      </div>
+    `;
+  } else if (tier === 3) {
+    pitch = `
+      <div style="font-weight:700; color:var(--b); margin-bottom:4px; display:flex; align-items:center; gap:6px;">🎯 <span>PITCH RECOMENDADO CRECIENTE ÚNICO:</span></div>
+      <div style="color:var(--tx); font-style:italic;">
+        "En lugar de estar tirando una cuota mensual de entierro para toda la vida, pones una aportación única de 5.000€ a trabajar en renta variable garantizada al 80-85%. Si pasa algo, tus hijos heredan la inversión completa más un cheque adicional de 3.000€ en efectivo para los gastos del funeral. Los 3.000€ pagan el entierro y los 5.000€ regresan íntegros a tus hijos con los intereses acumulados. ¿Prefieres seguir perdiendo dinero a fondo perdido o blindar tus ahorros hoy?"
+      </div>
+    `;
+  }
+
+  pitchBox.innerHTML = pitch;
 }
 
 // ══════════════════════════════════════════════════════════════

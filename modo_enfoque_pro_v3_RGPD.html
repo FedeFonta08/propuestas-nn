@@ -1355,7 +1355,7 @@ const PROFILES_FEDE = [
   { id:'familia',     emoji:'👨‍👩‍👧', label:'Familia',         sub:'Salud · Vida' },
   { id:'senior',      emoji:'🧓', label:'Senior 55+',      sub:'Contigo Senior' },
   { id:'ahorro',      emoji:'💰', label:'Ahorro',          sub:'SIALP · Creciente' },
-  { id:'excliente',   emoji:'🔄', label:'Ex-Santalucía',   sub:'Sorpresa' },
+  { id:'excliente',   emoji:'🔄', label:'Auditoría Decesos', sub:'Ahorro Activo' },
   { id:'cartera',     emoji:'📋', label:'Cartera NN',      sub:'Revisión' },
   { id:'hipoteca',    emoji:'🏠', label:'Hipoteca',        sub:'ING · Abanca' },
   { id:'pyme',        emoji:'🏢', label:'Empresa / PYME',  sub:'Pyme · Comercios' }
@@ -1490,17 +1490,18 @@ const SCRIPTS = {
     }
   },
 
-  // ── EX-SANTALUCÍA — solo Fede ─────────────────────────
+  // ── AUDITORÍA DECESOS — solo Fede ─────────────────────
   excliente: {
-    tag: 'Ex-Santalucía · Sorpresa',
+    tag: 'Auditoría Previsión Familiar',
     campaign: null,
     fede: {
       paragraphs: [
-        '"¡Hola <span class="dyn-name">[Nombre]</span>! Soy Fede. Seguramente te suene mi voz de mi etapa anterior, ¿verdad? <em>(Pausa)</em>. Pues agárrate porque te llamo para darte una sorpresa."',
-        '"He dado un salto profesional y me acaban de nombrar Delegado para abrir el nuevo Punto Naranja de Nationale-Nederlanden. Te llamo directamente porque quería que fueras de los primeros en saberlo. Ahora tengo acceso a herramientas de ahorro, optimización de impuestos y salud muy potentes que antes no te podía ofrecer."',
-        '"No te llamo para que cambies nada. Solo quiero invitarte a un café de 20 minutos para ponernos al día y que sepas qué hacemos ahora por si alguna vez lo necesitas. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"'
+        '"Hola <span class="dyn-name">[Nombre]</span>. Soy Fede Fontanals, te llamo desde la oficina de Nationale-Nederlanden en Xàtiva. No te robo ni dos minutos, te lo prometo. Te llamo porque estamos realizando una campaña de <strong>auditoría de costes de previsión familiar</strong> en la comarca."',
+        '"Muchos vecinos nos comentan que los recibos de sus seguros de decesos o entierros de toda la vida no paran de subir cada año y que, al final, es un dinero a fondo perdido que se queda la compañía. Mi trabajo no es venderte nada, sino entregarte un estudio para ver si estás tirando dinero. Te hago una pregunta directa: en la póliza que tienes actualmente... ¿te has parado a calcular cuánto dinero habrás regalado si vives hasta los 85 años? <em>(Pausa táctica de 5 segundos en silencio)</em>"',
+        '"Justo por eso te llamo. Dejar el futuro resuelto no tiene por qué significar perder tus ahorros. Nosotros ayudamos a sustituir ese gasto a fondo perdido por un <strong>Fondo de Previsión Familiar Activo</strong>. Aportando <strong>83€ al mes</strong> (o <strong>166€/mes</strong> para familias con exención fiscal total de impuestos SIALP), ese dinero es tuyo y crece con interés compuesto. Si mañana faltas, tus hijos reciben todo lo acumulado <strong>más un cheque de 3.000€ en efectivo</strong> de la compañía que paga el entierro. El entierro sale gratis, tus hijos heredan el 100% de tus ahorros libres de impuestos y el dinero no se lo queda la aseguradora. Y si vives muchos años, todo es tuyo para tu jubilación."',
+        '"Esto por teléfono es imposible de ver en detalle. Nos sentamos 15 minutos, te enseño la simulación gráfica de los 83€ mensuales (o 166€ si prefieres la opción SIALP exenta de IRPF) y decides tú. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"'
       ],
-      note: 'Sus pólizas son de Santalucía, NO de NN. No presionar para cancelar nada. Mapear: Decesos → Contigo Senior, Hogar → MiHogar, Vida → Contigo Familia.'
+      note: 'Flanco de ataque: Decesos tradicional a fondo perdido vs. Contigo Futuro (83€/mes, +3.000€ fallecimiento básico) o SIALP Creciente (166€/mes, 0% IRPF a 5 años). No nombrar Santalucía por teléfono. Mantener pausa de 5 seg tras la pregunta detonante.'
     }
   },
 
@@ -1608,15 +1609,15 @@ const SCRIPTS = {
 
   // ── MIS EX-CLIENTES — solo agentes con cartera previa ─
   excagente: {
-    tag: 'Mis ex-clientes · Presentación',
+    tag: 'Mis ex-clientes · Optimización',
     campaign: null,
     agent_excliente: {
       paragraphs: [
-        '"¡Hola <span class="dyn-name">[Nombre]</span>! Soy <span class="dyn-agent">[Agente]</span>. ¿Te acuerdas de mí de mi etapa en <span class="dyn-company">[Compañía]</span>? <em>(Pausa)</em> Pues te llamo porque he dado un paso importante."',
-        '"Acabo de incorporarme al equipo de Nationale-Nederlanden aquí en la comarca. Te llamo directamente porque quería que fueras de los primeros en saberlo. Ahora tengo acceso a herramientas de salud, ahorro y optimización fiscal que antes no te podía ofrecer."',
-        '"No te llamo para que cambies nada. Solo quiero invitarte a un café de 20 minutos para ponernos al día y que sepas qué puedo hacer por ti ahora. ¿Te viene mejor el martes o el miércoles?"'
+        '"¡Hola <span class="dyn-name">[Nombre]</span>! Soy <span class="dyn-agent">[Agente]</span>. Te llamo un momento de forma directa. Como sabes, ahora formo parte del equipo de Nationale-Nederlanden aquí en la comarca y te llamaba porque estamos realizando una campaña de <strong>auditoría de costes de previsión familiar</strong>."',
+        '"Muchos clientes me comentan que los seguros de entierro de toda la vida no paran de subir de precio y que, al final, es un dinero a fondo perdido. Quería ofrecerte un estudio de optimización gratuito de 15 minutos: vemos lo que estás pagando hoy y te enseño cómo tener un <strong>Fondo de Previsión Familiar Activo</strong> a partir de <strong>83€ al mes</strong> (o <strong>166€/mes</strong> SIALP exento de impuestos), donde tu dinero es tuyo y tus hijos heredan tus ahorros más un cheque de 3.000€ en efectivo para el entierro. Si vives, todo vuelve a ti."',
+        '"No te llamo para cambiarte nada por teléfono. Nos sentamos 15 minutos, te enseño la simulación gráfica y decides tú. ¿Te viene mejor el martes o el miércoles?"'
       ],
-      note: 'Adaptación del guión "sorpresa" de Fede. Reemplaza [Compañía] con la real (ej: Generali). No presionar para cancelar. Detectar necesidades nuevas.'
+      note: 'Adaptación para ex-clientes de agentes. Enfoque en auditoría y optimización de decesos tradicional a fondo perdido usando Contigo Futuro (83€/mes) o SIALP Creciente (166€/mes).'
     }
   },
 
@@ -1688,59 +1689,59 @@ function getScript() {
 const OBJECTIONS = [
   {
     q: 'No tengo tiempo / Estoy muy liado',
-    a: '"Lo entiendo perfectamente, [Nombre], y precisamente por eso no le pido más de 20 minutos, reloj en mano. Si en los primeros 5 minutos ve que no le aporta nada, lo dejamos ahí. Me desplazo yo a su zona de trabajo o donde le venga bien entre gestión y gestión. Mi objetivo es que se lleve la información y decida con calma. ¿Le viene mejor mañana o pasado?"'
+    a: '<strong>[Validar]:</strong> "Lo entiendo perfectamente, [Nombre], sé que vas a mil...<br><strong>[Reencuadrar]:</strong> ...y precisamente por eso te llamo: el que no tiene tiempo es el que más necesita delegar su tranquilidad. Te aseguro que en 15 min de reloj te lo dejo masticado.<br><strong>[Proyectar]:</strong> Si mañana surge un imprevisto, ¿vas a pensar \'menos mal que le dediqué 15 minutos\' o \'por qué no saqué ese hueco\'? ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"'
   },
   {
     q: 'Ya tengo seguro / Ya tengo algo en el banco',
-    a: '"Perfecto — eso es lo ideal. Justo por eso quiero verlo: la mayoría de personas en Xàtiva tienen contratado algo que creen que les cubre todo… y cuando miramos los números reales, hay huecos importantes. En 20 minutos revisamos lo que ya tiene y le digo con total transparencia si está bien o si hay algo que mejorar. Si todo está perfecto, me alegro y se queda exactamente igual. ¿Le viene mejor mañana o pasado?"'
+    a: '<strong>[Validar]:</strong> "Excelente, eso demuestra que eres previsor y responsable, [Nombre]...<br><strong>[Reencuadrar]:</strong> ...y justo por eso te llamo. Muchos vecinos en Xàtiva pagan pólizas de previsión tradicionales a fondo perdido que suben de precio cada año y ofrecen un servicio cada vez peor. En 15 min revisamos tu cobertura y te enseño cómo tener un Fondo de Previsión Activo donde tu dinero es tuyo y tus hijos heredan tus ahorros más un cheque de 3.000€ para el entierro. Si todo está perfecto con tu banco, te lo diré yo mismo y te quedarás tranquilo gratis.<br><strong>[Proyectar]:</strong> ¿Prefieres seguir pagando a fondo perdido o ver si puedes empezar a rentabilizar tu dinero? ¿Martes o miércoles?"'
   },
   {
     q: 'No quiero contratar nada',
-    a: '"Me parece una decisión muy sensata. De hecho, yo tampoco vengo a venderle nada hoy. Mi trabajo es que usted tenga su Chequeo de Protección por escrito —su foto real, no la de un folleto genérico— y luego usted decide con calma y sin presión. La reunión no le compromete a nada, es pura información técnica. ¿Le va bien que lo veamos un momento?"'
+    a: '<strong>[Validar]:</strong> "Me parece una decisión muy sensata, yo en tu lugar pensaría exactamente igual...<br><strong>[Reencuadrar]:</strong> ...de hecho, hoy no vengo a venderte nada. Mi trabajo hoy es entregarte tu estudio de costes de previsión familiar por escrito para que tengas la foto real de tu caso. Con esa información en la mano, tú decides lo que quieras con total tranquilidad.<br><strong>[Proyectar]:</strong> Tener la información es gratis, no tenerla es lo que sale caro cuando surge un problema. ¿Nos vemos un momento y le echamos un ojo? ¿Martes o miércoles?"'
   },
   {
     q: '¿Cuánto cuesta?',
-    a: '"Depende totalmente de su caso: su edad, situación familiar y lo que ya tiene cubierto. Darle una cifra ahora sería inventarme un número. Por eso hacemos la reunión de 20 min: para que vea el precio real de SU caso. Lo importante es que primero vea si lo necesita y si le encaja. ¿Le viene mejor mañana o pasado?"'
+    a: '<strong>[Validar]:</strong> "Es una pregunta muy importante, el control del gasto familiar es clave...<br><strong>[Reencuadrar]:</strong> ...pero depende totalmente de tu caso: tu edad, situación y lo que ya tengas cubierto. Darte una cifra ahora sería inventármela. Trabajamos con huchas de ahorro de previsión de <strong>83€ al mes</strong> (Contigo Futuro) o <strong>166€/mes</strong> (SIALP exento de impuestos), pero lo importante es ver cuál se adapta a tu hucha.<br><strong>[Proyectar]:</strong> Lo importante no es la cuota, es asegurarte de que cada euro que aportas sea tuyo y no se lo regales a una aseguradora a fondo perdido. En 15 min te saco tu simulación exacta. ¿Te viene mejor martes o miércoles?"'
   },
   {
     q: 'No me interesa / No lo necesito',
-    a: '"Puede que tenga razón. Solo le hago una pregunta: si mañana tiene un imprevisto o una baja larga, ¿sabe exactamente cuánto cobraría y cuánto tiempo aguantaría su economía familiar? <em>(Pausa)</em> Si lo tiene claro, estupendo. Si no, son 20 minutos para que lo sepa con certeza. Usted decide."'
+    a: '<strong>[Validar]:</strong> "Es normal que me digas eso, a muchos de mis clientes les pasaba igual antes de ver los números...<br><strong>[Reencuadrar]:</strong> ...solo te hago una pregunta: si mañana tienes una baja o un imprevisto de salud de 3 meses, ¿sabes exactamente cuánto te pagará la Seguridad Social y cuánto dinero perderás cada mes? ¿Y cuánto habrás regalado a tu seguro de entierro si vives hasta los 85 años?<br><strong>[Proyectar]:</strong> Si no tienes esa foto clara, estás asumiendo una apuesta muy cara. Son 15 min para despejar la incógnita y decidir tú. ¿Martes o miércoles?"'
   },
   {
     q: 'Envíemelo por email / WhatsApp',
-    a: '"Claro, le puedo mandar un dossier. Pero siendo honesto: un PDF no le va a decir si lo que ya tiene es suficiente para su caso particular. En 20 minutos cara a cara le doy la información masticada y resolvemos dudas. ¿Qué le parece si le mando algo breve y luego nos vemos un momento?"'
+    a: '<strong>[Validar]:</strong> "Por supuesto, te lo puedo enviar sin problema...<br><strong>[Reencuadrar]:</strong> ...pero un folleto en PDF no te va a decir si estás tirando dinero en tus pólizas actuales o si tienes algún agujero en tu protección familiar. En 15 minutos sentados te hago el cálculo exacto de tu caso, te lo imprimo y ya lo tienes para siempre.<br><strong>[Proyectar]:</strong> Es la diferencia entre leer un diagnóstico genérico y tener una radiografía propia de tu realidad. ¿Qué te viene mejor, martes por la mañana o miércoles por la tarde?"'
   },
   {
     q: 'Protección PLUS: ¿Por qué baja el capital?',
-    a: '"Es la clave de este producto, [Nombre]. En lugar de que la cuota suba cada año con su edad (como en los seguros normales), aquí la cuota se queda fija y lo que baja es el capital. ¿Por qué? Porque a medida que pasan los años, usted tiene menos deudas o más ahorros, y necesita menos capital de seguro. Es la forma más inteligente de pagar solo por el riesgo que realmente tiene. ¿Le gustaría ver cómo quedan sus números?"'
+    a: '<strong>[Validar]:</strong> "Es una pregunta magnífica, casi todo el mundo se sorprende al principio...<br><strong>[Reencuadrar]:</strong> ...pero es la clave de su eficiencia: en lugar de subir la cuota cada año con tu edad (que es lo que hace que los seguros tradicionales se vuelvan impagables), la cuota se queda fija y barata para siempre, y lo que baja es el capital. ¿Por qué? Porque a medida que pasan los años tienes menos deudas (la hipoteca se reduce), tus hijos crecen y tienes más ahorros acumulados. Necesitas menos cobertura.<br><strong>[Proyectar]:</strong> Es la forma más inteligente de pagar solo por el riesgo real que tienes hoy, sin tirar dinero en coberturas que ya no necesitas. ¿Nos vemos un momento y te enseño tu curva exacta?"'
   },
   {
     q: 'Protección PLUS: Ya tengo mi plan de ahorro',
-    a: '"Precisamente por eso se lo cuento. Protección PLUS no es para ahorrar, es el escudo que blinda su ahorro. Si usted tiene un plan a 10 años y mañana pasa algo, este producto garantiza que ese dinero llegue a su familia íntegro, como si hubiera terminado el plan. Es la diferencia entre tener una hucha y tener una hucha blindada. ¿Nos vemos 20 min y se lo enseño?"'
+    a: '<strong>[Validar]:</strong> "Fantástico, eso te sitúa en un nivel de responsabilidad muy alto...<br><strong>[Reencuadrar]:</strong> ...pero Protección PLUS no es para ahorrar, es el **escudo que blinda tu ahorro**. Si tienes un plan a 10 años y mañana pasa algo grave, Protección PLUS garantiza que ese capital llegue a tu familia íntegro desde el primer día, como si hubieras completado el plan de ahorro entero.<br><strong>[Proyectar]:</strong> Es la diferencia entre tener una hucha normal que se puede romper a mitad de camino y tener una hucha blindada. ¿Te va mejor martes o miércoles?"'
   },
   {
     q: 'A mi edad ya no necesito estas cosas',
-    a: '"Precisamente por eso le llamo. Lo que le cuento no es un seguro de esos que ojalá nunca use. Es algo para el día a día aquí en la comarca: podólogo, limpieza dental, chequeo preventivo... Y si algún día tiene un tropezón en casa, le mandan ayuda real (limpieza, compra, peluquería). Con 20 minutos le enseño cómo funciona el servicio. ¿Le viene bien?"'
+    a: '<strong>[Validar]:</strong> "Te entiendo perfectamente, y es lógico que lo pienses...<br><strong>[Reencuadrar]:</strong> ...pero este producto (Contigo Senior) no es el típico seguro de entierro para dejar en un cajón. Es un servicio para usar en el día a día aquí en la comarca: podólogo varias veces al año gratis, dentista, chequeos... y si tienes un tropezón en casa, te mandan ayuda real (limpieza, compra, peluquería a domicilio). Además de 6 meses bonificados ahora en mayo.<br><strong>[Proyectar]:</strong> Se trata de asegurar tu independencia y calidad de vida hoy, no solo el futuro. ¿Te va bien que me acerque 15 minutos a tu casa o nos tomamos un café en la Alameda?"'
   },
   {
     q: 'Tengo que hablarlo con mi pareja / familia',
-    a: '"Me parece estupendo — es una decisión de familia. De hecho, si quiere, cuando nos sentemos a verlo pueden estar todos delante. Así lo ven juntos con los números encima de la mesa y deciden en familia. No hay que decidir nada ese día. ¿Cuándo podríamos quedar?"'
+    a: '<strong>[Validar]:</strong> "Me parece una postura excelente, las decisiones de familia se toman en pareja...<br><strong>[Reencuadrar]:</strong> ...y de hecho, lo mejor es que en la reunión de 15 minutos estéis los dos delante. Así veis la simulación gráfica a la vez, resolvéis dudas de primera mano y nadie tiene que traducir tecnicismos al llegar a casa.<br><strong>[Proyectar]:</strong> Evita malentendidos y os da la foto real del patrimonio familiar al instante. ¿Qué os viene mejor, una tarde en casa de relax o una mañana?"'
   },
   {
     q: 'Ya me llamaron de otra compañía / Estoy harto',
-    a: '"Le entiendo perfectamente, y precisamente por eso le llamo yo directamente: sin rollos, sin presión. Soy Fede Fontanals, el Delegado que lleva personalmente Xàtiva y La Costera —estoy aquí en la comarca, no en un call center. Mi objetivo es presentarme y ver si le puedo ser útil. Si no le aporto nada, no vuelvo a molestarle. ¿Me da 20 minutos?"'
+    a: '<strong>[Validar]:</strong> "Te entiendo y te pido disculpas, a mí también me aburre el spam telefónico de los call centers...<br><strong>[Reencuadrar]:</strong> ...pero yo no te llamo de una centralita de Madrid o Valencia. Soy Fede Fontanals, el Delegado que gestiona personalmente Xàtiva y La Costera. Mi objetivo es simplemente presentarme de forma profesional y transparente. Si tras el estudio rápido de 15 minutos ves que no te aporto valor, te lo digo claro, nos despedimos y no vuelvo a llamarte jamás.<br><strong>[Proyectar]:</strong> Es la diferencia de tener a alguien de confianza al lado con nombre y apellidos cuando hace falta. ¿Me das un voto de confianza y nos tomamos un café rápido de 15 min?"'
   },
   {
     q: '¿Dónde está vuestra oficina?',
-    a: '"Ahora mismo el Punto Naranja de Xàtiva está en proceso de instalación. Pero para lo que le propongo no necesita moverse usted: me desplazo yo directamente. Podemos quedar en su casa, en su trabajo o en una cafetería del centro. Lo que a usted le resulte más cómodo. ¿Mañana o pasado?"'
+    a: '<strong>[Validar]:</strong> "Muy buena pregunta...<br><strong>[Reencuadrar]:</strong> ...el nuevo Punto Naranja de Xàtiva está en fase de instalación y apertura oficial. Pero para tu total comodidad, para esta auditoría de 15 minutos no hace falta que te desplaces tú: me muevo yo directamente y nos vemos en tu trabajo, en tu casa o en una cafetería céntrica, lo que prefieras.<br><strong>[Proyectar]:</strong> Te ahorras desplazamientos y aparcamiento. ¿Te viene mejor martes por la mañana o miércoles por la tarde?"'
   },
   {
     q: '¿Qué es Nationale-Nederlanden?',
-    a: '"Es normal que no le suene el nombre — es holandés. Llevamos más de 160 años en seguros y en España somos la compañía que está detrás de ING. Lo que nos hace diferentes es que tiene un delegado local, con cara y nombre, que se desplaza por la comarca. No un 900 desde Madrid. Soy esa persona para usted. ¿Nos tomamos un café?"'
+    a: '<strong>[Validar]:</strong> "Es una duda muy normal, el nombre es holandés y cuesta de pronunciar...<br><strong>[Reencuadrar]:</strong> ...pero llevamos más de 160 años asegurando familias en todo el mundo. En España somos el grupo financiero que ha estado históricamente detrás del banco ING. Lo que nos diferencia es que en lugar de un teléfono 900, tienes un gestor local aquí en Xàtiva con cara y ojos para asesorarte en persona.<br><strong>[Proyectar]:</strong> Tienes el músculo de una de las mayores aseguradoras globales y la cercanía de un vecino de confianza. ¿Nos sentamos un momento esta semana?"'
   },
   {
     q: '¿Y si no puedo pagar más adelante?',
-    a: '"Muy buena pregunta. Precisamente por eso trabajamos con productos flexibles. Si su situación cambia, tiene opciones: puede pausar aportaciones o ajustar coberturas. No le voy a presentar nada que sea una trampa. La idea es que tenga protección cuando la necesita, sin ataduras que no le encajen. ¿Le vemos un momento?"'
+    a: '<strong>[Validar]:</strong> "Es una preocupación totalmente lógica y muy prudente por tu parte, [Nombre]...<br><strong>[Reencuadrar]:</strong> ...precisamente por eso trabajamos con el modelo de ahorro flexible (Contigo Futuro). Si tu situación económica cambia, puedes pausar las aportaciones, reducirlas al mínimo o incluso rescatar el capital a partir del primer año si necesitas liquidez urgente. No te voy a proponer ninguna trampa.<br><strong>[Proyectar]:</strong> Tienes total tranquilidad hoy por si las cosas van mal mañana. ¿Te viene bien ver los números y las opciones de flexibilidad en 15 min?"'
   }
 ];
 // ══════════════════════════════════════════════════════════
