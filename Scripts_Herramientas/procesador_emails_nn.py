@@ -495,12 +495,26 @@ def exportar_json_dashboard(datos, campañas_viejas):
     ruta_json = os.path.join(os.path.dirname(os.path.dirname(__file__)), "radar_db.json")
     
     # Combinar campañas nuevas y viejas
-    todas = datos.get("Campañas_Activas", [])
-    nombres_nuevas = [c.get("Producto", "").lower() for c in todas]
+    todas_bruto = datos.get("Campañas_Activas", [])
+    nombres_nuevas = [c.get("Producto", "").lower() for c in todas_bruto]
     
     for c in campañas_viejas:
         if c.get("Producto", "").lower() not in nombres_nuevas:
-            todas.append(c)
+            todas_bruto.append(c)
+            
+    # Filtrar elementos dummy / placeholders sin sentido
+    todas = []
+    for c in todas_bruto:
+        prod_lower = c.get("Producto", "").lower() if c.get("Producto") else ""
+        if not prod_lower:
+            continue
+        if "producto" in prod_lower:
+            continue
+        if "actualizaci" in prod_lower:
+            continue
+        if "radar comercial" in prod_lower:
+            continue
+        todas.append(c)
             
     db = {
         "ultima_actualizacion": datetime.datetime.now().strftime("%d/%m/%Y %H:%M"),

@@ -1453,12 +1453,22 @@ function renderRadarUI(campanas, origen) {
   const footer = document.getElementById('radar-footer');
   if (!grid) return;
 
-  if (!campanas || campanas.length === 0) {
+  // Filtrar placeholders o campos vacíos sin sentido
+  const campanasValidas = (campanas || []).filter(c => {
+    const prod = (c.producto || c.Producto || '').toLowerCase();
+    if (!prod) return false;
+    if (prod.includes('producto')) return false;
+    if (prod.includes('actualizaci')) return false;
+    if (prod.includes('radar comercial')) return false;
+    return true;
+  });
+
+  if (campanasValidas.length === 0) {
     grid.innerHTML = '<div class="radar-loading">No hay campañas disponibles.</div>';
     return;
   }
 
-  const ordenadas = ordenarCampanas(campanas);
+  const ordenadas = ordenarCampanas(campanasValidas);
 
   grid.innerHTML = ordenadas.map(c => {
     const prod = c.producto || c.Producto || 'Producto';

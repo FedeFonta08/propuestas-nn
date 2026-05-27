@@ -293,12 +293,22 @@ async function cargarRadar() {
     const db = await response.json();
     status.textContent = `Última actualización: ${db.ultima_actualizacion}`;
     
-    if (db.campanas.length === 0) {
+    // Filtrar placeholders o campos vacíos sin sentido
+    const campanasValidas = (db.campanas || []).filter(c => {
+      const prod = (c.Producto || c.producto || '').toLowerCase();
+      if (!prod) return false;
+      if (prod.includes('producto')) return false;
+      if (prod.includes('actualizaci')) return false;
+      if (prod.includes('radar comercial')) return false;
+      return true;
+    });
+    
+    if (campanasValidas.length === 0) {
       grid.innerHTML = '<div class="premium-card" style="padding:40px; text-align:center; grid-column:1/-1;">No hay campañas activas esta semana.</div>';
       return;
     }
     
-    grid.innerHTML = db.campanas.map(c => {
+    grid.innerHTML = campanasValidas.map(c => {
       const esUrgente = c.Estado && c.Estado.includes('URGENTE');
       return `
         <div class="premium-card radar-card ${esUrgente ? 'urgente' : ''}">
