@@ -800,23 +800,7 @@ body {
                 <i>(Si responde)</i> → "Vale, pues te hago una pregunta muy directa: en ese seguro que pagas a [Compañía]... ¿te has parado a calcular exactamente cuánto dinero le habrás regalado a fondo perdido si vives hasta los 85 años?"<br>
                 <div class="tactical-pause" style="margin-top: 10px; border-color: var(--purple); color: var(--purple); background: #f5f3ff;">🤫 Silencio táctico de 5 segundos - ¡No hables tú primero!</div>
               </div>
-              <div class="script-si" style="margin-top: 15px; border-top: none; padding-top: 0;">
-                <b style="color:var(--purple);">La Solución de Intriga (El Cierre):</b><br><br>
-                "Justo por eso te llamo. Dejar todo resuelto a tu familia no tiene por qué significar regalarle miles de euros a una aseguradora.<br><br>
-                Nosotros estamos ayudando a las familias a transformar ese gasto a fondo perdido en un <b>Fondo de Previsión Familiar Activo</b>. Básicamente, hacemos que el servicio funerario de máxima calidad quede cubierto, pero con la gran diferencia de que <b>el dinero que aportas no se pierde y además te genera beneficio: es tuyo</b>.<br><br>
-                Si pasa lo peor, tu familia cobra un capital. Pero lo más importante: <b>si el día de mañana tienes cualquier imprevisto, una urgencia o necesitas el dinero en vida, puedes disponer de ese capital</b>. Tienes acceso a tu dinero, cosa que en un seguro de muertos tradicional es imposible.<br><br>
-                Explicar cómo funciona esta diferencia por teléfono es imposible, es algo muy visual. Lo que te propongo es que nos sentemos 15 minutos, te enseño gráficamente cómo se transforma ese gasto en ahorro para ti, y tú decides con los números en la mano.<br><br>
-                ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"
-              </div>
-            </div>
-          </div>
-              <div class="script-si" style="margin-top: 15px; border-top: none; padding-top: 0;">
-                <b style="color:var(--purple);">La Solución de Intriga (El Cierre):</b><br><br>
-                "Justo por eso te llamo. Dejar todo resuelto a tus hijos no tiene por qué significar regalarle miles de euros a una aseguradora.<br><br>
-                Nosotros estamos ayudando a las familias a transformar ese gasto a fondo perdido en un <b>Fondo de Previsión Familiar Activo</b>. Básicamente, hacemos que el servicio funerario de máxima calidad quede cubierto, pero con la gran diferencia de que <b>el dinero que aportas no se pierde: es tuyo</b>. Si pasa algo, tus hijos cobran un capital; y si vives muchos años (que es lo que todos queremos), todo ese ahorro te lo quedas tú para tu jubilación, no la compañía.<br><br>
-                Explicar cómo funciona este sistema por teléfono es imposible, es algo muy visual. Lo que te propongo es que nos sentemos 15 minutos, te enseño gráficamente cómo se transforma ese gasto en ahorro para ti, y tú decides con los números en la mano.<br><br>
-                ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"
-              </div>
+              
 
           <!-- TAB: OBJECIONES -->
           <div class="tab-content" id="tab-objeciones">
@@ -1842,8 +1826,11 @@ function selContacto(id) {
       `Te pregunto directamente... ¿tú tienes contratado actualmente algún seguro de decesos o entierro, o lo tienes resuelto de otra manera?<br><br>` +
       `<i>(Si responde decesos, continúas)</i> → Entiendo. Y en la póliza que tienes actualmente... ¿te has parado a calcular cuánto dinero habrás regalado si vives hasta los 85 años?<br><br>` +
       `<div class="tactical-pause">🤫 Pausa táctica de 5 segundos en silencio - ¡No hables primero!</div><br>` +
-      `Justo por eso te llamo. Dejar el futuro resuelto no tiene por qué significar perder tus ahorros. Nosotros ayudamos a sustituir ese gasto a fondo perdido por un <b>Fondo de Previsión Familiar Activo</b>. Aportando <b>83€ al mes</b> (Contigo Futuro) o <b>166€/mes</b> (SIALP exento de IRPF), ese dinero es tuyo y crece con interés compuesto. Si mañana faltas, tus hijos reciben todo lo acumulado <b>más un cheque de 3.000€ en efectivo</b> de la compañía para el entierro. El entierro sale gratis, tus hijos heredan el 100% de tus ahorros y la aseguradora no se queda nada.<br><br>` +
-      `Esto por teléfono es imposible de ver en detalle. Nos sentamos 15 minutos, te enseño la simulación gráfica de los 83€ mensuales (o 166€ si prefieres la opción SIALP) y decides tú. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"` +
+      `Justo por eso te llamo. Dejar todo resuelto a tu familia no tiene por qué significar regalarle miles de euros a una aseguradora.<br><br>` +
+      `Nosotros estamos ayudando a las familias a transformar ese gasto a fondo perdido en un <b>Fondo de Previsión Familiar Activo</b>. Básicamente, hacemos que el servicio funerario de máxima calidad quede cubierto, pero con la gran diferencia de que <b>el dinero que aportas no se pierde y además te genera beneficio: es tuyo</b>.<br><br>` +
+      `Si pasa lo peor, tu familia cobra un capital. Pero lo más importante: <b>si el día de mañana tienes cualquier imprevisto, una urgencia o necesitas el dinero en vida, puedes disponer de ese capital</b>. Tienes acceso a tu dinero, cosa que en un seguro de muertos tradicional es imposible.<br><br>` +
+      `Explicar cómo funciona esta diferencia por teléfono es imposible, es algo muy visual. Lo que te propongo es que nos sentemos 15 minutos, te enseño gráficamente cómo se transforma ese gasto en ahorro para ti, y tú decides con los números en la mano.<br><br>` +
+      `¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"` +
       (mapeoProducto ? `<br><br><b>Mapeo NN:</b> ${c.poliza} → <span style="color:var(--nn);font-weight:700">${mapeoProducto}</span>` : '');
   } else {
     const isHogar = tipoPoliza.toLowerCase().includes('hogar') || tipoPoliza.toLowerCase().includes('chalet') || tipoPoliza.toLowerCase().includes('casa');
