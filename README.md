@@ -74,32 +74,45 @@ El sistema se divide en cuatro capas operativas para cubrir todo el ciclo de la 
 
 ---
 
-## 🏗️ Arquitectura del Sistema
+## 🏗️ Arquitectura y Conexión del Sistema
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                   FRONTEND (HTML5 + JS)                 │
-│  Panel Despegue · Aperturas Pro · Cockpit · Propuestas  │
-└────────────────────────┬────────────────────────────────┘
-                         │ gviz/tq (JSON) + OAuth2
-                         ▼
-┌─────────────────────────────────────────────────────────┐
-│              GOOGLE SHEETS — FUENTE DE VERDAD           │
-│  CRM Maestro (Base de Datos) · Radar Comercial NN       │
-│  ID: [SISTEMA PROTEGIDO]                                │
-└────────────────────────┬────────────────────────────────┘
-                         │ Apps Script Backend
-                         ▼
-┌─────────────────────────────────────────────────────────┐
-│              GOOGLE CALENDAR + GMAIL                    │
-│        Citas · Eventos · Briefing Lunes ADN             │
-└────────────────────────┬────────────────────────────────┘
-                         │ Git push
-                         ▼
-┌─────────────────────────────────────────────────────────┐
-│              GITHUB PAGES (DESPLIEGUE)                  │
-│     fedefonta08.github.io/propuestas-nn/                │
-└─────────────────────────────────────────────────────────┘
+El ecosistema digital está totalmente interconectado mediante un flujo de automatización sincronizado en caliente entre herramientas de análisis local, bases de datos en la nube y páginas de cara al cliente.
+
+Para ver el directorio completo de componentes locales y remotos con sus respectivas funciones y flujos, consulta el **[Mapa Detallado de Arquitectura (MAPA_ARQUITECTURA.md)](MAPA_ARQUITECTURA.md)**.
+
+```mermaid
+flowchart TB
+    %% Estilo del Diagrama
+    classDef main fill:#FFF3EB,stroke:#e85c0f,stroke-width:2px,color:#000000;
+    classDef db fill:#F0FDF4,stroke:#16A34A,stroke-width:2px,color:#000000;
+    classDef cloud fill:#EFF6FF,stroke:#2563EB,stroke-width:2px,color:#000000;
+
+    Mail["📧 Correo Corporativo <br><i>(Entre Nosotros / Urgente)</i>"]:::main
+    Script["🧠 Python: procesador_emails_nn.py<br><i>(Scripts_Herramientas)</i>"]:::main
+    Sheets["📡 Google Sheets<br><i>(Radar Comercial Drive)</i>"]:::cloud
+    Github["🌐 GitHub Repository & Pages<br><i>CDN en Vivo</i>"]:::cloud
+    DB["📂 radar_db.json<br><i>Base de datos local en vivo</i>"]:::db
+
+    Dash["🎯 index.html<br><i>Despegue Principal</i>"]:::main
+    DashPrem["🎛️ index_v4_premium.html<br><i>Despegue Premium</i>"]:::main
+    Briefing["🧠 Briefing_Lunes_ADN.html<br><i>Dossier Vulnerabilidades</i>"]:::main
+    Portal["❤️ propuestas-nn-v2.html<br><i>Portal de Propuestas de Clientes</i>"]:::main
+
+    Mail -->|Lectura| Script
+    Script -->|1. Sincroniza| Sheets
+    Script -->|2. Filtra y genera| DB
+    Script -->|3. Actualiza| Briefing
+    Script -->|4. Push automático| Github
+
+    Github -->|CDN en Vivo| Portal
+    Github -->|CDN en Vivo| Dash
+    DB -->|Lectura local| Dash
+    DB -->|Lectura local| DashPrem
+    DB -->|Lectura local| Portal
+
+    class Dash,DashPrem,Briefing,Portal,Script main;
+    class DB db;
+    class Sheets,Github cloud;
 ```
 
 ---

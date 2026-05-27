@@ -31,6 +31,7 @@ Contraseña*.txt
 # 3. Bloqueo de Documentación de Trabajo e IDE
 *.md
 !README.md
+!MAPA_ARQUITECTURA.md
 .vscode/
 .idea/
 .DS_Store
