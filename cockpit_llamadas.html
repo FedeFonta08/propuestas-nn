@@ -1800,13 +1800,14 @@ function selContacto(id) {
 
   if (isDecesos) {
     document.getElementById('script-text').innerHTML =
-      `"Hola <b>${nombre}</b>, soy Fede Fontanals, te llamo desde la oficina de Nationale-Nederlanden en Xàtiva. No te robo ni dos minutos, te lo prometo. Te llamo porque estamos realizando una campaña de <b>auditoría de costes de previsión familiar</b> en la comarca."`;
+      `"Hola <b>${nombre}</b>, soy Fede Fontanals, te llamo desde la oficina de Nationale-Nederlanden en Xàtiva. No te robo ni dos minutos, te lo prometo. Te llamo porque estamos realizando una campaña local de <b>auditoría de costes de previsión y protección familiar</b> aquí en la comarca."`;
 
     document.getElementById('script-si').innerHTML =
-      `<b>Si dice sí →</b> "Perfecto. Muchos vecinos nos comentan que los recibos de sus seguros de decesos o entierros de toda la vida no paran de subir cada año y que, al final, es un dinero a fondo perdido que se queda la compañía. Mi trabajo no es venderte nada, sino entregarte un estudio para ver si estás tirando dinero.<br><br>` +
-      `Te hago una pregunta directa: en la póliza que tienes actualmente... ¿te has parado a calcular cuánto dinero habrás regalado si vives hasta los 85 años?<br><br>` +
+      `<b>Si dice sí →</b> "Perfecto. Muchos vecinos nos comentan que los recibos de sus seguros de decesos o entierros de toda la vida no paran de subir cada año y que, al final, es un dinero a fondo perdido que se queda la compañía. Mi trabajo no es venderte nada, sino entregarte un estudio para ver si estás pagando de más.<br><br>` +
+      `Te pregunto directamente... ¿tú tienes contratado actualmente algún seguro de decesos o entierro, o lo tienes resuelto de otra manera?<br><br>` +
+      `<i>(Si responde decesos, continúas)</i> → Entiendo. Y en la póliza que tienes actualmente... ¿te has parado a calcular cuánto dinero habrás regalado si vives hasta los 85 años?<br><br>` +
       `<div class="tactical-pause">🤫 Pausa táctica de 5 segundos en silencio - ¡No hables primero!</div><br>` +
-      `Justo por eso te llamo. Dejar el futuro resuelto no tiene por qué significar perder tus ahorros. Nosotros ayudamos a sustituir ese gasto a fondo perdido por un <b>Fondo de Previsión Familiar Activo</b>. Aportando <b>83€ al mes</b> (Contigo Futuro) o <b>166€/mes</b> (SIALP exento de IRPF), ese dinero es tuyo y crece con interés compuesto. Si mañana faltas, tus hijos reciben todo lo acumulado <b>más un cheque de 3.000€ en efectivo</b> de la compañía que paga el entierro. El entierro sale gratis, tus hijos heredan el 100% de tus ahorros libres de impuestos y la aseguradora no se queda nada. Y si vives muchos años, todo es tuyo para tu jubilación.<br><br>` +
+      `Justo por eso te llamo. Dejar el futuro resuelto no tiene por qué significar perder tus ahorros. Nosotros ayudamos a sustituir ese gasto a fondo perdido por un <b>Fondo de Previsión Familiar Activo</b>. Aportando <b>83€ al mes</b> (Contigo Futuro) o <b>166€/mes</b> (SIALP exento de IRPF), ese dinero es tuyo y crece con interés compuesto. Si mañana faltas, tus hijos reciben todo lo acumulado <b>más un cheque de 3.000€ en efectivo</b> de la compañía para el entierro. El entierro sale gratis, tus hijos heredan el 100% de tus ahorros y la aseguradora no se queda nada.<br><br>` +
       `Esto por teléfono es imposible de ver en detalle. Nos sentamos 15 minutos, te enseño la simulación gráfica de los 83€ mensuales (o 166€ si prefieres la opción SIALP) y decides tú. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"` +
       (mapeoProducto ? `<br><br><b>Mapeo NN:</b> ${c.poliza} → <span style="color:var(--nn);font-weight:700">${mapeoProducto}</span>` : '');
   } else {
@@ -1816,11 +1817,12 @@ function selContacto(id) {
 
     if (isHogar) {
       document.getElementById('script-text').innerHTML =
-        `"Hola <b>${nombre}</b>, soy Fede Fontanals, te llamo desde la oficina de Nationale-Nederlanden en Xàtiva. No te robo ni dos minutos, te lo prometo. Te llamo porque veo que tienes tu póliza de <b>${tipoPoliza}</b> próxima a renovación y estamos realizando una campaña local de <b>auditoría de costes de seguros del hogar</b>."`;
+        `"Hola <b>${nombre}</b>, soy Fede Fontanals, te llamo desde la oficina de Nationale-Nederlanden en Xàtiva. No te robo ni dos minutos, te lo prometo. Te llamo porque estamos realizando una campaña local de <b>auditoría de costes de seguros del hogar y previsión familiar</b> en la comarca."`;
 
       document.getElementById('script-si').innerHTML =
         `<b>Si dice sí →</b> "Perfecto. Muchos vecinos aquí en La Costera nos comentan que las pólizas de hogar que tienen atadas con el banco por la hipoteca (como ING o Abanca) o con aseguradoras tradicionales les suben de precio cada año de forma abusiva, sin darles cobertura real. Mi trabajo no es venderte nada por teléfono, sino entregarte un estudio de optimización.<br><br>` +
-        `Con nuestra solución MiHogar conseguimos ahorrar de media un 25-30% anual manteniendo o mejorando tus coberturas actuales. Y ese ahorro lo derivamos para que empiece a rentabilizar tu dinero en tu propia hucha.<br><br>` +
+        `Te pregunto directamente... ¿tú tienes tu seguro de hogar contratado con el banco por la hipoteca, o lo tienes con una compañía independiente?<br><br>` +
+        `<i>(Si responde, continúas)</i> → Excelente. Con nuestra solución MiHogar conseguimos ahorrar de media un 25-30% anual manteniendo o mejorando tus coberturas actuales. Y ese ahorro lo derivamos para que empiece a rentabilizar tu dinero en tu propia hucha familiar.<br><br>` +
         `Esto por teléfono es imposible de ver. Nos tomamos un café rápido de 15 minutos en el centro, te enseño la simulación gráfica de tu ahorro y decides tú. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"` +
         (mapeoProducto ? `<br><br><b>Mapeo NN:</b> ${c.poliza} → <span style="color:var(--nn);font-weight:700">${mapeoProducto}</span>` : '');
     } else if (isVida) {
@@ -1828,15 +1830,17 @@ function selContacto(id) {
         `"Hola <b>${nombre}</b>, soy Fede Fontanals, te llamo desde la oficina de Nationale-Nederlanden en Xàtiva. No te robo ni dos minutos, te lo prometo. Te llamo porque estamos realizando una campaña de <b>auditoría de protección y blindaje familiar</b> en la comarca."`;
 
       document.getElementById('script-si').innerHTML =
-        `<b>Si dice sí →</b> "Perfecto. El objetivo es comprobar que tu familia esté realmente blindada ante cualquier percance de salud o invalidez, y ver si tienes coberturas duplicadas con el banco que estás pagando a fondo perdido sin saberlo. Hacemos un chequeo rápido de tu póliza de <b>${tipoPoliza}</b> y te entregamos tu foto real por escrito.<br><br>` +
-        `Nos sentamos 15 minutos en la Alameda o en tu casa, te enseño la simulación y decides con total libertad. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"` +
+        `<b>Si dice sí →</b> "Perfecto. El objetivo es comprobar que tu familia esté realmente blindada ante cualquier percance de salud o invalidez, y ver si tienes coberturas duplicadas con el banco que estés pagando a fondo perdido sin saberlo.<br><br>` +
+        `Te pregunto directamente... ¿tienes actualmente alguna póliza de vida o de accidentes contratada para proteger a tu familia, o lo tienes sin cubrir?<br><br>` +
+        `<i>(Si tiene cobertura, continúas)</i> → Excelente. Hacemos un chequeo rápido de tu póliza y te entregamos tu foto real por escrito para ver si estás pagando de más o si te falta cobertura. Nos sentamos 15 minutos en la Alameda o en tu casa, te enseño la simulación y decides con total libertad. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"` +
         (mapeoProducto ? `<br><br><b>Mapeo NN:</b> ${c.poliza} → <span style="color:var(--nn);font-weight:700">${mapeoProducto}</span>` : '');
     } else if (isAuto) {
       document.getElementById('script-text').innerHTML =
-        `"Hola <b>${nombre}</b>, soy Fede Fontanals, te llamo desde la oficina de Nationale-Nederlanden en Xàtiva. No te robo ni dos minutos, te lo prometo. Te llamo porque veo que tienes tu seguro de <b>${tipoPoliza}</b> próximo a renovación y estamos realizando una campaña de optimización de presupuestos familiares."`;
+        `"Hola <b>${nombre}</b>, soy Fede Fontanals, te llamo desde la oficina de Nationale-Nederlanden en Xàtiva. No te robo ni dos minutos, te lo prometo. Te llamo porque estamos realizando una campaña local de <b>auditoría de costes de seguros y optimización del presupuesto familiar</b>."`;
 
       document.getElementById('script-si').innerHTML =
-        `<b>Si dice sí →</b> "Perfecto. Nationale-Nederlanden no comercializa seguros de coche directamente, pero utilizamos esta fecha de renovación para ayudarte a revisar y reventar los costes de tus otras pólizas (hogar, decesos o vida) que tienes vinculadas. El ahorro que te conseguimos sirve para compensar o pagar el seguro de tu coche, de modo que tu presupuesto familiar salga ganando.<br><br>` +
+        `<b>Si dice sí →</b> "Perfecto. Nationale-Nederlanden no comercializa seguros de coche directamente, pero te hago una pregunta... ¿el seguro de tu coche lo tienes actualmente vinculado con las pólizas de tu hogar o previsión en la misma compañía, o lo tienes por separado?<br><br>` +
+        `<i>(Si responde, continúas)</i> → Estupendo. Utilizamos la renovación de tu coche para ayudarte a revisar y reventar los costes de tus otras pólizas (hogar, decesos o vida). El ahorro que te conseguimos compensará o pagará el seguro de tu coche, de modo que tu presupuesto familiar salga ganando de forma inmediata.<br><br>` +
         `Nos sentamos 15 minutos, hacemos un check-list rápido, te dejo tu estudio por escrito y decides tú. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"` +
         (mapeoProducto ? `<br><br><b>Mapeo NN:</b> ${c.poliza} → <span style="color:var(--nn);font-weight:700">${mapeoProducto}</span>` : '');
     } else {
@@ -1846,7 +1850,8 @@ function selContacto(id) {
 
       document.getElementById('script-si').innerHTML =
         `<b>Si dice sí →</b> "Perfecto. Muchos vecinos nos comentan que están cansados de pagar seguros y pólizas tradicionales a fondo perdido que no paran de subir de precio. Mi trabajo no es venderte nada, sino entregarte un estudio para ver si estás tirando dinero y cómo tener un <b>Fondo de Previsión Activo</b> donde tu dinero sea tuyo y crezca para ti.<br><br>` +
-        `Esto por teléfono es imposible de ver. Nos tomamos un café rápido de 15 minutos en el centro, te enseño la simulación gráfica y decides tú. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"` +
+        `Te pregunto directamente... ¿tienes actualmente algún plan de ahorro o previsión familiar con tu banco, o estás ahorrando por tu cuenta?<br><br>` +
+        `<i>(Si responde, continúas)</i> → Excelente. Esto por teléfono es imposible de ver. Nos tomamos un café rápido de 15 minutos en el centro, te enseño la simulación gráfica y decides tú. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"` +
         (mapeoProducto ? `<br><br><b>Mapeo NN:</b> ${c.poliza} → <span style="color:var(--nn);font-weight:700">${mapeoProducto}</span>` : '');
     }
   }

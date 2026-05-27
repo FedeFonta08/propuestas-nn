@@ -1410,21 +1410,21 @@ const SCRIPTS = {
     campaign: 'Descuento 12,5% Salud',
     fede: {
       paragraphs: [
-        '"Hola <span class="dyn-name">[Nombre]</span>. Soy Fede, Delegado de Nationale-Nederlanden para Xàtiva y La Costera. Te llamo un momento porque estoy hablando con familias de la comarca."',
-        '"Estoy trabajando con familias y gente que trabaja por la zona — Canals, Vallada, Enguera. No sé si lo que te voy a decir encaja contigo, así que te lo cuento en medio minuto y tú decides si seguimos, ¿te parece?"',
-        '"Le pregunto algo muy concreto: si mañana tiene un accidente y no puede ir a trabajar durante uno o dos meses… ¿sabe exactamente cuánto cobraría al mes mientras esté de baja? <em>(Pausa)</em> Es lo normal, casi nadie lo tiene claro. Y ahí es donde viene el problema: la diferencia entre lo que cobra y lo que necesita para pagar la hipoteca y los gastos del mes puede ser de 400, 600 o más euros. Cada mes."',
-        '"No le llamo para venderle nada por teléfono. Lo que estoy haciendo es un chequeo de protección de 20 minutos: cuántos meses aguanta su familia hoy si pasa algo, qué diferencia haría una protección por accidentes, y cómo ahorrar poquito a poco en un plan que no paga impuestos a los años. Le dejo por escrito su foto real — para que la tenga usted, no yo."',
-        '"Si después de verlo me dice que no lo ve claro, para mí es un no perfecto y tan amigos. ¿Qué le viene mejor, que nos veamos una mañana de esta semana o prefiere a media tarde?"'
+        '"Hola <span class="dyn-name">[Nombre]</span>. Soy Fede Fontanals, Delegado de Nationale-Nederlanden para Xàtiva y La Costera. No te robo ni dos minutos, te lo prometo. Te llamo porque, con el cambio de normativa y las nuevas bonificaciones de este año, se están aplicando unos ajustes de optimización muy importantes en tu expediente."',
+        '"Me han asignado tu ficha personalmente para entregarte tu Gráfico de Protección Familiar actualizado por escrito y asegurarnos de que no estés pagando de más por tus coberturas familiares. Son solo 2 minutos de reloj. Te pregunto directamente: ¿tienes médico privado ahora mismo?"',
+        '"<em>(Si dice sí)</em> → Perfecto, eso te da una ventaja de entrada. Pero la pregunta clave es: ¿sabes exactamente cuánto pagas al mes y qué coberturas te incluye tu póliza actual en comparación con las nuevas bonificaciones del 12,5% que tenemos activas en la zona? En 15 minutos sentados te saco tu comparativa exacta por escrito."',
+        '"<em>(Si dice no / Solo SS)</em> → Entiendo. Te hago una pregunta muy concreta: si mañana sufres una baja o un percance de salud y no puedes trabajar durante uno o dos meses… ¿sabes exactamente cuánto te pagaría la Seguridad Social al mes? Casi nadie lo tiene claro, y la brecha de pérdida de ingresos para pagar la hipoteca y los gastos familiares suele superar los 500€ al mes. Justo para eso te sirve este Gráfico."',
+        '"Esto por teléfono es imposible de valorar en detalle. Nos tomamos un café rápido de 15 minutos en la Alameda o me acerco a tu casa, te entrego tu gráfico por escrito y decides tú con total libertad. Si no te aporta valor, nos despedimos tan amigos. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"'
       ],
-      note: 'Script A del meta-análisis (7/7 IAs). Objetivo: SOLO la cita de 20 min. No dar precios. No decir "seguro" en los primeros 30 seg. Pausa real de 3 seg después de la pregunta clave.'
+      note: 'Reframe de Impacto de Federico Fontanals. Genera urgencia de optimización de expediente y obliga a responder la pregunta de calificación de salud (médico privado) en el segundo párrafo. Cierre enfocado 100% en concretar la cita de 15 min.'
     },
     agent_excliente: {
       paragraphs: [
-        '"Buenos días, ¿<span class="dyn-name">[Nombre]</span>? Soy <span class="dyn-agent">[Agente]</span>, del equipo de Nationale-Nederlanden aquí en Xàtiva. ¿Le pillo en buen momento?"',
-        '"Le llamo porque sé que tenía una relación con <span class="dyn-company">[Compañía]</span> y quería presentarme: ahora le atiende nuestro equipo en la zona. No le llamo para cambiarle nada ni para hablar de precios por teléfono."',
-        '"Solo quiero hacerle un chequeo rápido de 20 minutos: ver cómo está su protección ahora y si hay algo que se pueda mejorar o que le falte sin saberlo. Si después de verlo está todo correcto, perfecto. Pero al menos tendrá la foto clara. ¿Le viene mejor esta semana o la que viene?"'
+        '"Hola <span class="dyn-name">[Nombre]</span>, soy <span class="dyn-agent">[Agente]</span> de la oficina de Nationale-Nederlanden en Xàtiva. No le robo ni dos minutos, se lo prometo. ¿Le pillo en un momento oportuno?"',
+        '"Le llamo porque estamos realizando una campaña local de <strong>auditoría de costes de previsión y protección familiar</strong> en la comarca (por Xàtiva, Canals, Vallada, Enguera). El objetivo es ayudar a las familias a revisar que no estén pagando de más por sus coberturas de previsión, salud o decesos, y asegurar que estén realmente blindadas ante cualquier imprevisto."',
+        '"No le llamo para venderle nada por teléfono. Le pregunto directamente... ¿tiene usted actualmente contratado algún seguro médico o de decesos privado, o lo tiene resuelto de otra manera?<br><br><i>(Si responde, continúas)</i> → Excelente. Hacemos un chequeo rápido de 15 minutos en el centro o en su casa, te enseño la simulación gráfica y decides tú con total libertad. ¿Le viene mejor el martes a las 10:00 o el miércoles por la tarde?"'
       ],
-      note: 'Sub-variante 1: agente con cartera previa. Reemplaza [Compañía] con el nombre real (Generali, Mapfre…). No presionar para cancelar nada.'
+      note: 'Enfoque de campaña local de costes y previsión familiar en comarca. GDPR-compliant: no menciona compañías anteriores ni presupone conocimiento de sus pólizas.'
     },
     agent_nuevo: {
       paragraphs: [
@@ -1609,15 +1609,15 @@ const SCRIPTS = {
 
   // ── MIS EX-CLIENTES — solo agentes con cartera previa ─
   excagente: {
-    tag: 'Mis ex-clientes · Optimización',
+    tag: 'Auditoría Previsión Familiar',
     campaign: null,
     agent_excliente: {
       paragraphs: [
-        '"¡Hola <span class="dyn-name">[Nombre]</span>! Soy <span class="dyn-agent">[Agente]</span>. Te llamo un momento de forma directa. Como sabes, ahora formo parte del equipo de Nationale-Nederlanden aquí en la comarca y te llamaba porque estamos realizando una campaña de <strong>auditoría de costes de previsión familiar</strong>."',
-        '"Muchos clientes me comentan que los seguros de entierro de toda la vida no paran de subir de precio y que, al final, es un dinero a fondo perdido. Quería ofrecerte un estudio de optimización gratuito de 15 minutos: vemos lo que estás pagando hoy y te enseño cómo tener un <strong>Fondo de Previsión Familiar Activo</strong> a partir de <strong>83€ al mes</strong> (o <strong>166€/mes</strong> SIALP exento de impuestos), donde tu dinero es tuyo y tus hijos heredan tus ahorros más un cheque de 3.000€ en efectivo para el entierro. Si vives, todo vuelve a ti."',
-        '"No te llamo para cambiarte nada por teléfono. Nos sentamos 15 minutos, te enseño la simulación gráfica y decides tú. ¿Te viene mejor el martes o el miércoles?"'
+        '"¡Hola <span class="dyn-name">[Nombre]</span>! Soy <span class="dyn-agent">[Agente]</span>, de la oficina de Nationale-Nederlanden en Xàtiva. No te robo ni dos minutos, te lo prometo. Te llamo porque estamos realizando una campaña local de <strong>auditoría de costes de previsión y ahorro familiar</strong> aquí en la comarca."',
+        '"Muchos vecinos nos comentan que los seguros de entierro o decesos de toda la vida no paran de subir de precio cada año y que, al final, es un dinero a fondo perdido que se queda la compañía. Mi trabajo no es venderte nada, sino entregarte un estudio para ver si estás pagando de más. Te hago una pregunta directa... ¿tú tienes contratado algún seguro de decesos o entierro actualmente, o lo tienes resuelto de otra manera?"',
+        '"<i>(Si tiene decesos, continúas)</i> → Justo por eso te llamo. Dejar el futuro resuelto no tiene por qué significar perder tus ahorros. Nosotros ayudamos a sustituir ese gasto a fondo perdido por un <b>Fondo de Previsión Familiar Activo</b>. Aportando <b>83€ al mes</b> (Contigo Futuro) o <b>166€/mes</b> SIALP, ese dinero es tuyo y crece con interés compuesto. Si mañana faltas, tus hijos reciben todo lo acumulado <b>más 3.000€ en efectivo</b> para el entierro. El entierro sale gratis, tus hijos heredan tus ahorros y la aseguradora no se queda nada. Esto por teléfono es imposible de ver. Nos tomamos un café rápido de 15 minutos en el centro o en tu casa, te enseño la simulación gráfica y decides tú. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"'
       ],
-      note: 'Adaptación para ex-clientes de agentes. Enfoque en auditoría y optimización de decesos tradicional a fondo perdido usando Contigo Futuro (83€/mes) o SIALP Creciente (166€/mes).'
+      note: 'GDPR-compliant. Enfoque 100% campaña de decesos a previsión familiar activa (83€/mes Contigo Futuro, 166€/mes SIALP). Sin alusiones a compañías previas.'
     }
   },
 
