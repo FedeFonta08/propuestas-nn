@@ -772,7 +772,8 @@ body {
           </div>
 
           <div class="cc-tabs">
-            <button class="cc-tab active" onclick="cambiarTab(this, 'tab-guion')">Guion</button>
+            <button class="cc-tab active" onclick="cambiarTab(this, 'tab-guion')">Guion Base</button>
+            <button class="cc-tab" onclick="cambiarTab(this, 'tab-guion-decesos')" style="color:var(--purple); border-color:var(--purple); background:var(--purple-l)">🎯 Impacto Decesos</button>
             <button class="cc-tab" onclick="cambiarTab(this, 'tab-objeciones')">Objeciones</button>
             <button class="cc-tab" onclick="cambiarTab(this, 'tab-calificar')">Calificar</button>
           </div>
@@ -1799,6 +1800,9 @@ function selContacto(id) {
   const isDecesos = c.poliza && c.poliza.toLowerCase().includes('decesos');
 
   if (isDecesos) {
+    // Update decesos script placeholder if it exists
+    document.querySelectorAll('.script-name-placeholder').forEach(el => el.textContent = contactoActivo.nombre);
+    
     document.getElementById('script-text').innerHTML =
       `"Hola <b>${nombre}</b>, soy Fede Fontanals, te llamo desde la oficina de Nationale-Nederlanden en Xàtiva. No te robo ni dos minutos, te lo prometo. Te llamo porque estamos realizando una campaña local de <b>auditoría de costes de previsión y protección familiar</b> aquí en la comarca."`;
 
@@ -1816,7 +1820,10 @@ function selContacto(id) {
     const isAuto = tipoPoliza.toLowerCase().includes('auto');
 
     if (isHogar) {
-      document.getElementById('script-text').innerHTML =
+      // Update decesos script placeholder if it exists
+    document.querySelectorAll('.script-name-placeholder').forEach(el => el.textContent = contactoActivo.nombre);
+    
+    document.getElementById('script-text').innerHTML =
         `"Hola <b>${nombre}</b>, soy Fede Fontanals, te llamo desde la oficina de Nationale-Nederlanden en Xàtiva. No te robo ni dos minutos, te lo prometo. Te llamo porque estamos realizando una campaña local de <b>auditoría de costes de seguros del hogar y previsión familiar</b> en la comarca."`;
 
       document.getElementById('script-si').innerHTML =
@@ -1826,7 +1833,10 @@ function selContacto(id) {
         `Esto por teléfono es imposible de ver. Nos tomamos un café rápido de 15 minutos en el centro, te enseño la simulación gráfica de tu ahorro y decides tú. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"` +
         (mapeoProducto ? `<br><br><b>Mapeo NN:</b> ${c.poliza} → <span style="color:var(--nn);font-weight:700">${mapeoProducto}</span>` : '');
     } else if (isVida) {
-      document.getElementById('script-text').innerHTML =
+      // Update decesos script placeholder if it exists
+    document.querySelectorAll('.script-name-placeholder').forEach(el => el.textContent = contactoActivo.nombre);
+    
+    document.getElementById('script-text').innerHTML =
         `"Hola <b>${nombre}</b>, soy Fede Fontanals, te llamo desde la oficina de Nationale-Nederlanden en Xàtiva. No te robo ni dos minutos, te lo prometo. Te llamo porque estamos realizando una campaña de <b>auditoría de protección y blindaje familiar</b> en la comarca."`;
 
       document.getElementById('script-si').innerHTML =
@@ -1835,7 +1845,10 @@ function selContacto(id) {
         `<i>(Si tiene cobertura, continúas)</i> → Excelente. Hacemos un chequeo rápido de tu póliza y te entregamos tu foto real por escrito para ver si estás pagando de más o si te falta cobertura. Nos sentamos 15 minutos en la Alameda o en tu casa, te enseño la simulación y decides con total libertad. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"` +
         (mapeoProducto ? `<br><br><b>Mapeo NN:</b> ${c.poliza} → <span style="color:var(--nn);font-weight:700">${mapeoProducto}</span>` : '');
     } else if (isAuto) {
-      document.getElementById('script-text').innerHTML =
+      // Update decesos script placeholder if it exists
+    document.querySelectorAll('.script-name-placeholder').forEach(el => el.textContent = contactoActivo.nombre);
+    
+    document.getElementById('script-text').innerHTML =
         `"Hola <b>${nombre}</b>, soy Fede Fontanals, te llamo desde la oficina de Nationale-Nederlanden en Xàtiva. No te robo ni dos minutos, te lo prometo. Te llamo porque estamos realizando una campaña local de <b>auditoría de costes de seguros y optimización del presupuesto familiar</b>."`;
 
       document.getElementById('script-si').innerHTML =
@@ -1845,7 +1858,10 @@ function selContacto(id) {
         (mapeoProducto ? `<br><br><b>Mapeo NN:</b> ${c.poliza} → <span style="color:var(--nn);font-weight:700">${mapeoProducto}</span>` : '');
     } else {
       // General o Ahorro
-      document.getElementById('script-text').innerHTML =
+      // Update decesos script placeholder if it exists
+    document.querySelectorAll('.script-name-placeholder').forEach(el => el.textContent = contactoActivo.nombre);
+    
+    document.getElementById('script-text').innerHTML =
         `"Hola <b>${nombre}</b>, soy Fede Fontanals, te llamo desde la oficina de Nationale-Nederlanden en Xàtiva. No te robo ni dos minutos, te lo prometo. Te llamo porque estamos realizando una campaña de <b>auditoría de costes de previsión y ahorro familiar</b> en la comarca."`;
 
       document.getElementById('script-si').innerHTML =
