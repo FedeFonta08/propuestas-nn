@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Control · Centro de Control de la Delegación NN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --orange: #FF6200;
+            --orange-hover: #E05600;
+            --orange-glow: rgba(255, 98, 0, 0.25);
+            --dark-bg: #0C0A09;
+            --dark-card: #1C1917;
+            --dark-border: #2E2A27;
+            --text-main: #FAFAF9;
+            --text-muted: #A8A29E;
+            --text-dark: #78716C;
+            --blue: #1A4FAB;
+            --blue-light: rgba(26, 79, 171, 0.15);
+            --green: #0F6E56;
+            --green-light: rgba(15, 110, 86, 0.15);
+            --glass-fill: rgba(28, 25, 23, 0.7);
+            --glass-border: rgba(255, 98, 0, 0.15);
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 98, 0, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(26, 79, 171, 0.04) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        /* ── HEADER / HERO ───────────────────────────────────────────── */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-out;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-box {
+            background: linear-gradient(135deg, #FF6200 0%, #E05600 100%);
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #fff;
+            box-shadow: 0 8px 24px var(--orange-glow);
+        }
+
+        .title-box h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #FAFAF9, #D6D3D1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .title-box p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .title-box p span {
+            color: var(--orange);
+            font-weight: 700;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .profile-card {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            padding: 10px 18px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .profile-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #FF6200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            border: 2px solid rgba(255, 98, 0, 0.3);
+        }
+
+        .profile-info h3 {
+            font-size: 13.5px;
+            font-weight: 700;
+        }
+
+        .profile-info p {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* ── GRID LAYOUT ─────────────────────────────────────────────── */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 7fr 5fr;
+            gap: 30px;
+            margin-bottom: 40px;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @media (max-width: 992px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── CARDS COMMON ────────────────────────────────────────────── */
+        .card {
+            background: var(--glass-fill);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--dark-border);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            border-color: var(--glass-border);
+            box-shadow: 0 16px 48px rgba(255, 98, 0, 0.05);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--orange), transparent);
+            opacity: 0.8;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            color: var(--orange);
+            font-style: normal;
+        }
+
+        .card-subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ── WORKSPACE FLOW SECTION ───────────────────────────────────── */
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .flow-node {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--dark-border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition);
+            position: relative;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .flow-node:hover {
+            background: rgba(255, 98, 0, 0.03);
+            border-color: rgba(255, 98, 0, 0.15);
+        }
+
+        .node-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .node-icon {
+            font-size: 28px;
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            background: rgba(255, 98, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--orange);
+            border: 1px solid rgba(255, 98, 0, 0.2);
+        }
+
+        .node-icon.blue {
+            background: rgba(26, 79, 171, 0.1);
+            color: #3b82f6;
+            border-color: rgba(26, 79, 171, 0.2);
+        }
+
+        .node-info h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14.5px;
+            font-weight: 700;
+        }
+
+        .node-info p {
+            font-size: 11.5px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .badge-privado {
+            font-size: 9px;
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            margin-left: 8px;
+        }
+
+        .badge-compartido {
+            font-size: 9px;
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            margin-left: 8px;
+        }
+
+        .btn-download {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-download:hover {
+            background: var(--orange);
+            border-color: var(--orange);
+            color: #fff;
+            box-shadow: 0 4px 12px var(--orange-glow);
+            transform: translateY(-1px);
+        }
+
+        /* ── INTERACTIVE PVM CALCULATOR ──────────────────────────────── */
+        .calculator-box {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            color: var(--text-main);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 13.5px;
+            width: 100%;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--orange);
+            box-shadow: 0 0 0 3px var(--orange-glow);
+        }
+
+        select.form-control {
+            cursor: pointer;
+        }
+
+        .calc-result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--dark-border);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .result-card.highlight {
+            background: rgba(255, 98, 0, 0.04);
+            border-color: rgba(255, 98, 0, 0.2);
+        }
+
+        .result-val {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+
+        .result-card.highlight .result-val {
+            color: var(--orange);
+            font-size: 24px;
+        }
+
+        .result-lbl {
+            font-size: 10.5px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .badge-riesgo {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-top: 4px;
+        }
+
+        .badge-riesgo.si {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .badge-riesgo.no {
+            background: rgba(26, 79, 171, 0.1);
+            color: #3b82f6;
+            border: 1px solid rgba(26, 79, 171, 0.2);
+        }
+
+        /* ── ACTIVITY MARCADOR ───────────────────────────────────────── */
+        .scoreboard {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .scoreboard-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--dark-border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            text-align: center;
+            align-items: center;
+        }
+
+        .scoreboard-row.header {
+            background: transparent;
+            border: none;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            padding-bottom: 4px;
+        }
+
+        .score-agent {
+            text-align: left;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .score-val {
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* ── DOCUMENTATION SECTION ────────────────────────────────────── */
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .docs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .doc-item {
+            background: var(--glass-fill);
+            border: 1px solid var(--dark-border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+            min-height: 160px;
+        }
+
+        .doc-item:hover {
+            border-color: rgba(255, 98, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .doc-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .doc-emoji {
+            font-size: 24px;
+        }
+
+        .doc-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .doc-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+
+        .doc-link {
+            font-size: 12px;
+            color: var(--orange);
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: var(--transition);
+        }
+
+        .doc-link:hover {
+            color: var(--orange-hover);
+        }
+
+        /* ── ANIMATIONS ─────────────────────────────────────────────── */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div id="loader" style="display:none;"><div class="ld"></div></div>
+    
+    <div class="container">
+        <!-- ── HEADER ── -->
+        <header>
+            <div class="header-left">
+                <div class="logo-box">NN</div>
+                <div class="title-box">
+                    <h1>MISSION CONTROL</h1>
+                    <p>Centro de Operaciones de la Delegación <span>· La Costera (Xàtiva)</span></p>
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <div class="profile-card">
+                    <div class="profile-avatar">FF</div>
+                    <div class="profile-info">
+                        <h3>Fede Fontanals</h3>
+                        <p>Delegado de Xàtiva/La Costera Punto Naranja</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ── MAIN DASHBOARD GRID ── -->
+        <div class="dashboard-grid">
+            
+            <!-- LEFT COLUMN: SYSTEM ARCHITECTURE & WORKFLOW -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h2 class="card-title">🛡️ Arquitectura y Flujo de Trabajo Sincronizado J5</h2>
+                        <p class="card-subtitle">Ecosistema automatizado de previsiones y actividad en Google Drive</p>
+                    </div>
+                </div>
+                
+                <div class="flow-container">
+                    <!-- Fede's Private Master Excel -->
+                    <div class="flow-node">
+                        <div class="node-left">
+                            <div class="node-icon">📊</div>
+                            <div class="node-info">
+                                <h4>Libro Maestro Delegación (Fede Fontanals) <span class="badge-privado">Privado</span></h4>
+                                <p>dashboard, comisiones cerradas reales J5 y métricas unificadas.</p>
+                            </div>
+                        </div>
+                        <a href="file:///D:/Users/ffont/Downloads/NN_SISTEMA_MAESTRO_2026_v2.xlsx" class="btn-download">
+                            Abrir Maestro
+                        </a>
+                    </div>
+                    
+                    <!-- Separation Arrow (Conceptually done through beautiful layout) -->
+                    
+                    <!-- Rosiane's Personal Sheet -->
+                    <div class="flow-node">
+                        <div class="node-left">
+                            <div class="node-icon blue">🩹</div>
+                            <div class="node-info">
+                                <h4>Plantilla de Trabajo del Agente (Compartible) <span class="badge-compartido">Editable por Agente</span></h4>
+                                <p>Previsiones (Pipeline J5) y registro de actividad diaria sin riesgo de romper el Maestro.</p>
+                            </div>
+                        </div>
+                        <a href="file:///D:/Users/ffont/Downloads/Plantilla_Trabajo_Agente_NN.xlsx" class="btn-download">
+                            Descargar Plantilla
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Live Weekly Marcador -->
+                <div style="margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--dark-border);">
+                    <h3 class="card-title" style="font-size: 15px; margin-bottom: 12px;">📊 Marcador Semanal Consolidado</h3>
+                    <p class="card-subtitle" style="margin-bottom: 16px;">Sincronizado automáticamente con los registros del servidor de actividad local</p>
+                    
+                    <div class="scoreboard">
+                        <div class="scoreboard-row header">
+                            <div style="text-align: left;">Agente</div>
+                            <div>Llamadas</div>
+                            <div>Contactos</div>
+                            <div>Reuniones</div>
+                            <div>Presupuestos</div>
+                        </div>
+                        
+                        <div class="scoreboard-row">
+                            <div class="score-agent">🍊 FEDE</div>
+                            <div class="score-val" style="color: var(--orange);">32</div>
+                            <div class="score-val">12</div>
+                            <div class="score-val" style="color: var(--green);">4</div>
+                            <div class="score-val">2</div>
+                        </div>
+                        
+                        <div class="scoreboard-row">
+                            <div class="score-agent" style="color: #3b82f6;">👤 ROSIANE</div>
+                            <div class="score-val" style="color: #3b82f6;">24</div>
+                            <div class="score-val">8</div>
+                            <div class="score-val">2</div>
+                            <div class="score-val">1</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: INTERACTIVE PVM CALCULATOR -->
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <div class="card-header">
+                        <div>
+                            <h2 class="card-title">⚡ Calculadora Interactiva de PVM (J5)</h2>
+                            <p class="card-subtitle">Consulta de comisiones en tiempo real basada en tu catálogo y condicionado</p>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-box">
+                        <div class="form-group">
+                            <label for="prodSelect">Selecciona Producto</label>
+                            <select id="prodSelect" class="form-control" onchange="calculatePVM()">
+                                <option value="" disabled selected>-- Elige un producto --</option>
+                                <optgroup label="VIDA y GENERALES INDIVIDUAL P.P.">
+                                    <option value="salud_c" data-pvm="1.5" data-pvp="—" data-riesgo="Sí">Seguro de Salud Completo (Salud Completo)</option>
+                                    <option value="salud_cop" data-pvm="2.0" data-pvp="16%" data-riesgo="Sí">Seguro de Salud con Copago (Salud Completo Copago)</option>
+                                    <option value="salud_aut" data-pvm="1.2" data-pvp="—" data-riesgo="Sí">Salud con Copago para Autónomos</option>
+                                    <option value="senior" data-pvm="3.0" data-pvp="100%" data-riesgo="Sí">Contigo Senior (+55)</option>
+                                    <option value="familia" data-pvm="4.0" data-pvp="150%" data-riesgo="Sí">Contigo Familia</option>
+                                    <option value="autonomo" data-pvm="2.0" data-pvp="75%" data-riesgo="Sí">Contigo Autónomo (Baja Laboral ILT)</option>
+                                    <option value="pplus" data-pvm="4.0" data-pvp="125%" data-riesgo="Sí">Protección PLUS</option>
+                                    <option value="sialp" data-pvm="1.0" data-pvp="27%" data-riesgo="No">Plan SIALP (Creciente)</option>
+                                    <option value="futuro" data-pvm="1.0" data-pvp="18%" data-riesgo="No">Contigo Futuro</option>
+                                    <option value="hogar" data-pvm="1.5" data-pvp="100%" data-riesgo="Sí">Mihogar Seguro</option>
+                                    <option value="accidentes" data-pvm="4.0" data-pvp="180%" data-riesgo="Sí">Seguro de Accidentes LiderPlus</option>
+                                </optgroup>
+                                <optgroup label="OTROS - PYME (CASER / COLECTIVOS)">
+                                    <option value="colect_pyme" data-pvm="2.25" data-pvp="40%" data-riesgo="Sí">Contigo Pyme (Seguros Colectivos)</option>
+                                    <option value="colect_no_pyme_vida" data-pvm="1.4" data-pvp="32%" data-riesgo="Sí">Colectivos No PYME (Vida Riesgo &lt; 20.000€)</option>
+                                    <option value="colect_no_pyme_acc" data-pvm="1.0" data-pvp="60%" data-riesgo="Sí">Colectivos No PYME (Accidentes &lt; 20.000€)</option>
+                                    <option value="comercio_caser" data-pvm="0.5" data-pvp="—" data-riesgo="Sí">Seguro para Comercios (Caser Comercio)</option>
+                                    <option value="pyme_caser" data-pvm="0.4" data-pvp="—" data-riesgo="Sí">Seguro PYME - CASER</option>
+                                    <option value="rc_caser" data-pvm="0.4" data-pvp="—" data-riesgo="Sí">RC PRO · Caser (Responsabilidad Civil)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="primaInput">Prima de la Operación (€)</label>
+                            <input type="number" id="primaInput" class="form-control" placeholder="Ej. 150" oninput="calculatePVM()">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="periodSelect">Periodicidad</label>
+                            <select id="periodSelect" class="form-control" onchange="calculatePVM()">
+                                <option value="Mensual">Mensual</option>
+                                <option value="Anual">Anual</option>
+                                <option value="Trimestral">Trimestral</option>
+                                <option value="Semestral">Semestral</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="calc-result-grid">
+                    <div class="result-card">
+                        <div id="resPvmPerc" class="result-val">—</div>
+                        <div class="result-lbl">% Medición PVM</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div id="resPvpPerc" class="result-val">—</div>
+                        <div class="result-lbl">% Pago PVP</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div id="resRiesgo" class="result-val">—</div>
+                        <div class="result-lbl">¿Clasifica Riesgo?</div>
+                    </div>
+                    
+                    <div class="result-card highlight">
+                        <div id="resPvmGen" class="result-val">0,00 €</div>
+                        <div class="result-lbl">PVM Generado</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── DOCUMENTATION SECTION ── -->
+        <h3 class="card-title" style="font-size: 18px; margin-bottom: 20px; font-family: 'Outfit', sans-serif;">📂 Manuales y Recursos Oficiales</h3>
+        <div class="docs-grid">
+            <!-- J5 Contract -->
+            <div class="doc-item">
+                <div class="doc-top">
+                    <div class="doc-emoji">📕</div>
+                    <div>
+                        <h4 class="doc-title">Condicionado J5 Exclusivo</h4>
+                        <p class="doc-desc">Anexo al Contrato Mercantil de Agente J5 con todas las tablas oficiales de comisionamiento.</p>
+                    </div>
+                </div>
+                <a href="file:///D:/Users/ffont/Downloads/J5XXXXX.pdf" class="doc-link">Ver Documento PDF →</a>
+            </div>
+            
+            <!-- Walkthrough MD -->
+            <div class="doc-item">
+                <div class="doc-top">
+                    <div class="doc-emoji">🛡️</div>
+                    <div>
+                        <h4 class="doc-title">Bitácora de Vuelo e Intervención</h4>
+                        <p class="doc-desc">Resumen explicativo del blindaje de fórmulas y la sincronización total del catálogo realizada.</p>
+                    </div>
+                </div>
+                <a href="file:///C:/Users/ffont/.gemini/antigravity/brain/b2360fd0-f3bd-495b-b30c-6c7abac5b9ac/walkthrough.md" class="doc-link">Leer Bitácora →</a>
+            </div>
+            
+            <!-- Proposals Portal -->
+            <div class="doc-item">
+                <div class="doc-top">
+                    <div class="doc-emoji">🌐</div>
+                    <div>
+                        <h4 class="doc-title">Portal de Propuestas Online</h4>
+                        <p class="doc-desc">Accede a la web de cara a cliente donde se muestran las propuestas y objeciones de tu delegación.</p>
+                    </div>
+                </div>
+                <a href="https://fedefonta08.github.io/propuestas-nn/propuestas-nn-v2.html" target="_blank" class="doc-link">Abrir Portal Web →</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculatePVM() {
+            const prodSelect = document.getElementById('prodSelect');
+            const selectedOpt = prodSelect.options[prodSelect.selectedIndex];
+            const primaInput = document.getElementById('primaInput');
+            const periodSelect = document.getElementById('periodSelect');
+            
+            if (!selectedOpt || selectedOpt.value === "") return;
+            
+            const pvmVal = parseFloat(selectedOpt.getAttribute('data-pvm'));
+            const pvpVal = selectedOpt.getAttribute('data-pvp');
+            const riesgo = selectedOpt.getAttribute('data-riesgo');
+            
+            const rawPrima = parseFloat(primaInput.value) || 0;
+            const period = periodSelect.value;
+            
+            // Calculate Annualized Premium
+            let primaAnualizada = rawPrima;
+            if (period === "Mensual") {
+                primaAnualizada = rawPrima * 12;
+            } else if (period === "Trimestral") {
+                primaAnualizada = rawPrima * 4;
+            } else if (period === "Semestral") {
+                primaAnualizada = rawPrima * 2;
+            }
+            
+            // Calculate PVM Generated
+            const pvmGenerado = primaAnualizada * pvmVal;
+            
+            // Update UI
+            document.getElementById('resPvmPerc').innerText = (pvmVal * 100) + '%';
+            document.getElementById('resPvpPerc').innerText = pvpVal;
+            
+            const resRiesgo = document.getElementById('resRiesgo');
+            resRiesgo.innerText = riesgo;
+            resRiesgo.className = 'result-val';
+            if (riesgo === 'Sí') {
+                resRiesgo.innerHTML = 'Sí <br><span class="badge-riesgo si">Riesgo</span>';
+            } else {
+                resRiesgo.innerHTML = 'No <br><span class="badge-riesgo no">Ahorro</span>';
+            }
+            
+            // Format PVM generated as currency
+            document.getElementById('resPvmGen').innerText = pvmGenerado.toLocaleString('es-ES', {
+                style: 'currency',
+                currency: 'EUR'
+            });
+        }
+    </script>
+</body>
+</html>

@@ -306,7 +306,7 @@ Eventos: clicks propuestas · registros CRM · llamadas · citas
 
 | Persona | Rol | Email | Teléfono |
 |---------|-----|-------|----------|
-| **Federico Fontanals** | Agente Dinamizador | [CONTACTO: Ver políticas de privacidad] | [TELÉFONO: Contactar a través de NN] |
+| **Federico Fontanals** | Delegado de Xàtiva/La Costera | [CONTACTO: Ver políticas de privacidad] | [TELÉFONO: Contactar a través de NN] |
 | **NN DPO** | Protección de Datos | dpo@nnespana.es | +34 91 602 60 00 |
 
 ---
