@@ -53,7 +53,7 @@ El sistema se divide en cuatro capas operativas para cubrir todo el ciclo de la 
 | Herramienta | Archivo | Estado | Propósito |
 |-------------|---------|--------|-----------|
 | 🖼️ **Marketing Cards** | [`marketing_cards_premium.html`](https://fedefonta08.github.io/propuestas-nn/marketing_cards_premium.html) | 🟢 Live | Kit de Social Media: genera imágenes premium para WhatsApp/RRSS. |
-| 📋 **Portal Propuestas v2** | [`propuestas-nn-v2.html`](https://fedefonta08.github.io/propuestas-nn/propuestas-nn-v2.html) | 🟢 Live | Landing pages personalizadas para 28 productos NN. |
+| 📋 **Portal Propuestas v2** | [`propuestas-nn-v2.html`](https://fedefonta08.github.io/propuestas-nn/propuestas-nn-v2.html) | 🟢 Live | Landing pages personalizadas para 22 productos NN. |
 | ⚙️ **Generador de URLs** | [`generador_urls_propuestas.html`](https://fedefonta08.github.io/propuestas-nn/generador_urls_propuestas.html) | 🟢 Live | Automatiza la creación de enlaces y plantillas de email. |
 | 🎂 **Felicita NN** | [`Felicitaciones_Cumple_NN.html`](https://fedefonta08.github.io/propuestas-nn/Scripts_Herramientas/Felicitaciones_Cumple_NN.html) | 🟢 Live | Sistema de fidelización y felicitación vía WhatsApp. |
 
@@ -202,6 +202,7 @@ Cada herramienta del ecosistema tiene los guiones, objeciones y árboles de deci
 - **Contigo Pyme:** Seguros colectivos para empleados (retención de talento).
 - **Seguro Comercios:** Multirriesgo NN-Caser con garantía de continuidad.
 - **Salud Autónomos:** Asistencia Sanitas deducible 100% en el IRPF.
+- **RC PRO (Caser):** Responsabilidad Civil profesional y empresarial con hasta 3.000.000 € de capital.
 </details>
 
 <details>
@@ -320,7 +321,7 @@ Este ecosistema digital no habría nacido sin el impulso de **Alejandro Fontanal
 
 - [x] Radar Comercial dinámico con pulsadores expandibles
 - [x] Cockpit de Llamadas sincronizado con CRM Maestro
-- [x] Portal de Propuestas v2 con 28 productos y RGPD
+- [x] Portal de Propuestas v2 con 22 productos y RGPD
 - [x] Sistema de Aperturas Pro con 8 perfiles psicológicos
 - [x] Pipeline de Reclutamiento (objetivo: 4-5 agentes sept 2026)
 - [x] Guión Operacional e Índice de Productos versionado

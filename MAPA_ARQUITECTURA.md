@@ -29,7 +29,7 @@ flowchart TB
     Briefing["🧠 Briefing_Lunes_ADN.html<br><i>Dossier de vulnerabilidades y aperturas</i>"]:::main
 
     %% Interfaz del Cliente
-    Portal["❤️ propuestas-nn-v2.html<br><i>Portal de Propuestas de Clientes</i><br>Muestra 24 productos con descuentos activos"]:::main
+    Portal["❤️ propuestas-nn-v2.html<br><i>Portal de Propuestas de Clientes</i><br>Muestra 22 productos con descuentos activos"]:::main
 
     %% Conexiones e Integraciones
     Mail -->|Lectura automática| Script
@@ -90,7 +90,7 @@ flowchart TB
 ### 4. Portal del Cliente (El Cierre de Ventas)
 
 *   **Portal de Propuestas:** [propuestas-nn-v2.html](file:///D:/Users/ffont/Downloads/06_NATIONALE_NEDERLANDEN/propuestas-nn-v2.html)
-    *   **Función:** Generador de enlaces comerciales dinámicos que presentas a tus prospectos. Cuenta con 24 fichas interactivas de productos de Nationale-Nederlanden organizadas en 5 fases de protección.
+    *   **Función:** Generador de enlaces comerciales dinámicos que presentas a tus prospectos. Cuenta con 22 fichas interactivas de productos de Nationale-Nederlanden organizadas en 5 fases de protección.
     *   **Interconexión:** 
         *   Recibe parámetros de URL de tus clientes para saludarlos de forma personalizada.
         *   **Carga la base de datos de Radar en vivo** desde el CDN de GitHub (`radar_db.json`). Si una campaña del Radar tiene un `id_producto` configurado y está activa, el portal inyecta automáticamente el descuento en la ficha correspondiente (ej. 25% vitalicio en *Contigo Autónomo* y *Contigo Familia*) de manera 100% interactiva.
