@@ -881,7 +881,7 @@ body::before {
     <div class="pvm-div"></div>
     <div class="pvm-bar-wrap">
       <div class="pvm-bar-label">
-        <span>Progreso 2026</span>
+        <span id="pvm-progress-label">Progreso 2026</span>
         <span id="pvm-bar-txt">0 / 10.291 pts</span>
       </div>
       <div class="pvm-bar">
@@ -1188,9 +1188,72 @@ function actualizarReloj() {
 setInterval(actualizarReloj, 1000);
 actualizarReloj();
 
-// ── PVM ──────────────────────────────────────
-const PVM_OBJETIVO = 10291;
-const PVM_KEY = 'nn_pvm_2026';
+// ── PVM DYNAMIC CYCLES ───────────────────────
+const CIERRE_CALENDAR_2026 = {
+  0: 28, // Enero
+  1: 25, // Febrero
+  2: 27, // Marzo
+  3: 28, // Abril
+  4: 27, // Mayo
+  5: 26, // Junio
+  6: 29, // Julio
+  7: 27, // Agosto
+  8: 28, // Septiembre
+  9: 28, // Octubre
+  10: 27,// Noviembre
+  11: 23 // Diciembre
+};
+
+const PVM_OBJETIVOS_2026 = {
+  0: 10291, // Enero
+  1: 10291, // Febrero
+  2: 10291, // Marzo
+  3: 10291, // Abril
+  4: 10291, // Mayo
+  5: 10291, // Junio
+  6: 10291, // Julio
+  7: 4574,  // Agosto
+  8: 8004,  // Septiembre
+  9: 10291, // Octubre
+  10: 10291,// Noviembre
+  11: 6190  // Diciembre
+};
+
+const NOMBRES_MESES = [
+  "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+  "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+];
+
+// Helper to determine active monthly cycle for a given date
+function obtenerCicloActual(date) {
+  const year = date.getFullYear();
+  const month = date.getMonth(); // 0-11
+  const day = date.getDate();
+  
+  // Official closing day of this calendar month
+  const closingDay = CIERRE_CALENDAR_2026[month] || 28;
+  
+  if (day > closingDay) {
+    // Past current month's close -> belongs to the NEXT month's cycle
+    let nextMonth = month + 1;
+    let cycleYear = year;
+    if (nextMonth > 11) {
+      nextMonth = 0;
+      cycleYear += 1;
+    }
+    return { year: cycleYear, month: nextMonth };
+  } else {
+    // Still within current month's cycle
+    return { year, month };
+  }
+}
+
+// Get dynamically calculated storage key and objective
+const cicloActual = obtenerCicloActual(new Date());
+const PVM_OBJETIVO = PVM_OBJETIVOS_2026[cicloActual.month] || 10291;
+const PVM_KEY = `nn_pvm_2026_ciclo_${cicloActual.year}_${cicloActual.month + 1}`;
+
+console.log(`[PVM] Ciclo Activo: ${NOMBRES_MESES[cicloActual.month]} ${cicloActual.year} | Objetivo: ${PVM_OBJETIVO} | Key: ${PVM_KEY}`);
 
 function cargarPVM() {
   try {
@@ -1206,11 +1269,24 @@ function renderPVM(pts) {
   const pct = Math.min(Math.round(pts / PVM_OBJETIVO * 100), 100);
   const falta = Math.max(PVM_OBJETIVO - pts, 0);
 
+  // Update UI texts
   document.getElementById('pvm-actual').textContent = pts.toLocaleString('es-ES');
   document.getElementById('pvm-pts').textContent = pts.toLocaleString('es-ES');
   document.getElementById('pvm-falta').textContent = falta.toLocaleString('es-ES');
   document.getElementById('pvm-pct').textContent = pct + '%';
   document.getElementById('pvm-bar-txt').textContent = `${pts.toLocaleString('es-ES')} / ${PVM_OBJETIVO.toLocaleString('es-ES')} pts`;
+  
+  // Set dynamic label with active cycle month and year
+  const labelEl = document.getElementById('pvm-progress-label');
+  if (labelEl) {
+    labelEl.textContent = `Progreso Ciclo ${NOMBRES_MESES[cicloActual.month]} ${cicloActual.year}`;
+  }
+  
+  // Set dynamic hero subtitle objective
+  const objTotalEl = document.querySelector('.obj-total');
+  if (objTotalEl) {
+    objTotalEl.textContent = `de ${PVM_OBJETIVO.toLocaleString('es-ES')} puntos`;
+  }
 
   setTimeout(() => {
     document.getElementById('pvm-bar').style.width = pct + '%';
