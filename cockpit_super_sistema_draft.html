@@ -1986,6 +1986,7 @@ function selContacto(id) {
   // ── Pólizas panel ────────────────────────────────────────
   renderCompetitorPolicies(c);
 
+
   // Notas de Empatía (Col AW del CRM)
   const notasEl = document.getElementById('cc-notas');
   if (c.notas) {
@@ -2148,17 +2149,6 @@ const OBJECIONES = [
     resp: '<strong>[Validar]:</strong> "Me parece una decisión muy sensata, yo en tu lugar pensaría exactamente igual...<br><strong>[Reencuadrar]:</strong> ...de hecho, hoy no vengo a venderte nada. Mi trabajo hoy es entregarte tu estudio de costes de previsión familiar por escrito para que tengas la foto real de tu caso. Con esa información en la mano, tú decides lo que quieras con total tranquilidad.<br><strong>[Proyectar]:</strong> Tener la información es gratis, no tenerla es lo que sale caro cuando surge un problema. ¿Nos vemos un momento y le echamos un ojo? ¿Martes o miércoles?"'
   },
   {
-    label: '¿Cuánto cuesta?',
-    resp: '<strong>[Validar]:</strong> "Es una pregunta muy importante, el control del gasto familiar es clave...<br><strong>[Reencuadrar]:</strong> ...pero depende totalmente de tu caso: tu edad, situación y lo que ya tengas cubierto. Darte una cifra ahora sería inventármela. Trabajamos con huchas de ahorro de previsión de <strong>83€ al mes</strong> (Contigo Futuro) o <strong>166€/mes</strong> (SIALP exento de impuestos), pero lo importante es ver cuál se adapta a tu hucha.<br><strong>[Proyectar]:</strong> Lo importante no es la cuota, es asegurarte de que cada euro que aportas sea tuyo y no se lo regales a una aseguradora a fondo perdido. En 15 min te saco tu simulación exacta. ¿Te viene mejor martes o miércoles?"'
-  },
-  {
-    label: 'No me interesa / No lo necesito',
-    resp: '<strong>[Validar]:</strong> "Es normal que me digas eso, a muchos de mis clientes les pasaba igual antes de ver los números...<br><strong>[Reencuadrar]:</strong> ...solo te hago una pregunta: si mañana tienes una baja o un imprevisto de salud de 3 meses, ¿sabes exactamente cuánto te pagará la Seguridad Social y cuánto dinero perderás cada mes? ¿Y cuánto habrás regalado a tu seguro de entierro si vives hasta los 85 años?<br><strong>[Proyectar]:</strong> Si no tienes esa foto clara, estás asumiendo una apuesta muy cara. Son 15 min para despejar la incógnita y decidir tú. ¿Martes o miércoles?"'
-  },
-  {
-    label: 'Envíemelo por email / WhatsApp',
-    resp: '<strong>[Validar]:</strong> "Por supuesto, te lo puedo enviar sin problema...<br><strong>[Reencuadrar]:</strong> ...pero un folleto en PDF no te va a decir si estás tirando dinero en tus pólizas actuales o si tienes algún agujero en tu protección familiar. En 15 minutos sentados te hago el cálculo exacto de tu caso, te lo imprimo y ya lo tienes para siempre.<br><strong>[Proyectar]:</strong> Es la diferencia entre leer un diagnóstico genérico y tener una radiografía propia de tu realidad. ¿Qué te viene mejor, martes por la mañana o miércoles por la tarde?"'
-  },
   {
     label: 'Protección PLUS: ¿Por qué baja el capital?',
     resp: '<strong>[Validar]:</strong> "Es una pregunta magnífica, casi todo el mundo se sorprende al principio...<br><strong>[Reencuadrar]:</strong> ...pero es la clave de su eficiencia: en lugar de subir la cuota cada año con tu edad (que es lo que hace que los seguros tradicionales se vuelvan impagables), la cuota se queda fija y barata para siempre, y lo que baja es el capital. ¿Por qué? Porque a medida que pasan los años tienes menos deudas (la hipoteca se reduce), tus hijos crecen y tienes más ahorros acumulados. Necesitas menos cobertura.<br><strong>[Proyectar]:</strong> Es la forma más inteligente de pagar solo por el riesgo real que tienes hoy, sin tirar dinero en coberturas que ya no necesitas. ¿Nos vemos un momento y te enseño tu curva exacta?"'
