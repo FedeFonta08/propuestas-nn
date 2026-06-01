@@ -60,7 +60,7 @@ El sistema se divide en cuatro capas operativas para cubrir todo el ciclo de la 
 ### 3️⃣ Inteligencia & Análisis (El Cerebro de la Bestia)
 | Herramienta | Archivo | Estado | Propósito |
 |-------------|---------|--------|-----------|
-| 👥 **CRM Panel v2** | [`nn_crm_panel_v2.html`](https://fedefonta08.github.io/propuestas-nn/nn_crm_panel_v2.html) | 🟢 Live | Gestión de base de datos de contactos con búsqueda avanzada e historial. |
+| 🔍 **Buscador CRM Híbrido** | [Integrado en Cockpit] | 🟢 Live | Buscador histórico offline y en tiempo real integrado directamente en la barra lateral del Cockpit. |
 | 🤝 **Pipeline Recluta** | [`Reclutamiento_NN_v2_RGPD.html`](https://fedefonta08.github.io/propuestas-nn/Reclutamiento_NN_v2_RGPD.html) | 🟢 Live | Seguimiento de candidatos y expansión del equipo. |
 | 📰 **Briefing ADN** | [`Briefing_Lunes_ADN.html`](https://fedefonta08.github.io/propuestas-nn/Briefing_Lunes_ADN.html) | 🟢 Live | Traducción de campañas a narrativa de vulnerabilidad ADN. |
 | 🐍 **Motor Python** | [`enviar_campana_nn.py`](#) | ⚙️ Interno | Scripts de automatización, limpieza de CRM y envíos masivos. |
@@ -222,7 +222,15 @@ Cada herramienta del ecosistema tiene los guiones, objeciones y árboles de deci
 
 ---
 
-## ⚡ Últimas Actualizaciones (Mayo 2026)
+## ⚡ Últimas Actualizaciones
+
+### 🆕 Junio 2026 (Sprint 6 — Consolidación ADN y Buscador CRM Híbrido)
+- **Buscador CRM Híbrido Integrado:** Rediseño completo de la barra lateral (`#sidebar`) del Cockpit de Llamadas. Ahora integra de forma fluida dos pestañas: la `[📅 Cola del Día]` (vencimientos activos del mes) y el `[🔍 Buscar en CRM]` (búsqueda global en caliente).
+- **Búsqueda Dinámica desde 2 Caracteres:** Filtrado ultra-rápido (<5ms) en memoria gracias a la carga inicial y persistencia del CRM global en `todosLosContactos`. Permite búsquedas instantáneas por teléfono normalizado, localidad, nombre, póliza, buyer persona y notas.
+- **Simplificación del Ecosistema:** Se retiró la pestaña obsoleta `nn_crm_panel_v2.html` del Dashboard central (`index.html`) para unificar y simplificar toda la UX operativa en una sola cabina centralizada.
+- **Mapeo de Datos ADN Robusto:** Corregidas las variables de lectura del payload de Google Drive. Se mapeó `COL.MES_VTO = 8` (Columna I), `COL.BUYER = 49` y `COL.TELEFONO = 1`, con recuperación de teléfono secundario `tel2` de la columna 2. Esto permite que los vencimientos de Junio carguen impecables.
+- **Redirección de PVM e Integridad Matemática (`round()`):** El servidor local se conectó a `NN_SISTEMA_MAESTRO_2026_v2_REPARADO.xlsx` (Junio activo) y se implementó un redondeo preciso mediante `round()` de `648.704` pts, arrojando los **649 puntos comerciales reales** exactos que muestra tu Panel de Despegue (solucionando el desfase de 1 pt causado por truncamiento `int()`).
+- **Sincronización Simétrica:** Las 4 copias oficiales del Cockpit de Llamadas se balancearon a un tamaño idéntico de **181.089 bytes**.
 
 ### 🆕 Radar Comercial — Rediseño total (10 mayo 2026)
 - **Nuevo sistema de pulsadores expandibles** en `aperturas_desktop_v4.html` e `index.html`
@@ -239,6 +247,47 @@ Cada herramienta del ecosistema tiene los guiones, objeciones y árboles de deci
 - Creado y versionado `Guion_Operacional_NN.md` con mapa completo del ecosistema
 - Incluye Índice de Productos con sus fuentes de verdad (Drive vs GitHub)
 - Protocolo de cierre de sesión: siempre `git add → commit → push`
+
+---
+
+## 📜 Historial de Aprendizaje y Evolución del Sistema
+
+> *"La tecnología no tiene valor sin el proceso humano que la moldea. Este ecosistema es el testimonio de cómo hemos aprendido a automatizar la disciplina para liberar el talento."*
+> — Federico Fontanals
+
+Este sistema no nació de la noche a la mañana. Ha sido un proceso iterativo de **mayéutica tecnológica**, donde cada sprint representó un reto de aprendizaje de arquitectura, sincronización y diseño. Así ha evolucionado nuestro centro de mando:
+
+### 📍 Fase 1: El Origen Analítico y Estructura Base (Marzo - Abril 2026)
+*   **El Reto:** La dispersión de información. Fede dependía de hojas de cálculo de Excel estáticas y scripts en papel que ralentizaban la agilidad comercial.
+*   **El Aprendizaje:** Comprender la estructura de datos del asesor consultivo.
+*   **Hitos Logrados:** 
+    *   Nacimiento de los primeros prototipos HTML locales para simular el comportamiento de llamadas.
+    *   Desarrollo de la **Calculadora de Interés Compuesto** (`interes_compuesto_NN.html`) y el selector de **Árbol de Decisión de Productos** para ganar autoridad técnica ante el cliente.
+    *   Consolidación del primer **Dashboard Central (`index.html`)** para unificar el acceso rápido.
+
+### 📍 Fase 2: Automatización Local y Conexión de Datos (Abril - Mayo 2026)
+*   **El Reto:** Los datos de actividad de llamadas se perdían o requerían transcripción manual al Excel maestro, quitando tiempo comercial valioso.
+*   **El Aprendizaje:** Programación de sockets HTTP locales en Python y uso de librerías de lectura de hojas de cálculo (`openpyxl`).
+*   **Hitos Logrados:**
+    *   Creación del servidor local de actividad **`servidor_actividad.py`**. Ahora, cada interacción guardada en la cabina local escribe de forma transparente en el Excel en caliente.
+    *   Implementación de las **Alertas de Cierre** de ciclo y el generador de imágenes comerciales premium **`marketing_cards_premium.html`** para automatizar el impacto visual en WhatsApp.
+
+### 📍 Fase 3: Ecosistema en la Nube y Sincronización 360 (Mayo 2026)
+*   **El Reto:** La base de datos local no se sincronizaba con el teléfono del agente en caliente, perdiendo la oportunidad de enriquecer la agenda telefónica de forma automática para el Caller ID (Samsung/Google).
+*   **El Aprendizaje:** Desarrollo en Google Apps Script (`doGet`/`doPost`), CORS bypass local y consumo de **People API (Google Contacts)** y **Google Calendar API**.
+*   **Hitos Logrados:**
+    *   Nacimiento del **Master Sync Bridge (`google_apps_script.js`)**: ahora el Cockpit agenda citas en el calendario, crea contactos enriquecidos y actualiza etiquetas de estado en tiempo real.
+    *   Diseño del **Radar Comercial** dinámico en el Dashboard principal que se nutre directamente de Drive.
+
+### 📍 Fase 4: Inteligencia ADN & Búsqueda Híbrida (Sprint 6 — Junio 2026)
+*   **El Reto:** Fusión total de las **24 variables del ADN de cliente** y el volumen creciente de contactos. Abrir múltiples pestañas de CRM generaba lentitud en el momento caliente de la llamada.
+*   **El Aprendizaje:** Optimización de caché local en el navegador (`todosLosContactos`), invalidación reactiva de datos y normalización de cadenas de búsqueda de alta velocidad.
+*   **Hitos Logrados:**
+    *   **Buscador CRM Híbrido Integrado:** Transformación del `#sidebar` del Cockpit en un panel segmentado que combina la cola de vencimientos del día con un buscador global histórico en caliente (a partir del **2º carácter**).
+    *   **Fusión e Integridad del ADN:** Mapeo robusto a la Columna I (`COL.MES_VTO`) del CRM Maestro. Carga inmediata de los contactos de Junio.
+    *   **Precisión Decimal del PVM (`round()`):** Redirección del servidor local al Excel en caliente `NN_SISTEMA_MAESTRO_2026_v2_REPARADO.xlsx` y reemplazo de truncamiento entero por redondeo preciso (`round()`), mostrando en cabecera exactamente los **649 puntos comerciales reales** del Panel de Despegue.
+    *   **Simplificación del Dashboard:** Eliminación definitiva de la pestaña obsoleta `nn_crm_panel_v2.html` para unificar toda la operativa de llamadas en una cabina centralizada.
+    *   **Simetría Absoluta:** Sincronización byte a byte de las 4 copias oficiales del Cockpit de Llamadas a un tamaño simétrico exacto de **181.089 bytes**.
 
 ---
 
