@@ -273,9 +273,9 @@ if __name__ == "__main__":
     except RefreshError:
         print("\n[!] ERROR: El token de Google ha caducado o ha sido revocado.")
         print("Para solucionarlo, ejecuta localmente: python Scripts_Herramientas/auth_drive.py")
-        sys.exit(0) 
+        sys.exit(1) 
     except Exception as e:
         print(f"\n[!] ERROR INESPERADO: {str(e)}")
         import traceback
         traceback.print_exc()
-        sys.exit(0)
+        sys.exit(1)
