@@ -318,13 +318,13 @@ body {
 }
 .cc-actions { display: flex; gap: 6px; flex-shrink: 0; align-items: flex-start; }
 .btn-sm {
-  padding: 7px 14px; border-radius: var(--rad);
-  font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600;
+  padding: 6px 14px; border-radius: 20px;
+  font-family: 'DM Sans', sans-serif; font-size: 11.5px; font-weight: 700;
   cursor: pointer; border: none; transition: all 0.15s;
-  display: inline-flex; align-items: center; gap: 4px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 4px;
 }
-.btn-wa { background: #25D366; color: #fff; }
-.btn-wa:hover { background: #1DA851; }
+.btn-wa { background: #25D366; color: #fff; border: 1.5px solid #25D366; }
+.btn-wa:hover { background: #1DA851; border-color: #1DA851; }
 .btn-adn { background: var(--b-l); color: var(--b); border: 1.5px solid var(--b); }
 .btn-adn:hover { background: #DBEAFE; }
 .btn-panel { background: var(--card); color: var(--nn); border: 1.5px solid var(--nn); }
@@ -507,17 +507,73 @@ body {
    NEW CONTACT PANEL
    ══════════════════════════════════════════════════════════════ */
 #panel-nuevo .sp-title { color: var(--g); }
-.nc-section-title {
-  font-size: 12px; font-weight: 700; color: var(--tx2);
-  padding: 6px 0; margin-top: 10px; border-bottom: 1px solid var(--brd);
+.nc-accordion-item {
+  border: 1.5px solid var(--brd);
+  border-radius: var(--rad);
   margin-bottom: 8px;
-  display: flex; align-items: center; gap: 6px;
+  overflow: hidden;
+  background: var(--white);
 }
-.nc-section-title span {
-  width: 20px; height: 20px; border-radius: 50%;
-  background: var(--nn); color: var(--white);
-  display: inline-flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 700;
+.nc-accordion-header {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--bg);
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--tx);
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.15s ease;
+  outline: none;
+}
+.nc-accordion-header:hover {
+  background: var(--nn-l);
+  color: var(--nn);
+}
+.nc-accordion-header .sec-num {
+  background: var(--tx3);
+  color: var(--white);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  margin-right: 6px;
+  transition: background 0.15s ease;
+}
+.nc-accordion-item.open .nc-accordion-header .sec-num {
+  background: var(--nn);
+}
+.nc-accordion-header .arrow {
+  font-size: 8px;
+  color: var(--tx3);
+  transition: transform 0.2s ease;
+}
+.nc-accordion-item.open .nc-accordion-header {
+  background: var(--nn-l);
+  border-bottom: 1px solid var(--brd);
+  color: var(--nn);
+}
+.nc-accordion-item.open .nc-accordion-header .arrow {
+  transform: rotate(180deg);
+  color: var(--nn);
+}
+.nc-accordion-content {
+  display: none;
+  padding: 12px;
+  background: var(--white);
+  animation: fadeIn 0.2s ease;
+}
+.nc-accordion-item.open .nc-accordion-content {
+  display: block;
 }
 .nc-row { display: flex; gap: 8px; margin-bottom: 6px; }
 .nc-field { flex: 1; display: flex; flex-direction: column; gap: 2px; }
@@ -526,6 +582,7 @@ body {
   padding: 7px 10px; font-family: 'DM Sans', sans-serif; font-size: 12px;
   border: 1.5px solid var(--brd2); border-radius: var(--rad);
   background: var(--white); color: var(--tx);
+  transition: border-color 0.15s ease;
 }
 .nc-field input:focus, .nc-field select:focus { border-color: var(--nn); outline: none; }
 .nc-field textarea { resize: none; height: 48px; }
@@ -854,17 +911,24 @@ body {
 
       <div class="call-card">
         <div class="cc-header">
-                    <div class="cc-who" style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+          <div class="cc-who" style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px;">
             <!-- Left Column: Contact details, warnings, and empathy notes -->
-            <div style="display: flex; align-items: flex-start; gap: 16px; flex: 1.4; min-width: 320px; flex-shrink: 0;">
-              <div class="cc-avatar" id="cc-avatar" style="margin-top: 4px;">--</div>
-              <div style="flex: 1;">
-                <div class="cc-name" id="cc-name">—</div>
-                <div class="cc-detail" id="cc-detail">—</div>
-                <div id="cc-warn" style="display:none; margin-top: 8px;">
-                  <div class="cc-warn-badge">⚠ Faltan datos — Propón visita para actualizar</div>
+            <div style="display: flex; align-items: flex-start; gap: 16px; flex: 1.4; min-width: 320px; flex-shrink: 0; justify-content: space-between; width: 100%;">
+              <div style="display: flex; align-items: flex-start; gap: 16px;">
+                <div class="cc-avatar" id="cc-avatar" style="margin-top: 4px;">--</div>
+                <div style="flex: 1;">
+                  <div class="cc-name" id="cc-name">—</div>
+                  <div class="cc-detail" id="cc-detail">—</div>
+                  <div id="cc-warn" style="display:none; margin-top: 8px;">
+                    <div class="cc-warn-badge">⚠ Faltan datos — Propón visita para actualizar</div>
+                  </div>
+                  <div class="cc-detail" id="cc-notas" style="color:var(--nn); font-weight:600; margin-top: 8px; display: none;"></div>
                 </div>
-                <div class="cc-detail" id="cc-notas" style="color:var(--nn); font-weight:600; margin-top: 8px; display: none;"></div>
+              </div>
+              <div class="cc-actions" style="margin-top: 4px;">
+                <button class="btn-sm btn-wa" id="btn-wa" onclick="copiarWA()" title="Copiar WhatsApp previo">WA</button>
+                <button class="btn-sm btn-panel" onclick="togglePanel('panel-docs')" title="Ver documentación de productos" style="background:var(--nn-l); border-color:var(--nn); color:var(--nn)">DOCS</button>
+                <button class="btn-sm btn-adn" onclick="togglePanel('panel-adn')">ADN</button>
               </div>
             </div>
             
@@ -886,12 +950,6 @@ body {
                 <div id="cc-nn-list" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
               </div>
             </div>
-          </div>
-          </div>
-          <div class="cc-actions">
-            <button class="btn-sm btn-wa" id="btn-wa" onclick="copiarWA()" title="Copiar WhatsApp previo">WA</button>
-            <button class="btn-sm btn-panel" onclick="togglePanel('panel-docs')" title="Ver documentación de productos" style="background:var(--nn-l); border-color:var(--nn); color:var(--nn)">DOCS</button>
-            <button class="btn-sm btn-adn" onclick="togglePanel('panel-adn')">ADN</button>
           </div>
         </div>
 
@@ -1142,50 +1200,213 @@ body {
   <button class="sp-close" onclick="cerrarPaneles()">✕</button>
   <div class="sp-title">+ Nuevo contacto / Referenciado</div>
   <div style="font-size:12px;color:var(--b);background:var(--b-l);padding:8px 12px;border-radius:var(--rad);margin-bottom:12px">
-    Se guardará en el CRM y en Google Contacts (sincroniza con Samsung)
+    💡 Se guardará en el CRM y en Google Contacts (sincroniza con Samsung)
   </div>
 
-  <div class="nc-section-title"><span>1</span> Identificación</div>
-  <div class="nc-row">
-    <div class="nc-field"><label>Nombre completo *</label><input type="text" id="nc-nombre" placeholder="Nombre y apellidos"></div>
-  </div>
-  <div class="nc-row">
-    <div class="nc-field"><label>Teléfono *</label><input type="tel" id="nc-tel1" placeholder="+34 6XX XXX XXX"></div>
-    <div class="nc-field"><label>Email</label><input type="email" id="nc-email"></div>
-  </div>
-  <div class="nc-row">
-    <div class="nc-field"><label>Localidad</label><input type="text" id="nc-localidad" placeholder="Xàtiva, Anna..."></div>
-    <div class="nc-field"><label>¿Quién recomienda?</label><input type="text" id="nc-recomendado" placeholder="Nombre del referente"></div>
-  </div>
+  <div style="display:flex; flex-direction:column; gap:6px; max-height:calc(100vh - 180px); overflow-y:auto; padding-right:2px; margin-bottom:10px;">
+    <!-- 👥 1. IDENTIFICACIÓN & CONTACTO -->
+    <div class="nc-accordion-item open" id="nc-item-1">
+      <button class="nc-accordion-header" onclick="toggleNcAccordion(1)">
+        <span><span class="sec-num">1</span> Identificación & Contacto</span>
+        <span class="arrow">▼</span>
+      </button>
+      <div class="nc-accordion-content">
+        <div class="nc-row">
+          <div class="nc-field"><label>Nombre completo *</label><input type="text" id="nc-nombre" placeholder="Nombre y apellidos"></div>
+        </div>
+        <div class="nc-row">
+          <div class="nc-field"><label>Empresa</label><input type="text" id="nc-empresa" placeholder="Empresa"></div>
+          <div class="nc-field"><label>Cargo</label><input type="text" id="nc-cargo" placeholder="Cargo"></div>
+        </div>
+        <div class="nc-row">
+          <div class="nc-field"><label>Teléfono móvil *</label><input type="tel" id="nc-tel1" placeholder="+34 6XX XXX XXX"></div>
+          <div class="nc-field"><label>Teléfono fijo / 2</label><input type="tel" id="nc-tel2" placeholder="Teléfono 2"></div>
+        </div>
+        <div class="nc-row">
+          <div class="nc-field"><label>Email</label><input type="email" id="nc-email" placeholder="Email"></div>
+          <div class="nc-field"><label>Localidad</label><input type="text" id="nc-localidad" placeholder="Xàtiva, Anna..."></div>
+        </div>
+        <div class="nc-row">
+          <div class="nc-field"><label>Cumpleaños</label><input type="date" id="nc-cumpleanos"></div>
+          <div class="nc-field"><label>¿Quién recomienda?</label><input type="text" id="nc-recomendado" placeholder="Nombre del referente"></div>
+        </div>
+      </div>
+    </div>
 
-  <div class="nc-section-title"><span>2</span> Perfil comercial</div>
-  <div class="nc-row">
-    <div class="nc-field">
-      <label>Buyer Persona</label>
-      <select id="nc-buyer">
-        <option value="">—</option>
-        <option>FAMILIA</option>
-        <option>AUTÓNOMO</option>
-        <option>JOVEN AHORRO</option>
-        <option>PLANIFICADOR</option>
-        <option>SENIOR</option>
-      </select>
+    <!-- 🎯 2. ESTADO COMERCIAL -->
+    <div class="nc-accordion-item" id="nc-item-2">
+      <button class="nc-accordion-header" onclick="toggleNcAccordion(2)">
+        <span><span class="sec-num">2</span> Estado comercial</span>
+        <span class="arrow">▼</span>
+      </button>
+      <div class="nc-accordion-content">
+        <div class="nc-row">
+          <div class="nc-field">
+            <label>Estado *</label>
+            <select id="nc-estado">
+              <option value="Potencial">Potencial</option>
+              <option value="En proceso">En proceso</option>
+              <option value="Cliente activo">Cliente activo</option>
+              <option value="Perdido">Perdido</option>
+            </select>
+          </div>
+          <div class="nc-field">
+            <label>Urgencia</label>
+            <select id="nc-urgencia">
+              <option value="⚪ RESTO">⚪ Sin urgencia</option>
+              <option value="🔴 URGENTE">🔴 Urgente</option>
+              <option value="🟡 PRÓXIMO">🟡 Próximo</option>
+              <option value="🟢 OK">🟢 Activo OK</option>
+            </select>
+          </div>
+        </div>
+        <div class="nc-row">
+          <div class="nc-field">
+            <label>Canal preferido</label>
+            <select id="nc-canal">
+              <option value="">— Seleccionar —</option>
+              <option>WhatsApp</option>
+              <option>Llamada</option>
+              <option>Email</option>
+              <option>Presencial</option>
+            </select>
+          </div>
+          <div class="nc-field">
+            <label>Buyer Persona</label>
+            <select id="nc-buyer">
+              <option value="">— Seleccionar —</option>
+              <option>FAMILIA</option>
+              <option>AUTÓNOMO</option>
+              <option>JOVEN AHORRO</option>
+              <option>PLANIFICADOR</option>
+              <option>SENIOR</option>
+            </select>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="nc-field">
-      <label>Necesidad</label>
-      <select id="nc-necesidad">
-        <option value="">—</option>
-        <option>Protección familiar</option>
-        <option>Ahorro</option>
-        <option>Salud</option>
-        <option>Jubilación</option>
-        <option>Protección autónomo</option>
-        <option>Hogar</option>
-      </select>
+
+    <!-- 👤 3. ADN — PERFIL PERSONAL -->
+    <div class="nc-accordion-item" id="nc-item-3">
+      <button class="nc-accordion-header" onclick="toggleNcAccordion(3)">
+        <span><span class="sec-num">3</span> ADN — Perfil personal</span>
+        <span class="arrow">▼</span>
+      </button>
+      <div class="nc-accordion-content">
+        <div class="nc-row">
+          <div class="nc-field">
+            <label>Estado civil</label>
+            <select id="nc-estadocivil">
+              <option value="">—</option>
+              <option>Soltero/a</option>
+              <option>Casado/a</option>
+              <option>Pareja de hecho</option>
+              <option>Divorciado/a</option>
+              <option>Viudo/a</option>
+            </select>
+          </div>
+          <div class="nc-field">
+            <label>Régimen SS</label>
+            <select id="nc-regimen">
+              <option value="">—</option>
+              <option>General</option>
+              <option>Autónomo (RETA)</option>
+              <option>Funcionario (MUFACE)</option>
+              <option>No cotiza</option>
+            </select>
+          </div>
+        </div>
+        <div class="nc-row">
+          <div class="nc-field"><label>Años cotizados SS</label><input type="number" id="nc-anioss" min="0" max="50"></div>
+          <div class="nc-field"><label>Nº hijos &lt;25</label><input type="number" id="nc-hijos" min="0" max="20"></div>
+        </div>
+        <div class="nc-row">
+          <div class="nc-field">
+            <label>Tiene pareja</label>
+            <select id="nc-pareja">
+              <option value="">—</option>
+              <option value="Sí">Sí</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="nc-row">
-    <div class="nc-field"><label>Notas</label><textarea id="nc-notas" placeholder="Contexto, cómo te ha llegado..."></textarea></div>
+
+    <!-- 💰 4. ADN — PERFIL ECONÓMICO -->
+    <div class="nc-accordion-item" id="nc-item-4">
+      <button class="nc-accordion-header" onclick="toggleNcAccordion(4)">
+        <span><span class="sec-num">4</span> ADN — Perfil económico</span>
+        <span class="arrow">▼</span>
+      </button>
+      <div class="nc-accordion-content">
+        <div class="nc-row">
+          <div class="nc-field"><label>Salario neto mensual (€)</label><input type="number" id="nc-salario" min="0" placeholder="€"></div>
+          <div class="nc-field"><label>Nº pagas</label><input type="number" id="nc-pagas" min="12" max="16" value="12"></div>
+        </div>
+        <div class="nc-row">
+          <div class="nc-field"><label>Ahorro acumulado (€)</label><input type="number" id="nc-ahorro" min="0" placeholder="€"></div>
+          <div class="nc-field"><label>Gastos anuales hogar (€)</label><input type="number" id="nc-gastos" min="0" placeholder="€"></div>
+        </div>
+        <div class="nc-row">
+          <div class="nc-field">
+            <label>Nivel económico</label>
+            <select id="nc-nivel">
+              <option value="">—</option>
+              <option>Bajo</option>
+              <option>Medio-bajo</option>
+              <option>Medio</option>
+              <option>Medio-alto</option>
+              <option>Alto</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✨ 5. ADN — NECESIDAD NN -->
+    <div class="nc-accordion-item" id="nc-item-5">
+      <button class="nc-accordion-header" onclick="toggleNcAccordion(5)">
+        <span><span class="sec-num">5</span> ADN — Necesidad NN</span>
+        <span class="arrow">▼</span>
+      </button>
+      <div class="nc-accordion-content">
+        <div class="nc-row">
+          <div class="nc-field">
+            <label>Necesidad principal</label>
+            <select id="nc-necesidad">
+              <option value="">—</option>
+              <option>Protección familiar</option>
+              <option>Ahorro</option>
+              <option>Salud</option>
+              <option>Jubilación</option>
+              <option>Protección autónomo</option>
+              <option>Hogar</option>
+            </select>
+          </div>
+          <div class="nc-field">
+            <label>Producto recomendado</label>
+            <select id="nc-producto-rec">
+              <option value="">—</option>
+              <option>Contigo Familia</option>
+              <option>Contigo Autónomo</option>
+              <option>Plan Salud + Vida</option>
+              <option>SIALP</option>
+              <option>Contigo Futuro</option>
+              <option>Flexicuenta Asegurada</option>
+              <option>Ahorro Garantizado Extra</option>
+              <option>Plan General de Inversión (PGI)</option>
+              <option>Contigo Senior</option>
+              <option>Mi Hogar</option>
+              <option>Hipoteca</option>
+            </select>
+          </div>
+        </div>
+        <div class="nc-row">
+          <div class="nc-field"><label>Observaciones / notas</label><textarea id="nc-observaciones" placeholder="Información importante para el seguimiento..."></textarea></div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <button class="btn-nc-save" id="btn-nc-save" onclick="guardarNuevoContacto()">GUARDAR CONTACTO</button>
@@ -1306,11 +1527,11 @@ body {
       </div>
     </div>
 
-    <!-- Acordeón 3: Plan Creciente Estándar -->
+    <!-- Acordeón 3: Plan General de Inversión (PGI) -->
     <div class="acc-item">
       <button class="acc-header" onclick="toggleAccItem(this)">
         <span class="acc-icon">🔴</span>
-        <span class="acc-title">Plan Creciente Único (5.000€)</span>
+        <span class="acc-title">Plan General de Inversión - PGI (5.000€)</span>
         <span class="acc-arrow">▼</span>
       </button>
       <div class="acc-content">
@@ -2116,7 +2337,7 @@ function selContacto(id) {
 function mapPolizaToNN(poliza) {
   if (!poliza) return '';
   const p = poliza.toLowerCase();
-  if (p.includes('decesos'))   return 'Contigo Futuro (83€/m) / SIALP Creciente (166€/m) / Creciente Estándar (5.000€)';
+  if (p.includes('decesos'))   return 'Contigo Futuro (83€/m) / SIALP Creciente (166€/m) / Plan General de Inversión PGI (5.000€)';
   if (p.includes('hogar') || p.includes('chalet') || p.includes('casa')) return 'MiHogar Seguro';
   if (p.includes('vida'))      return 'Plan Salud+Vida / Protección Plus';
   if (p.includes('auto'))      return '(NN no ofrece auto — derivar a hipoteca o SIALP)';
@@ -2160,12 +2381,8 @@ const OBJECIONES = [
     resp: '<strong>[Validar]:</strong> "Por supuesto, te lo puedo enviar sin problema...<br><strong>[Reencuadrar]:</strong> ...pero un folleto en PDF no te va a decir si estás tirando dinero en tus pólizas actuales o si tienes algún agujero en tu protección familiar. En 15 minutos sentados te hago el cálculo exacto de tu caso, te lo imprimo y ya lo tienes para siempre.<br><strong>[Proyectar]:</strong> Es la diferencia entre leer un diagnóstico genérico y tener una radiografía propia de tu realidad. ¿Qué te viene mejor, martes por la mañana o miércoles por la tarde?"'
   },
   {
-    label: 'Protección PLUS: ¿Por qué baja el capital?',
-    resp: '<strong>[Validar]:</strong> "Es una pregunta magnífica, casi todo el mundo se sorprende al principio...<br><strong>[Reencuadrar]:</strong> ...pero es la clave de su eficiencia: en lugar de subir la cuota cada año con tu edad (que es lo que hace que los seguros tradicionales se vuelvan impagables), la cuota se queda fija y barata para siempre, y lo que baja es el capital. ¿Por qué? Porque a medida que pasan los años tienes menos deudas (la hipoteca se reduce), tus hijos crecen y tienes más ahorros acumulados. Necesitas menos cobertura.<br><strong>[Proyectar]:</strong> Es la forma más inteligente de pagar solo por el riesgo real que tienes hoy, sin tirar dinero en coberturas que ya no necesitas. ¿Nos vemos un momento y te enseño tu curva exacta?"'
-  },
-  {
-    label: 'Protección PLUS: Ya tengo mi plan de ahorro',
-    resp: '<strong>[Validar]:</strong> "Fantástico, eso te sitúa en un nivel de responsabilidad muy alto...<br><strong>[Reencuadrar]:</strong> ...pero Protección PLUS no es para ahorrar, es el **escudo que blinda tu ahorro**. Si tienes un plan a 10 años y mañana pasa algo grave, Protección PLUS garantiza que ese capital llegue a tu familia íntegro desde el primer día, como si hubieras completado el plan de ahorro entero.<br><strong>[Proyectar]:</strong> Es la diferencia entre tener una hucha normal que se puede romper a mitad de camino y tener una hucha blindada. ¿Te va mejor martes o miércoles?"'
+    label: 'Menos mal que no te contraté en la otra compañía...',
+    resp: '<strong>[Validar]:</strong> "Te entiendo perfectamente, [Nombre], y me alegra que lo saques, porque precisamente ahí está el detalle...<br><strong>[Reencuadrar]:</strong> ...un seguro contratado es un contrato firmado: las condiciones se respetan al 100% pase lo que pase, por lo que tus pólizas estarían exactamente igual de seguras. Pero te voy a ser muy honesto: el motivo por el que yo di el paso a Nationale-Nederlanden es precisamente por clientes exigentes como tú. En la otra compañía cubríamos una etapa muy familiar y tradicional. Pero al especializarme en la Radiografía Financiera ADN, me di cuenta de que para proteger el patrimonio real, el ahorro y la inversión a largo plazo frente a la inflación, necesitábamos la solidez y las herramientas del Grupo NN.<br><strong>[Proyectar]:</strong> No me moví para cambiar de oficina; me moví para poder ofrecerte hoy un blindaje que antes, sencillamente, no existía en mi catálogo. Así que, en realidad, el momento de que miremos tus números con las herramientas de verdad es ahora. ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"'
   },
   {
     label: 'A mi edad ya no necesito estas cosas',
@@ -2436,7 +2653,7 @@ function renderCalificar(c) {
           <input type="radio" name="tier-choice" value="3" onclick="selectTier(3)" style="margin-top:3px; accent-color:var(--nn);">
           <div style="flex:1;">
             <div style="display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-size:12px; font-weight:700; color:var(--tx);">🔴 Escalón 3: Plan Creciente Estándar</span>
+              <span style="font-size:12px; font-weight:700; color:var(--tx);">🔴 Escalón 3: Plan General de Inversión (PGI)</span>
               <span style="font-size:11px; font-weight:700; color:var(--b); background:var(--b-l); padding:2px 6px; border-radius:4px;">5.000€ Único</span>
             </div>
             <div style="font-size:10px; color:var(--tx3); margin-top:2px;">Para seniors (+55) con liquidez o cansados de pagar cuotas</div>
@@ -2450,6 +2667,20 @@ function renderCalificar(c) {
 
       <div id="tier-pitch-box" style="margin-top:15px; padding:12px; background:var(--bg); border-radius:10px; border:1px solid var(--brd); font-size:12px; line-height:1.5;">
         <!-- Se inyectará el pitch del escalón seleccionado aquí -->
+      </div>
+      
+      <div style="margin-top:15px; border-top:1px dashed var(--brd); padding-top:12px;">
+        <details style="background:var(--nn-l); border:1px solid var(--nn-l); border-radius:8px; padding:8px 12px; cursor:pointer;">
+          <summary style="font-size:11px; font-weight:700; color:var(--nn); display:flex; align-items:center; gap:6px;">
+            💡 <span>Mayéutica Avanzada: El Método del Cofre Familiar (2-3 miembros)</span>
+          </summary>
+          <div style="font-size:11px; color:var(--tx2); margin-top:8px; line-height:1.5; cursor:default;">
+            <b style="color:var(--tx);">La Metáfora de los "Billetes de Autobús":</b><br>
+            <i>"Estáis pagando tres billetes de autobús para un viaje en el que no vais a subir todos a la vez. Es absurdo pagar tres cuotas recurrentes para un servicio que se usará con años de diferencia."</i><br><br>
+            <b style="color:var(--tx);">El Cofre Familiar Rotatorio (Script):</b><br>
+            <i>"Manuel, María... hoy pagáis casi 70€ al mes a la otra compañía por estar los tres en la póliza de muertos. Eso son 840€ al año tirados a un pozo sin fondo. Estáis pagando tres billetes de autobús para un viaje en el que no vais a subir todos a la vez. Nosotros os proponemos crear un único <b>Cofre de Reserva Familiar</b> de 5.000€ con nuestro Plan General de Inversión (PGI). Ese dinero es vuestro, crece seguro y nadie os lo toca. Si el día de mañana cualquiera de los tres falta, el cofre se abre inmediatamente y le entrega a la familia los 5.000€ más la rentabilidad y un extra de 1.000€ por contrato. Con eso pagáis el entierro de 4.000€ al contado en Xàtiva y os sobran 2.000€ que se quedan en casa. Y mientras tanto, los 70€ mensuales que antes tirabais, ahora se quedan en vuestra cuenta del banco. En solo 5 años, habéis acumulado más de 4.000€ en vuestro banco. Con ese ahorro autofinanciáis el segundo entierro de sobra, sin regalar un céntimo. ¿Seguimos comprando billetes de autobús inútiles, o abrimos vuestro cofre familiar hoy?"</i>
+          </div>
+        </details>
       </div>
     `;
     selectTier(1); // Seleccionar escalón 1 por defecto
@@ -2503,7 +2734,7 @@ function selectTier(tier) {
     `;
   } else if (tier === 3) {
     pitch = `
-      <div style="font-weight:700; color:var(--b); margin-bottom:4px; display:flex; align-items:center; gap:6px;">🎯 <span>PITCH RECOMENDADO CRECIENTE ÚNICO:</span></div>
+      <div style="font-weight:700; color:var(--b); margin-bottom:4px; display:flex; align-items:center; gap:6px;">🎯 <span>PITCH RECOMENDADO PLAN GENERAL DE INVERSIÓN (PGI):</span></div>
       <div style="color:var(--tx); font-style:italic;">
         "En lugar de estar tirando una cuota mensual de entierro para toda la vida, pones una aportación única de 5.000€ a trabajar en renta variable garantizada al 80-85%. Si pasa algo, tus hijos heredan la inversión completa más un cheque adicional de 3.000€ en efectivo para los gastos del funeral. Los 3.000€ pagan el entierro y los 5.000€ regresan íntegros a tus hijos con los intereses acumulados. ¿Prefieres seguir perdiendo dinero a fondo perdido o blindar tus ahorros hoy?"
       </div>
@@ -2917,43 +3148,89 @@ function siguienteContacto() {
 // ══════════════════════════════════════════════════════════════
 // NUEVO CONTACTO
 // ══════════════════════════════════════════════════════════════
-function abrirNuevoContacto() { togglePanel('panel-nuevo'); }
+function toggleNcAccordion(idx) {
+  const item = document.getElementById(`nc-item-${idx}`);
+  if (!item) return;
+  const isOpen = item.classList.contains('open');
+  
+  // Collapse others
+  document.querySelectorAll('.nc-accordion-item').forEach(el => {
+    el.classList.remove('open');
+  });
+  
+  if (!isOpen) {
+    item.classList.add('open');
+  }
+}
+
+function abrirNuevoContacto() {
+  togglePanel('panel-nuevo');
+  // Asegurar que el primer bloque de acordeón esté abierto por defecto al abrir
+  document.querySelectorAll('.nc-accordion-item').forEach((el, idx) => {
+    if (idx === 0) el.classList.add('open');
+    else el.classList.remove('open');
+  });
+}
 
 async function guardarNuevoContacto() {
   const nombre = document.getElementById('nc-nombre').value.trim();
-  const tel = document.getElementById('nc-tel1').value.trim();
-  if (!nombre || !tel) { toast('⚠️ Nombre y teléfono obligatorios', 'warn'); return; }
+  const tel1 = document.getElementById('nc-tel1').value.trim();
+  if (!nombre || !tel1) { toast('⚠️ Nombre y teléfono obligatorios', 'warn'); return; }
 
   const btn = document.getElementById('btn-nc-save');
   btn.disabled = true;
   btn.textContent = 'GUARDANDO...';
 
   const payload = {
-    accion: 'nuevo_contacto',
-    nombre: nombre,
-    telefono1: tel,
-    email: document.getElementById('nc-email').value.trim(),
-    localidad: document.getElementById('nc-localidad').value.trim(),
-    recomendado: document.getElementById('nc-recomendado').value.trim(),
-    buyerPersona: document.getElementById('nc-buyer').value,
-    necesidad: document.getElementById('nc-necesidad').value,
-    observaciones: document.getElementById('nc-notas').value.trim(),
-    estado: 'Potencial',
-    urgencia: '🟡 PRÓXIMO',
+    accion:              'nuevo_contacto',
+    nombre:              nombre,
+    apodo:               '', // Campo omitido en UI por petición del usuario
+    empresa:             document.getElementById('nc-empresa').value.trim(),
+    cargo:               document.getElementById('nc-cargo').value.trim(),
+    tel1:                tel1,
+    tel2:                document.getElementById('nc-tel2').value.trim(),
+    email:               document.getElementById('nc-email').value.trim(),
+    localidad:           document.getElementById('nc-localidad').value.trim(),
+    cumpleanos:          document.getElementById('nc-cumpleanos').value,
+    recomendado:         document.getElementById('nc-recomendado').value.trim(),
+    estado:              document.getElementById('nc-estado').value,
+    urgencia:            document.getElementById('nc-urgencia').value,
+    canal:               document.getElementById('nc-canal').value,
+    buyerPersona:        document.getElementById('nc-buyer').value,
+    estadoCivil:         document.getElementById('nc-estadocivil').value,
+    regimenSS:           document.getElementById('nc-regimen').value,
+    aniosSS:             document.getElementById('nc-anioss').value,
+    hijos:               document.getElementById('nc-hijos').value,
+    pareja:              document.getElementById('nc-pareja').value,
+    salario:             document.getElementById('nc-salario').value,
+    pagas:               document.getElementById('nc-pagas').value,
+    ahorro:              document.getElementById('nc-ahorro').value,
+    gastos:              document.getElementById('nc-gastos').value,
+    nivelEco:            document.getElementById('nc-nivel').value,
+    necesidad:           document.getElementById('nc-necesidad').value,
+    productoRecomendado: document.getElementById('nc-producto-rec').value,
+    observaciones:       document.getElementById('nc-observaciones').value.trim()
   };
 
   try {
     const r = await post(payload);
     if (r.ok) {
-      toast('✅ Contacto guardado', 'ok');
+      toast('✅ ' + r.msg, 'ok');
       cerrarPaneles();
-      // Clear form
+      // Limpiar los campos del formulario
       document.querySelectorAll('#panel-nuevo input, #panel-nuevo select, #panel-nuevo textarea')
-        .forEach(el => el.value = '');
+        .forEach(el => {
+          if (el.tagName === 'SELECT') {
+            el.value = el.options[0] ? el.options[0].value : '';
+          } else {
+            el.value = '';
+          }
+        });
     } else {
-      toast('❌ Error: ' + (r.error || 'desconocido'), 'err');
+      toast('❌ Error: ' + (r.error || r.msg || 'desconocido'), 'err');
     }
   } catch(e) {
+    console.error('Error al guardar nuevo contacto:', e);
     toast('❌ Sin conexión con el CRM', 'err');
   }
 
