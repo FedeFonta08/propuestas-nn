@@ -2045,18 +2045,18 @@ function procesarContactos(json, filtroMes) {
     return {
       id: i,
       nombre:       val(COL.NOMBRE),
-      telefono:     val(COL.TEL1) || val(COL.TEL2), // Usar teléfono móvil como principal, o secundario
-      tel2:         val(COL.TEL2),
+      telefono:     val(COL.TELEFONO),
+      tel2:         val(2),
       cumpleanos:   val(COL.CUMPLEANOS),
       localidad:    val(COL.LOCALIDAD),
       poliza:       val(COL.POLIZA_1),
       vto:          val(COL.VTO_1),
       resultado:    val(COL.RESULTADO),
-      buyer:        val(COL.BUYER_PERSONA),
+      buyer:        val(COL.BUYER),
       notas:        val(COL.OBSERVACIONES),
       datosIncompletos: camposVacios > 0,
       hecho: sesion.hechos.includes(val(COL.NOMBRE)),
-      mesVto:       val(COL.VTO_MES)
+      mesVto:       val(COL.MES_VTO)
     };
   });
 
