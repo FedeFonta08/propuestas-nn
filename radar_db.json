@@ -1,37 +1,44 @@
 {
-  "ultima_actualizacion": "25/05/2026 16:28",
+  "ultima_actualizacion": "01/06/2026 12:33",
   "campanas": [
     {
       "Producto": "Contigo Familia",
-      "Tipo_de_campaña": "Lanzamiento y Dominio de Conversación",
-      "Descripcion_del_beneficio": "Herramienta completa con argumentos y soportes para dominar conversaciones y cerrar ventas. Ideal para conversaciones críticas y fidelización.",
-      "Fecha_inicio": "25/05/2026",
+      "Tipo_de_campaña": "Fidelización y Venta",
+      "Descripcion_del_beneficio": "Herramienta completa con argumentos y soportes para dominar las conversaciones y potenciar la venta.",
+      "Fecha_inicio": null,
       "Fecha_fin": null,
       "Cupo_max": null,
       "Descuento_Bonus": null,
-      "Segmento_objetivo": "Clientes particulares y familiares",
-      "Vulnerabilidad_Detectada": "La falta de una herramienta argumental sólida y soportes efectivos para abordar conversaciones críticas y de fidelización, dejando al cliente expuesto a una gestión de sus necesidades de protección incompleta.",
-      "Pregunta_Apertura": "Si mañana tus necesidades familiares más críticas no pudieran ser cubiertas adecuadamente por tu protección actual, ¿cómo garantizarías esa continuidad sin comprometer tu tranquilidad?",
+      "Segmento_objetivo": "Clientes particulares y familiares.",
+      "Vulnerabilidad_Detectada": "El miedo a dejar a la familia desprotegida ante un imprevisto o la preocupación por la continuidad del nivel de vida de los seres queridos ante la ausencia del principal sustento.",
+      "Pregunta_Apertura": "¿Si mañana no estuvieras, cómo se mantendría tu familia el mes que viene? ¿Quién asumiría la carga económica de la hipoteca y los gastos diarios?",
       "Estado": "🟢 ACTIVA",
       "Cambios_Catalogo": null
     },
     {
       "Producto": "Contigo Autónomo",
-      "Tipo_de_campaña": "Descuento y Cobertura Integral",
-      "Descripcion_del_beneficio": "Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo explícitamente la cobertura de Incapacidad Laboral Temporal (ILT).",
+      "Tipo_de_campaña": "Descuento Vitalicio y Adaptación",
+      "Descripcion_del_beneficio": "Protección laboral integral para autónomos con un 25% de descuento vitalicio en la prima, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT). Cubre fallecimiento, invalidez y enfermedades graves.",
       "Fecha_inicio": null,
       "Fecha_fin": null,
       "Cupo_max": null,
       "Descuento_Bonus": "25%",
-      "Segmento_objetivo": "Autónomos RETA",
-      "Vulnerabilidad_Detectada": "El riesgo de no contar con una protección laboral integral y económica que cubra contingencias graves, a pesar de no necesitar la cobertura específica de Incapacidad Laboral Temporal, comprometiendo la estabilidad financiera del autónomo.",
-      "Pregunta_Apertura": "Si tu actividad profesional se viera interrumpida permanentemente por una incapacidad o fallecimiento, ¿cómo asegurarías el futuro económico de tu negocio y tu familia sin depender de coberturas específicas que hoy no te son prioritarias?",
+      "Segmento_objetivo": "Autónomos RETA.",
+      "Vulnerabilidad_Detectada": "El riesgo de descapitalización o endeudamiento ante una baja laboral prolongada que detenga los ingresos, sumado a la preocupación por la protección económica familiar ante el fallecimiento o invalidez, sin cubrir la baja laboral específica por un coste elevado.",
+      "Pregunta_Apertura": "Si mañana sufres una baja laboral de 3 meses, tus gastos siguen corriendo, pero tus ingresos se reducen drásticamente. ¿De dónde sacarías el dinero para cubrir esos meses sin tocar tus ahorros o endeudarte?",
       "Estado": "🟢 ACTIVA",
       "Cambios_Catalogo": {
         "id_producto": "autonomo",
         "campos_a_actualizar": {
           "descripcion_breve": "Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
+          "precio_base": "Consultar",
           "detalles_adicionales": "Con descuento hábitos saludables −10% · Capital total: 266.000 € · *25% descuento vitalicio (excluye ILT)*",
+          "estadisticas_clave": [
+            {
+              "valor": "25% vitalicio",
+              "etiqueta": "Descuento de prima"
+            }
+          ],
           "coberturas_clave": [
             {
               "cobertura": "Incapacidad laboral temporal (ILT)",
@@ -176,29 +183,36 @@
   "novedades": [
     {
       "Producto": "Contigo Familia",
-      "Que_ha_cambiado": "Se promociona como herramienta de dominio de conversaciones críticas y de fidelización, con argumentos y soportes listos para usar.",
+      "Que_ha_cambiado": "Se promociona como una herramienta clave para dominar las conversaciones de venta con argumentos y soportes directos, listos para usar en visitas.",
       "Tipo": "🟢 Mejora",
       "Vigente_desde": "25/05/2026",
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Actualizar argumentos de venta y material de apoyo para 'Contigo Familia'.",
-      "Impacto_segmento": "Todos los segmentos de particulares y familias.",
+      "Accion_sobre_CRM": "Destacar la disponibilidad de argumentos y soportes para la venta consultiva.",
+      "Impacto_segmento": "Todos los segmentos que venden seguros de vida y protección familiar.",
       "Fuente": "Entre Nosotros #562",
       "Cambios_Catalogo": null
     },
     {
       "Producto": "Contigo Autónomo",
-      "Que_ha_cambiado": "Se lanza con un 25% de descuento vitalicio para autónomos, excluyendo explícitamente la cobertura de Incapacidad Laboral Temporal (ILT).",
+      "Que_ha_cambiado": "Campaña específica para autónomos RETA que incluye un 25% de descuento vitalicio en la prima, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
       "Tipo": "🟢 Mejora",
       "Vigente_desde": "25/05/2026",
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Crear segmento específico 'Autónomos' para 'Contigo Autónomo' y destacar el descuento vitalicio y la exclusión de ILT.",
+      "Accion_sobre_CRM": "Crear un segmento específico para autónomos y aplicar el descuento del 25% en las cotizaciones, asegurando la exclusión de ILT.",
       "Impacto_segmento": "Autónomos RETA.",
       "Fuente": "Entre Nosotros #562",
       "Cambios_Catalogo": {
         "id_producto": "autonomo",
         "campos_a_actualizar": {
           "descripcion_breve": "Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
+          "precio_base": "Consultar",
           "detalles_adicionales": "Con descuento hábitos saludables −10% · Capital total: 266.000 € · *25% descuento vitalicio (excluye ILT)*",
+          "estadisticas_clave": [
+            {
+              "valor": "25% vitalicio",
+              "etiqueta": "Descuento de prima"
+            }
+          ],
           "coberturas_clave": [
             {
               "cobertura": "Incapacidad laboral temporal (ILT)",
@@ -213,35 +227,30 @@
     },
     {
       "Producto": "Campaña Actualizada: Contigo Familia",
-      "Que_ha_cambiado": "Herramienta completa con argumentos y soportes para dominar conversaciones y cerrar ventas. Ideal para conversaciones críticas y fidelización.",
+      "Que_ha_cambiado": "Herramienta completa con argumentos y soportes para dominar las conversaciones y potenciar la venta.",
       "Tipo": "🟢 Campaña Modificada",
-      "Vigente_desde": "25/05/2026",
+      "Vigente_desde": null,
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Ofrecer al segmento: Clientes particulares y familiares",
-      "Impacto_segmento": "Clientes particulares y familiares",
+      "Accion_sobre_CRM": "Ofrecer al segmento: Clientes particulares y familiares.",
+      "Impacto_segmento": "Clientes particulares y familiares.",
       "Fuente": "Entre Nosotros #562"
     },
     {
       "Producto": "Campaña Actualizada: Contigo Autónomo",
-      "Que_ha_cambiado": "Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo explícitamente la cobertura de Incapacidad Laboral Temporal (ILT).",
+      "Que_ha_cambiado": "Protección laboral integral para autónomos con un 25% de descuento vitalicio en la prima, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT). Cubre fallecimiento, invalidez y enfermedades graves.",
       "Tipo": "🟢 Campaña Modificada",
       "Vigente_desde": null,
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Ofrecer al segmento: Autónomos RETA",
-      "Impacto_segmento": "Autónomos RETA",
+      "Accion_sobre_CRM": "Ofrecer al segmento: Autónomos RETA.",
+      "Impacto_segmento": "Autónomos RETA.",
       "Fuente": "Entre Nosotros #562"
     }
   ],
   "historial": {
     "N_Edicion": "562",
-    "Resumen_ejecutivo": "Lanzamiento de 'Contigo Familia' como herramienta de venta y promociones para 'Contigo Autónomo' (descuento vitalicio, exclusión ILT). Se enfatiza la venta consultiva y el uso de pildoras de audio.",
-    "Campañas_nuevas": [
-      "Contigo Familia",
-      "Contigo Autónomo (con descuento 25% vitalicio y exclusión ILT)"
-    ],
-    "Cambios_producto": [
-      "Actualización de 'Contigo Autónomo' para reflejar el descuento y la exclusión de ILT."
-    ],
+    "Resumen_ejecutivo": "Se destacan 9 claves en 1 minuto para productos Vida-Riesgo. Se potencia el uso de Contigo Familia y se lanza una campaña específica para autónomos con Contigo Autónomo, ofreciendo un 25% de descuento vitalicio y excluyendo ILT.",
+    "Campañas_nuevas": "Contigo Familia (potenciación), Contigo Autónomo (nueva campaña específica).",
+    "Cambios_producto": "Adaptación de la campaña 'Contigo Familia' para venta consultiva y lanzamiento de campaña específica 'Contigo Autónomo' con descuento y exclusión de ILT.",
     "N_acciones": 2
   }
 }
