@@ -695,6 +695,10 @@ body::before {
   color: var(--gold);
 }
 
+.radar-card.expanded .radar-brief {
+  display: none;
+}
+
 .radar-card-details {
   max-height: 0;
   overflow: hidden;
@@ -1606,7 +1610,7 @@ function renderRadarUI(campanas, origen) {
         </div>
         <div class="radar-card-details">
           <div class="radar-detail-label">Detalles de la campaña (${tipo})</div>
-          <div class="radar-desc" style="margin-bottom:15px; color:#374151">• ${desc}</div>
+          <div class="radar-desc" style="margin-bottom:15px; color:var(--text2); font-size:13.5px; line-height:1.5; font-family:'Inter',sans-serif;">• ${desc}</div>
           <div class="radar-detail-grid">
             <div class="radar-detail-item">
               <span class="radar-detail-label">Vencimiento</span>
