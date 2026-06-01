@@ -788,6 +788,46 @@ body {
 .p-badge-default .p-vto { background: var(--brd2); color: var(--tx2); }
 .p-badge-nn { border-left: 4.5px solid var(--nn); }
 .p-badge-nn .p-vto { background: #FFF7ED; color: var(--nn); }
+
+/* Pestañas del Buscador Híbrido */
+.sb-tabs {
+  display: flex;
+  background: var(--bg);
+  padding: 4px;
+  border-bottom: 1.5px solid var(--brd);
+  gap: 2px;
+  flex-shrink: 0;
+}
+.sb-tab {
+  flex: 1;
+  padding: 8px 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  border: none;
+  background: transparent;
+  color: var(--tx3);
+  cursor: pointer;
+  border-radius: var(--rad);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.sb-tab.active {
+  background: var(--white);
+  color: var(--nn);
+  box-shadow: var(--shadow);
+}
+.sb-tab:hover:not(.active) {
+  color: var(--tx2);
+  background: rgba(255,255,255,0.4);
+}
+#search-input:focus {
+  border-color: var(--nn);
+  box-shadow: 0 0 0 3px var(--nn-ll);
+}
 </style>
 </head>
 <body>
@@ -875,23 +915,56 @@ body {
 
   <!-- SIDEBAR -->
   <div class="sidebar">
-    <div class="sb-head">
-      <div class="sb-title">
-        Cola del día
-        <span class="sb-count" id="sb-count">0 contactos</span>
+    <!-- Pestañas del Buscador Híbrido -->
+    <div class="sb-tabs">
+      <button class="sb-tab active" id="sb-tab-cola" onclick="switchSidebarTab('cola')">📅 Cola del Día</button>
+      <button class="sb-tab" id="sb-tab-buscar" onclick="switchSidebarTab('buscar')">🔍 Buscar en CRM</button>
+    </div>
+
+    <!-- Contenedor Cola del Día -->
+    <div id="cola-container" style="display: flex; flex-direction: column; overflow: hidden; flex: 1;">
+      <div class="sb-head">
+        <div class="sb-title">
+          Cola del día
+          <span class="sb-count" id="sb-count">0 contactos</span>
+        </div>
+        <div class="mode-toggle">
+          <button class="mode-btn active" id="mode-vto" onclick="setMode('vto')">Vencimientos</button>
+          <button class="mode-btn" id="mode-loc" onclick="setMode('loc')">Por localidad</button>
+        </div>
       </div>
-      <div class="mode-toggle">
-        <button class="mode-btn active" id="mode-vto" onclick="setMode('vto')">Vencimientos</button>
-        <button class="mode-btn" id="mode-loc" onclick="setMode('loc')">Por localidad</button>
+      <div class="sb-filter">
+        <select class="sb-select" id="filter-select" onchange="aplicarFiltro()">
+          <option value="actual">Mes actual + siguiente</option>
+        </select>
+      </div>
+      <div class="sb-list" id="contact-list">
+        <div style="padding:20px;text-align:center;color:var(--tx3);font-size:13px">Cargando contactos...</div>
       </div>
     </div>
-    <div class="sb-filter">
-      <select class="sb-select" id="filter-select" onchange="aplicarFiltro()">
-        <option value="actual">Mes actual + siguiente</option>
-      </select>
-    </div>
-    <div class="sb-list" id="contact-list">
-      <div style="padding:20px;text-align:center;color:var(--tx3);font-size:13px">Cargando contactos...</div>
+
+    <!-- Contenedor Buscador CRM -->
+    <div id="buscar-container" style="display: none; flex-direction: column; overflow: hidden; flex: 1;">
+      <div class="sb-search-box" style="padding: 12px 14px 8px; flex-shrink: 0;">
+        <div style="position: relative; display: flex; align-items: center;">
+          <span style="position: absolute; left: 10px; color: var(--tx3); font-size: 13px;">🔍</span>
+          <input type="text" id="search-input" oninput="ejecutarBusqueda()" placeholder="Buscar por nombre, tel, localidad..." 
+                 style="width: 100%; padding: 8px 12px 8px 30px; font-family: 'DM Sans', sans-serif; font-size: 12px;
+                        border: 1.5px solid var(--brd2); border-radius: var(--rad); background: var(--white); color: var(--tx);
+                        transition: all 0.15s ease; outline: none;">
+          <button id="search-clear-btn" onclick="limpiarBusqueda()" 
+                  style="position: absolute; right: 10px; border: none; background: transparent; color: var(--tx3); 
+                         cursor: pointer; font-size: 12px; display: none;">✕</button>
+        </div>
+        <div style="font-size: 10.5px; color: var(--tx3); margin-top: 6px; font-weight: 500;" id="search-stats">
+          Búsqueda global sobre todo el histórico del CRM
+        </div>
+      </div>
+      <div class="sb-list" id="search-results-list" style="flex: 1; overflow-y: auto; padding: 0 8px 8px;">
+        <div style="padding: 20px; text-align: center; color: var(--tx3); font-size: 12px;">
+          Escribe al menos 2 caracteres para buscar...
+        </div>
+      </div>
     </div>
     <div class="sb-footer">
       <button class="btn-nuevo" onclick="abrirNuevoContacto()">+ Nuevo contacto / Referenciado</button>
@@ -1850,6 +1923,7 @@ const CAMPOS_CRITICOS = [COL.TELEFONO, COL.LOCALIDAD, COL.BUYER];
 // ESTADO
 // ══════════════════════════════════════════════════════════════
 let contactos = [];
+let todosLosContactos = [];
 let contactoActivo = null;
 let resultadoSel = null;
 let modoActual = 'vto';
@@ -1963,14 +2037,43 @@ function procesarContactos(json, filtroMes) {
     return;
   }
   
+  // Guardar TODOS los contactos del CRM Maestro para la búsqueda global histórica
+  todosLosContactos = rows.slice(1).map((r, i) => {
+    const val = idx => (r && r.c && r.c[idx] && r.c[idx].v) ? String(r.c[idx].v).trim() : '';
+    const camposVacios = CAMPOS_CRITICOS.filter(c => !val(c)).length;
+
+    return {
+      id: i,
+      nombre:       val(COL.NOMBRE),
+      telefono:     val(COL.TEL1) || val(COL.TEL2), // Usar teléfono móvil como principal, o secundario
+      tel2:         val(COL.TEL2),
+      cumpleanos:   val(COL.CUMPLEANOS),
+      localidad:    val(COL.LOCALIDAD),
+      poliza:       val(COL.POLIZA_1),
+      vto:          val(COL.VTO_1),
+      resultado:    val(COL.RESULTADO),
+      buyer:        val(COL.BUYER_PERSONA),
+      notas:        val(COL.OBSERVACIONES),
+      datosIncompletos: camposVacios > 0,
+      hecho: sesion.hechos.includes(val(COL.NOMBRE)),
+      mesVto:       val(COL.VTO_MES)
+    };
+  });
+
+  // Filtrar y renderizar la cola del día clásica
+  filtrarYRenderizarClassicList(filtroMes);
+}
+
+function filtrarYRenderizarClassicList(filtroMes) {
+  const el = document.getElementById('contact-list');
   const mesActualIdx = new Date().getMonth();
   const mesSiguienteIdx = (mesActualIdx + 1) % 12;
   const mesActualNombre = MESES[mesActualIdx].toUpperCase();
   const mesSiguienteNombre = MESES[mesSiguienteIdx].toUpperCase();
 
-  contactos = rows.slice(1).map((r, i) => {
-    const val = idx => (r && r.c && r.c[idx] && r.c[idx].v) ? String(r.c[idx].v).trim() : '';
-    const mesVtoRow = val(COL.MES_VTO).toUpperCase();
+  // Filtrar de todosLosContactos
+  contactos = todosLosContactos.filter(c => {
+    const mesVtoRow = (c.mesVto || '').toUpperCase();
     let matchesFilter = false;
 
     if (filtroMes === 'actual') {
@@ -1979,29 +2082,13 @@ function procesarContactos(json, filtroMes) {
       matchesFilter = (mesVtoRow === MESES[parseInt(filtroMes)].toUpperCase());
     }
 
-    if (!matchesFilter && modoActual === 'vto') return null;
-
-    const camposVacios = CAMPOS_CRITICOS.filter(c => !val(c)).length;
-
-    return {
-      id: i,
-      nombre:       val(COL.NOMBRE),
-      telefono:     val(COL.TELEFONO),
-      cumpleanos:   val(COL.CUMPLEANOS),
-      localidad:    val(COL.LOCALIDAD),
-      poliza:       val(COL.POLIZA_1),
-      vto:          val(COL.VTO_1),
-      resultado:    val(COL.RESULTADO),
-      buyer:        val(COL.BUYER),
-      notas:        val(COL.OBSERVACIONES),
-      datosIncompletos: camposVacios > 0,
-      hecho: sesion.hechos.includes(val(COL.NOMBRE))
-    };
-  }).filter(c => c !== null);
+    if (!matchesFilter && modoActual === 'vto') return false;
+    return true;
+  });
 
   if (contactos.length === 0) {
     el.innerHTML = `<div style="padding:20px;text-align:center;color:var(--tx2);font-size:12px">
-      No hay vencimientos de <b>\${filtroMes === 'actual' ? 'Mayo/Junio' : MESES[filtroMes].toUpperCase()}</b> en el Maestro.<br><br>
+      No hay vencimientos de <b>${filtroMes === 'actual' ? 'Mayo/Junio' : MESES[filtroMes].toUpperCase()}</b> en el Maestro.<br><br>
       <span style="color:var(--tx3);font-size:11px">Asegúrate de que la <b>Columna I</b> del CRM MAESTRO tenga el nombre del mes.</span>
     </div>`;
     document.getElementById('sb-count').textContent = '0 contactos';
@@ -2016,6 +2103,119 @@ function procesarContactos(json, filtroMes) {
   });
 
   renderLista(contactos);
+}
+
+// ── NAVEGACIÓN Y BÚSQUEDA HÍBRIDA ─────────────────────────────
+function switchSidebarTab(tab) {
+  if (tab === 'cola') {
+    document.getElementById('sb-tab-cola').classList.add('active');
+    document.getElementById('sb-tab-buscar').classList.remove('active');
+    document.getElementById('cola-container').style.display = 'flex';
+    document.getElementById('buscar-container').style.display = 'none';
+  } else {
+    document.getElementById('sb-tab-cola').classList.remove('active');
+    document.getElementById('sb-tab-buscar').classList.add('active');
+    document.getElementById('cola-container').style.display = 'none';
+    document.getElementById('buscar-container').style.display = 'flex';
+    document.getElementById('search-input').focus();
+  }
+}
+
+function limpiarBusqueda() {
+  const input = document.getElementById('search-input');
+  input.value = '';
+  document.getElementById('search-clear-btn').style.display = 'none';
+  ejecutarBusqueda();
+  input.focus();
+}
+
+function ejecutarBusqueda() {
+  const query = document.getElementById('search-input').value.trim().toLowerCase();
+  const listEl = document.getElementById('search-results-list');
+  const statsEl = document.getElementById('search-stats');
+  const clearBtn = document.getElementById('search-clear-btn');
+
+  if (query.length > 0) {
+    clearBtn.style.display = 'block';
+  } else {
+    clearBtn.style.display = 'none';
+  }
+
+  // Búsqueda a partir del 2º carácter por decisión comercial y UX óptima
+  if (query.length < 2) {
+    listEl.innerHTML = `
+      <div style="padding: 20px; text-align: center; color: var(--tx3); font-size: 12px;">
+        Escribe al menos 2 caracteres para buscar...
+      </div>`;
+    statsEl.textContent = 'Búsqueda global sobre todo el histórico del CRM';
+    return;
+  }
+
+  // Filtrado dinámico sobre la base global histórica
+  const matches = todosLosContactos.filter(c => {
+    const cleanPhone = (c.telefono || '').replace(/[\s\+\-]/g, '');
+    const cleanPhone2 = (c.tel2 || '').replace(/[\s\+\-]/g, '');
+    const cleanQuery = query.replace(/[\s\+\-]/g, '');
+    return (
+      (c.nombre && c.nombre.toLowerCase().includes(query)) ||
+      (c.telefono && cleanPhone.includes(cleanQuery)) ||
+      (c.tel2 && cleanPhone2.includes(cleanQuery)) ||
+      (c.localidad && c.localidad.toLowerCase().includes(query)) ||
+      (c.poliza && c.poliza.toLowerCase().includes(query)) ||
+      (c.buyer && c.buyer.toLowerCase().includes(query)) ||
+      (c.notas && c.notas.toLowerCase().includes(query))
+    );
+  });
+
+  statsEl.innerHTML = `Encontrados: <b style="color: var(--nn);">${matches.length}</b> de ${todosLosContactos.length} contactos`;
+
+  if (matches.length === 0) {
+    listEl.innerHTML = `
+      <div style="padding: 20px; text-align: center; color: var(--tx3); font-size: 12px;">
+        ⚠️ Ningún contacto coincide con "${query}"
+      </div>`;
+    return;
+  }
+
+  // Renderizar la lista filtrada de búsqueda
+  let html = '';
+  matches.forEach(c => {
+    const initials = c.nombre.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
+    const isDone = c.hecho ? 'done' : '';
+    const activeClass = (contactoActivo && contactoActivo.id === c.id) ? ' active' : '';
+    const doneMark = c.hecho ? '<span class="ci-done-mark">✓</span>' : '';
+    
+    // Warn ADN incompleto
+    const fieldsToWarn = CAMPOS_CRITICOS.filter(idx => {
+      if (idx === COL.TELEFONO) return !c.telefono;
+      if (idx === COL.LOCALIDAD) return !c.localidad;
+      if (idx === COL.BUYER) return !c.buyer;
+      return false;
+    });
+    const warnBadge = fieldsToWarn.length > 0 ? `<span class="ci-warn" title="Faltan datos críticos">⚠️ ADN</span>` : '';
+    const tagClass = getTagClass(c.poliza);
+    const tagDisplay = c.poliza ? `<span class="ci-tag ${tagClass}">${c.poliza} ${c.vto || ''}</span>` : '';
+
+    html += `
+      <div class="contact-item${isDone}${activeClass}" data-id="${c.id}" onclick="selContacto(${c.id})">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div class="ci-avatar" style="width:28px; height:28px; border-radius:50%; background:var(--nn-l); color:var(--nn); display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; flex-shrink:0;">
+            ${initials}
+          </div>
+          <div style="flex:1; overflow:hidden;">
+            <div class="ci-name" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${c.nombre}</div>
+            <div class="ci-meta" style="margin-top:2px;">
+              <span class="ci-loc">📍 ${c.localidad || 'S/L'}</span>
+              ${tagDisplay}
+              ${warnBadge}
+            </div>
+          </div>
+        </div>
+        ${doneMark}
+      </div>
+    `;
+  });
+  listEl.innerHTML = html;
 }
 
 
@@ -2062,7 +2262,7 @@ function renderLista(lista) {
       if (resIcon) prevResult = `<span style="font-size:10px;color:var(--tx3)">${resIcon} prev</span>`;
     }
 
-    return `<div class="contact-item${activo}${done}" onclick="selContacto(${c.id})">
+    return `<div class="contact-item${activo}${done}" data-id="${c.id}" onclick="selContacto(${c.id})">
       <div class="ci-name">${c.nombre} ${prevResult}</div>
       <div class="ci-meta">
         <span class="ci-loc">${c.localidad || '📍?'}</span>
@@ -2115,7 +2315,11 @@ function setMode(modo) {
 function aplicarFiltro() {
   const val = document.getElementById('filter-select').value;
   if (modoActual === 'vto') {
-    cargarContactos(val);
+    if (todosLosContactos.length > 0) {
+      filtrarYRenderizarClassicList(val);
+    } else {
+      cargarContactos(val);
+    }
   } else {
     renderLista(contactos);
   }
@@ -2152,7 +2356,10 @@ function calcularEdad(fechaStr) {
 }
 
 function selContacto(id) {
-  const c = contactos.find(x => x.id === id);
+  let c = contactos.find(x => x.id === id);
+  if (!c) {
+    c = todosLosContactos.find(x => x.id === id);
+  }
   if (!c) {
     console.error('Contacto no encontrado con ID:', id);
     return;
@@ -2162,12 +2369,11 @@ function selContacto(id) {
   resultadoSel = null;
 
   // Marcar en la lista
-  document.querySelectorAll('.contact-item').forEach(el => el.classList.remove('active'));
-  const items = document.querySelectorAll('.contact-item');
-  // Find the correct item (might not be sequential due to sorting)
-  items.forEach(item => {
-    if (item.querySelector('.ci-name')?.textContent.includes(c.nombre)) {
-      item.classList.add('active');
+  document.querySelectorAll('.contact-item').forEach(el => {
+    if (el.getAttribute('data-id') === String(c.id)) {
+      el.classList.add('active');
+    } else {
+      el.classList.remove('active');
     }
   });
 
@@ -2940,6 +3146,9 @@ async function guardarResultado() {
       // Mark as done & go next
       contactoActivo.hecho = true;
       renderLista(contactos);
+      if (document.getElementById('sb-tab-buscar').classList.contains('active')) {
+        ejecutarBusqueda();
+      }
       setTimeout(siguienteContacto, 800);
     } else {
       toast('❌ Error: ' + (r ? (r.message || r.error || 'desconocido') : 'respuesta vacía'), 'err');
@@ -3217,6 +3426,9 @@ async function guardarNuevoContacto() {
     if (r.ok) {
       toast('✅ ' + r.msg, 'ok');
       cerrarPaneles();
+      // Forzar recarga de contactos en caliente desde Google Sheets para incluir el nuevo registro
+      todosLosContactos = [];
+      aplicarFiltro();
       // Limpiar los campos del formulario
       document.querySelectorAll('#panel-nuevo input, #panel-nuevo select, #panel-nuevo textarea')
         .forEach(el => {
