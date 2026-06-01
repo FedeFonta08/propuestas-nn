@@ -11,6 +11,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TOKEN_PATH = os.path.join(BASE_DIR, 'token_drive.json')
 SHEET_ID = '16lui0o9wPYe9tL-9PaU6_H2heG8uIBYrCIL9vvfpdC0'
 OUTPUT_HTML = os.path.join(BASE_DIR, 'Felicitaciones_Cumple_NN.html')
+# Sincronización verificada y token actualizado el 01/06/2026
+
 
 def get_data():
     # Intenta leer desde el archivo local, si no, usa la variable de entorno (para GitHub Actions)
