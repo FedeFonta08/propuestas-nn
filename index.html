@@ -620,8 +620,8 @@ body::before {
 }
 
 .radar-card {
-  background: #FFFFFF;
-  border: 1.5px solid rgba(0,0,0,0.10);
+  background: var(--navy);
+  border: 1.5px solid var(--border);
   border-radius: var(--r);
   padding: 0;
   overflow: hidden;
@@ -631,14 +631,16 @@ body::before {
 }
 
 .radar-card:hover {
+  background: rgba(255, 255, 255, 0.03);
   border-color: var(--orange);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(201,77,0,0.12);
+  transform: translateY(-2.5px);
+  box-shadow: 0 6px 18px var(--glow), 0 0 10px rgba(255, 140, 0, 0.15);
 }
 
 .radar-card.expanded {
   border-color: var(--orange);
-  background: #FFFBF9;
+  background: rgba(30, 30, 30, 0.90);
+  box-shadow: 0 0 20px var(--glow);
 }
 
 .radar-card-header {
@@ -655,19 +657,22 @@ body::before {
 }
 
 .radar-producto {
-  font-size: 16px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 15px;
   font-weight: 700;
-  color: #111827;
+  color: var(--gold) !important;
   display: block;
+  text-shadow: 0 0 8px rgba(212,175,55,0.3);
+  margin-bottom: 2px;
 }
 
 .radar-brief {
   font-size: 12px;
-  color: var(--text3);
+  color: var(--text3) !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 400px;
+  max-width: 450px;
 }
 
 .radar-badge {
@@ -687,7 +692,7 @@ body::before {
 
 .radar-card.expanded .radar-card-chevron {
   transform: rotate(180deg);
-  color: var(--orange);
+  color: var(--gold);
 }
 
 .radar-card-details {
@@ -700,7 +705,7 @@ body::before {
 .radar-card.expanded .radar-card-details {
   max-height: 800px;
   padding: 0 18px 18px;
-  border-top: 1px solid rgba(0,0,0,0.06);
+  border-top: 1.5px solid rgba(212, 175, 55, 0.15);
   margin-top: 0;
   padding-top: 18px;
 }
@@ -713,7 +718,8 @@ body::before {
 }
 
 .radar-detail-item {
-  background: rgba(0,0,0,0.02);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(212, 175, 55, 0.08);
   padding: 10px 12px;
   border-radius: 10px;
 }
@@ -730,20 +736,23 @@ body::before {
 .radar-detail-val {
   font-size: 13px;
   font-weight: 600;
-  color: var(--text);
+  color: var(--text2);
 }
 
 .radar-accion-premium {
   margin-top: 15px;
-  background: rgba(201, 77, 0, 0.05);
+  background: rgba(255, 140, 0, 0.08);
   border-left: 4px solid var(--orange);
   padding: 12px 15px;
   border-radius: 0 10px 10px 0;
+  box-shadow: inset 0 0 10px rgba(255,140,0,0.05);
 }
 
 .radar-accion-premium .radar-detail-val {
   color: var(--orange);
   font-size: 14px;
+  font-weight: 700;
+  text-shadow: 0 0 5px rgba(255,140,0,0.2);
 }
 
 .radar-loading {
