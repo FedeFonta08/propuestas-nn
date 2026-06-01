@@ -4,29 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DESPEGUE — Panel NN · Fede</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --orange:   #C94D00;
-  --orange-l: #E85C0D;
-  --dark:     #F5F5F0;
-  --navy:     #FFFFFF;
-  --navy2:    #FFF8F5;
-  --navy3:    #FFF0E8;
-  --green:    #16A34A;
-  --green-d:  #15803D;
-  --blue:     #1D4ED8;
-  --amber:    #B45309;
-  --red:      #B91C1C;
-  --purple:   #6D28D9;
-  --teal:     #0F766E;
+  --orange:   #FF8C00;
+  --orange-l: #FFA500;
+  --gold:     #D4AF37;
+  --dark:     #050505;
+  --navy:     rgba(20, 20, 20, 0.85);
+  --navy2:    rgba(30, 30, 30, 0.90);
+  --navy3:    rgba(10, 10, 10, 0.95);
+  --green:    #10B981;
+  --green-d:  #059669;
+  --blue:     #3B82F6;
+  --amber:    #F59E0B;
+  --red:      #EF4444;
+  --purple:   #8B5CF6;
+  --teal:     #14B8A6;
   --white:    #FFFFFF;
-  --text:     #111827;
-  --text2:    #374151;
-  --text3:    #6B7280;
-  --border:   rgba(0,0,0,0.10);
-  --border2:  rgba(0,0,0,0.18);
-  --card:     rgba(0,0,0,0.03);
+  --text:     #FFFFFF;
+  --text2:    #E5E5E5;
+  --text3:    #A0A0A0;
+  --border:   rgba(212, 175, 55, 0.22);
+  --border2:  rgba(212, 175, 55, 0.40);
+  --card:     rgba(20, 20, 20, 0.80);
+  --glow:     rgba(212, 175, 55, 0.12);
   --r:        14px;
   --r-lg:     20px;
 }
@@ -34,11 +36,15 @@
 *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
-  background: #F5F5F0;
+  font-family: 'Inter', sans-serif;
+  background: var(--dark);
   color: var(--text);
   min-height: 100vh;
   overflow-x: hidden;
+  background-image: 
+    linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
 }
 
 body::before {
@@ -46,8 +52,8 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 50% at 10% 0%, rgba(201,77,0,0.04) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 90% 100%, rgba(29,78,216,0.03) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 50% at 10% 0%, rgba(212, 175, 55, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 100%, rgba(255, 140, 0, 0.04) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
@@ -57,9 +63,9 @@ body::before {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: #FFFFFF;
-  backdrop-filter: none;
-  border-bottom: 2px solid var(--orange);
+  background: rgba(10, 10, 10, 0.90);
+  backdrop-filter: blur(10px);
+  border-bottom: 2.5px solid var(--gold);
   padding: 0 2rem;
   height: 58px;
   display: flex;
@@ -75,15 +81,18 @@ body::before {
 
 .logo-box {
   width: 36px; height: 36px;
-  background: var(--orange);
+  background: var(--gold);
   border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
 }
 
 .logo-box svg { width: 18px; height: 18px; }
 
 .logo-text {
+  color: var(--gold);
+  text-shadow: 0 0 8px rgba(212,175,55,0.4);
   font-family: 'Bebas Neue', sans-serif;
   font-size: 21px;
   letter-spacing: 1.5px;
@@ -153,41 +162,44 @@ body::before {
   letter-spacing: 2px;
 }
 
-.titulo span { color: var(--orange); }
+.titulo span { color: var(--gold); text-shadow: 0 0 15px rgba(212,175,55,0.5); }
+.titulo { color: var(--text) !important; }
 
 .objetivo-box {
-  background: #F0FDF4;
-  border: 2px solid #16A34A;
+  background: var(--navy);
+  border: 2px solid var(--gold);
   border-radius: var(--r);
   padding: 1rem 1.5rem;
   min-width: 260px;
   text-align: right;
+  box-shadow: 0 0 15px var(--glow);
 }
 
 .obj-label {
   font-size: 9px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #15803D;
+  color: var(--gold);
   margin-bottom: 4px;
 }
 
 .obj-num {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 38px;
-  color: #15803D;
+  color: var(--gold);
   line-height: 1;
+  text-shadow: 0 0 8px rgba(212,175,55,0.4);
 }
 
 .obj-total {
   font-size: 12px;
-  color: #374151;
+  color: var(--text3);
   margin-top: 2px;
 }
 
 .progress-hero {
   height: 8px;
-  background: #D1FAE5;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 100px;
   overflow: hidden;
   margin-top: 8px;
@@ -204,7 +216,7 @@ body::before {
 /* ── SEPARADOR ───────────────────────────────── */
 .sep {
   border: none;
-  border-top: 1px solid rgba(0,0,0,0.10);
+  border-top: 1.5px solid rgba(212, 175, 55, 0.15);
   margin: 0 2rem;
 }
 
@@ -233,22 +245,24 @@ body::before {
 }
 
 .section-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 18px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
   letter-spacing: 1px;
-  color: #374151;
+  color: var(--gold);
+  text-shadow: 0 0 8px rgba(212,175,55,0.3);
 }
 
 .section-line {
   flex: 1;
-  height: 1px;
-  background: rgba(0,0,0,0.10);
+  height: 1.5px;
+  background: rgba(212, 175, 55, 0.15);
 }
 
 /* ── HERRAMIENTA PRINCIPAL (hero card) ─────────── */
 .main-tool {
-  background: #FFF8F5;
-  border: 2px solid var(--orange);
+  background: var(--navy);
+  border: 2px solid var(--gold);
   border-radius: var(--r-lg);
   padding: 1.75rem;
   display: flex;
@@ -261,6 +275,7 @@ body::before {
   position: relative;
   overflow: hidden;
   margin-bottom: 1rem;
+  box-shadow: 0 0 20px var(--glow);
 }
 
 .main-tool::before {
@@ -268,13 +283,14 @@ body::before {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 4px;
-  background: var(--orange);
+  background: var(--gold);
+  box-shadow: 0 0 10px var(--gold);
 }
 
 .main-tool:hover {
-  border-color: var(--orange-l);
+  border-color: var(--orange);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(201,77,0,0.15);
+  box-shadow: 0 8px 24px var(--glow), 0 0 15px rgba(255, 140, 0, 0.2);
 }
 
 .main-tool-icon {
@@ -315,6 +331,9 @@ body::before {
 }
 
 .main-tool-name {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--gold);
+  text-shadow: 0 0 10px rgba(212,175,55,0.4);
   font-family: 'Bebas Neue', sans-serif;
   font-size: 28px;
   letter-spacing: 1px;
@@ -348,8 +367,8 @@ body::before {
 }
 
 .tool-card {
-  background: #FFFFFF;
-  border: 1.5px solid rgba(0,0,0,0.12);
+  background: var(--navy);
+  border: 1.5px solid var(--border);
   border-radius: var(--r);
   padding: 1.1rem 1.25rem;
   display: flex;
@@ -362,10 +381,10 @@ body::before {
 }
 
 .tool-card:hover {
-  background: #FFF8F5;
+  background: rgba(255, 255, 255, 0.04);
   border-color: var(--orange);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 18px var(--glow), 0 0 10px rgba(255, 140, 0, 0.15);
 }
 
 .tool-card:hover .tool-arrow { opacity: 1; }
@@ -389,6 +408,7 @@ body::before {
 }
 
 .tool-name {
+  color: var(--text);
   font-size: 15px;
   font-weight: 600;
   color: #111827;
@@ -399,6 +419,7 @@ body::before {
 }
 
 .tool-desc {
+  color: var(--text3);
   font-size: 12px;
   color: #6B7280;
   line-height: 1.4;
@@ -420,8 +441,8 @@ body::before {
 }
 
 .guia-card {
-  background: #FFFFFF;
-  border: 1.5px solid rgba(0,0,0,0.12);
+  background: var(--navy);
+  border: 1.5px solid var(--border);
   border-radius: var(--r);
   padding: 1rem;
   cursor: pointer;
@@ -434,10 +455,10 @@ body::before {
 }
 
 .guia-card:hover {
-  background: #FFF8F5;
+  background: rgba(255, 255, 255, 0.04);
   border-color: var(--orange);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 18px var(--glow), 0 0 10px rgba(255, 140, 0, 0.15);
 }
 
 .guia-header {
@@ -462,6 +483,7 @@ body::before {
 }
 
 .guia-name {
+  color: var(--text);
   font-size: 14px;
   font-weight: 600;
   color: #111827;
@@ -523,11 +545,12 @@ body::before {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  background: #FFFFFF;
-  border: 1.5px solid rgba(0,0,0,0.12);
+  background: var(--navy);
+  border: 1.5px solid var(--border);
   border-radius: var(--r);
   padding: 1rem 1.5rem;
   margin-bottom: 1rem;
+  box-shadow: 0 0 15px var(--glow);
 }
 
 .pvm-item { text-align: center; }
@@ -547,7 +570,7 @@ body::before {
   margin-top: 1px;
 }
 
-.pvm-div { width:1px; height:32px; background: rgba(0,0,0,0.10); }
+.pvm-div { width:1px; height:32px; background: rgba(212, 175, 55, 0.18); }
 
 .pvm-bar-wrap { flex: 1; }
 
@@ -570,7 +593,7 @@ body::before {
 
 .pvm-bar {
   height: 10px;
-  background: #E5E7EB;
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 100px;
   overflow: hidden;
 }
@@ -917,6 +940,18 @@ body::before {
 
   <div class="tools-grid">
 
+    <!-- 🎛️ CABINA DE CONTROL 360 (Eje Principal) -->
+    <a class="tool-card" href="cockpit_llamadas.html" target="_blank" style="border-color:var(--gold);background:rgba(212,175,55,0.05)">
+      <div class="tool-icon" style="background:var(--gold);color:black;font-weight:bold;box-shadow:0 0 10px rgba(212,175,55,0.3)">🎛️</div>
+      <div class="tool-info">
+        <div class="tool-tag" style="color:var(--gold)">CONTROL · OPERACIONES</div>
+        <div class="tool-name" style="color:var(--gold);font-family:'Orbitron',sans-serif;font-weight:700">Cabina de Control 360</div>
+        <div class="tool-desc">CRM Activo · Marcador de Rendimiento · Cola de Acción Diaria</div>
+      </div>
+      <div class="tool-arrow" style="opacity:1;color:var(--gold)">→</div>
+    </a>
+
+
     <!-- 🆕 NUEVO: Briefing Automático IA -->
     <a class="tool-card" href="Briefing_Lunes_ADN.html" target="_blank" style="border-color:#16A34A;background:#DCFCE7">
       <div class="tool-icon" style="background:#15803D;color:white">🧠</div>
@@ -994,15 +1029,7 @@ body::before {
     </a>
 
     <!-- ✅ CORRECCIÓN 3: Enlace relativo cambiado a absoluto -->
-    <a class="tool-card" href="cockpit_llamadas.html" target="_blank">
-      <div class="tool-icon c-red">🎛️</div>
-      <div class="tool-info">
-        <div class="tool-tag" style="color:var(--red)">Control · Monitor</div>
-        <div class="tool-name">Cockpit Documentos NN</div>
-        <div class="tool-desc">Centro de mando · Monitor semanal portal</div>
-      </div>
-      <div class="tool-arrow">→</div>
-    </a>
+    
 
     <a class="tool-card" href="Reclutamiento_NN_v2_RGPD.html" target="_blank">
       <div class="tool-icon c-teal">🤝</div>
