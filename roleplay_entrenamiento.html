@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Voz de Roleplay Financiero · Nationale-Nederlanden</title>
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0b132b;
+      --bg-card: rgba(28, 37, 65, 0.4);
+      --bg-card-hover: rgba(28, 37, 65, 0.6);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --text-main: #f8f9fa;
+      --text-muted: #a0aec0;
+      
+      /* Nationale-Nederlanden Identity */
+      --nn-orange: #F39200;
+      --nn-orange-glow: rgba(243, 146, 0, 0.3);
+      --nn-navy: #142B47;
+      
+      /* Status Colors */
+      --trust-green: #10B981;
+      --defense-red: #EF4444;
+      --info-blue: #3B82F6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(20, 43, 71, 0.5) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(243, 146, 0, 0.08) 0px, transparent 50%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .outfit {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* --- LAYOUT --- */
+    header {
+      background: rgba(11, 19, 43, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nn-badge {
+      background: var(--nn-orange);
+      color: #000;
+      font-weight: 800;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+
+    .header-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .header-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Voice Toggles */
+    .controls-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .voice-toggle-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .voice-toggle-btn.active {
+      background: rgba(243, 146, 0, 0.2);
+      border-color: var(--nn-orange);
+      color: var(--nn-orange);
+    }
+
+    .main-container {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      flex-grow: 1;
+      height: calc(100vh - 70px);
+    }
+
+    /* --- SIDEBAR: ESCENARIOS --- */
+    .sidebar {
+      background: rgba(11, 19, 43, 0.4);
+      border-right: 1px solid var(--border-color);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      overflow-y: auto;
+    }
+
+    .section-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .scenario-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scenario-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(243, 146, 0, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .scenario-card.active {
+      background: rgba(243, 146, 0, 0.1);
+      border-color: var(--nn-orange);
+      box-shadow: 0 0 15px rgba(243, 146, 0, 0.15);
+    }
+
+    .scenario-card.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--nn-orange);
+    }
+
+    .scenario-name {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .scenario-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .scenario-desc {
+      font-size: 0.8rem;
+      line-height: 1.4;
+      color: var(--text-muted);
+    }
+
+    .vulnerability-pill {
+      display: inline-block;
+      font-size: 0.7rem;
+      background: rgba(239, 68, 68, 0.15);
+      color: #FCA5A5;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      margin-top: 0.5rem;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    /* --- MAIN ARENA --- */
+    .arena {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      height: 100%;
+      background: rgba(11, 19, 43, 0.1);
+    }
+
+    /* Stat Header */
+    .stat-header {
+      background: rgba(28, 37, 65, 0.25);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .patient-dossier h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .patient-dossier p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.15rem;
+    }
+
+    .bar-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .bar-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .bar-outer {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .bar-inner {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .trust-bar { background: var(--trust-green); box-shadow: 0 0 8px rgba(16, 185, 129, 0.4); }
+    .defense-bar { background: var(--defense-red); box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
+
+    /* Arena Chat Area */
+    .chat-area {
+      padding: 1.5rem 2rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      scroll-behavior: smooth;
+    }
+
+    .msg-bubble {
+      max-width: 75%;
+      padding: 1rem 1.25rem;
+      border-radius: 16px;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    .msg-client {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-bottom-left-radius: 4px;
+      align-self: flex-start;
+      position: relative;
+    }
+
+    .speak-bubble-btn {
+      position: absolute;
+      right: -32px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .speak-bubble-btn:hover {
+      background: var(--nn-orange);
+      color: #000;
+      border-color: var(--nn-orange);
+    }
+
+    .msg-fede {
+      background: rgba(243, 146, 0, 0.15);
+      border: 1px solid rgba(243, 146, 0, 0.25);
+      border-bottom-right-radius: 4px;
+      align-self: flex-end;
+      color: var(--text-main);
+    }
+
+    .coach-feedback {
+      align-self: center;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      color: #93C5FD;
+      font-size: 0.8rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: 12px;
+      max-width: 90%;
+      text-align: left;
+      line-height: 1.45;
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    .coach-feedback strong {
+      color: #BFDBFE;
+      display: block;
+      margin-bottom: 0.25rem;
+      font-family: 'Outfit', sans-serif;
+      letter-spacing: 0.05em;
+    }
+
+    /* Option Selector (Fede's Actions) */
+    .action-panel {
+      background: rgba(11, 19, 43, 0.6);
+      border-top: 1px solid var(--border-color);
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .action-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--nn-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    .option-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 1rem 1.25rem;
+      border-radius: 12px;
+      color: var(--text-main);
+      font-size: 0.88rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      background: var(--bg-card-hover);
+      border-color: rgba(243, 146, 0, 0.4);
+      transform: translateX(4px);
+    }
+
+    .option-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .option-letter {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      color: var(--text-muted);
+    }
+
+    .option-btn:hover .option-letter {
+      background: var(--nn-orange);
+      color: #000;
+      border-color: var(--nn-orange);
+    }
+
+    /* Simulation States */
+    .welcome-screen {
+      grid-row: span 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+      text-align: center;
+      background: radial-gradient(circle at center, rgba(20, 43, 71, 0.2) 0%, transparent 70%);
+    }
+
+    .welcome-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      animation: pulse 2s infinite;
+    }
+
+    .welcome-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #fff 0%, var(--text-muted) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .welcome-desc {
+      max-width: 500px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .start-btn {
+      background: var(--nn-orange);
+      color: #000;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(243, 146, 0, 0.3);
+      transition: all 0.2s;
+    }
+
+    .start-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(243, 146, 0, 0.5);
+    }
+
+    /* --- OBJECTION SANDBOX TAB --- */
+    .tab-nav {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+
+    .tab-btn.active {
+      background: var(--bg-card);
+      color: var(--nn-orange);
+      border-color: var(--border-color);
+    }
+
+    .sandbox-container {
+      padding: 2rem;
+      overflow-y: auto;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2rem;
+    }
+
+    .sandbox-sidebar {
+      border-right: 1px solid var(--border-color);
+      padding-right: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      overflow-y: auto;
+      max-height: calc(100vh - 120px);
+    }
+
+    .objection-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+      color: var(--text-main);
+    }
+
+    .objection-pill:hover {
+      border-color: rgba(243, 146, 0, 0.4);
+      background: var(--bg-card-hover);
+    }
+
+    .objection-pill.active {
+      background: rgba(243, 146, 0, 0.1);
+      border-color: var(--nn-orange);
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .sandbox-workbench {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .sandbox-title-block {
+      background: rgba(28, 37, 65, 0.2);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+
+    .sandbox-subtitle {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .sandbox-obj-text {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .sandbox-typing-zone {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .sandbox-textarea-wrapper {
+      position: relative;
+    }
+
+    .sandbox-textarea {
+      background: rgba(11, 19, 43, 0.5);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1rem;
+      padding-right: 3rem;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.95rem;
+      resize: none;
+      height: 120px;
+      width: 100%;
+      transition: all 0.3s;
+    }
+
+    .sandbox-textarea:focus {
+      outline: none;
+      border-color: var(--nn-orange);
+      box-shadow: 0 0 10px rgba(243, 146, 0, 0.15);
+    }
+
+    /* Sandbox Mic Button */
+    .sandbox-mic-btn {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      background: rgba(243, 146, 0, 0.15);
+      border: 1px solid var(--nn-orange);
+      color: var(--nn-orange);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .sandbox-mic-btn:hover {
+      background: var(--nn-orange);
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    .sandbox-mic-btn.recording {
+      background: var(--defense-red);
+      border-color: var(--defense-red);
+      color: white;
+      animation: pulse 1.5s infinite;
+    }
+
+    .sandbox-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+    }
+
+    .reveal-btn {
+      background: rgba(243, 146, 0, 0.15);
+      border: 1px solid var(--nn-orange);
+      color: var(--nn-orange);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      padding: 0.6rem 1.5rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .reveal-btn:hover {
+      background: var(--nn-orange);
+      color: #000;
+    }
+
+    .script-output {
+      background: rgba(28, 37, 65, 0.3);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: none;
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    .script-output.show {
+      display: block;
+    }
+
+    .formula-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+      margin-right: 0.5rem;
+    }
+
+    .tag-validar { background: rgba(16, 185, 129, 0.15); color: #A7F3D0; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .tag-reencuadrar { background: rgba(59, 130, 246, 0.15); color: #BFDBFE; border: 1px solid rgba(59, 130, 246, 0.3); }
+    .tag-proyectar { background: rgba(243, 146, 0, 0.15); color: #FDE68A; border: 1px solid rgba(243, 146, 0, 0.3); }
+
+    .sandbox-formula-block {
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 3px solid var(--border);
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .sandbox-formula-block p {
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .sandbox-formula-block.validar { var(--border): var(--trust-green); border-left-color: var(--trust-green); }
+    .sandbox-formula-block.reencuadrar { var(--border): var(--info-blue); border-left-color: var(--info-blue); }
+    .sandbox-formula-block.proyectar { var(--border): var(--nn-orange); border-left-color: var(--nn-orange); }
+
+    /* Post-Interview Evaluation Tab */
+    .evaluation-container {
+      padding: 2.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+      overflow-y: auto;
+      height: 100%;
+    }
+
+    .eval-intro {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .eval-intro h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--nn-orange);
+      margin-bottom: 0.5rem;
+    }
+
+    .eval-intro p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .eval-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .eval-row {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .eval-question-text {
+      font-size: 0.92rem;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .eval-question-num {
+      color: var(--nn-orange);
+      font-weight: 700;
+      margin-right: 0.5rem;
+    }
+
+    .eval-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .eval-btn-choice {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.4rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+
+    .eval-btn-choice.active-yes {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: var(--trust-green);
+      color: #A7F3D0;
+    }
+
+    .eval-btn-choice.active-no {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: var(--defense-red);
+      color: #FCA5A5;
+    }
+
+    .eval-result-card {
+      background: rgba(243, 146, 0, 0.1);
+      border: 1px solid var(--nn-orange);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      display: none;
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    .eval-result-score {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--nn-orange);
+      font-family: 'Outfit', sans-serif;
+      margin-bottom: 0.5rem;
+    }
+
+    .eval-result-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .eval-result-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* --- ANIMATIONS --- */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.9; }
+    }
+
+    .tactical-pause {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      color: var(--text-muted);
+      font-style: italic;
+      font-size: 0.75rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin: 0.5rem 0;
+    }
+
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-container">
+      <span class="nn-badge">NN</span>
+      <div>
+        <h1 class="header-title">Roleplay & Mayéutica Financiera 🎙️</h1>
+        <div class="header-subtitle">Simulador de Escenarios por Voz · Nationale-Nederlanden Xàtiva</div>
+      </div>
+    </div>
+    
+    <div class="controls-wrapper">
+      <button class="voice-toggle-btn active" id="btn-client-voice" onclick="toggleClientVoice()">
+        🔊 Voz del Cliente: SÍ
+      </button>
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchMainTab('simulation')">🕹️ Simulador de Citas</button>
+        <button class="tab-btn" onclick="switchMainTab('sandbox')">🛡️ Sandbox de Objeciones</button>
+        <button class="tab-btn" onclick="switchMainTab('eval')">📋 Autoevaluación ADN</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- WORKSPACE -->
+  <div class="main-container" id="main-workspace">
+    
+    <!-- SIDEBAR DE ESCENARIOS (Only visible in Simulation tab) -->
+    <div class="sidebar" id="sim-sidebar">
+      <div class="section-title">
+        <span>👤 Selecciona tu "Paciente"</span>
+      </div>
+      
+      <!-- ESCENARIO 1 -->
+      <div class="scenario-card" id="scen-0" onclick="selectScenario(0)">
+        <div class="scenario-name">Manuel Sanchis</div>
+        <div class="scenario-meta">
+          <span>52 años, Xàtiva</span>
+          <span style="color: var(--defense-red);">Alta Resistencia</span>
+        </div>
+        <div class="scenario-desc">Autónomo. Lleva 25 años pagando Decesos en Santalucía y se opone ferozmente a perder su antigüedad.</div>
+        <div class="vulnerability-pill">🩸 Decesos a Fondo Perdido: 12.600€</div>
+      </div>
+
+      <!-- ESCENARIO 2 -->
+      <div class="scenario-card" id="scen-1" onclick="selectScenario(1)">
+        <div class="scenario-name">Dra. Clara Crespo</div>
+        <div class="scenario-meta">
+          <span>41 años, Pediatra</span>
+          <span style="color: var(--nn-orange);">Poco Tiempo</span>
+        </div>
+        <div class="scenario-desc">Ingresos altos, nula planificación fiscal. Odia el spam. Cree que "no necesita" seguros adicionales.</div>
+        <div class="vulnerability-pill">💸 Fuga IRPF: +3.000€/año</div>
+      </div>
+
+      <!-- ESCENARIO 3 -->
+      <div class="scenario-card" id="scen-2" onclick="selectScenario(2)">
+        <div class="scenario-name">María Barberá</div>
+        <div class="scenario-meta">
+          <span>36 años, Administrativa</span>
+          <span style="color: var(--trust-green);">Receptiva pero Miedosa</span>
+        </div>
+        <div class="scenario-desc">10.000€ parados en Caixabank. Teme a la bolsa. Busca rentabilidad sin riesgo para el futuro de su hijo.</div>
+        <div class="vulnerability-pill">📉 Ahorro Muerto (Caixabank): 0%</div>
+      </div>
+    </div>
+
+    <!-- ARENA DE ROLEPLAY -->
+    <div class="arena" id="sim-arena">
+      
+      <!-- WELCOME SCREEN (Active when no scenario is loaded) -->
+      <div class="welcome-screen" id="welcome-screen">
+        <div class="welcome-icon">🩺</div>
+        <h2 class="welcome-title">Entrenamiento del "Médico Financiero"</h2>
+        <p class="welcome-desc">
+          Bienvenido al gimnasio de Mayéutica de Xàtiva. Selecciona uno de los perfiles de la izquierda para iniciar la llamada simulada. Tu objetivo es rebajar sus defensas, diagnosticar su fuga de dinero y cerrar la visita presencial.
+        </p>
+        <div style="font-size: 0.95rem; color: var(--nn-orange); margin-top: -1rem; margin-bottom: 2rem; font-weight: 600;">
+          💡 ¡MODO DE VOZ NATIVO COMPLETO ACTIVADO! Los clientes te hablarán en voz alta. Puedes usar el micrófono en el Sandbox de Objeciones.
+        </div>
+      </div>
+
+      <!-- STAT HEADER (Hidden initially) -->
+      <div class="stat-header" id="arena-header" style="display: none;">
+        <div class="patient-dossier">
+          <h3 id="current-name">Nombre del Cliente</h3>
+          <p id="current-context">Contexto del cliente</p>
+        </div>
+        
+        <div class="bar-container">
+          <div class="bar-label">
+            <span>🤝 CONFIANZA</span>
+            <span id="trust-val" style="color: var(--trust-green)">50%</span>
+          </div>
+          <div class="bar-outer">
+            <div class="bar-inner trust-bar" id="trust-bar-fill" style="width: 50%;"></div>
+          </div>
+        </div>
+
+        <div class="bar-container">
+          <div class="bar-label">
+            <span>🛡️ DEFENSAS</span>
+            <span id="defense-val" style="color: var(--defense-red)">50%</span>
+          </div>
+          <div class="bar-outer">
+            <div class="bar-inner defense-bar" id="defense-bar-fill" style="width: 50%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHAT HISTORY (Hidden initially) -->
+      <div class="chat-area" id="arena-chat" style="display: none;">
+        <!-- Bubbles injected dynamically -->
+      </div>
+
+      <!-- ACTION PANEL (Hidden initially) -->
+      <div class="action-panel" id="arena-actions" style="display: none;">
+        <div class="action-label">👉 Selecciona tu respuesta (Aplica Mayéutica)</div>
+        <div class="options-grid" id="options-grid">
+          <!-- Buttons injected dynamically -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SANDBOX DE OBJECIONES (Hidden initially) -->
+    <div class="sandbox-container" id="sandbox-tab" style="display: none; grid-column: span 2;">
+      <div class="sandbox-sidebar" id="sandbox-sidebar-list">
+        <!-- Objection pills loaded dynamically -->
+      </div>
+      <div class="sandbox-workbench">
+        <div class="sandbox-title-block">
+          <div class="sandbox-subtitle">Objeción Seleccionada</div>
+          <div class="sandbox-obj-text" id="sandbox-obj-title">Selecciona una objeción para entrenar</div>
+        </div>
+        
+        <div class="sandbox-typing-zone">
+          <div class="sandbox-subtitle">🎙️ Pulsa el micrófono para hablar y responder de viva voz, o escribe si lo prefieres</div>
+          
+          <div class="sandbox-textarea-wrapper">
+            <textarea class="sandbox-textarea" id="sandbox-user-input" placeholder="Pulsa el botón de micrófono abajo a la derecha y ensaya tu respuesta Validar ➡️ Reencuadrar ➡️ Proyectar hablando..."></textarea>
+            
+            <button class="sandbox-mic-btn" id="sandbox-mic-btn" onclick="toggleSpeechRecognition()" title="Hablar con mi voz">
+              🎙️
+            </button>
+          </div>
+        </div>
+
+        <div class="sandbox-actions">
+          <button class="reveal-btn" onclick="revealObjectionScript()">🔑 Revelar Guion Maestro de Cierre</button>
+        </div>
+
+        <div class="script-output" id="sandbox-script-output">
+          <!-- Guion details injected dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- AUTOEVALUACIÓN TAB (Hidden initially) -->
+    <div class="evaluation-container" id="eval-tab" style="display: none; grid-column: span 2;">
+      <div class="eval-intro">
+        <h2>Autoevaluación Post-Entrevista (ADN)</h2>
+        <p>Completa este cuestionario de 10 preguntas después de cada llamada o visita para medir tu madurez como Consultor Financiero de Nationale-Nederlanden.</p>
+      </div>
+
+      <div class="eval-grid" id="eval-questions-grid">
+        <!-- Questions loaded dynamically -->
+      </div>
+
+      <div class="eval-result-card" id="eval-result-card">
+        <div class="eval-result-score" id="eval-score-num">0 / 10</div>
+        <div class="eval-result-title" id="eval-score-title">Evaluando...</div>
+        <div class="eval-result-desc" id="eval-score-desc">Sigue practicando para elevar tu nivel.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    /* ========================================================
+       CONFIGURACIÓN DE VOZ (TEXT-TO-SPEECH)
+       ======================================================== */
+    let clientVoiceEnabled = true;
+    let synth = window.speechSynthesis;
+    let currentVoice = null;
+
+    // Load voices and select a native Spanish one
+    function loadVoices() {
+      if (!synth) return;
+      const voices = synth.getVoices();
+      // Prefer Spanish from Spain (es-ES)
+      currentVoice = voices.find(v => v.lang === 'es-ES' || v.lang.startsWith('es-')) || voices.find(v => v.lang.startsWith('es'));
+    }
+    
+    if (synth) {
+      loadVoices();
+      if (synth.onvoiceschanged !== undefined) {
+        synth.onvoiceschanged = loadVoices;
+      }
+    }
+
+    function toggleClientVoice() {
+      clientVoiceEnabled = !clientVoiceEnabled;
+      const btn = document.getElementById('btn-client-voice');
+      if (clientVoiceEnabled) {
+        btn.classList.add('active');
+        btn.innerText = "🔊 Voz del Cliente: SÍ";
+      } else {
+        btn.classList.remove('active');
+        btn.innerText = "🔇 Voz del Cliente: NO";
+        if (synth) synth.cancel();
+      }
+    }
+
+    function speakText(text) {
+      if (!clientVoiceEnabled || !synth) return;
+      
+      synth.cancel(); // Stop any previous speech
+      
+      // Clean raw HTML tags if they are in the text
+      const cleanText = text.replace(/<[^>]*>/g, '');
+      
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.lang = 'es-ES';
+      utterance.rate = 1.0; // Normal rate
+      utterance.pitch = 1.0;
+      
+      if (currentVoice) {
+        utterance.voice = currentVoice;
+      }
+      
+      synth.speak(utterance);
+    }
+
+    /* ========================================================
+       RECONOCIMIENTO DE VOZ (SPEECH-TO-TEXT)
+       ======================================================== */
+    let recognition = null;
+    let isRecording = false;
+
+    function initSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        console.warn("Speech Recognition not supported in this browser.");
+        return false;
+      }
+      
+      recognition = new SpeechRecognition();
+      recognition.lang = 'es-ES';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onstart = () => {
+        isRecording = true;
+        const mic = document.getElementById('sandbox-mic-btn');
+        mic.classList.add('recording');
+        mic.innerHTML = "🛑";
+        document.getElementById('sandbox-user-input').placeholder = "Escuchando... Habla de forma clara ahora.";
+      };
+
+      recognition.onresult = (event) => {
+        const text = event.results[0][0].transcript;
+        document.getElementById('sandbox-user-input').value = text;
+      };
+
+      recognition.onerror = (event) => {
+        console.error("Speech Recognition Error:", event.error);
+        stopMicUI();
+      };
+
+      recognition.onend = () => {
+        stopMicUI();
+      };
+
+      return true;
+    }
+
+    function stopMicUI() {
+      isRecording = false;
+      const mic = document.getElementById('sandbox-mic-btn');
+      mic.classList.remove('recording');
+      mic.innerHTML = "🎙️";
+      document.getElementById('sandbox-user-input').placeholder = "Pulsa el botón de micrófono abajo a la derecha y ensaya tu respuesta Validar ➡️ Reencuadrar ➡️ Proyectar hablando...";
+    }
+
+    function toggleSpeechRecognition() {
+      if (!recognition) {
+        const supported = initSpeechRecognition();
+        if (!supported) {
+          alert("Tu navegador o sistema operativo no soporta el Reconocimiento de Voz nativo. Te recomendamos usar Google Chrome o Microsoft Edge.");
+          return;
+        }
+      }
+
+      if (isRecording) {
+        recognition.stop();
+      } else {
+        recognition.start();
+      }
+    }
+
+    /* ========================================================
+       DATA DE ROLEPLAYS (ESCENARIOS)
+       ======================================================== */
+    const SCENARIOS = [
+      {
+        name: "Manuel Sanchis",
+        meta: "52 años, Xàtiva · Autónomo",
+        desc: "Lleva 25 años pagando Decesos en Santalucía. Siente que si cambia, 'tira todo lo pagado'.",
+        vulnerability: "Decesos a Fondo Perdido: 12.600€",
+        initialTrust: 30,
+        initialDefense: 80,
+        steps: [
+          {
+            // Paso 0: Apertura
+            clientText: "Dígame, ¿quién me llama y para qué? Estoy bastante liado.",
+            options: [
+              {
+                text: "Hola Manuel, le llamo de Nationale-Nederlanden. Le llamo para ofrecerle un estudio de sus seguros de vida y previsión, que ahora mismo tenemos una campaña con el 25% de descuento directo y vitalicio en el seguro Contigo Familia. ¿Le vendría bien quedar el martes?",
+                trustEffect: -10,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ ERROR DE VENDEDOR TRANSACCIONAL (Pág. 37 del Manual):</strong> Has entrado ofreciendo un producto y un descuento directamente en frío. Manuel huele la venta a un kilómetro de distancia. Sus defensas se disparan y bloquea la llamada.",
+                nextStep: 1
+              },
+              {
+                text: "Hola Manuel, disculpe la molestia. Le llamo para hacer una encuesta rápida del Ayuntamiento de Xàtiva sobre seguros e IRPF de los autónomos. Solo le quitaré 5 minutos de reloj. ¿Tiene seguros contratados actualmente?",
+                trustEffect: -15,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ERROR DE ENGAÑO INICIAL:</strong> Inventarse un pretexto falso (como una encuesta municipal) destruye la confianza de inmediato en cuanto se destape. Nunca uses excusas para no presentarte con orgullo.",
+                nextStep: 1
+              },
+              {
+                text: "Hola Manuel, soy Fede Fontanals, tu gestor de Nationale-Nederlanden aquí en Xàtiva. Te llamo rápido porque estamos ayudando a varios autónomos de la comarca a revisar sus costes de previsión familiar... Sé que vas a mil, por lo que seré súper directo.",
+                trustEffect: +20,
+                defenseEffect: -15,
+                coachFeedback: "<strong>✅ EXCELENTE APERTURA DEL MÉDICO FINANCIERO:</strong> Te presentas con autoridad local, empatizas con su falta de tiempo y enmarcas la llamada en 'revisar costes' (ayuda), no en vender. Bajas defensas y generas respeto.",
+                nextStep: 2
+              }
+            ]
+          },
+          {
+            // Paso 1 (Solo si eligió mala apertura)
+            clientText: "Mire, yo es que de seguros no quiero saber nada. Ya tengo el de entierro en Santalucía de toda la vida y no voy a cambiar.",
+            options: [
+              {
+                text: "Pero Manuel, Santalucía le está cobrando una barbaridad y las primas suben cada año por su edad. Está tirando el dinero. El PGI de Nationale-Nederlanden es muchísimo mejor, garantizado al 100% y con rentabilidad de Goldman Sachs. Déjeme demostrárselo en una reunión.",
+                trustEffect: -10,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ERROR FATAL - CONTRADECIR AL CLIENTE:</strong> Atacar directamente su decisión de Santalucía genera reactividad psicológica inmediata. Él defiende su seguro porque siente que atacas su inteligencia. Cierre garantizado de llamada.",
+                nextStep: 99 // Final fallido
+              },
+              {
+                text: "Entiendo Manuel, Santalucía es una compañía muy grande y tradicional. Pero justamente por eso le llamo: la mayoría de vecinos en Xàtiva están pagando tres 'billetes de autobús' a fondo perdido para un viaje donde no van a subir todos a la vez. En 15 min le enseño gratis cómo crear su propio Cofre de Reserva donde el dinero nunca se pierde.",
+                trustEffect: +30,
+                defenseEffect: -25,
+                coachFeedback: "<strong>✅ MAYÉUTICA SUBLIME (Pág. 10 del Manual):</strong> Validaste su decisión para calmarlo, introdujiste la metáfora de los 'billetes de autobús' para que él mismo vea la irracionalidad del gasto, y ofreciste la alternativa del 'Cofre de Reserva'.",
+                nextStep: 3
+              }
+            ]
+          },
+          {
+            // Paso 2 (Si eligió buena apertura)
+            clientText: "Ya... pero es que yo de eso no necesito nada. Ya tengo mi seguro de decesos con Santalucía de toda la vida y ya está todo pagado.",
+            options: [
+              {
+                text: "Entiendo Manuel, que tenga esa previsión demuestra que es una persona responsable con los suyos... Pero déjeme hacerle una pregunta: ¿ha calculado cuánto dinero habrá regalado a la compañía si vive hasta los 85 años y cuánto patrimonio neto heredarán sus hijos de esa póliza?",
+                trustEffect: +30,
+                defenseEffect: -20,
+                coachFeedback: "<strong>✅ MAYÉUTICA BRUTAL (Pág. 37 del Manual):</strong> Validas su carácter previsor (bajas defensas) y lanzas una pregunta calibrada dura que ataca la herencia de sus hijos. Le obligas a pensar en el dolor del patrimonio neto 0€.",
+                nextStep: 3
+              },
+              {
+                text: "Hombre, de toda la vida sí, pero Santalucía es carísimo hoy en día. Nosotros tenemos pólizas de decesos mucho más baratas. Si me da 15 minutos en su casa, le hago un presupuesto y le mejoro el precio de cabeza.",
+                trustEffect: -5,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ ERROR DE GUERRA DE PRECIOS (Pág. 38 del Manual):</strong> Estás compitiendo en el fango de 'barato vs caro'. El cliente asume que eres otro vendedor tratando de cambiarle el mismo collar por uno más barato. No percibe valor.",
+                nextStep: 1
+              }
+            ]
+          },
+          {
+            // Paso 3 (El reencuadre)
+            clientText: "Hombre, pues no lo he calculado, pero de toda la vida se ha hecho así... si me cambio ahora, pierdo los 25 años que llevo pagando allí, ¿no?",
+            options: [
+              {
+                text: "No, para nada. En un seguro de decesos no acumula nada, no hay rescate. Si deja de pagar hoy, no tiene un céntimo allí. Así que no pierde nada por cambiarse a Nationale-Nederlanden.",
+                trustEffect: -5,
+                defenseEffect: +5,
+                coachFeedback: "<strong>❌ RESPUESTA FRÍA Y TÉCNICA:</strong> Aunque es verdad, explicárselo de forma tan directa hace que se sienta tonto por haber pagado 25 años en vano. La disonancia cognitiva lo bloquea.",
+                nextStep: 99
+              },
+              {
+                text: "Esa es la duda más normal, Manuel, y es lógico pensar que 'perdemos el derecho'... Pero déjame aclararte algo: el seguro de entierro es como el seguro de un coche. Pagas este año para estar cubierto este año. Si no chocas, el dinero se lo queda la compañía. No has acumulado una hucha allí. En 25 años has pagado unos 9.000€ a fondo perdido, y si vives otros 20 años pagarás otros 10.000€. Tus hijos recibirán un sepelio de 4.000€ y el resto (15.000€) se lo regalas a la aseguradora.",
+                trustEffect: +30,
+                defenseEffect: -20,
+                coachFeedback: "<strong>✅ DESMITIFICACIÓN MAGISTRAL (Pág. 29 del Manual):</strong> Has utilizado la metáfora perfecta del seguro de coche. Has calculado en el aire su gasto potencial y has hecho visible el 'dolor' de regalar 15.000€ a la compañía. El abismo financiero se hace obvio.",
+                nextStep: 4
+              }
+            ]
+          },
+          {
+            // Paso 4 (El cierre de visita)
+            clientText: "Madre mía... visto así suena a robo, pero ¿cuál es la alternativa entonces? Yo no quiero dejar a mis hijos con el lío del entierro mañana.",
+            options: [
+              {
+                text: "Por supuesto, Manuel. Para eso está nuestro Plan Garantizado de Inversión (PGI). Creas un único Cofre de Reserva de 5.000€ a tu nombre. Tu dinero crece seguro, y si pasa algo, tu familia cobra los 5.000€ más 1.000€ de regalo al instante, pagan el entierro de 4.000€ en Xàtiva y les sobran 2.000€ que se quedan en casa. Y mientras tanto, dejas de pagar el recibo mensual de Santalucía para siempre. Para ver la simulación en pantalla y que veas cómo encaja en tu economía, ¿te viene mejor que me acerque el martes por la mañana o el miércoles por la tarde?",
+                trustEffect: +40,
+                defenseEffect: -30,
+                coachFeedback: "<strong>🚀 CIERRE PERFECTO DEL MÉDICO FINANCIERO:</strong> Presentaste la alternativa (Cofre Familiar) resolviendo su objeción de 'dejar el lío a los hijos', cuantificaste los beneficios y cerraste con la **Doble Alternativa** directa de fecha y hora. ¡Cita asegurada!",
+                nextStep: 100 // Éxito
+              },
+              {
+                text: "Pues la alternativa es contratar un plan Contigo Familia conmigo hoy. Si quiere le mando un email con los detalles del seguro y cuando lo lea me dice si le encaja o no.",
+                trustEffect: -20,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ ERROR FATAL - ENVIAR POR EMAIL (Pág. 35 del Manual):</strong> Has regalado tu oportunidad de cierre. Has matado el lead al enviarlo por correo. Él nunca lo leerá con la atención adecuada y perderás el contacto.",
+                nextStep: 99
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: "Dra. Clara Crespo",
+        meta: "41 años, Pediatra · Hospital Lluís Alcanyís",
+        desc: "Ingresos altos, cero planificación. Cree que los seguros son un gasto inútil. Odia que le quiten tiempo.",
+        vulnerability: "Fuga IRPF: +3.000€/año",
+        initialTrust: 25,
+        initialDefense: 90,
+        steps: [
+          {
+            clientText: "Dígame rápido por favor, estoy entre consulta y consulta y no tengo tiempo para ofertas.",
+            options: [
+              {
+                text: "Hola Clara, disculpe. Le llamo de Nationale-Nederlanden para presentarle el seguro de Salud Premium en alianza con Sanitas. Este mes tenemos una campaña única con un 12.5% de descuento anual y el primer año de vida gratuito. ¿Podríamos vernos 20 minutos?",
+                trustEffect: -10,
+                defenseEffect: +5,
+                coachFeedback: "<strong>❌ ERROR DE PRODUCTO EN FRÍO:</strong> Le has soltado la chapa comercial de Sanitas y descuentos a un médico que trabaja en la sanidad pública y que ya va a mil por hora. Cero empatía con su situación.",
+                nextStep: 1
+              },
+              {
+                text: "Dra. Crespo, hola. Soy Fede Fontanals, delegado de Nationale-Nederlanden en Xàtiva. Le llamo estrictamente por una cuestión de **auditoría fiscal para profesionales de la salud** en La Costera. Sé que está en consultas, por lo que seré súper breve.",
+                trustEffect: +30,
+                defenseEffect: -20,
+                coachFeedback: "<strong>✅ IMPACTO DE AUTORIDAD Y CONTEXTO:</strong> Hablas su idioma ('Dra. Crespo', 'consultas'), enmarcas la llamada en un tema que le duele (auditoría fiscal de su IRPF como médico) y garantizas brevedad. Se queda a escuchar.",
+                nextStep: 2
+              }
+            ]
+          },
+          {
+            clientText: "Mire, yo de seguros no quiero saber nada. Todo lo que sea seguros me parece un sacadinero y además tengo la sanidad cubierta de sobra por mi trabajo.",
+            options: [
+              {
+                text: "Claro, lo entiendo perfectamente... Pero Clara, precisamente no le llamo para venderle un seguro médico. Le llamo porque el reloj de Hacienda no se detiene. Como pediatra, con sus ingresos, su tramo de IRPF está provocando que le regale miles de euros al Estado que por ley podría estar reteniendo y convirtiendo en ahorro garantizado para usted. ¿Sabe cuánto dinero exacto está perdiendo en su declaración por no tener optimizados sus activos de previsión?",
+                trustEffect: +30,
+                defenseEffect: -25,
+                coachFeedback: "<strong>✅ MAYÉUTICA FISCAL PREMIUM:</strong> Validaste su postura, diste un giro radical (no es seguro médico, es optimización de impuestos) y lanzaste la pregunta de dolor de 'cuánto regala a Hacienda'. Su mente racional de médico quiere el número.",
+                nextStep: 3
+              },
+              {
+                text: "Ya, pero es que Nationale-Nederlanden es una aseguradora multinacional muy importante, trabajamos con Goldman Sachs. No es un sacadinero. Debería darle una oportunidad a ver nuestros planes de jubilación.",
+                trustEffect: -10,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ ERROR DE JUSTIFICACIÓN DE MARCA:</strong> Al defender la marca ('somos muy importantes') estás discutiendo con el cliente. Ella se reafirma en su postura defensiva.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "Hombre, pues no sé la cifra exacta, pero sí que pago una salvajada de IRPF en la nómina del hospital... ¿pero qué tiene que ver eso con ustedes?",
+            options: [
+              {
+                text: "Tiene que ver porque Nationale-Nederlanden tiene las herramientas legales autorizadas por ley para que los profesionales médicos reduzcan su base imponible al máximo. En solo 15 minutos en el propio hospital, durante un descanso, te saco la simulación exacta de lo que puedes retener este año y el impacto neto en tu hucha. Si ves que no te ahorras dinero, te lo digo claro, nos tomamos un café y no te molesto más. ¿Te viene mejor el martes a las 14:00 (hora de salida) o el jueves a la misma hora?",
+                trustEffect: +40,
+                defenseEffect: -30,
+                coachFeedback: "<strong>🚀 CIERRE DE CIRUJANO:</strong> Conectaste su dolor (paga salvajada de IRPF) con tu solución, garantizaste comodidad absoluta ('en el hospital en un descanso'), quitaste presión comercial y cerraste con la doble alternativa. ¡Cita agendada!",
+                nextStep: 100
+              },
+              {
+                text: "Pues porque nosotros vendemos planes de pensiones desgravables. Si quiere le puedo mandar un folleto por email de nuestro plan de pensiones Duplo y cuando lo lea me dice si quiere que le abra uno.",
+                trustEffect: -15,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ AUTO-SABOTAJE DEL FOLLETO POR EMAIL:</strong> Le has tirado la pelota a su tejado. Clara nunca abrirá un PDF de pensiones en mitad de su caótico día. Cita perdida.",
+                nextStep: 99
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: "María Barberá",
+        meta: "36 años, Administrativa · Xàtiva",
+        desc: "Tiene 10.000€ parados en Caixabank. Le da pánico la bolsa y las estafas. Quiere rentabilidad pero 'sin perder nada'.",
+        vulnerability: "Ahorro Muerto en Cuenta: 0% Rentabilidad",
+        initialTrust: 40,
+        initialDefense: 50,
+        steps: [
+          {
+            clientText: "Hola, me coge trabajando pero si es rápido dígame. Me da mucho miedo todo lo que sean inversiones, con lo que cuesta ahorrar...",
+            options: [
+              {
+                text: "Hola María, soy Fede Fontanals, tu gestor local de Nationale-Nederlanden aquí en Xàtiva. Te llamo súper rápido precisamente por eso. Sé lo que cuesta ahorrar hoy en día y por eso estamos ayudando a varios vecinos de la comarca a blindar sus ahorros frente a la inflación sin correr ningún riesgo de perder su dinero... ¿Te parece bien que te cuente en 2 minutos?",
+                trustEffect: +25,
+                defenseEffect: -15,
+                coachFeedback: "<strong>✅ EMPATÍA ABSOLUTA (Pág. 14 del Manual):</strong> Validaste de inmediato su dolor ('sé lo cuesta ahorrar') y te presentaste como el escudo que blinda sus ahorros ('sin riesgo de perder'). Generas confianza instantánea.",
+                nextStep: 2
+              },
+              {
+                text: "María, no se preocupe. Nuestro Plan Flexible de Inversión trabaja en mercados internacionales con gestión activa de Goldman Sachs y rentabilidades del 8% anual. Es totalmente seguro, no va a perder nada. Déjeme pasar por su casa y le abrimos una cuenta hoy mismo.",
+                trustEffect: -15,
+                defenseEffect: +20,
+                coachFeedback: "<strong>❌ ERROR FATAL - PROMESAS FALSAS:</strong> Decir que una inversión en bolsa 'con gestión de Goldman Sachs' es 100% segura y que no va a perder nada suena a estafa financiera para una persona conservadora. Sus alertas rojas se encienden.",
+                nextStep: 1
+              }
+            ]
+          },
+          {
+            clientText: "Es que mi cuñado perdió un dineral en un fondo y yo prefiero tener mi dinero en mi cuenta de Caixabank de toda la vida, que aunque no me dé nada, sé que está seguro.",
+            options: [
+              {
+                text: "Es lo más inteligente del mundo, María, después del susto de tu cuñado es normal ser prudente... Pero déjame hacerte una pregunta: ¿sabías que tener el dinero en una cuenta de toda la vida al 0% es la única forma matemática garantizada de perder dinero todos los días por culpa de la inflación? Si tienes 10.000€ guardados, en 5 años tus 10.000€ valdrán de verdad 8.000€ de compra en el Family Cash de Xàtiva. Estás perdiendo 2.000€ en silencio sin que el banco te diga nada.",
+                trustEffect: +30,
+                defenseEffect: -15,
+                coachFeedback: "<strong>✅ REENCUADRE DEL DOLOR INVISIBLE (Pág. 37):</strong> Validaste su miedo (su cuñado), reencuadraste su concepto de 'seguridad' demostrándole que el banco es una pérdida silenciosa garantizada (inflación en el Family Cash local). El dolor se vuelve real.",
+                nextStep: 3
+              },
+              {
+                text: "Caixabank no le da nada porque los bancos tradicionales se quedan con sus beneficios. Nosotros somos mucho mejores. Debería confiar en mí y no en su banco.",
+                trustEffect: -10,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ ATACAR AL BANCO DE CONFIANZA:</strong> Decirle que su banco de toda la vida la engaña de forma tan directa genera fricción defensiva. Prefiere al banco conocido que al asesor desconocido.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "¡Madre mía, no lo había pensado así! ¿Pero hay alguna forma de hacerlo crecer sin arriesgarse a perder lo ahorrado?",
+            options: [
+              {
+                text: "Por supuesto, María. Precisamente para personas prudentes como tú tenemos el **Plan SIALP** o el **Plan Garantizado de Inversión (PGI)**. Tienen un blindaje por contrato que asegura que pase lo que pase en los mercados, tú tienes garantizado tu capital al vencimiento más las subidas acumuladas. Y con exención fiscal del 0% de impuestos a partir del año 5. Para hacerte la simulación exacta y que veas la red de seguridad por escrito en un papel, ¿te viene mejor el martes a las 17:00 en tu casa o el miércoles a las 11:00 tomándonos un café?",
+                trustEffect: +40,
+                defenseEffect: -30,
+                coachFeedback: "<strong>🚀 CIERRE MAESTRO DE SEGURIDAD:</strong> Presentaste la red de seguridad del PGI/SIALP garantizado, diste el beneficio fiscal y cerraste vendiendo estrictamente la **simulación en papel** en su casa. ¡Cita agendada con total confianza!",
+                nextStep: 100
+              },
+              {
+                text: "Sí, claro, el SIALP es fantástico. Si quieres te mando las condiciones de la póliza en un PDF de 40 páginas por WhatsApp para que te lo leas con calma y me dices.",
+                trustEffect: -20,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ MUERTE POR DOCUMENTACIÓN:</strong> Mandar 40 páginas de condicionado técnico a una persona con miedo al mundo financiero la abrumará y la asustará. Nunca dejes que un PDF sustituya tu presencia física.",
+                nextStep: 99
+              }
+            ]
+          }
+        ]
+      }
+    ];
+
+    /* ========================================================
+       DATA DE OBJECIONES (SANDBOX)
+       ======================================================== */
+    const OBJECIONES_SANDBOX = [
+      {
+        title: "No tengo tiempo / Estoy muy liado",
+        validar: "Lo entiendo perfectamente, [Nombre], sé que vas a mil y que tu tiempo es oro...",
+        reencuadrar: "...y precisamente por eso te llamo: el que no tiene tiempo es el que más necesita delegar su tranquilidad y asegurarse de que sus planes funcionan solos, sin quitarle minutos al día. Te aseguro que en 15 min de reloj te lo dejo masticado.",
+        proyectar: "Si mañana surge cualquier imprevisto de salud o laboral, ¿vas a pensar 'menos mal que le dediqué 15 minutos' o 'por qué no saqué ese pequeño hueco'? ¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"
+      },
+      {
+        title: "Ya tengo seguro de entierro / decesos",
+        validar: "Excelente, eso demuestra que eres una persona previsora y muy responsable con tu familia, [Nombre]...",
+        reencuadrar: "...y justo por eso te llamo. Muchos vecinos en Xàtiva pagan pólizas de previsión tradicionales a fondo perdido que suben de precio exponencialmente con la edad y nunca devuelven nada. En 15 min revisamos tu cobertura y te enseño cómo tener un Fondo de Previsión Activo (PGI) donde tu dinero sigue siendo tuyo, renta seguro y tus hijos heredan tus ahorros más un cheque de 3.000€ para el entierro. Si tu seguro actual es perfecto, te lo diré yo mismo y te quedarás tranquilo gratis.",
+        proyectar: "¿Prefieres seguir pagando un alquiler a fondo perdido toda la vida o ver si puedes empezar a rentabilizar tu dinero? ¿Nos vemos martes o miércoles?"
+      },
+      {
+        title: "No quiero contratar nada / No tengo dinero",
+        validar: "Me parece una decisión súper sensata, yo en tu lugar y sin conocerme de nada pensaría exactamente igual, [Nombre]...",
+        reencuadrar: "...de hecho, hoy no vengo a venderte nada. Mi trabajo hoy es simplemente entregarte tu estudio de costes de previsión familiar por escrito para que tengas la foto real de tu caso. Con esa información en la mano, tú decides lo que quieras hacer con total tranquilidad.",
+        proyectar: "Tener la información y la radiografía es gratis, no tenerla es lo que sale realmente caro cuando surge un problema familiar. ¿Nos vemos un momento rápido esta semana? ¿Martes o miércoles?"
+      },
+      {
+        title: "Envíemelo por email / WhatsApp",
+        validar: "Por supuesto, te lo puedo enviar sin ningún problema por correo, faltaría más...",
+        reencuadrar: "...pero un folleto PDF genérico no te va a decir si estás perdiendo dinero en tus pólizas actuales o si tienes algún agujero grave en tu protección familiar. Es como enviarte la foto de una tirita genérica por correo cuando lo que necesitas es una radiografía de tu caso real para ver dónde sangra tu dinero.",
+        proyectar: "Nos sentamos 15 minutos, te hago la simulación exacta en pantalla con tus datos, te imprimo el informe en papel y ya lo tienes para siempre. ¿Qué te viene mejor, martes por la mañana o miércoles por la tarde?"
+      },
+      {
+        title: "No me interesa / No lo necesito",
+        validar: "Es totalmente normal que me digas eso, a muchos de mis clientes en La Costera les pasaba exactamente lo mismo antes de ver los números...",
+        reencuadrar: "...pero déjame hacerte una sola pregunta: si mañana tienes una baja médica o un imprevisto de salud de 3 meses, ¿sabes exactamente cuánto te pagará la Seguridad Social y cuánto dinero neto perderás cada mes? ¿Y cuánto habrás regalado a tu seguro de entierro si vives hasta los 85 años?",
+        proyectar: "Si no tienes esa foto clara, estás asumiendo una apuesta diaria muy cara. Son solo 15 minutos para despejar la incógnita y decidir tú. ¿Martes o miércoles?"
+      }
+    ];
+
+    /* ========================================================
+       DATA DE AUTOEVALUACIÓN
+       ======================================================== */
+    const EVAL_QUESTIONS = [
+      "¿Conseguí que el cliente se sintiera cómodo e interesado en los primeros 3 minutos?",
+      "¿Establecí claramente que mi rol es el de un Médico Financiero (ayudar, no colocar productos)?",
+      "¿El cliente llegó a verbalizar sus problemas y preocupaciones con sus propias palabras?",
+      "¿Utilicé más preguntas abiertas ('¿Cómo?', '¿Qué?') que afirmaciones directas?",
+      "¿Respeté los silencios calibrados (contar mentalmente hasta 10) sin interrumpir al cliente?",
+      "¿Presenté la solución (PGI, SIALP, Contigo) estrictamente DESPUÉS de que el cliente viera y admitiera su agujero?",
+      "¿Utilicé los números específicos del cliente (gastos, IRPF, cuotas) en lugar de estadísticas abstractas?",
+      "¿El cliente tomó la decisión de la cita por sí mismo (cierre natural) en lugar de sentir que le presioné?",
+      "¿Logré identificar la razón real detrás de sus objeciones iniciales (tiempo, precio, confianza)?",
+      "¿Terminé la llamada con el día, la hora y el lugar de la visita presencial cerrados al 100%?"
+    ];
+
+    /* ========================================================
+       STATE MANAGEMENT
+       ======================================================== */
+    let currentScenarioIdx = null;
+    let currentStepIdx = 0;
+    let trustScore = 50;
+    let defenseScore = 50;
+    let mainTab = 'simulation';
+
+    /* ========================================================
+       TAB SWITCHING
+       ======================================================== */
+    function switchMainTab(tab) {
+      mainTab = tab;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      
+      // Hide all panels
+      document.getElementById('sim-sidebar').style.display = 'none';
+      document.getElementById('sim-arena').style.display = 'none';
+      document.getElementById('sandbox-tab').style.display = 'none';
+      document.getElementById('eval-tab').style.display = 'none';
+
+      // Find active button
+      let targetBtnIdx = 0;
+      if (tab === 'simulation') targetBtnIdx = 0;
+      else if (tab === 'sandbox') targetBtnIdx = 1;
+      else if (tab === 'eval') targetBtnIdx = 2;
+
+      document.querySelectorAll('.tab-btn')[targetBtnIdx].classList.add('active');
+
+      if (tab === 'simulation') {
+        document.getElementById('sim-sidebar').style.display = 'flex';
+        document.getElementById('sim-arena').style.display = 'grid';
+        if (currentScenarioIdx === null) {
+          document.getElementById('welcome-screen').style.display = 'flex';
+          document.getElementById('arena-header').style.display = 'none';
+          document.getElementById('arena-chat').style.display = 'none';
+          document.getElementById('arena-actions').style.display = 'none';
+        }
+      } else if (tab === 'sandbox') {
+        document.getElementById('sandbox-tab').style.display = 'grid';
+        initSandbox();
+      } else if (tab === 'eval') {
+        document.getElementById('eval-tab').style.display = 'block';
+        initEvaluation();
+      }
+    }
+
+    /* ========================================================
+       SIMULADOR: SCENARIO SELECTION & LOGIC
+       ======================================================== */
+    function selectScenario(idx) {
+      // Set active card styles
+      document.querySelectorAll('.scenario-card').forEach(card => card.classList.remove('active'));
+      document.getElementById(`scen-${idx}`).classList.add('active');
+
+      currentScenarioIdx = idx;
+      currentStepIdx = 0;
+      
+      const sc = SCENARIOS[idx];
+      trustScore = sc.initialTrust;
+      defenseScore = sc.initialDefense;
+
+      // Hide welcome, show arena
+      document.getElementById('welcome-screen').style.display = 'none';
+      document.getElementById('arena-header').style.display = 'grid';
+      document.getElementById('arena-chat').style.display = 'flex';
+      document.getElementById('arena-actions').style.display = 'flex';
+
+      // Update Header Info
+      document.getElementById('current-name').innerText = sc.name;
+      document.getElementById('current-context').innerText = sc.meta + " · " + sc.desc;
+      updateBars();
+
+      // Reset Chat
+      const chat = document.getElementById('arena-chat');
+      chat.innerHTML = `
+        <div class="coach-feedback">
+          <strong>🩺 BRIEFING DEL CASO FINANCIERO:</strong>
+          Vulnerabilidad crítica: <strong>${sc.vulnerability}</strong>.<br>
+          Mentalidad del cliente: ${sc.desc}<br>
+          <i>Tu objetivo es romper el hielo, aislar la objeción, reencuadrar el dolor y cerrar la visita presencial. ¡Adelante!</i>
+        </div>
+      `;
+
+      // Trigger first client message
+      setTimeout(() => {
+        injectClientMessage(sc.steps[0].clientText);
+        renderOptions(sc.steps[0].options);
+      }, 500);
+    }
+
+    function updateBars() {
+      // Cap values between 0 and 100
+      trustScore = Math.max(0, Math.min(100, trustScore));
+      defenseScore = Math.max(0, Math.min(100, defenseScore));
+
+      document.getElementById('trust-val').innerText = `${trustScore}%`;
+      document.getElementById('trust-bar-fill').style.width = `${trustScore}%`;
+
+      document.getElementById('defense-val').innerText = `${defenseScore}%`;
+      document.getElementById('defense-bar-fill').style.width = `${defenseScore}%`;
+    }
+
+    function injectClientMessage(text) {
+      const chat = document.getElementById('arena-chat');
+      const msg = document.createElement('div');
+      msg.className = 'msg-bubble msg-client';
+      msg.innerHTML = `
+        <strong>👤 Cliente:</strong> "${text}"
+        <button class="speak-bubble-btn" onclick="speakText('${text.replace(/'/g, "\\'")}')" title="Volver a escuchar">🔊</button>
+      `;
+      chat.appendChild(msg);
+      chat.scrollTop = chat.scrollHeight;
+
+      // Automatically speak client message
+      speakText(text);
+    }
+
+    function injectFedeMessage(text) {
+      const chat = document.getElementById('arena-chat');
+      const msg = document.createElement('div');
+      msg.className = 'msg-bubble msg-fede';
+      msg.innerHTML = `<strong>🩺 Tú (Fede):</strong> "${text}"`;
+      chat.appendChild(msg);
+      chat.scrollTop = chat.scrollHeight;
+      if (synth) synth.cancel(); // Mute client voice if Fede speaks
+    }
+
+    function injectCoachMessage(text) {
+      const chat = document.getElementById('arena-chat');
+      const msg = document.createElement('div');
+      msg.className = 'coach-feedback';
+      msg.innerHTML = text;
+      chat.appendChild(msg);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function renderOptions(options) {
+      const grid = document.getElementById('options-grid');
+      grid.innerHTML = options.map((opt, i) => {
+        const letters = ['A', 'B', 'C'];
+        return `
+          <button class="option-btn" onclick="selectOption(${i})">
+            <span class="option-letter">${letters[i]}</span>
+            <span>${opt.text}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectOption(optIdx) {
+      const sc = SCENARIOS[currentScenarioIdx];
+      const step = sc.steps[currentStepIdx];
+      const opt = step.options[optIdx];
+
+      // Disable buttons temporarily
+      document.querySelectorAll('.option-btn').forEach(btn => btn.disabled = true);
+
+      // Inject Fede message
+      injectFedeMessage(opt.text);
+
+      // Apply effects
+      trustScore += opt.trustEffect;
+      defenseScore += opt.defenseEffect;
+      
+      setTimeout(() => {
+        updateBars();
+        injectCoachMessage(opt.coachFeedback);
+
+        setTimeout(() => {
+          if (opt.nextStep === 100) {
+            // ÉXITO
+            injectClientMessage("Bueno... la verdad es que me has dejado pensando. Me parece bien, apunta: el martes a las 10:00 me viene bien. Te espero en casa. A ver si es verdad lo que me cuentas.");
+            injectCoachMessage("<strong>🏆 ¡ÉXITO ROTUNDO! CITA CONSOLIDADA:</strong> Has demostrado la seguridad, la empatía y la mayéutica del <strong>Médico Financiero</strong>. Has reventado sus defensas, has hecho visible su abismo financiero y has cerrado la visita presencial. ¡Este es el camino!");
+            clearActions();
+          } else if (opt.nextStep === 99) {
+            // FALLO
+            injectClientMessage("Mire, déjelo estar. No me interesa nada de esto y no me apetece perder el tiempo. No me llame más por favor, adiós.");
+            injectCoachMessage("<strong>❌ LLAMADA FRACASADA:</strong> Has caído en las trampas clásicas (presionar con producto, justificar la marca, ofrecer enviar por email). Sus defensas han vencido a la confianza. Revisa el Manual y vuelve a intentarlo con otra estrategia.");
+            clearActions();
+          } else {
+            // Siguiente paso
+            currentStepIdx = opt.nextStep;
+            const nextStepObj = sc.steps[currentStepIdx];
+            injectClientMessage(nextStepObj.clientText);
+            renderOptions(nextStepObj.options);
+          }
+        }, 1200);
+
+      }, 800);
+    }
+
+    function clearActions() {
+      const grid = document.getElementById('options-grid');
+      grid.innerHTML = `
+        <button class="start-btn" onclick="selectScenario(${currentScenarioIdx})" style="width: auto; margin: 0 auto;">
+          🔄 Reiniciar este Escenario
+        </button>
+      `;
+    }
+
+    /* ========================================================
+       SANDBOX DE OBJECIONES (TAB 2)
+       ======================================================= */
+    let currentObjIdx = 0;
+
+    function initSandbox() {
+      const list = document.getElementById('sandbox-sidebar-list');
+      list.innerHTML = OBJECIONES_SANDBOX.map((obj, i) => `
+        <button class="objection-pill ${i === 0 ? 'active' : ''}" id="obj-pill-${i}" onclick="selectSandboxObjection(${i})">
+          🎯 ${obj.title}
+        </button>
+      `).join('');
+      selectSandboxObjection(0);
+    }
+
+    function selectSandboxObjection(idx) {
+      document.querySelectorAll('.objection-pill').forEach(p => p.classList.remove('active'));
+      document.getElementById(`obj-pill-${idx}`).classList.add('active');
+
+      currentObjIdx = idx;
+      const obj = OBJECIONES_SANDBOX[idx];
+
+      document.getElementById('sandbox-obj-title').innerText = `"${obj.title}"`;
+      document.getElementById('sandbox-user-input').value = "";
+      document.getElementById('sandbox-script-output').classList.remove('show');
+      if (synth) synth.cancel();
+    }
+
+    function revealObjectionScript() {
+      const obj = OBJECIONES_SANDBOX[currentObjIdx];
+      const output = document.getElementById('sandbox-script-output');
+      
+      output.innerHTML = `
+        <div style="font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--nn-orange); margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+          <span>🛡️ Fórmula de Blindaje Implacable (Mayéutica Activa)</span>
+          <button class="voice-toggle-btn" onclick="speakObjectionFormula()" style="padding: 0.3rem 0.6rem;">🔊 Leer Fórmula</button>
+        </div>
+        
+        <div class="sandbox-formula-block validar">
+          <span class="formula-tag tag-validar">🤝 1. VALIDAR</span>
+          <p id="formula-validar">"${obj.validar}"</p>
+        </div>
+
+        <div class="sandbox-formula-block reencuadrar">
+          <span class="formula-tag tag-reencuadrar">🔄 2. REENCUADRAR</span>
+          <p id="formula-reencuadrar">${obj.reencuadrar}</p>
+        </div>
+
+        <div class="sandbox-formula-block proyectar">
+          <span class="formula-tag tag-proyectar">🎯 3. PROYECTAR (CIERRE DOBLE)</span>
+          <p id="formula-proyectar">"${obj.proyectar}"</p>
+        </div>
+      `;
+
+      output.classList.add('show');
+    }
+
+    function speakObjectionFormula() {
+      const obj = OBJECIONES_SANDBOX[currentObjIdx];
+      const fullText = `Validamos: ${obj.validar}. Reencuadramos: ${obj.reencuadrar}. Proyectamos: ${obj.proyectar}`;
+      speakText(fullText);
+    }
+
+    /* ========================================================
+       AUTOEVALUACIÓN (TAB 3)
+       ======================================================== */
+    let evalScores = {};
+
+    function initEvaluation() {
+      const grid = document.getElementById('eval-questions-grid');
+      grid.innerHTML = EVAL_QUESTIONS.map((q, i) => `
+        <div class="eval-row">
+          <div class="eval-question-text">
+            <span class="eval-question-num">${i + 1}.</span> ${q}
+          </div>
+          <div class="eval-actions">
+            <button class="eval-btn-choice" id="eval-yes-${i}" onclick="setEvalChoice(${i}, true)">SÍ</button>
+            <button class="eval-btn-choice" id="eval-no-${i}" onclick="setEvalChoice(${i}, false)">NO</button>
+          </div>
+        </div>
+      `).join('');
+
+      evalScores = {};
+      document.getElementById('eval-result-card').style.display = 'none';
+      if (synth) synth.cancel();
+    }
+
+    function setEvalChoice(questionIdx, choice) {
+      evalScores[questionIdx] = choice;
+
+      const yesBtn = document.getElementById(`eval-yes-${questionIdx}`);
+      const noBtn = document.getElementById(`eval-no-${questionIdx}`);
+
+      if (choice) {
+        yesBtn.className = 'eval-btn-choice active-yes';
+        noBtn.className = 'eval-btn-choice';
+      } else {
+        yesBtn.className = 'eval-btn-choice';
+        noBtn.className = 'eval-btn-choice active-no';
+      }
+
+      // Calculate total if all answered
+      const answeredCount = Object.keys(evalScores).length;
+      if (answeredCount === 10) {
+        showEvaluationResult();
+      }
+    }
+
+    function showEvaluationResult() {
+      let score = 0;
+      for (let i = 0; i < 10; i++) {
+        if (evalScores[i] === true) score++;
+      }
+
+      const card = document.getElementById('eval-result-card');
+      const num = document.getElementById('eval-score-num');
+      const title = document.getElementById('eval-score-title');
+      const desc = document.getElementById('eval-score-desc');
+
+      num.innerText = `${score} / 10 SÍ`;
+
+      let speechResult = "";
+
+      if (score >= 9) {
+        title.innerText = "🏆 ¡MÉDICO FINANCIERO ELITE!";
+        desc.innerText = "Tienes un dominio absoluto del ADN del cliente y de la Mayéutica Financiera. Tu llamada no genera fricción y tus visitas presenciales están garantizadas para cerrar pólizas de alto valor. ¡Estás listo para volar alto en La Costera!";
+        speechResult = "¡Excelente, Fede! Eres un Médico Financiero de Élite. Tienes el control total del ADN y tu mayéutica es insuperable. Estás listo para volar alto y reventar tus números en Xàtiva. ¡Enhorabuena!";
+      } else if (score >= 7) {
+        title.innerText = "🩺 ASESOR COMPETENTE DE ADN";
+        desc.innerText = "Haces un excelente trabajo de escucha y diagnóstico, pero aún quedan pequeños puntos de improvisación o presión comercial en el cierre. Revisa las preguntas en las que marcaste 'NO' y corrige en la siguiente llamada.";
+        speechResult = "Buen trabajo, Fede. Eres un asesor competente de ADN, pero aún quedan pequeños puntos de improvisación en el cierre. Corrige esos detalles en tu próxima llamada para alcanzar el nivel élite.";
+      } else if (score >= 5) {
+        title.innerText = "🌱 ASESOR EN DESARROLLO";
+        desc.innerText = "Estás en el camino correcto, pero todavía tienes el chip de 'vendedor' en algunas fases. Recuerda: habla menos, haz preguntas más profundas y mantén la tranquilidad en los silencios incómodos.";
+        speechResult = "Estás en el camino correcto, Fede. Pero ten cuidado: sigues teniendo el chip de vendedor tradicional en algunas fases. Recuerda hacer preguntas más profundas y no tener miedo a los silencios.";
+      } else {
+        title.innerText = "❌ VENDEDOR DE PÓLIZAS (MINDSET TRANSACCIONAL)";
+        desc.innerText = "Estás cometiendo errores fatales de venta tradicional (presionar, hablar de producto antes del dolor, huir ante objeciones). Cierra la llamada, abre tu Manual Maestro del ADN y vuelve a estudiar los módulos de empatía quirúrgica.";
+        speechResult = "Fede, el resultado demuestra un mindset demasiado transaccional. Estás actuando como un vendedor tradicional. Te sugiero repasar los módulos de empatía del manual de ADN antes de volver a llamar.";
+      }
+
+      card.style.display = 'block';
+      card.scrollIntoView({ behavior: 'smooth' });
+
+      // Speak result out loud
+      speakText(speechResult);
+    }
+  </script>
+</body>
+</html>
