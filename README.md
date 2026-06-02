@@ -68,6 +68,7 @@ El sistema se divide en cuatro capas operativas para cubrir todo el ciclo de la 
 ### 4️⃣ Simuladores de Autoridad (Consultoría Técnica)
 | Herramienta | Archivo | Estado | Propósito |
 |-------------|---------|--------|-----------|
+| 🎙️ **Simulador de Roleplay** | [`roleplay_entrenamiento.html`](https://fedefonta08.github.io/propuestas-nn/roleplay_entrenamiento.html) | 🟢 Live | Roleplay interactivo por voz real y análisis NLP semántico. |
 | 💎 **Interés Compuesto** | [`interes_compuesto_NN.html`](https://fedefonta08.github.io/propuestas-nn/Scripts_Herramientas/interes_compuesto_NN.html) | 🟢 Live | Calculadora premium para proyectar el futuro financiero. |
 | 🧮 **Calculadora PVM** | [`calculadora_pvm_nn.html`](https://fedefonta08.github.io/propuestas-nn/Scripts_Herramientas/calculadora_pvm_nn.html) | 🟢 Live | Control de objetivos, puntos y comisiones en tiempo real. |
 | 🌲 **Árbol de Decisión** | [`arbol_decision_producto_nn.html`](https://fedefonta08.github.io/propuestas-nn/Scripts_Herramientas/arbol_decision_producto_nn.html) | 🟢 Live | Selector inteligente de producto según el perfil del cliente. |
@@ -224,7 +225,9 @@ Cada herramienta del ecosistema tiene los guiones, objeciones y árboles de deci
 
 ## ⚡ Últimas Actualizaciones
 
-### 🆕 Junio 2026 (Sprint 6 — Consolidación ADN y Buscador CRM Híbrido)
+### 🆕 Junio 2026 (Sprint 6 — Simulador de Roleplay por Voz & Consolidación)
+- **Simulador de Roleplay por Voz Nativa y NLP Semántico:** Implementada la herramienta interactiva [`roleplay_entrenamiento.html`](https://fedefonta08.github.io/propuestas-nn/roleplay_entrenamiento.html) con soporte nativo por voz (Web Speech API). Incorpora dos modos de entrenamiento: **Opción Múltiple** y **Hablar Libremente**. En este último, Fede habla libremente al micrófono y un motor NLP semántico local analiza en vivo si cumple las fases de *Validar*, *Reencuadrar* (dolores de decesos, IRPF o banco) y *Proyectar* (cierre), adaptando la confianza/defensas del cliente y emitiendo objeciones y respuestas de viva voz de forma dinámica.
+- **Pulsador Activo en index.html:** Se integró la tarjeta de roleplay en el panel principal con un radar pulsante por CSS y animación de brillo activo para entrenamientos diarios de llamadas y visitas personales.
 - **Buscador CRM Híbrido Integrado:** Rediseño completo de la barra lateral (`#sidebar`) del Cockpit de Llamadas. Ahora integra de forma fluida dos pestañas: la `[📅 Cola del Día]` (vencimientos activos del mes) y el `[🔍 Buscar en CRM]` (búsqueda global en caliente).
 - **Búsqueda Dinámica desde 2 Caracteres:** Filtrado ultra-rápido (<5ms) en memoria gracias a la carga inicial y persistencia del CRM global en `todosLosContactos`. Permite búsquedas instantáneas por teléfono normalizado, localidad, nombre, póliza, buyer persona y notas.
 - **Simplificación del Ecosistema:** Se retiró la pestaña obsoleta `nn_crm_panel_v2.html` del Dashboard central (`index.html`) para unificar y simplificar toda la UX operativa en una sola cabina centralizada.
@@ -280,9 +283,10 @@ Este sistema no nació de la noche a la mañana. Ha sido un proceso iterativo de
     *   Diseño del **Radar Comercial** dinámico en el Dashboard principal que se nutre directamente de Drive.
 
 ### 📍 Fase 4: Inteligencia ADN & Búsqueda Híbrida (Sprint 6 — Junio 2026)
-*   **El Reto:** Fusión total de las **24 variables del ADN de cliente** y el volumen creciente de contactos. Abrir múltiples pestañas de CRM generaba lentitud en el momento caliente de la llamada.
-*   **El Aprendizaje:** Optimización de caché local en el navegador (`todosLosContactos`), invalidación reactiva de datos y normalización de cadenas de búsqueda de alta velocidad.
+*   **El Reto:** Fusión total de las **24 variables del ADN de cliente** y el volumen creciente de contactos. Además, Fede requería ganar la máxima confianza y seguridad en llamadas y visitas presenciales mediante simulaciones realistas por voz.
+*   **El Aprendizaje:** Optimización de caché local en el navegador (`todosLosContactos`), invalidación reactiva de datos y desarrollo de sistemas de reconocimiento y síntesis de voz nativos (Web Speech API) con lógica de análisis semántico NLP en caliente en Javascript.
 *   **Hitos Logrados:**
+    *   **Simulador de Voz Nativo & NLP:** Creación de `roleplay_entrenamiento.html` que lee los diálogos del cliente en voz alta y procesa las respuestas del micrófono de Fede, validando semánticamente sus argumentos bajo los tres pilares (Validar, Reencuadrar, Proyectar) y arrojando feedback del "AI Coach" en caliente.
     *   **Buscador CRM Híbrido Integrado:** Transformación del `#sidebar` del Cockpit en un panel segmentado que combina la cola de vencimientos del día con un buscador global histórico en caliente (a partir del **2º carácter**).
     *   **Fusión e Integridad del ADN:** Mapeo robusto a la Columna I (`COL.MES_VTO`) del CRM Maestro. Carga inmediata de los contactos de Junio.
     *   **Precisión Decimal del PVM (`round()`):** Redirección del servidor local al Excel en caliente `NN_SISTEMA_MAESTRO_2026_v2_REPARADO.xlsx` y reemplazo de truncamiento entero por redondeo preciso (`round()`), mostrando en cabecera exactamente los **649 puntos comerciales reales** del Panel de Despegue.
