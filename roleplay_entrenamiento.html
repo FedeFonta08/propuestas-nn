@@ -1251,6 +1251,11 @@
           <div class="options-grid" id="options-grid">
             <!-- Buttons injected dynamically -->
           </div>
+          <div style="text-align: center; margin-top: 0.75rem; border-top: 1px dashed var(--border-color); padding-top: 0.75rem; width: 100%;">
+             <button class="mode-btn" onclick="selectScenario(currentScenarioIdx)" style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.25); color: #FCA5A5; font-size: 0.75rem; padding: 0.4rem 0.9rem; border-radius: 6px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(239,68,68,0.15)'" onmouseout="this.style.background='rgba(239,68,68,0.08)'">
+                🔄 Empezar de nuevo esta llamada
+             </button>
+          </div>
         </div>
 
         <!-- MODO HABLAR LIBREMENTE -->
@@ -1270,9 +1275,14 @@
             </button>
           </div>
           
-          <button class="send-speech-btn" id="btn-submit-speech" onclick="submitFreeSpeechResponse()" disabled>
-            🚀 Enviar y Analizar Respuesta
-          </button>
+          <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 0.25rem;">
+             <button class="mode-btn" onclick="selectScenario(currentScenarioIdx); restartFreeSpeechPanel();" style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.25); color: #FCA5A5; font-size: 0.75rem; padding: 0.4rem 0.9rem; border-radius: 6px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(239,68,68,0.15)'" onmouseout="this.style.background='rgba(239,68,68,0.08)'">
+                🔄 Empezar de nuevo esta llamada
+             </button>
+             <button class="send-speech-btn" id="btn-submit-speech" onclick="submitFreeSpeechResponse()" disabled>
+                🚀 Enviar y Analizar Respuesta
+             </button>
+          </div>
 
           <!-- Guías Conversacionales Dinámicas -->
           <div id="free-speech-guides-wrapper" style="margin-top: 1.25rem; border-top: 1px dashed var(--border-color); padding-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
@@ -2730,9 +2740,14 @@
           </button>
         </div>
         
-        <button class="send-speech-btn" id="btn-submit-speech" onclick="submitFreeSpeechResponse()" disabled>
-          🚀 Enviar y Analizar Respuesta
-        </button>
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 0.25rem;">
+           <button class="mode-btn" onclick="selectScenario(currentScenarioIdx); restartFreeSpeechPanel();" style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.25); color: #FCA5A5; font-size: 0.75rem; padding: 0.4rem 0.9rem; border-radius: 6px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(239,68,68,0.15)'" onmouseout="this.style.background='rgba(239,68,68,0.08)'">
+              🔄 Empezar de nuevo esta llamada
+           </button>
+           <button class="send-speech-btn" id="btn-submit-speech" onclick="submitFreeSpeechResponse()" disabled>
+              🚀 Enviar y Analizar Respuesta
+           </button>
+        </div>
 
         <!-- Guías Conversacionales Dinámicas -->
         <div id="free-speech-guides-wrapper" style="margin-top: 1.25rem; border-top: 1px dashed var(--border-color); padding-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
