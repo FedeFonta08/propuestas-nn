@@ -744,6 +744,124 @@ body {
   gap: 10px;
 }
 
+/* Estilos premium para objeción "No te preocupes, ya te llamo yo" */
+.objection-two-paths {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 5px;
+}
+.objection-header {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--am);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1.5px solid var(--brd2);
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.paths-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 600px) {
+  .paths-container {
+    grid-template-columns: 1fr;
+  }
+}
+.path-card {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+}
+.path-card.path-a {
+  border: 1.5px solid #C4B5FD;
+  border-top: 4px solid #7C3AED;
+}
+.path-card.path-b {
+  border: 1.5px solid #FBCFE8;
+  border-top: 4px solid #DB2777;
+}
+.path-badge {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 12px;
+  display: inline-block;
+}
+.path-badge.path-a {
+  background: #F5F3FF;
+  color: #7C3AED;
+  border: 1px solid #7C3AED;
+}
+.path-badge.path-b {
+  background: #FDF2F8;
+  color: #DB2777;
+  border: 1px solid #FBCFE8;
+}
+.path-title {
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--tx);
+}
+.path-desc {
+  font-size: 11px;
+  color: var(--tx2);
+  font-style: italic;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.path-script {
+  background: #F9FAFB;
+  padding: 8px 10px;
+  border-radius: 0 6px 6px 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--tx);
+  margin-bottom: 8px;
+}
+.path-script.path-a {
+  border-left: 3px solid #7C3AED;
+}
+.path-script.path-b {
+  border-left: 3px solid #DB2777;
+}
+.outcomes-box {
+  background: var(--am-l);
+  border: 1.5px dashed var(--am);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 11.5px;
+  color: var(--tx);
+}
+.outcomes-title {
+  font-weight: 700;
+  color: var(--am);
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.outcomes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  line-height: 1.5;
+}
+
+
 /* Estilos premium para seguros en competencia (ex-Santalucía) */
 .poliza-badge-card {
   display: flex;
@@ -2613,6 +2731,59 @@ const OBJECIONES = [
   {
     label: '¿Y si no puedo pagar más adelante?',
     resp: '<strong>[Validar]:</strong> "Es una preocupación totalmente lógica y muy prudente por tu parte, [Nombre]...<br><strong>[Reencuadrar]:</strong> ...precisamente por eso trabajamos con el modelo de ahorro flexible (Contigo Futuro). Si tu situación económica cambia, puedes pausar las aportaciones, reducirlas al mínimo o incluso rescatar el capital a partir del primer año si necesitas liquidez urgente. No te voy a proponer ninguna trampa.<br><strong>[Proyectar]:</strong> Tienes total tranquilidad hoy por si las cosas van mal mañana. ¿Te viene bien ver los números y las opciones de flexibilidad en 15 min?"'
+  },
+  {
+    label: 'No te preocupes, ya te llamo yo',
+    resp: `<div class="objection-two-paths">
+  <div class="objection-header">
+    🎯 CLAVE: Identifica la intención detrás del "Ya te llamo yo"
+  </div>
+  
+  <div class="paths-container">
+    <!-- CAMINO A -->
+    <div class="path-card path-a">
+      <div>
+        <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px;">
+          <span class="path-badge path-a">CAMINO A</span>
+          <span class="path-title">Interés Real (Sin Tiempo)</span>
+        </div>
+        <p class="path-desc">
+          Le quitas el peso de tener que acordarse él y tomas tú el control:
+        </p>
+        <div class="path-script path-a">
+          "¡Perfecto, <strong>[Nombre]</strong>! Como sé que vas a mil cosas y a mí también se me complican los días, para que no tengas que estar pendiente de acordarte tú de llamarme, yo me encargo de darte un toque rápido. ¿Qué te viene mejor: que te llame yo el <strong>martes que viene a primera hora</strong> o prefieres el <strong>jueves por la tarde</strong>?"
+        </div>
+      </div>
+    </div>
+
+    <!-- CAMINO B -->
+    <div class="path-card path-b">
+      <div>
+        <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px;">
+          <span class="path-badge path-b">CAMINO B</span>
+          <span class="path-title">Filtro de Excusa / Sinceridad</span>
+        </div>
+        <p class="path-desc">
+          Le das permiso con total buen rollo para decirte la verdad y ahorrarte semanas de llamadas perdidas:
+        </p>
+        <div class="path-script path-b">
+          "¡Claro que sí, <strong>[Nombre]</strong>! Pero una cosa con total confianza... si en el fondo no te interesa nada el tema, dímelo tranquilo, ¿eh? Que nos conocemos de sobra, no me va a parecer mal en absoluto y así no te ando molestando con llamadas que sé que vas ocupado. ¿Es así?"
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESENLACE INTERACTIVO -->
+  <div class="outcomes-box">
+    <div class="outcomes-title">
+      ⚡ CÓMO ACTUAR TRAS LA RESPUESTA (CAMINO B)
+    </div>
+    <div class="outcomes-list">
+      <div><strong>❌ Si te dice que NO le interesa:</strong> Le das las gracias por la honestidad, te despides amistosamente y a otra cosa.</div>
+      <div><strong>✅ Si te dice que SÍ le interesa pero va sin tiempo:</strong> Aplicas el <strong>Camino A</strong> y dejas el día/hora cerrado en el acto.</div>
+    </div>
+  </div>
+</div>`
   }
 ];
 
