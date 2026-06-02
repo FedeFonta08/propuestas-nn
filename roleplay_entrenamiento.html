@@ -1170,6 +1170,28 @@
         <div class="scenario-desc">10.000€ parados en Caixabank. Teme a la bolsa. Busca rentabilidad sin riesgo para el futuro de su hijo.</div>
         <div class="vulnerability-pill">📉 Ahorro Muerto (Caixabank): 0%</div>
       </div>
+
+      <!-- ESCENARIO 4 (RETA AUTÓNOMOS) -->
+      <div class="scenario-card" id="scen-3" onclick="selectScenario(3)">
+        <div class="scenario-name">Vicente Guerola</div>
+        <div class="scenario-meta">
+          <span>45 años, Xàtiva</span>
+          <span style="color: var(--nn-orange);">Autónomo RETA</span>
+        </div>
+        <div class="scenario-desc">Dueño de pastelería local. Cotiza al mínimo en el RETA. Cree que "nunca enferma" y que su negocio es su pensión.</div>
+        <div class="vulnerability-pill">🩹 Desamparo por Baja: Faltan 2.300€/mes</div>
+      </div>
+
+      <!-- ESCENARIO 5 (SALUD FAMILIAR) -->
+      <div class="scenario-card" id="scen-4" onclick="selectScenario(4)">
+        <div class="scenario-name">Ana Belén Sanz</div>
+        <div class="scenario-meta">
+          <span>38 años, Canals</span>
+          <span style="color: var(--trust-green);">Gasto Duplicado Copagos</span>
+        </div>
+        <div class="scenario-desc">Madre de 2 niños. Paga mutua antigua de Adeslas con copagos muy altos y teme las listas de espera en pediatría.</div>
+        <div class="vulnerability-pill">💸 Fuga de Copagos: +1.200€/año</div>
+      </div>
     </div>
 
     <!-- ARENA DE ROLEPLAY -->
@@ -1395,8 +1417,13 @@
 
     function resetFreeSpeechUI() {
       const box = document.getElementById('speech-preview-box');
-      box.innerHTML = '<span class="speech-preview-placeholder">Haz clic en el micrófono de la derecha y habla tranquilamente. Puedes hacer pausas para respirar y pensar; el micro no se apagará. Cuando termines, vuelve a pulsar el micrófono para detener la grabación...</span>';
-      document.getElementById('btn-submit-speech').disabled = true;
+      if (box) {
+        box.innerHTML = '<span class="speech-preview-placeholder">Haz clic en el micrófono de la derecha y habla tranquilamente. Puedes hacer pausas para respirar y pensar; el micro no se apagará. Cuando termines, vuelve a pulsar el micrófono para detener la grabación...</span>';
+      }
+      const submitBtn = document.getElementById('btn-submit-speech');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+      }
     }
 
     /* Micrófono del Sandbox (MODO SIN PRESIÓN - CONTINUO) */
@@ -1777,6 +1804,181 @@
             ]
           }
         ]
+      },
+      {
+        name: "Vicente Guerola",
+        meta: "45 años, Xàtiva · Pastelero Autónomo",
+        desc: "Dueño de pastelería. Cotiza al mínimo en el RETA. Su obrador gasta 3.000€/mes fijos, pero el Estado solo le daría 700€/mes de baja.",
+        vulnerability: "Desamparo por Baja: Faltan 2.300€/mes",
+        initialTrust: 35,
+        initialDefense: 75,
+        semDict: {
+          validar: ['entiendo', 'lógico', 'logico', 'esfuerzo', 'panadería', 'pastelería', 'pasteleria', 'autónomo', 'autonomo', 'negocio', 'currar', 'trabajar', 'santo', 'valiente', 'respetable'],
+          reencuadrar: ['baja', 'enfermo', 'ingresos', 'gastos', 'fijos', 'seguridad social', 'reta', 'mínimo', 'minimo', 'mesa', 'patas', 'embargo', 'cerrar', 'persiana', 'cajón', 'cajon', 'coste', 'dinero'],
+          proyectar: ['martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'mañana', 'tarde', 'visita', '15 minutos', 'diez', 'café', 'acercar', 'panadería', 'pastelería', 'vernos', 'obrador']
+        },
+        steps: [
+          {
+            clientText: "Hola, dígame rápido que estoy en el obrador de la pastelería preparando los pedidos y no puedo entretenerme.",
+            options: [
+              {
+                text: "Hola Vicente, le llamo de Nationale-Nederlanden. Tenemos un Plan de Jubilación Garantizado ideal para autónomos que le renta el 5% y además le regala un seguro de baja de 30€ al día gratis el primer año. ¿Nos vemos mañana?",
+                trustEffect: -10,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ ERROR TRANSACCIONAL DE PRODUCTO:</strong> Vicente está sudando en el obrador y le hablas de jubilarse y de pólizas de baja. Feroz reacción defensiva.",
+                nextStep: 1
+              },
+              {
+                text: "Vicente, disculpe. Le llamo para hacer una entrega urgente de un catálogo de materias primas para panaderías de Xàtiva. ¿A qué hora le viene mejor que me acerque?",
+                trustEffect: -20,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ERROR DE ENGAÑO:</strong> Inventarse un pretexto falso de materias primas destruye tu credibilidad como asesor financiero de inmediato.",
+                nextStep: 1
+              },
+              {
+                text: "Vicente, buenas. Soy Fede Fontanals, tu asesor de Nationale-Nederlanden en Xàtiva. Te llamo rápido porque sé que estás con las manos en la masa en la pastelería y tu tiempo vale oro. Estoy ayudando a varios autónomos de la zona a blindar sus costes fijos ante cualquier baja médica de imprevisto... Seré súper directo.",
+                trustEffect: +30,
+                defenseEffect: -15,
+                coachFeedback: "<strong>✅ APERTURA DE MÉDICO FINANCIERO:</strong> Empatizas con su trabajo del obrador, enmarcas en blindar costes fijos de autónomo (dolor real) y prometes brevedad. Respeto absoluto.",
+                nextStep: 2
+              }
+            ]
+          },
+          {
+            clientText: "Mire, yo es que no tengo tiempo para estas cosas. Además, yo nunca me pongo enfermo, llevo 15 años sin coger una baja. Mi negocio es fuerte y si pasa algo mis empleados se encargan.",
+            options: [
+              {
+                text: "Vicente, todo el mundo se pone enfermo alguna vez, es de locos no tener un seguro de baja. Si tiene un accidente se arrepentirá toda su vida. Déjeme pasar 15 minutos y le cotizo un seguro de baja barato.",
+                trustEffect: -10,
+                defenseEffect: +20,
+                coachFeedback: "<strong>❌ ERROR DE ENFRENTAMIENTO Y MIEDO:</strong> Decirle 'es de locos' y amenazarle con desgracias genera reactividad psicológica inmediata. Te colgará el teléfono.",
+                nextStep: 99
+              },
+              {
+                text: "Te entiendo perfectamente Vicente, que lleves 15 años al pie del cañón demuestra el esfuerzo inmenso que has metido en la pastelería... Pero justamente por eso te llamo: como cotizas al mínimo en el RETA, si mañana sufres una baja médica, el Estado te pagará 700€ al mes. Sin embargo, los gastos fijos del obrador siguen siendo de 3.000€. ¿De dónde saldrán los 2.300€ de diferencia cada mes para que tu familia no se ahogue? En 15 min en tu local te enseño la simulación exacta y tú decides. ¿Te viene bien martes al cerrar a las 14:00 o miércoles?",
+                trustEffect: +40,
+                defenseEffect: -25,
+                coachFeedback: "<strong>✅ MAYÉUTICA QUIRÚRGICA:</strong> Validas su esfuerzo brutal de 15 años (bajas defensas), pones números específicos y dolorosos al descubierto (gastos 3.000€ vs 700€ de ayuda) y proyectas con doble alternativa de cierre cómodo. ¡Magistral!",
+                nextStep: 3
+              }
+            ]
+          },
+          {
+            clientText: "Bueno, pero es que yo ya pago mi cuota de autónomo todos los meses a la Seguridad Social, ¿para qué quiero pagar otra póliza?",
+            options: [
+              {
+                text: "Es lo más lógico pensar así, Vicente, bastante nos cuesta ya levantar el cierre de autónomos... Pero déjame hacerte una pregunta de Médico: si tu pastelería dependiera de una mesa de 3 patas y una de ellas (tu presencia física) se rompiera por una lesión, ¿el negocio seguiría sosteniéndose o se caería todo el cajón al suelo? La Seguridad Social solo te cubre una de esas patas de forma mínima. En 15 minutos te enseño cómo blindar la mesa en un papel. ¿Te viene bien el martes a las 14:00 o el miércoles por la mañana?",
+                trustEffect: +35,
+                defenseEffect: -20,
+                coachFeedback: "<strong>✅ REENCUADRE DE LA MESA DE 3 PATAS:</strong> Validaste su queja de cuotas farragosas e introdujiste la metáfora perfecta de la mesa inestable para un autónomo unipersonal. Él ve visualmente el peligro de desplome.",
+                nextStep: 3
+              },
+              {
+                text: "Porque la Seguridad Social no sirve para nada y los autónomos están totalmente desprotegidos hoy en día. Si confía en el gobierno se va a ir a la ruina. Contrate nuestro plan RETA Plus hoy mismo y se deja de problemas.",
+                trustEffect: -15,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ERROR POLÍTICO Y AMENAZAS:</strong> Entrar a debatir sobre el gobierno o la Seguridad Social desvía el foco de su dolor personal a un debate genérico. Pierdes el control de la llamada.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "Ostras... pues no lo había pensado así, la verdad es que si yo no estoy, el negocio sufre mucho. Venga, me parece correcto, pásate el martes a las 14:00 que ya he cerrado el obrador y lo vemos rápido.",
+            options: [
+              {
+                text: "Excelente Vicente. Pues anotado queda: el martes a las 14:00 me paso por el obrador de la pastelería en Xàtiva. Llévate las últimas facturas fijos del negocio y te hago la simulación en un papel en 15 minutos. Un abrazo y feliz jornada pastelería.",
+                trustEffect: +20,
+                defenseEffect: -10,
+                coachFeedback: "<strong>🚀 CITA CONSOLIDADA:</strong> Cierre limpio, reforzando la comodidad de la cita en su propio negocio en su hora de cierre.",
+                nextStep: 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: "Ana Belén Sanz",
+        meta: "38 años, Canals · Madre de Familia",
+        desc: "Paga Adeslas familiar (90€/mes). Gasta más de 100€/mes en copagos silenciosos por visitas rutinarias médicas y análisis de sus 2 niños.",
+        vulnerability: "Fuga de Copagos: +1.200€/año",
+        initialTrust: 40,
+        initialDefense: 60,
+        semDict: {
+          validar: ['entiendo', 'hijos', 'niños', 'canals', 'normal', 'madre', 'tranquilidad', 'familia', 'salud', 'preocupación', 'lógico', 'logico'],
+          reencuadrar: ['copago', 'copagos', 'espera', 'lista', 'especialista', 'urgencias', 'seguro', 'adeslas', 'mapfre', 'sanitas', 'grifo', 'dinero', 'fuga', 'cobertura', 'carencia', 'silencio', 'goteo', 'cuenta', 'banco'],
+          proyectar: ['martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'mañana', 'tarde', 'casa', '15 minutos', 'vernos', 'café', 'alameda', 'acercar', 'hijos', 'niños', 'canals', 'colegio']
+        },
+        steps: [
+          {
+            clientText: "Hola, buenas. Estoy saliendo de trabajar y tengo que recoger a los niños del colegio en Canals, dígame rápido por favor.",
+            options: [
+              {
+                text: "Hola Ana Belén, le llamo para venderle nuestro seguro Contigo Familia con coberturas de salud ilimitadas y sin copagos por solo 45€ al mes. Es una campaña excelente en Canals. ¿Le viene bien que quedemos?",
+                trustEffect: -10,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ ERROR DE COLOCACIÓN DE PRECIO COMERCIAL:</strong> Le tiras un folleto de 45€ al mes a una madre estresada que sale de currar a por sus hijos. Cero empatía.",
+                nextStep: 1
+              },
+              {
+                text: "Ana Belén, hola. Soy Fede Fontanals, gestor de Nationale-Nederlanden en La Costera. Te llamo rápido porque sé que vas corriendo al colegio en Canals a por tus niños. Te contacto porque estamos ayudando a varias familias de la zona a taponar una **fuga silenciosa de más de 1.000€ al año** en copagos de seguros médicos desfasados... Seré súper breve.",
+                trustEffect: +30,
+                defenseEffect: -15,
+                coachFeedback: "<strong>✅ IMPACTO DE EMPATÍA FAMILIAR:</strong> Te enmarcas en Canals, reconoces su estrés de madre, y le pones el foco en 'taponar una fuga silenciosa' en salud familiar. Capta su atención inmediata.",
+                nextStep: 2
+              }
+            ]
+          },
+          {
+            clientText: "Mire, yo ya tengo un seguro de salud con Adeslas desde hace 5 años y pago 90€ al mes. Estamos contentos y no quiero follones de cambiarme ahora.",
+            options: [
+              {
+                text: "Adeslas es muy mala compañía y le subirá el recibo en cuanto sus hijos cumplan años. Además, los copagos de Adeslas son abusivos. Venga conmigo y le hago un descuento del 15% inmediato en Sanitas.",
+                trustEffect: -15,
+                defenseEffect: +20,
+                coachFeedback: "<strong>❌ ERROR FATAL DE ATACAR A LA COMPETENCIA:</strong> Atacar su seguro actual es atacar su decisión de compra. Ella defenderá Adeslas por inercia psicológica.",
+                nextStep: 99
+              },
+              {
+                text: "Es totalmente comprensible, Ana Belén, Adeslas es una mutua grande y tradicional, y tener esa previsión para tus niños demuestra que eres una madre súper responsable... Pero déjame hacerte una pregunta de Médico: ¿has revisado tu extracto del banco para ver cuánto pagas de más al mes en copagos tontos por análisis, pediatra o recetas? Es como tener un grifo abierto en el baño que gotea dinero en silencio. En 15 min en Canals te enseño a cerrarlo por completo sin perder calidad médica. ¿Te viene bien martes a las 17:30 en tu casa o miércoles?",
+                trustEffect: +35,
+                defenseEffect: -20,
+                coachFeedback: "<strong>✅ MAYÉUTICA DEL GRIFO ABIERTO:</strong> Validas su postura de madre previsora (bajas defensas), introduces la metáfora destructora del 'grifo de copagos que gotea dinero' y cierras vendiendo la auditoría sin compromiso. ¡Sencillamente brillante!",
+                nextStep: 3
+              }
+            ]
+          },
+          {
+            clientText: "Bueno... sí que es verdad que últimamente cada vez que vamos al médico nos llega un cargo de 3€, 5€ o 10€ de copago por cada niño y al final de mes se nota un pico... ¿pero cómo sé que con ustedes estaré mejor?",
+            options: [
+              {
+                text: "Esa es la duda más normal del mundo, Ana Belén... Pero el seguro Contigo Familia en alianza con Sanitas está diseñado precisamente para familias activas con niños. Es una tarifa plana real, sin copagos sorpresa, donde sabes exactamente lo que pagas al céntimo. Es cerrar el grifo de las fugas de dinero para siempre. En 15 minutos en tu casa con un café te enseño la simulación comparada en pantalla y tú misma decides. ¿Te viene mejor el miércoles a las 17:30 o el jueves por la tarde?",
+                trustEffect: +40,
+                defenseEffect: -25,
+                coachFeedback: "<strong>✅ CONSOLIDACIÓN DE TARIFA PLANA:</strong> Explicas el concepto de tarifa plana real vs. goteo de copagos, y pides la cita para comparar cómodamente en su casa con un café. Cero fricción.",
+                nextStep: 3
+              },
+              {
+                text: "Porque nosotros somos más baratos y tenemos mejores médicos que Adeslas en toda Valencia. Déjeme su DNI y le tramito la baja de Adeslas hoy mismo para no perder la campaña.",
+                trustEffect: -20,
+                defenseEffect: +20,
+                coachFeedback: "<strong>❌ ERROR DE AGRESIVIDAD COMERCIAL:</strong> Tratar de pedirle el DNI para darle de baja hoy mismo en frío activa todas sus defensas de alerta de estafa. Llamada rota.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "Pues la verdad es que sí que me gustaría cerrar ese grifo de los copagos, que es un goteo tonto de dinero. Venga, nos vemos el miércoles a las 17:30 en casa tomándonos un café y me lo enseñas en papel.",
+            options: [
+              {
+                text: "Perfecto Ana Belén. Anotado queda, el miércoles a las 17:30 nos tomamos ese café en tu casa en Canals. Sigue tranquila con tus niños y el miércoles en 15 minutos te dejo la auditoría de salud familiar hecha por escrito. Un saludo afectuoso.",
+                trustEffect: +20,
+                defenseEffect: -10,
+                coachFeedback: "<strong>🚀 CITA CERRADA CON SEGURIDAD:</strong> Cierre afectuoso, empático y profesional. ¡Fede suma otra visita de salud familiar de altísimo valor!",
+                nextStep: 100
+              }
+            ]
+          }
+        ]
       }
     ];
 
@@ -1813,6 +2015,181 @@
         validar: "Es totalmente normal que me digas eso, a muchos de mis clientes en La Costera les pasaba exactamente lo mismo antes de ver los números...",
         reencuadrar: "...pero déjame hacerte una sola pregunta: si mañana tienes una baja médica o un imprevisto de salud de 3 meses, ¿sabes exactamente cuánto te pagará la Seguridad Social y cuánto dinero neto perderás cada mes? ¿Y cuánto habrás regalado a tu seguro de entierro si vives hasta los 85 años?",
         proyectar: "Si no tienes esa foto clara, estás asumiendo una apuesta diaria muy cara. Son solo 15 minutos para despejar la incógnita y decidir tú. ¿Martes o miércoles?"
+      },
+      {
+        name: "Vicente Guerola",
+        meta: "45 años, Xàtiva · Pastelero Autónomo",
+        desc: "Dueño de pastelería. Cotiza al mínimo en el RETA. Su obrador gasta 3.000€/mes fijos, pero el Estado solo le daría 700€/mes de baja.",
+        vulnerability: "Desamparo por Baja: Faltan 2.300€/mes",
+        initialTrust: 35,
+        initialDefense: 75,
+        semDict: {
+          validar: ['entiendo', 'lógico', 'logico', 'esfuerzo', 'panadería', 'pastelería', 'pasteleria', 'autónomo', 'autonomo', 'negocio', 'currar', 'trabajar', 'santo', 'valiente', 'respetable'],
+          reencuadrar: ['baja', 'enfermo', 'ingresos', 'gastos', 'fijos', 'seguridad social', 'reta', 'mínimo', 'minimo', 'mesa', 'patas', 'embargo', 'cerrar', 'persiana', 'cajón', 'cajon', 'coste', 'dinero'],
+          proyectar: ['martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'mañana', 'tarde', 'visita', '15 minutos', 'diez', 'café', 'acercar', 'panadería', 'pastelería', 'vernos', 'obrador']
+        },
+        steps: [
+          {
+            clientText: "Hola, dígame rápido que estoy en el obrador de la pastelería preparando los pedidos y no puedo entretenerme.",
+            options: [
+              {
+                text: "Hola Vicente, le llamo de Nationale-Nederlanden. Tenemos un Plan de Jubilación Garantizado ideal para autónomos que le renta el 5% y además le regala un seguro de baja de 30€ al día gratis el primer año. ¿Nos vemos mañana?",
+                trustEffect: -10,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ ERROR TRANSACCIONAL DE PRODUCTO:</strong> Vicente está sudando en el obrador y le hablas de jubilarse y de pólizas de baja. Feroz reacción defensiva.",
+                nextStep: 1
+              },
+              {
+                text: "Vicente, disculpe. Le llamo para hacer una entrega urgente de un catálogo de materias primas para panaderías de Xàtiva. ¿A qué hora le viene mejor que me acerque?",
+                trustEffect: -20,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ERROR DE ENGAÑO:</strong> Inventarse un pretexto falso de materias primas destruye tu credibilidad como asesor financiero de inmediato.",
+                nextStep: 1
+              },
+              {
+                text: "Vicente, buenas. Soy Fede Fontanals, tu asesor de Nationale-Nederlanden en Xàtiva. Te llamo rápido porque sé que estás con las manos en la masa en la pastelería y tu tiempo vale oro. Estoy ayudando a varios autónomos de la zona a blindar sus costes fijos ante cualquier baja médica de imprevisto... Seré súper directo.",
+                trustEffect: +30,
+                defenseEffect: -15,
+                coachFeedback: "<strong>✅ APERTURA DE MÉDICO FINANCIERO:</strong> Empatizas con su trabajo del obrador, enmarcas en blindar costes fijos de autónomo (dolor real) y prometes brevedad. Respeto absoluto.",
+                nextStep: 2
+              }
+            ]
+          },
+          {
+            clientText: "Mire, yo es que no tengo tiempo para estas cosas. Además, yo nunca me pongo enfermo, llevo 15 años sin coger una baja. Mi negocio es fuerte y si pasa algo mis empleados se encargan.",
+            options: [
+              {
+                text: "Vicente, todo el mundo se pone enfermo alguna vez, es de locos no tener un seguro de baja. Si tiene un accidente se arrepentirá toda su vida. Déjeme pasar 15 minutos y le cotizo un seguro de baja barato.",
+                trustEffect: -10,
+                defenseEffect: +20,
+                coachFeedback: "<strong>❌ ERROR DE ENFRENTAMIENTO Y MIEDO:</strong> Decirle 'es de locos' y amenazarle con desgracias genera reactividad psicológica inmediata. Te colgará el teléfono.",
+                nextStep: 99
+              },
+              {
+                text: "Te entiendo perfectamente Vicente, que lleves 15 años al pie del cañón demuestra el esfuerzo inmenso que has metido en la pastelería... Pero justamente por eso te llamo: como cotizas al mínimo en el RETA, si mañana sufres una baja médica, el Estado te pagará 700€ al mes. Sin embargo, los gastos fijos del obrador siguen siendo de 3.000€. ¿De dónde saldrán los 2.300€ de diferencia cada mes para que tu familia no se ahogue? En 15 min en tu local te enseño la simulación exacta y tú decides. ¿Te viene bien martes al cerrar a las 14:00 o miércoles?",
+                trustEffect: +40,
+                defenseEffect: -25,
+                coachFeedback: "<strong>✅ MAYÉUTICA QUIRÚRGICA:</strong> Validas su esfuerzo brutal de 15 años (bajas defensas), pones números específicos y dolorosos al descubierto (gastos 3.000€ vs 700€ de ayuda) y proyectas con doble alternativa de cierre cómodo. ¡Magistral!",
+                nextStep: 3
+              }
+            ]
+          },
+          {
+            clientText: "Bueno, pero es que yo ya pago mi cuota de autónomo todos los meses a la Seguridad Social, ¿para qué quiero pagar otra póliza?",
+            options: [
+              {
+                text: "Es lo más lógico pensar así, Vicente, bastante nos cuesta ya levantar el cierre de autónomos... Pero déjame hacerte una pregunta de Médico: si tu pastelería dependiera de una mesa de 3 patas y una de ellas (tu presencia física) se rompiera por una lesión, ¿el negocio seguiría sosteniéndose o se caería todo el cajón al suelo? La Seguridad Social solo te cubre una de esas patas de forma mínima. En 15 minutos te enseño cómo blindar la mesa en un papel. ¿Te viene bien el martes a las 14:00 o el miércoles por la mañana?",
+                trustEffect: +35,
+                defenseEffect: -20,
+                coachFeedback: "<strong>✅ REENCUADRE DE LA MESA DE 3 PATAS:</strong> Validaste su queja de cuotas farragosas e introdujiste la metáfora perfecta de la mesa inestable para un autónomo unipersonal. Él ve visualmente el peligro de desplome.",
+                nextStep: 3
+              },
+              {
+                text: "Porque la Seguridad Social no sirve para nada y los autónomos están totalmente desprotegidos hoy en día. Si confía en el gobierno se va a ir a la ruina. Contrate nuestro plan RETA Plus hoy mismo y se deja de problemas.",
+                trustEffect: -15,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ERROR POLÍTICO Y AMENAZAS:</strong> Entrar a debatir sobre el gobierno o la Seguridad Social desvía el foco de su dolor personal a un debate genérico. Pierdes el control de la llamada.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "Ostras... pues no lo había pensado así, la verdad es que si yo no estoy, el negocio sufre mucho. Venga, me parece correcto, pásate el martes a las 14:00 que ya he cerrado el obrador y lo vemos rápido.",
+            options: [
+              {
+                text: "Excelente Vicente. Pues anotado queda: el martes a las 14:00 me paso por el obrador de la pastelería en Xàtiva. Llévate las últimas facturas fijos del negocio y te hago la simulación en un papel en 15 minutos. Un abrazo y feliz jornada pastelería.",
+                trustEffect: +20,
+                defenseEffect: -10,
+                coachFeedback: "<strong>🚀 CITA CONSOLIDADA:</strong> Cierre limpio, reforzando la comodidad de la cita en su propio negocio en su hora de cierre.",
+                nextStep: 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: "Ana Belén Sanz",
+        meta: "38 años, Canals · Madre de Familia",
+        desc: "Paga Adeslas familiar (90€/mes). Gasta más de 100€/mes en copagos silenciosos por visitas rutinarias médicas y análisis de sus 2 niños.",
+        vulnerability: "Fuga de Copagos: +1.200€/año",
+        initialTrust: 40,
+        initialDefense: 60,
+        semDict: {
+          validar: ['entiendo', 'hijos', 'niños', 'canals', 'normal', 'madre', 'tranquilidad', 'familia', 'salud', 'preocupación', 'lógico', 'logico'],
+          reencuadrar: ['copago', 'copagos', 'espera', 'lista', 'especialista', 'urgencias', 'seguro', 'adeslas', 'mapfre', 'sanitas', 'grifo', 'dinero', 'fuga', 'cobertura', 'carencia', 'silencio', 'goteo', 'cuenta', 'banco'],
+          proyectar: ['martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'mañana', 'tarde', 'casa', '15 minutos', 'vernos', 'café', 'alameda', 'acercar', 'hijos', 'niños', 'canals', 'colegio']
+        },
+        steps: [
+          {
+            clientText: "Hola, buenas. Estoy saliendo de trabajar y tengo que recoger a los niños del colegio en Canals, dígame rápido por favor.",
+            options: [
+              {
+                text: "Hola Ana Belén, le llamo para venderle nuestro seguro Contigo Familia con coberturas de salud ilimitadas y sin copagos por solo 45€ al mes. Es una campaña excelente en Canals. ¿Le viene bien que quedemos?",
+                trustEffect: -10,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ ERROR DE COLOCACIÓN DE PRECIO COMERCIAL:</strong> Le tiras un folleto de 45€ al mes a una madre estresada que sale de currar a por sus hijos. Cero empatía.",
+                nextStep: 1
+              },
+              {
+                text: "Ana Belén, hola. Soy Fede Fontanals, gestor de Nationale-Nederlanden en La Costera. Te llamo rápido porque sé que vas corriendo al colegio en Canals a por tus niños. Te contacto porque estamos ayudando a varias familias de la zona a taponar una **fuga silenciosa de más de 1.000€ al año** en copagos de seguros médicos desfasados... Seré súper breve.",
+                trustEffect: +30,
+                defenseEffect: -15,
+                coachFeedback: "<strong>✅ IMPACTO DE EMPATÍA FAMILIAR:</strong> Te enmarcas en Canals, reconoces su estrés de madre, y le pones el foco en 'taponar una fuga silenciosa' en salud familiar. Capta su atención inmediata.",
+                nextStep: 2
+              }
+            ]
+          },
+          {
+            clientText: "Mire, yo ya tengo un seguro de salud con Adeslas desde hace 5 años y pago 90€ al mes. Estamos contentos y no quiero follones de cambiarme ahora.",
+            options: [
+              {
+                text: "Adeslas es muy mala compañía y le subirá el recibo en cuanto sus hijos cumplan años. Además, los copagos de Adeslas son abusivos. Venga conmigo y le hago un descuento del 15% inmediato en Sanitas.",
+                trustEffect: -15,
+                defenseEffect: +20,
+                coachFeedback: "<strong>❌ ERROR FATAL DE ATACAR A LA COMPETENCIA:</strong> Atacar su seguro actual es atacar su decisión de compra. Ella defenderá Adeslas por inercia psicológica.",
+                nextStep: 99
+              },
+              {
+                text: "Es totalmente comprensible, Ana Belén, Adeslas es una mutua grande y tradicional, y tener esa previsión para tus niños demuestra que eres una madre súper responsable... Pero déjame hacerte una pregunta de Médico: ¿has revisado tu extracto del banco para ver cuánto pagas de más al mes en copagos tontos por análisis, pediatra o recetas? Es como tener un grifo abierto en el baño que gotea dinero en silencio. En 15 min en Canals te enseño a cerrarlo por completo sin perder calidad médica. ¿Te viene bien martes a las 17:30 en tu casa o miércoles?",
+                trustEffect: +35,
+                defenseEffect: -20,
+                coachFeedback: "<strong>✅ MAYÉUTICA DEL GRIFO ABIERTO:</strong> Validas su postura de madre previsora (bajas defensas), introduces la metáfora destructora del 'grifo de copagos que gotea dinero' y cierras vendiendo la auditoría sin compromiso. ¡Sencillamente brillante!",
+                nextStep: 3
+              }
+            ]
+          },
+          {
+            clientText: "Bueno... sí que es verdad que últimamente cada vez que vamos al médico nos llega un cargo de 3€, 5€ o 10€ de copago por cada niño y al final de mes se nota un pico... ¿pero cómo sé que con ustedes estaré mejor?",
+            options: [
+              {
+                text: "Esa es la duda más normal del mundo, Ana Belén... Pero el seguro Contigo Familia en alianza con Sanitas está diseñado precisamente para familias activas con niños. Es una tarifa plana real, sin copagos sorpresa, donde sabes exactamente lo que pagas al céntimo. Es cerrar el grifo de las fugas de dinero para siempre. En 15 minutos en tu casa con un café te enseño la simulación comparada en pantalla y tú misma decides. ¿Te viene mejor el miércoles a las 17:30 o el jueves por la tarde?",
+                trustEffect: +40,
+                defenseEffect: -25,
+                coachFeedback: "<strong>✅ CONSOLIDACIÓN DE TARIFA PLANA:</strong> Explicas el concepto de tarifa plana real vs. goteo de copagos, y pides la cita para comparar cómodamente en su casa con un café. Cero fricción.",
+                nextStep: 3
+              },
+              {
+                text: "Porque nosotros somos más baratos y tenemos mejores médicos que Adeslas en toda Valencia. Déjeme su DNI y le tramito la baja de Adeslas hoy mismo para no perder la campaña.",
+                trustEffect: -20,
+                defenseEffect: +20,
+                coachFeedback: "<strong>❌ ERROR DE AGRESIVIDAD COMERCIAL:</strong> Tratar de pedirle el DNI para darle de baja hoy mismo en frío activa todas sus defensas de alerta de estafa. Llamada rota.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "Pues la verdad es que sí que me gustaría cerrar ese grifo de los copagos, que es un goteo tonto de dinero. Venga, nos vemos el miércoles a las 17:30 en casa tomándonos un café y me lo enseñas en papel.",
+            options: [
+              {
+                text: "Perfecto Ana Belén. Anotado queda, el miércoles a las 17:30 nos tomamos ese café en tu casa en Canals. Sigue tranquila con tus niños y el miércoles en 15 minutos te dejo la auditoría de salud familiar hecha por escrito. Un saludo afectuoso.",
+                trustEffect: +20,
+                defenseEffect: -10,
+                coachFeedback: "<strong>🚀 CITA CERRADA CON SEGURIDAD:</strong> Cierre afectuoso, empático y profesional. ¡Fede suma otra visita de salud familiar de altísimo valor!",
+                nextStep: 100
+              }
+            ]
+          }
+        ]
       }
     ];
 
