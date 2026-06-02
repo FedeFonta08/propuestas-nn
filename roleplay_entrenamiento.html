@@ -2228,6 +2228,27 @@
     let trustScore = 50;
     let defenseScore = 50;
     let mainTab = 'simulation';
+    let lastClientObjectionIdx = null; // Sincroniza la última objeción del cliente con el Sandbox
+
+    function detectObjectionFromClientText(text) {
+      const t = text.toLowerCase();
+      if (t.includes('whatsapp') || t.includes('email') || t.includes('correo') || t.includes('envía') || t.includes('envie') || t.includes('mándamelo') || t.includes('mandamelo')) {
+        return 3; // Index 3: "Envíemelo por email / WhatsApp"
+      }
+      if (t.includes('tiempo') || t.includes('liado') || t.includes('prisa') || t.includes('trabajando') || t.includes('consulta') || t.includes('minutos')) {
+        return 0; // Index 0: "No tengo tiempo / Estoy muy liado"
+      }
+      if (t.includes('entierro') || t.includes('decesos') || t.includes('muerto') || t.includes('santalucía') || t.includes('santalucia') || t.includes('libreta') || t.includes('banco') || t.includes('cuenta') || t.includes('caixabank') || t.includes('cambiarme')) {
+        return 1; // Index 1: "Ya tengo seguro de entierro / decesos"
+      }
+      if (t.includes('dinero') || t.includes('pagar') || t.includes('caro') || t.includes('precio') || t.includes('cuesta') || t.includes('presupuesto')) {
+        return 2; // Index 2: "No quiero contratar nada / No tengo dinero"
+      }
+      if (t.includes('interesa') || t.includes('necesito') || t.includes('seguros no')) {
+        return 4; // Index 4: "No me interesa / No lo necesito"
+      }
+      return null;
+    }
 
     /* ========================================================
        TAB SWITCHING
@@ -2261,7 +2282,7 @@
         }
       } else if (tab === 'sandbox') {
         document.getElementById('sandbox-tab').style.display = 'grid';
-        initSandbox();
+        initSandbox(lastClientObjectionIdx);
         
         // CONECTAR CON PACIENTE ACTIVO
         const clientNameSpan = document.getElementById('sandbox-client-name');
@@ -2292,6 +2313,7 @@
 
       currentScenarioIdx = idx;
       currentStepIdx = 0;
+      lastClientObjectionIdx = null; // Reset de la sincronización de objeciones
       
       const sc = SCENARIOS[idx];
       trustScore = sc.initialTrust;
@@ -2353,6 +2375,13 @@
 
       // Automatically speak client message
       speakText(text);
+
+      // CLASIFICAR OBJECIÓN PARA CONECTAR EL SANDBOX AUTOMÁTICAMENTE
+      const detectedIdx = detectObjectionFromClientText(text);
+      if (detectedIdx !== null) {
+        lastClientObjectionIdx = detectedIdx;
+        console.log("SYNC: Objeción clasificada y vinculada en Sandbox: index " + detectedIdx);
+      }
     }
 
     function injectFedeMessage(text) {
@@ -2744,14 +2773,16 @@
        ======================================================== */
     let currentObjIdx = 0;
 
-    function initSandbox() {
+    function initSandbox(selectedIdx) {
+      const activeIdx = (selectedIdx !== undefined && selectedIdx !== null) ? selectedIdx : 0;
+      
       const list = document.getElementById('sandbox-sidebar-list');
       list.innerHTML = OBJECIONES_SANDBOX.map((obj, i) => `
-        <button class="objection-pill ${i === 0 ? 'active' : ''}" id="obj-pill-${i}" onclick="selectSandboxObjection(${i})">
+        <button class="objection-pill ${i === activeIdx ? 'active' : ''}" id="obj-pill-${i}" onclick="selectSandboxObjection(${i})">
           🎯 ${obj.title}
         </button>
       `).join('');
-      selectSandboxObjection(0);
+      selectSandboxObjection(activeIdx);
     }
 
     function selectSandboxObjection(idx) {
