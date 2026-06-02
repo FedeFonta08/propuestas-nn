@@ -1095,6 +1095,11 @@
       gap: 0.25rem;
       margin-top: 0.15rem;
     }
+  
+    @keyframes slideDown {
+      from { transform: translateY(-15px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
   </style>
 </head>
 <body>
@@ -1110,6 +1115,10 @@
     </div>
     
     <div class="controls-wrapper">
+      <!-- Configuración del Asesor -->
+      <button class="voice-toggle-btn" id="btn-toggle-profile-panel" onclick="toggleProfilePanel()" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); color: var(--text-main);">
+        👤 Perfil Asesor
+      </button>
       <!-- Selector de Modo de Juego -->
       <button class="mode-btn active" id="btn-mode-multiple" onclick="switchGameMode('multiple')" title="Elegir entre opciones A, B, C">
         🕹️ Opción Múltiple
@@ -1134,6 +1143,38 @@
       </div>
     </div>
   </header>
+
+  <!-- PANEL DE CONFIGURACIÓN DE ASESOR (Desplegable) -->
+  <div id="profile-settings-panel" style="display: none; background: rgba(28, 37, 65, 0.95); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border-color); padding: 1.25rem 2rem; animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; z-index: 99; position: relative;">
+    <div style="display: flex; gap: 2rem; align-items: center; justify-content: center; max-width: 950px; margin: 0 auto; flex-wrap: wrap;">
+      <div style="font-weight: 700; color: var(--nn-orange); font-family: 'Outfit', sans-serif; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem;">
+        ⚙️ Configurar Perfil Comercial:
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+        <label style="font-size: 0.68rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em;">Nombre de Presentación</label>
+        <input type="text" id="setting-agent-name" value="Fede Fontanals" oninput="applyCustomProfile()" style="background: rgba(11, 19, 43, 0.85); border: 1px solid var(--border-color); border-radius: 6px; padding: 0.4rem 0.8rem; color: white; font-family: inherit; font-size: 0.85rem; width: 180px; outline: none; border-color: rgba(255,255,255,0.15);">
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+        <label style="font-size: 0.68rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em;">Cargo de Presentación</label>
+        <select id="setting-agent-role" onchange="applyCustomProfile()" style="background: rgba(11, 19, 43, 0.85); border: 1px solid var(--border-color); border-radius: 6px; padding: 0.4rem 0.8rem; color: white; font-family: inherit; font-size: 0.85rem; width: 180px; outline: none; cursor: pointer; border-color: rgba(255,255,255,0.15);">
+          <option value="Agente" style="background: var(--bg-dark); color: white;">Agente</option>
+          <option value="Asesor" style="background: var(--bg-dark); color: white;">Asesor</option>
+          <option value="Delegado" style="background: var(--bg-dark); color: white;" selected>Delegado</option>
+          <option value="Gerente" style="background: var(--bg-dark); color: white;">Gerente</option>
+        </select>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+        <label style="font-size: 0.68rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em;">Género Gramatical</label>
+        <select id="setting-agent-gender" onchange="applyCustomProfile()" style="background: rgba(11, 19, 43, 0.85); border: 1px solid var(--border-color); border-radius: 6px; padding: 0.4rem 0.8rem; color: white; font-family: inherit; font-size: 0.85rem; width: 130px; outline: none; cursor: pointer; border-color: rgba(255,255,255,0.15);">
+          <option value="m">Masculino</option>
+          <option value="f">Femenino</option>
+        </select>
+      </div>
+      <button class="voice-toggle-btn active" onclick="toggleProfilePanel()" style="padding: 0.45rem 1.25rem; border-radius: 6px; font-size: 0.82rem;">
+        Cerrar Ajustes
+      </button>
+    </div>
+  </div>
 
   <!-- WORKSPACE -->
   <div class="main-container" id="main-workspace">
@@ -1195,8 +1236,52 @@
           <span>38 años, Canals</span>
           <span style="color: var(--trust-green);">Gasto Duplicado Copagos</span>
         </div>
-        <div class="scenario-desc">Madre de 2 niños. Paga mutua antigua de Adeslas con copagos muy altos y teme las listas de espera en pediatría.</div>
+        <div class="scenario-desc">Madre de 2 niños... Paga mutua antigua de Adeslas... con copagos muy altos... y teme las listas de espera en pediatría.</div>
         <div class="vulnerability-pill">💸 Fuga de Copagos: +1.200€/año</div>
+      </div>
+
+      <!-- ESCENARIO 6 (AUTÓNOMO ILT) -->
+      <div class="scenario-card" id="scen-5" onclick="selectScenario(5)">
+        <div class="scenario-name">Jordi Sanz</div>
+        <div class="scenario-meta">
+          <span>42 años, Xàtiva</span>
+          <span style="color: var(--nn-orange);">Autónomo RETA</span>
+        </div>
+        <div class="scenario-desc">Fontanero autónomo... Tiene un negocio activo... pero cotiza al mínimo... y desconoce el desamparo de su baja.</div>
+        <div class="vulnerability-pill">🩹 Brecha de Baja: -2.100€/mes</div>
+      </div>
+
+      <!-- ESCENARIO 7 (JUBILACIÓN / PPSA) -->
+      <div class="scenario-card" id="scen-6" onclick="selectScenario(6)">
+        <div class="scenario-name">María José</div>
+        <div class="scenario-meta">
+          <span>54 años, Dentista</span>
+          <span style="color: var(--nn-orange);">IRPF Muy Alto</span>
+        </div>
+        <div class="scenario-desc">Dentista con clínica propia... Ingresos altos... Paga un 35% de IRPF... y cree que no necesita previsión.</div>
+        <div class="vulnerability-pill">💸 Fuga Fiscal IRPF: -2.800€/año</div>
+      </div>
+
+      <!-- ESCENARIO 8 (DECESOS VITALICIO) -->
+      <div class="scenario-card" id="scen-7" onclick="selectScenario(7)">
+        <div class="scenario-name">Paco y Carmen</div>
+        <div class="scenario-meta">
+          <span>58 y 56 años, Canals</span>
+          <span style="color: var(--defense-red);">Miedo a Cambiar</span>
+        </div>
+        <div class="scenario-desc">Pagan 110€/mes en Santalucía de entierro... desde hace 20 años... Sienten que si cambian perderán su antigüedad.</div>
+        <div class="vulnerability-pill">🩸 Decesos a Fondo Perdido: 26.000€</div>
+      </div>
+
+      <!-- ESCENARIO 9 (SIALP / AHORRO) -->
+      <div class="scenario-card" id="scen-8" onclick="selectScenario(8)">
+        <div class="scenario-name">Carlos</div>
+        <div class="scenario-meta">
+          <span>38 años, Xàtiva</span>
+          <span style="color: var(--trust-green);">Ahorrador Conservador</span>
+        </div>
+        <div class="scenario-desc">Tiene 20.000€ parados en cuenta de Caixabank... teme a la bolsa... y la inflación se come sus ahorros en silencio.</div>
+        <div class="vulnerability-pill">📉 Ahorro Muerto: 0% Rentabilidad</div>
       </div>
     </div>
 
@@ -1206,12 +1291,41 @@
       <!-- WELCOME SCREEN (Active when no scenario is loaded) -->
       <div class="welcome-screen" id="welcome-screen">
         <div class="welcome-icon">🩺</div>
-        <h2 class="welcome-title">Entrenamiento del "Médico Financiero"</h2>
+        <h2 class="welcome-title" id="welcome-title-text">Entrenamiento del "Médico Financiero"</h2>
         <p class="welcome-desc" id="welcome-desc-text">
           Bienvenido al gimnasio de Mayéutica de Xàtiva. Selecciona uno de los perfiles de la izquierda para iniciar la llamada simulada. Tu objetivo es rebajar sus defensas, diagnosticar su fuga de dinero y cerrar la visita presencial.
         </p>
-        <div style="font-size: 0.95rem; color: var(--nn-orange); margin-top: -1rem; margin-bottom: 2rem; font-weight: 600;">
+        <div style="font-size: 0.95rem; color: var(--nn-orange); margin-top: -1rem; margin-bottom: 2.2rem; font-weight: 600;">
           💡 ¡MODO DE AUDIO COMPLETO! El simulador lee las respuestas y analiza lo que tú dices usando reconocimiento de voz.
+        </div>
+
+        <!-- Tarjeta de Metodología de las 3 Fases -->
+        <div class="methodology-card" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.25rem; margin-top: 1.5rem; text-align: left; max-width: 600px; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.15); animation: fadeIn 0.4s ease-out;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.5rem;">
+            <h4 style="color: var(--nn-orange); margin: 0; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span>📋 METODOLOGÍA DEL MÉDICO FINANCIERO (Las 3 Fases)</span>
+            </h4>
+            <button onclick="speakWelcomeMethodology()" class="speak-bubble-btn" style="padding: 0.25rem 0.55rem; font-size: 0.75rem; border-radius: 6px; background: rgba(243, 146, 0, 0.1); border: 1px solid rgba(243, 146, 0, 0.3); color: var(--nn-orange); cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(243, 146, 0, 0.2)'" onmouseout="this.style.background='rgba(243, 146, 0, 0.1)'">
+              🔊 Escuchar Concepto
+            </button>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 0.75rem;">
+            Para perfeccionar tus cierres y pasar de "vendedor transaccional" a "diagnosticador de confianza", cada respuesta que envíes o hables debe estructurarse obligatoriamente en estas tres fases consecutivas:
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <div style="font-size: 0.8rem; line-height: 1.4;">
+              <strong style="color: #60A5FA;">🤝 1. VALIDAR (Empatía Inicial):</strong>
+              Frases como <i>"Te entiendo perfectamente..."</i>, <i>"Es súper lógico que me digas eso..."</i> o <i>"Demuestra que eres previsor..."</i>. Valida y respeta la postura del cliente para desactivar sus defensas de inmediato. Nunca discutas ni confrontes.
+            </div>
+            <div style="font-size: 0.8rem; line-height: 1.4;">
+              <strong style="color: #FB923C;">🔄 2. REENCUADRAR (Mayéutica / Dolor latente):</strong>
+              Frases de reencuadre y metáforas (como la metáfora del alquiler vs compra del seguro de entierro, o el coche vs el sueldo). Aquí usas preguntas detonantes para que el cliente visualice su propio agujero financiero (su brecha).
+            </div>
+            <div style="font-size: 0.8rem; line-height: 1.4;">
+              <strong style="color: #F87171;">🎯 3. PROYECTAR (Cierre de Cita Binaria):</strong>
+              Frases para vender la cita de diagnóstico presencial de 15 minutos (nunca intentes vender el producto por teléfono) usando doble alternativa: <i>"¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"</i>.
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1377,11 +1491,29 @@
     let clientVoiceEnabled = true;
     let synth = window.speechSynthesis;
     let currentVoice = null;
+    let coachVoice = null;
 
     function loadVoices() {
       if (!synth) return;
       const voices = synth.getVoices();
-      currentVoice = voices.find(v => v.lang === 'es-ES' || v.lang.startsWith('es-')) || voices.find(v => v.lang.startsWith('es'));
+      // Filter all Spanish voices
+      const spanishVoices = voices.filter(v => v.lang === 'es-ES' || v.lang.startsWith('es-') || v.lang.startsWith('es'));
+      
+      if (spanishVoices.length > 0) {
+        // Client gets the first Spanish voice (usually Helena or default)
+        currentVoice = spanishVoices[0];
+        
+        // Coach gets a different Spanish voice if available (e.g. Sabina or Google Spanish male/female)
+        if (spanishVoices.length > 1) {
+          coachVoice = spanishVoices[1];
+        } else {
+          // Fallback if only one Spanish voice exists
+          coachVoice = spanishVoices[0];
+        }
+        
+        console.log("TTS Setup: Client Voice -> " + currentVoice.name);
+        console.log("TTS Setup: Coach Voice -> " + (coachVoice ? coachVoice.name : "None (Fallback to Client)"));
+      }
     }
     
     if (synth) {
@@ -1422,6 +1554,39 @@
       synth.speak(utterance);
     }
 
+    function speakCoachText(text) {
+      if (!synth) return;
+      synth.cancel();
+
+      let cleanText = text.replace(/<[^>]*>/g, '')
+                          .replace(/\.\.\./g, ', ')
+                          .replace(/ · /g, ', ')
+                          .replace(/1\./g, 'Primera fase: ')
+                          .replace(/2\./g, 'Segunda fase: ')
+                          .replace(/3\./g, 'Tercera fase: ');
+
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.lang = 'es-ES';
+      utterance.rate = 0.92;
+      utterance.pitch = 1.15; // Mantener un tono didáctico diferenciado
+      if (coachVoice) utterance.voice = coachVoice;
+      else if (currentVoice) utterance.voice = currentVoice;
+      synth.speak(utterance);
+    }
+
+    function speakCoachStrategy(idx) {
+      const sc = SCENARIOS[idx];
+      if (!sc || !sc.strategy) return;
+      const nameText = sc.name;
+      const speech = `Estrategia de venta para el caso de ${nameText}. Primera fase, Validar: ${sc.strategy.validar} Segunda fase, Reencuadrar: ${sc.strategy.reencuadrar} Tercera fase, Proyectar: ${sc.strategy.proyectar}`;
+      speakCoachText(speech);
+    }
+
+    function speakWelcomeMethodology() {
+      const text = "Metodología del Médico Financiero en tres fases. Primera fase: Validar. Consiste en empatizar y respetar la postura inicial del cliente para desactivar sus defensas de inmediato sin confrontar. Segunda fase: Reencuadrar. Utilizar preguntas detonantes y metáforas para que el cliente visualice su propio agujero financiero y admita su necesidad real. Tercera fase: Proyectar. Cerrar la visita presencial de quince minutos usando doble alternativa para fijar el día y la hora.";
+      speakCoachText(text);
+    }
+
     /* ========================================================
        RECONOCIMIENTO DE VOZ GENERAl (SPEECH-TO-TEXT)
        ======================================================== */
@@ -1444,7 +1609,7 @@
         document.getElementById('btn-mode-free').classList.add('active');
         document.getElementById('panel-multiple-choices').style.display = 'none';
         document.getElementById('panel-free-speech').style.display = 'flex';
-        resetFreeSpeechUI();
+        restartFreeSpeechPanel();
       }
     }
 
@@ -1582,6 +1747,11 @@
     const SCENARIOS = [
       {
         name: "Manuel Sanchis",
+        strategy: {
+          validar: "Validar que es súper comprensible que le dé rabia cambiar de seguro por miedo a perder los 25 años de antigüedad pagados en Santalucía.",
+          reencuadrar: "Reencuadrar usando la metáfora del autobús o el alquiler: pagar decesos tradicional es un alquiler a fondo perdido. Con el Fondo de Previsión Activo (PGI) de NN el dinero se acumula y es de su propiedad.",
+          proyectar: "Proponer cita binaria para el martes/miércoles en la Alameda para mostrarle los números exactos de su ahorro en papel."
+        },
         meta: "52 años, Xàtiva · Autónomo",
         desc: "Lleva 25 años pagando Decesos en Santalucía. Siente que si cambia, 'tira todo lo pagado'.",
         vulnerability: "Decesos a Fondo Perdido: 12.600€",
@@ -1700,6 +1870,11 @@
       },
       {
         name: "Dra. Clara Crespo",
+        strategy: {
+          validar: "Validar que su tiempo es oro, su nivel de ingresos es alto y que odia perder el tiempo con spam comercial.",
+          reencuadrar: "Reencuadrar explicando que no le vendes seguros, sino que haces una auditoría fiscal rápida para frenar su fuga de impuestos en el IRPF (Hacienda se queda con parte de su esfuerzo).",
+          proyectar: "Proyectar cerrando la visita corta de 15 minutos en su consulta o clínica, ofreciendo elegir entre martes o miércoles."
+        },
         meta: "41 años, Pediatra · Hospital Lluís Alcanyís",
         desc: "Ingresos altos, cero planificación. Cree que los seguros son un gasto inútil. Odia que le quiten tiempo.",
         vulnerability: "Fuga IRPF: +3.000€/año",
@@ -1770,6 +1945,11 @@
       },
       {
         name: "María Barberá",
+        strategy: {
+          validar: "Validar que la seguridad de su dinero es lo primero y que con el miedo a la bolsa es súper sensato ser prudente.",
+          reencuadrar: "Reencuadrar explicando que tener 10.000€ parados en Caixabank al 0% es perder dinero en silencio cada día por culpa de la inflación (el dinero se encoge).",
+          proyectar: "Proyectar proponiendo un café rápido de 15 minutos para enseñarle opciones con capital garantizado por contrato (sin riesgo de bolsa)."
+        },
         meta: "36 años, Administrativa · Xàtiva",
         desc: "Tiene 10.000€ parados en Caixabank. Le da pánico la bolsa y las estafas. Quiere rentabilidad pero 'sin perder nada'.",
         vulnerability: "Ahorro Muerto en Cuenta: 0% Rentabilidad",
@@ -1840,6 +2020,11 @@
       },
       {
         name: "Vicente Guerola",
+        strategy: {
+          validar: "Validar que es magnífico que tenga un negocio local de éxito y goce de buena salud.",
+          reencuadrar: "Reencuadrar revelando su brecha de baja: como autónomo cotizando al mínimo, si enferma perderá más de 2.300€ al mes netos mientras los gastos fijos de la pastelería siguen corriendo.",
+          proyectar: "Proyectar cerrando una visita corta en su pastelería (martes o miércoles) para mostrarle su brecha exacta en un gráfico."
+        },
         meta: "45 años, Xàtiva · Pastelero Autónomo",
         desc: "Dueño de pastelería. Cotiza al mínimo en el RETA. Su obrador gasta 3.000€/mes fijos, pero el Estado solo le daría 700€/mes de baja.",
         vulnerability: "Desamparo por Baja: Faltan 2.300€/mes",
@@ -1931,6 +2116,11 @@
       },
       {
         name: "Ana Belén Sanz",
+        strategy: {
+          validar: "Validar que como madre la prioridad absoluta es la salud de sus hijos y que contratar una mutua privada fue una excelente decisión.",
+          reencuadrar: "Reencuadrar alertando de la fuga silenciosa de dinero: con los copagos altos de su mutua antigua, cualquier problema de pediatría le cuesta un ojo de la cara.",
+          proyectar: "Proyectar agendando una revisión rápida de coberturas y copagos para el martes a las 10:00 o el miércoles por la tarde."
+        },
         meta: "38 años, Canals · Madre de Familia",
         desc: "Paga Adeslas familiar (90€/mes). Gasta más de 100€/mes en copagos silenciosos por visitas rutinarias médicas y análisis de sus 2 niños.",
         vulnerability: "Fuga de Copagos: +1.200€/año",
@@ -2008,6 +2198,314 @@
                 defenseEffect: -10,
                 coachFeedback: "<strong>🚀 CITA CERRADA CON SEGURIDAD:</strong> Cierre afectuoso, empático y profesional. ¡Fede suma otra visita de salud familiar de altísimo valor!",
                 nextStep: 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: "Jordi Sanz",
+        strategy: {
+          validar: "Validar que ser fontanero autónomo exige un esfuerzo físico enorme y que es muy inteligente centrarse en facturar al máximo.",
+          reencuadrar: "Reencuadrar advirtiendo que su cuerpo es el motor de su negocio; si enferma y cotiza al mínimo, la Seguridad Social le pagará una miseria y perderá más de 2.100€ netos al mes.",
+          proyectar: "Proyectar cerrando una cita de 15 minutos en un hueco de su jornada para calcular su brecha de incapacidad exacta."
+        },
+        meta: "42 años, Xàtiva · Fontanero Autónomo",
+        desc: "Cotiza al mínimo en el RETA. Su negocio gasta 2.800€/mes fijos, pero la Seguridad Social solo le daría 700€/mes de baja.",
+        vulnerability: "Desamparo por Baja: Faltan 2.100€/mes",
+        initialTrust: 35,
+        initialDefense: 75,
+        semDict: {
+          validar: ['entiendo', 'autónomo', 'autonomo', 'esfuerzo', 'lógico', 'logico', 'lucha', 'trabajar', 'currar'],
+          reencuadrar: ['baja', 'reta', 'mínimo', 'minimo', 'gastos', 'fijos', 'persiana', 'ingresos', 'seguridad social', 'médico', 'medico', 'accidentar', 'lesión', 'lesion', 'rompes', 'pararse'],
+          proyectar: ['martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'mañana', 'tarde', 'visita', '15 minutos', 'diez', 'café', 'vernos', 'obrador', 'reunión', 'reunion', 'local']
+        },
+        steps: [
+          {
+            clientText: "Hola, soy Jordi... Sí, soy fontanero... Estoy ahora mismo en medio de una reparación en Xàtiva... ¿Qué quería? Rapidez por favor.",
+            options: [
+              {
+                text: "Hola Jordi... soy Fede Fontanals... te llamo de Nationale-Nederlanden... Tenemos un seguro de baja laboral muy barato para fontaneros... que te paga 30 euros al día... y te cubre si te rompes un brazo... ¿Cuándo nos vemos?",
+                trustEffect: -10,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ ERROR TRANSACCIONAL (Pág. 37 del Manual):</strong> Le estás vendiendo una póliza de baja y dando precios en frío a un autónomo ocupado. Jordi huele la venta a un kilómetro de distancia. Sus defensas se disparan.",
+                nextStep: 1
+              },
+              {
+                text: "Hola Jordi... soy Fede Fontanals... de Nationale-Nederlanden... aquí en Xàtiva... Te llamo rápido... porque sé que estás currando... y tu tiempo vale oro... Estoy ayudando a varios fontaneros y autónomos de la comarca... a blindar sus negocios... ante cualquier baja médica... para que no tengan que cerrar... Seré súper directo... ¿tienes un minuto... o te pillo mal?",
+                trustEffect: +30,
+                defenseEffect: -15,
+                coachFeedback: "<strong>✅ APERTURA DEL MÉDICO FINANCIERO (Pág. 10 del Manual):</strong> Empatizas de inmediato con su trabajo en Xàtiva, enmarcas en 'blindar el negocio' y hablas con pausas naturales. Jordi decide escucharte.",
+                nextStep: 2
+              }
+            ]
+          },
+          {
+            clientText: "Mire, yo es que nunca me pongo enfermo... y no tengo tiempo para estas cosas... Además... ya pago mi cuota de autónomo todos los meses... y si pasa algo... ya me cubre la Seguridad Social.",
+            options: [
+              {
+                text: "Te entiendo perfectamente, Jordi... bastante nos cuesta ya... levantar la persiana... todos los días... Pero... déjame hacerte una pregunta muy directa... Tú cotizas al mínimo en el RETA... ¿sabes exactamente cuánto te pagaría el Estado al día... si mañana tienes una lesión... y no puedes trabajar durante dos meses? [Silencio de respiro]",
+                trustEffect: +35,
+                defenseEffect: -20,
+                coachFeedback: "<strong>✅ PREGUNTA DETONANTE DE ADN (Pág. 15 del Manual):</strong> Validas su esfuerzo y de inmediato pones el foco en la brecha del RETA mínimo. Silencio táctico para que él sienta el abismo financiero y responda.",
+                nextStep: 3
+              },
+              {
+                text: "Jordi, la Seguridad Social paga una miseria... y si te fías de ellos vas a quebrar tu negocio... Nuestro seguro Contigo Autónomo es de Goldman Sachs... y te cubre todo sin carencias... No te lo pienses y quedemos mañana.",
+                trustEffect: -10,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ENFRENTAMIENTO DIRECTO (Pág. 37 del Manual):</strong> Atacar al sistema público de forma agresiva genera reactividad psicológica inmediata. Te percibe como un comercial que solo busca confrontación.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "Pues no lo sé exacto... pero supongo que me darían para ir tirando... ¿no? Tampoco será tan poco dinero...",
+            options: [
+              {
+                text: "Eso es lo que todos pensamos, Jordi... hasta que vemos los números reales... Con la base mínima... el Estado te pagará unos 700 euros al mes... Pero... los gastos fijos de tu negocio y de tu casa... son de unos 2.800 euros... ¿De dónde van a salir... los 2.100 euros de diferencia cada mes... para que tu familia siga adelante? En solo 15 minutos... te enseño la radiografía de tu caso en un papel... y tú mismo decides... ¿Te viene bien el martes a las 14:00... o el miércoles?",
+                trustEffect: +40,
+                defenseEffect: -30,
+                coachFeedback: "<strong>🚀 CIERRE MAGISTRAL DE BRECHA:</strong> Cuantificas con números duros el dolor real (gastos vs. ayuda estatal), presentas la auditoría como ayuda gratuita y cierras con doble alternativa. Cita cerrada.",
+                nextStep: 100
+              },
+              {
+                text: "Es poquísimo dinero Jordi... te lo aseguro... Si quieres... te mando un folleto por WhatsApp con las tablas del seguro de baja de NN... y te lo miras el fin de semana... ¿Me das tu email?",
+                trustEffect: -15,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ MUERTE POR ENVIAR DOCUMENTACIÓN (Pág. 35 del Manual):</strong> Has matado el lead al enviar información fría para que él la interprete solo. Nunca agendará y perderás el contacto.",
+                nextStep: 99
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: "María José",
+        strategy: {
+          validar: "Validar que su clínica dental le va de maravilla y que tiene unos ingresos muy desahogados gracias a su esfuerzo profesional.",
+          reencuadrar: "Reencuadrar destapando su fuga fiscal: al pagar un 35% de IRPF, regala miles de euros a Hacienda cada año que podría retener legalmente en un plan SIALP o plan creciente.",
+          proyectar: "Proyectar proponiendo una reunión breve de 15 minutos en su clínica ofreciendo cita el martes por la mañana o el miércoles."
+        },
+        meta: "54 años, Xàtiva · Dentista",
+        desc: "Ingresos altos en su clínica propia, pero paga más del 35% de IRPF. Cree que no necesita previsión y que su banco lo lleva todo.",
+        vulnerability: "Fuga Fiscal IRPF: -2.800€/año",
+        initialTrust: 30,
+        initialDefense: 80,
+        semDict: {
+          validar: ['entiendo', 'clínica', 'clinica', 'profesional', 'irpf', 'impuestos', 'pacientes', 'lógico', 'logico'],
+          reencuadrar: ['hacienda', 'desgravar', 'ahorro', 'estado', 'jubilación', 'jubilacion', 'duplo', 'goldman', 'diferencia', 'fiscal', 'declaración', 'declaracion', 'renta'],
+          proyectar: ['martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'mañana', 'tarde', 'visita', '15 minutos', 'café', 'vernos', 'reunión', 'reunion', 'clínica', 'clinica', 'consulta']
+        },
+        steps: [
+          {
+            clientText: "Dígame, soy la Dra. María José... Estoy entre paciente y paciente en mi clínica... ¿De qué se trata? No tengo tiempo para ofertas de bancos.",
+            options: [
+              {
+                text: "Hola María José... le llamo de Nationale-Nederlanden... Tenemos un plan de pensiones Duplo excelente... que le desgrava el IRPF... y está gestionado por Goldman Sachs... Este mes tenemos promoción... ¿Hablamos?",
+                trustEffect: -10,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ ERROR TRANSACCIONAL (Pág. 37 del Manual):</strong> Intentar colocar un plan de pensiones por teléfono a un médico estresado es venta fría de catálogo. Defensas al máximo.",
+                nextStep: 1
+              },
+              {
+                text: "Dra. María José... buenas... Soy Fede Fontanals... delegado de Nationale-Nederlanden... aquí en Xàtiva... Te llamo muy rápido... porque sé que estás entre consultas... y tu tiempo es sagrado... Le contacto por una cuestión de auditoría fiscal... específica para profesionales de la salud... en La Costera... para optimizar su IRPF... Seré súper breve...",
+                trustEffect: +30,
+                defenseEffect: -20,
+                coachFeedback: "<strong>✅ APERTURA DE ALTO ESTATUS:</strong> Hablas con autoridad, respetas su tiempo de médico y enmarcas la llamada en optimización fiscal (IRPF), no en seguros. Capta su interés.",
+                nextStep: 2
+              }
+            ]
+          },
+          {
+            clientText: "Mire... yo ya tengo mis ahorros en mi banco de siempre... y allí me lo gestionan todo... Además... de jubilación no quiero pensar... aún me quedan muchos años de clínica.",
+            options: [
+              {
+                text: "Te entiendo perfectamente... es comodísimo confiar en el banco de siempre... Pero... déjame hacerte una pregunta muy directa... ¿Sabes exactamente cuánto dinero de tu clínica... estás regalando cada año a Hacienda en tu declaración... que por ley podrías estar reteniendo... e invirtiendo en un fondo garantizado para ti? [Pausa de respiro]",
+                trustEffect: +35,
+                defenseEffect: -20,
+                coachFeedback: "<strong>✅ MAYÉUTICA DE DOLOR FISCAL (Pág. 15 del Manual):</strong> Enfocas el dolor en los impuestos que regala al Estado y que podría retener legalmente. Su perfil analítico de médico quiere el dato.",
+                nextStep: 3
+              },
+              {
+                text: "El banco no le va a desgravar nada... porque ellos solo miran sus comisiones... Nationale-Nederlanden es mucho mejor... y además trabajamos con Goldman Sachs... Debería darme una oportunidad.",
+                trustEffect: -15,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ERROR DE ATAQUE AL BANCO (Pág. 37 del Manual):</strong> Atacar su banco de confianza genera reactividad inmediata. Ella prefiere defender su decisión anterior.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "Pues no lo sé exacto... sé que pago mucho... pero no sé la cifra... ¿Cómo funciona eso?",
+            options: [
+              {
+                text: "Es lo habitual... no tener el número en la cabeza... En Nationale-Nederlanden... contamos con un Plan de Pensiones especial RETA... que te permite desgravar hasta 5.750 euros anuales... directos en tu declaración... En solo 15 minutos... en un descanso en tu clínica... pasamos tus datos por el simulador fiscal... y verás el ahorro neto en tu bolsillo... Si no hay brecha... nos tomamos un café y tan amigos... ¿Qué te viene mejor: el martes a las 14:30 al cerrar... o el miércoles?",
+                trustEffect: +40,
+                defenseEffect: -30,
+                coachFeedback: "<strong>🚀 CIERRE DE CIRUJANO:</strong> Das el dato técnico de la desgravación de autónomos (5.750€), ofreces la simulación fiscal en su propia clínica y cierras con doble alternativa. Cita consolidada.",
+                nextStep: 100
+              },
+              {
+                text: "Pues le puedo enviar un email con la ficha técnica del Plan Duplo... y el folleto explicativo en PDF... Se lo lee con calma... y me dice si le interesa abrirlo... ¿Qué le parece?",
+                trustEffect: -15,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ AUTO-SABOTAJE POR EMAIL (Pág. 35 del Manual):</strong> Has perdido la oportunidad de cierre presencial. El email morirá en su bandeja de entrada sin ser leído.",
+                nextStep: 99
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: "Paco y Carmen",
+        strategy: {
+          validar: "Validar que pagar fielmente su póliza de entierro en Santalucía durante 20 años demuestra un sentido de la responsabilidad familiar de Paco y Carmen ejemplar.",
+          reencuadrar: "Reencuadrar rompiendo el mito de la antigüedad: pagar un seguro de entierro tradicional es un alquiler a fondo perdido. Con NN el dinero es suyo, renta seguro y sus herederos se quedan con el sobrante.",
+          proyectar: "Proyectar proponiendo una visita en su domicilio de 20 minutos con doble alternativa (martes/miércoles) para mostrar el estudio comparativo."
+        },
+        meta: "58 y 56 años, Canals · Asegurados Santalucía",
+        desc: "Pagan decesos en Santalucía a fondo perdido desde hace 20 años. Temen que al cambiarse pierdan la antigüedad.",
+        vulnerability: "Decesos a Fondo Perdido: 26.000€",
+        initialTrust: 35,
+        initialDefense: 75,
+        semDict: {
+          validar: ['entiendo', 'lógico', 'logico', 'antigüedad', 'antiguedad', 'responsables', 'familia', 'entierro', 'decesos'],
+          reencuadrar: ['perder', 'regalar', 'santalucía', 'santalucia', 'autobús', 'autobus', 'alquiler', 'hucha', 'previsión', 'prevision', 'entierro', 'decesos', 'coche', 'patrimonio', 'futuro'],
+          proyectar: ['martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'mañana', 'tarde', 'visita', '15 minutos', 'café', 'vernos', 'reunión', 'reunion', 'canals', 'casa']
+        },
+        steps: [
+          {
+            clientText: "Hola, sí, dígame... Estábamos viendo la televisión... Yo es que no quiero cambiar de seguro de entierro... Llevamos 20 años en Santalucía y si me cambio... pierdo la antigüedad y el dinero pagado.",
+            options: [
+              {
+                text: "Paco... Santalucía le está robando... en 20 años ha tirado su dinero... Nuestro seguro es mucho más barato... y le cubre más... Déjeme ir mañana a su casa en Canals... y le hago el cambio en cinco minutos.",
+                trustEffect: -15,
+                defenseEffect: +20,
+                coachFeedback: "<strong>❌ ATAQUE DIRECTO Y AGRESIVO (Pág. 37 del Manual):</strong> Decirle que le roban y que ha tirado su dinero ataca su orgullo y su coherencia pasada. Se cierra en banda.",
+                nextStep: 1
+              },
+              {
+                text: "Hola Paco... buenas tardes... Soy Fede Fontanals... de Nationale-Nederlanden... Te llamo rápido... y disculpa que os interrumpa la tele... Te contacto... porque estamos ayudando a varios vecinos de Canals... a revisar sus seguros familiares... Sé que la antigüedad en Santalucía os preocupa... y es muy lógico pensar así... Seré súper breve...",
+                trustEffect: +30,
+                defenseEffect: -15,
+                coachFeedback: "<strong>✅ APERTURA EMPÁTICA (Pág. 10 del Manual):</strong> Validas de inmediato su preocupación por la antigüedad, te disculpas educadamente y te presentas con cercanía. Bajan sus defensas.",
+                nextStep: 2
+              }
+            ]
+          },
+          {
+            clientText: "Es que es normal... son muchos años pagando... si lo dejo ahora... es como tirar todo ese dinero... ¿no?",
+            options: [
+              {
+                text: "Ese es el miedo más normal del mundo, Paco... Pero... déjame explicarte una cosa con total transparencia... El seguro de decesos tradicional... es como un alquiler de un piso... Pagas este mes... para estar cubierto este mes... Si no faltas... el dinero se lo queda la compañía... No hay una hucha acumulada allí... En 20 años... habéis pagado casi 12.000 euros a fondo perdido... y si vivís otros 20... pagaréis otros 14.000... Al final... vuestros hijos recibirán un sepelio de 4.000 euros... y el resto... 22.000 euros... se los regalaréis a la aseguradora... [Pausa de silencio]",
+                trustEffect: +35,
+                defenseEffect: -25,
+                coachFeedback: "<strong>✅ REENCUADRE CON METÁFORA DE ALQUILER:</strong> Explicas que el seguro tradicional es un alquiler sin hucha acumulada. Los números del dinero regalado a la compañía hacen visible el abismo.",
+                nextStep: 3
+              },
+              {
+                text: "Paco, no se preocupe por eso... Nosotros le respetamos la antigüedad y le hacemos un descuento directo del 25%... Su entierro estará cubierto desde el primer día... Quedemos mañana y le hago la póliza.",
+                trustEffect: -5,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ ERROR DE GUERRA DE PRECIO:</strong> Intentar rebatir ofreciendo un descuento sin explicar la brecha del dinero perdido hace que el cliente sientan que le vendes lo mismo por menos.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "Ostras... pues no lo había pensado de esa manera... ¿Pero cuál es la alternativa entonces? Yo no quiero dejar a mis hijos con el follón y el gasto de mi entierro.",
+            options: [
+              {
+                text: "Por supuesto, Paco... faltaría más... Nosotros ayudamos a los vecinos a sustituir ese gasto a fondo perdido... por un Fondo de Previsión Familiar Activo... Aportando unos 83 euros al mes... ese dinero no se pierde... es vuestro y crece en una hucha garantizada... Si faltáis... la compañía le da a vuestros hijos el capital ahorrado... más un cheque directo de 3.000 euros... para el entierro de libre elección... Y si vivís muchos años... todo ese dinero acumulado es vuestro... para disfrutarlo en vuestra jubilación... En solo 15 minutos... en vuestra casa... os enseño la simulación gráfica... y decidís con los números en la mano... ¿Os viene bien el martes a las 17:00... o el miércoles por la tarde?",
+                trustEffect: +40,
+                defenseEffect: -30,
+                coachFeedback: "<strong>🚀 CIERRE PERFECTO CON EL PLAN DE 83€:</strong> Presentas la alternativa de Contigo Futuro (Fondo Activo), detallas los 3.000€ directos para entierro libre, devuelves la propiedad del dinero al cliente y cierras con doble alternativa. Cita asegurada.",
+                nextStep: 100
+              },
+              {
+                text: "Pues la alternativa es contratar un plan Contigo Futuro... Si quiere le mando un PDF explicativo de 25 páginas por WhatsApp... se lo lee y si le parece bien... me avisa para ir a su casa... ¿Le parece?",
+                trustEffect: -20,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ AUTO-SABOTAJE POR WHATSAPP (Pág. 35 del Manual):</strong> Le has pasado la responsabilidad al cliente. Paco nunca abrirá un PDF de 25 páginas sobre decesos. Cita perdida.",
+                nextStep: 99
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: "Carlos",
+        strategy: {
+          validar: "Validar que la cautela y el miedo a perder en renta variable es totalmente natural en los tiempos que corren.",
+          reencuadrar: "Reencuadrar alertando de que dejar 20.000€ al 0% en Caixabank no es seguro, porque la inflación se come 600€ de su poder de compra cada año sin hacer ruido.",
+          proyectar: "Proyectar proponiendo un café en Xàtiva para enseñarle opciones de ahorro garantizado libre de impuestos (PGI/SIALP) con capital protegido."
+        },
+        meta: "38 años, Xàtiva · Ahorrador Caixabank",
+        desc: "Tiene 20.000€ parados en cuenta de Caixabank al 0%. Le da pánico la bolsa y las estafas. Teme a la inflación.",
+        vulnerability: "Ahorro Muerto: 0% Rentabilidad",
+        initialTrust: 40,
+        initialDefense: 60,
+        semDict: {
+          validar: ['entiendo', 'normal', 'prudente', 'ahorrar', 'esfuerzo', 'lógico', 'logico', 'seguridad', 'miedo'],
+          reencuadrar: ['inflación', 'inflacion', 'banco', 'caixabank', 'caixa', 'caja', 'libreta', 'cuenta', 'parado', 'perder', 'compra', 'family cash', 'supermercado', 'sialp', 'garantizado', 'garantía', 'seguro'],
+          proyectar: ['martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'mañana', 'tarde', 'casa', 'café', 'vernos', '15 minutos', 'diez', 'cinco', 'hora', 'acercar']
+        },
+        steps: [
+          {
+            clientText: "Hola, dígame... Me pilla saliendo del trabajo... Yo es que no quiero saber nada de inversiones ni de bolsa... que hoy en día todo son estafas y se pierde el dinero...",
+            options: [
+              {
+                text: "Hola Carlos... soy Fede Fontanals... de Nationale-Nederlanden... Le llamo para ofrecerle un Unit Linked con perfil dinámico en bolsa internacional... que le da un 8% anual gestionado por Goldman Sachs... No corre ningún riesgo... es totalmente seguro... ¿Quedamos?",
+                trustEffect: -20,
+                defenseEffect: +25,
+                coachFeedback: "<strong>❌ ERROR DE PERFIL DE RIESGO (Pág. 37 del Manual):</strong> Ofrecer inversión dinámica en bolsa a un perfil que tiene pánico a perder dinero enciende todas sus alarmas. Desconexión instantánea.",
+                nextStep: 1
+              },
+              {
+                text: "Hola Carlos... soy Fede Fontanals... de Nationale-Nederlanden... en Xàtiva... Te llamo muy rápido... precisamente por eso... Sé perfectamente lo que cuesta ahorrar hoy en día... y que el miedo a perder es lo más lógico del mundo... Estoy ayudando a varios vecinos de la zona... a blindar sus ahorros frente a la inflación... sin correr ningún riesgo... de perder su capital... Seré súper directo...",
+                trustEffect: +30,
+                defenseEffect: -15,
+                coachFeedback: "<strong>✅ APERTURA DE MÁXIMA EMPATÍA (Pág. 14 del Manual):</strong> Validas de inmediato su miedo a perder y su prudencia, y te posicionas como el escudo que blinda su dinero. Generas tranquilidad.",
+                nextStep: 2
+              }
+            ]
+          },
+          {
+            clientText: "Ya... pero es que yo tengo mis 20.000 euros en mi libreta de Caixabank de toda la vida... y aunque no me den nada... sé que están seguros y no se van a perder...",
+            options: [
+              {
+                text: "Es una postura súper prudente, Carlos... y de verdad que la respeto... Pero... déjame hacerte una pregunta muy directa... ¿Sabías que tener el dinero parado al 0%... es la única forma matemática garantizada de perder dinero todos los días... por culpa de la inflación? Si dejas esos 20.000 euros guardados... en 5 años tus 20.000 euros... valdrán en realidad unos 16.000 euros de compra... en el Family Cash de Xàtiva... Estás perdiendo 4.000 euros en silencio... sin que tu banco te diga nada... [Silencio táctico]",
+                trustEffect: +35,
+                defenseEffect: -20,
+                coachFeedback: "<strong>✅ REENCUADRE DE DOLOR SILENCIOSO:</strong> Reencuadras la falsa seguridad del banco como una pérdida garantizada del poder de compra en el Family Cash local por la inflación. El miedo al dolor invisible se activa.",
+                nextStep: 3
+              },
+              {
+                text: "Caixabank le está engañando... ellos se quedan con su dinero y no le pagan nada... Nationale-Nederlanden es una multinacional mucho más solvente... Debería cambiar sus ahorros hoy mismo.",
+                trustEffect: -15,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ERROR DE COMPETENCIA DIRECTA:</strong> Atacar a su banco genera fricción defensiva. El cliente se cierra ante el ataque.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "Madre mía... no lo había visto así... pero ¿existe alguna alternativa segura de verdad... donde no arriesgue mi capital?",
+            options: [
+              {
+                text: "Por supuesto, Carlos... Precisamente por eso te llamo... Contamos con el Plan Creciente SIALP... que tiene un blindaje contractual... que te garantiza por escrito que pase lo que pase... tú recuperas el 100% de tu capital... más las ganancias consolidadas... Y a partir del quinto año... todos tus rendimientos están exentos de impuestos... En solo 15 minutos... te enseño la simulación gráfica en un papel... y tú decides... ¿Te viene bien el martes a las 18:00... o el miércoles a última hora?",
+                trustEffect: +40,
+                defenseEffect: -30,
+                coachFeedback: "<strong>🚀 CIERRE PERFECTO CON SIALP:</strong> Explicas el blindaje contractual de capital, el beneficio de impuestos a partir del 5º año y pides la cita rápida con doble alternativa. ¡Cita consolidada!",
+                nextStep: 100
+              },
+              {
+                text: "Sí, el SIALP es muy bueno... Si quiere le mando el PDF del contrato por correo... se lo lee... y si le convence... me llama y le abro la cuenta... ¿Qué le parece?",
+                trustEffect: -20,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ ERROR DE ABANDONO DE CIERRE:</strong> Delegar la venta en un PDF de condicionado hace que el cliente se enfríe y nunca te llame. Oportunidad perdida.",
+                nextStep: 99
               }
             ]
           }
@@ -2050,179 +2548,46 @@
         proyectar: "Si no tienes esa foto clara, estás asumiendo una apuesta diaria muy cara. Son solo 15 minutos para despejar la incógnita y decidir tú. ¿Martes o miércoles?"
       },
       {
-        name: "Vicente Guerola",
-        meta: "45 años, Xàtiva · Pastelero Autónomo",
-        desc: "Dueño de pastelería. Cotiza al mínimo en el RETA. Su obrador gasta 3.000€/mes fijos, pero el Estado solo le daría 700€/mes de baja.",
-        vulnerability: "Desamparo por Baja: Faltan 2.300€/mes",
-        initialTrust: 35,
-        initialDefense: 75,
-        semDict: {
-          validar: ['entiendo', 'lógico', 'logico', 'esfuerzo', 'panadería', 'pastelería', 'pasteleria', 'autónomo', 'autonomo', 'negocio', 'currar', 'trabajar', 'santo', 'valiente', 'respetable'],
-          reencuadrar: ['baja', 'enfermo', 'ingresos', 'gastos', 'fijos', 'seguridad social', 'reta', 'mínimo', 'minimo', 'mesa', 'patas', 'embargo', 'cerrar', 'persiana', 'cajón', 'cajon', 'coste', 'dinero'],
-          proyectar: ['martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'mañana', 'tarde', 'visita', '15 minutos', 'diez', 'café', 'acercar', 'panadería', 'pastelería', 'vernos', 'obrador']
-        },
-        steps: [
-          {
-            clientText: "Hola, dígame rápido que estoy en el obrador de la pastelería preparando los pedidos y no puedo entretenerme.",
-            options: [
-              {
-                text: "Hola Vicente, le llamo de Nationale-Nederlanden. Tenemos un Plan de Jubilación Garantizado ideal para autónomos que le renta el 5% y además le regala un seguro de baja de 30€ al día gratis el primer año. ¿Nos vemos mañana?",
-                trustEffect: -10,
-                defenseEffect: +10,
-                coachFeedback: "<strong>❌ ERROR TRANSACCIONAL DE PRODUCTO:</strong> Vicente está sudando en el obrador y le hablas de jubilarse y de pólizas de baja. Feroz reacción defensiva.",
-                nextStep: 1
-              },
-              {
-                text: "Vicente, disculpe. Le llamo para hacer una entrega urgente de un catálogo de materias primas para panaderías de Xàtiva. ¿A qué hora le viene mejor que me acerque?",
-                trustEffect: -20,
-                defenseEffect: +15,
-                coachFeedback: "<strong>❌ ERROR DE ENGAÑO:</strong> Inventarse un pretexto falso de materias primas destruye tu credibilidad como asesor financiero de inmediato.",
-                nextStep: 1
-              },
-              {
-                text: "Vicente, buenas... Soy Fede Fontanals, tu asesor en Xàtiva. Te llamo rápido, porque sé que estás con las manos en la masa en la pastelería... y tu tiempo vale oro. Estoy ayudando a varios autónomos de la zona... a blindar sus costes fijos ante cualquier baja médica de imprevisto... Seré súper directo.",
-                trustEffect: +30,
-                defenseEffect: -15,
-                coachFeedback: "<strong>✅ APERTURA DE MÉDICO FINANCIERO:</strong> Empatizas con su trabajo del obrador, enmarcas en blindar costes fijos de autónomo (dolor real) y prometes brevedad. Respeto absoluto.",
-                nextStep: 2
-              }
-            ]
-          },
-          {
-            clientText: "Mire, yo es que no tengo tiempo para estas cosas. Además, yo nunca me pongo enfermo, llevo 15 años sin coger una baja. Mi negocio es fuerte y si pasa algo mis empleados se encargan.",
-            options: [
-              {
-                text: "Vicente, todo el mundo se pone enfermo alguna vez, es de locos no tener un seguro de baja. Si tiene un accidente se arrepentirá toda su vida. Déjeme pasar 15 minutos y le cotizo un seguro de baja barato.",
-                trustEffect: -10,
-                defenseEffect: +20,
-                coachFeedback: "<strong>❌ ERROR DE ENFRENTAMIENTO Y MIEDO:</strong> Decirle 'es de locos' y amenazarle con desgracias genera reactividad psicológica inmediata. Te colgará el teléfono.",
-                nextStep: 99
-              },
-              {
-                text: "Te entiendo perfectamente, Vicente... Que lleves 15 años al pie del cañón, demuestra el esfuerzo inmenso que has metido en la pastelería. Pero... justamente por eso te llamo: como cotizas al mínimo en el RETA... si mañana sufres una baja médica, el Estado te pagará 700€ al mes. Sin embargo... los gastos fijos del obrador siguen siendo de 3.000€. ¿De dónde saldrán los 2.300€ de diferencia cada mes... para que tu familia no se ahogue? En solo 15 minutos en tu local... te enseño la simulación exacta y tú decides... ¿Te viene bien el martes al cerrar a las 14:00... o el miércoles?",
-                trustEffect: +40,
-                defenseEffect: -25,
-                coachFeedback: "<strong>✅ MAYÉUTICA QUIRÚRGICA:</strong> Validas su esfuerzo brutal de 15 años (bajas defensas), pones números específicos y dolorosos al descubierto (gastos 3.000€ vs 700€ de ayuda) y proyectas con doble alternativa de cierre cómodo. ¡Magistral!",
-                nextStep: 3
-              }
-            ]
-          },
-          {
-            clientText: "Bueno, pero es que yo ya pago mi cuota de autónomo todos los meses a la Seguridad Social, ¿para qué quiero pagar otra póliza?",
-            options: [
-              {
-                text: "Es lo más lógico pensar así, Vicente... bastante nos cuesta ya levantar la persiana todos los días. Pero, déjame hacerte una pregunta de Médico: si tu pastelería dependiera de una mesa de 3 patas... y una de ellas, tu presencia física, se rompiera por una lesión... ¿el obrador seguiría sosteniéndose, o se caería todo el cajón al suelo? La Seguridad Social solo te cubre una de esas patas de forma mínima. En 15 minutos te enseño cómo blindar la mesa en un papel. ¿Te viene bien el martes a las 14:00... o el miércoles por la mañana?",
-                trustEffect: +35,
-                defenseEffect: -20,
-                coachFeedback: "<strong>✅ REENCUADRE DE LA MESA DE 3 PATAS:</strong> Validaste su queja de cuotas farragosas e introdujiste la metáfora perfecta de la mesa inestable para un autónomo unipersonal. Él ve visualmente el peligro de desplome.",
-                nextStep: 3
-              },
-              {
-                text: "Porque la Seguridad Social no sirve para nada y los autónomos están totalmente desprotegidos hoy en día. Si confía en el gobierno se va a ir a la ruina. Contrate nuestro plan RETA Plus hoy mismo y se deja de problemas.",
-                trustEffect: -15,
-                defenseEffect: +15,
-                coachFeedback: "<strong>❌ ERROR POLÍTICO Y AMENAZAS:</strong> Entrar a debatir sobre el gobierno o la Seguridad Social desvía el foco de su dolor personal a un debate genérico. Pierdes el control de la llamada.",
-                nextStep: 99
-              }
-            ]
-          },
-          {
-            clientText: "Ostras... pues no lo había pensado así, la verdad es que si yo no estoy, el negocio sufre mucho. Venga, me parece correcto, pásate el martes a las 14:00 que ya he cerrado el obrador y lo vemos rápido.",
-            options: [
-              {
-                text: "Excelente Vicente. Pues anotado queda: el martes a las 14:00 me paso por el obrador de la pastelería en Xàtiva. Llévate las últimas facturas fijos del negocio y te hago la simulación en un papel en 15 minutos. Un abrazo y feliz jornada pastelería.",
-                trustEffect: +20,
-                defenseEffect: -10,
-                coachFeedback: "<strong>🚀 CITA CONSOLIDADA:</strong> Cierre limpio, reforzando la comodidad de la cita en su propio negocio en su hora de cierre.",
-                nextStep: 100
-              }
-            ]
-          }
-        ]
+        title: "Santalucía vs NN (Cambio de Delegado)",
+        validar: "Te entiendo... perfectamente, [Nombre]... y de hecho me alegra mucho... que saques ese tema... porque es una duda... muy inteligente...",
+        reencuadrar: "...A nivel legal... un seguro es un contrato blindado. Tus pólizas habrían estado 100% seguras... y vigentes... independientemente de mí. Pero te soy franco... di el paso a Nationale-Nederlanden... por clientes exigentes como tú. Para proteger... y hacer crecer los ahorros de la inflación hoy en día... necesitaba la potencia... y el blindaje patrimonial de NN... (con socios como Goldman Sachs... y planes SIALP... libres de impuestos)... algo que en mi anterior catálogo tradicional... no existía.",
+        proyectar: "Lo que de verdad importa... no es dónde estaba yo ayer... sino dónde tienes tú tu dinero hoy... y cómo lo estás protegiendo. ¿Te cuadra que hagamos una Radiografía Financiera... rápida de 20 minutos... mañana a las 10:30... o prefieres a las 16:30?"
       },
       {
-        name: "Ana Belén Sanz",
-        meta: "38 años, Canals · Madre de Familia",
-        desc: "Paga Adeslas familiar (90€/mes). Gasta más de 100€/mes en copagos silenciosos por visitas rutinarias médicas y análisis de sus 2 niños.",
-        vulnerability: "Fuga de Copagos: +1.200€/año",
-        initialTrust: 40,
-        initialDefense: 60,
-        semDict: {
-          validar: ['entiendo', 'hijos', 'niños', 'canals', 'normal', 'madre', 'tranquilidad', 'familia', 'salud', 'preocupación', 'lógico', 'logico'],
-          reencuadrar: ['copago', 'copagos', 'espera', 'lista', 'especialista', 'urgencias', 'seguro', 'adeslas', 'mapfre', 'sanitas', 'grifo', 'dinero', 'fuga', 'cobertura', 'carencia', 'silencio', 'goteo', 'cuenta', 'banco'],
-          proyectar: ['martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'mañana', 'tarde', 'casa', '15 minutos', 'vernos', 'café', 'alameda', 'acercar', 'hijos', 'niños', 'canals', 'colegio']
-        },
-        steps: [
-          {
-            clientText: "Hola, buenas. Estoy saliendo de trabajar y tengo que recoger a los niños del colegio en Canals, dígame rápido por favor.",
-            options: [
-              {
-                text: "Hola Ana Belén, le llamo para venderle nuestro seguro Contigo Familia con coberturas de salud ilimitadas y sin copagos por solo 45€ al mes. Es una campaña excelente en Canals. ¿Le viene bien que quedemos?",
-                trustEffect: -10,
-                defenseEffect: +10,
-                coachFeedback: "<strong>❌ ERROR DE COLOCACIÓN DE PRECIO COMERCIAL:</strong> Le tiras un folleto de 45€ al mes a una madre estresada que sale de currar a por sus hijos. Cero empatía.",
-                nextStep: 1
-              },
-              {
-                text: "Ana Belén, hola... Soy Fede Fontanals, tu gestor en La Costera. Te llamo rápido, porque sé que vas corriendo al colegio a por tus niños en Canals. Te contacto porque estamos ayudando a varias familias de la zona... a taponar una fuga silenciosa de más de 1.000€ al año... en copagos de seguros médicos desfasados. Seré súper breve.",
-                trustEffect: +30,
-                defenseEffect: -15,
-                coachFeedback: "<strong>✅ IMPACTO DE EMPATÍA FAMILIAR:</strong> Te enmarcas en Canals, reconoces su estrés de madre, y le pones el foco en 'taponar una fuga silenciosa' en salud familiar. Capta su atención inmediata.",
-                nextStep: 2
-              }
-            ]
-          },
-          {
-            clientText: "Mire, yo ya tengo un seguro de salud con Adeslas desde hace 5 años y pago 90€ al mes. Estamos contentos y no quiero follones de cambiarme ahora.",
-            options: [
-              {
-                text: "Adeslas es muy mala compañía y le subirá el recibo en cuanto sus hijos cumplan años. Además, los copagos de Adeslas son abusivos. Venga conmigo y le hago un descuento del 15% inmediato en Sanitas.",
-                trustEffect: -15,
-                defenseEffect: +20,
-                coachFeedback: "<strong>❌ ERROR FATAL DE ATACAR A LA COMPETENCIA:</strong> Atacar su seguro actual es atacar su decisión de compra. Ella defenderá Adeslas por inercia psicológica.",
-                nextStep: 99
-              },
-              {
-                text: "Es totalmente comprensible, Ana Belén... Adeslas es una mutua grande y tradicional, y tener esa previsión para tus niños... demuestra que eres una madre súper responsable. Pero, déjame hacerte una pregunta de Médico: ¿has revisado tu extracto del banco... para ver cuánto pagas de más al mes en copagos tontos por análisis, pediatra o recetas? Es como tener un grifo abierto en el baño... que gotea dinero en silencio. En solo 15 minutos... te enseño a cerrarlo por completo sin perder calidad médica. ¿Te viene bien el martes a las 17:30 en tu casa... o el miércoles?",
-                trustEffect: +35,
-                defenseEffect: -20,
-                coachFeedback: "<strong>✅ MAYÉUTICA DEL GRIFO ABIERTO:</strong> Validas su postura de madre previsora (bajas defensas), introduces la metáfora destructora del 'grifo de copagos que gotea dinero' y cierras vendiendo la auditoría sin compromiso. ¡Sencillamente brillante!",
-                nextStep: 3
-              }
-            ]
-          },
-          {
-            clientText: "Bueno... sí que es verdad que últimamente cada vez que vamos al médico nos llega un cargo de 3€, 5€ o 10€ de copago por cada niño y al final de mes se nota un pico... ¿pero cómo sé que con ustedes estaré mejor?",
-            options: [
-              {
-                text: "Esa es la duda más normal del mundo, Ana Belén... Pero el seguro Contigo Familia... en alianza con Sanitas, está diseñado precisamente para familias con niños. Es una tarifa plana real... sin copagos sorpresa... donde sabes exactamente lo que pagas al céntimo. Es cerrar el grifo de las fugas de dinero para siempre. En 15 minutos en tu casa con un café... te enseño la simulación comparada en pantalla... y tú misma decides. ¿Te viene mejor el miércoles a las 17:30... o el jueves por la tarde?",
-                trustEffect: +40,
-                defenseEffect: -25,
-                coachFeedback: "<strong>✅ CONSOLIDACIÓN DE TARIFA PLANA:</strong> Explicas el concepto de tarifa plana real vs. goteo de copagos, y pides la cita para comparar cómodamente en su casa con un café. Cero fricción.",
-                nextStep: 3
-              },
-              {
-                text: "Porque nosotros somos más baratos y tenemos mejores médicos que Adeslas en toda Valencia. Déjeme su DNI y le tramito la baja de Adeslas hoy mismo para no perder la campaña.",
-                trustEffect: -20,
-                defenseEffect: +20,
-                coachFeedback: "<strong>❌ ERROR DE AGRESIVIDAD COMERCIAL:</strong> Tratar de pedirle el DNI para darle de baja hoy mismo en frío activa todas sus defensas de alerta de estafa. Llamada rota.",
-                nextStep: 99
-              }
-            ]
-          },
-          {
-            clientText: "Pues la verdad es que sí que me gustaría cerrar ese grifo de los copagos, que es un goteo tonto de dinero. Venga, nos vemos el miércoles a las 17:30 en casa tomándonos un café y me lo enseñas en papel.",
-            options: [
-              {
-                text: "Perfecto Ana Belén. Anotado queda, el miércoles a las 17:30 nos tomamos ese café en tu casa en Canals. Sigue tranquila con tus niños y el miércoles en 15 minutos te dejo la auditoría de salud familiar hecha por escrito. Un saludo afectuoso.",
-                trustEffect: +20,
-                defenseEffect: -10,
-                coachFeedback: "<strong>🚀 CITA CERRADA CON SEGURIDAD:</strong> Cierre afectuoso, empático y profesional. ¡Fede suma otra visita de salud familiar de altísimo valor!",
-                nextStep: 100
-              }
-            ]
-          }
-        ]
+        title: "Ya te llamo yo / Ya me lo miraré",
+        validar: "¡Perfecto, [Nombre]!... Oye... como sé que vas a mil cosas... y a mí también se me complican los días...",
+        reencuadrar: "...para que no tengas que estar pendiente... de acordarte tú de llamarme... yo me encargo de darte un toque rápido. O si en el fondo... no te interesa nada el tema... dímelo tranquilo, ¿eh?... Que nos conocemos de sobra... no me va a parecer mal en absoluto... y así no te ando molestando con llamadas... que sé que vas ocupado. ¿Es así?",
+        proyectar: "¿Qué te viene mejor... que te llame yo el martes que viene a primera hora... o prefieres el jueves por la tarde?"
+      },
+      {
+        title: "El seguro con mi banco",
+        validar: "Es totalmente comprensible, [Nombre]... Es comodísimo... tener todo centralizado en el mismo sitio... y te ahorra papeleo...",
+        reencuadrar: "...pero una cosa te digo... con total transparencia. El banco se dedica a prestar dinero... no a la previsión familiar. A menudo te empaquetan un seguro genérico... para cubrir su propio riesgo... o cobrar comisiones... pero no cubre tus necesidades reales. Es como ir al médico de cabecera... en vez de a un cirujano especialista... cuando tienes un problema grave. En la Radiografía confirmamos... si ese seguro del banco te protege a ti... o solo protege al banco...",
+        proyectar: "Para revisar las coberturas reales de esa póliza... en 10 minutos... ¿te viene mejor el martes a las 10:00... o el miércoles por la tarde?"
+      },
+      {
+        title: "El negocio va muy justo / No me viene bien ahora",
+        validar: "Te entiendo perfectamente, [Nombre]... Vivimos momentos de mucha incertidumbre y es de lo más sensato vigilar cada euro que sale del negocio...",
+        reencuadrar: "...pero precisamente por eso te llamo. Si hoy el negocio va justo, imagínate el impacto de una baja médica de dos o tres meses sin poder facturar y con los gastos fijos (el local, la luz, los autónomos) corriendo igual. La protección de ingresos no es un gasto, es el blindaje que evita el cierre de tu negocio si tú no puedes estar en el timón.",
+        proyectar: "Hacemos un cálculo rápido de tu brecha de baja en 10 minutos. Si tu colchón actual es suficiente, te lo diré con toda honestidad. ¿Te viene mejor el martes a las 11:00 o el miércoles por la tarde?"
+      },
+      {
+        title: "Lo tengo que hablar con mi pareja",
+        validar: "Me parece una postura excelente, [Nombre]... Las decisiones importantes de protección familiar siempre se deben tomar de mutuo acuerdo y en pareja...",
+        reencuadrar: "...y justo por eso, para evitarte a ti la molestia de tener que resumir o 'traducir' gráficos de brecha financiera en la cena, mi propuesta es que nos sentemos los tres juntos. En 15 minutos os muestro el cálculo neto y resolvemos las dudas de ambos de una sola vez.",
+        proyectar: "¿Qué os vendría mejor a los dos... un hueco rápido a última hora de la tarde, sobre las 19:30, o preferís un café el miércoles a mediodía?"
+      },
+      {
+        title: "Ya es tarde para mí / Ya soy mayor para ahorrar",
+        validar: "Entiendo esa sensación, [Nombre]... A veces pensamos que si no empezamos a los 30 años, ya no merece la pena planificar el futuro...",
+        reencuadrar: "...pero te aseguro que es justo al revés. Cada año cuenta, y a partir de los 50 es cuando más claro se ve el destino y cuando más impacto tiene cada decisión. Hay fórmulas con capital garantizado por contrato diseñadas precisamente para perfiles senior que buscan tranquilidad y seguridad para sus últimos años laborables sin arriesgar nada.",
+        proyectar: "Vemos tu número de pensión estimada y el capital que aún podemos consolidar antes de que te jubiles. En 15 minutos lo tienes en papel. ¿Te cuadra el martes a las 10:00 o el jueves a las 16:00?"
+      },
+      {
+        title: "La sanidad pública ya me cubre todo",
+        validar: "Es verdad, [Nombre], la sanidad pública española es excelente para emergencias críticas y tenemos grandes profesionales...",
+        reencuadrar: "...pero el verdadero problema no es la urgencia vital, sino las listas de espera para especialistas y pruebas diagnósticas. Esperar 6 meses por una resonancia o una cita con el cardiólogo con la incertidumbre encima es lo que de verdad desgasta a una familia. Un plan de salud con copagos mínimos te permite saltarte esa lista y ver al mejor especialista en 48 horas.",
+        proyectar: "¿Prefieres depender de los plazos de la administración cuando tu salud está en juego, o tener la llave de tu propio tiempo por menos de lo que cuesta un café al día? ¿Hacemos el número el martes por la mañana o el miércoles por la tarde?"
       }
     ];
 
@@ -2245,6 +2610,111 @@
     /* ========================================================
        STATE MANAGEMENT
        ======================================================== */
+    let currentAgentName = 'Fede Fontanals';
+    let currentAgentRole = 'Delegado';
+    let currentAgentGender = 'm'; // 'm' or 'f'
+
+    function toggleProfilePanel() {
+      const panel = document.getElementById('profile-settings-panel');
+      const btn = document.getElementById('btn-toggle-profile-panel');
+      if (panel.style.display === 'none') {
+        panel.style.display = 'block';
+        btn.classList.add('active');
+      } else {
+        panel.style.display = 'none';
+        btn.classList.remove('active');
+      }
+    }
+
+    function adjustAgentText(text) {
+      let roleText = currentAgentRole;
+      if (currentAgentGender === 'f') {
+        if (roleText === 'Delegado') roleText = 'Delegada';
+        else if (roleText === 'Asesor') roleText = 'Asesora';
+      }
+
+      // Reemplazo de Nombres
+      let adjusted = text
+        .replace(/Fede Fontanals/g, currentAgentName)
+        .replace(/Fede/g, currentAgentName.split(' ')[0]);
+
+      // Reemplazo de Cargos (Reemplaza "delegado", "tu gestor", "tu asesor", etc.)
+      // Para evitar colisiones parciales, reemplazamos frases largas primero
+      adjusted = adjusted
+        .replace(/\bdelegado de Nationale-Nederlanden\b/gi, roleText + " de Nationale-Nederlanden")
+        .replace(/\btu gestor local de Nationale-Nederlanden\b/gi, "tu " + roleText + " local de Nationale-Nederlanden")
+        .replace(/\btu gestor de Nationale-Nederlanden\b/gi, "tu " + roleText + " de Nationale-Nederlanden")
+        .replace(/\bdelegado\b/gi, roleText)
+        .replace(/\btu gestor\b/gi, "tu " + roleText)
+        .replace(/\btu asesor\b/gi, "tu " + roleText)
+        .replace(/\basesor\b/gi, roleText)
+        .replace(/\bgestor\b/gi, roleText);
+
+      // Reemplazos de Género Gramatical si es Femenino
+      if (currentAgentGender === 'f') {
+        // Si el rol es "Agente" o similar, la concordancia de "una Agente" o "tu Agente" es directa.
+        adjusted = adjusted
+          .replace(/\bTú \(Fede\)\b/g, "Tú (" + currentAgentName.split(' ')[0] + ")")
+          .replace(/\bTu \(Fede\)\b/g, "Tu (" + currentAgentName.split(' ')[0] + ")")
+          .replace(/\blisto\b/g, "lista")
+          .replace(/\bListo\b/g, "Lista")
+          .replace(/\bUn Médico Financiero\b/g, "Una Médica Financiera")
+          .replace(/\bun Médico Financiero\b/g, "una Médica Financiera")
+          .replace(/\bMédico Financiero\b/g, "Médica Financiera")
+          .replace(/\bmédico financiero\b/g, "médica financiera")
+          .replace(/\bdel Médico Financiero\b/g, "de la Médica Financiera")
+          .replace(/\bdel médico financiero\b/g, "de la médica financiera")
+          .replace(/\basesor competente\b/g, "asesora competente")
+          .replace(/\beres un\b/g, "eres una")
+          .replace(/\bEres un\b/g, "Eres una")
+          .replace(/\bun vendedor\b/g, "una vendedora")
+          .replace(/\bUn vendedor\b/g, "Una vendedora")
+          .replace(/\bcomo un vendedor\b/g, "como una vendedora")
+          .replace(/\bvendedor tradicional\b/g, "vendedora tradicional")
+          .replace(/\bvendedor\b/g, "vendedora");
+      } else {
+        // En masculino, solo ajustamos el nombre en la etiqueta "Tú (Nombre)"
+        adjusted = adjusted
+          .replace(/\bTú \(Fede\)\b/g, "Tú (" + currentAgentName.split(' ')[0] + ")")
+          .replace(/\bTu \(Fede\)\b/g, "Tu (" + currentAgentName.split(' ')[0] + ")");
+      }
+      
+      return adjusted;
+    }
+
+    function applyCustomProfile() {
+      currentAgentName = document.getElementById('setting-agent-name').value || 'Fede Fontanals';
+      currentAgentRole = document.getElementById('setting-agent-role').value || 'Delegado';
+      currentAgentGender = document.getElementById('setting-agent-gender').value;
+
+      // Update welcome text if it exists
+      const welcomeTitle = document.getElementById('welcome-title-text');
+      if (welcomeTitle) {
+        welcomeTitle.innerText = currentAgentGender === 'f' ? 'Entrenamiento de la "Médica Financiera"' : 'Entrenamiento del "Médico Financiero"';
+      }
+      
+      const welcomeDesc = document.getElementById('welcome-desc-text');
+      if (welcomeDesc) {
+        welcomeDesc.innerHTML = adjustAgentText(
+          "Bienvenido al gimnasio de Mayéutica de Xàtiva. Selecciona uno de los perfiles de la izquierda para iniciar la llamada simulada. Tu objetivo es rebajar sus defensas, diagnosticar su fuga de dinero y cerrar la visita presencial."
+        );
+      }
+
+      // Re-render currently active options if in multiple choice mode
+      if (currentScenarioIdx !== null) {
+        const sc = SCENARIOS[currentScenarioIdx];
+        const step = sc.steps[currentStepIdx];
+        if (step && step.options) {
+          renderOptions(step.options);
+        }
+      }
+      
+      // Re-render sandbox objections if in sandbox mode
+      if (currentObjIdx !== null) {
+        revealObjectionScript();
+      }
+    }
+
     let currentScenarioIdx = null;
     let currentStepIdx = 0;
     let trustScore = 50;
@@ -2388,19 +2858,43 @@
       document.getElementById('current-context').innerText = sc.meta + " · " + sc.desc;
       updateBars();
 
-      // Reset Chat
+      // Reset Chat and inject Briefing + Strategy
       const chat = document.getElementById('arena-chat');
+      
+      let strategyHTML = '';
+      if (sc.strategy) {
+        strategyHTML = `
+          <div class="strategy-briefing" style="margin-top: 0.75rem; background: rgba(243, 146, 0, 0.06); border-left: 3px solid var(--nn-orange); padding: 0.65rem 0.85rem; border-radius: 4px; text-align: left;">
+            <div style="font-weight: 700; color: var(--nn-orange); font-size: 0.82rem; margin-bottom: 0.35rem; display: flex; justify-content: space-between; align-items: center;">
+              <span style="display: flex; align-items: center; gap: 0.4rem;">📋 PLAN ESTRATÉGICO (Las 3 Fases)</span>
+              <button onclick="speakCoachStrategy(${idx})" class="speak-bubble-btn" style="padding: 0.15rem 0.45rem; font-size: 0.7rem; border-radius: 4px; background: rgba(243, 146, 0, 0.1); border: 1px solid rgba(243, 146, 0, 0.3); color: var(--nn-orange); cursor: pointer;" onmouseover="this.style.background='rgba(243,146,0,0.2)'" onmouseout="this.style.background='rgba(243,146,0,0.1)'">🔊 Escuchar Coach</button>
+            </div>
+            <div style="font-size: 0.78rem; line-height: 1.45; color: var(--text-main);">
+              <strong style="color: #60A5FA;">🤝 1. VALIDAR:</strong> ${sc.strategy.validar}<br>
+              <strong style="color: #FB923C;">🔄 2. REENCUADRAR:</strong> ${sc.strategy.reencuadrar}<br>
+              <strong style="color: #F87171;">🎯 3. PROYECTAR:</strong> ${sc.strategy.proyectar}
+            </div>
+          </div>
+        `;
+      }
+
       chat.innerHTML = `
         <div class="coach-feedback">
           <strong>🩺 BRIEFING DEL CASO FINANCIERO:</strong>
           Vulnerabilidad crítica: <strong>${sc.vulnerability}</strong>.<br>
           Mentalidad del cliente: ${sc.desc}<br>
+          ${strategyHTML}
+          <br>
           <i>Tu objetivo es romper el hielo, aislar la objeción, reencuadrar el dolor y cerrar la visita presencial. ¡Adelante!</i>
         </div>
       `;
 
-      // Reset Free Speech Panel too
-      resetFreeSpeechUI();
+      // Reset Free Speech Panel (reconstruct) to fix lost restart button
+      if (gameMode === 'free') {
+        restartFreeSpeechPanel();
+      } else {
+        resetFreeSpeechUI();
+      }
 
       // Trigger first client message
       setTimeout(() => {
@@ -2446,7 +2940,8 @@
       const chat = document.getElementById('arena-chat');
       const msg = document.createElement('div');
       msg.className = 'msg-bubble msg-fede';
-      msg.innerHTML = `<strong>🩺 Tú (Fede):</strong> "${text}"`;
+      const shortName = currentAgentName.split(' ')[0];
+      msg.innerHTML = `<strong>🩺 Tú (${shortName}):</strong> "${text}"`;
       chat.appendChild(msg);
       chat.scrollTop = chat.scrollHeight;
       if (synth) synth.cancel(); // Mute client voice if Fede speaks
@@ -2456,7 +2951,7 @@
       const chat = document.getElementById('arena-chat');
       const msg = document.createElement('div');
       msg.className = 'coach-feedback';
-      msg.innerHTML = text;
+      msg.innerHTML = adjustAgentText(text);
       chat.appendChild(msg);
       chat.scrollTop = chat.scrollHeight;
     }
@@ -2765,7 +3260,7 @@
       const panel = document.getElementById('panel-free-speech');
       panel.innerHTML = `
         <button class="start-btn" onclick="selectScenario(${currentScenarioIdx}); restartFreeSpeechPanel();" style="width: auto; margin: 0 auto; display: block;">
-          🔄 Reiniciar este Escenario de Voz
+          🔄 Empezar de nuevo esta llamada
         </button>
       `;
     }
@@ -2826,7 +3321,7 @@
       const grid = document.getElementById('options-grid');
       grid.innerHTML = `
         <button class="start-btn" onclick="selectScenario(${currentScenarioIdx})" style="width: auto; margin: 0 auto;">
-          🔄 Reiniciar este Escenario
+          🔄 Empezar de nuevo esta llamada
         </button>
       `;
     }
@@ -2870,10 +3365,10 @@
       // Obtener el nombre del cliente activo o uno genérico
       const clientName = (currentScenarioIdx !== null) ? SCENARIOS[currentScenarioIdx].name.split(' ')[0] : "Felipe";
       
-      // Reemplazar dinámicamente la etiqueta [Nombre] por el nombre del cliente activo
-      const parsedValidar = obj.validar.replace(/\[Nombre\]/g, clientName);
-      const parsedReencuadrar = obj.reencuadrar.replace(/\[Nombre\]/g, clientName);
-      const parsedProyectar = obj.proyectar.replace(/\[Nombre\]/g, clientName);
+      // Reemplazar dinámicamente la etiqueta [Nombre] por el nombre del cliente activo y aplicar perfil de asesor
+      const parsedValidar = adjustAgentText(obj.validar.replace(/\[Nombre\]/g, clientName));
+      const parsedReencuadrar = adjustAgentText(obj.reencuadrar.replace(/\[Nombre\]/g, clientName));
+      const parsedProyectar = adjustAgentText(obj.proyectar.replace(/\[Nombre\]/g, clientName));
       
       output.innerHTML = `
         <div style="font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--nn-orange); margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
@@ -2909,7 +3404,7 @@
       const parsedProyectar = obj.proyectar.replace(/\[Nombre\]/g, clientName);
       
       const fullText = `Validamos: ${parsedValidar}. Reencuadramos: ${parsedReencuadrar}. Proyectamos: ${parsedProyectar}`;
-      speakText(fullText);
+      speakText(adjustAgentText(fullText));
     }
 
     /* ========================================================
