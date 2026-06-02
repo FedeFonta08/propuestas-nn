@@ -2310,6 +2310,33 @@
           document.getElementById('arena-header').style.display = 'none';
           document.getElementById('arena-chat').style.display = 'none';
           document.getElementById('arena-actions').style.display = 'none';
+        } else {
+          // TRASPASO INTELIGENTE (SANDBOX -> SIMULADOR DE DIÁLOGO)
+          const sandboxInput = document.getElementById('sandbox-user-input');
+          if (sandboxInput) {
+            const sandboxText = sandboxInput.value.trim();
+            if (sandboxText !== "") {
+              // Copiar al previsualizador del micrófono continuo
+              const previewBox = document.getElementById('speech-preview-box');
+              if (previewBox) {
+                previewBox.innerHTML = `<span style="color: white; font-weight: 500;">"${sandboxText}"</span>`;
+                previewBox.dataset.transcript = sandboxText;
+                currentSpeechText = sandboxText;
+              }
+              // Habilitar botón de enviar respuesta
+              const submitBtn = document.getElementById('btn-submit-speech');
+              if (submitBtn) {
+                submitBtn.disabled = false;
+              }
+              // Notificar al Fede en su status
+              const status = document.getElementById('speech-mode-status');
+              if (status) {
+                status.innerText = "✍️ ¡Borrador importado del Sandbox! Listo para enviar.";
+                status.style.color = "var(--nn-orange)";
+              }
+              console.log("SYNC: Respuesta traspasada con éxito del Sandbox al Simulador.");
+            }
+          }
         }
       } else if (tab === 'sandbox') {
         document.getElementById('sandbox-tab').style.display = 'grid';
