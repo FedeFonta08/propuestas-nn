@@ -348,6 +348,7 @@
       text-align: left;
       line-height: 1.45;
       animation: fadeIn 0.4s ease-out forwards;
+      width: 100%;
     }
 
     .coach-feedback strong {
@@ -374,6 +375,9 @@
       color: var(--nn-orange);
       text-transform: uppercase;
       letter-spacing: 0.08em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .options-grid {
@@ -428,6 +432,143 @@
       background: var(--nn-orange);
       color: #000;
       border-color: var(--nn-orange);
+    }
+
+    /* --- FREE SPEECH CONTAINER (Modo Conversación Real) --- */
+    .free-speech-panel {
+      display: none;
+      flex-direction: column;
+      gap: 0.75rem;
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    .speech-input-area {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .speech-preview-box {
+      background: rgba(11, 19, 43, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1rem;
+      min-height: 56px;
+      max-height: 120px;
+      overflow-y: auto;
+      font-size: 0.92rem;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    .speech-preview-placeholder {
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .main-mic-btn {
+      background: rgba(243, 146, 0, 0.1);
+      border: 2px solid var(--nn-orange);
+      color: var(--nn-orange);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 10px rgba(243, 146, 0, 0.15);
+    }
+
+    .main-mic-btn:hover {
+      background: var(--nn-orange);
+      color: #000;
+      transform: scale(1.08);
+      box-shadow: 0 0 15px rgba(243, 146, 0, 0.4);
+    }
+
+    .main-mic-btn.listening {
+      background: var(--defense-red);
+      border-color: var(--defense-red);
+      color: white;
+      animation: pulse 1.5s infinite;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+    }
+
+    .send-speech-btn {
+      background: var(--nn-orange);
+      color: #000;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      align-self: flex-end;
+    }
+
+    .send-speech-btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(243, 146, 0, 0.3);
+    }
+
+    .send-speech-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Píldoras de Análisis Semántico */
+    .semantic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .semantic-pill {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      text-align: center;
+      border: 1px solid var(--border-color);
+    }
+
+    .semantic-pill.met {
+      background: rgba(16, 185, 129, 0.15);
+      color: #A7F3D0;
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .semantic-pill.missed {
+      background: rgba(239, 68, 68, 0.15);
+      color: #FCA5A5;
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    /* Mode Switcher in Header */
+    .mode-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mode-btn.active {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: var(--info-blue);
+      color: #93C5FD;
     }
 
     /* Simulation States */
@@ -880,6 +1021,14 @@
     </div>
     
     <div class="controls-wrapper">
+      <!-- Selector de Modo de Juego -->
+      <button class="mode-btn active" id="btn-mode-multiple" onclick="switchGameMode('multiple')" title="Elegir entre opciones A, B, C">
+        🕹️ Opción Múltiple
+      </button>
+      <button class="mode-btn" id="btn-mode-free" onclick="switchGameMode('free')" title="Hablar libremente al micrófono y que interprete tus palabras">
+        🗣️ Hablar Libremente
+      </button>
+
       <button class="voice-toggle-btn active" id="btn-client-voice" onclick="toggleClientVoice()">
         🔊 Voz del Cliente: SÍ
       </button>
@@ -941,11 +1090,11 @@
       <div class="welcome-screen" id="welcome-screen">
         <div class="welcome-icon">🩺</div>
         <h2 class="welcome-title">Entrenamiento del "Médico Financiero"</h2>
-        <p class="welcome-desc">
+        <p class="welcome-desc" id="welcome-desc-text">
           Bienvenido al gimnasio de Mayéutica de Xàtiva. Selecciona uno de los perfiles de la izquierda para iniciar la llamada simulada. Tu objetivo es rebajar sus defensas, diagnosticar su fuga de dinero y cerrar la visita presencial.
         </p>
         <div style="font-size: 0.95rem; color: var(--nn-orange); margin-top: -1rem; margin-bottom: 2rem; font-weight: 600;">
-          💡 ¡MODO DE VOZ NATIVO COMPLETO ACTIVADO! Los clientes te hablarán en voz alta. Puedes usar el micrófono en el Sandbox de Objeciones.
+          💡 ¡MODO DE AUDIO COMPLETO! El simulador lee las respuestas y analiza lo que tú dices usando reconocimiento de voz.
         </div>
       </div>
 
@@ -984,10 +1133,37 @@
 
       <!-- ACTION PANEL (Hidden initially) -->
       <div class="action-panel" id="arena-actions" style="display: none;">
-        <div class="action-label">👉 Selecciona tu respuesta (Aplica Mayéutica)</div>
-        <div class="options-grid" id="options-grid">
-          <!-- Buttons injected dynamically -->
+        
+        <!-- MODO OPCIÓN MÚLTIPLE -->
+        <div id="panel-multiple-choices" style="display: block; width: 100%;">
+          <div class="action-label">👉 Selecciona tu respuesta (Aplica Mayéutica)</div>
+          <div class="options-grid" id="options-grid">
+            <!-- Buttons injected dynamically -->
+          </div>
         </div>
+
+        <!-- MODO HABLAR LIBREMENTE (NUEVO!) -->
+        <div id="panel-free-speech" class="free-speech-panel" style="width: 100%;">
+          <div class="action-label">
+            <span>🗣️ MODO CONVERSACIÓN REAL: Habla directamente a tu cliente</span>
+            <span id="speech-mode-status" style="color: var(--text-muted); font-size: 0.75rem;">Micrófono apagado</span>
+          </div>
+          
+          <div class="speech-input-area">
+            <div class="speech-preview-box" id="speech-preview-box">
+              <span class="speech-preview-placeholder">Haz clic en el micrófono de la derecha y empieza a hablar. Di tu respuesta de viva voz...</span>
+            </div>
+            
+            <button class="main-mic-btn" id="main-mic-btn" onclick="toggleMainSpeechRecognition()" title="Presiona para hablar al cliente">
+              🎙️
+            </button>
+          </div>
+          
+          <button class="send-speech-btn" id="btn-submit-speech" onclick="submitFreeSpeechResponse()" disabled>
+            🚀 Enviar y Analizar Respuesta
+          </button>
+        </div>
+
       </div>
 
     </div>
@@ -1053,11 +1229,9 @@
     let synth = window.speechSynthesis;
     let currentVoice = null;
 
-    // Load voices and select a native Spanish one
     function loadVoices() {
       if (!synth) return;
       const voices = synth.getVoices();
-      // Prefer Spanish from Spain (es-ES)
       currentVoice = voices.find(v => v.lang === 'es-ES' || v.lang.startsWith('es-')) || voices.find(v => v.lang.startsWith('es'));
     }
     
@@ -1083,49 +1257,62 @@
 
     function speakText(text) {
       if (!clientVoiceEnabled || !synth) return;
-      
-      synth.cancel(); // Stop any previous speech
-      
-      // Clean raw HTML tags if they are in the text
+      synth.cancel(); // Stop ongoing speech
       const cleanText = text.replace(/<[^>]*>/g, '');
-      
       const utterance = new SpeechSynthesisUtterance(cleanText);
       utterance.lang = 'es-ES';
-      utterance.rate = 1.0; // Normal rate
+      utterance.rate = 1.0;
       utterance.pitch = 1.0;
-      
-      if (currentVoice) {
-        utterance.voice = currentVoice;
-      }
-      
+      if (currentVoice) utterance.voice = currentVoice;
       synth.speak(utterance);
     }
 
     /* ========================================================
-       RECONOCIMIENTO DE VOZ (SPEECH-TO-TEXT)
+       RECONOCIMIENTO DE VOZ GENERAl (SPEECH-TO-TEXT)
        ======================================================== */
     let recognition = null;
-    let isRecording = false;
+    let mainRecognition = null;
+    let isRecordingSandbox = false;
+    let isRecordingMain = false;
+    let gameMode = 'multiple'; // 'multiple' o 'free'
 
+    function switchGameMode(mode) {
+      gameMode = mode;
+      document.getElementById('btn-mode-multiple').classList.remove('active');
+      document.getElementById('btn-mode-free').classList.remove('active');
+      
+      if (mode === 'multiple') {
+        document.getElementById('btn-mode-multiple').classList.add('active');
+        document.getElementById('panel-multiple-choices').style.display = 'block';
+        document.getElementById('panel-free-speech').style.display = 'none';
+      } else {
+        document.getElementById('btn-mode-free').classList.add('active');
+        document.getElementById('panel-multiple-choices').style.display = 'none';
+        document.getElementById('panel-free-speech').style.display = 'flex';
+        resetFreeSpeechUI();
+      }
+    }
+
+    function resetFreeSpeechUI() {
+      const box = document.getElementById('speech-preview-box');
+      box.innerHTML = '<span class="speech-preview-placeholder">Haz clic en el micrófono de la derecha y empieza a hablar. Di tu respuesta de viva voz...</span>';
+      document.getElementById('btn-submit-speech').disabled = true;
+    }
+
+    /* Micrófono del Sandbox */
     function initSpeechRecognition() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        console.warn("Speech Recognition not supported in this browser.");
-        return false;
-      }
+      if (!SpeechRecognition) return false;
       
       recognition = new SpeechRecognition();
       recognition.lang = 'es-ES';
-      recognition.continuous = false;
-      recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
-
+      
       recognition.onstart = () => {
-        isRecording = true;
+        isRecordingSandbox = true;
         const mic = document.getElementById('sandbox-mic-btn');
         mic.classList.add('recording');
         mic.innerHTML = "🛑";
-        document.getElementById('sandbox-user-input').placeholder = "Escuchando... Habla de forma clara ahora.";
+        document.getElementById('sandbox-user-input').placeholder = "Escuchando tu voz... Habla ahora.";
       };
 
       recognition.onresult = (event) => {
@@ -1133,40 +1320,85 @@
         document.getElementById('sandbox-user-input').value = text;
       };
 
-      recognition.onerror = (event) => {
-        console.error("Speech Recognition Error:", event.error);
-        stopMicUI();
-      };
-
-      recognition.onend = () => {
-        stopMicUI();
-      };
-
+      recognition.onerror = () => stopSandboxMic();
+      recognition.onend = () => stopSandboxMic();
       return true;
     }
 
-    function stopMicUI() {
-      isRecording = false;
+    function stopSandboxMic() {
+      isRecordingSandbox = false;
       const mic = document.getElementById('sandbox-mic-btn');
-      mic.classList.remove('recording');
-      mic.innerHTML = "🎙️";
-      document.getElementById('sandbox-user-input').placeholder = "Pulsa el botón de micrófono abajo a la derecha y ensaya tu respuesta Validar ➡️ Reencuadrar ➡️ Proyectar hablando...";
+      if (mic) {
+        mic.classList.remove('recording');
+        mic.innerHTML = "🎙️";
+      }
+      const area = document.getElementById('sandbox-user-input');
+      if (area) area.placeholder = "Pulsa el botón de micrófono abajo a la derecha y ensaya tu respuesta Validar ➡️ Reencuadrar ➡️ Proyectar hablando...";
     }
 
     function toggleSpeechRecognition() {
       if (!recognition) {
-        const supported = initSpeechRecognition();
-        if (!supported) {
-          alert("Tu navegador o sistema operativo no soporta el Reconocimiento de Voz nativo. Te recomendamos usar Google Chrome o Microsoft Edge.");
+        if (!initSpeechRecognition()) {
+          alert("Reconocimiento de voz no soportado en tu navegador.");
           return;
         }
       }
+      if (isRecordingSandbox) recognition.stop();
+      else recognition.start();
+    }
 
-      if (isRecording) {
-        recognition.stop();
-      } else {
-        recognition.start();
+    /* Micrófono del Simulador (Modo Hablar Libremente) */
+    function initMainSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) return false;
+
+      mainRecognition = new SpeechRecognition();
+      mainRecognition.lang = 'es-ES';
+      mainRecognition.continuous = false;
+      mainRecognition.interimResults = false;
+
+      mainRecognition.onstart = () => {
+        isRecordingMain = true;
+        document.getElementById('main-mic-btn').classList.add('listening');
+        document.getElementById('speech-mode-status').innerText = "🔴 Escuchando... Habla tu respuesta libremente.";
+        document.getElementById('speech-mode-status').style.color = "var(--defense-red)";
+      };
+
+      mainRecognition.onresult = (event) => {
+        const text = event.results[0][0].transcript;
+        const box = document.getElementById('speech-preview-box');
+        box.innerHTML = `<span style="color: white; font-weight: 500;">"${text}"</span>`;
+        document.getElementById('btn-submit-speech').disabled = false;
+        
+        // Guardamos el texto temporalmente
+        box.dataset.transcript = text;
+      };
+
+      mainRecognition.onerror = () => stopMainMic();
+      mainRecognition.onend = () => stopMainMic();
+      return true;
+    }
+
+    function stopMainMic() {
+      isRecordingMain = false;
+      const mic = document.getElementById('main-mic-btn');
+      if (mic) mic.classList.remove('listening');
+      const status = document.getElementById('speech-mode-status');
+      if (status) {
+        status.innerText = "Micrófono apagado";
+        status.style.color = "var(--text-muted)";
       }
+    }
+
+    function toggleMainSpeechRecognition() {
+      if (!mainRecognition) {
+        if (!initMainSpeechRecognition()) {
+          alert("Tu navegador no soporta el reconocimiento de voz nativo.");
+          return;
+        }
+      }
+      if (isRecordingMain) mainRecognition.stop();
+      else mainRecognition.start();
     }
 
     /* ========================================================
@@ -1180,9 +1412,14 @@
         vulnerability: "Decesos a Fondo Perdido: 12.600€",
         initialTrust: 30,
         initialDefense: 80,
+        // DICCIONARIOS DE EVALUACIÓN SEMÁNTICA (NUEVO!)
+        semDict: {
+          validar: ['entiendo', 'lógico', 'logico', 'comprensible', 'normal', 'previsor', 'responsable', 'correcto', 'claro', 'respeto', 'siento', 'disculpa', 'perdona'],
+          reencuadrar: ['autobús', 'autobuses', 'billete', 'billetes', 'coche', 'alquiler', 'perder', 'regalar', 'santalucía', 'santalucia', 'entierro', 'decesos', 'caja', 'acumular', 'hucha', 'heredar', 'patrimonio', 'cofre', 'reserva', 'dinero'],
+          proyectar: ['martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'mañana', 'tarde', 'café', 'alameda', 'reunión', 'visita', '15 minutos', 'diez', 'once', 'cinco', 'seis', 'hora', 'vernos', 'acercar']
+        },
         steps: [
           {
-            // Paso 0: Apertura
             clientText: "Dígame, ¿quién me llama y para qué? Estoy bastante liado.",
             options: [
               {
@@ -1209,7 +1446,6 @@
             ]
           },
           {
-            // Paso 1 (Solo si eligió mala apertura)
             clientText: "Mire, yo es que de seguros no quiero saber nada. Ya tengo el de entierro en Santalucía de toda la vida y no voy a cambiar.",
             options: [
               {
@@ -1217,7 +1453,7 @@
                 trustEffect: -10,
                 defenseEffect: +15,
                 coachFeedback: "<strong>❌ ERROR FATAL - CONTRADECIR AL CLIENTE:</strong> Atacar directamente su decisión de Santalucía genera reactividad psicológica inmediata. Él defiende su seguro porque siente que atacas su inteligencia. Cierre garantizado de llamada.",
-                nextStep: 99 // Final fallido
+                nextStep: 99
               },
               {
                 text: "Entiendo Manuel, Santalucía es una compañía muy grande y tradicional. Pero justamente por eso le llamo: la mayoría de vecinos en Xàtiva están pagando tres 'billetes de autobús' a fondo perdido para un viaje donde no van a subir todos a la vez. En 15 min le enseño gratis cómo crear su propio Cofre de Reserva donde el dinero nunca se pierde.",
@@ -1229,7 +1465,6 @@
             ]
           },
           {
-            // Paso 2 (Si eligió buena apertura)
             clientText: "Ya... pero es que yo de eso no necesito nada. Ya tengo mi seguro de decesos con Santalucía de toda la vida y ya está todo pagado.",
             options: [
               {
@@ -1249,7 +1484,6 @@
             ]
           },
           {
-            // Paso 3 (El reencuadre)
             clientText: "Hombre, pues no lo he calculado, pero de toda la vida se ha hecho así... si me cambio ahora, pierdo los 25 años que llevo pagando allí, ¿no?",
             options: [
               {
@@ -1269,7 +1503,6 @@
             ]
           },
           {
-            // Paso 4 (El cierre de visita)
             clientText: "Madre mía... visto así suena a robo, pero ¿cuál es la alternativa entonces? Yo no quiero dejar a mis hijos con el lío del entierro mañana.",
             options: [
               {
@@ -1277,7 +1510,7 @@
                 trustEffect: +40,
                 defenseEffect: -30,
                 coachFeedback: "<strong>🚀 CIERRE PERFECTO DEL MÉDICO FINANCIERO:</strong> Presentaste la alternativa (Cofre Familiar) resolviendo su objeción de 'dejar el lío a los hijos', cuantificaste los beneficios y cerraste con la **Doble Alternativa** directa de fecha y hora. ¡Cita asegurada!",
-                nextStep: 100 // Éxito
+                nextStep: 100
               },
               {
                 text: "Pues la alternativa es contratar un plan Contigo Familia conmigo hoy. Si quiere le mando un email con los detalles del seguro y cuando lo lea me dice si le encaja o no.",
@@ -1295,8 +1528,11 @@
         meta: "41 años, Pediatra · Hospital Lluís Alcanyís",
         desc: "Ingresos altos, cero planificación. Cree que los seguros son un gasto inútil. Odia que le quiten tiempo.",
         vulnerability: "Fuga IRPF: +3.000€/año",
-        initialTrust: 25,
-        initialDefense: 90,
+        semDict: {
+          validar: ['entiendo', 'breve', 'rápido', 'rapido', 'tiempo', 'consultas', 'lógico', 'normal', 'profesional', 'pediatra', 'médico', 'medico', 'trabajo'],
+          reencuadrar: ['hacienda', 'impuesto', 'impuestos', 'irpf', 'declaración', 'renta', 'retener', 'desgravar', 'deducir', 'nómina', 'nomina', 'clinica', 'hospital', 'fiscal', 'optimizar', 'duplo', 'ahorro', 'dinero'],
+          proyectar: ['martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'mañana', 'tarde', 'hospital', 'descanso', 'salida', '15 minutos', 'vernos', 'café', 'diez', 'dos', 'hora', 'acercar']
+        },
         steps: [
           {
             clientText: "Dígame rápido por favor, estoy entre consulta y consulta y no tengo tiempo para ofertas.",
@@ -1362,8 +1598,11 @@
         meta: "36 años, Administrativa · Xàtiva",
         desc: "Tiene 10.000€ parados en Caixabank. Le da pánico la bolsa y las estafas. Quiere rentabilidad pero 'sin perder nada'.",
         vulnerability: "Ahorro Muerto en Cuenta: 0% Rentabilidad",
-        initialTrust: 40,
-        initialDefense: 50,
+        semDict: {
+          validar: ['entiendo', 'miedo', 'normal', 'prudente', 'previsora', 'ahorrar', 'cuesta', 'cuñado', 'cunado', 'lógico', 'tranquila', 'responsable'],
+          reencuadrar: ['inflación', 'inflacion', 'banco', 'caixabank', 'caixa', 'caja', 'libreta', 'cuenta', 'muerto', 'parado', 'perder', 'compra', 'family cash', 'supermercado', 'silencio', 'sialp', 'garantizado', 'garantía', 'seguro'],
+          proyectar: ['martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'mañana', 'tarde', 'casa', 'café', 'alameda', 'vernos', '15 minutos', 'diez', 'cinco', 'hora', 'acercar']
+        },
         steps: [
           {
             clientText: "Hola, me coge trabajando pero si es rápido dígame. Me da mucho miedo todo lo que sean inversiones, con lo que cuesta ahorrar...",
@@ -1563,6 +1802,9 @@
         </div>
       `;
 
+      // Reset Free Speech Panel too
+      resetFreeSpeechUI();
+
       // Trigger first client message
       setTimeout(() => {
         injectClientMessage(sc.steps[0].clientText);
@@ -1571,7 +1813,6 @@
     }
 
     function updateBars() {
-      // Cap values between 0 and 100
       trustScore = Math.max(0, Math.min(100, trustScore));
       defenseScore = Math.max(0, Math.min(100, defenseScore));
 
@@ -1671,7 +1912,231 @@
       }, 800);
     }
 
+    /* ========================================================
+       SISTEMA NLP DE INTERPRETACIÓN DE VOZ LIBRE (¡NUEVO!)
+       ======================================================== */
+    let mainSpeechRecognition = null;
+    let currentSpeechText = "";
+
+    function initMainSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) return false;
+
+      mainSpeechRecognition = new SpeechRecognition();
+      mainRecognition = mainSpeechRecognition; // Sync alias
+      mainSpeechRecognition.lang = 'es-ES';
+      mainSpeechRecognition.continuous = false;
+      mainSpeechRecognition.interimResults = false;
+
+      mainSpeechRecognition.onstart = () => {
+        isRecordingMain = true;
+        document.getElementById('main-mic-btn').classList.add('listening');
+        document.getElementById('speech-mode-status').innerText = "🔴 Escuchando... Di tu respuesta libremente.";
+        document.getElementById('speech-mode-status').style.color = "var(--defense-red)";
+      };
+
+      mainSpeechRecognition.onresult = (event) => {
+        const text = event.results[0][0].transcript;
+        currentSpeechText = text;
+        const box = document.getElementById('speech-preview-box');
+        box.innerHTML = `<span style="color: white; font-weight: 500;">"${text}"</span>`;
+        document.getElementById('btn-submit-speech').disabled = false;
+      };
+
+      mainSpeechRecognition.onerror = () => stopMainMic();
+      mainSpeechRecognition.onend = () => stopMainMic();
+      return true;
+    }
+
+    function toggleMainSpeechRecognition() {
+      if (!mainSpeechRecognition) {
+        if (!initMainSpeechRecognition()) {
+          alert("Tu navegador no soporta el reconocimiento de voz nativo.");
+          return;
+        }
+      }
+      if (isRecordingMain) mainSpeechRecognition.stop();
+      else mainSpeechRecognition.start();
+    }
+
+    function submitFreeSpeechResponse() {
+      if (!currentSpeechText) return;
+
+      // Disable mic and submit button
+      document.getElementById('main-mic-btn').disabled = true;
+      document.getElementById('btn-submit-speech').disabled = true;
+
+      // Inject Fede spoken message to Chat
+      injectFedeMessage(currentSpeechText);
+
+      // ANALIZAR SEMÁNTICAMENTE LAS PALABRAS (Mayéutica NLP Engine)
+      const sc = SCENARIOS[currentScenarioIdx];
+      const textLower = currentSpeechText.toLowerCase();
+
+      // Helper function to match keywords in array
+      function checkKeywords(dictArr) {
+        return dictArr.filter(word => textLower.includes(word));
+      }
+
+      const matchesVal = checkKeywords(sc.semDict.validar);
+      const matchesReenc = checkKeywords(sc.semDict.reencuadrar);
+      const matchesProj = checkKeywords(sc.semDict.proyectar);
+
+      const hasValidar = matchesVal.length > 0;
+      const hasReenc = matchesReenc.length > 0;
+      const hasProj = matchesProj.length > 0;
+
+      // Calcular Efectos
+      let trustDelta = 0;
+      let defenseDelta = 0;
+      let scoreText = "";
+
+      // Validar: genera Confianza
+      if (hasValidar) {
+        trustDelta += 25;
+        defenseDelta -= 15;
+      } else {
+        trustDelta -= 10;
+        defenseDelta += 10;
+      }
+
+      // Reencuadrar: reduce Defensas considerablemente
+      if (hasReenc) {
+        trustDelta += 15;
+        defenseDelta -= 25;
+      } else {
+        defenseDelta += 15;
+      }
+
+      // Proyectar: cierra la llamada
+      if (hasProj) {
+        trustDelta += 10;
+        defenseDelta -= 10;
+      } else {
+        defenseDelta += 10;
+      }
+
+      // Checks for bad words (vendedor transaccional)
+      const badWords = ['vender', 'contratar', 'seguro', 'seguros', 'firmar', 'comprar', 'póliza', 'poliza', 'campaña', 'descuento', 'barato', 'goldman', 'sanalucia', 'santalucia'];
+      const matchesBad = badWords.filter(word => textLower.includes(word));
+      const hasBad = matchesBad.length > 0;
+
+      if (hasBad) {
+        trustDelta -= 20;
+        defenseDelta += 25;
+      }
+
+      // Update trust and defense scores
+      trustScore += trustDelta;
+      defenseScore += defenseDelta;
+
+      setTimeout(() => {
+        updateBars();
+
+        // Build the Semantics analysis pills
+        const pillValidarClass = hasValidar ? 'semantic-pill met' : 'semantic-pill missed';
+        const pillReencuadrarClass = hasReenc ? 'semantic-pill met' : 'semantic-pill missed';
+        const pillProyectarClass = hasProj ? 'semantic-pill met' : 'semantic-pill missed';
+
+        const pillsHTML = `
+          <div class="semantic-grid">
+            <div class="${pillValidarClass}">🤝 1. VALIDAR: ${hasValidar ? 'SÍ (' + matchesVal[0] + ')' : 'NO'}</div>
+            <div class="${pillReencuadrarClass}">🔄 2. REENCUADRAR: ${hasReenc ? 'SÍ (' + matchesReenc[0] + ')' : 'NO'}</div>
+            <div class="${pillProyectarClass}">🎯 3. PROYECTAR: ${hasProj ? 'SÍ (' + matchesProj[0] + ')' : 'NO'}</div>
+          </div>
+        `;
+
+        // Generar Coach feedback
+        let coachMsg = `<strong>🔍 ANÁLISIS DE VOZ DE TU CLIENTE:</strong>`;
+        if (hasValidar && hasReenc && hasProj && !hasBad) {
+          coachMsg += `Has utilizado perfectamente los 3 pilares del <strong>Médico Financiero</strong>. Has validado su postura, has metido la metáfora para reencuadrar el dolor y has cerrado con doble alternativa. ¡Impecable!`;
+        } else {
+          coachMsg += `El cliente ha analizado tus palabras de viva voz. `;
+          if (!hasValidar) coachMsg += `<br>🔴 <strong>Falta Validar:</strong> No has empatizado ni validado su postura inicial. Se siente atacado.`;
+          if (!hasReenc) coachMsg += `<br>🔴 <strong>Falta Reencuadrar:</strong> No has mencionado el concepto clave (como la metáfora del autobús o Hacienda). No ve el agujero financiero.`;
+          if (!hasProj) coachMsg += `<br>🔴 <strong>Falta Proyectar:</strong> No has propuesto fechas concretas (martes/miércoles) ni has vendido la cita rápida.`;
+          if (hasBad) coachMsg += `<br>⚠️ <strong>Fricción comercial:</strong> Has mencionado palabras agresivas de venta (${matchesBad.join(', ')}). Sus defensas han subido.`;
+        }
+
+        coachMsg += pillsHTML;
+        injectCoachMessage(coachMsg);
+
+        setTimeout(() => {
+          // Dynamic client reaction based on trust vs defense
+          if (trustScore >= 80 && defenseScore <= 35) {
+            // ÉXITO CONVERSACIONAL
+            injectClientMessage("Pues la verdad es que me has convencido. Me dejas bastante preocupado con lo que me has dicho... Venga, me parece correcto, pásate el martes por la mañana y le echamos un vistazo en un papel a mi caso.");
+            injectCoachMessage("<strong>🏆 ¡ÉXITO MAESTRO! CITA CERRADA POR VOZ REAL:</strong> Has conseguido que el cliente acepte la visita hablando con total naturalidad y aplicando el método del manual. ¡Tus números van a despegar hoy mismo!");
+            clearFreeSpeechActions();
+          } else if (defenseScore >= 95 || trustScore <= 10) {
+            // FRACASO CONVERSACIONAL
+            injectClientMessage("Mire, déjelo estar. No me interesa nada de esto y no me apetece perder el tiempo. No me llame más por favor, adiós.");
+            injectCoachMessage("<strong>❌ LLAMADA BLOQUEADA:</strong> Has acumulado demasiada tensión o fricción de vendedor. El cliente ha colgado el teléfono. Pulsa el botón abajo para reiniciar el escenario e inténtalo de nuevo.");
+            clearFreeSpeechActions();
+          } else {
+            // El cliente sigue objetando dinámicamente basado en la carencia
+            let reactionText = "";
+            if (!hasValidar) {
+              reactionText = "Es que ya sé lo que me va a decir, y a mí no me gusta que me intenten cambiar mis pólizas de siempre, me da mucha desconfianza.";
+            } else if (!hasReenc) {
+              reactionText = "Ya... pero a mí me va bien como estoy, no veo por qué tengo que cambiar o perder el tiempo mirando otras cosas.";
+            } else if (!hasProj) {
+              reactionText = "Bueno, pues si quiere mándemelo todo detallado por WhatsApp y ya si eso me lo miro con tranquilidad y le digo.";
+            } else {
+              reactionText = "No sé... me suena muy bonito todo eso, pero es que realmente no tengo tiempo esta semana para reuniones.";
+            }
+
+            injectClientMessage(reactionText);
+            
+            // Re-enable mic and reset preview
+            document.getElementById('main-mic-btn').disabled = false;
+            resetFreeSpeechUI();
+          }
+        }, 1500);
+
+      }, 1000);
+    }
+
+    function clearFreeSpeechActions() {
+      const panel = document.getElementById('panel-free-speech');
+      panel.innerHTML = `
+        <button class="start-btn" onclick="selectScenario(${currentScenarioIdx}); restartFreeSpeechPanel();" style="width: auto; margin: 0 auto; display: block;">
+          🔄 Reiniciar este Escenario de Voz
+        </button>
+      `;
+    }
+
+    function restartFreeSpeechPanel() {
+      const panel = document.getElementById('panel-free-speech');
+      panel.innerHTML = `
+        <div class="action-label">
+          <span>🗣️ MODO CONVERSACIÓN REAL: Habla directamente a tu cliente</span>
+          <span id="speech-mode-status" style="color: var(--text-muted); font-size: 0.75rem;">Micrófono apagado</span>
+        </div>
+        
+        <div class="speech-input-area">
+          <div class="speech-preview-box" id="speech-preview-box">
+            <span class="speech-preview-placeholder">Haz clic en el micrófono de la derecha y empieza a hablar. Di tu respuesta de viva voz...</span>
+          </div>
+          
+          <button class="main-mic-btn" id="main-mic-btn" onclick="toggleMainSpeechRecognition()" title="Presiona para hablar al cliente">
+            🎙️
+          </button>
+        </div>
+        
+        <button class="send-speech-btn" id="btn-submit-speech" onclick="submitFreeSpeechResponse()" disabled>
+          🚀 Enviar y Analizar Respuesta
+        </button>
+      `;
+      document.getElementById('main-mic-btn').disabled = false;
+      resetFreeSpeechUI();
+    }
+
     function clearActions() {
+      if (gameMode === 'free') {
+        clearFreeSpeechActions();
+        return;
+      }
       const grid = document.getElementById('options-grid');
       grid.innerHTML = `
         <button class="start-btn" onclick="selectScenario(${currentScenarioIdx})" style="width: auto; margin: 0 auto;">
@@ -1682,7 +2147,7 @@
 
     /* ========================================================
        SANDBOX DE OBJECIONES (TAB 2)
-       ======================================================= */
+       ======================================================== */
     let currentObjIdx = 0;
 
     function initSandbox() {
