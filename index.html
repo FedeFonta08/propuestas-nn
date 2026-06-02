@@ -828,6 +828,32 @@ body::before {
 .delay-4 { animation-delay: 0.2s; }
 .delay-5 { animation-delay: 0.25s; }
 .delay-6 { animation-delay: 0.3s; }
+
+/* --- ROLEPLAY PULSATOR --- */
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 6px rgba(255, 140, 0, 0.4); }
+  50% { box-shadow: 0 0 16px rgba(255, 140, 0, 0.8); }
+  100% { box-shadow: 0 0 6px rgba(255, 140, 0, 0.4); }
+}
+.pulsing-radar-dot {
+  position: absolute;
+  top: 8px; right: 8px;
+  width: 8px; height: 8px;
+  background-color: var(--orange);
+  border-radius: 50%;
+}
+.pulsing-radar-dot::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid var(--orange);
+  animation: radar-ping 1.8s ease-out infinite;
+}
+@keyframes radar-ping {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
 </style>
 </head>
 <body>
@@ -961,6 +987,18 @@ body::before {
         <div class="tool-desc">CRM Activo · Marcador de Rendimiento · Cola de Acción Diaria</div>
       </div>
       <div class="tool-arrow" style="opacity:1;color:var(--gold)">→</div>
+    </a>
+
+    <!-- 🎙️ SIMULADOR DE ROLEPLAY POR VOZ (Novedad Crítica) -->
+    <a class="tool-card" href="roleplay_entrenamiento.html" target="_blank" style="border-color:var(--orange);background:rgba(255,140,0,0.05);position:relative;">
+      <div class="tool-icon" style="background:var(--orange);color:black;font-weight:bold;box-shadow:0 0 10px rgba(255, 140, 0, 0.4);animation:pulse-glow 2s infinite;">🎙️</div>
+      <div class="tool-info">
+        <div class="tool-tag" style="color:var(--orange)">IA · ENTRENAMIENTO ACTIVO</div>
+        <div class="tool-name" style="font-family:'Orbitron',sans-serif;font-weight:700">Simulador de Roleplay & Mayéutica</div>
+        <div class="tool-desc">Entrenamiento de Clientes por Voz Real · NLP Semántico en Vivo · Sandbox de Objeciones</div>
+      </div>
+      <div class="tool-arrow" style="opacity:1;color:var(--orange)">→</div>
+      <span class="pulsing-radar-dot"></span>
     </a>
 
 
