@@ -1006,6 +1006,95 @@
     ::-webkit-scrollbar-thumb:hover {
       background: rgba(255, 255, 255, 0.25);
     }
+
+    /* --- CONVERSATIONAL GUIDE CARDS (MODO HABLAR LIBREMENTE) --- */
+    .guide-card {
+      background: rgba(28, 37, 65, 0.25);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0.8rem 1.1rem;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .guide-card:hover {
+      background: rgba(28, 37, 65, 0.5);
+      border-color: rgba(243, 146, 0, 0.4);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(243, 146, 0, 0.05);
+    }
+
+    .guide-card.recommended {
+      border-left: 4px solid var(--trust-green);
+      background: rgba(16, 185, 129, 0.06);
+    }
+    
+    .guide-card.recommended:hover {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: var(--trust-green);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.08);
+    }
+
+    .guide-card.warning {
+      border-left: 4px solid var(--defense-red);
+      background: rgba(239, 68, 68, 0.03);
+    }
+
+    .guide-card.warning:hover {
+      background: rgba(239, 68, 68, 0.06);
+      border-color: var(--defense-red);
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.05);
+    }
+
+    .guide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .guide-badge-recommended {
+      color: #A7F3D0;
+      background: rgba(16, 185, 129, 0.15);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      letter-spacing: 0.02em;
+    }
+
+    .guide-badge-warning {
+      color: #FCA5A5;
+      background: rgba(239, 68, 68, 0.12);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      letter-spacing: 0.02em;
+    }
+
+    .guide-text {
+      font-size: 0.85rem;
+      line-height: 1.45;
+      color: var(--text-main);
+      font-style: italic;
+    }
+
+    .guide-footer {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.25rem;
+      margin-top: 0.15rem;
+    }
   </style>
 </head>
 <body>
@@ -1131,7 +1220,7 @@
         <!-- Bubbles injected dynamically -->
       </div>
 
-      <!-- ACTION PANEL (Hidden initially) -->
+            <!-- ACTION PANEL (Hidden initially) -->
       <div class="action-panel" id="arena-actions" style="display: none;">
         
         <!-- MODO OPCIÓN MÚLTIPLE -->
@@ -1142,7 +1231,7 @@
           </div>
         </div>
 
-        <!-- MODO HABLAR LIBREMENTE (NUEVO!) -->
+        <!-- MODO HABLAR LIBREMENTE -->
         <div id="panel-free-speech" class="free-speech-panel" style="width: 100%;">
           <div class="action-label">
             <span>🗣️ MODO CONVERSACIÓN REAL: Habla directamente a tu cliente</span>
@@ -1162,6 +1251,17 @@
           <button class="send-speech-btn" id="btn-submit-speech" onclick="submitFreeSpeechResponse()" disabled>
             🚀 Enviar y Analizar Respuesta
           </button>
+
+          <!-- Guías Conversacionales Dinámicas -->
+          <div id="free-speech-guides-wrapper" style="margin-top: 1.25rem; border-top: 1px dashed var(--border-color); padding-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
+            <div class="action-label" style="color: var(--nn-orange); margin-bottom: 0.25rem; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <span>📋 GUÍAS CONVERSACIONALES SUGERIDAS (Para leer al micrófono o inspirarte):</span>
+              <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: none; font-weight: normal;">🖱️ Clic en una para cargar como borrador</span>
+            </div>
+            <div id="free-speech-guides" style="display: flex; flex-direction: column; gap: 0.65rem; width: 100%;">
+              <!-- Guides injected dynamically -->
+            </div>
+          </div>
         </div>
 
       </div>
@@ -1858,16 +1958,64 @@
     }
 
     function renderOptions(options) {
+      // 1. Multiple Choice Grid
       const grid = document.getElementById('options-grid');
-      grid.innerHTML = options.map((opt, i) => {
-        const letters = ['A', 'B', 'C'];
-        return `
-          <button class="option-btn" onclick="selectOption(${i})">
-            <span class="option-letter">${letters[i]}</span>
-            <span>${opt.text}</span>
-          </button>
-        `;
-      }).join('');
+      if (grid) {
+        grid.innerHTML = options.map((opt, i) => {
+          const letters = ['A', 'B', 'C'];
+          return `
+            <button class="option-btn" onclick="selectOption(${i})">
+              <span class="option-letter">${letters[i]}</span>
+              <span>${opt.text}</span>
+            </button>
+          `;
+        }).join('');
+      }
+
+      // 2. Free Speech Guides Panel
+      const fsGuides = document.getElementById('free-speech-guides');
+      if (fsGuides) {
+        fsGuides.innerHTML = options.map((opt, i) => {
+          const isRecommended = opt.trustEffect >= 20;
+          const cardClass = isRecommended ? 'guide-card recommended' : 'guide-card warning';
+          const badgeClass = isRecommended ? 'guide-badge-recommended' : 'guide-badge-warning';
+          const badgeText = isRecommended ? '💡 Enfoque Médico Financiero (Recomendado)' : '⚠️ Enfoque Comercial / Transaccional (Sube defensas)';
+          
+          const escapedText = opt.text.replace(/'/g, "\'").replace(/"/g, '&quot;');
+          
+          return `
+            <div class="${cardClass}" onclick="useGuideAsDraft('${escapedText}')" title="Cargar como borrador en tu cuadro de texto">
+              <div class="guide-header">
+                <span class="${badgeClass}">${badgeText}</span>
+                <span style="color: var(--text-muted); font-weight: 700;">Opción ${['A', 'B', 'C'][i]}</span>
+              </div>
+              <div class="guide-text">"${opt.text}"</div>
+              <div class="guide-footer">
+                <span>🖱️ Clic en esta guía para cargar borrador</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    function useGuideAsDraft(text) {
+      const box = document.getElementById('speech-preview-box');
+      if (box) {
+        box.innerHTML = `<span style="color: white; font-weight: 500;">"${text}"</span>`;
+        box.dataset.transcript = text;
+        currentSpeechText = text;
+      }
+      const submitBtn = document.getElementById('btn-submit-speech');
+      if (submitBtn) {
+        submitBtn.disabled = false;
+      }
+      
+      const status = document.getElementById('speech-mode-status');
+      if (status) {
+        status.innerText = "✍️ Guía cargada como borrador. ¡Listo para enviar o hablar!";
+        status.style.color = "var(--nn-orange)";
+      }
     }
 
     function selectOption(optIdx) {
@@ -2127,9 +2275,26 @@
         <button class="send-speech-btn" id="btn-submit-speech" onclick="submitFreeSpeechResponse()" disabled>
           🚀 Enviar y Analizar Respuesta
         </button>
+
+        <!-- Guías Conversacionales Dinámicas -->
+        <div id="free-speech-guides-wrapper" style="margin-top: 1.25rem; border-top: 1px dashed var(--border-color); padding-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
+          <div class="action-label" style="color: var(--nn-orange); margin-bottom: 0.25rem; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <span>📋 GUÍAS CONVERSACIONALES SUGERIDAS (Para leer al micrófono o inspirarte):</span>
+            <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: none; font-weight: normal;">🖱️ Clic en una para cargar como borrador</span>
+          </div>
+          <div id="free-speech-guides" style="display: flex; flex-direction: column; gap: 0.65rem; width: 100%;">
+            <!-- Guides injected dynamically -->
+          </div>
+        </div>
       `;
       document.getElementById('main-mic-btn').disabled = false;
       resetFreeSpeechUI();
+      
+      // Load current scenario step suggestions
+      if (currentScenarioIdx !== null) {
+        const sc = SCENARIOS[currentScenarioIdx];
+        renderOptions(sc.steps[currentStepIdx].options);
+      }
     }
 
     function clearActions() {
@@ -2169,8 +2334,10 @@
 
       document.getElementById('sandbox-obj-title').innerText = `"${obj.title}"`;
       document.getElementById('sandbox-user-input').value = "";
-      document.getElementById('sandbox-script-output').classList.remove('show');
       if (synth) synth.cancel();
+      
+      // AUTO-REVEAL THE MASTER CONVERSATIONAL GUIDES BY DEFAULT
+      revealObjectionScript();
     }
 
     function revealObjectionScript() {
