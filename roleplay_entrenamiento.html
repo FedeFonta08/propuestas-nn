@@ -1121,6 +1121,12 @@
       <button class="voice-toggle-btn active" id="btn-client-voice" onclick="toggleClientVoice()">
         🔊 Voz del Cliente: SÍ
       </button>
+      <!-- Control de Velocidad de Locución (Anti-Metralleta) -->
+      <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); padding: 0.4rem 0.8rem; border-radius: 8px;">
+        <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600; font-family: 'Outfit', sans-serif; text-transform: uppercase; letter-spacing: 0.03em;">⏱️ Tempo:</span>
+        <input type="range" id="voice-rate-slider" min="0.75" max="1.0" step="0.05" value="0.85" oninput="updateVoiceRateValue(this.value)" style="width: 65px; accent-color: var(--nn-orange); cursor: pointer;">
+        <span id="voice-rate-value" style="font-size: 0.75rem; color: var(--nn-orange); font-weight: 700; width: 35px; text-align: right;">0.85x</span>
+      </div>
       <div class="tab-nav">
         <button class="tab-btn active" onclick="switchMainTab('simulation')">🕹️ Simulador de Citas</button>
         <button class="tab-btn" onclick="switchMainTab('sandbox')">🛡️ Sandbox de Objeciones</button>
@@ -1401,10 +1407,16 @@
     function speakText(text) {
       if (!clientVoiceEnabled || !synth) return;
       synth.cancel(); // Stop ongoing speech
-      const cleanText = text.replace(/<[^>]*>/g, '');
+      
+      // REEMPLAZO INTELIGENTE DE ETIQUETAS POR ESPACIOS (Evita unir palabras y el efecto metralleta)
+      let cleanText = text.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+      
+      // Añadir pausas forzadas reemplazando puntos suspensivos o rayas por comas de respiro
+      cleanText = cleanText.replace(/\.\.\./g, ', ').replace(/ · /g, ', ');
+
       const utterance = new SpeechSynthesisUtterance(cleanText);
       utterance.lang = 'es-ES';
-      utterance.rate = 1.0;
+      utterance.rate = clientVoiceRate; // Tempo pausado y natural controlado por Fede
       utterance.pitch = 1.0;
       if (currentVoice) utterance.voice = currentVoice;
       synth.speak(utterance);
@@ -2239,6 +2251,15 @@
     let defenseScore = 50;
     let mainTab = 'simulation';
     let lastClientObjectionIdx = null; // Sincroniza la última objeción del cliente con el Sandbox
+    let clientVoiceRate = 0.85; // Velocidad pausada, natural y con autoridad por defecto (Anti-Metralleta)
+
+    function updateVoiceRateValue(val) {
+      clientVoiceRate = parseFloat(val);
+      const valSpan = document.getElementById('voice-rate-value');
+      if (valSpan) {
+        valSpan.innerText = val + "x";
+      }
+    }
 
     function detectObjectionFromClientText(text) {
       const t = text.toLowerCase();
