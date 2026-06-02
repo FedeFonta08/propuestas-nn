@@ -1296,6 +1296,17 @@
         <!-- Objection pills loaded dynamically -->
       </div>
       <div class="sandbox-workbench">
+        <!-- VÍNCULO DIRECTO CON PACIENTE SIMULADO (¡CONEXIÓN!) -->
+        <div id="sandbox-client-connection" style="background: rgba(243, 146, 0, 0.08); border: 1px solid rgba(243, 146, 0, 0.2); border-radius: 12px; padding: 0.75rem 1.25rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; animation: fadeIn 0.3s ease-out forwards; width: 100%;">
+          <div style="display: flex; align-items: center; gap: 0.6rem; font-size: 0.88rem; color: var(--text-muted);">
+             <span style="font-size: 1.25rem;">🩺</span>
+             <span>Paciente Vinculado: <strong id="sandbox-client-name" style="color: var(--nn-orange);">Ninguno (Modo Libre)</strong></span>
+          </div>
+          <button class="start-btn" id="sandbox-btn-return-sim" onclick="switchMainTab('simulation')" style="padding: 0.45rem 1rem; font-size: 0.78rem; display: none; background: var(--nn-orange); color: #000; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; transition: all 0.2s;">
+             🔙 Volver a la Consulta
+          </button>
+        </div>
+
         <div class="sandbox-title-block">
           <div class="sandbox-subtitle">Objeción Seleccionada</div>
           <div class="sandbox-obj-text" id="sandbox-obj-title">Selecciona una objeción para entrenar</div>
@@ -2251,6 +2262,20 @@
       } else if (tab === 'sandbox') {
         document.getElementById('sandbox-tab').style.display = 'grid';
         initSandbox();
+        
+        // CONECTAR CON PACIENTE ACTIVO
+        const clientNameSpan = document.getElementById('sandbox-client-name');
+        const returnBtn = document.getElementById('sandbox-btn-return-sim');
+        
+        if (currentScenarioIdx !== null) {
+          const sc = SCENARIOS[currentScenarioIdx];
+          clientNameSpan.innerText = sc.name;
+          returnBtn.style.display = 'inline-block';
+          returnBtn.innerText = `🔙 Volver a la Consulta de ${sc.name.split(' ')[0]}`;
+        } else {
+          clientNameSpan.innerText = "Ninguno (Modo Libre)";
+          returnBtn.style.display = 'none';
+        }
       } else if (tab === 'eval') {
         document.getElementById('eval-tab').style.display = 'block';
         initEvaluation();
@@ -2748,25 +2773,33 @@
       const obj = OBJECIONES_SANDBOX[currentObjIdx];
       const output = document.getElementById('sandbox-script-output');
       
+      // Obtener el nombre del cliente activo o uno genérico
+      const clientName = (currentScenarioIdx !== null) ? SCENARIOS[currentScenarioIdx].name.split(' ')[0] : "Felipe";
+      
+      // Reemplazar dinámicamente la etiqueta [Nombre] por el nombre del cliente activo
+      const parsedValidar = obj.validar.replace(/\[Nombre\]/g, clientName);
+      const parsedReencuadrar = obj.reencuadrar.replace(/\[Nombre\]/g, clientName);
+      const parsedProyectar = obj.proyectar.replace(/\[Nombre\]/g, clientName);
+      
       output.innerHTML = `
         <div style="font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--nn-orange); margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
-          <span>🛡️ Fórmula de Blindaje Implacable (Mayéutica Activa)</span>
+          <span>🛡️ Fórmula de Blindaje para ${clientName} (Mayéutica Activa)</span>
           <button class="voice-toggle-btn" onclick="speakObjectionFormula()" style="padding: 0.3rem 0.6rem;">🔊 Leer Fórmula</button>
         </div>
         
-        <div class="sandbox-formula-block validar">
+        <div class="sandbox-formula-block validar" style="border-left: 3px solid var(--trust-green); padding-left: 0.75rem;">
           <span class="formula-tag tag-validar">🤝 1. VALIDAR</span>
-          <p id="formula-validar">"${obj.validar}"</p>
+          <p id="formula-validar">"${parsedValidar}"</p>
         </div>
 
-        <div class="sandbox-formula-block reencuadrar">
+        <div class="sandbox-formula-block reencuadrar" style="border-left: 3px solid var(--info-blue); padding-left: 0.75rem;">
           <span class="formula-tag tag-reencuadrar">🔄 2. REENCUADRAR</span>
-          <p id="formula-reencuadrar">${obj.reencuadrar}</p>
+          <p id="formula-reencuadrar">${parsedReencuadrar}</p>
         </div>
 
-        <div class="sandbox-formula-block proyectar">
+        <div class="sandbox-formula-block proyectar" style="border-left: 3px solid var(--nn-orange); padding-left: 0.75rem;">
           <span class="formula-tag tag-proyectar">🎯 3. PROYECTAR (CIERRE DOBLE)</span>
-          <p id="formula-proyectar">"${obj.proyectar}"</p>
+          <p id="formula-proyectar">"${parsedProyectar}"</p>
         </div>
       `;
 
@@ -2775,7 +2808,13 @@
 
     function speakObjectionFormula() {
       const obj = OBJECIONES_SANDBOX[currentObjIdx];
-      const fullText = `Validamos: ${obj.validar}. Reencuadramos: ${obj.reencuadrar}. Proyectamos: ${obj.proyectar}`;
+      const clientName = (currentScenarioIdx !== null) ? SCENARIOS[currentScenarioIdx].name.split(' ')[0] : "Felipe";
+      
+      const parsedValidar = obj.validar.replace(/\[Nombre\]/g, clientName);
+      const parsedReencuadrar = obj.reencuadrar.replace(/\[Nombre\]/g, clientName);
+      const parsedProyectar = obj.proyectar.replace(/\[Nombre\]/g, clientName);
+      
+      const fullText = `Validamos: ${parsedValidar}. Reencuadramos: ${parsedReencuadrar}. Proyectamos: ${parsedProyectar}`;
       speakText(fullText);
     }
 
