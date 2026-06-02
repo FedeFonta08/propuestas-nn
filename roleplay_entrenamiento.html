@@ -1240,7 +1240,7 @@
           
           <div class="speech-input-area">
             <div class="speech-preview-box" id="speech-preview-box">
-              <span class="speech-preview-placeholder">Haz clic en el micrófono de la derecha y empieza a hablar. Di tu respuesta de viva voz...</span>
+              <span class="speech-preview-placeholder">Haz clic en el micrófono de la derecha y habla tranquilamente. Puedes hacer pausas para respirar y pensar; el micro no se apagará. Cuando termines, vuelve a pulsar el micrófono para detener la grabación...</span>
             </div>
             
             <button class="main-mic-btn" id="main-mic-btn" onclick="toggleMainSpeechRecognition()" title="Presiona para hablar al cliente">
@@ -1283,7 +1283,7 @@
           <div class="sandbox-subtitle">🎙️ Pulsa el micrófono para hablar y responder de viva voz, o escribe si lo prefieres</div>
           
           <div class="sandbox-textarea-wrapper">
-            <textarea class="sandbox-textarea" id="sandbox-user-input" placeholder="Pulsa el botón de micrófono abajo a la derecha y ensaya tu respuesta Validar ➡️ Reencuadrar ➡️ Proyectar hablando..."></textarea>
+            <textarea class="sandbox-textarea" id="sandbox-user-input" placeholder="Pulsa el micrófono para hablar tranquilamente. Puedes pausar para respirar; el micrófono no se apagará. Pulsa 🛑 cuando termines de hablar..."></textarea>
             
             <button class="sandbox-mic-btn" id="sandbox-mic-btn" onclick="toggleSpeechRecognition()" title="Hablar con mi voz">
               🎙️
@@ -1395,29 +1395,34 @@
 
     function resetFreeSpeechUI() {
       const box = document.getElementById('speech-preview-box');
-      box.innerHTML = '<span class="speech-preview-placeholder">Haz clic en el micrófono de la derecha y empieza a hablar. Di tu respuesta de viva voz...</span>';
+      box.innerHTML = '<span class="speech-preview-placeholder">Haz clic en el micrófono de la derecha y habla tranquilamente. Puedes hacer pausas para respirar y pensar; el micro no se apagará. Cuando termines, vuelve a pulsar el micrófono para detener la grabación...</span>';
       document.getElementById('btn-submit-speech').disabled = true;
     }
 
-    /* Micrófono del Sandbox */
+    /* Micrófono del Sandbox (MODO SIN PRESIÓN - CONTINUO) */
     function initSpeechRecognition() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) return false;
       
       recognition = new SpeechRecognition();
       recognition.lang = 'es-ES';
+      recognition.continuous = true;
+      recognition.interimResults = false;
       
       recognition.onstart = () => {
         isRecordingSandbox = true;
         const mic = document.getElementById('sandbox-mic-btn');
         mic.classList.add('recording');
         mic.innerHTML = "🛑";
-        document.getElementById('sandbox-user-input').placeholder = "Escuchando tu voz... Habla ahora.";
+        document.getElementById('sandbox-user-input').placeholder = "Grabando... Habla sin prisa. Puedes hacer pausas para pensar. Pulsa el botón rojo de abajo para detener.";
       };
 
       recognition.onresult = (event) => {
-        const text = event.results[0][0].transcript;
-        document.getElementById('sandbox-user-input').value = text;
+        let fullTranscript = '';
+        for (let i = 0; i < event.results.length; i++) {
+          fullTranscript += event.results[i][0].transcript + ' ';
+        }
+        document.getElementById('sandbox-user-input').value = fullTranscript.trim();
       };
 
       recognition.onerror = () => stopSandboxMic();
@@ -1433,7 +1438,7 @@
         mic.innerHTML = "🎙️";
       }
       const area = document.getElementById('sandbox-user-input');
-      if (area) area.placeholder = "Pulsa el botón de micrófono abajo a la derecha y ensaya tu respuesta Validar ➡️ Reencuadrar ➡️ Proyectar hablando...";
+      if (area) area.placeholder = "Pulsa el micrófono para hablar tranquilamente. Puedes pausar para respirar; el micrófono no se apagará. Pulsa 🛑 cuando termines de hablar...";
     }
 
     function toggleSpeechRecognition() {
@@ -1447,35 +1452,45 @@
       else recognition.start();
     }
 
-    /* Micrófono del Simulador (Modo Hablar Libremente) */
+    /* Micrófono del Simulador (MODO SIN PRESIÓN - CONTINUO) */
     function initMainSpeechRecognition() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) return false;
 
-      mainRecognition = new SpeechRecognition();
-      mainRecognition.lang = 'es-ES';
-      mainRecognition.continuous = false;
-      mainRecognition.interimResults = false;
+      mainSpeechRecognition = new SpeechRecognition();
+      mainRecognition = mainSpeechRecognition; // Sync alias
+      mainSpeechRecognition.lang = 'es-ES';
+      mainSpeechRecognition.continuous = true;
+      mainSpeechRecognition.interimResults = false;
 
-      mainRecognition.onstart = () => {
+      mainSpeechRecognition.onstart = () => {
         isRecordingMain = true;
         document.getElementById('main-mic-btn').classList.add('listening');
-        document.getElementById('speech-mode-status').innerText = "🔴 Escuchando... Habla tu respuesta libremente.";
+        document.getElementById('speech-mode-status').innerText = "🔴 Grabando... Habla sin prisa. Puedes pausar y pensar. Pulsa el micro otra vez para detener.";
         document.getElementById('speech-mode-status').style.color = "var(--defense-red)";
       };
 
-      mainRecognition.onresult = (event) => {
-        const text = event.results[0][0].transcript;
-        const box = document.getElementById('speech-preview-box');
-        box.innerHTML = `<span style="color: white; font-weight: 500;">"${text}"</span>`;
-        document.getElementById('btn-submit-speech').disabled = false;
+      mainSpeechRecognition.onresult = (event) => {
+        let fullTranscript = '';
+        for (let i = 0; i < event.results.length; i++) {
+          fullTranscript += event.results[i][0].transcript + ' ';
+        }
+        fullTranscript = fullTranscript.trim();
         
-        // Guardamos el texto temporalmente
-        box.dataset.transcript = text;
+        currentSpeechText = fullTranscript;
+        const box = document.getElementById('speech-preview-box');
+        if (box) {
+          box.innerHTML = `<span style="color: white; font-weight: 500;">"${fullTranscript}"</span>`;
+          box.dataset.transcript = fullTranscript;
+        }
+        const submitBtn = document.getElementById('btn-submit-speech');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+        }
       };
 
-      mainRecognition.onerror = () => stopMainMic();
-      mainRecognition.onend = () => stopMainMic();
+      mainSpeechRecognition.onerror = () => stopMainMic();
+      mainSpeechRecognition.onend = () => stopMainMic();
       return true;
     }
 
@@ -2066,6 +2081,7 @@
     let mainSpeechRecognition = null;
     let currentSpeechText = "";
 
+    /* Micrófono del Simulador (MODO SIN PRESIÓN - CONTINUO) */
     function initMainSpeechRecognition() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) return false;
@@ -2073,22 +2089,33 @@
       mainSpeechRecognition = new SpeechRecognition();
       mainRecognition = mainSpeechRecognition; // Sync alias
       mainSpeechRecognition.lang = 'es-ES';
-      mainSpeechRecognition.continuous = false;
+      mainSpeechRecognition.continuous = true;
       mainSpeechRecognition.interimResults = false;
 
       mainSpeechRecognition.onstart = () => {
         isRecordingMain = true;
         document.getElementById('main-mic-btn').classList.add('listening');
-        document.getElementById('speech-mode-status').innerText = "🔴 Escuchando... Di tu respuesta libremente.";
+        document.getElementById('speech-mode-status').innerText = "🔴 Grabando... Habla sin prisa. Puedes pausar y pensar. Pulsa el micro otra vez para detener.";
         document.getElementById('speech-mode-status').style.color = "var(--defense-red)";
       };
 
       mainSpeechRecognition.onresult = (event) => {
-        const text = event.results[0][0].transcript;
-        currentSpeechText = text;
+        let fullTranscript = '';
+        for (let i = 0; i < event.results.length; i++) {
+          fullTranscript += event.results[i][0].transcript + ' ';
+        }
+        fullTranscript = fullTranscript.trim();
+        
+        currentSpeechText = fullTranscript;
         const box = document.getElementById('speech-preview-box');
-        box.innerHTML = `<span style="color: white; font-weight: 500;">"${text}"</span>`;
-        document.getElementById('btn-submit-speech').disabled = false;
+        if (box) {
+          box.innerHTML = `<span style="color: white; font-weight: 500;">"${fullTranscript}"</span>`;
+          box.dataset.transcript = fullTranscript;
+        }
+        const submitBtn = document.getElementById('btn-submit-speech');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+        }
       };
 
       mainSpeechRecognition.onerror = () => stopMainMic();
@@ -2264,7 +2291,7 @@
         
         <div class="speech-input-area">
           <div class="speech-preview-box" id="speech-preview-box">
-            <span class="speech-preview-placeholder">Haz clic en el micrófono de la derecha y empieza a hablar. Di tu respuesta de viva voz...</span>
+            <span class="speech-preview-placeholder">Haz clic en el micrófono de la derecha y habla tranquilamente. Puedes hacer pausas para respirar y pensar; el micro no se apagará. Cuando termines, vuelve a pulsar el micrófono para detener la grabación...</span>
           </div>
           
           <button class="main-mic-btn" id="main-mic-btn" onclick="toggleMainSpeechRecognition()" title="Presiona para hablar al cliente">
