@@ -68,7 +68,8 @@ El sistema se divide en cuatro capas operativas para cubrir todo el ciclo de la 
 ### 4️⃣ Simuladores de Autoridad (Consultoría Técnica)
 | Herramienta | Archivo | Estado | Propósito |
 |-------------|---------|--------|-----------|
-| 🎙️ **Simulador de Roleplay** | [`roleplay_entrenamiento.html`](https://fedefonta08.github.io/propuestas-nn/roleplay_entrenamiento.html) | 🟢 Live | Roleplay interactivo por voz real y análisis NLP semántico. |
+| 🎙️ **Simulador de Roleplay** | [`roleplay_entrenamiento.html`](https://fedefonta08.github.io/propuestas-nn/roleplay_entrenamiento.html) | 🟢 Live | Roleplay interactivo por voz real y análisis NLP semántico. 14 escenarios activos. |
+| 🩺 **Informe Definitivo AdN** | [`informe-definitivo-adn.html`](https://fedefonta08.github.io/propuestas-nn/guias-comerciales/informe-definitivo-adn.html) | 🟢 Live | Dashboard interactivo para clientes que consolida las 4 fases del ADN con medidor circular SVG. |
 | 💎 **Interés Compuesto** | [`interes_compuesto_NN.html`](https://fedefonta08.github.io/propuestas-nn/Scripts_Herramientas/interes_compuesto_NN.html) | 🟢 Live | Calculadora premium para proyectar el futuro financiero. |
 | 🧮 **Calculadora PVM** | [`calculadora_pvm_nn.html`](https://fedefonta08.github.io/propuestas-nn/Scripts_Herramientas/calculadora_pvm_nn.html) | 🟢 Live | Control de objetivos, puntos y comisiones en tiempo real. |
 | 🌲 **Árbol de Decisión** | [`arbol_decision_producto_nn.html`](https://fedefonta08.github.io/propuestas-nn/Scripts_Herramientas/arbol_decision_producto_nn.html) | 🟢 Live | Selector inteligente de producto según el perfil del cliente. |
@@ -226,6 +227,9 @@ Cada herramienta del ecosistema tiene los guiones, objeciones y árboles de deci
 ## ⚡ Últimas Actualizaciones
 
 ### 🆕 Junio 2026 (Sprint 6 — Simulador de Roleplay por Voz & Consolidación)
+- **Fusión del ADN y Saneamiento de Nombres:** Saneado de forma simétrica todo el ecosistema (Guía Comercial e Informes) para suprimir apellidos de clientes y utilizar solo nombres de pila (**Francisco**, **Nuria**, **Jordi**, **Noelia** y **Alex**) protegiendo la confidencialidad.
+- **Informe Definitivo de ADN (Nuevo):** Desarrollado el panel web para el cliente [`informe-definitivo-adn.html`](https://fedefonta08.github.io/propuestas-nn/guias-comerciales/informe-definitivo-adn.html) que consolida de forma interactiva las 4 fases del ADN con selector dinámico, Gauge circular SVG y plan de acción con checklist.
+- **Inyección de Escenarios 10 a 14 en Roleplay:** Enriquecido el simulador [`roleplay_entrenamiento.html`](https://fedefonta08.github.io/propuestas-nn/roleplay_entrenamiento.html) inyectando los escenarios 10, 11, 12, 13 de los casos reales y el escenario **14 (Alex)** para modelar al 100% el Buyer Persona S1 Joven con la mayéutica del *coste del retraso* de SIALP.
 - **Simulador de Roleplay por Voz Nativa y NLP Semántico:** Implementada la herramienta interactiva [`roleplay_entrenamiento.html`](https://fedefonta08.github.io/propuestas-nn/roleplay_entrenamiento.html) con soporte nativo por voz (Web Speech API). Incorpora dos modos de entrenamiento: **Opción Múltiple** y **Hablar Libremente**. En este último, Fede habla libremente al micrófono y un motor NLP semántico local analiza en vivo si cumple las fases de *Validar*, *Reencuadrar* (dolores de decesos, IRPF o banco) y *Proyectar* (cierre), adaptando la confianza/defensas del cliente y emitiendo objeciones y respuestas de viva voz de forma dinámica.
 - **Pulsador Activo en index.html:** Se integró la tarjeta de roleplay en el panel principal con un radar pulsante por CSS y animación de brillo activo para entrenamientos diarios de llamadas y visitas personales.
 - **Buscador CRM Híbrido Integrado:** Rediseño completo de la barra lateral (`#sidebar`) del Cockpit de Llamadas. Ahora integra de forma fluida dos pestañas: la `[📅 Cola del Día]` (vencimientos activos del mes) y el `[🔍 Buscar en CRM]` (búsqueda global en caliente).
