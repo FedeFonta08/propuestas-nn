@@ -1181,8 +1181,11 @@
     
     <!-- SIDEBAR DE ESCENARIOS (Only visible in Simulation tab) -->
     <div class="sidebar" id="sim-sidebar">
-      <div class="section-title">
+      <div class="section-title" style="display: flex; justify-content: space-between; align-items: center;">
         <span>👤 Selecciona tu "Paciente"</span>
+        <button onclick="resetEntireSystem()" class="voice-toggle-btn" style="padding: 0.2rem 0.5rem; font-size: 0.68rem; border-radius: 4px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-muted); cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'; this.style.color='var(--text-main)';" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.color='var(--text-muted)';" title="Volver a la pantalla de inicio y reiniciar todo el sistema">
+          🏠 Inicio
+        </button>
       </div>
       
       <!-- ESCENARIO 1 -->
@@ -1387,8 +1390,16 @@
       <!-- STAT HEADER (Hidden initially) -->
       <div class="stat-header" id="arena-header" style="display: none;">
         <div class="patient-dossier">
-          <h3 id="current-name">Nombre del Cliente</h3>
-          <p id="current-context">Contexto del cliente</p>
+          <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+            <h3 id="current-name" style="margin: 0; display: inline-block;">Nombre del Cliente</h3>
+            <button onclick="selectScenario(currentScenarioIdx); if(gameMode==='free') restartFreeSpeechPanel();" class="voice-toggle-btn" style="padding: 0.25rem 0.55rem; font-size: 0.7rem; border-radius: 6px; background: rgba(243, 146, 0, 0.15); border: 1px solid rgba(243, 146, 0, 0.3); color: var(--nn-orange); cursor: pointer; transition: all 0.2s; font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem;" onmouseover="this.style.background='rgba(243,146,0,0.25)'" onmouseout="this.style.background='rgba(243, 146, 0, 0.15)'" title="Reiniciar llamada de nuevo">
+              🔄 Reiniciar Llamada
+            </button>
+            <button onclick="resetEntireSystem()" class="voice-toggle-btn" style="padding: 0.25rem 0.55rem; font-size: 0.7rem; border-radius: 6px; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #FCA5A5; cursor: pointer; transition: all 0.2s; font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem;" onmouseover="this.style.background='rgba(239,68,68,0.25)'" onmouseout="this.style.background='rgba(239, 68, 68, 0.15)'" title="Salir de la conversación y volver a inicio (Reiniciar sistema)">
+              🏠 Salir (Reiniciar Todo)
+            </button>
+          </div>
+          <p id="current-context" style="margin-top: 0.25rem;">Contexto del cliente</p>
         </div>
         
         <div class="bar-container">
@@ -3407,6 +3418,41 @@
         injectClientMessage(sc.steps[0].clientText);
         renderOptions(sc.steps[0].options);
       }, 500);
+    }
+
+    function resetEntireSystem() {
+      // Stop speech recognition if active
+      if (typeof isRecordingMain !== 'undefined' && isRecordingMain) {
+        if (typeof mainSpeechRecognition !== 'undefined' && mainSpeechRecognition) {
+          try { mainSpeechRecognition.stop(); } catch(e) {}
+        }
+        if (typeof mainRecognition !== 'undefined' && mainRecognition) {
+          try { mainRecognition.stop(); } catch(e) {}
+        }
+      }
+      if (typeof isRecordingSandbox !== 'undefined' && isRecordingSandbox) {
+        if (typeof recognition !== 'undefined' && recognition) {
+          try { recognition.stop(); } catch(e) {}
+        }
+      }
+      
+      // Cancel speech synthesis if playing
+      if (synth && synth.speaking) {
+        synth.cancel();
+      }
+
+      // Deselect active scenario card
+      document.querySelectorAll('.scenario-card').forEach(card => card.classList.remove('active'));
+      
+      currentScenarioIdx = null;
+      currentStepIdx = 0;
+      lastClientObjectionIdx = null;
+      
+      // Hide arena components, show welcome screen
+      document.getElementById('welcome-screen').style.display = 'block';
+      document.getElementById('arena-header').style.display = 'none';
+      document.getElementById('arena-chat').style.display = 'none';
+      document.getElementById('arena-actions').style.display = 'none';
     }
 
     function updateBars() {
