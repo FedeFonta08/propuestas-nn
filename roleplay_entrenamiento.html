@@ -1283,6 +1283,61 @@
         <div class="scenario-desc">Tiene 20.000€ parados en cuenta de Caixabank... teme a la bolsa... y la inflación se come sus ahorros en silencio.</div>
         <div class="vulnerability-pill">📉 Ahorro Muerto: 0% Rentabilidad</div>
       </div>
+      <!-- ESCENARIO 10 (JUBILACIÓN) -->
+      <div class="scenario-card" id="scen-9" onclick="selectScenario(9)">
+        <div class="scenario-name">Francisco</div>
+        <div class="scenario-meta">
+          <span>65 años, Xàtiva</span>
+          <span style="color: var(--nn-orange);">Alta Resistencia</span>
+        </div>
+        <div class="scenario-desc">Ingeniero RETA. Cree que con su plan del banco le sobra y que ya es muy tarde para cambiar.</div>
+        <div class="vulnerability-pill">💸 Brecha de Jubilación: -180.000 €</div>
+      </div>
+
+      <!-- ESCENARIO 11 (PROTECCIÓN) -->
+      <div class="scenario-card" id="scen-10" onclick="selectScenario(10)">
+        <div class="scenario-name">Nuria</div>
+        <div class="scenario-meta">
+          <span>41 años, Carcaixent</span>
+          <span style="color: var(--defense-red);">Infraseguro BBVA</span>
+        </div>
+        <div class="scenario-desc">Tiene seguro del banco pero deja 0€ de liquidez familiar. Confía en la viudedad de 954,33 €/mes.</div>
+        <div class="vulnerability-pill">🩸 Liquidez Fallecimiento: 0 €</div>
+      </div>
+
+      <!-- ESCENARIO 12 (PROTECCIÓN ILT) -->
+      <div class="scenario-card" id="scen-11" onclick="selectScenario(11)">
+        <div class="scenario-name">Jordi</div>
+        <div class="scenario-meta">
+          <span>45 años, Xàtiva</span>
+          <span style="color: var(--nn-orange);">RETA Autónomos</span>
+        </div>
+        <div class="scenario-desc">Mecánico de taller. Cotiza al mínimo en RETA. Gastos de 2.000€ vs baja de 339€ (brecha de 1.661€/mes).</div>
+        <div class="vulnerability-pill">🩹 Brecha ILT: -1.661 €/mes</div>
+      </div>
+
+      <!-- ESCENARIO 13 (AHORRO E INVERSIÓN) -->
+      <div class="scenario-card" id="scen-12" onclick="selectScenario(12)">
+        <div class="scenario-name">Noelia</div>
+        <div class="scenario-meta">
+          <span>36 años, Carcaixent</span>
+          <span style="color: var(--trust-green);">Miedo a la Bolsa</span>
+        </div>
+        <div class="scenario-desc">Tiene 36.000 € parados en el banco al 0%. La inflación le carcome 8.000 € de poder de compra en 10 años.</div>
+        <div class="vulnerability-pill">📉 Ahorro Muerto: 0% Rentabilidad</div>
+      </div>
+
+      <!-- ESCENARIO 14 (SIALP JOVEN) -->
+      <div class="scenario-card" id="scen-13" onclick="selectScenario(13)">
+        <div class="scenario-name">Alex</div>
+        <div class="scenario-meta">
+          <span>24 años, Xàtiva</span>
+          <span style="color: var(--trust-green);">Joven Ahorrador</span>
+        </div>
+        <div class="scenario-desc">Recién graduado, primer sueldo. Ve la jubilación lejana. Hay que convencerle con el coste de retrasarse.</div>
+        <div class="vulnerability-pill">⏳ Coste del Retraso: Plan Creciente SIALP</div>
+      </div>
+
     </div>
 
     <!-- ARENA DE ROLEPLAY -->
@@ -2511,7 +2566,458 @@
           }
         ]
       }
-    ];
+    ,
+      // ESCENARIO 10 (JUBILACIÓN - FASE 1)
+      {
+        name: "Francisco",
+        strategy: {
+          validar: "Validar que es magnífico que esté en las puertas de una jubilación muy merecida tras una brillante carrera como ingeniero.",
+          reencuadrar: "Reencuadrar usando el reloj de urgencia: sólo le queda 1 año para optimizar su base imponible antes de jubilarse. Dejar su dinero parado al 0% es un regalo silencioso de IRPF al Estado e inflación.",
+          proyectar: "Proyectar cerrando una auditoría rápida de 15 minutos en su oficina para analizar sus bases de cotización en el simulador de la Seguridad Social de NN."
+        },
+        meta: "65 años, Xàtiva · Ingeniero",
+        desc: "Cercano a jubilarse. Casado con Francisca (59). Cree que con su plan de pensiones del banco y sus ahorros va de sobra, y que ya es muy tarde para cambiar.",
+        vulnerability: "Brecha de Jubilación / Fuga Fiscal IRPF",
+        initialTrust: 30,
+        initialDefense: 80,
+        semDict: {
+          validar: ['entiendo', 'lógico', 'logico', 'carrera', 'ingeniero', 'esfuerzo', 'merecido', 'jubilarse', 'respeto', 'normal', 'enhorabuena'],
+          reencuadrar: ['hacienda', 'irpf', 'impuestos', 'banco', 'parado', 'inflación', 'inflacion', 'reloj', 'plazo', 'tarde', 'pérdida', 'perdida', 'seguridad social', 'pension', 'pensión', 'simulador'],
+          proyectar: ['martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'mañana', 'tarde', 'visita', '15 minutos', 'diez', 'café', 'vernos', 'reunión', 'reunion', 'oficina', 'despacho']
+        },
+        steps: [
+          {
+            clientText: "Buenas tardes, soy Francisco. Dígame qué quería rápido, que estoy terminando unos informes en el despacho.",
+            options: [
+              {
+                text: "Hola Francisco... le llamo de Nationale-Nederlanden porque tenemos el Plan SIALP de jubilación con desgravación de impuestos que es de Goldman Sachs y le viene muy bien para no pagar IRPF. ¿Quedamos mañana?",
+                trustEffect: -15,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ ERROR TRANSACCIONAL DE PRODUCTO:</strong> Has entrado vendiendo SIALP, IRPF y Goldman Sachs por teléfono a un profesional ocupado que no te conoce. Sus defensas se disparan.",
+                nextStep: 1
+              },
+              {
+                text: "Hola Francisco... buenas tardes. Soy Fede Fontanals, tu delegado de Nationale-Nederlanden en Xàtiva. Te llamo de forma rápida porque sé que estás en el despacho... y tu tiempo vale oro. Estamos ayudando a profesionales cualificados de la zona... a realizar una auditoría de su futura pensión en la Seguridad Social... antes de que se cierre su plazo de jubilación ordinaria. Seré muy breve...",
+                trustEffect: +25,
+                defenseEffect: -15,
+                coachFeedback: "<strong>✅ EXCELENTE ENFOQUE DE CONSULTOR:</strong> Te presentas con autoridad local, respetas su tiempo de oficina, y enmarcas la llamada en una 'auditoría de pensión de jubilación' (ayuda/relevancia) en vez de un producto comercial.",
+                nextStep: 2
+              }
+            ]
+          },
+          {
+            clientText: "Mire, Fede, yo ya tengo mi plan de pensiones de toda la vida en mi banco y además tengo mis ahorros allí bien seguros. No necesito mirar más a mi edad.",
+            options: [
+              {
+                text: "Es súper lógico pensar así, Francisco... y demuestra la responsabilidad con la que has gestionado tu patrimonio... Pero... déjame hacerte una pregunta de Médico: en ese plan de pensiones tradicional... ¿sabes exactamente qué porcentaje neto de tus ahorros le vas a regalar a Hacienda al rescatarlo de golpe... y cuánto poder de compra estás perdiendo por la inflación en tu cuenta? Es como tener un depósito de agua... con una fuga silenciosa. En solo 15 minutos en tu despacho... pasamos tus números por nuestro simulador y verás la cifra exacta de tu pensión real...",
+                trustEffect: +35,
+                defenseEffect: -25,
+                coachFeedback: "<strong>✅ MAYÉUTICA DE LA FUGA FISCAL:</strong> Validas su carácter previsor (bajas defensas), introduces la metáfora del depósito con fuga y alertas de la retención fiscal del rescate bancario. Su mente analítica de ingeniero quiere ver los números.",
+                nextStep: 3
+              },
+              {
+                text: "Los bancos no le van a desgravar bien y no le garantizan nada, Francisco. Las comisiones del banco se comen su ahorro. Si me da 15 minutos le demuestro que Nationale-Nederlanden es mucho más solvente que su banco tradicional.",
+                trustEffect: -10,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ERROR DE CONFRONTACIÓN DIRECTA:</strong> Atacar su banco de toda la vida ataca indirectamente su criterio anterior. El cliente se cierra ante tu agresividad comercial.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "Bueno, pero es que yo ya tengo 65 años, me jubilo el año que viene. Ya es tarde para que yo empiece a cambiar de planes o a abrir huchas nuevas.",
+            options: [
+              {
+                text: "Te entiendo perfectamente, Francisco... y de hecho es la duda más normal cuando estamos tan cerca de la meta... Pero... justamente por eso el momento es **ahora**: estás en el último año legal para optimizar tu IRPF al máximo antes de jubilarte. Lo que dejas de deducir hoy... lo pierdes para siempre. No se trata de abrir planes a 20 años... sino de blindar lo que ya has acumulado y proteger la pensión de Francisca. Para ver el estudio gráfico en papel... ¿te viene mejor el martes a las 10:00 o el miércoles por la tarde al salir del despacho?",
+                trustEffect: +40,
+                defenseEffect: -30,
+                coachFeedback: "<strong>🚀 CIERRE MAESTRO DE RELOJ DE URGENCIA:</strong> Validas su edad, reencuadras con el 'último año legal' de deducción de IRPF y cierras con doble alternativa enfocada a su despacho. Cita agendada de forma brillante.",
+                nextStep: 100
+              },
+              {
+                text: "Nunca es tarde, Francisco. Si contrata hoy nuestro Plan Flexible de Ahorro, todavía puede aportar antes de que acabe el año fiscal. Déjeme pasar mañana por su oficina y firmamos los papeles.",
+                trustEffect: -15,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ERROR DE EMPUJE COMERCIAL:</strong> Tratar de forzar una firma en frío sin hacer el diagnóstico del gap genera pánico de venta tradicional. Oportunidad rota.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "Pues la verdad es que sí me gustaría ver esa simulación exacta antes de jubilarme. Venga, apunta: nos vemos el martes a las 10:00 en mi despacho y lo revisamos en papel.",
+            options: [
+              {
+                text: "Perfecto Francisco. Anotado queda el martes a las 10:00 en tu despacho. Llévate tu última base de cotización de la Seguridad Social y en 15 minutos te dejo la auditoría hecha por escrito. Un saludo cordial.",
+                trustEffect: +20,
+                defenseEffect: -10,
+                coachFeedback: "<strong>🚀 CITA CONSOLIDADA CON ÉLITE:</strong> Has cerrado la llamada de forma limpia y profesional. ¡Fede suma un cliente con altísimo PVM en jubilación!",
+                nextStep: 100
+              }
+            ]
+          }
+        ]
+      },
+      // ESCENARIO 11 (PROTECCIÓN - FASE 2)
+      {
+        name: "Nuria",
+        strategy: {
+          validar: "Validar que tener un seguro vinculado a la hipoteca demuestra una excelente responsabilidad familiar y que es lógico confiar en que la vivienda quedará pagada.",
+          reencuadrar: "Reencuadrar demostrando que el seguro de vida bancario protege al banco, no a sus hijos. Al faltar ella, la deuda se cancela pero la familia se queda con 0€ líquidos para comer, vestir y estudiar. Alertar de la brecha mensual severa frente a la pensión de viudedad real de 954,33 €.",
+          proyectar: "Proponer una cita rápida de 15 minutos en su domicilio para realizar una Radiografía de Protección familiar y comparar coberturas bancarias frente a la póliza Contigo Familia con descuento de colectivos."
+        },
+        meta: "41 años, Carcaixent · Administrativa",
+        desc: "Madre de 2 niños. Paga seguro de vida vinculado a la hipoteca en su banco de siempre y confía en la pensión de viudedad pública estimada en 954,33 € al mes.",
+        vulnerability: "Infraseguro de Vida / Amortización sin Liquidez",
+        initialTrust: 40,
+        initialDefense: 65,
+        semDict: {
+          validar: ['entiendo', 'lógico', 'logico', 'responsabilidad', 'hipoteca', 'previsora', 'responsable', 'correcto', 'casa', 'vivienda'],
+          reencuadrar: ['banco', 'amortizar', 'deuda', 'efectivo', 'liquidez', 'cero', 'dinero', 'viudedad', 'orfandad', 'seguridad social', 'pension', 'pensión', 'contigo familia', 'comer', 'colegio', 'hijos', '954', 'brecha'],
+          proyectar: ['martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'mañana', 'tarde', 'visita', '15 minutos', 'diez', 'café', 'vernos', 'reunión', 'reunion', 'casa', 'domicilio', 'colegio']
+        },
+        steps: [
+          {
+            clientText: "Hola, sí, dígame. Estoy saliendo de comprar y tengo un poco de prisa, ¿qué quería?",
+            options: [
+              {
+                text: "Hola Nuria... le llamo de Nationale-Nederlanden porque tenemos el seguro Contigo Familia con un 25% de descuento vitalicio de colectivos y primer año de vida gratuito. ¿Le interesa contratarlo hoy?",
+                trustEffect: -15,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ ERROR DE COMERCIAL APRESURADO:</strong> Intentar colocar un seguro de vida y tirar descuentos por teléfono a una madre de familia estresada activa todas sus defensas contra el spam.",
+                nextStep: 1
+              },
+              {
+                text: "Hola Nuria... buenas tardes. Soy Fede Fontanals, tu gestor de Nationale-Nederlanden aquí en La Costera. Te llamo rápido... porque sé que vas de cabeza con las compras y tu tiempo es oro. Te contacto... porque estamos realizando un estudio para familias en la comarca... para taponar una fuga de costes en seguros de protección bancarios. Seré súper directo...",
+                trustEffect: +25,
+                defenseEffect: -15,
+                coachFeedback: "<strong>✅ EXCELENTE APERTURA DEL MÉDICO FINANCIERO:</strong> Empatizas con su falta de tiempo, te posicionas localmente y enmarcas la llamada en una 'fuga de costes bancarios' en vez de una venta directa. Se queda a escuchar.",
+                nextStep: 2
+              }
+            ]
+          },
+          {
+            clientText: "Mire, yo ya tengo un seguro de vida con el banco BBVA vinculado a mi hipoteca. Ya pago bastante allí y no quiero duplicar coberturas ni pagar más seguros.",
+            options: [
+              {
+                text: "Entiendo perfectamente, Nuria... Es súper comprensible y demuestra lo responsable que eres protegiendo tu casa... Pero, déjame hacerte una pregunta muy directa: ¿sabías que ese seguro del banco... está diseñado para proteger al banco y no a tu familia? Si mañana pasa algo... el banco cobra la hipoteca, sí... pero tu familia se queda con cero euros en efectivo para comer, pagar el colegio o las facturas del día a día. ¿Sabías que estás pagando para blindar al banco... mientras dejas desprotegidos a tus hijos?",
+                trustEffect: +35,
+                defenseEffect: -25,
+                coachFeedback: "<strong>✅ MAYÉUTICA DEL BLINDAJE BANCARIO:</strong> Validas su carácter previsor (hipoteca), reencuadras el propósito real del seguro bancario (protege al banco, no a los niños) y revelas la brecha de liquidez. El dolor es obvio.",
+                nextStep: 3
+              },
+              {
+                text: "Nuria, los seguros de los bancos son malísimos, tienen cláusulas abusivas y le cobran el doble de precio. Si se cambia conmigo a Nationale-Nederlanden se ahorra un 20% garantizado. Quedemos mañana.",
+                trustEffect: -10,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ERROR DE DESPRESTIGIO Y PRECIO:</strong> Criticar al banco de forma tan agresiva genera desconfianza. Ella contrató con el banco y siente que cuestionas su inteligencia de compra.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "Hombre, pues no lo había pensado así, yo pensaba que si la hipoteca se pagaba ya no tendrían problemas. Pero además, supongo que el Estado daría una pensión de viudedad y orfandad a mi marido y mis hijos...",
+            options: [
+              {
+                text: "Es la duda más normal, Nuria... y ojalá las pensiones públicas cubrieran todo... Pero las matemáticas del Estado demuestran que tu pensión de viudedad estimada por tu cotización sería de solo 954,33 € al mes. Si tu objetivo para que tu familia viva bien son 1.200 € al mes durante 10 años para criar a tus hijos, os queda una brecha de casi 300 € al mes sin cubrir. En solo 15 minutos en tu casa con un café... te enseño la simulación gráfica de tu caso... y tú decides con la foto real en la mano. ¿Te viene mejor el martes a las 17:30 o el miércoles por la tarde?",
+                trustEffect: +40,
+                defenseEffect: -30,
+                coachFeedback: "<strong>🚀 CIERRE PERFECTO CON RADIOGRAFÍA:</strong> Validas la creencia en el Estado, das el número exacto del simulador de la Seguridad Social de NN (954,33 €/mes), y ofreces el cálculo visual en casa con doble alternativa. Cita cerrada.",
+                nextStep: 100
+              },
+              {
+                text: "La pensión de viudedad del Estado es ridícula y no le dará ni para pagar la luz, Nuria. No se fíe de las ayudas públicas porque España está en quiebra. Contrate nuestro plan Contigo Familia hoy mismo.",
+                trustEffect: -15,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ERROR ALARMISTA Y POLÍTICO:</strong> Usar argumentos de tinte político y alarmista asusta al cliente y destruye tu imagen de consultor profesional.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "Pues la verdad es que me dejas preocupada. Apunta el miércoles a las 17:30 y nos tomamos ese café. Tráete los papeles a ver cómo queda mi caso.",
+            options: [
+              {
+                text: "Perfecto, Nuria. Anotado queda el miércoles a las 17:30 en tu casa. Ten a mano el recibo del seguro del banco y te dejo la simulación comparada en 15 minutos. Un abrazo y buena tarde.",
+                trustEffect: +20,
+                defenseEffect: -10,
+                coachFeedback: "<strong>🚀 CITA CERRADA CON ÉXITO:</strong> Has cerrado la cita de forma impecable, reforzando la sencillez del análisis. ¡Excelente trabajo!",
+                nextStep: 100
+              }
+            ]
+          }
+        ]
+      },
+      // ESCENARIO 12 (PROTECCIÓN - AUTÓNOMOS)
+      {
+        name: "Jordi",
+        strategy: {
+          validar: "Validar el mérito inmenso que tiene levantar la persiana de su taller cada día y el criterio lógico de controlar los costes fijos de su negocio.",
+          reencuadrar: "Reencuadrar demostrando que como autónomo su salud es el único motor del taller. Si sufre una baja por enfermedad o accidente, su prestación RETA es de solo 339 € al mes. Con unos fijos de negocio de 2.000 €, la brecha es de 1.661 €/mes, lo que asfixiaría su taller de inmediato.",
+          proyectar: "Proponer una cita rápida de 15 minutos en su propio local/taller a última hora para hacer un diagnóstico de su brecha RETA con la póliza Contigo Familia con subsidio de baja."
+        },
+        meta: "45 años, Xàtiva · Mecánico Autónomo",
+        desc: "Mecánico con nave en alquiler. Cotiza al mínimo en RETA (452 €/mes). Confía en que nunca se pone malo y que si pasa algo la Seguridad Social le sostendrá.",
+        vulnerability: "Brecha ILT / RETA Insuficiente",
+        initialTrust: 35,
+        initialDefense: 75,
+        semDict: {
+          validar: ['entiendo', 'lógico', 'logico', 'autónomo', 'autonomo', 'taller', 'esfuerzo', 'persiana', 'mérito', 'merito', 'gastos', 'fijos', 'negocio'],
+          reencuadrar: ['baja', 'reta', 'ilt', '339', 'alquiler', 'nave', 'fijos', 'taller', 'motor', 'enfermedad', 'accidente', '1661', 'persiana', 'cero', 'quiebra'],
+          proyectar: ['martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'mañana', 'tarde', 'visita', '15 minutos', 'diez', 'café', 'vernos', 'reunión', 'reunion', 'taller', 'nave', 'local']
+        },
+        steps: [
+          {
+            clientText: "Hola, muy buenas, soy Jordi. Dime rápido que tengo el coche de un cliente subido en el elevador y no puedo perder el tiempo.",
+            options: [
+              {
+                text: "Hola Jordi, te llamo de Nationale-Nederlanden porque tenemos un seguro de baja diaria ILT para autónomos que te paga 50 € al día si te pones enfermo. Te viene súper bien para no perder dinero. ¿Quedamos mañana en tu taller?",
+                trustEffect: -15,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ ERROR TRANSACCIONAL DE PRODUCTO:</strong> Has entrado vendiendo la baja a 50 € en frío mientras el cliente está trabajando con las manos en un motor. Despiertas rechazo comercial inmediato.",
+                nextStep: 1
+              },
+              {
+                text: "Hola Jordi... buenas tardes. Soy Fede Fontanals, tu gestor de Nationale-Nederlanden en Xàtiva. Te llamo rápido... porque sé que estás con las manos en la faena y tu tiempo es dinero. Te contacto... porque estamos realizando una auditoría de costes del RETA para talleres de la comarca... para taponar el impacto de las bajas por enfermedad. Seré súper directo...",
+                trustEffect: +25,
+                defenseEffect: -15,
+                coachFeedback: "<strong>✅ EXCELENTE ENFOQUE OPERATIVO:</strong> Respetas su faena, te posicionas localmente y enmarcas la llamada en una 'auditoría de costes del RETA' (relevancia profesional) en vez de una venta de seguros.",
+                nextStep: 2
+              }
+            ]
+          },
+          {
+            clientText: "Mire, Fede, yo soy autónomo de toda la vida y pago mi cuota al RETA todos los meses religiosos. Si tengo una baja ya me pagará el Estado. Y además, yo nunca me pongo enfermo, no tengo tiempo para eso.",
+            options: [
+              {
+                text: "Te entiendo perfectamente, Jordi... levantar la persiana todos los días tiene un mérito inmenso y es muy lógico querer recortar gastos fijos... Pero... déjame hacerte una pregunta de Médico: si cotizas al mínimo con una cuota de 452 €... ¿sabías que si mañana tienes un accidente y no puedes abrir el taller, la Seguridad Social solo te va a pagar 339 € al mes de prestación? Si el alquiler de tu nave y tus fijos suman 2.000 €, ¿cómo cubres los 1.661 € mensuales de diferencia? Tu cuerpo es el motor de tu taller: si el motor se para, ¿quién paga tu persiana?",
+                trustEffect: +35,
+                defenseEffect: -25,
+                coachFeedback: "<strong>✅ REENCUADRE DEL GAP DEL AUTÓNOMO:</strong> Validas su esfuerzo diario (bajas defensas), introduces el dato real de su baja estimada (339 €) y le confrontas con el coste fijo de su nave. El riesgo de quiebra es evidente.",
+                nextStep: 3
+              },
+              {
+                text: "Eso es un error, Jordi. Si te rompes una pierna y estás tres meses de baja te arruinas, porque el Estado no ayuda a los autónomos y te vas a ver ahogado por las deudas. Tienes que contratar un seguro ya.",
+                trustEffect: -15,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ERROR POR AMENAZA Y AGRESIVIDAD:</strong> Amenazar al cliente con la ruina y atacar al Estado de forma tan directa genera una reacción defensiva. El cliente se cierra ante tu agresividad.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "¿Cómo? ¿Solo 339 euros al mes si cojo la baja? ¿Estás seguro? Eso no me da ni para pagar el alquiler de la nave, y mucho menos para comer en casa...",
+            options: [
+              {
+                text: "Es una realidad durísima, Jordi... y ojalá el RETA protegiera más a los que ponéis el hombro en la comarca... Justamente por eso realizamos este diagnóstico de 15 minutos en papel: para calcular tu brecha exacta y crear una póliza Contigo Familia que cubra esos 1.700 € mensuales de diferencia por si alguna vez el motor del taller se tiene que parar. Para revisar tus números... ¿te viene mejor el jueves a las 19:30 cuando ya no tengas clientes o el viernes a mediodía?",
+                trustEffect: +40,
+                defenseEffect: -30,
+                coachFeedback: "<strong>🚀 CIERRE PERFECTO CON RADIOGRAFÍA:</strong> Empatizas con la dureza de la situación, confirmas el gap y ofreces el estudio rápido de 15 minutos al final de su jornada laboral para no interrumpir su trabajo. Cita agendada.",
+                nextStep: 100
+              },
+              {
+                text: "Sí, es totalmente correcto, es una miseria. Si me das tus datos bancarios y tu DNI te hago un seguro rápido por teléfono de baja diaria por 45 euros al mes y te olvidas de problemas.",
+                trustEffect: -10,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ERROR DE CIERRE PREMATURO:</strong> Intentar forzar una venta de producto por teléfono sin un diagnóstico presencial en papel destruye la confianza y tu autoridad como consultor.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "Pues me has dejado preocupado con el número. Pásate el jueves a las 19:30 por el taller y nos tomamos ese café rápido con los papeles.",
+            options: [
+              {
+                text: "Perfecto, Jordi. Anotado queda el jueves a las 19:30 en tu taller. Ten a mano tu último recibo de la cuota de autónomos y en 15 minutos te dejo la simulación en papel de tu brecha real. Un abrazo y que vaya bien la jornada.",
+                trustEffect: +20,
+                defenseEffect: -10,
+                coachFeedback: "<strong>🚀 CITA CONSOLIDADA:</strong> Cierre limpio, profesional, respetando su espacio laboral y consolidando tu visita presencial de alto valor. ¡Excelente trabajo!",
+                nextStep: 100
+              }
+            ]
+          }
+        ]
+      },
+      // ESCENARIO 13 (AHORRO E INVERSIÓN - FASE 3)
+      {
+        name: "Noelia",
+        strategy: {
+          validar: "Validar que es sumamente prudente querer proteger el dinero de toda la vida y que es totalmente normal tener recelo de la volatilidad de los mercados.",
+          reencuadrar: "Reencuadrar demostrando que dejar sus 36.000 € al 0% en el banco no es seguro, es una pérdida silenciosa y matemáticamente garantizada por la inflación. Presentar el Plan Creciente SIALP con su blindaje diario del 80% del capital y su exención fiscal total.",
+          proyectar: "Proponer una cita rápida de 15 minutos en su casa con un café para realizar un estudio gráfico de su brecha de ahorro y mostrarle cómo blindar sus ahorros."
+        },
+        meta: "36 años, Carcaixent · Administrativa",
+        desc: "Pareja de Francisco. Tiene 36.000 € parados en la cuenta del banco de siempre. Le aterra perder en bolsa pero quiere ahorrar para ayudar a su hijo.",
+        vulnerability: "Fuga por Inflación / Libreta al 0%",
+        initialTrust: 40,
+        initialDefense: 70,
+        semDict: {
+          validar: ['entiendo', 'lógico', 'logico', 'prudente', 'precaución', 'precaucion', 'seguros', 'banco', 'normal', 'comprensible', 'ahorradora', 'responsabilidad'],
+          reencuadrar: ['inflación', 'inflacion', 'parado', 'cero', 'pérdida', 'perdida', 'poder de compra', 'sialp', 'impuestos', 'exento', 'goldman sachs', 'contigo futuro', 'garantía', 'garantia', '80%'],
+          proyectar: ['martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'mañana', 'tarde', 'visita', '15 minutos', 'diez', 'café', 'vernos', 'reunión', 'reunion', 'casa', 'domicilio', 'estudio']
+        },
+        steps: [
+          {
+            clientText: "Hola, buenas tardes. Dígame qué quería, pero le adelanto que yo no quiero invertir nada en bolsa, que los mercados son muy peligrosos.",
+            options: [
+              {
+                text: "Hola Noelia, le llamo de Nationale-Nederlanden porque tenemos el Unit Linked Contigo Futuro con carteras dinámicas de Goldman Sachs que le dan un 6% de rentabilidad anual y baten a la bolsa de forma garantizada. ¿Quedamos mañana en su casa?",
+                trustEffect: -15,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ ERROR DE EMPUJE DE RIESGO:</strong> Has entrado ofreciendo Unit Linked y carteras dinámicas a una persona que te acaba de decir que le aterra la bolsa. Sus defensas se cierran en banda.",
+                nextStep: 1
+              },
+              {
+                text: "Hola Noelia... buenas tardes. Soy Fede Fontanals, tu gestor de Nationale-Nederlanden aquí en La Costera. Te llamo rápido... porque sé que tu tiempo es valioso. Te contacto... porque estamos ayudando a ahorradores de la zona a taponar una fuga silenciosa en sus libretas bancarias... producida por las nuevas subidas de costes. Seré súper directo...",
+                trustEffect: +25,
+                defenseEffect: -15,
+                coachFeedback: "<strong>✅ APERTURA DE DIAGNÓSTICO PROFESIONAL:</strong> Respetas su tiempo, te presentas con cercanía y enmarcas la llamada en una 'fuga silenciosa en las libretas' (dolor/inflación) en lugar de inversión en bolsa.",
+                nextStep: 2
+              }
+            ]
+          },
+          {
+            clientText: "Mire, Fede, yo tengo mis 36.000 euros en una libreta de toda la vida de mi banco. No me da nada de intereses, es verdad, pero al menos sé que está ahí seguro y que no va a desaparecer.",
+            options: [
+              {
+                text: "Es súper comprensible y demuestra lo prudente que eres protegiendo el esfuerzo de tu vida, Noelia... Pero, déjame hacerte una pregunta muy directa: ¿sabías que dejar tus 36.000 € al 0% en el banco no es seguro, sino una pérdida garantizada de valor? Con la subida de precios actual, tus 36.000 € comprarán dentro de 10 años lo mismo que 28.000 € hoy. Estás perdiendo 8.000 € de poder de compra de forma silenciosa. ¿Sabías que en Nationale-Nederlanden tenemos planes con garantía de capital del 80% diaria blindada por contrato y exentos de impuestos?",
+                trustEffect: +35,
+                defenseEffect: -25,
+                coachFeedback: "<strong>✅ MAYÉUTICA DE LA DEPRECIACIÓN SILENCIOSA:</strong> Validas su prudencia, le demuestras el coste matemático de la inflación en su libreta (pérdida de 8.000 € de compra) y le presentas la garantía contractual del 80% como alternativa de seguridad.",
+                nextStep: 3
+              },
+              {
+                text: "Los bancos le están engañando cobrándole comisiones por tener su libreta abierta, Noelia. Si se pasa a nuestro plan de ahorro garantizado de NN, no pagará comisiones y le daremos el doble de rentabilidad. ¿Le viene bien mañana?",
+                trustEffect: -10,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ERROR DE ATENTADO A SU CRITERIO:</strong> Decirle al cliente que el banco le 'engaña' ataca indirectamente su propia inteligencia por haber tenido el dinero allí. Se activa la resistencia.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "¿Perder 8.000 euros de valor de compra? ¿Tanto? La verdad es que las cosas están carísimas... pero a mí me da miedo que la bolsa caiga y perder mis ahorros, que nos ha costado mucho sudor juntarlos.",
+            options: [
+              {
+                text: "Te entiendo perfectamente, Noelia... y ojalá la economía fuera más estable... Justamente por eso nuestro Plan Creciente SIALP te blinda el 80% del valor máximo diario que alcance tu dinero. Si el fondo sube, tu garantía sube por contrato, pero si hay caídas en el mercado, tu dinero nunca baja de ese suelo. Para ver una simulación gráfica en papel de cómo crecería tu dinero con este escudo fiscal... ¿te viene mejor el martes a las 18:00 en casa o el miércoles por la tarde al salir de trabajar?",
+                trustEffect: +40,
+                defenseEffect: -30,
+                coachFeedback: "<strong>🚀 CIERRE PERFECTO CON ESCUDO DE CAPITAL:</strong> Empatizas con su sudor por ahorrar, le explicas de forma muy gráfica el 'suelo dinámico' de garantía del SIALP y cierras la visita presencial con doble alternativa.",
+                nextStep: 100
+              },
+              {
+                text: "No se preocupe, Noelia. Nuestros fondos de Goldman Sachs están muy diversificados y es imposible que pierda dinero. Déjeme pasar mañana a firmar la solicitud y lo comprueba usted misma.",
+                trustEffect: -15,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ERROR DE FALSAS PROMESAS:</strong> Decir que es 'imposible perder dinero' en un Unit Linked viola las normativas de la CNMV y asusta al cliente. Cita perdida.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "Bueno, si me garantizan por contrato que no perderé mis ahorros y que está libre de impuestos, sí que me gustaría verlo por escrito en papel. Venga, te espero el martes a las 18:00 en casa.",
+            options: [
+              {
+                text: "Perfecto, Noelia. Anotado queda el martes a las 18:00 en tu casa. Ten a mano la cartilla del banco y te dejo hecha la simulación comparada en 15 minutos. Un abrazo y buena tarde.",
+                trustEffect: +20,
+                defenseEffect: -10,
+                coachFeedback: "<strong>🚀 CITA CERRADA CON MÁXIMA SEGURIDAD:</strong> Cierre limpio, reforzando la seguridad y preparando la documentación necesaria para la visita. ¡Excelente trabajo consultivo!",
+                nextStep: 100
+              }
+            ]
+          }
+        ]
+      },
+      // ESCENARIO 14 (SIALP JOVEN - S1)
+      {
+        name: "Alex",
+        strategy: {
+          validar: "Validar que es normal querer disfrutar del primer sueldo a los 24 años y ver el retiro a un siglo de distancia.",
+          reencuadrar: "Reencuadrar demostrando el coste del retraso: empezar a ahorrar con 30 € hoy equivale a tener que aportar 150 € a los 40 años para el mismo capital. Presentar el SIALP como hucha líquida exenta de impuestos en el año 5.",
+          proyectar: "Proponer una cita rápida de 10 minutos para tomar un café y ver la simulación en el iPad."
+        },
+        meta: "24 años, Xàtiva · Desarrollador Junior",
+        desc: "Primer empleo. Ve la jubilación como ciencia ficción y prefiere gastar en ocio. Teme atarse de por vida.",
+        vulnerability: "Coste del Retraso / Invulnerabilidad",
+        initialTrust: 40,
+        initialDefense: 70,
+        semDict: {
+          validar: ['entiendo', 'lógico', 'logico', 'normal', 'primer sueldo', 'joven', 'disfrutar', 'entender', 'respetable'],
+          reencuadrar: ['retraso', 'coste', 'tiempo', 'interés compuesto', 'sialp', '30 €', '150 €', 'impuestos', 'coche', 'casa', 'hucha', 'liquidar', 'retirar', '5 años', 'liquidez'],
+          proyectar: ['martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'mañana', 'tarde', 'café', 'alameda', '10 minutos', ' iPad', 'acercar', 'vernos', 'charla']
+        },
+        steps: [
+          {
+            clientText: "Hola, buenas. Mira, soy Alex. Estoy un poco liado y si es para vender seguros, paso, que soy muy joven y no necesito nada de eso.",
+            options: [
+              {
+                text: "Hola Alex, le llamo de Nationale-Nederlanden porque tenemos el Plan SIALP de jubilación con desgravación de impuestos que le viene muy bien para el futuro. ¿Quedamos mañana?",
+                trustEffect: -15,
+                defenseEffect: +10,
+                coachFeedback: "<strong>❌ ERROR TRANSACCIONAL EN FRÍO:</strong> Ofrecer un producto complejo de jubilación y desgravación a un joven de 24 años en su primer empleo genera rechazo inmediato.",
+                nextStep: 1
+              },
+              {
+                text: "Hola Alex... buenas tardes. Soy Fede Fontanals, tu gestor local de Nationale-Nederlanden en Xàtiva. Te llamo rápido... porque sé que vas de cabeza y tu tiempo es oro. Te contacto... porque estamos activando un beneficio de ahorro especial para jóvenes profesionales de la zona... que cuesta hoy la mitad de lo que le costaría a tu cuñado. Seré muy breve...",
+                trustEffect: +25,
+                defenseEffect: -15,
+                coachFeedback: "<strong>✅ EXCELENTE APERTURA GENERACIONAL:</strong> Te presentas con autoridad local, empatizas con su ritmo y hablas de un 'beneficio de ahorro que cuesta la mitad de lo que le cuesta a un mayor'. Captura su curiosidad.",
+                nextStep: 2
+              }
+            ]
+          },
+          {
+            clientText: "Ya, pero es que yo acabo de empezar a trabajar y lo que quiero es disfrutar de mi dinero ahora. La jubilación me pilla a un siglo de distancia, no pienso en eso.",
+            options: [
+              {
+                text: "Es súper lógico pensar así, Alex... y de hecho es lo más normal del mundo con tu primer sueldo... Pero... déjame hacerte una pregunta de Médico: si pudieras comprar hoy un billete para que tu 'yo del futuro' viaje gratis y te costara solo 30 € al mes hoy frente a tener que pagar 150 € al mes si te esperas a tener 40 años... ¿lo comprarías hoy o preferirías regalarle ese sobreprecio al tiempo por retrasarte?",
+                trustEffect: +35,
+                defenseEffect: -25,
+                coachFeedback: "<strong>✅ ENCUADRE DEL COSTE DEL RETRASO:</strong> Validas su derecho a disfrutar de su sueldo (bajas defensas) y aplicas la mayéutica del coste de esperar usando la metáfora del billete. Entiende el valor del tiempo.",
+                nextStep: 3
+              },
+              {
+                text: "Alex, la Seguridad Social va a quebrar y cuando seas mayor no tendrás pensión si no empiezas a ahorrar hoy mismo. Tienes que ser responsable y pensar en el mañana.",
+                trustEffect: -10,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ERROR DE ADVERTENCIA APOCALÍPTICA:</strong> Intentar asustar a un joven de 24 años con la quiebra del sistema público genera desconexión inmediata. Sienten que no va con ellos.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "Hombre, pagar 30 euros al mes sí que me lo puedo permitir, pero no quiero atarme con un banco a 40 años, que vete a saber dónde estaré mañana.",
+            options: [
+              {
+                text: "Te entiendo perfectamente, Alex... a tu edad lo último que queremos es atarnos a contratos rígidos de por vida... Pero... justamente por eso el Plan Creciente SIALP es flexible: no tienes permanencia, tu dinero está disponible a partir del primer año por si tienes una de las tuyas, y a los 5 años te lo puedes llevar 100% libre de impuestos para dar la entrada de tu coche o tu casa. Para enseñarte en un gráfico en el iPad cómo funciona este escudo fiscal... ¿te viene mejor el martes a las 18:00 o el miércoles por la tarde al salir del curre?",
+                trustEffect: +40,
+                defenseEffect: -30,
+                coachFeedback: "<strong>🚀 CIERRE PERFECTO DE FLEXIBILIDAD Y LIQUIDEZ:</strong> Validas su objeción de atarse (bajas defensas), explicas la disponibilidad y el beneficio de SIALP (entrada de coche/casa a 5 años) y cierras con doble alternativa. Cita agendada.",
+                nextStep: 100
+              },
+              {
+                text: "No se preocupe, puede cancelar cuando quiera. Déjeme su DNI y le tramito la póliza en un momento para que empiece a ahorrar ya.",
+                trustEffect: -15,
+                defenseEffect: +15,
+                coachFeedback: "<strong>❌ ERROR DE CIERRE PREMATURO:</strong> Forzar la toma del DNI y la firma por teléfono sin que el cliente vea los números y el funcionamiento del plan rompe la confianza. Cita perdida.",
+                nextStep: 99
+              }
+            ]
+          },
+          {
+            clientText: "Pues la verdad es que si es dinero disponible y me sirve para la entrada de la casa sin pagar a Hacienda, sí me interesa verlo. Pásate el miércoles a las 18:00 y lo vemos con ese café.",
+            options: [
+              {
+                text: "Perfecto, Alex. Apuntado queda el miércoles a las 18:00 en la Alameda para ese café rápido. En 10 minutos te dejo la simulación en pantalla. Que pases buena tarde.",
+                trustEffect: +20,
+                defenseEffect: -10,
+                coachFeedback: "<strong>🚀 CITA CONSOLIDADA:</strong> Cierre limpio, ágil y adaptado a su perfil. ¡Fede suma un cliente joven con gran potencial futuro!",
+                nextStep: 100
+              }
+            ]
+          }
+        ]
+      }
+];
 
     /* ========================================================
        DATA DE OBJECIONES (SANDBOX)

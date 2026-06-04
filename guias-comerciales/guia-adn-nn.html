@@ -201,7 +201,7 @@ body {
 
 /* ══ CONTENT ═════════════════════════════════════ */
 .content {
-  max-width: 900px;
+  max-width: 950px;
   margin: 0 auto;
   padding: 0 2rem 4rem;
 }
@@ -317,6 +317,56 @@ body {
 }
 
 .card p:last-child { margin-bottom: 0; }
+
+.case-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 16px;
+  margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+  .case-grid { grid-template-columns: 1fr; }
+}
+
+.case-data {
+  background: var(--dark3);
+  border-radius: var(--r);
+  padding: 1rem;
+  font-size: 15px;
+}
+
+.case-data ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+.case-data li {
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--dark4);
+  padding-bottom: 6px;
+}
+
+.case-data li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.case-data strong {
+  color: var(--text);
+}
+
+.case-tag {
+  display: inline-block;
+  background: var(--nn-glow);
+  color: var(--nn-light);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
 
 /* ══ COLLAPSIBLE ═════════════════════════════════ */
 .collapse-trigger {
@@ -599,7 +649,7 @@ body {
 
 .priority-row {
   display: grid;
-  grid-template-columns: 40px 1fr 1fr 1fr auto;
+  grid-template-columns: 40px 1.5fr 1.5fr 1fr auto;
   gap: 10px;
   align-items: center;
   background: var(--dark3);
@@ -786,10 +836,10 @@ body {
     ⚡ Cheat Sheet <span class="level-badge badge-quick">1 MIN</span>
   </div>
   <div class="level-tab" onclick="switchLevel('guide')">
-    📋 Guía Práctica <span class="level-badge badge-guide">ESTUDIO</span>
+    📋 Casos Prácticos ADN <span class="level-badge badge-guide">ESTUDIO</span>
   </div>
   <div class="level-tab" onclick="switchLevel('deep')">
-    🧠 Manual Profundo <span class="level-badge badge-deep">FORMACIÓN</span>
+    🧠 Manual de Neuroventas <span class="level-badge badge-deep">FORMACIÓN</span>
   </div>
 </div>
 
@@ -804,6 +854,7 @@ body {
 
 <!-- ═══════════════════════════════════════════════════
      NIVEL 1: CHEAT SHEET
+     Pestaña rápida con el esqueleto conversacional y prioridades
 ═══════════════════════════════════════════════════ -->
 <div class="level-content active" id="level-quick">
 
@@ -811,8 +862,8 @@ body {
     <div class="section-head">
       <div class="section-icon icon-orange">📞</div>
       <div>
-        <div class="section-title">FLUJO RÁPIDO DE LA ENTREVISTA ADN</div>
-        <div class="section-sub">Consulta durante la entrevista · 5 fases</div>
+        <div class="section-title">FLUJO DE LA ENTREVISTA ADN (GUION OPERACIONAL)</div>
+        <div class="section-sub">Estructura conversacional en 5 fases críticas</div>
       </div>
     </div>
 
@@ -820,11 +871,11 @@ body {
       <div class="flow-step">
         <div class="flow-line"><div class="flow-dot">1</div><div class="flow-connector"></div></div>
         <div class="flow-content">
-          <h4>APERTURA · 3 minutos</h4>
+          <h4>APERTURA · 3 minutos (Desarme Límbico)</h4>
           <p><span class="speaker">"No estoy aquí para venderte nada. Estoy aquí para ayudarte a descubrir si tienes algún agujero en tu protección que no has visto."</span></p>
           <div class="tip">
-            <div class="tip-title">🎯 Clave</div>
-            <p>Pide permiso. Establece que tu rol es diagnosticar, no vender. El cliente debe sentir que ELIGE participar.</p>
+            <div class="tip-title">🎯 Meta</div>
+            <p>Neutraliza la defensa instintiva de 2 segundos. Pide permiso y cede el control al cliente para que elija participar.</p>
           </div>
         </div>
       </div>
@@ -832,13 +883,13 @@ body {
       <div class="flow-step">
         <div class="flow-line"><div class="flow-dot">2</div><div class="flow-connector"></div></div>
         <div class="flow-content">
-          <h4>DESCUBRIMIENTO · 10-15 minutos</h4>
-          <p>Pregunta abierta: <span class="speaker">"¿Cómo es un mes normal para ti económicamente?"</span></p>
-          <p>Refleja sus números: <span class="speaker">"Entonces te sobran unos Z € al mes... ¿a dónde van?"</span></p>
-          <p>Pregunta demoledora: <span class="speaker">"Si mañana tienes una emergencia grave, ¿de dónde sale el dinero?"</span></p>
+          <h4>DESCUBRIMIENTO · 10-15 minutos (Auditoría General)</h4>
+          <p>Sondeo: <span class="speaker">"¿Cómo es un mes normal para ti económicamente? Sin entrar en detalles... ¿cuánto entra y cuánto sale?"</span></p>
+          <p>Reflejo: <span class="speaker">"Entonces te sobran unos Z € al mes... ¿a dónde van?"</span></p>
+          <p>Mina táctica: <span class="speaker">"Si mañana tienes una emergencia grave, ¿de dónde sale el dinero?"</span></p>
           <div class="golden">
             <div class="tip-title">⚡ Regla de oro</div>
-            <p>USA SUS NÚMEROS, NO LOS TUYOS. "Tú has dicho que..." es imbatible.</p>
+            <p>Utiliza siempre los números del cliente ("Tú has dicho que ingresas..."). Discutir con sus propios datos es cognitivamente imposible.</p>
           </div>
         </div>
       </div>
@@ -846,13 +897,13 @@ body {
       <div class="flow-step">
         <div class="flow-line"><div class="flow-dot">3</div><div class="flow-connector"></div></div>
         <div class="flow-content">
-          <h4>ACTIVAR CONCIENCIA · 5-10 minutos</h4>
-          <p>IT: <span class="speaker">"Si no puedes trabajar 6 meses, ¿cómo cubres tus gastos?"</span></p>
-          <p>Familia: <span class="speaker">"Si tú faltas, ¿cómo vive tu familia el mes que viene?"</span></p>
-          <p>Jubilación: <span class="speaker">"¿De dónde van a salir esos € al mes cuando no trabajes?"</span></p>
+          <h4>ACTIVACIÓN DE CONCIENCIA · 5-10 minutos (Cuantificar la Brecha)</h4>
+          <p>Incapacidad Temporal: <span class="speaker">"Si enfermas y tienes que parar 3 meses, ¿sabes al céntimo cuánto te ingresará la Seguridad Social cada día?"</span></p>
+          <p>Protección Familiar: <span class="speaker">"Si el motor económico de esta casa se apaga hoy... ¿cuántos meses exactos aguantaría tu familia pagando la hipoteca?"</span></p>
+          <p>Jubilación: <span class="speaker">"Cuando dejes de trabajar, vas a necesitar Z €/mes. ¿De dónde van a salir si la Seguridad Social solo te ingresa la mitad?"</span></p>
           <div class="warning">
-            <div class="tip-title">🤫 Silencio</div>
-            <p>Después de la pregunta, CÁLLATE. Cuenta hasta 10. El que habla primero pierde poder. Deja que el cliente conecte.</p>
+            <div class="tip-title">🤫 Regla del Silencio de 10 Segundos</div>
+            <p>Tras la pregunta demoledora, cállate. Cuenta mentalmente hasta 10. Deja que el cliente asimile el abismo. El primero que habla, pierde poder.</p>
           </div>
         </div>
       </div>
@@ -860,87 +911,109 @@ body {
       <div class="flow-step">
         <div class="flow-line"><div class="flow-dot">4</div><div class="flow-connector"></div></div>
         <div class="flow-content">
-          <h4>RECAPITULACIÓN · 2-3 minutos</h4>
-          <p><span class="speaker">"Recapitulemos: (1) si no puedes trabajar, no tienes cómo cubrir gastos. (2) Si faltas, tu familia no tiene cómo mantenerse. (3) Cuando te jubiles, te van a faltar X € al mes. ¿Estoy equivocado en algo?"</span></p>
-          <p>Luego: <span class="speaker">"¿Qué quieres hacer con esta información?"</span></p>
+          <h4>RECAPITULACIÓN · 2-3 minutos (Espejo del Dolor)</h4>
+          <p><span class="speaker">"Recapitulemos tus números: si tienes una baja cobras solo 339 € al mes frente a fijos de 2.000 €; si faltas, tu familia no tiene liquidez; y en jubilación te faltarán 900 € al mes. ¿Es correcto?"</span></p>
+          <p>Pregunta de control: <span class="speaker">"¿Qué quieres hacer con esta información?"</span></p>
         </div>
       </div>
 
       <div class="flow-step">
         <div class="flow-line"><div class="flow-dot">5</div><div class="flow-connector"></div></div>
         <div class="flow-content">
-          <h4>SOLUCIÓN NATURAL · 5-10 minutos</h4>
-          <p><span class="speaker">"No te voy a vender nada que no necesites. Pero sí te enseño cómo cerrar estos agujeros. ¿Te las explico y tú decides?"</span></p>
-          <div class="tip">
-            <div class="tip-title">🎯 Cierre suave</div>
-            <p>"¿Empezamos con [producto] y luego vemos el resto, o prefieres cerrar todo de una vez?"</p>
-          </div>
+          <h4>SOLUCIÓN NATURAL · 5-10 minutos (Cerrar la Hemorragia)</h4>
+          <p><span class="speaker">"No vengo a venderte nada. Vengo a enseñarte cómo cerrar estas fugas. Te explico cómo Nationale-Nederlanden blinda estos riesgos por contrato y tú decides..."</span></p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- CHEAT: OBJECIONES RÁPIDAS -->
+  <!-- CHEAT: OBJECIONES VRP -->
   <div class="section">
     <div class="section-head">
       <div class="section-icon icon-red">🛡️</div>
       <div>
-        <div class="section-title">OBJECIONES — RESPUESTA RÁPIDA</div>
-        <div class="section-sub">Copia y usa · Las 5 más frecuentes</div>
+        <div class="section-title">MANEJO DE OBJECIONES (MÉTODO VRP)</div>
+        <div class="section-sub">Validar · Reencuadrar · Proyectar</div>
       </div>
     </div>
 
     <div class="card card-red">
-      <div class="card-title">"Es muy caro"</div>
-      <p><span class="speaker">"¿Caro comparado con qué? Si mañana no puedes trabajar, pierdes X € al mes. Este producto te cubre Y €. ¿Qué es más caro: pagar 200 €/mes ahora o perder 2.000 €/mes si te pasa algo?"</span></p>
+      <div class="card-title">"Es demasiado caro"</div>
+      <p><span class="speaker">"Entiendo perfectamente que quieras cuidar tu dinero (Validar). Pero déjame preguntarte algo: ¿qué es más caro, asumir un coste de 200 € al mes hoy o perder 2.000 € al mes de forma indefinida si mañana tienes un accidente y tu taller se para? (Reencuadrar)"</span></p>
     </div>
 
     <div class="card card-amber">
-      <div class="card-title">"Déjame pensarlo"</div>
-      <p><span class="speaker">"Por supuesto. Pero antes: ¿qué parte no te ha quedado clara? ¿Es el precio, la necesidad, o el producto?"</span></p>
-      <p>Después: <span class="speaker">"Si dentro de 6 meses tienes un accidente, ¿vas a pensar 'menos mal que contraté' o 'por qué esperé'?"</span></p>
+      <div class="card-title">"Ya tengo un seguro con mi banco"</div>
+      <p><span class="speaker">"Qué gran noticia, demuestra que eres una persona muy previsora (Validar). Sin embargo, ¿sabes al céntimo cuánto cobraría tu familia al mes si faltas y si ese capital extingue la hipoteca o los deja con 0 € de liquidez para comer? Comparemos coberturas contra coberturas, no precios (Reencuadrar)"</span></p>
     </div>
 
     <div class="card card-blue">
-      <div class="card-title">"Ya tengo seguro"</div>
-      <p><span class="speaker">"Perfecto. ¿Qué cobertura tienes? ¿Cuánto te cubre al mes si no puedes trabajar? ¿Durante cuánto tiempo?"</span></p>
-      <p>Después: <span class="speaker">"Tus gastos son Z € al mes. ¿Cómo cubres la diferencia?"</span></p>
-    </div>
-
-    <div class="card card-purple">
-      <div class="card-title">"Tengo que consultarlo con mi pareja"</div>
-      <p><span class="speaker">"Me parece perfecto. ¿Qué crees que le preocupará más: el precio o la necesidad? Te preparo un resumen para que decidáis juntos."</span></p>
-    </div>
-
-    <div class="card card-green">
-      <div class="card-title">"No es el momento"</div>
-      <p><span class="speaker">"Entiendo. ¿Cuál sería el momento? Porque los accidentes no esperan al momento adecuado..."</span></p>
+      <div class="card-title">"Déjame que lo piense"</div>
+      <p><span class="speaker">"Por supuesto, es una decisión muy seria y es sano meditarla (Validar). Para que lo pienses con toda la información: ¿qué te frena realmente? ¿Es el presupuesto, el producto o la confianza? (Reencuadrar) Si en 6 meses ocurre un imprevisto médico, ¿pensarás 'menos mal que contraté' o 'por qué no lo dejé resuelto'? (Proyectar)"</span></p>
     </div>
   </div>
 
-  <!-- CHEAT: DECISIÓN RÁPIDA -->
+  <!-- CHEAT: BUYER PERSONAS (S1 A S5) -->
   <div class="section">
     <div class="section-head">
-      <div class="section-icon icon-green">🎯</div>
+      <div class="section-icon icon-purple">👥</div>
       <div>
-        <div class="section-title">¿QUÉ PRODUCTO PRIMERO?</div>
-        <div class="section-sub">Árbol de decisión rápido</div>
+        <div class="section-title">FRAMEWORK DE BUYER PERSONAS (S1 A S5)</div>
+        <div class="section-sub">Estrategia de venta rápida y segmentación por perfil vital</div>
       </div>
     </div>
 
-    <div class="card card-accent">
-      <p><strong>¿Autónomo?</strong> → <span class="kw">Contigo Autónomo</span> (dolor IT agudo)</p>
-      <p><strong>¿Hijos o pareja dependiente?</strong> → <span class="kw">Plan Salud+Vida</span> (protección familiar)</p>
-      <p><strong>¿Mayor de 50?</strong> → <span class="kw">Plan Creciente SIALP</span> (urgencia jubilación)</p>
-      <p><strong>¿Casa sin seguro hogar?</strong> → <span class="kw">MiHogar Seguro</span> (cierre fácil)</p>
-      <p><strong>¿Ninguna anterior?</strong> → <span class="kw">Plan Salud+Vida</span> (producto estrella universal)</p>
+    <div class="priority-grid">
+      <div class="priority-row" style="border-left: 4px solid var(--green)">
+        <div class="priority-rank">S1</div>
+        <div class="priority-profile">Joven (18-30 años)</div>
+        <div class="priority-product">SIALP Plan Creciente (Ahorro)</div>
+        <div class="priority-pts">El coste del retraso</div>
+        <span class="case-tag" style="background:var(--green-bg);color:var(--green)">Tiempo</span>
+      </div>
+      <div class="priority-row" style="border-left: 4px solid var(--blue)">
+        <div class="priority-rank">S2</div>
+        <div class="priority-profile">Constructor (28-38 años)</div>
+        <div class="priority-product">SIALP + Contigo Familia</div>
+        <div class="priority-pts">Equilibrio Familiar / Hipoteca</div>
+        <span class="case-tag" style="background:var(--blue-bg);color:var(--blue)">Hogar</span>
+      </div>
+      <div class="priority-row" style="border-left: 4px solid var(--purple)">
+        <div class="priority-rank">S3</div>
+        <div class="priority-profile">Protector (36-52 años)</div>
+        <div class="priority-product">SIALP + Sistema Duplo</div>
+        <div class="priority-pts">La hipoteca del tiempo / Carga</div>
+        <span class="case-tag" style="background:var(--purple-bg);color:var(--purple)">Estabilidad</span>
+      </div>
+      <div class="priority-row" style="border-left: 4px solid var(--red)">
+        <div class="priority-rank">S3A</div>
+        <div class="priority-profile">Autónomo RETA (36-52 años)</div>
+        <div class="priority-product">PPSA Autónomos + ILT Baja</div>
+        <div class="priority-pts">La mesa de 3 patas / Persiana</div>
+        <span class="case-tag" style="background:var(--red-bg);color:var(--red)">RETA</span>
+      </div>
+      <div class="priority-row" style="border-left: 4px solid var(--amber)">
+        <div class="priority-rank">S4</div>
+        <div class="priority-profile">Planificador (50-64 años)</div>
+        <div class="priority-product">Sistema Duplo + SIALP</div>
+        <div class="priority-pts">El Reloj Fiscal del IRPF</div>
+        <span class="case-tag" style="background:var(--amber-bg);color:var(--amber)">Fiscal</span>
+      </div>
+      <div class="priority-row" style="border-left: 4px solid var(--nn)">
+        <div class="priority-rank">S5</div>
+        <div class="priority-profile">Senior (55+ años)</div>
+        <div class="priority-product">PPSA + Contigo Senior</div>
+        <div class="priority-pts">El Blindaje del Legado / Herencia</div>
+        <span class="case-tag">Legado</span>
+      </div>
     </div>
   </div>
 
 </div>
 
 <!-- ═══════════════════════════════════════════════════
-     NIVEL 2: GUÍA PRÁCTICA
+     NIVEL 2: CASOS PRÁCTICOS ADN (MAPEO TÉCNICO)
+     Documentación detallada de las 4 fases del ADN con casos reales
 ═══════════════════════════════════════════════════ -->
 <div class="level-content" id="level-guide">
 
@@ -948,285 +1021,206 @@ body {
     <div class="section-head">
       <div class="section-icon icon-orange">🧬</div>
       <div>
-        <div class="section-title">CÓMO FUNCIONA EL ADN POR DENTRO</div>
-        <div class="section-sub">Lo que el formulario realmente mide en cada bloque</div>
+        <div class="section-title">LOS 4 CASOS REALES DEL ADN FINANCIERO</div>
+        <div class="section-sub">Mapeo de pantallas, datos económicos y ganchos de venta por fase</div>
       </div>
     </div>
 
-    <!-- BLOQUE 1 -->
+    <!-- FASE 1: JUBILACIÓN -->
     <button class="collapse-trigger" onclick="toggleCollapse(this)">
-      <div class="label"><div class="fase-num">1</div> Ingresos y Gastos — Capacidad de pago oculta</div>
+      <div class="label"><div class="fase-num">1</div> Fase 1: Jubilación — Caso Francisco (S4)</div>
       <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
     <div class="collapse-body">
-      <p>El ADN pide ingresos, gastos, ahorro acumulado y ahorro jubilación. No es un formulario fiscal: es un escáner de vulnerabilidades.</p>
-      <p><strong>Lo que realmente calcula:</strong></p>
-      <p>→ <strong>Ingresos – Gastos</strong> = capacidad de ahorro real. Si gana 60.000 € y gasta 48.000 €, tiene 1.000 €/mes de margen aunque no ahorre nada.</p>
-      <p>→ <strong>Ahorro acumulado = 0 €</strong> con ingresos altos = perfil reactivo (solo actúa ante crisis).</p>
-      <p>→ <strong>Ahorro jubilación = 0 €</strong> = miopía de futuro. Palanca: "¿Cómo vas a vivir cuando no puedas trabajar?"</p>
-      <p>→ <strong>Gastos anuales</strong> = su estándar de vida. Cualquier amenaza a ese nivel genera ansiedad inmediata.</p>
-
-      <div class="dialogue dialogue-good">
-        <div class="dialogue-label label-good">ASÍ SE PREGUNTA</div>
-        <p><span class="speaker">Agente:</span> "Cuéntame: ¿cómo es un mes normal para ti económicamente? Sin entrar en detalles, más o menos... ¿cuánto entra y cuánto sale?"</p>
-        <p><span class="speaker">Agente:</span> "Vale, entonces te sobran unos Z € al mes... ¿a dónde van?"</p>
-        <p><span class="speaker">Agente:</span> "Y si mañana tienes una emergencia grave, ¿de dónde sale el dinero?"</p>
-        <p><span class="silence">— SILENCIO. DEJAR QUE PROCESE —</span></p>
+      <div class="case-grid">
+        <div>
+          <p><strong>Descripción del Caso (S4 - Planificador):</strong> Francisco, 65 años (Xàtiva), ingeniero. Autónomo RETA con 38 años cotizados. Cree que con su plan de pensiones bancario y ahorros va sobrado y que ya es muy tarde para cambiar.</p>
+          <p><strong>Vulnerabilidad principal:</strong> Brecha fiscal y pérdida de poder de compra severa por la ineficiencia fiscal del plan de pensiones del banco.</p>
+          <p><strong>Solución propuesta:</strong> <strong>PPSA (Autónomos)</strong> para máxima deducibilidad fiscal en el último año legal (hasta 5.750 €) y el <strong>Sistema Duplo</strong> para gestión dinámica delegada con Goldman Sachs.</p>
+        </div>
+        <div class="case-data">
+          <div class="case-tag">Datos Clave</div>
+          <ul>
+            <li>Edad: <strong>65 años</strong></li>
+            <li>Régimen: <strong>Autónomo RETA</strong></li>
+            <li>Años Cotizados: <strong>38 años</strong></li>
+            <li>Fórmula propuesta: <strong>PPSA + Duplo</strong></li>
+          </ul>
+        </div>
       </div>
 
-      <div class="tip">
-        <div class="tip-title">🎯 Lo que consigues</div>
-        <p>El cliente verbaliza que no tiene colchón. No se lo dices tú: lo descubre él. Esa es la diferencia entre vender y diagnosticar.</p>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">1</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>Bypass del Sistema RETA (Captura: 20260604_121843.jpg) · Progreso 57%</h4>
+            <p><strong>Pregunta Mágica:</strong> "Francisco, para calcular tu pensión exacta necesitamos introducir tu base de cotización actual del RETA. ¿Tributas por la base ordinaria general o tienes alguna bonificación especial activa en tu cuota?"</p>
+            <p><strong>Validación:</strong> "Excelente. Registrar la cotización general nos asegura estimar con total precisión tu pensión pública de jubilación y detectar cualquier desfase impositivo."</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">2</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>Fuga Fiscal del Plan del Banco (Captura: 20260604_121849.jpg) · Progreso 57%</h4>
+            <p><strong>Pregunta Mágica:</strong> "¿Sabes qué retención fiscal exacta del IRPF te va a aplicar Hacienda cuando rescates de golpe el capital de tu plan de pensiones del banco tradicional?"</p>
+            <p><strong>Validación:</strong> "Es muy normal no conocer el impacto del rescate. Los bancos no suelen avisar de que un rescate ineficiente puede llevarse hasta el 40% de tu ahorro en impuestos. Vamos a planificarlo de forma progresiva."</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">3</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>El Reloj de Urgencia (Captura: 20260604_121859.jpg) · Progreso 57%</h4>
+            <p><strong>Pregunta Mágica:</strong> "Francisco, estás en tu último año de cotización antes de jubilarte. Lo que no deduzcas fiscalmente hoy, lo perderás para siempre. ¿Tiene sentido regalarle IRPF al Estado en tu último año en activo?"</p>
+            <p><strong>Validación:</strong> "Es de lo más inteligente. Utilizar el PPSA de autónomos en este último sprint fiscal te permite deducir el máximo legal y asegurar que ese dinero se quede en tu bolsillo, no en el de Hacienda."</p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- BLOQUE 2 -->
+    <!-- FASE 2: PROTECCIÓN -->
     <button class="collapse-trigger" onclick="toggleCollapse(this)">
-      <div class="label"><div class="fase-num">2</div> Datos personales — Segmentación de riesgo</div>
+      <div class="label"><div class="fase-num">2</div> Fase 2: Protección — Casos Nuria (S2) y Jordi (S3A)</div>
       <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
     <div class="collapse-body">
-      <p>Edad, estado civil, hijos, régimen SS, años cotizados. Cada campo segmenta al cliente:</p>
-      <p>→ <strong>Edad</strong> = reloj de urgencia. 25-35: protección IT. 36-50: familia + jubilación. 51-65: urgencia jubilación. 65+: rentas vitalicias.</p>
-      <p>→ <strong>Casado + hijos</strong> = multiplicador emocional. "Si tú faltas, ¿quién paga la universidad?"</p>
-      <p>→ <strong>Autónomo + pocos años cotizados</strong> = desprotección total en IT y jubilación.</p>
-
-      <div class="golden">
-        <div class="tip-title">⚡ Clave práctica</div>
-        <p>Años hasta jubilación = tu ventana de venta para ahorro. Dependientes = tu palanca emocional para protección. Régimen SS = tu argumento para IT complementaria.</p>
-      </div>
-    </div>
-
-    <!-- BLOQUE 3 -->
-    <button class="collapse-trigger" onclick="toggleCollapse(this)">
-      <div class="label"><div class="fase-num">3</div> Protección — La falsa dicotomía</div>
-      <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-    </button>
-    <div class="collapse-body">
-      <p>El ADN pregunta: ¿Protección personal (IT) o protección familiar (fallecimiento/IPA)?</p>
-      <p>Está diseñado para que el cliente no pueda elegir solo una sin sentirse desprotegido. Si elige IT, ¿y si fallece? Si elige vida, ¿y si se incapacita?</p>
-      <p><strong>Lectura del cliente:</strong></p>
-      <p>→ Solo elige IT = perfil reactivo, piensa en el presente.</p>
-      <p>→ Elige vida/IPA = perfil previsor, piensa en los suyos.</p>
-      <p>→ Quiere ambas = cliente ideal, abierto a paquete combinado.</p>
-    </div>
-
-    <!-- BLOQUE 4 -->
-    <button class="collapse-trigger" onclick="toggleCollapse(this)">
-      <div class="label"><div class="fase-num">4</div> Necesidad prioritaria — Puerta de entrada</div>
-      <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-    </button>
-    <div class="collapse-body">
-      <p>Jubilación, Protección, Ahorro o Hogar. El cliente elige una, pero ninguna existe aislada:</p>
-      <p>→ Elige <span class="kw">Jubilación</span>: le muestras que sin protección no llegará a jubilarse.</p>
-      <p>→ Elige <span class="kw">Protección</span>: le muestras que sin ahorro estará protegido pero pobre.</p>
-      <p>→ Elige <span class="kw">Ahorro</span>: cliente con excedente, busca rentabilidad.</p>
-      <p>→ Elige <span class="kw">Hogar</span>: bajo valor, pero es puerta de entrada para cross-selling.</p>
-
-      <div class="tip">
-        <div class="tip-title">🎯 Estrategia</div>
-        <p>Empieza siempre por su dolor activo (lo que elige). Luego expande al dolor latente (lo que no ha visto). Nunca vendas todo de golpe.</p>
-      </div>
-    </div>
-
-    <!-- BLOQUE 5 -->
-    <button class="collapse-trigger" onclick="toggleCollapse(this)">
-      <div class="label"><div class="fase-num">5</div> Jubilación — El generador de urgencia</div>
-      <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-    </button>
-    <div class="collapse-body">
-      <p>El ADN pregunta si las pensiones se mantendrán y pide un % de reducción estimado. El cliente está calculando su propia brecha futura.</p>
-
-      <div class="dialogue dialogue-good">
-        <div class="dialogue-label label-good">CONVERSACIÓN TIPO</div>
-        <p><span class="speaker">Agente:</span> "Dentro de X años, cuando dejes de trabajar... ¿cómo te imaginas que vas a vivir?"</p>
-        <p><span class="speaker">Cliente:</span> "Pues... bien, supongo."</p>
-        <p><span class="speaker">Agente:</span> "¿'Bien' significa con el mismo nivel de vida que ahora?"</p>
-        <p><span class="speaker">Cliente:</span> "Sí, igual o mejor."</p>
-        <p><span class="speaker">Agente:</span> "Si hoy gastas X € al mes, cuando te jubiles vas a necesitar lo mismo. La pregunta del millón: ¿de dónde van a salir esos € cuando no estés trabajando?"</p>
-        <p><span class="speaker">Cliente:</span> "De la pensión..."</p>
-        <p><span class="speaker">Agente:</span> "Con Y años cotizados, probablemente entre Z1 y Z2 €. Eso es GAP € menos de lo que necesitas. Cada mes. Durante 20-25 años. ¿Cómo piensas cerrar esa brecha?"</p>
-        <p><span class="silence">— SILENCIO LARGO. DEJAR QUE CAIGA EL PESO —</span></p>
-      </div>
-    </div>
-
-    <!-- BLOQUE 6 -->
-    <button class="collapse-trigger" onclick="toggleCollapse(this)">
-      <div class="label"><div class="fase-num">6</div> Gráfico de brechas — El espejo financiero</div>
-      <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-    </button>
-    <div class="collapse-body">
-      <p>El ADN genera un gráfico automático: barra naranja (lo que necesita) vs barras pequeñas (lo que tiene). Es un diagnóstico visual que elimina la negación.</p>
-      <p>→ El cliente ve que la barra de su objetivo es el doble que la de su protección actual.</p>
-      <p>→ Si dice "no puedo permitirme 200 €/mes" pero el sistema muestra 2.200 € de ahorro disponible, puedes señalar la contradicción.</p>
-
-      <div class="golden">
-        <div class="tip-title">⚡ Momento clave</div>
-        <p>Este es el punto de máxima conciencia. El cliente VE su problema. No lo interrumpas. Deja que lo procese. Después pregunta: "¿Qué quieres hacer con esta información?"</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- GUÍA: TÉCNICAS DE ESCUCHA -->
-  <div class="section">
-    <div class="section-head">
-      <div class="section-icon icon-blue">👂</div>
-      <div>
-        <div class="section-title">TÉCNICAS DE ESCUCHA ACTIVA</div>
-        <div class="section-sub">Las 5 herramientas del asesor consultivo</div>
-      </div>
-    </div>
-
-    <div class="card card-blue">
-      <div class="card-title"><span class="num">1</span> El Espejo (Mirroring)</div>
-      <p>Repite las últimas 2-3 palabras del cliente en forma de pregunta. Él sigue hablando y revelando información sin que hagas preguntas invasivas.</p>
-      <div class="dialogue dialogue-good">
-        <p><span class="speaker">Cliente:</span> "Es que ahora mismo no puedo permitírmelo..."</p>
-        <p><span class="speaker">Agente:</span> "¿No puedes permitírtelo?"</p>
-        <p><span class="speaker">Cliente:</span> "Bueno, es que tengo muchos gastos... la hipoteca, el colegio..."</p>
-      </div>
-    </div>
-
-    <div class="card card-blue">
-      <div class="card-title"><span class="num">2</span> El Etiquetado (Labeling)</div>
-      <p>Verbaliza la emoción que percibes. El cliente se siente comprendido y baja defensas.</p>
-      <div class="dialogue dialogue-good">
-        <p><span class="speaker">Cliente:</span> (tono dubitativo) "No sé... es mucho dinero..."</p>
-        <p><span class="speaker">Agente:</span> "Parece que te preocupa el compromiso económico..."</p>
-        <p><span class="speaker">Cliente:</span> "Sí, es que si me comprometo a 200 €/mes y luego tengo un imprevisto..."</p>
-      </div>
-    </div>
-
-    <div class="card card-blue">
-      <div class="card-title"><span class="num">3</span> Silencio Calibrado</div>
-      <p>Después de una pregunta dura, cuenta mentalmente hasta 10. El 90% de las veces el cliente habla antes.</p>
       <div class="vs-grid">
-        <div class="vs-col bad">
-          <div class="vs-label">Agente novato</div>
-          <p style="font-size:14px;color:var(--text2)">"Bueno, es que... quiero decir... imagino que es difícil..."</p>
-          <p style="font-size:13px;color:var(--red)">Rompe la tensión. El cliente no conecta.</p>
-        </div>
         <div class="vs-col good">
-          <div class="vs-label">Agente experto</div>
-          <p style="font-size:14px;color:var(--text2)">Silencio. Contacto visual tranquilo. Espera.</p>
-          <p style="font-size:13px;color:var(--green)">El cliente verbaliza su vulnerabilidad.</p>
+          <div class="vs-label">A. Perfil Familiar (S2) — Caso Nuria</div>
+          <p style="font-size:14px;color:var(--text)">Nuria, 41 años (Carcaixent). Administrativa. Casada y madre de 2 niños. Cree que está totalmente protegida por el seguro de vida vinculado a la hipoteca y la pensión de viudedad.</p>
+          <p style="font-size:14px;color:var(--text2)"><strong>Hemorragia:</strong> El seguro del banco amortiza la deuda pero deja a la familia con **0 € líquidos** en caso de fallecimiento. La pensión de viudedad pública estimada es de solo **954,33 €/mes**, lo que genera una brecha mensual de ~300 € para mantener a sus hijos.</p>
+          <p style="font-size:14px;color:var(--nn-light)"><strong>Solución:</strong> Contigo Familia con capital líquido mensual para los dependientes.</p>
+        </div>
+        <div class="vs-col good" style="border-top-color: var(--nn)">
+          <div class="vs-label">B. Perfil Autónomo (S3A) — Caso Jordi</div>
+          <p style="font-size:14px;color:var(--text)">Jordi, 45 años (Xàtiva). Propietario de un taller mecánico. Casado y con 1 hijo (8 años). Cotiza al mínimo en RETA (cuota de 452 €/mes). Confía en que 'nunca se pone enfermo'.</p>
+          <p style="font-size:14px;color:var(--text2)"><strong>Hemorragia:</strong> En caso de baja por ILT (enfermedad/accidente), la Seguridad Social solo le ingresará **339 €/mes**. Los fijos del taller (alquiler de nave, suministros, impuestos) suman **2.000 €/mes** y no se paran. Su brecha es de **1.661 €/mes**.</p>
+          <p style="font-size:14px;color:var(--nn-light)"><strong>Solución:</strong> Contigo Familia ILT con subsidio de baja diaria de 50 €/día.</p>
+        </div>
+      </div>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">1</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>El Engaño del Seguro Bancario (Nuria) · Captura: 20260604_130214.jpg</h4>
+            <p><strong>Pregunta Mágica:</strong> "Nuria, es magnífico que tengas asegurada la vivienda con el banco. Pero déjame hacerte una pregunta: si tú faltas mañana, el banco cobra la hipoteca y cancela la deuda... pero ¿de dónde saca tu marido el efectivo mensual para pagar el colegio de los niños, la luz y la comida?"</p>
+            <p><strong>Validación:</strong> "Exacto. Ese seguro protege al banco, no a tu familia. Necesitamos un escudo de liquidez directa que mantenga el nivel de vida de tus hijos, no solo la hipoteca del banco."</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">2</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>El Motor Parado del Taller (Jordi) · Captura: 20260604_130420.jpg</h4>
+            <p><strong>Pregunta Mágica:</strong> "Jordi, tú eres el motor de tu taller: si tus manos se paran por una fractura, la persiana se queda bajada. Si el Estado solo te paga 339 € al mes y la nave te cuesta 2.000 €, ¿de qué cuenta de ahorros saldrán los 1.661 € de brecha cada mes?"</p>
+            <p><strong>Validación:</strong> "Es muy duro. Trabajar al mínimo te ahorra cuota hoy, pero te expone a una quiebra inmediata ante una simple baja. Crear un escudo diario de subsidio es la única forma de que tu negocio no dependa de tu salud."</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="card card-blue">
-      <div class="card-title"><span class="num">4</span> Preguntas Calibradas</div>
-      <p>Empiezan con "¿Cómo...?" o "¿Qué...?" y obligan a pensar. Evita siempre preguntas cerradas (sí/no).</p>
-      <p>→ "¿Cómo piensas resolver esto?"</p>
-      <p>→ "¿Qué pasaría si...?"</p>
-      <p>→ "¿Cómo afectaría esto a tu familia?"</p>
-      <p>→ "¿Qué te impide dar el paso hoy?"</p>
-    </div>
+    <!-- FASE 3: AHORRO E INVERSIÓN -->
+    <button class="collapse-trigger" onclick="toggleCollapse(this)">
+      <div class="label"><div class="fase-num">3</div> Fase 3: Ahorro e Inversión — Francisco y Noelia (S3)</div>
+      <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="collapse-body">
+      <div class="case-grid">
+        <div>
+          <p><strong>Contexto Financiero Consolidado (S3 - Protector):</strong></p>
+          <p>Francisco (autónomo) y su pareja Noelia (cuenta ajena, 1.300 €/mes netos en 12 pagas, grupo Ingenieros). Ingresos del hogar: **59.400 €/año** (**4.950 €/mes** netos conjuntos). Gastos: **25.000 €/año** (**2.083,33 €/mes**). Patrimonio líquido: **36.000 €**. Excedente neto: **2.866,67 €/mes**.</p>
+          <p>Mapeamos la secuencia de sus 3 huchas/sueños activos:</p>
+        </div>
+        <div class="case-data">
+          <div class="case-tag">Presupuesto Familiar</div>
+          <ul>
+            <li>Ingresos netos: <strong>4.950 €/mes</strong></li>
+            <li>Gastos fijos: <strong>2.083 €/mes</strong></li>
+            <li>Excedente libre: <strong>2.867 €/mes</strong></li>
+            <li>Ahorro inicial: <strong>36.000 €</strong></li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="card card-blue">
-      <div class="card-title"><span class="num">5</span> Resumen Acumulativo</div>
-      <p>Cada 10-15 minutos, resume lo que el cliente ha dicho. Le devuelves SUS respuestas. Confirma su situación sin que tú lo juzgues.</p>
-      <div class="dialogue dialogue-good">
-        <p><span class="speaker">Agente:</span> "Déjame ver si lo he entendido: ganas X €, gastas Y €, no tienes ahorro acumulado, si mañana no puedes trabajar no sabes cómo cubrirías los gastos, y te preocupa tu jubilación pero no has empezado a ahorrar. ¿Es correcto?"</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- GUÍA: CROSS-SELLING -->
-  <div class="section">
-    <div class="section-head">
-      <div class="section-icon icon-green">📈</div>
-      <div>
-        <div class="section-title">CROSS-SELLING SECUENCIAL</div>
-        <div class="section-sub">Nunca vendas todo de golpe — 5 pasos en el tiempo</div>
-      </div>
-    </div>
-
-    <div class="flow">
-      <div class="flow-step">
-        <div class="flow-line"><div class="flow-dot">1</div><div class="flow-connector"></div></div>
-        <div class="flow-content">
-          <h4>Venta inicial — Producto ancla</h4>
-          <p>Cierra el producto que resuelve el dolor más agudo. Nada más.</p>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">A</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>Hucha 1: Comprarme una casa (14 pantallas, 20260604_133608.jpg a 133805.jpg)</h4>
+            <p><strong>Configuración:</strong> 0 € iniciales de sus ahorros, acumulando cuota regular a 25 años. Ahorro disponible libre de 2.866,67 €/mes. El simulador les recuerda la brecha de jubilación de Francisco (-339 €/mes) y protección (180 €/mes).</p>
+            <p><strong>Pregunta Mágica:</strong> "Francisco, el portal muestra que ingresáis netos 4.950 € al mes. Con vuestro excedente mensual de 2.866 €, podéis cubrir la jubilación y abrir la hucha de la casa sin alterar vuestro nivel de vida actual. ¿Habéis pensado destinar una parte de vuestros 36.000 € acumulados a la entrada o empezamos de cero?"</p>
+            <p><strong>Validación:</strong> "Mantener intacto vuestro fondo de emergencia de 36.000 € es una gran decisión protectora. Programar el ahorro de la casa mes a mes desde el excedente os garantiza llegar a la meta sin esfuerzo."</p>
+          </div>
         </div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-line"><div class="flow-dot">2</div><div class="flow-connector"></div></div>
-        <div class="flow-content">
-          <h4>Entrega/Firma — Semana 1-2</h4>
-          <p>"¿Cómo te sientes ahora que tienes esto cerrado?"</p>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">B</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>Hucha 2: La educación de sus hijos (18 pantallas, 20260604_134745.jpg a 134945.jpg)</h4>
+            <p><strong>Configuración:</strong> Deciden asignar **1.000 €** de su patrimonio acumulado, reduciendo su fondo de emergencia a **35.000 €**. Debido al interés compuesto a largo plazo, la aportación mensual simulada es de 16,67 €/mes, resultando en un gap de cotización neta de solo **-2 €/mes**.</p>
+            <p><strong>Pregunta Mágica:</strong> "Al apartar 1.000 € hoy para los estudios de tu hijo, tu fondo de emergencia queda en 35.000 € (muy robusto) y la cuota regular mensual requerida por el simulador cae a solo 2 € al mes. ¿Cómo valoras que el futuro académico de tu hijo quede prácticamente blindado por contrato con solo 2 € al mes?"</p>
+            <p><strong>Validación:</strong> "Es el poder del tiempo y del interés compuesto. Apartar una pequeña parte inicial y programar una cuota simbólica de 2 € os garantiza la universidad de Andrés sin tensionar el día a día."</p>
+          </div>
         </div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-line"><div class="flow-dot">3</div><div class="flow-connector"></div></div>
-        <div class="flow-content">
-          <h4>Apertura brecha secundaria — Semana 2-3</h4>
-          <p>"Me quedó en la cabeza el tema de [brecha no cerrada]. ¿Lo hablamos?"</p>
-        </div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-line"><div class="flow-dot">4</div><div class="flow-connector"></div></div>
-        <div class="flow-content">
-          <h4>Venta cruzada — Mes 2</h4>
-          <p>Presenta solución para la segunda brecha.</p>
-        </div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-line"><div class="flow-dot">5</div><div class="flow-connector"></div></div>
-        <div class="flow-content">
-          <h4>Cliente recurrente — Mes 6-12</h4>
-          <p>"Han pasado X meses. ¿Ha cambiado algo? ¿Hijos nuevos? ¿Cambio laboral? Revisemos."</p>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">C</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>Hucha 3: ¿Quizás un viaje? (17 pantallas, 20260604_135253.jpg a 135502.jpg)</h4>
+            <p><strong>Configuración:</strong> Objetivo de 500 € a 5 años (sin capital inicial), aportando una cuota mensual de **8,33 €/mes** (redondeado a 8 €/mes en el resumen de metas cruzadas).</p>
+            <p><strong>Pregunta Mágica:</strong> "Para esta hucha de ilusión de 500 €, el sistema calcula una cuota periódica de solo 8 € al mes. ¿Procedemos a abrir un Plan Creciente SIALP, que a sus 5 años de vencimiento exactos os entregará el dinero 100% libre de impuestos?"</p>
+            <p><strong>Validación:</strong> "Excelente. El SIALP a 5 años es perfecto para viajes programados: blinda el capital contra caídas gracias a su suelo del 80% y os exime por completo de pagar IRPF a su retirada."</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- GUÍA: PRIORIZACIÓN POR PERFIL -->
-  <div class="section">
-    <div class="section-head">
-      <div class="section-icon icon-purple">👤</div>
-      <div>
-        <div class="section-title">MAPA DE PRIORIZACIÓN POR PERFIL</div>
-        <div class="section-sub">Qué vender primero según el tipo de cliente</div>
+    <!-- FASE 4: HOGAR Y AUTOS -->
+    <button class="collapse-trigger" onclick="toggleCollapse(this)">
+      <div class="label"><div class="fase-num">4</div> Fase 4: Hogar y Autos — Venta Cruzada a Jordi (S3A)</div>
+      <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="collapse-body">
+      <div class="case-grid">
+        <div>
+          <p><strong>Estrategia Comercial (S3A - Autónomo RETA):</strong> El portal recopila la aseguradora actual, la fecha de vencimiento y la prima anual. Su objetivo es detectar ineficiencias económicas y agendar contactos futuros 1-2 meses antes del vencimiento.</p>
+          <p><strong>Soluciones asociadas:</strong></p>
+          <p>→ **Mihogar Seguro** (alianza Caser): Seguro modular con 12 coberturas básicas, servicio Manitas y descuentos de hasta el 25%.</p>
+          <p>→ **Autos MM Globalis** (alianza Mutua Madrileña): Asistencia desde el Km 0, recuperación de puntos, recursos de multas y valor a nuevo los 2 primeros años.</p>
+        </div>
+        <div class="case-data">
+          <div class="case-tag">Datos de Captura</div>
+          <ul>
+            <li>Vencimiento común: <strong>04/06/2026</strong></li>
+            <li>Aseguradora actual: <strong>[Campo de Entrada]</strong></li>
+            <li>Prima anual actual: <strong>[Campo de Entrada]</strong></li>
+          </ul>
+        </div>
       </div>
-    </div>
 
-    <div class="card card-accent" style="margin-bottom:8px;">
-      <div class="card-title" style="font-size:14px;">Autónomo joven (25-40)</div>
-      <p><span class="kw">Contigo Autónomo</span> → <span class="kw">Plan Salud+Vida</span> → <span class="kw">SIALP</span> · PVM estimado: ~3.300 pts</p>
-      <p style="font-size:14px;color:var(--text3)">"Protege tu presente + construye tu futuro"</p>
-    </div>
-    <div class="card card-accent" style="margin-bottom:8px;">
-      <div class="card-title" style="font-size:14px;">Familia con hijos (30-50)</div>
-      <p><span class="kw">Plan Salud+Vida</span> → <span class="kw">Contigo Familia</span> → <span class="kw">MiHogar</span> · PVM estimado: ~2.100 pts</p>
-      <p style="font-size:14px;color:var(--text3)">"Protección 360º de los tuyos"</p>
-    </div>
-    <div class="card card-accent" style="margin-bottom:8px;">
-      <div class="card-title" style="font-size:14px;">Pre-jubilado (55-65)</div>
-      <p><span class="kw">SIALP</span> → <span class="kw">Contigo Senior</span> → <span class="kw">Plan Salud+Vida</span> · PVM estimado: ~3.500 pts</p>
-      <p style="font-size:14px;color:var(--text3)">"Último tren para tu jubilación digna"</p>
-    </div>
-    <div class="card card-accent" style="margin-bottom:8px;">
-      <div class="card-title" style="font-size:14px;">Senior 65+</div>
-      <p><span class="kw">Contigo Senior</span> → <span class="kw">Renta Vitalicia</span> → <span class="kw">MiHogar</span> · PVM estimado: ~2.200 pts</p>
-      <p style="font-size:14px;color:var(--text3)">"Dignidad y tranquilidad en la vejez"</p>
-    </div>
-    <div class="card card-accent" style="margin-bottom:8px;">
-      <div class="card-title" style="font-size:14px;">Constructor patrimonial (40-55)</div>
-      <p><span class="kw">SIALP</span> → <span class="kw">Protección Plus</span> → <span class="kw">PPSA</span> · PVM estimado: ~4.200 pts</p>
-      <p style="font-size:14px;color:var(--text3)">"Optimización fiscal + construcción patrimonio"</p>
-    </div>
-    <div class="card card-accent">
-      <div class="card-title" style="font-size:14px;">Empleado cuenta ajena (30-50)</div>
-      <p><span class="kw">Plan Salud+Vida</span> → <span class="kw">PPSA</span> → <span class="kw">MiHogar + Auto</span> · PVM estimado: ~2.500 pts</p>
-      <p style="font-size:14px;color:var(--text3)">"Fiscalidad + protección + patrimonio"</p>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">1</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>Módulo Hogar (5 pantallas, 20260604_142134.jpg a 142220.jpg) · Progreso 48%</h4>
+            <p><strong>Pregunta Mágica:</strong> "Jordi, tu seguro de hogar está con el banco por imperativo de la hipoteca. Pero ¿sabías que la ley de contrato de seguros te permite cambiar de compañía notificando con un mes de antelación? ¿Te gustaría ver cuánto de más te está cobrando el banco al año en comparación con nuestro seguro modular Mihogar?"</p>
+            <p><strong>Validación:</strong> "Muy bien. Auditar la póliza del banco es el primer paso para recuperar el control. Ahorrarte un 25% anual manteniendo mejores coberturas y servicio Manitas integrado es lo más sensato."</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">2</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>Módulo Auto (4 pantallas, 20260604_142320.jpg a 142358.jpg) · Progreso 47%</h4>
+            <p><strong>Pregunta Mágica:</strong> "Para tu furgoneta y el coche familiar, Mapfre es una aseguradora de renombre, pero su prima anual suele fluctuar mucho. MM Globalis (Mutua Madrileña) nos da un precio cerrado y estable al emitir, además de asistencia Km 0 desde el minuto uno. ¿Cuándo vence tu póliza actual para que te calculemos la cotización exacta?"</p>
+            <p><strong>Validación:</strong> "Perfecto. Registrar el vencimiento del 4 de junio nos permite planificar tu ahorro de autos con antelación para que cuando llegue el recibo no tengas que pagarlo de golpe bajo las condiciones del banco."</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
 </div>
 
 <!-- ═══════════════════════════════════════════════════
-     NIVEL 3: MANUAL PROFUNDO
+     NIVEL 3: MANUAL DE NEUROVENTAS
+     Psicología avanzada, de las transcripciones de audios
 ═══════════════════════════════════════════════════ -->
 <div class="level-content" id="level-deep">
 
@@ -1234,206 +1228,180 @@ body {
     <div class="section-head">
       <div class="section-icon icon-purple">🧠</div>
       <div>
-        <div class="section-title">MINDSET: ASESOR VS VENDEDOR</div>
-        <div class="section-sub">El cambio mental que lo cambia todo</div>
+        <div class="section-title">PSICOLOGÍA Y COMUNICACIÓN CONSULTIVA</div>
+        <div class="section-sub">Tácticas de desmontaje de defensas y activación límbica del cliente</div>
       </div>
     </div>
 
-    <div class="vs-grid">
-      <div class="vs-col bad">
-        <div class="vs-label">Vendedor de pólizas</div>
-        <ul>
-          <li>Objetivo: colocar producto</li>
-          <li>"¿Qué quieres comprar?"</li>
-          <li>Resistencia alta (huelen venta)</li>
-          <li>Foco: características del producto</li>
-          <li>Cierre: presión ("Firma aquí")</li>
-          <li>Resultado: venta única</li>
-          <li>Relación: termina tras la firma</li>
-        </ul>
+    <!-- SUBSECCIÓN 1 -->
+    <div class="card card-purple">
+      <div class="card-title">1. La "Llamada de Rescate" (Los Primeros 20 Segundos)</div>
+      <p>El manual interno de NN prohíbe esconderse tras el correo masivo, considerándolo "pereza comercial disfrazada de productividad". La llamada de rescate busca capturar 30 minutos del cliente desarmando su amígdala (detector de amenazas) mediante una **vulnerabilidad comercial anticipada**.</p>
+      
+      <div class="dialogue dialogue-good">
+        <div class="dialogue-label label-good">GUION TÁCTICO DE APERTURA</div>
+        <p><span class="speaker">Asesor:</span> "Hola Francisco, buenos días. Soy Fede Fontanals, tu delegado de Nationale-Nederlanden en Xàtiva. Te llamo rápido porque tu tiempo es oro..."</p>
+        <p><span class="speaker">Asesor:</span> "Te envié un correo hace unos días, pero, siendo muy honesto contigo, me quedé frío al leerlo. Parecía el típico correo masivo comercial, muy aburrido, y probablemente ni lo abriste..."</p>
+        <p><span class="speaker">Cliente:</span> (Sorprendido, baja la guardia) "Pues... la verdad es que no lo recuerdo..."</p>
+        <p><span class="speaker">Asesor:</span> "Es normal. Precisamente por eso te llamo. Estamos realizando una auditoría rápida de 15 minutos en tu sector para profesionales autónomos, para detectar una brecha severa que hay en la Seguridad Social. Si tras meter tus números en el simulador veo que estás 100% protegido, seré el primero en felicitarte y colgaré la llamada. ¿Te viene mejor el martes a las 10:00 en tu despacho o el miércoles por la tarde?"</p>
       </div>
-      <div class="vs-col good">
-        <div class="vs-label">Asesor de ADN</div>
-        <ul>
-          <li>Objetivo: descubrir vulnerabilidades</li>
-          <li>"¿Qué te pasaría si...?"</li>
-          <li>Resistencia baja (sienten ayuda)</li>
-          <li>Foco: problemas del cliente</li>
-          <li>Cierre: natural ("¿Qué quieres hacer?")</li>
-          <li>Resultado: cliente recurrente + referidos</li>
-          <li>Relación: empieza tras la firma</li>
-        </ul>
+      <p style="font-size:14px;color:var(--text3)">*Nota: El asesor no vende un seguro por teléfono; vende una auditoría gratuita de 15 minutos utilizando la honestidad radical.*</p>
+    </div>
+
+    <!-- SUBSECCIÓN 2 -->
+    <div class="card card-purple">
+      <div class="card-title">2. Clasificación Clínica de los Silencios Post-Pregunta Dura</div>
+      <p>Tras lanzar una pregunta de activación de conciencia, el manual ordena hacer un silencio absoluto de 10 segundos. No debes "rescatar" cognitivamente al cliente de su incomodidad. Dependiendo de su comportamiento no verbal, el silencio se gestiona de tres formas:</p>
+      
+      <div class="vs-grid">
+        <div class="vs-col good">
+          <div class="vs-label">A. Silencio Reflexivo</div>
+          <p style="font-size:14px;color:var(--text)">**Indicadores:** Ceño fruncido, mirada desviada hacia un lado o hacia arriba, haciendo cuentas mentales.</p>
+          <p style="font-size:14px;color:var(--green)">**Táctica del Asesor:** Inmovilidad absoluta. No interrumpas el cálculo del neocórtex del cliente.</p>
+        </div>
+        <div class="vs-col good" style="border-top-color: var(--amber)">
+          <div class="vs-label">B. Silencio Defensivo</div>
+          <p style="font-size:14px;color:var(--text)">**Indicadores:** Mandíbula tensa, brazos cruzados, mirada fija y rígida. Siente el secuestro amigdalino por verse acorralado.</p>
+          <p style="font-size:14px;color:var(--amber)">**Táctica del Asesor:** Empatía táctica. Rompe suavemente a los 10 segundos: *"Sé que mirar estos números es incómodo, pero es mi obligación profesional mostrártelo..."*</p>
+        </div>
       </div>
-    </div>
-
-    <div class="quote">
-      <p>"No estoy aquí para venderle nada. Estoy aquí para ayudarle a descubrir si tiene problemas que aún no ha visto. Si los tiene, le enseñaré cómo solucionarlos. Si no los tiene, se lo diré y nos despediremos."</p>
-      <div class="author">— Mantra pre-entrevista</div>
-    </div>
-
-    <div class="card">
-      <p>Este mindset elimina TU ansiedad comercial, que el cliente percibe inconscientemente. Cuando tú estás relajado porque no "necesitas" vender, el cliente baja defensas.</p>
-      <p><strong>Vendedor piensa:</strong> "Necesito cerrar esta venta." / "¿Cómo le convenzo?"</p>
-      <p><strong>Asesor piensa:</strong> "¿Qué riesgos tiene que no ve?" / "¿Cómo le ayudo a descubrirlos?"</p>
-      <p>El cambio es sutil pero poderoso. Cuando dejas de intentar vender y empiezas a diagnosticar vulnerabilidades, tu lenguaje corporal, tu tono, tus preguntas... todo cambia. El cliente lo percibe.</p>
-    </div>
-  </div>
-
-  <!-- DEEP: 3 REGLAS DE ORO -->
-  <div class="section">
-    <div class="section-head">
-      <div class="section-icon icon-amber">⚡</div>
-      <div>
-        <div class="section-title">3 REGLAS DE ORO INNEGOCIABLES</div>
-        <div class="section-sub">Rompe una y pierdes la venta</div>
+      
+      <div class="vs-grid" style="grid-template-columns:1fr;margin-top:0;">
+        <div class="vs-col good" style="border-top-color: var(--red)">
+          <div class="vs-label">C. Silencio de Resistencia</div>
+          <p style="font-size:14px;color:var(--text)">**Indicadores:** Evitación total de la mirada, rigidez y congelación. No confía en ti para compartir sus datos económicos.</p>
+          <p style="font-size:14px;color:var(--red)">**Táctica del Asesor:** Desescalada inmediata. *"Oye, frena un momento. Mi intención no es juzgar tu economía, sino darte claridad sobre tu Seguridad Social. ¿Hay algo de lo que te he planteado que te incomode?"*</p>
+        </div>
       </div>
     </div>
 
-    <div class="card card-amber">
-      <div class="card-title"><span class="num" style="background:var(--amber)">1</span> Nunca presentes la solución antes de que el cliente verbalice el problema</div>
-
+    <!-- SUBSECCIÓN 3 -->
+    <div class="card card-purple">
+      <div class="card-title">3. Las Metáforas Visuales de la Disonancia (Sesgo Antigravity)</div>
+      <p>El cerebro humano rechaza de forma instintiva la jerga técnica compleja o los nombres comerciales abstractos de seguros. El **Sesgo Antigravity** consiste en traducir conceptos áridos en imágenes visuales instantáneas:</p>
+      
       <div class="vs-grid">
         <div class="vs-col bad">
-          <div class="vs-label">Error</div>
-          <p style="font-size:14px;color:var(--text2)">"Tienes que contratar Plan Salud+Vida porque si te pasa algo grave y la sanidad pública tiene lista de espera..."</p>
-          <p style="font-size:13px;color:var(--red)">Tú creas el problema. El cliente no conecta.</p>
+          <div class="vs-label">Jerga comercial (Falsa seguridad)</div>
+          <ul>
+            <li>"Seguro de vida de capital decreciente..."</li>
+            <li>"Cartera diversificada Goldman Sachs 50/50..."</li>
+            <li>"Deducciones en la base imponible del IRPF..."</li>
+            <li>"Seguro de baja ILT diaria RETA..."</li>
+          </ul>
         </div>
         <div class="vs-col good">
-          <div class="vs-label">Correcto</div>
-          <p style="font-size:14px;color:var(--text2)">"¿Qué pasaría si mañana te diagnostican algo grave y te dicen que la cita es dentro de 4 meses?"</p>
-          <p style="font-size:13px;color:var(--green)">Él descubre el problema. Se abre.</p>
+          <div class="vs-label">Sesgo Antigravity (Traducir a imágenes)</div>
+          <ul>
+            <li>"El escudo inteligente de tu hipoteca."</li>
+            <li>"El colchón de los directivos de Goldman Sachs."</li>
+            <li>"El grifo de Hacienda que podemos cerrar."</li>
+            <li>"La persiana de tu taller en caso de enfermedad."</li>
+          </ul>
         </div>
       </div>
     </div>
 
-    <div class="card card-amber">
-      <div class="card-title"><span class="num" style="background:var(--amber)">2</span> Usa sus números, nunca los tuyos</div>
-      <div class="vs-grid">
-        <div class="vs-col bad">
-          <div class="vs-label">Error</div>
-          <p style="font-size:14px;color:var(--text2)">"La pensión media en España es de 1.200 €. Eso no te va a alcanzar."</p>
-          <p style="font-size:13px;color:var(--red)">Estadísticas genéricas. Puede pensar "a mí me irá mejor".</p>
+    <!-- SUBSECCIÓN 4 -->
+    <div class="card card-purple">
+      <div class="card-title">4. El Cerebro Multiagente (Los 4 Sesgos de la Élite Comercial)</div>
+      <p>El manual describe un marco mental basado en sesgos conversacionales inspirados en cómo procesan la información diferentes perfiles de IA, adaptando el argumento de venta según la personalidad del cliente:</p>
+      
+      <div class="priority-grid">
+        <div class="priority-row" style="background:var(--dark3); border-left:4px solid var(--nn)">
+          <div class="priority-profile">🛡️ Sesgo Gemini (El Médico)</div>
+          <div class="priority-product">"Si tras auditar tus datos veo que estás protegido, te daré la enhorabuena y colgaré. Mi valor está en el diagnóstico, no en la póliza."</div>
+          <div class="case-tag">Genera Confianza</div>
         </div>
-        <div class="vs-col good">
-          <div class="vs-label">Correcto</div>
-          <p style="font-size:14px;color:var(--text2)">"TÚ has dicho que necesitas 1.800 €/mes. Con 15 años cotizados, la SS te dará unos 900 €. Tus propios números dicen que te faltan 900 €/mes."</p>
-          <p style="font-size:13px;color:var(--green)">No pueden rebatir SUS propios datos.</p>
+        <div class="priority-row" style="background:var(--dark3); border-left:4px solid var(--blue)">
+          <div class="priority-profile">🔍 Sesgo Comet (Hiperpersonalización)</div>
+          <div class="priority-product">"He analizado tu sector y tu situación: como autónomo con 2 dependientes, la Seguridad Social te deja una brecha exacta de 1.661 €."</div>
+          <div class="case-tag">Elimina la Genérica</div>
         </div>
+        <div class="priority-row" style="background:var(--dark3); border-left:4px solid var(--red)">
+          <div class="priority-profile">🤠 Sesgo Cowboy (FOMO/Binario)</div>
+          <div class="priority-product">"Las opciones son binarias: o decides destinar 200 € al futuro de tus hijos hoy, o el azar decidirá si acaban dependiendo del Estado."</div>
+          <div class="case-tag">Urgencia Cruda</div>
+        </div>
+        <div class="priority-row" style="background:var(--dark3); border-left:4px solid var(--purple)">
+          <div class="priority-profile">📈 Sesgo Clow (El Reloj Fiscal)</div>
+          <div class="priority-product">"Hacienda cierra su ventanilla el 31 de diciembre. Si no deduces esos 5.750 € antes de las 12 de la noche, habrás regalado ese dinero."</div>
+          <div class="case-tag">Urgencia Temporal</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBSECCIÓN 5: BUYER PERSONAS S1-S5 -->
+    <div class="card card-purple">
+      <div class="card-title">5. El Framework Completo de Persuasión: Buyer Personas (S1 a S5)</div>
+      <p>Adapta tu mayéutica y el gancho de venta consultiva según la mentalidad y momento vital del cliente:</p>
+
+      <!-- S1 -->
+      <div class="dialogue" style="border-left: 4px solid var(--green); background: var(--dark3); margin-bottom: 12px;">
+        <div class="dialogue-label" style="color:var(--green)">🟢 S1: Joven (18–30 años) — El poder del Tiempo</div>
+        <p><strong>Enfoque Límbico:</strong> Sienten invulnerabilidad física y ven la jubilación a años luz. Priorizan ocio, viajes o el primer coche/vivienda.</p>
+        <p><strong>La Pregunta Detonante:</strong> <em>"Si pudieras comprar hoy un billete para que tu 'yo del futuro' viaje gratis y te costara la mitad de lo que le costará dentro de diez años... ¿lo comprarías hoy o esperarías a que doble el precio por retrasarte?"</em></p>
+        <p><strong>Estrategia de Producto:</strong> <strong>Plan Creciente SIALP</strong>. Argumentar el coste de no hacer nada (ahorrar 50 €/mes hoy equivale a tener que aportar 250 €/mes a los 45).</p>
+      </div>
+
+      <!-- S2 -->
+      <div class="dialogue" style="border-left: 4px solid var(--blue); background: var(--dark3); margin-bottom: 12px;">
+        <div class="dialogue-label" style="color:var(--blue)">🔵 S2: Constructor (28–38 años) — Equilibrio Familiar</div>
+        <p><strong>Enfoque Límbico:</strong> Máxima presión de gastos (hipoteca, niños pequeños). Su cerebro está enfocado en sobrevivir al mes.</p>
+        <p><strong>La Pregunta Detonante:</strong> <em>"Nuria, si vuestro sueldo de casa cayera a la mitad de golpe por una enfermedad, ¿qué proyectos de tus hijos tendrías que cancelar hoy? Creemos un escudo para que vuestros fijos nunca amenacen la estabilidad."</em></p>
+        <p><strong>Estrategia de Producto:</strong> <strong>SIALP + Contigo Familia</strong>. Enlazar el ahorro a la seguridad familiar y el blindaje hipotecario.</p>
+      </div>
+
+      <!-- S3 -->
+      <div class="dialogue" style="border-left: 4px solid var(--purple); background: var(--dark3); margin-bottom: 12px;">
+        <div class="dialogue-label" style="color:var(--purple)">🟣 S3: Protector (36–52 años) — El tramo de Máxima Carga</div>
+        <p><strong>Enfoque Límbico:</strong> Preocupados por la estabilidad. Sienten la hipoteca del tiempo: ven que el retiro se acerca pero sus ahorros están parados al 0% en el banco.</p>
+        <p><strong>La Pregunta Detonante:</strong> <em>"Si dejas tu dinero en la libreta del banco al 0%, ¿estás protegiendo tu esfuerzo o le estás garantizando a la inflación que se coma las vacaciones de tu jubilación de forma silenciosa?"</em></p>
+        <p><strong>Estrategia de Producto:</strong> <strong>SIALP + Sistema Duplo</strong>. Demostrar la brecha en papel e incentivar la rentabilidad activa.</p>
+      </div>
+
+      <!-- S3A -->
+      <div class="dialogue" style="border-left: 4px solid var(--red); background: var(--dark3); margin-bottom: 12px;">
+        <div class="dialogue-label" style="color:var(--red)">🔴 S3A: Autónomo (36–52 años) — La Alerta del RETA</div>
+        <p><strong>Enfoque Límbico:</strong> Pánico al parón del negocio. Saben que si sus manos no trabajan, el negocio se hunde.</p>
+        <p><strong>La Pregunta Detonante:</strong> <em>"Jordi, cotizas al mínimo para pagar menos cuota. Pero si tu negocio tiene 2.000 € de gastos fijos que no perdonan y el RETA solo te ingresa 339 € al mes por baja, ¿de dónde salen los 1.660 € mensuales de brecha para que tu persiana no se quede bajada para siempre?"</em></p>
+        <p><strong>Estrategia de Producto:</strong> <strong>PPSA Autónomos (hasta 5.750 €/año de deducción IRPF) + Seguro ILT</strong>. El argumento es la supervivencia del negocio.</p>
+      </div>
+
+      <!-- S4 -->
+      <div class="dialogue" style="border-left: 4px solid var(--amber); background: var(--dark3); margin-bottom: 12px;">
+        <div class="dialogue-label" style="color:var(--amber)">🟡 S4: Planificador (50–64 años) — La Última Ventana</div>
+        <p><strong>Enfoque Límbico:</strong> Urgencia máxima. Quedan menos de 10-15 años de vida laboral activa. Sus hijos ya son independientes y sus ingresos son estables y altos.</p>
+        <p><strong>La Pregunta Detonante:</strong> <em>"Francisco, estás en el último tramo de tu vida laboral donde puedes obligar a Hacienda a devolverte hasta el 40% de lo que ahorres en tu declaración anual. ¿Prefieres dejarle ese dinero al Estado o meterlo en tu plan de jubilación familiar?"</em></p>
+        <p><strong>Estrategia de Producto:</strong> <strong>Sistema Duplo (gestión Goldman Sachs) + SIALP</strong>. Foco total en la desgravación por el Reloj Fiscal.</p>
+      </div>
+
+      <!-- S5 -->
+      <div class="dialogue" style="border-left: 4px solid var(--nn); background: var(--dark3); margin-bottom: 12px;">
+        <div class="dialogue-label" style="color:var(--nn-light)">🟤 S5: Senior (55+ años) — Consolidación y Legado</div>
+        <p><strong>Enfoque Límbico:</strong> Miedo a ser una carga para sus hijos, a la pérdida de autonomía y a que la herencia quede bloqueada o con altos impuestos.</p>
+        <p><strong>La Pregunta Detonante:</strong> <em>"El día de mañana, ¿quieres que tus hijos tengan que pedir un préstamo para poder liquidar el impuesto de sucesiones de tu herencia, o prefieres dejarles un cheque líquido blindado por contrato y exento de tributación?"</em></p>
+        <p><strong>Estrategia de Producto:</strong> <strong>PPSA (capital garantizado) + Contigo Senior</strong>. El argumento es la tranquilidad hereditaria y la autonomía.</p>
       </div>
     </div>
 
-    <div class="card card-amber">
-      <div class="card-title"><span class="num" style="background:var(--amber)">3</span> Si dicen "déjame pensarlo", no has creado suficiente urgencia</div>
-      <p>Las 3 razones reales detrás de "déjame pensarlo":</p>
-      <p>→ <strong>Precio:</strong> Fraccionamiento. "¿Prefieres pagar 200 €/mes o arriesgarte a perder 2.000 €/mes?"</p>
-      <p>→ <strong>Urgencia:</strong> Proyección. "Los accidentes no esperan. ¿Qué pasa si ocurre mientras piensas?"</p>
-      <p>→ <strong>Confianza:</strong> Transferencia social. "¿Quieres que hable con [quien te recomendó] para que confirme?"</p>
-    </div>
-  </div>
+    <!-- SUBSECCIÓN 6 -->
+    <div class="card card-purple">
+      <div class="card-title">6. La Venta Lógica: El Dolor Matemático</div>
+      <p>El manual insiste: **el dolor abstracto no vende, el dolor matemático sí**. No le digas al cliente que "su jubilación será difícil". Haz que sea su propio cerebro el que choque contra la disonancia cognitiva de sus números reales:</p>
 
-  <!-- DEEP: BLOQUEADORES MENTALES -->
-  <div class="section">
-    <div class="section-head">
-      <div class="section-icon icon-red">🧱</div>
-      <div>
-        <div class="section-title">BLOQUEADORES MENTALES DEL AGENTE</div>
-        <div class="section-sub">Miedos que te frenan y cómo superarlos</div>
+      <div class="dialogue dialogue-bad">
+        <div class="dialogue-label label-bad">ENFOQUE DE VENDEDOR TRADICIONAL (ABSTRACTO)</div>
+        <p><span class="speaker">Vendedor:</span> "Deberías contratar el SIALP porque la inflación es muy alta y vas a perder poder adquisitivo en el banco..."</p>
+        <p style="font-size:13px;color:var(--red)">*Resultado: El cliente desconecta de inmediato porque la inflación es un concepto lejano.*</p>
       </div>
-    </div>
 
-    <div class="card card-red">
-      <div class="card-title">"Es invasivo preguntar cuánto gana alguien"</div>
-      <p><strong>Realidad:</strong> Solo es invasivo si no has creado confianza antes.</p>
-      <p><strong>Solución:</strong> Permiso anticipado. "Vamos a hablar de algo más personal: tu economía. No necesito saber al céntimo, solo entender tu situación general. ¿Te parece bien?" — Nadie dice que no.</p>
-    </div>
-
-    <div class="card card-red">
-      <div class="card-title">"Y si se ofende y se va"</div>
-      <p><strong>Realidad:</strong> Si se ofende por preguntas profesionales hechas con respeto, no tenía intención real. Mejor perderlo ahora que perder 2 horas.</p>
-      <p><strong>Solución:</strong> Enmarca dentro del servicio. "Para recomendarte lo adecuado, necesito entender tu capacidad económica. No busco datos de banco, solo saber si hablamos de 100, 300 o 500 €/mes."</p>
-    </div>
-
-    <div class="card card-red">
-      <div class="card-title">"No sé qué hacer con los silencios incómodos"</div>
-      <p><strong>Realidad:</strong> Los silencios NO son incómodos. Son momentos de procesamiento emocional.</p>
-      <p><strong>Solución:</strong> CÁLLATE Y ESPERA. Cuenta hasta 10. Si llegan los 15-20 segundos sin respuesta: "Veo que es una pregunta difícil de responder..."</p>
-    </div>
-  </div>
-
-  <!-- DEEP: ERRORES FATALES -->
-  <div class="section">
-    <div class="section-head">
-      <div class="section-icon icon-red">💀</div>
-      <div>
-        <div class="section-title">ERRORES FATALES QUE DESTRUYEN LA VENTA</div>
-        <div class="section-sub">Evítalos siempre</div>
+      <div class="dialogue dialogue-good">
+        <div class="dialogue-label label-good">ENFOQUE DE ASESOR CONSULTIVO (MATEMÁTICO)</div>
+        <p><span class="speaker">Asesor:</span> "Noelia, tú eres muy prudente y entiendo que te dé tranquilidad tener tus 36.000 € en la libreta del banco de siempre..."</p>
+        <p><span class="speaker">Asesor:</span> "Pero hagamos un cálculo matemático rápido: con la subida de precios actual al 3%, tus 36.000 € comprarán dentro de 10 años exactamente lo mismo que comprarías hoy con 28.000 €."</p>
+        <p><span class="speaker">Asesor:</span> "Dejar el dinero parado al 0% significa que le estás regalando al banco una pérdida garantizada de 8.000 € de tu poder de compra. ¿Tiene sentido perder 8.000 € de tus ahorros por miedo a que la bolsa caiga?"</p>
       </div>
-    </div>
-
-    <div class="card card-red">
-      <div class="card-title">Hablar de características en lugar de beneficios</div>
-      <div class="vs-grid">
-        <div class="vs-col bad">
-          <div class="vs-label">Fatal</div>
-          <p style="font-size:14px;color:var(--text2)">"Este Plan Creciente tiene gestión 50/50 de Goldman Sachs con garantías desde día 1."</p>
-        </div>
-        <div class="vs-col good">
-          <div class="vs-label">Correcto</div>
-          <p style="font-size:14px;color:var(--text2)">"Si aportas 200 €/mes durante 10 años, llegas con 30.000 € que te dan 300 € extra cada mes para siempre. ¿Qué harías con esos 300 €?"</p>
-        </div>
-      </div>
-      <p style="font-size:14px;color:var(--amber)"><strong>Regla:</strong> Nadie compra "gestión Goldman Sachs". Compran tranquilidad en la vejez.</p>
-    </div>
-
-    <div class="card card-red">
-      <div class="card-title">No cuantificar el dolor</div>
-      <div class="vs-grid">
-        <div class="vs-col bad">
-          <div class="vs-label">Abstracto</div>
-          <p style="font-size:14px;color:var(--text2)">"Si no puedes trabajar, estarías en problemas."</p>
-        </div>
-        <div class="vs-col good">
-          <div class="vs-label">Concreto</div>
-          <p style="font-size:14px;color:var(--text2)">"Si no puedes trabajar 6 meses y tus gastos son 2.000 €/mes, son 12.000 € que no van a entrar. ¿De dónde salen?"</p>
-        </div>
-      </div>
-      <p style="font-size:14px;color:var(--amber)"><strong>Regla:</strong> El dolor abstracto no vende. El dolor con número específico sí.</p>
-    </div>
-
-    <div class="card card-red">
-      <div class="card-title">Competir por precio</div>
-      <p><strong>Cliente:</strong> "En otra compañía me sale más barato."</p>
-      <p><strong>Nunca:</strong> "Sí, pero nosotros tenemos mejor servicio."</p>
-      <p><strong>Siempre:</strong> "¿Qué coberturas tiene? ¿Cuánto te cubre al mes? ¿Durante cuánto tiempo? Tus gastos son Z €. ¿Cómo cubres la diferencia?"</p>
-      <p style="font-size:14px;color:var(--amber)"><strong>Regla:</strong> Nunca compares precio vs precio. Compara cobertura vs cobertura.</p>
-    </div>
-  </div>
-
-  <!-- DEEP: AUTOEVALUACIÓN -->
-  <div class="section">
-    <div class="section-head">
-      <div class="section-icon icon-green">✅</div>
-      <div>
-        <div class="section-title">AUTOEVALUACIÓN POST-ENTREVISTA</div>
-        <div class="section-sub">Responde después de cada ADN</div>
-      </div>
-    </div>
-
-    <div class="checklist" id="checklist">
-      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Apertura:</strong> ¿Conseguí que se sintiera cómodo en los primeros 3 minutos?</div></div>
-      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Apertura:</strong> ¿Establecí que mi rol es ayudar, no vender?</div></div>
-      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Descubrimiento:</strong> ¿El cliente verbalizó sus problemas con sus propias palabras?</div></div>
-      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Descubrimiento:</strong> ¿Usé más preguntas que afirmaciones?</div></div>
-      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Descubrimiento:</strong> ¿Respeté los silencios sin interrumpir?</div></div>
-      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Soluciones:</strong> ¿Presenté DESPUÉS de que viera el problema?</div></div>
-      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Soluciones:</strong> ¿Usé los números del cliente, no estadísticas generales?</div></div>
-      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Cierre:</strong> ¿El cliente tomó la decisión por sí mismo?</div></div>
-      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Cierre:</strong> ¿Manejé objeciones identificando la razón real?</div></div>
-      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>Cierre:</strong> ¿Terminé con próximos pasos claros?</div></div>
-    </div>
-
-    <div class="card" style="text-align:center; margin-top:12px;">
-      <p style="font-size:14px;color:var(--text3)">9-10 ✓ = <span style="color:var(--green);font-weight:700">Asesor experto</span> · 7-8 = <span style="color:var(--blue);font-weight:700">Competente</span> · 5-6 = <span style="color:var(--amber);font-weight:700">En desarrollo</span> · &lt;5 = <span style="color:var(--red);font-weight:700">Vendedor, no asesor</span></p>
     </div>
   </div>
 
