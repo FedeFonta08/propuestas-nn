@@ -1301,14 +1301,35 @@ Y mientras tanto, los 70€ mensuales que antes tirabais, ahora se quedan en vue
         phase: "fase-6",
         name: "Hipoteca Mari Carmen",
         desc: "Préstamo hipotecario ABANCA (fijo, mixto o variable) sin comisión de apertura e intereses bonificables por vinculación.",
-        reframe: "La financiación flexible y sin costes de entrada para que tu nueva casa sea una oportunidad, no una carga."
+        reframe: "La financiación flexible y sin costes de entrada para que tu nueva casa sea una oportunidad, no una carga.",
+        pdfs: [
+          { name: "Ficha Hipoteca Fija", path: "docs/fase6-hipotecas/abanca/abanca-maricarmen-fija-valor.pdf" },
+          { name: "Ficha Hipoteca Mixta", path: "docs/fase6-hipotecas/abanca/abanca-maricarmen-mixta-valor.pdf" },
+          { name: "Ficha Hipoteca Variable", path: "docs/fase6-hipotecas/abanca/abanca-maricarmen-variable-valor.pdf" },
+          { name: "Guía Rápida de Solicitud", path: "docs/fase6-hipotecas/abanca/guia-rapida-solicitud-hipotecas.pdf" },
+          { name: "Manual Operativo Hipotecas", path: "docs/fase6-hipotecas/abanca/manual-operativo-hipotecas.pdf" },
+          { name: "Pre-Scoring Online ABANCA", path: "docs/fase6-hipotecas/abanca/negocio-hipotecario-prescoring-online.pdf" },
+          { name: "Presentación Hipotecas ABANCA", path: "docs/fase6-hipotecas/abanca/presentacion-hipotecas-abanca.pdf" },
+          { name: "Protocolo Soporte e Incidencias", path: "docs/fase6-hipotecas/abanca/protocolo-consultas-incidencias-abanca.pdf" },
+          { name: "Manual Plataforma ABANCA", path: "docs/fase6-hipotecas/abanca/manual-plataforma-abanca.pdf" },
+          { name: "Operaciones No Planteables", path: "docs/fase6-hipotecas/abanca/operaciones-no-planteables-abanca.pdf" }
+        ]
       },
       {
         id: "naranja",
         phase: "fase-6",
         name: "Hipoteca Naranja",
         desc: "Hipoteca ING 100% digital, sin comisión de apertura y con gastos de formalización (notaría, registro) asumidos por el banco.",
-        reframe: "Estrena casa sin pagar gastos de formalización; la hipoteca transparente y digital que te hace el proceso mucho más fácil."
+        reframe: "Estrena casa sin pagar gastos de formalización; la hipoteca transparente y digital que te hace el proceso mucho más fácil.",
+        pdfs: [
+          { name: "Folleto Comercial Naranja", path: "docs/fase6-hipotecas/ing/folleto-hipoteca-naranja.pdf" },
+          { name: "Guía Completa Hipoteca Naranja", path: "docs/fase6-hipotecas/ing/guia-completa-hipoteca-naranja.pdf" },
+          { name: "Guía Integral Naranja", path: "docs/fase6-hipotecas/ing/guia-integral-hipoteca-naranja.pdf" },
+          { name: "Presentación Hipotecas ING", path: "docs/fase6-hipotecas/ing/presentacion-hipotecas-ing.pdf" },
+          { name: "Presentación Ecosistema ING-NN", path: "docs/fase6-hipotecas/ing/presentacion-ecosistema-hipotecario-ing.pdf" },
+          { name: "Presentación Solidez y Agilidad", path: "docs/fase6-hipotecas/ing/presentacion-hipoteca-naranja-solidez-agilidad.pdf" },
+          { name: "Presentación Transparencia Naranja", path: "docs/fase6-hipotecas/ing/presentacion-hipoteca-naranja-transparencia.pdf" }
+        ]
       }
     ];
 
@@ -1344,16 +1365,24 @@ Y mientras tanto, los 70€ mensuales que antes tirabais, ahora se quedan en vue
     // RESOLVE PDF LINK DYNAMICALLY
     function resolvePDFLink(relPath) {
       // If we are online on github pages
-      if (window.location.hostname === 'fedefonta08.github.io' || window.location.protocol === 'https:') {
+      if (window.location.hostname === 'fedefonta08.github.io' || window.location.protocol === 'https:' || window.location.protocol === 'http:') {
         return relPath;
       }
       // If we are opened from the downloads folder directly (not inside 06_NATIONALE_NEDERLANDEN)
       const pathname = window.location.pathname;
-      if (pathname.includes('/Downloads/Biblia_de_Ventas_NN_v2.html')) {
-        return '06_NATIONALE_NEDERLANDEN/' + relPath;
+      
+      // Detect if we are on Federico's computer (where the local docs/ folder exists)
+      const isFedeComputer = pathname.toLowerCase().includes('ffont') || pathname.toLowerCase().includes('downloads/06_nationale_nederlanden');
+      
+      if (isFedeComputer) {
+        if (pathname.includes('/Downloads/Biblia_de_Ventas_NN_v2.html')) {
+          return '06_NATIONALE_NEDERLANDEN/' + relPath;
+        }
+        return relPath;
+      } else {
+        // For external agents opened locally, redirect to the online hosted PDFs
+        return 'https://fedefonta08.github.io/propuestas-nn/' + relPath;
       }
-      // Otherwise
-      return relPath;
     }
 
     // RENDER PRODUCTS
