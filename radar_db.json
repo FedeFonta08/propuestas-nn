@@ -45,90 +45,6 @@
       "Cambios_Catalogo": null
     },
     {
-      "Producto": "Plan Salud + Vida",
-      "Tipo_de_campaña": "Promoción Cruzada",
-      "Descripcion_del_beneficio": "Seguro de Vida bonificado el primer año (coste 0€) y descuento del 12,5% en Salud hasta el 1 de junio de 2026. Ampliación de plazo de contratación hasta el 31 de mayo.",
-      "Fecha_inicio": null,
-      "Fecha_fin": "31/05/2026",
-      "Cupo_max": null,
-      "Descuento_Bonus": "12,5% en Salud (hasta 01/06/2026)",
-      "Segmento_objetivo": "Particulares y familias que buscan una protección integral de salud y vida.",
-      "Vulnerabilidad_Detectada": "El miedo a las listas de espera y la incertidumbre en la atención sanitaria pública ante diagnósticos graves, combinado con la preocupación por la protección económica de la familia en caso de fallecimiento o invalidez del sustento principal.",
-      "Pregunta_Apertura": "¿Qué pasaría si mañana te diagnostican algo importante y la sanidad pública te da cita para dentro de 4 meses? ¿Podrías asumir ese tiempo de espera sin comprometer tu salud y, a la vez, cómo asegurarías la estabilidad económica de tu familia si tú ya no estuvieras para proveer?",
-      "Estado": "⚡ URGENTE",
-      "Cambios_Catalogo": {
-        "id_producto": "saludvida",
-        "campos_a_actualizar": {
-          "descripcion_breve": "La única solución híbrida: Medicina Sanitas + Seguro de Vida en un solo contrato. Vida GRATIS el primer año y 12,5% de descuento en Salud hasta el 1 de junio de 2026. Ampliación de plazo de contratación hasta el 31 de mayo.",
-          "detalles_adicionales": "Prima variable según edad y zona · Vida gratis 12 meses · Descuento del 12,5% en Salud hasta el 1 de junio de 2026. Plazo de emisión ampliado hasta el 31 de mayo.",
-          "estadisticas_clave": [
-            {
-              "valor": "12,5%",
-              "etiqueta": "Descuento en Salud hasta junio 2026"
-            },
-            {
-              "valor": "0 €",
-              "etiqueta": "Vida (1er año)"
-            },
-            {
-              "valor": "+40.000",
-              "etiqueta": "Médicos Sanitas"
-            },
-            {
-              "valor": "31/05/2026",
-              "etiqueta": "Fecha límite emisión"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "Producto": "Contigo Senior (+55)",
-      "Tipo_de_campaña": "Bonificación Especial",
-      "Descripcion_del_beneficio": "6 meses bonificados en la prima durante mayo de 2026 para mayores de 55 años.",
-      "Fecha_inicio": null,
-      "Fecha_fin": null,
-      "Cupo_max": null,
-      "Descuento_Bonus": "6 meses bonificados",
-      "Segmento_objetivo": "Mayores de 55 años.",
-      "Vulnerabilidad_Detectada": "La preocupación por mantener la autonomía y calidad de vida ante el envejecimiento, la fragilidad ante accidentes y la necesidad de asistencia sanitaria especializada. El miedo a depender de terceros o enfrentar gastos médicos imprevistos.",
-      "Pregunta_Apertura": "Al superar los 55 años, ¿cómo estás blindando tu tranquilidad y autonomía ante posibles accidentes o la necesidad de cuidados médicos especializados, asegurándote de que no supongan una carga financiera inesperada para ti o tu familia?",
-      "Estado": "⚡ URGENTE",
-      "Cambios_Catalogo": {
-        "id_producto": "senior",
-        "campos_a_actualizar": {
-          "detalles_adicionales": "Prima variable según edad · Exclusivo mayores de 55 años · 6 meses bonificados en mayo 2026",
-          "estadisticas_clave": [
-            {
-              "valor": "65.000 €",
-              "etiqueta": "Capital máx. por accidente"
-            },
-            {
-              "valor": "+55 años",
-              "etiqueta": "Edad de acceso"
-            },
-            {
-              "valor": "Sanitas",
-              "etiqueta": "Red asistencial"
-            },
-            {
-              "valor": "6 meses bonif.",
-              "etiqueta": "Mayo 2026"
-            }
-          ],
-          "coberturas_clave": [
-            {
-              "cobertura": "6 meses bonificados",
-              "concepto": "Mayo 2026",
-              "valor_limite": "✓",
-              "es_clave": true,
-              "tipo": "bonificación"
-            }
-          ]
-        }
-      }
-    },
-    {
       "Producto": "Salud Completo Copago",
       "Segmento_objetivo": "S2 Constructor · S3 Protector · S3A Autónomo",
       "Estado": "🟢 ACTIVA",
@@ -185,14 +101,6 @@
       "Pregunta_Apertura": ""
     },
     {
-      "Producto": "Salud (Campaña Ahorro + Salud)",
-      "Segmento_objetivo": "Clientes que ya contrataron PC SIALP o Contigo Futuro en campaña y aún no han formalizado su seguro de Salud.",
-      "Estado": "⚡ URGENTE",
-      "Descripcion_del_beneficio": "Ampliación del plazo de formalización para seguros de Salud a clientes que contrataron PC SIALP o Contigo Futuro en campaña. Fecha de emisión hasta el 31 de mayo, con efecto 1 de mayo o 1 de junio.",
-      "Vulnerabilidad_Detectada": "Miedo a listas de espera de 4 meses ante diagnósticos graves que impacten severamente la calidad de vida y el bienestar familiar.",
-      "Pregunta_Apertura": "¿Qué pasaría si mañana te diagnostican algo grave y la sanidad pública te da cita para dentro de 4 meses? ¿Podrías permitirte esperar tanto, o afrontarías los costes de una alternativa privada de forma inmediata?"
-    },
-    {
       "Producto": "Plan de Referencias 2026",
       "Segmento_objetivo": "Agentes actuales",
       "Estado": "🟢 ACTIVA",
@@ -207,30 +115,6 @@
       "Descripcion_del_beneficio": "Descuento vitalicio del 25% sobre la prima. Excluye la cobertura de Incapacidad Laboral Temporal (ILT).",
       "Vulnerabilidad_Detectada": "El riesgo de descapitalización o endeudamiento si una baja laboral impide trabajar durante un periodo prolongado, especialmente para autónomos con gastos fijos y una pensión pública insuficiente.",
       "Pregunta_Apertura": "Si mañana tu negocio tiene que parar 3 meses por una baja, tus gastos siguen iguales pero tus ingresos cesan. ¿De dónde saldrían los 2.000€ que te faltarían cada mes para mantener tu nivel de vida?"
-    },
-    {
-      "Producto": "Seguro de Salud Completo",
-      "Segmento_objetivo": "Clientes que han contratado Plan SIALP o Contigo Futuro",
-      "Estado": "🟢 ACTIVA",
-      "Descripcion_del_beneficio": "Los clientes que hayan contratado Plan SIALP o Contigo Futuro en campaña, pueden formalizar su seguro de Salud con fecha de emisión hasta el 31 de mayo de 2026 y fecha de efecto 1 de mayo o 1 de junio de 2026.",
-      "Vulnerabilidad_Detectada": "Miedo a listas de espera de 4 meses ante diagnósticos graves.",
-      "Pregunta_Apertura": "¿Qué pasaría si mañana te diagnostican algo y la sanidad pública te da cita para dentro de 4 meses? ¿Podrías permitírtelo?"
-    },
-    {
-      "Producto": "Plan SIALP",
-      "Segmento_objetivo": "Clientes que hayan contratado SIALP",
-      "Estado": "🟢 ACTIVA",
-      "Descripcion_del_beneficio": "Permite contratar el seguro de Salud asociado a la campaña Ahorro + Salud con fecha de emisión hasta el 31 de mayo y fecha de efecto 1 de mayo y 1 de junio.",
-      "Vulnerabilidad_Detectada": "El miedo a perder la oportunidad de complementar un ahorro a largo plazo (SIALP) con una protección de salud esencial, debido a plazos de contratación ajustados.",
-      "Pregunta_Apertura": "Si tu plan SIALP te da tranquilidad financiera a futuro, ¿cómo estás protegiendo tu salud presente para poder disfrutar de ese futuro?"
-    },
-    {
-      "Producto": "Contigo Futuro",
-      "Segmento_objetivo": "Clientes que hayan contratado Contigo Futuro",
-      "Estado": "🟢 ACTIVA",
-      "Descripcion_del_beneficio": "Los clientes que contrataron Contigo Futuro pueden formalizar su seguro de Salud asociado hasta el 31 de mayo, beneficiándose de las condiciones de la campaña Ahorro + Salud.",
-      "Vulnerabilidad_Detectada": "La necesidad de proteger el capital invertido a largo plazo frente a imprevistos de salud que puedan requerir gastos médicos elevados, comprometiendo la estrategia de acumulación y el objetivo de jubilación.",
-      "Pregunta_Apertura": "Imagina que necesitas un tratamiento médico costoso o una cirugía compleja. ¿Cómo te aseguras de que tu inversión a largo plazo, destinada a tu futuro, no se vea drásticamente afectada por un gasto de salud imprevisto?"
     },
     {
       "Producto": "Hipoteca Naranja (ING)",

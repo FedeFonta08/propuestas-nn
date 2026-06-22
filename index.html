@@ -1463,17 +1463,6 @@ const CAMPANAS_ACTIVAS = [
     estado: '🟢 ACTIVA'
   },
   {
-    producto: 'Salud (Campaña Ahorro + Salud)',
-    tipo: 'Ampliación plazo de formalización',
-    desc: 'Permite formalizar seguro de Salud a clientes que contrataron SIALP o Contigo Futuro con emisión hasta el 31 de mayo de 2026.',
-    inicio: '18/05/2026',
-    fin: '31/05/2026',
-    dto: 'Ampliación emisión',
-    segmento: 'Clientes SIALP o Contigo Futuro',
-    accion: 'Campaña crítica que cierra este mes. Contactar clientes que tienen el ahorro pero les falta la Salud. Pólizas efecto 1 mayo / 1 junio.',
-    estado: '⚡ URGENTE'
-  },
-  {
     producto: 'Hipoteca Naranja (ING)',
     tipo: 'Actualización de precios',
     desc: 'Subida generalizada de tipos de interés en hipotecas fijas y variables para nuevos scorings desde el 11 de mayo de 2026.',
@@ -1483,28 +1472,6 @@ const CAMPANAS_ACTIVAS = [
     segmento: 'Clientes en búsqueda activa de hipoteca',
     accion: 'Advertir a clientes en prospección sobre la subida. No afecta a expedientes con scoring cerrado antes del 11 de mayo.',
     estado: '⚡ URGENTE'
-  },
-  {
-    producto: 'Plan Salud + Vida',
-    tipo: 'Ampliación de promoción',
-    desc: 'Seguro de Vida GRATIS el primer año y 12,5% de descuento en Salud hasta el 1 de junio de 2026.',
-    inicio: '18/05/2026',
-    fin: '01/06/2026',
-    dto: 'Vida Gratis + 12,5% Salud',
-    segmento: 'Particulares y familias',
-    accion: 'Ofrecer la solución híbrida de medicina Sanitas + vida. Cierre de promoción muy próximo.',
-    estado: '🟢 ACTIVA'
-  },
-  {
-    producto: 'Contigo Senior (+55)',
-    tipo: 'Bonificación especial',
-    desc: '6 meses de prima bonificados en mayo de 2026. Ecosistema de protección integral con red asistencial Sanitas.',
-    inicio: '04/05/2026',
-    fin: '31/05/2026',
-    dto: '6 meses bonificados',
-    segmento: 'Mayores de 55 años',
-    accion: 'Filtrar base de datos contactos +55 años. Ofrecer cobertura de accidentes de 65.000 € y servicios reales de autonomía.',
-    estado: '🟢 ACTIVA'
   },
   {
     producto: 'Salud Completo Copago',
@@ -1611,18 +1578,50 @@ function ordenarCampanas(lista) {
   return [...lista].sort((a,b) => orden(a.estado || a.Estado || '') - orden(b.estado || b.Estado || ''));
 }
 
+function esFechaPasada(fechaStr) {
+  if (!fechaStr) return false;
+  const str = String(fechaStr).trim().toLowerCase();
+  if (!str || str === 'indefinido' || str === 'indefinida' || str === 'sin cupo' || str === '—' || str === 'n/a') return false;
+  
+  const parts = str.split(/[\/\-]/);
+  if (parts.length === 3) {
+    const dia = parseInt(parts[0], 10);
+    const mes = parseInt(parts[1], 10) - 1; // 0-based month
+    const anio = parseInt(parts[2], 10);
+    if (!isNaN(dia) && !isNaN(mes) && !isNaN(anio)) {
+      const fechaFin = new Date(anio, mes, dia, 23, 59, 59);
+      const hoy = new Date();
+      return fechaFin < hoy;
+    }
+  }
+  return false;
+}
+
 function renderRadarUI(campanas, origen) {
   const grid = document.getElementById('radar-grid');
   const footer = document.getElementById('radar-footer');
   if (!grid) return;
 
-  // Filtrar placeholders o campos vacíos sin sentido
+  // Filtrar placeholders o campos vacíos sin sentido, canceladas o fuera de término
   const campanasValidas = (campanas || []).filter(c => {
     const prod = (c.producto || c.Producto || '').toLowerCase();
     if (!prod) return false;
     if (prod.includes('producto')) return false;
     if (prod.includes('actualizaci')) return false;
     if (prod.includes('radar comercial')) return false;
+
+    // Filtrar por Estado
+    const est = (c.estado || c.Estado || '').toLowerCase();
+    if (est.includes('cancelada') || est.includes('finalizada') || est.includes('vencida') || est.includes('inactiva') || est.includes('no activa')) {
+      return false;
+    }
+
+    // Filtrar por Fecha fin
+    const finStr = c.fin || c.Fecha_fin || '';
+    if (esFechaPasada(finStr)) {
+      return false;
+    }
+
     return true;
   });
 
