@@ -212,15 +212,29 @@ def get_gspread_client():
     if os.path.exists(token_path):
         creds = Credentials.from_authorized_user_file(token_path, SCOPES)
     if not creds or not creds.valid:
+        token_renovado = False
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
+            try:
+                creds.refresh(Request())
+                token_renovado = True
+            except Exception as e:
+                print(f"\n⚠️ El token existente no se pudo renovar: {e}")
+                print("Se iniciará el proceso de autenticación de nuevo...")
+                if os.path.exists(token_path):
+                    try:
+                        os.remove(token_path)
+                    except:
+                        pass
+                creds = None
+
+        if not token_renovado or not creds:
             if not os.path.exists(creds_path):
-                print(f"\\n❌ ATENCIÓN: Falta el archivo 'credentials.json'.")
+                print(f"\n❌ ATENCIÓN: Falta el archivo 'credentials.json'.")
                 print("Debes descargarlo de Google Cloud Console y colocarlo en la carpeta Scripts_Herramientas.")
                 sys.exit(1)
             flow = InstalledAppFlow.from_client_secrets_file(creds_path, SCOPES)
             creds = flow.run_local_server(port=0)
+            
         with open(token_path, 'w') as token:
             token.write(creds.to_json())
 

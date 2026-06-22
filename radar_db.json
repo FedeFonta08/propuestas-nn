@@ -1,23 +1,102 @@
 {
-  "ultima_actualizacion": "01/06/2026 12:34",
+  "ultima_actualizacion": "22/06/2026 15:10",
   "campanas": [
     {
-      "Producto": "Contigo Senior (+55)",
-      "Tipo_de_campaña": "Bonificación",
-      "Descripcion_del_beneficio": "6 meses bonificados en la prima de Contigo Senior (+55) durante mayo de 2026.",
-      "Fecha_inicio": "01/05/2026",
-      "Fecha_fin": "31/10/2026",
+      "Producto": "Contigo Autónomo",
+      "Tipo_de_campaña": "Descuento Vitalicio",
+      "Descripcion_del_beneficio": "25% de descuento vitalicio en la prima, aplicable a autónomos RETA. Excluye cobertura de Incapacidad Laboral Temporal (ILT).",
+      "Fecha_inicio": null,
+      "Fecha_fin": null,
       "Cupo_max": null,
-      "Descuento_Bonus": null,
-      "Segmento_objetivo": "Mayores de 55 años",
-      "Vulnerabilidad_Detectada": "Preocupación por la seguridad económica y el acceso a servicios asistenciales tras la jubilación.",
-      "Pregunta_Apertura": "¿Cómo se imagina su día a día a partir de los 55? ¿Ha pensado en cómo mantener su nivel de vida y acceder a los mejores servicios de salud y asistencia sin que el coste le suponga una carga?",
+      "Descuento_Bonus": "25%",
+      "Segmento_objetivo": "Autónomos RETA",
+      "Vulnerabilidad_Detectada": "Los autónomos se enfrentan a la inestabilidad de sus ingresos ante bajas laborales, donde la prestación pública es insuficiente y sus gastos fijos continúan. El miedo a no poder cubrir las necesidades básicas o endeudarse ante una incapacidad es una preocupación latente.",
+      "Pregunta_Apertura": "Si mañana sufres una baja laboral por enfermedad o accidente, y la prestación pública solo cubre una parte mínima de tus gastos fijos, ¿de dónde saldría el dinero restante para mantener tu negocio y tu nivel de vida cada mes que no puedas trabajar?",
+      "Estado": "🟢 ACTIVA",
+      "Cambios_Catalogo": {
+        "id_producto": "autonomo",
+        "campos_a_actualizar": {
+          "descripcion_breve": "Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
+          "detalles_adicionales": "Con descuento hábitos saludables −10% · Capital total: 266.000 € · *25% descuento vitalicio (excluye ILT)*",
+          "coberturas_clave": [
+            {
+              "cobertura": "Incapacidad laboral temporal (ILT)",
+              "concepto": "EXCLUIDA en esta campaña con descuento del 25%.",
+              "valor_limite": "N/A",
+              "es_clave": false,
+              "tipo": "exclusión"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "Producto": "Contigo Familia",
+      "Tipo_de_campaña": "Descuento Vitalicio (sin ILT)",
+      "Descripcion_del_beneficio": "25% de descuento vitalicio en la prima, dirigido a la protección familiar. En esta modalidad para autónomos, se excluye la cobertura de Incapacidad Laboral Temporal (ILT).",
+      "Fecha_inicio": null,
+      "Fecha_fin": null,
+      "Cupo_max": null,
+      "Descuento_Bonus": "25%",
+      "Segmento_objetivo": "Familias y particulares (incluyendo autónomos sin foco en ILT)",
+      "Vulnerabilidad_Detectada": "La preocupación por la estabilidad económica familiar ante un imprevisto que impida al principal sustento trabajar y generar ingresos. El miedo a que la falta de aportación comprometa el futuro educativo de los hijos o la continuidad del hogar.",
+      "Pregunta_Apertura": "Si mañana tuvieras un accidente o una enfermedad grave que te impidiera trabajar durante un tiempo, ¿cómo garantizarías que tus hijos puedan seguir estudiando y tu familia mantenga su nivel de vida sin que tus ahorros se vean mermados?",
+      "Estado": "🟢 ACTIVA",
+      "Cambios_Catalogo": null
+    },
+    {
+      "Producto": "Plan Salud + Vida",
+      "Tipo_de_campaña": "Promoción Cruzada",
+      "Descripcion_del_beneficio": "Seguro de Vida bonificado el primer año (coste 0€) y descuento del 12,5% en Salud hasta el 1 de junio de 2026. Ampliación de plazo de contratación hasta el 31 de mayo.",
+      "Fecha_inicio": null,
+      "Fecha_fin": "31/05/2026",
+      "Cupo_max": null,
+      "Descuento_Bonus": "12,5% en Salud (hasta 01/06/2026)",
+      "Segmento_objetivo": "Particulares y familias que buscan una protección integral de salud y vida.",
+      "Vulnerabilidad_Detectada": "El miedo a las listas de espera y la incertidumbre en la atención sanitaria pública ante diagnósticos graves, combinado con la preocupación por la protección económica de la familia en caso de fallecimiento o invalidez del sustento principal.",
+      "Pregunta_Apertura": "¿Qué pasaría si mañana te diagnostican algo importante y la sanidad pública te da cita para dentro de 4 meses? ¿Podrías asumir ese tiempo de espera sin comprometer tu salud y, a la vez, cómo asegurarías la estabilidad económica de tu familia si tú ya no estuvieras para proveer?",
+      "Estado": "⚡ URGENTE",
+      "Cambios_Catalogo": {
+        "id_producto": "saludvida",
+        "campos_a_actualizar": {
+          "descripcion_breve": "La única solución híbrida: Medicina Sanitas + Seguro de Vida en un solo contrato. Vida GRATIS el primer año y 12,5% de descuento en Salud hasta el 1 de junio de 2026. Ampliación de plazo de contratación hasta el 31 de mayo.",
+          "detalles_adicionales": "Prima variable según edad y zona · Vida gratis 12 meses · Descuento del 12,5% en Salud hasta el 1 de junio de 2026. Plazo de emisión ampliado hasta el 31 de mayo.",
+          "estadisticas_clave": [
+            {
+              "valor": "12,5%",
+              "etiqueta": "Descuento en Salud hasta junio 2026"
+            },
+            {
+              "valor": "0 €",
+              "etiqueta": "Vida (1er año)"
+            },
+            {
+              "valor": "+40.000",
+              "etiqueta": "Médicos Sanitas"
+            },
+            {
+              "valor": "31/05/2026",
+              "etiqueta": "Fecha límite emisión"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "Producto": "Contigo Senior (+55)",
+      "Tipo_de_campaña": "Bonificación Especial",
+      "Descripcion_del_beneficio": "6 meses bonificados en la prima durante mayo de 2026 para mayores de 55 años.",
+      "Fecha_inicio": null,
+      "Fecha_fin": null,
+      "Cupo_max": null,
+      "Descuento_Bonus": "6 meses bonificados",
+      "Segmento_objetivo": "Mayores de 55 años.",
+      "Vulnerabilidad_Detectada": "La preocupación por mantener la autonomía y calidad de vida ante el envejecimiento, la fragilidad ante accidentes y la necesidad de asistencia sanitaria especializada. El miedo a depender de terceros o enfrentar gastos médicos imprevistos.",
+      "Pregunta_Apertura": "Al superar los 55 años, ¿cómo estás blindando tu tranquilidad y autonomía ante posibles accidentes o la necesidad de cuidados médicos especializados, asegurándote de que no supongan una carga financiera inesperada para ti o tu familia?",
       "Estado": "⚡ URGENTE",
       "Cambios_Catalogo": {
         "id_producto": "senior",
         "campos_a_actualizar": {
-          "descripcion_breve": "Ecosistema de protección integral para mayores de 55. Capital por accidente hasta 65.000 €. Asistencia Sanitas + servicios reales de autonomía. 6 meses bonificados en mayo 2026.",
-          "precio_base": "Consultar",
           "detalles_adicionales": "Prima variable según edad · Exclusivo mayores de 55 años · 6 meses bonificados en mayo 2026",
           "estadisticas_clave": [
             {
@@ -48,104 +127,6 @@
           ]
         }
       }
-    },
-    {
-      "Producto": "Plan Salud + Vida",
-      "Tipo_de_campaña": "Descuento y Bonificación",
-      "Descripcion_del_beneficio": "12,5% de descuento en la prima de salud hasta el 1 de junio de 2026 y el seguro de vida es GRATIS el primer año.",
-      "Fecha_inicio": null,
-      "Fecha_fin": "01/06/2026",
-      "Cupo_max": null,
-      "Descuento_Bonus": "12.5%",
-      "Segmento_objetivo": "Familias e individuos que buscan cobertura de salud y vida.",
-      "Vulnerabilidad_Detectada": "El elevado coste de la sanidad privada y la preocupación por la protección económica familiar ante imprevistos vitales.",
-      "Pregunta_Apertura": "¿Qué pasaría si mañana necesitas una atención médica especializada y la lista de espera de la sanidad pública se alarga 4 meses? ¿Y si tu familia dependiera de un solo sueldo y tú faltaras de repente?",
-      "Estado": "⚡ URGENTE",
-      "Cambios_Catalogo": {
-        "id_producto": "saludvida",
-        "campos_a_actualizar": {
-          "descripcion_breve": "La única solución híbrida: Medicina Sanitas + Seguro de Vida en un solo contrato. Vida GRATIS el primer año y 12,5% de descuento en Salud hasta el 1 de junio de 2026. Ampliación de plazo de contratación hasta el 31 de mayo.",
-          "precio_base": "Consultar",
-          "detalles_adicionales": "Prima variable según edad y zona · Vida gratis 12 meses · Descuento del 12,5% en Salud hasta el 1 de junio de 2026. Plazo de emisión ampliado hasta 31 de mayo.",
-          "estadisticas_clave": [
-            {
-              "valor": "12,5%",
-              "etiqueta": "Descuento en Salud hasta junio 2026"
-            },
-            {
-              "valor": "0 €",
-              "etiqueta": "Vida (1er año)"
-            },
-            {
-              "valor": "+40.000",
-              "etiqueta": "Médicos Sanitas"
-            },
-            {
-              "valor": "31/05/2026",
-              "etiqueta": "Fecha límite emisión"
-            }
-          ],
-          "coberturas_clave": [
-            {
-              "cobertura": "Seguro de vida — 1er año GRATIS",
-              "concepto": "Capital a elegir",
-              "valor_limite": "0 € primer año",
-              "es_clave": true,
-              "tipo": "gratis"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "Producto": "Contigo Autónomo",
-      "Tipo_de_campaña": "Descuento Vitalicio y Exclusión de Cobertura Específica",
-      "Descripcion_del_beneficio": "25% de descuento vitalicio en la prima, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
-      "Fecha_inicio": null,
-      "Fecha_fin": null,
-      "Cupo_max": null,
-      "Descuento_Bonus": "25%",
-      "Segmento_objetivo": "Autónomos RETA.",
-      "Vulnerabilidad_Detectada": "El riesgo de ver mermados drásticamente los ingresos ante una baja laboral, enfermedad grave o invalidez, y la incertidumbre sobre la continuidad del negocio.",
-      "Pregunta_Apertura": "Si mañana, por una enfermedad o accidente, no pudieras ejercer tu actividad durante 3 meses, ¿de dónde saldrían los 900€ que necesitas cada mes para cubrir tus gastos fijos y mantener tu nivel de vida?",
-      "Estado": "🟢 ACTIVA",
-      "Cambios_Catalogo": {
-        "id_producto": "autonomo",
-        "campos_a_actualizar": {
-          "descripcion_breve": "Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
-          "precio_base": "Consultar",
-          "detalles_adicionales": "Con descuento hábitos saludables −10% · Capital total: 266.000 € · *25% descuento vitalicio (excluye ILT)*",
-          "estadisticas_clave": [
-            {
-              "valor": "25% vitalicio",
-              "etiqueta": "Descuento de prima"
-            }
-          ],
-          "coberturas_clave": [
-            {
-              "cobertura": "Incapacidad laboral temporal (ILT)",
-              "concepto": "EXCLUIDA en esta campaña con descuento del 25%.",
-              "valor_limite": "N/A",
-              "es_clave": false,
-              "tipo": "exclusión"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "Producto": "Contigo Familia",
-      "Tipo_de_campaña": "Descuento Vitalicio (General)",
-      "Descripcion_del_beneficio": "25% de descuento vitalicio en la prima.",
-      "Fecha_inicio": null,
-      "Fecha_fin": null,
-      "Cupo_max": null,
-      "Descuento_Bonus": "25%",
-      "Segmento_objetivo": "Individuos y familias.",
-      "Vulnerabilidad_Detectada": "El riesgo de que la falta de uno de los pilares económicos familiares cause una merma drástica en el nivel de vida de los supervivientes, o la incapacidad total o grave de sustentar a la familia.",
-      "Pregunta_Apertura": "Si tú faltaras mañana, ¿cómo vivirían tu pareja y tus hijos el mes que viene? ¿Quién asumiría el peso de la hipoteca y los gastos corrientes sin tus ingresos?",
-      "Estado": "🟢 ACTIVA",
-      "Cambios_Catalogo": null
     },
     {
       "Producto": "Salud Completo Copago",
@@ -262,174 +243,95 @@
   ],
   "novedades": [
     {
-      "Producto": "Contigo Senior (+55)",
-      "Que_ha_cambiado": "Se aplica una bonificación de 6 meses en la prima para contrataciones realizadas durante el mes de mayo de 2026.",
-      "Tipo": "🟢 Mejora",
-      "Vigente_desde": "01/05/2026",
-      "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Actualizar la campaña comercial y notificar a los agentes.",
-      "Impacto_segmento": "Mayores de 55 años.",
-      "Fuente": "Entre Nosotros #563",
-      "Cambios_Catalogo": {
-        "id_producto": "senior",
-        "campos_a_actualizar": {
-          "descripcion_breve": "Ecosistema de protección integral para mayores de 55. Capital por accidente hasta 65.000 €. Asistencia Sanitas + servicios reales de autonomía. 6 meses bonificados en mayo 2026.",
-          "precio_base": "Consultar",
-          "detalles_adicionales": "Prima variable según edad · Exclusivo mayores de 55 años · 6 meses bonificados en mayo 2026",
-          "estadisticas_clave": [
-            {
-              "valor": "65.000 €",
-              "etiqueta": "Capital máx. por accidente"
-            },
-            {
-              "valor": "+55 años",
-              "etiqueta": "Edad de acceso"
-            },
-            {
-              "valor": "Sanitas",
-              "etiqueta": "Red asistencial"
-            },
-            {
-              "valor": "6 meses bonif.",
-              "etiqueta": "Mayo 2026"
-            }
-          ],
-          "coberturas_clave": [
-            {
-              "cobertura": "6 meses bonificados",
-              "concepto": "Mayo 2026",
-              "valor_limite": "✓",
-              "es_clave": true,
-              "tipo": "bonificación"
-            }
-          ]
-        }
-      }
-    },
-    {
       "Producto": "Plan Salud + Vida",
-      "Que_ha_cambiado": "Promoción de descuento del 12.5% en salud hasta el 1 de junio de 2026 y el seguro de vida es gratuito el primer año.",
+      "Que_ha_cambiado": "Ampliación del plazo de emisión de la campaña a 31 de mayo de 2026. La promoción de Vida gratis el primer año y descuento del 12,5% en Salud se mantiene vigente hasta el 1 de junio de 2026.",
       "Tipo": "🟢 Mejora",
-      "Vigente_desde": null,
+      "Vigente_desde": "22/06/2026",
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Actualizar el banner promocional y la información de precios.",
-      "Impacto_segmento": "Familias e individuos.",
-      "Fuente": "Entre Nosotros #563",
-      "Cambios_Catalogo": {
-        "id_producto": "saludvida",
-        "campos_a_actualizar": {
-          "descripcion_breve": "La única solución híbrida: Medicina Sanitas + Seguro de Vida en un solo contrato. Vida GRATIS el primer año y 12,5% de descuento en Salud hasta el 1 de junio de 2026. Ampliación de plazo de contratación hasta el 31 de mayo.",
-          "precio_base": "Consultar",
-          "detalles_adicionales": "Prima variable según edad y zona · Vida gratis 12 meses · Descuento del 12,5% en Salud hasta el 1 de junio de 2026. Plazo de emisión ampliado hasta el 31 de mayo.",
-          "estadisticas_clave": [
-            {
-              "valor": "12,5%",
-              "etiqueta": "Descuento en Salud hasta junio 2026"
-            },
-            {
-              "valor": "0 €",
-              "etiqueta": "Vida (1er año)"
-            },
-            {
-              "valor": "+40.000",
-              "etiqueta": "Médicos Sanitas"
-            },
-            {
-              "valor": "31/05/2026",
-              "etiqueta": "Fecha límite emisión"
-            }
-          ],
-          "coberturas_clave": [
-            {
-              "cobertura": "Seguro de vida — 1er año GRATIS",
-              "concepto": "Capital a elegir",
-              "valor_limite": "0 € primer año",
-              "es_clave": true,
-              "tipo": "gratis"
-            }
-          ]
-        }
-      }
+      "Accion_sobre_CRM": "Actualizar fechas de fin de campaña para nuevos clientes.",
+      "Impacto_segmento": "Particulares y familias.",
+      "Fuente": "Entre Nosotros #566",
+      "Cambios_Catalogo": null
     },
     {
       "Producto": "Contigo Autónomo",
-      "Que_ha_cambiado": "Se aplica un 25% de descuento vitalicio en la prima, excluyendo explícitamente la cobertura de Incapacidad Laboral Temporal (ILT).",
+      "Que_ha_cambiado": "Se confirma la exclusión explícita de la cobertura de Incapacidad Laboral Temporal (ILT) para esta campaña específica con descuento vitalicio del 25%.",
+      "Tipo": "🔴 Proceso Crítico",
+      "Vigente_desde": "22/06/2026",
+      "Afecta_guia_comercial": "SÍ",
+      "Accion_sobre_CRM": "Asegurar que la ficha de Contigo Autónomo refleje esta exclusión de ILT y que los comerciales sean conscientes de ello.",
+      "Impacto_segmento": "Autónomos.",
+      "Fuente": "Entre Nosotros #566",
+      "Cambios_Catalogo": null
+    },
+    {
+      "Producto": "Contigo Familia",
+      "Que_ha_cambiado": "La campaña con un 25% de descuento vitalicio se extiende a autónomos, excluyendo la cobertura de ILT. Se trata de un producto diferenciado de la oferta general de Contigo Familia.",
       "Tipo": "🟢 Mejora",
-      "Vigente_desde": null,
+      "Vigente_desde": "22/06/2026",
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Actualizar precios y descripciones en el CRM para el segmento de autónomos.",
-      "Impacto_segmento": "Autónomos RETA.",
-      "Fuente": "Entre Nosotros #563",
-      "Cambios_Catalogo": {
-        "id_producto": "autonomo",
-        "campos_a_actualizar": {
-          "descripcion_breve": "Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
-          "precio_base": "Consultar",
-          "detalles_adicionales": "Con descuento hábitos saludables −10% · Capital total: 266.000 € · *25% descuento vitalicio (excluye ILT)*",
-          "estadisticas_clave": [
-            {
-              "valor": "25% vitalicio",
-              "etiqueta": "Descuento de prima"
-            }
-          ],
-          "coberturas_clave": [
-            {
-              "cobertura": "Incapacidad laboral temporal (ILT)",
-              "concepto": "EXCLUIDA en esta campaña con descuento del 25%.",
-              "valor_limite": "N/A",
-              "es_clave": false,
-              "tipo": "exclusión"
-            }
-          ]
-        }
-      }
+      "Accion_sobre_CRM": "Crear un registro específico o etiqueta para 'Contigo Familia para Autónomos (sin ILT)' para diferenciarlo de la oferta general.",
+      "Impacto_segmento": "Autónomos y particulares.",
+      "Fuente": "Entre Nosotros #566",
+      "Cambios_Catalogo": null
     },
     {
-      "Producto": "Campaña Actualizada: Contigo Senior (+55)",
-      "Que_ha_cambiado": "6 meses bonificados en la prima de Contigo Senior (+55) durante mayo de 2026.",
-      "Tipo": "🟢 Campaña Modificada",
-      "Vigente_desde": "01/05/2026",
+      "Producto": "Contigo Senior (+55)",
+      "Que_ha_cambiado": "Se anuncia una bonificación de 6 meses en la prima, aplicable durante mayo de 2026, para nuevas contrataciones.",
+      "Tipo": "🟢 Mejora",
+      "Vigente_desde": "22/06/2026",
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Ofrecer al segmento: Mayores de 55 años",
-      "Impacto_segmento": "Mayores de 55 años",
-      "Fuente": "Entre Nosotros #563"
-    },
-    {
-      "Producto": "Campaña Actualizada: Plan Salud + Vida",
-      "Que_ha_cambiado": "12,5% de descuento en la prima de salud hasta el 1 de junio de 2026 y el seguro de vida es GRATIS el primer año.",
-      "Tipo": "🟢 Campaña Modificada",
-      "Vigente_desde": null,
-      "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Ofrecer al segmento: Familias e individuos que buscan cobertura de salud y vida.",
-      "Impacto_segmento": "Familias e individuos que buscan cobertura de salud y vida.",
-      "Fuente": "Entre Nosotros #563"
+      "Accion_sobre_CRM": "Actualizar la información de la campaña en el CRM con las nuevas fechas y el detalle de la bonificación.",
+      "Impacto_segmento": "Mayores de 55 años.",
+      "Fuente": "Entre Nosotros #566",
+      "Cambios_Catalogo": null
     },
     {
       "Producto": "Campaña Actualizada: Contigo Autónomo",
-      "Que_ha_cambiado": "25% de descuento vitalicio en la prima, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
+      "Que_ha_cambiado": "25% de descuento vitalicio en la prima, aplicable a autónomos RETA. Excluye cobertura de Incapacidad Laboral Temporal (ILT).",
       "Tipo": "🟢 Campaña Modificada",
       "Vigente_desde": null,
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Ofrecer al segmento: Autónomos RETA.",
-      "Impacto_segmento": "Autónomos RETA.",
-      "Fuente": "Entre Nosotros #563"
+      "Accion_sobre_CRM": "Ofrecer al segmento: Autónomos RETA",
+      "Impacto_segmento": "Autónomos RETA",
+      "Fuente": "Entre Nosotros #566"
     },
     {
       "Producto": "Campaña Actualizada: Contigo Familia",
-      "Que_ha_cambiado": "25% de descuento vitalicio en la prima.",
+      "Que_ha_cambiado": "25% de descuento vitalicio en la prima, dirigido a la protección familiar. En esta modalidad para autónomos, se excluye la cobertura de Incapacidad Laboral Temporal (ILT).",
       "Tipo": "🟢 Campaña Modificada",
       "Vigente_desde": null,
       "Afecta_guia_comercial": "SÍ",
-      "Accion_sobre_CRM": "Ofrecer al segmento: Individuos y familias.",
-      "Impacto_segmento": "Individuos y familias.",
-      "Fuente": "Entre Nosotros #563"
+      "Accion_sobre_CRM": "Ofrecer al segmento: Familias y particulares (incluyendo autónomos sin foco en ILT)",
+      "Impacto_segmento": "Familias y particulares (incluyendo autónomos sin foco en ILT)",
+      "Fuente": "Entre Nosotros #566"
+    },
+    {
+      "Producto": "Campaña Actualizada: Plan Salud + Vida",
+      "Que_ha_cambiado": "Seguro de Vida bonificado el primer año (coste 0€) y descuento del 12,5% en Salud hasta el 1 de junio de 2026. Ampliación de plazo de contratación hasta el 31 de mayo.",
+      "Tipo": "🟢 Campaña Modificada",
+      "Vigente_desde": null,
+      "Afecta_guia_comercial": "SÍ",
+      "Accion_sobre_CRM": "Ofrecer al segmento: Particulares y familias que buscan una protección integral de salud y vida.",
+      "Impacto_segmento": "Particulares y familias que buscan una protección integral de salud y vida.",
+      "Fuente": "Entre Nosotros #566"
+    },
+    {
+      "Producto": "Campaña Actualizada: Contigo Senior (+55)",
+      "Que_ha_cambiado": "6 meses bonificados en la prima durante mayo de 2026 para mayores de 55 años.",
+      "Tipo": "🟢 Campaña Modificada",
+      "Vigente_desde": null,
+      "Afecta_guia_comercial": "SÍ",
+      "Accion_sobre_CRM": "Ofrecer al segmento: Mayores de 55 años.",
+      "Impacto_segmento": "Mayores de 55 años.",
+      "Fuente": "Entre Nosotros #566"
     }
   ],
   "historial": {
-    "N_Edicion": "563",
-    "Resumen_ejecutivo": "Se actualizan campañas activas para Contigo Senior (+55) con bonificación, Plan Salud + Vida con descuento y seguro de vida gratis, y Contigo Autónomo con descuento vitalicio excluyendo ILT. Se detallan las mejoras en el catálogo para reflejar estos cambios.",
-    "Campañas_nuevas": "Contigo Senior (+55) - Bonificación, Plan Salud + Vida - Descuento/Bonificación, Contigo Autónomo - Descuento Vitalicio",
-    "Cambios_producto": "Contigo Senior (+55), Plan Salud + Vida, Contigo Autónomo",
-    "N_acciones": 3
+    "N_Edicion": "566",
+    "Resumen_ejecutivo": "Actualizaciones de campañas clave: Contigo Autónomo con 25% de descuento vitalicio (excluye ILT), expansión de Contigo Familia a autónomos (sin ILT), promoción Salud + Vida ampliada y bonificación para Contigo Senior. Se enfatiza la importancia de la venta consultiva y la correcta segmentación de los productos.",
+    "Campañas_nuevas": "Contigo Autónomo (25% descuento vitalicio, sin ILT), Contigo Familia (extensión a autónomos, sin ILT), Promoción Salud + Vida (ampliada), Bonificación Contigo Senior (+55).",
+    "Cambios_producto": "Exclusión de ILT en Contigo Autónomo y expansión de Contigo Familia a autónomos como productos diferenciados.",
+    "N_acciones": 4
   }
 }
