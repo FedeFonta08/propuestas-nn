@@ -1394,7 +1394,26 @@ function actualizarPVM() {
   input.value = '';
 }
 
-renderPVM(cargarPVM());
+const ACTIVIDAD_SCRIPT_URL = 'http://localhost:5151';
+
+async function inicializarPVM() {
+  let pts = cargarPVM();
+  renderPVM(pts);
+  
+  try {
+    const res = await fetch(ACTIVIDAD_SCRIPT_URL + '?payload=' + encodeURIComponent(JSON.stringify({ accion: 'get_pvm' })));
+    const data = await res.json();
+    if (data.ok) {
+      pts = data.pvm;
+      guardarPVM(pts);
+      renderPVM(pts);
+    }
+  } catch(e) {
+    console.info('Servidor local no disponible para sincronización de PVM');
+  }
+}
+
+inicializarPVM();
 
 // ── FRASES DEL DÍA ──────────────────────────
 const FRASES = [

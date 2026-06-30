@@ -1330,6 +1330,11 @@ def main():
                 subprocess.run(["git", "add", "-f", "../propuestas-nn-v2.html"], cwd=carpeta_scripts, check=False)
             
             subprocess.run(["git", "commit", "-m", "Auto-update Briefing, Radar DB, Catalog and Proposals Portal"], cwd=carpeta_scripts, check=True)
+            
+            # Sincronizar cambios remotos antes de hacer push para evitar rechazos (e.g. por cumpleaños automáticos)
+            print("🔄 Sincronizando cambios remotos desde GitHub...")
+            subprocess.run(["git", "pull", "--rebase", "--autostash"], cwd=carpeta_scripts, check=False)
+            
             subprocess.run(["git", "push"], cwd=carpeta_scripts, check=True)
             print("✅ ¡Sincronización con GitHub completada! Tu panel online y el portal de propuestas ya están actualizados.")
         except Exception as e:

@@ -2015,9 +2015,62 @@ if (!MASTER_TOKEN) {
 const SHEET_ID = '16lui0o9wPYe9tL-9PaU6_H2heG8uIBYrCIL9vvfpdC0';
 const SISTEMA_MAESTRO_ID = '1qshgFOXh-SOuTxgeY95ORfXsC71kwF7O';
 const ACTIVIDAD_SCRIPT_URL = 'http://localhost:5151';
-const PVM_OBJ = 10291;
-const PVM_KEY = 'nn_pvm_2026';
 const SESION_KEY = 'nn_cockpit_sesion';
+
+// ── PVM DYNAMIC CYCLES ───────────────────────
+const CIERRE_CALENDAR_2026 = {
+  0: 28, // Enero
+  1: 25, // Febrero
+  2: 27, // Marzo
+  3: 28, // Abril
+  4: 27, // Mayo
+  5: 26, // Junio
+  6: 29, // Julio
+  7: 27, // Agosto
+  8: 28, // Septiembre
+  9: 28, // Octubre
+  10: 27,// Noviembre
+  11: 23 // Diciembre
+};
+
+const PVM_OBJETIVOS_2026 = {
+  0: 10291, // Enero
+  1: 10291, // Febrero
+  2: 10291, // Marzo
+  3: 10291, // Abril
+  4: 10291, // Mayo
+  5: 10291, // Junio
+  6: 10291, // Julio
+  7: 4574,  // Agosto
+  8: 8004,  // Septiembre
+  9: 10291, // Octubre
+  10: 10291,// Noviembre
+  11: 6190  // Diciembre
+};
+
+function obtenerCicloActual(date) {
+  const year = date.getFullYear();
+  const month = date.getMonth(); // 0-11
+  const day = date.getDate();
+  
+  const closingDay = CIERRE_CALENDAR_2026[month] || 28;
+  
+  if (day > closingDay) {
+    let nextMonth = month + 1;
+    let cycleYear = year;
+    if (nextMonth > 11) {
+      nextMonth = 0;
+      cycleYear += 1;
+    }
+    return { year: cycleYear, month: nextMonth };
+  } else {
+    return { year, month };
+  }
+}
+
+const cicloActual = obtenerCicloActual(new Date());
+const PVM_OBJETIVO = PVM_OBJETIVOS_2026[cicloActual.month] || 10291;
+const PVM_KEY = `nn_pvm_2026_ciclo_${cicloActual.year}_${cicloActual.month + 1}`;
 
 // ── Mapeo Columnas CRM MAESTRO (Estructura 54 columnas) ──────
 const COL = {
@@ -2081,9 +2134,9 @@ async function renderPVM() {
     console.info('Servidor local no disponible para PVM');
   }
 
-  const pct = Math.min(Math.round(pts / PVM_OBJ * 100), 100);
+  const pct = Math.min(Math.round(pts / PVM_OBJETIVO * 100), 100);
   document.getElementById('pvm-fill').style.width = pct + '%';
-  document.getElementById('pvm-txt').textContent = pts.toLocaleString('es-ES') + ' / ' + PVM_OBJ.toLocaleString('es-ES');
+  document.getElementById('pvm-txt').textContent = pts.toLocaleString('es-ES') + ' / ' + PVM_OBJETIVO.toLocaleString('es-ES');
 }
 renderPVM();
 
