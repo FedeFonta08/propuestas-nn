@@ -2000,32 +2000,23 @@ renderSesion();
 // ══════════════════════════════════════════════════════════════
 async function cargarContactos(filtroMes = 'actual') {
   const el = document.getElementById('contact-list');
-  el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--tx3);font-size:13px"><span class="spinner" style="border-top-color:var(--nn)"></span><br>Consultando Maestro...</div>';
-
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=CRM%20MAESTRO`;
-
-  // Crear la función de callback global para el fallback JSONP (evita bloqueos CORS locales de file:///)
-  window.googleDocCallback = function(json) {
-    procesarContactos(json, filtroMes);
-  };
+  el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--tx3);font-size:13px"><span class="spinner" style="border-top-color:var(--nn)"></span><br>Consultando CRM Seguro...</div>';
 
   try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4000);
-    const res = await fetch(url, { signal: controller.signal });
-    clearTimeout(timeoutId);
-    const text = await res.text();
-    const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
-    procesarContactos(json, filtroMes);
+    const data = await post({ accion: 'obtener_contactos' });
+    if (data.ok) {
+      procesarContactos(data, filtroMes);
+    } else {
+      if (data.error && (data.error.includes('Contraseña') || data.error.includes('token') || data.error.includes('denegado'))) {
+        localStorage.removeItem('nn_master_token');
+        el.innerHTML = `<div style="padding:16px;text-align:center;color:var(--r)">🔒 Contraseña incorrecta. Recarga la página para intentarlo de nuevo.<br><button onclick="location.reload()" style="margin-top:10px;padding:6px 12px;background:var(--nn);color:white;border:none;border-radius:4px;cursor:pointer">Recargar</button></div>`;
+      } else {
+        el.innerHTML = `<div style="padding:16px;text-align:center;color:var(--r)">⚠️ Error: ${data.error || 'Acceso denegado'}</div>`;
+      }
+    }
   } catch(e) {
-    console.warn('Fetch falló (probablemente bloqueo CORS local de file:///), activando JSONP fallback:', e);
-    // Activar fallback JSONP inyectando un script
-    const script = document.createElement('script');
-    script.src = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=responseHandler:googleDocCallback&sheet=CRM%20MAESTRO`;
-    script.onerror = function() {
-      el.innerHTML = '<div style="padding:16px;text-align:center;color:var(--r)">⚠️ Error conexión CRM.</div>';
-    };
-    document.body.appendChild(script);
+    console.error('Error al cargar contactos desde Apps Script:', e);
+    el.innerHTML = '<div style="padding:16px;text-align:center;color:var(--r)">⚠️ Error de conexión con el CRM Seguro.</div>';
   }
 }
 

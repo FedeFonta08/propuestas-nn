@@ -2171,32 +2171,23 @@ renderSesion();
 // ══════════════════════════════════════════════════════════════
 async function cargarContactos(filtroMes = 'actual') {
   const el = document.getElementById('contact-list');
-  el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--tx3);font-size:13px"><span class="spinner" style="border-top-color:var(--nn)"></span><br>Consultando Maestro...</div>';
-
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=CRM%20MAESTRO`;
-
-  // Crear la función de callback global para el fallback JSONP (evita bloqueos CORS locales de file:///)
-  window.googleDocCallback = function(json) {
-    procesarContactos(json, filtroMes);
-  };
+  el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--tx3);font-size:13px"><span class="spinner" style="border-top-color:var(--nn)"></span><br>Consultando CRM Seguro...</div>';
 
   try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4000);
-    const res = await fetch(url, { signal: controller.signal });
-    clearTimeout(timeoutId);
-    const text = await res.text();
-    const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
-    procesarContactos(json, filtroMes);
+    const data = await post({ accion: 'obtener_contactos' });
+    if (data.ok) {
+      procesarContactos(data, filtroMes);
+    } else {
+      if (data.error && (data.error.includes('Contraseña') || data.error.includes('token') || data.error.includes('denegado'))) {
+        localStorage.removeItem('nn_master_token');
+        el.innerHTML = `<div style="padding:16px;text-align:center;color:var(--r)">🔒 Contraseña incorrecta. Recarga la página para intentarlo de nuevo.<br><button onclick="location.reload()" style="margin-top:10px;padding:6px 12px;background:var(--nn);color:white;border:none;border-radius:4px;cursor:pointer">Recargar</button></div>`;
+      } else {
+        el.innerHTML = `<div style="padding:16px;text-align:center;color:var(--r)">⚠️ Error: ${data.error || 'Acceso denegado'}</div>`;
+      }
+    }
   } catch(e) {
-    console.warn('Fetch falló (probablemente bloqueo CORS local de file:///), activando JSONP fallback:', e);
-    // Activar fallback JSONP inyectando un script
-    const script = document.createElement('script');
-    script.src = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=responseHandler:googleDocCallback&sheet=CRM%20MAESTRO`;
-    script.onerror = function() {
-      el.innerHTML = '<div style="padding:16px;text-align:center;color:var(--r)">⚠️ Error conexión CRM.</div>';
-    };
-    document.body.appendChild(script);
+    console.error('Error al cargar contactos desde Apps Script:', e);
+    el.innerHTML = '<div style="padding:16px;text-align:center;color:var(--r)">⚠️ Error de conexión con el CRM Seguro.</div>';
   }
 }
 
@@ -2620,19 +2611,15 @@ function selContacto(id) {
     document.querySelectorAll('.script-name-placeholder').forEach(el => el.textContent = contactoActivo.nombre);
     
     document.getElementById('script-text').innerHTML =
-      `"Hola <b>${nombre}</b>, soy Fede Fontanals, te llamo desde la oficina de Nationale-Nederlanden en Xàtiva. No te robo ni dos minutos, te lo prometo. Te llamo porque estamos realizando una campaña local de <b>auditoría de costes de previsión y protección familiar</b> aquí en la comarca."`;
+      `"Hola <b>${nombre}</b>, soy Fede Fontanals. Te llamo de parte de Nationale-Nederlanden aquí en Xàtiva. No te robo ni dos minutos, te lo prometo. Te llamo porque estoy haciendo una ronda de contactos informal con vecinos de la comarca para presentarme personalmente y saludarte."`;
 
     document.getElementById('script-si').innerHTML =
-      `<b>Si dice sí →</b> "Perfecto. Muchos vecinos nos comentan que los recibos de sus seguros de decesos de toda la vida no paran de subir cada año y que, al final, es un dinero a fondo perdido que se queda la compañía. Mi trabajo no es venderte nada, sino entregarte un estudio para ver si estás pagando de más.<br><br>` +
-      `Te pregunto directamente... ¿tú tienes contratado actualmente algún seguro de decesos o entierro, o lo tienes resuelto de otra manera?<br><br>` +
-      `<i>(Si responde decesos, continúas)</i> → Entiendo. Y en la póliza que tienes actualmente... ¿te has parado a calcular cuánto dinero habrás regalado si vives hasta los 85 años?<br><br>` +
-      `<div class="tactical-pause">🤫 Pausa táctica de 5 segundos en silencio - ¡No hables primero!</div><br>` +
-      `Justo por eso te llamo. Dejar todo resuelto a tu familia no tiene por qué significar regalarle miles de euros a una aseguradora.<br><br>` +
-      `Nosotros estamos ayudando a las familias a transformar ese gasto a fondo perdido en un <b>Fondo de Previsión Familiar Activo</b>. Básicamente, hacemos que el servicio funerario de máxima calidad quede cubierto, pero con la gran diferencia de que <b>el dinero que aportas no se pierde y además te genera beneficio: es tuyo</b>.<br><br>` +
-      `Si pasa lo peor, tu familia cobra un capital. Pero lo más importante: <b>si el día de mañana tienes cualquier imprevisto, una urgencia o necesitas el dinero en vida, puedes disponer de ese capital</b>. Tienes acceso a tu dinero, cosa que en un seguro de muertos tradicional es imposible.<br><br>` +
-      `Explicar cómo funciona esta diferencia por teléfono es imposible, es algo muy visual. Lo que te propongo es que nos sentemos 15 minutos, te enseño gráficamente cómo se transforma ese gasto en ahorro para ti, y tú decides con los números en la mano.<br><br>` +
-      `¿Te viene mejor el martes a las 10:00 o el miércoles por la tarde?"` +
-      (mapeoProducto ? `<br><br><b>Mapeo NN:</b> ${c.poliza} → <span style="color:var(--nn);font-weight:700">${mapeoProducto}</span>` : '');
+      `<b>Si responde bien/con interés →</b> "Verás, te aclaro que no te llamo para intentar venderte nada ni para cambiar ninguna póliza de decesos que tengas de toda la vida, de verdad. Sé perfectamente que la tranquilidad familiar no se toca.<br><br>` +
+      `Mi labor principal como delegado aquí en la comarca es actuar como <b>traductor técnico</b>. La mayoría de la gente tiene seguros en su banco o en otras compañías y no tiene ni idea de qué está cubierto realmente o de si tienen exclusiones graves en la letra pequeña. Lo que hago es sentarme con ellos, auditar esos contratos actuales y traducirlos a 'cristiano' para que sepan exactamente qué tienen, sin rodeos y sin compromiso. Es un servicio de diagnóstico gratuito.<br><br>` +
+      `Lo que suelo proponer es que nos tomemos un café rápido de 15 minutos en el centro de Xàtiva o donde te venga bien. Yo invito al café, te echo un ojo a los contratos que quieras revisar para traducírtelos a cristiano, nos conocemos y, si el día de mañana necesitas cualquier cosa, ya sabes quién está de este lado.<br><br>` +
+      `<div class="tactical-pause">🤫 Escucha con interés sincero su respuesta y sus comentarios sin prisa.</div><br>` +
+      `¿Te cuadra que nos tomemos ese café rápido el martes por la mañana o prefieres el miércoles por la tarde?"` +
+      (mapeoProducto ? `<br><br><b>Referencia NN (Solo si surge interés real):</b> ${c.poliza} → <span style="color:var(--nn);font-weight:700">${mapeoProducto}</span>` : '');
   } else {
     const isHogar = tipoPoliza.toLowerCase().includes('hogar') || tipoPoliza.toLowerCase().includes('chalet') || tipoPoliza.toLowerCase().includes('casa');
     const isVida = tipoPoliza.toLowerCase().includes('vida');

@@ -2682,6 +2682,13 @@ const PLAN_SEMANAL = {
 
 const MESES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
+// Validar token maestro al entrar
+let MASTER_TOKEN = localStorage.getItem('nn_master_token');
+if (!MASTER_TOKEN) {
+  MASTER_TOKEN = prompt("🔒 Seguridad NN: Introduce la Contraseña Maestra del CRM:");
+  if (MASTER_TOKEN) localStorage.setItem('nn_master_token', MASTER_TOKEN);
+}
+
 // URL de Google Apps Script guardada en LocalStorage (o la por defecto)
 let googleAppsScriptUrl = localStorage.getItem('gas_url') || SCRIPT_URL;
 
@@ -2819,6 +2826,252 @@ window.onload = function() {
   actualizarSidebarListas();
   actualizarEstadisticasHeader();
 };
+
+// ── INTEGRACIÓN GOOGLE APPS SCRIPT: LEER CONTACTOS Y SCOREBOARD ──────
+async function cargarContactosDesdeSheet() {
+  if (!googleAppsScriptUrl) return;
+
+  try {
+    const payload = { accion: 'obtener_contactos', token: MASTER_TOKEN };
+    const url = googleAppsScriptUrl + '?payload=' + encodeURIComponent(JSON.stringify(payload));
+    const res = await fetch(url, { method: 'GET', redirect: 'follow' });
+    const data = await res.json();
+    
+    if (data.ok) {
+      const rows = data.table.rows;
+      if (rows && rows.length >= 2) {
+        const COL = {
+          NOMBRE: 0,
+          TELEFONO: 1,
+          TEL2: 2,
+          EMAIL: 3,
+          LOCALIDAD: 4,
+          CUMPLEANOS: 5,
+          ESTADO: 6,
+          URGENCIA: 7,
+          VTO_MES: 8,
+          PRODUCTOS: 9,
+          ESTADO_CIVIL: 25,
+          REGIMEN_SS: 26,
+          ANIOS_SS: 27,
+          HIJOS: 28,
+          PAREJA: 29,
+          SALARIO: 30,
+          PAGAS: 31,
+          AHORRO: 32,
+          GASTOS: 33,
+          NIVEL_ECO: 34,
+          NECESIDAD: 35,
+          PRODUCTO_COT: 36,
+          EXPEDIENTE: 37,
+          ADN: 38,
+          SEMAFORO: 39,
+          WHATSAPP: 40,
+          FECHA_CONTACTO: 41,
+          RESULTADO: 42,
+          PRODUCTO_OFRECIDO: 43,
+          FECHA_PROX: 44,
+          PROX_ACCION: 45,
+          CANAL: 46,
+          RECOMENDADO: 47,
+          OBSERVACIONES: 48,
+          BUYER_PERSONA: 49,
+          PRODUCTO_REC: 50
+        };
+
+        const val = (r, idx) => (r && r.c && r.c[idx] && r.c[idx].v) ? String(r.c[idx].v).trim() : '';
+
+        contactosBD = rows.slice(1).map((r, i) => {
+          let adnText = val(r, COL.ADN);
+          let adnObj = {
+            p1: `Llamar a ${val(r, COL.NOMBRE)} y agendar diagnóstico.`,
+            p2: `Estudiar necesidades de previsión o ahorro.`,
+            p3: `Concretar cita en el Punto Naranja de Xàtiva.`,
+            familia: val(r, COL.HIJOS) ? `Hijos: ${val(r, COL.HIJOS)}` : "Por completar",
+            empleo: val(r, COL.REGIMEN_SS) || "Por completar",
+            poliza: val(r, COL.PRODUCTOS) || "Por completar",
+            riesgo: "Por completar"
+          };
+          try {
+            if (adnText.startsWith('{')) {
+              adnObj = JSON.parse(adnText);
+            } else if (adnText) {
+              adnObj.p1 = adnText;
+            }
+          } catch(e) {}
+
+          let historialObj = [];
+          const ultFecha = val(r, COL.FECHA_CONTACTO);
+          const ultRes = val(r, COL.RESULTADO) || 'pendiente';
+          const ultObs = val(r, COL.OBSERVACIONES);
+          if (ultFecha) {
+            historialObj.push({
+              fecha: ultFecha,
+              resultado: ultRes,
+              notes: ultObs || 'Sin notas adicionales.',
+              agente: 'FEDE'
+            });
+          }
+
+          return {
+            id: i + 1,
+            nombre: val(r, COL.NOMBRE),
+            telefono: val(r, COL.TELEFONO),
+            tel2: val(r, COL.TEL2),
+            localidad: val(r, COL.LOCALIDAD),
+            perfil: val(r, COL.BUYER_PERSONA) || 'Familia',
+            vtoMes: val(r, COL.VTO_MES) || 'Julio',
+            vtoProducto: val(r, COL.PRODUCTOS) || 'Hogar',
+            estado: val(r, COL.ESTADO) || 'Pendiente',
+            urgencia: val(r, COL.URGENCIA) || 'Media',
+            productos: val(r, COL.PRODUCTOS),
+            poliza1: val(r, COL.PRODUCTOS), mes1: val(r, COL.VTO_MES),
+            poliza2: '', mes2: '',
+            poliza3: '', mes3: '',
+            poliza4: '', mes4: '',
+            poliza5: '', mes5: '',
+            necesidad: val(r, COL.NECESIDAD),
+            observaciones: val(r, COL.OBSERVACIONES),
+            buyer: val(r, COL.BUYER_PERSONA),
+            prodRec: val(r, COL.PRODUCTO_REC),
+            segmento: val(r, COL.NIVEL_ECO) || 'Clase Media',
+            esAutonomo: val(r, COL.REGIMEN_SS) === 'Autónomo' || val(r, COL.BUYER_PERSONA).toLowerCase().includes('autónomo'),
+            adn: adnObj,
+            historial: historialObj,
+            completado: val(r, COL.ESTADO).toLowerCase() === 'completado' || val(r, COL.ESTADO).toLowerCase().includes('cliente')
+          };
+        });
+
+        if (typeof actualizarSidebarListas === 'function') {
+          actualizarSidebarListas();
+          actualizarEstadisticasHeader();
+        }
+        console.log('✅ CRM 360: Contactos cargados desde Google Sheets');
+      }
+    } else {
+      if (data.error && (data.error.includes('Contraseña') || data.error.includes('token') || data.error.includes('denegado'))) {
+        localStorage.removeItem('nn_master_token');
+      }
+      console.warn('Error al cargar contactos de Sheet:', data.error);
+    }
+  } catch(e) {
+    console.error('Error al cargar contactos desde Sheet:', e);
+  }
+}
+
+function getSemana() {
+  const now = new Date();
+  const start = new Date(now.getFullYear(), 0, 1);
+  return Math.ceil(((now - start) / 86400000 + start.getDay() + 1) / 7);
+}
+
+function cargarMarcador() {
+  try {
+    const d = JSON.parse(localStorage.getItem(MARCADOR_KEY) || '{}');
+    const semActual = getSemana();
+    if (d.semana !== semActual) {
+      const nuevo = { semana: semActual, FEDE: {llamadas:0,contactos:0,reuniones:0,presupuestos:0}, ROSIANE: {llamadas:0,contactos:0,reuniones:0,presupuestos:0} };
+      localStorage.setItem(MARCADOR_KEY, JSON.stringify(nuevo));
+      return nuevo;
+    }
+    return d;
+  } catch(e) {
+    return { semana: getSemana(), FEDE: {llamadas:0,contactos:0,reuniones:0,presupuestos:0}, ROSIANE: {llamadas:0,contactos:0,reuniones:0,presupuestos:0} };
+  }
+}
+
+function renderMarcador(m) {
+  if (!m) m = cargarMarcador();
+  const sem = m.semana || getSemana();
+  const semEl = document.getElementById('marcador-semana-num');
+  if (semEl) semEl.textContent = sem;
+
+  ['FEDE', 'ROSIANE'].forEach(ag => {
+    const real = m[ag] || {llamadas:0,contactos:0,reuniones:0,presupuestos:0};
+    const plan = PLAN_SEMANAL[ag];
+    const pfx  = ag === 'FEDE' ? 'fede' : 'ros';
+
+    const pct = plan.llamadas > 0 ? Math.min(Math.round(real.llamadas / plan.llamadas * 100), 100) : 0;
+    const cls = pct >= 75 ? 'ok' : pct >= 40 ? 'warn' : 'low';
+
+    const llamEl = document.getElementById(`m-${pfx}-llamadas`);
+    if (llamEl) {
+      llamEl.textContent = `${real.llamadas}/${plan.llamadas}`;
+      llamEl.className = `metric-val ${cls}`;
+    }
+    const contEl = document.getElementById(`m-${pfx}-contactos`);
+    if (contEl) contEl.textContent = `${real.contactos}/${plan.contactos}`;
+    const reunEl = document.getElementById(`m-${pfx}-reuniones`);
+    if (reunEl) reunEl.textContent = `${real.reuniones}/${plan.reuniones}`;
+    const presEl = document.getElementById(`m-${pfx}-presupuestos`);
+    if (presEl) presEl.textContent = `${real.presupuestos||0}/${plan.presupuestos}`;
+    
+    const barEl = document.getElementById(`bar-${pfx}`);
+    if (barEl) barEl.style.width = pct + '%';
+    const pctEl = document.getElementById(`pct-${pfx}`);
+    if (pctEl) pctEl.textContent = pct + '% del plan semanal';
+  });
+
+  const msgs = [
+    { th: 100, txt: '🏆 Plan cumplido — ¡Semana perfecta!' },
+    { th: 75,  txt: '🔥 Muy cerca — ¡Un último empujón!' },
+    { th: 50,  txt: '🟢 Buen ritmo, sigamos' },
+    { th: 25,  txt: '🟡 A medio camino — ¡Vamos!' },
+    { th: 0,   txt: '🔴 Arrancando — ¡A por ello!' }
+  ];
+  const fedePct = PLAN_SEMANAL.FEDE.llamadas > 0
+    ? Math.round((m.FEDE?.llamadas || 0) / PLAN_SEMANAL.FEDE.llamadas * 100) : 0;
+  const msg = msgs.find(x => fedePct >= x.th) || msgs[msgs.length - 1];
+  const msgEl = document.getElementById('marcador-msg');
+  if (msgEl) msgEl.textContent = msg.txt;
+}
+
+async function cargarMarcadorDesdeSheet() {
+  try {
+    const res = await fetch(ACTIVIDAD_SCRIPT_URL + '?payload=' + encodeURIComponent(JSON.stringify({ accion: 'get_marcador' })));
+    const data = await res.json();
+    if (data.ok) {
+      const m = cargarMarcador();
+      ['FEDE', 'ROSIANE'].forEach(ag => {
+        if (data[ag]) m[ag] = data[ag];
+      });
+      localStorage.setItem(MARCADOR_KEY, JSON.stringify(m));
+      renderMarcador(m);
+      console.log('Marcador cargado desde Excel local');
+      return;
+    }
+  } catch(e) {
+    console.info('Servidor local no disponible para lectura, intentando Google Sheets...');
+  }
+
+  try {
+    const url = `https://docs.google.com/spreadsheets/d/${SISTEMA_MAESTRO_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('📞 Actividad Agentes')}`;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3000);
+    const res  = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    
+    const text = await res.text();
+    const json = JSON.parse(text.replace(/^[^\(]+\(/, '').replace(/\);?\s*$/, ''));
+    const rows = json.table?.rows;
+    if (!rows || rows.length < 7) { renderMarcador(); return; }
+
+    const gv = (row, col) => { try { return parseInt(rows[row]?.c[col]?.v || 0); } catch(e) { return 0; } };
+
+    const m = cargarMarcador();
+    m.FEDE.llamadas    = gv(5, 6)  || m.FEDE.llamadas;
+    m.FEDE.contactos   = gv(6, 6)  || m.FEDE.contactos;
+    m.FEDE.reuniones   = gv(7, 6)  || m.FEDE.reuniones;
+    m.ROSIANE.llamadas  = gv(14, 6) || m.ROSIANE.llamadas;
+    m.ROSIANE.contactos = gv(15, 6) || m.ROSIANE.contactos;
+    m.ROSIANE.reuniones = gv(16, 6) || m.ROSIANE.reuniones;
+
+    localStorage.setItem(MARCADOR_KEY, JSON.stringify(m));
+    renderMarcador(m);
+  } catch(e) {
+    renderMarcador();
+  }
+}
 
 // RELOJ Y FECHA
 function actualizarReloj() {
@@ -3650,6 +3903,8 @@ function ejecutarEnvioGoogleBridge(payload) {
   }
   
   mostrarToast('⏳ Sincronizando con tu calendario y móvil...', 'warn', true);
+  
+  payload.token = MASTER_TOKEN; // 🔒 Inyectar contraseña maestra
   
   fetch(googleAppsScriptUrl, {
     method: 'POST',
