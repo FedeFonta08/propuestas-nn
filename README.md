@@ -4,12 +4,9 @@ Este repositorio publica únicamente páginas y materiales comerciales destinado
 
 ## Contenido público
 
-- [Panel Despegue](https://fedefonta08.github.io/propuestas-nn/)
-- [Sistema Aperturas Pro](https://fedefonta08.github.io/propuestas-nn/aperturas_desktop_v4.html)
-- [Modo Enfoque Pro](https://fedefonta08.github.io/propuestas-nn/modo_enfoque_pro_v3_RGPD.html)
+- [Portal público](https://fedefonta08.github.io/propuestas-nn/)
+- [Estudio Financiero](https://estudio-financiero.netlify.app/)
 - [Portal de propuestas](https://fedefonta08.github.io/propuestas-nn/propuestas-nn-v2.html)
-- [Generador de URLs](https://fedefonta08.github.io/propuestas-nn/generador_urls_propuestas.html)
-- [Marketing Cards](https://fedefonta08.github.io/propuestas-nn/marketing_cards_premium.html)
 - [Material comercial](docs/)
 
 ## Límite de seguridad
