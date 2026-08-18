@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulador Cross-Selling — Nationale-Nederlanden</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--nn:#FF6200;--bg:#FFFFFF;--bg2:#F5F5F3;--text:#1a1a1a;--text2:#6b6b6b;--text3:#999;--border:#e0e0e0;--radius:10px;--radius-lg:14px;--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+@media(prefers-color-scheme:dark){:root{--bg:#1a1a1a;--bg2:#2a2a2a;--text:#e8e8e8;--text2:#a0a0a0;--text3:#777;--border:#3a3a3a}}
+body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px;max-width:800px;margin:0 auto;line-height:1.6}
+h1{font-size:20px;font-weight:600;margin-bottom:4px}
+.subtitle{font-size:13px;color:var(--text2);margin-bottom:24px}
+.header-bar{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--nn)}
+.nn-logo{width:8px;height:32px;background:var(--nn);border-radius:4px}
+.profiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:24px}
+.prof{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:14px 10px;cursor:pointer;text-align:center;transition:all .2s}
+.prof:hover{border-color:var(--text3)}
+.prof.active{border:2.5px solid var(--nn)}
+.prof .icon{width:40px;height:40px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600}
+.prof .name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
+.prof .age{font-size:11px;color:var(--text2)}
+.prod-list{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.prod-row{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all .2s}
+.prod-row:hover{border-color:var(--text3)}
+.prod-row.selected{border-color:var(--nn);background:rgba(255,98,0,0.05)}
+.prod-row .check{width:20px;height:20px;border-radius:4px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.prod-row.selected .check{background:var(--nn);border-color:var(--nn)}
+.prod-row.selected .check::after{content:'';width:6px;height:10px;border:solid white;border-width:0 2px 2px 0;transform:rotate(45deg);margin-top:-2px}
+.prod-row .info{flex:1;min-width:0}
+.prod-row .pname{font-size:14px;font-weight:600;color:var(--text)}
+.prod-row .psub{font-size:12px;color:var(--text2);margin-top:2px}
+.prod-row .pts{font-size:15px;font-weight:600;color:var(--nn);white-space:nowrap}
+.badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:6px;margin-left:6px;font-weight:600}
+.badge-risk{background:#E1F5EE;color:#085041}
+.badge-norisk{background:var(--bg2);color:var(--text2)}
+@media(prefers-color-scheme:dark){.badge-risk{background:#085041;color:#9FE1CB}.prod-row.selected{background:rgba(255,98,0,0.1)}}
+.totals{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:24px 0}
+.card{background:var(--bg2);border-radius:var(--radius);padding:14px}
+.card .label{font-size:12px;color:var(--text2);margin-bottom:4px}
+.card .value{font-size:22px;font-weight:600}
+.bar-wrap{margin:16px 0}
+.bar-bg{height:26px;background:var(--bg2);border-radius:13px;overflow:hidden;position:relative}
+.bar-fill{height:100%;background:var(--nn);border-radius:13px;transition:width .4s ease;min-width:2px}
+.bar-label{font-size:13px;color:var(--text2);margin-top:6px;text-align:right}
+.seq{margin-top:24px;padding:16px;background:var(--bg2);border-radius:var(--radius-lg)}
+.seq-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:10px}
+.seq-steps{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.seq-chip{font-size:12px;padding:6px 12px;border-radius:var(--radius);font-weight:600}
+.seq-arrow{color:var(--text3);font-size:16px}
+</style>
+</head>
+<body>
+<div class="header-bar">
+<div class="nn-logo"></div>
+<div><h1>Simulador Cross-Selling por Perfil</h1><div class="subtitle">Nazionale-Nederlanden · Planificación de venta cruzada</div></div>
+</div>
+
+<div class="profiles" id="profiles"></div>
+<div class="prod-list" id="products"></div>
+
+<div class="totals">
+<div class="card"><div class="label">PVM total cliente</div><div class="value" id="t_pvm" style="color:var(--nn)">0 pts</div></div>
+<div class="card"><div class="label">% objetivo mensual</div><div class="value" id="t_pct">0%</div></div>
+<div class="card"><div class="label">Productos riesgo</div><div class="value" id="t_risk">0 / 0</div></div>
+<div class="card"><div class="label">Prima mensual cliente</div><div class="value" id="t_prima">0 €</div></div>
+</div>
+
+<div class="bar-wrap">
+<div class="bar-bg"><div class="bar-fill" id="bfg" style="width:0%"></div></div>
+<div class="bar-label" id="blbl">0 / 10.291 pts</div>
+</div>
+
+<div class="seq" id="seq_box" style="display:none">
+<div class="seq-title">Secuencia de venta recomendada</div>
+<div class="seq-steps" id="seq_steps"></div>
+</div>
+
+<script>
+const OBJ=10291;
+const PROFILES=[
+{id:'auto_joven',name:'Autónomo joven',age:'25-40',color:'#FAECE7',tc:'#712B13',initials:'AJ',products:[
+{name:'Contigo Autónomo ILT',pvm:200,prima:35,risk:true,order:1,arg:'Dolor agudo: IT'},
+{name:'Plan Salud+Vida',pvm:150,prima:95,risk:true,order:2,arg:'Sanitas 48-72h'},
+{name:'SIALP',pvm:100,prima:167,risk:false,order:3,arg:'Ahorro fiscal'},
+{name:'MiHogar Seguro',pvm:150,prima:25,risk:true,order:4,arg:'Patrimonio'}
+]},
+{id:'familia',name:'Familia con hijos',age:'30-50',color:'#E1F5EE',tc:'#085041',initials:'FH',products:[
+{name:'Plan Salud+Vida',pvm:150,prima:110,risk:true,order:1,arg:'Protección familiar'},
+{name:'Contigo Familia',pvm:400,prima:45,risk:true,order:2,arg:'Capital fallecimiento'},
+{name:'MiHogar Seguro',pvm:150,prima:28,risk:true,order:3,arg:'Hogar protegido'},
+{name:'SIALP',pvm:100,prima:167,risk:false,order:4,arg:'Futuro hijos'}
+]},
+{id:'prejub',name:'Pre-jubilado',age:'55-65',color:'#EEEDFE',tc:'#3C3489',initials:'PJ',products:[
+{name:'SIALP',pvm:100,prima:167,risk:false,order:1,arg:'Último tren jubilación'},
+{name:'Contigo Senior',pvm:300,prima:32,risk:true,order:2,arg:'Sustituye Decesos'},
+{name:'Plan Salud+Vida',pvm:150,prima:85,risk:true,order:3,arg:'Listas de espera'},
+{name:'PPSA',pvm:40,prima:100,risk:false,order:4,arg:'Complemento fiscal'}
+]},
+{id:'senior',name:'Senior 65+',age:'65+',color:'#FAEEDA',tc:'#633806',initials:'S+',products:[
+{name:'Contigo Senior',pvm:300,prima:38,risk:true,order:1,arg:'Dignidad y serenidad'},
+{name:'Plan Salud+Vida',pvm:150,prima:120,risk:true,order:2,arg:'Salud privada'},
+{name:'MiHogar Seguro',pvm:150,prima:22,risk:true,order:3,arg:'Hogar'},
+{name:'PPSA',pvm:40,prima:100,risk:false,order:4,arg:'Complemento fiscal'},
+{name:'Protección Plus',pvm:400,prima:35,risk:true,order:5,arg:'Capital fallecimiento'},
+{name:'Previsión Familiar Decreciente',pvm:140,prima:30,risk:false,order:6,arg:'Deuda hipotecaria'},
+{name:'Líder Plus Accidentes',pvm:400,prima:15,risk:true,order:7,arg:'Bajo coste'}
+]},
+{id:'pareja',name:'Pareja joven',age:'25-35',color:'#E6F1FB',tc:'#0C447C',initials:'PJ',products:[
+{name:'Plan Salud+Vida',pvm:150,prima:75,risk:true,order:1,arg:'Empezar protegidos'},
+{name:'SIALP',pvm:100,prima:167,risk:false,order:2,arg:'Ahorro automático'},
+{name:'MiHogar Seguro',pvm:150,prima:25,risk:true,order:3,arg:'Primera vivienda'},
+{name:'Líder Plus Accidentes',pvm:400,prima:15,risk:true,order:4,arg:'Bajo coste, alta cobertura'}
+]}
+];
+let activeProfile=null;
+let selected=new Set();
+const profBox=document.getElementById('profiles');
+const prodBox=document.getElementById('products');
+PROFILES.forEach(p=>{
+const d=document.createElement('div');
+d.className='prof';
+d.innerHTML=`<div class="icon" style="background:${p.color};color:${p.tc}">${p.initials}</div><div class="name">${p.name}</div><div class="age">${p.age}</div>`;
+d.onclick=()=>selectProfile(p.id);
+d.dataset.id=p.id;
+profBox.appendChild(d);
+});
+function selectProfile(id){
+activeProfile=id;selected.clear();
+document.querySelectorAll('.prof').forEach(b=>b.classList.toggle('active',b.dataset.id===id));
+const pr=PROFILES.find(p=>p.id===id);
+prodBox.innerHTML='';
+pr.products.forEach((prod,i)=>{
+const pa=Math.round(prod.prima*12);
+const pvm=Math.round(pa*(prod.pvm/100));
+const row=document.createElement('div');
+row.className='prod-row';
+row.dataset.idx=i;
+row.innerHTML=`<div class="check"></div><div class="info"><div class="pname">${prod.name}<span class="badge ${prod.risk?'badge-risk':'badge-norisk'}">${prod.risk?'Riesgo':'No riesgo'}</span></div><div class="psub">${prod.prima>0?prod.prima+'€/mes':'Variable'} · PA: ${pa.toLocaleString('es-ES')}€ · ${prod.arg}</div></div><span class="pts">${pvm>0?'+'+pvm.toLocaleString('es-ES'):''} pts</span>`;
+row.onclick=()=>{
+if(selected.has(i))selected.delete(i);else selected.add(i);
+row.classList.toggle('selected');
+calc();
+};
+prodBox.appendChild(row);
+});
+calc();
+}
+function calc(){
+if(!activeProfile)return;
+const pr=PROFILES.find(p=>p.id===activeProfile);
+let totalPvm=0,totalPrima=0,riskCount=0,riskTotal=0;
+const selProds=[];
+pr.products.forEach((prod,i)=>{
+const pa=Math.round(prod.prima*12);
+const pvm=Math.round(pa*(prod.pvm/100));
+if(prod.risk)riskTotal++;
+if(selected.has(i)){
+totalPvm+=pvm;totalPrima+=prod.prima;
+if(prod.risk)riskCount++;
+selProds.push({...prod,pvm});
+}
+});
+document.getElementById('t_pvm').textContent=totalPvm.toLocaleString('es-ES')+' pts';
+const pct=totalPvm>0?Math.round((totalPvm/OBJ)*1000)/10:0;
+document.getElementById('t_pct').textContent=pct+'%';
+document.getElementById('t_risk').textContent=riskCount+' / '+selProds.length;
+document.getElementById('t_prima').textContent=Math.round(totalPrima)+' €/mes';
+document.getElementById('bfg').style.width=Math.min(100,pct)+'%';
+document.getElementById('blbl').textContent=totalPvm.toLocaleString('es-ES')+' / 10.291 pts';
+const seqBox=document.getElementById('seq_box');
+const seqSteps=document.getElementById('seq_steps');
+if(selProds.length>0){
+seqBox.style.display='block';
+selProds.sort((a,b)=>a.order-b.order);
+const colors=['#FAECE7','#E1F5EE','#EEEDFE','#FAEEDA'];
+const tcolors=['#712B13','#085041','#3C3489','#633806'];
+seqSteps.innerHTML=selProds.map((p,i)=>{
+const c=colors[i%colors.length];const tc=tcolors[i%tcolors.length];
+return `<span class="seq-chip" style="background:${c};color:${tc}">${i+1}. ${p.name} (${p.pvm} pts)</span>${i<selProds.length-1?'<span class="seq-arrow">→</span>':''}`;
+}).join('');
+}else{
+seqBox.style.display='none';
+}
+}
+selectProfile('familia');
+</script>
+</body>
+</html>

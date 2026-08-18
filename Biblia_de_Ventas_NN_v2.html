@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🚀 Biblia de Ventas Nationale-Nederlanden 2026</title>
+  
+  <!-- SEO & Icons -->
+  <meta name="description" content="Guía Maestra de Argumentarios y Catálogo Estructurado del Ecosistema Despegue NN para agentes comerciales.">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* CSS CUSTOM PROPERTIES - BRAND SYSTEM */
+    :root {
+      --primary: hsl(24, 100%, 50%); /* NN Vivid Orange */
+      --primary-hover: hsl(24, 100%, 43%);
+      --primary-soft: hsl(24, 100%, 96%);
+      --primary-glow: hsla(24, 100%, 50%, 0.15);
+      
+      --pdf-red: hsl(0, 75%, 45%);
+      --pdf-soft: hsla(0, 75%, 45%, 0.05);
+      
+      --dark-bg: hsl(220, 15%, 13%);
+      --dark-card: hsl(220, 15%, 17%);
+      --dark-border: hsl(220, 15%, 23%);
+      --dark-text: hsl(210, 15%, 95%);
+      --dark-muted: hsl(210, 10%, 70%);
+
+      --light-bg: hsl(210, 20%, 98%);
+      --light-card: hsl(0, 0%, 100%);
+      --light-border: hsl(210, 15%, 90%);
+      --light-text: hsl(220, 15%, 16%);
+      --light-muted: hsl(220, 10%, 46%);
+
+      --transition-fast: 0.2s ease;
+      --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      /* Active Theme */
+      --bg: var(--light-bg);
+      --card-bg: var(--light-card);
+      --border: var(--light-border);
+      --text: var(--light-text);
+      --text-muted: var(--light-muted);
+      
+      --sidebar-width: 280px;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.1);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+    }
+
+    [data-theme="dark"] {
+      --bg: var(--dark-bg);
+      --card-bg: var(--dark-card);
+      --border: var(--dark-border);
+      --text: var(--dark-text);
+      --text-muted: var(--dark-muted);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    /* GENERAL RESET */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background-color var(--transition-normal), color var(--transition-normal);
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* UTILITIES */
+    .glass {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-radius: 50px;
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    /* SIDEBAR NAVIGATION */
+    aside {
+      width: var(--sidebar-width);
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--border);
+      transition: transform var(--transition-normal);
+    }
+
+    .sidebar-header {
+      padding: 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-dot {
+      width: 14px;
+      height: 14px;
+      background-color: var(--primary);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--primary);
+    }
+
+    .logo-text {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+    }
+
+    .logo-subtitle {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary);
+      background-color: var(--primary-soft);
+    }
+
+    .nav-link.active {
+      font-weight: 600;
+      border-left: 3px solid var(--primary);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    .nav-link i {
+      font-size: 1.1rem;
+      width: 20px;
+      text-align: center;
+    }
+
+    .sidebar-footer {
+      padding: 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .theme-switch {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      transition: color var(--transition-fast);
+    }
+
+    .theme-switch:hover {
+      color: var(--primary);
+    }
+
+    /* MAIN CONTENT AREA */
+    main {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      min-width: 0;
+      padding: 40px;
+      max-width: 1200px;
+      transition: margin-left var(--transition-normal);
+    }
+
+    /* TOP BAR (MOBILE ONLY) */
+    .top-bar {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      width: 100%;
+    }
+
+    .menu-toggle {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      margin-bottom: 40px;
+      position: relative;
+      padding: 40px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, hsl(24, 100%, 97%) 0%, hsl(24, 60%, 93%) 100%);
+      border: 1px solid hsla(24, 100%, 50%, 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    [data-theme="dark"] .hero {
+      background: linear-gradient(135deg, hsl(220, 15%, 15%) 0%, hsl(24, 30%, 15%) 100%);
+      border: 1px solid hsla(24, 100%, 50%, 0.2);
+    }
+
+    .hero-badge {
+      align-self: flex-start;
+      background: var(--primary);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 50px;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 10px var(--primary-glow);
+    }
+
+    .hero h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.2;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      line-height: 1.6;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      margin-top: 10px;
+    }
+
+    .hero-meta span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-meta i {
+      color: var(--primary);
+    }
+
+    /* SECTIONS CONTAINER */
+    section {
+      display: none;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SEARCH AND FILTER BAR */
+    .controls-wrapper {
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .search-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 16px 20px 16px 52px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background-color: var(--card-bg);
+      color: var(--text);
+      transition: all var(--transition-fast);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 20px;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+    }
+
+    /* FILTER TAGS */
+    .filter-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      background-color: var(--card-bg);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--primary);
+      color: var(--primary);
+      background-color: var(--primary-soft);
+    }
+
+    /* PRODUCT CARDS GRID */
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .product-card {
+      padding: 24px;
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .product-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .product-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .product-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .product-description {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .reframe-box {
+      position: relative;
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      background: var(--primary-soft);
+      border-left: 4px solid var(--primary);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .reframe-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* PDF ATTACHMENTS BOX */
+    .pdf-box {
+      border-top: 1px dashed var(--border);
+      padding-top: 14px;
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pdf-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--pdf-red);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .pdf-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pdf-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .pdf-link-btn:hover {
+      border-color: var(--pdf-red);
+      color: var(--pdf-red);
+      background: var(--pdf-soft);
+    }
+
+    /* ARGUMENTARIOS STAR */
+    .script-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      gap: 20px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .script-tab-btn {
+      padding: 12px 6px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      position: relative;
+      white-space: nowrap;
+      transition: color var(--transition-fast);
+    }
+
+    .script-tab-btn:hover, .script-tab-btn.active {
+      color: var(--primary);
+    }
+
+    .script-tab-btn::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--primary);
+      transform: scaleX(0);
+      transition: transform var(--transition-fast);
+    }
+
+    .script-tab-btn.active::after {
+      transform: scaleX(1);
+    }
+
+    .script-container {
+      display: none;
+    }
+
+    .script-container.active {
+      display: block;
+    }
+
+    .script-card {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .script-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--primary-soft);
+    }
+
+    .script-title {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+
+    .script-body {
+      padding: 24px;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text);
+      white-space: pre-line;
+      background-color: var(--card-bg);
+      position: relative;
+    }
+
+    .btn-copy {
+      padding: 8px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-copy:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background-color: var(--primary-soft);
+    }
+
+    /* COMPARISON BOARD */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .comparison-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .comp-card {
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .comp-card.negative {
+      border-top: 4px solid hsl(0, 80%, 60%);
+    }
+
+    .comp-card.positive {
+      border-top: 4px solid hsl(140, 70%, 45%);
+    }
+
+    .comp-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .comp-card.negative h3 {
+      color: hsl(0, 80%, 60%);
+    }
+
+    .comp-card.positive h3 {
+      color: hsl(140, 70%, 45%);
+    }
+
+    .comp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      list-style: none;
+    }
+
+    .comp-list li {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .comp-list li::before {
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+    }
+
+    .comp-card.negative .comp-list li::before {
+      content: "\f00d";
+      color: hsl(0, 80%, 60%);
+    }
+
+    .comp-card.positive .comp-list li::before {
+      content: "\f00c";
+      color: hsl(140, 70%, 45%);
+    }
+
+    .formula-banner {
+      background: linear-gradient(135deg, hsl(210, 20%, 95%) 0%, hsl(210, 10%, 90%) 100%);
+      padding: 20px;
+      border-radius: var(--radius-sm);
+      margin-top: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+
+    [data-theme="dark"] .formula-banner {
+      background: linear-gradient(135deg, hsl(220, 15%, 16%) 0%, hsl(220, 10%, 20%) 100%);
+    }
+
+    /* METHOD BLOCKS */
+    .method-block {
+      padding: 24px;
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .method-block h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .method-block p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+    /* CHECKLIST */
+    .checklist-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background-color var(--transition-fast);
+    }
+
+    .checklist-item:hover {
+      background-color: var(--primary-soft);
+    }
+
+    .checklist-item input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .checklist-item span {
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 992px) {
+      aside {
+        transform: translateX(-100%);
+      }
+
+      aside.open {
+        transform: translateX(0);
+      }
+
+      main {
+        margin-left: 0;
+        padding: 24px;
+      }
+
+      .top-bar {
+        display: flex;
+        background-color: var(--card-bg);
+        border-bottom: 1px solid var(--border);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero {
+        padding: 24px;
+      }
+      
+      .hero h1 {
+        font-size: 1.75rem;
+      }
+
+      .script-tabs {
+        gap: 10px;
+      }
+
+      .script-tab-btn {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body data-theme="light">
+
+  <!-- TOP BAR (Mobile Toggle) -->
+  <div class="top-bar glass">
+    <div class="logo-container">
+      <div class="logo-dot"></div>
+      <span class="logo-text">Biblia de Ventas</span>
+    </div>
+    <button class="menu-toggle" id="menuToggleBtn">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="glass" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-container">
+        <div class="logo-dot"></div>
+        <span class="logo-text">Ecosistema NN</span>
+      </div>
+      <span class="logo-subtitle">Punto Naranja Xàtiva</span>
+    </div>
+
+    <nav class="nav-links">
+      <div class="nav-link active" data-target="seccion-catalogo">
+        <i class="fa-solid fa-list-check"></i>
+        <span>Catálogo de Productos</span>
+      </div>
+      <div class="nav-link" data-target="seccion-argumentarios">
+        <i class="fa-solid fa-comments"></i>
+        <span>Argumentarios 8 IAs</span>
+      </div>
+      <div class="nav-link" data-target="seccion-decesos">
+        <i class="fa-solid fa-scale-balanced"></i>
+        <span>Decesos vs PGI</span>
+      </div>
+      <div class="nav-link" data-target="seccion-metodologia">
+        <i class="fa-solid fa-brain"></i>
+        <span>Mindset y Técnicas</span>
+      </div>
+      <div class="nav-link" data-target="seccion-checklist">
+        <i class="fa-solid fa-square-check"></i>
+        <span>Checklist de Validación</span>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted);">FEDE FONTANALS</span>
+      <button class="theme-switch" id="themeSwitchBtn">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN WINDOW -->
+  <main>
+    <!-- HERO PANEL -->
+    <div class="hero">
+      <span class="hero-badge">Ecosistema Despegue 2026</span>
+      <h1>Biblia de Ventas <span>Nationale-Nederlanden</span></h1>
+      <p>Argumentarios estrella, reframes comerciales y estructuración por fases para una consultoría de alta autoridad basada en el ADN del cliente.</p>
+      <div class="hero-meta">
+        <span><i class="fa-solid fa-user-tie"></i> Federico Fontanals</span>
+        <span><i class="fa-solid fa-location-dot"></i> Xàtiva & La Costera</span>
+        <span><i class="fa-solid fa-calendar-days"></i> Mayo 2026</span>
+      </div>
+    </div>
+
+    <!-- SECTION 1: CATALOG -->
+    <section id="seccion-catalogo" class="active">
+      <div class="controls-wrapper">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Buscar producto, descripción técnica o palabra clave...">
+        </div>
+        
+        <div class="filter-tags">
+          <button class="filter-btn active" data-phase="all">Todos</button>
+          <button class="filter-btn" data-phase="fase-1">Fase 1: Ahorro</button>
+          <button class="filter-btn" data-phase="fase-2">Fase 2: Salud y Vida</button>
+          <button class="filter-btn" data-phase="fase-3">Fase 3: Hogar y Auto</button>
+          <button class="filter-btn" data-phase="fase-4">Fase 4: Pensiones</button>
+          <button class="filter-btn" data-phase="fase-5">Fase 5: Profesional</button>
+          <button class="filter-btn" data-phase="fase-6">Fase 6: Hipotecas</button>
+        </div>
+      </div>
+
+      <div class="product-grid" id="productGrid">
+        <!-- Products will be dynamically rendered here -->
+      </div>
+    </section>
+
+    <!-- SECTION 2: ARGUMENTARIOS STAR -->
+    <section id="seccion-argumentarios">
+      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 16px;"><i class="fa-solid fa-bolt" style="color: var(--primary); margin-right: 8px;"></i>Argumentarios Estrella (Sesgos de IA)</h2>
+      <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">Selecciona el producto y copia el speech de alto impacto para enviarlo por WhatsApp, email o usarlo por teléfono.</p>
+
+      <div class="script-tabs" id="scriptTabs">
+        <!-- Script buttons rendered dynamically -->
+      </div>
+      
+      <div id="scriptContent">
+        <!-- Script details rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- SECTION 3: DECESOS VS PGI -->
+    <section id="seccion-decesos">
+      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 16px;"><i class="fa-solid fa-shield-halved" style="color: var(--primary); margin-right: 8px;"></i>Auditoría de Previsión Familiar</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">Metodología de Mayéutica Financiera para redirigir el gasto recurrente y a fondo perdido de los seguros de decesos tradicionales hacia el <strong>Plan Garantizado de Inversión (PGI)</strong> de Nationale-Nederlanden.</p>
+
+      <div class="comparison-grid">
+        <div class="comp-card glass negative">
+          <h3>Póliza de Decesos Tradicional (Gasto a Fondo Perdido)</h3>
+          <ul class="comp-list">
+            <li>Persona de 50 años paga unos <strong>30€/mes</strong> de media. Las primas suben exponencialmente con la edad.</li>
+            <li>Coste total estimado a los 35 años: <strong>12.600€</strong> entregados a la aseguradora.</li>
+            <li>En caso de fallecimiento, la compañía cubre el sepelio de ~4.000€.</li>
+            <li>El excedente de <strong>8.600€ queda para la compañía</strong>. El patrimonio heredado neto es de <strong>0€</strong>.</li>
+          </ul>
+        </div>
+        
+        <div class="comp-card glass positive">
+          <h3>Plan Garantizado de Inversión (El Cofre Seguro de NN)</h3>
+          <ul class="comp-list">
+            <li>Aportación única de <strong>5.000€</strong>. Dinero protegido contractualmente y a tu nombre.</li>
+            <li>En caso de fallecimiento, se liquida a los beneficiarios en <strong>48-72h</strong> libres de paralización judicial.</li>
+            <li>Devuelve el capital inicial (5.000€) + rendimientos + <strong>1.000€ de capital de cobertura adicional</strong>.</li>
+            <li>Si el total es ~6.500€, los herederos pagan el sepelio y <strong>se quedan con 2.500€ de herencia real</strong>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="formula-banner">
+        💡 Fórmula Patrimonial Familiar: Tu dinero regresa a tu familia en lugar de quedarse en la aseguradora.
+      </div>
+
+      <div class="script-card glass" style="margin-top: 30px;">
+        <div class="script-header">
+          <span class="script-title">💬 Metáfora de los Billetes de Autobús (Para Grupos Familiares)</span>
+          <button class="btn-copy" onclick="copyText(this, 'script-autobus')">
+            <i class="fa-solid fa-copy"></i> Copiar Argumentario
+          </button>
+        </div>
+        <div class="script-body" id="script-autobus">"Manuel, María... hoy pagáis casi 70€ al mes a la otra compañía por estar los tres en la póliza de decesos. Eso son 840€ al año tirados a un pozo sin fondo. Estáis pagando tres billetes de autobús para un viaje en el que no vais a subir todos a la vez.
+
+Nosotros os proponemos crear un único Cofre de Reserva Familiar de 5.000€ con nuestro Plan Garantizado de Inversión. Ese dinero es vuestro, crece seguro y nadie os lo toca. Si el día de mañana cualquiera de los tres falta, el cofre se abre inmediatamente y le entrega a la familia los 5.000€ más la rentabilidad y un extra de 1.000€ por contrato. Con eso pagáis el entierro de 4.000€ al contado en Xàtiva y os sobran 2.000€ que se quedan en casa.
+
+Y mientras tanto, los 70€ mensuales que antes tirabais, ahora se quedan en vuestra cuenta del banco. En solo 5 años, habéis acumulado más de 4.000€ de ahorro. ¿Seguimos comprando billetes de autobús inútiles, o abrimos vuestro cofre familiar hoy?"</div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: MINDSETS -->
+    <section id="seccion-metodologia">
+      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 24px;"><i class="fa-solid fa-brain" style="color: var(--primary); margin-right: 8px;"></i>Metodología y Técnicas de Venta</h2>
+      
+      <div class="method-block glass">
+        <h3>1. El Cambio de Mentalidad (Consultor vs. Vendedor)</h3>
+        <p><strong>Vendedor tradicional:</strong> Entra con mentalidad transaccional: "¿Cómo le convenzo para cerrar la venta?". Se enfoca en detalles del producto.</p>
+        <p><strong>Asesor consultivo (Ecosistema Despegue):</strong> Entra con mentalidad diagnóstica: "¿Qué riesgos tiene este cliente que aún no ha detectado?". Se enfoca en encontrar vulnerabilidades en su cobertura y estilo de vida.</p>
+      </div>
+
+      <div class="method-block glass">
+        <h3>2. El Proceso de 4 Fases del ADN</h3>
+        <p><strong>Fase A: Apertura (3 min):</strong> Baja las defensas del cliente. Frase de oro: <em>"No estoy aquí para venderte nada. Estoy aquí para ayudarte a descubrir si tienes algún agujero en tu protección."</em></p>
+        <p><strong>Fase B: Descubrimiento (10-15 min):</strong> Haz preguntas socráticas utilizando los datos del cliente. <em>"Si mañana tienes una emergencia médica o una baja de 6 meses, ¿de dónde sale exactamente el dinero?"</em></p>
+        <p><strong>Fase C: Activar Conciencia (5-10 min):</strong> Aplica silencio estratégico tras hacer la pregunta clave. Cuenta mentalmente hasta 10 y no rompas la tensión. Deja que asimilen la desprotección.</p>
+        <p><strong>Fase D: Recapitulación (2-3 min):</strong> Resume las vulnerabilidades confirmadas por el propio cliente. <em>"Recapitulando: si te ocurre algo, tus ingresos bajan un 40% y tu familia no tiene un colchón de seguridad. ¿Qué quieres hacer con esta información?"</em></p>
+      </div>
+
+      <div class="method-block glass">
+        <h3>3. Técnicas de Comunicación Avanzadas</h3>
+        <p><strong>El Reflejo (Mirroring):</strong> Repite las últimas 2-3 palabras clave pronunciadas por el cliente en tono interrogante para que siga revelando datos sin sentirse interrogado.</p>
+        <p><strong>Etiquetado Emocional (Labeling):</strong> Verbaliza sus miedos o reticencias: <em>"Parece que te preocupa el compromiso de la cuota mensual..."</em> para desactivar su resistencia inconsciente.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 5: CHECKLIST -->
+    <section id="seccion-checklist">
+      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 16px;"><i class="fa-solid fa-clipboard-list" style="color: var(--primary); margin-right: 8px;"></i>Checklist de Validación del Consultor</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px;">Lista de control obligatoria antes de presentar cualquier propuesta de valor al cliente.</p>
+
+      <div class="checklist-container">
+        <label class="checklist-item glass">
+          <input type="checkbox" checked>
+          <span>¿Están todos los productos catalogados por fases para evitar desorden conceptual?</span>
+        </label>
+        <label class="checklist-item glass">
+          <input type="checkbox" checked>
+          <span>¿Se mantiene el tono consultivo y directo en los speeches telefónicos?</span>
+        </label>
+        <label class="checklist-item glass">
+          <input type="checkbox">
+          <span>¿La propuesta de valor se centra en los beneficios de vida y no en los términos técnicos del producto?</span>
+        </label>
+        <label class="checklist-item glass">
+          <input type="checkbox">
+          <span>¿Se ha realizado el diagnóstico de brecha (Gap) antes de lanzar la simulación numérica?</span>
+        </label>
+        <label class="checklist-item glass">
+          <input type="checkbox">
+          <span>¿Se ha aplicado el silencio socrático tras la pregunta estrella de protección familiar?</span>
+        </label>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // PRODUCT DATA ARRAY WITH PRECISE MAPPED PDF FILES FOR THE FIRST 6 PRODUCTS
+    const products = [
+      {
+        id: "sialp",
+        phase: "fase-1",
+        name: "Plan SIALP",
+        desc: "Seguro de ahorro individual con exención fiscal total de rendimientos a partir del 5º año. Límite de 5.000€ anuales y garantía del 85% del valor más alto alcanzado.",
+        reframe: "Haz crecer tus ahorros sin regalar beneficios a Hacienda; el blindaje que convierte el ahorro en patrimonio real.",
+        pdfs: [
+          { name: "Folleto Plan Creciente SIALP", path: "docs/fase1-ahorro/sialp/Folleto Plan Creciente Sialp.pdf" },
+          { name: "Ficha Plan Creciente SIALP", path: "docs/fase1-ahorro/sialp/Ficha Plan Creciente Sialp.pdf" },
+          { name: "Preguntas Frecuentes SIALP", path: "docs/fase1-ahorro/sialp/Preguntas Frecuentes Plan Creciente y Plan Creciente Sialp.pdf" },
+          { name: "Sesión Refuerzo Argumentos SIALP", path: "docs/fase1-ahorro/sialp/Sesión Refuerzo Agurmentos Sialp.pdf" },
+          { name: "Condiciones Generales SIALP", path: "docs/fase1-ahorro/sialp/CC GG PLAN CRECIENTE SIALP.pdf" }
+        ]
+      },
+      {
+        id: "contigo-futuro",
+        phase: "fase-1",
+        name: "Contigo Futuro",
+        desc: "Unit Linked con garantía diaria y creciente del 80% del mayor valor alcanzado. Inversión sostenible (ESG) y exención de prima por IPA hasta los 67 años.",
+        reframe: "Invertir de forma ética con la tranquilidad de consolidar ganancias cada día y un blindaje del 80%.",
+        pdfs: [
+          { name: "Folleto Contigo Futuro", path: "docs/fase1-ahorro/contigo-futuro/NN_Contigo-Futuro-Folleto.pdf" },
+          { name: "Ficha de Producto", path: "docs/fase1-ahorro/contigo-futuro/Ficha-de-producto.pdf" },
+          { name: "FAQs Contigo Futuro", path: "docs/fase1-ahorro/contigo-futuro/FAQs Contigo Futuro.pdf" }
+        ]
+      },
+      {
+        id: "pgi",
+        phase: "fase-1",
+        name: "Plan Garantizado de Inversión",
+        desc: "Producto de inversión con garantía contractual al vencimiento del 90%, 100% o 110% del capital según el plazo (5, 10 o 20 años).",
+        reframe: "Participa en la subida de los mercados mundiales con una red de seguridad que blindará tu inversión por contrato.",
+        pdfs: [
+          { name: "Folleto Plan Garantizado de Inversión", path: "docs/Plan Garantizado de Inversión/folleto-plan-garantizado-de-inversion.pdf" },
+          { name: "Ficha Técnica PGI", path: "docs/Plan Garantizado de Inversión/Ficha-PGI.pdf" },
+          { name: "Presentación PGI", path: "docs/Plan Garantizado de Inversión/presentacion-pgi.pdf" }
+        ]
+      },
+      {
+        id: "flexicuenta",
+        phase: "fase-1",
+        name: "Flexicuenta Asegurada",
+        desc: "Cuenta de ahorro sin comisiones con disponibilidad inmediata (24-48h). Rentabilidad garantizada desde el primer euro y nivel de riesgo mínimo (1/7).",
+        reframe: "El colchón de seguridad que te paga por ahorrar, dándote libertad absoluta y disponibilidad total de tu dinero.",
+        pdfs: [
+          { name: "Folleto Flexicuenta Asegurada", path: "docs/Flexicuenta Asegurada/Flexicuenta-Asegurada_Folleto.pdf" },
+          { name: "Ficha Técnica Flexicuenta", path: "docs/Flexicuenta Asegurada/Ficha Flexicuenta Asegurada.pdf" },
+          { name: "Condiciones Generales Flexicuenta", path: "docs/Flexicuenta Asegurada/Condiciones Generales Flexicuenta Asegurada.pdf" }
+        ]
+      },
+      {
+        id: "p-ahorro-garantizado",
+        phase: "fase-1",
+        name: "Plan de Ahorro Garantizado",
+        desc: "Inversión a prima única (desde 1.000€) con rentabilidad mínima garantizada por contrato a un plazo fijo de 5 años y capital 100% asegurado.",
+        reframe: "Asegura tu futuro con un rendimiento predecible y la tranquilidad de saber exactamente cuánto tendrás el día de mañana.",
+        pdfs: [
+          { name: "Folleto Ahorro Garantizado Extra", path: "docs/fase1-ahorro/ahorro-garantizado/folleto-age-vip.pdf" },
+          { name: "Presentación Ahorro Garantizado", path: "docs/fase1-ahorro/ahorro-garantizado/Presentación_Plan_de_Ahorro_Garantizado.pdf" },
+          { name: "Ficha Características AGe", path: "docs/fase1-ahorro/ahorro-garantizado/Característica_Ventaja_Beneficio - ficha AGe editable.pdf" },
+          { name: "Condiciones Generales AGe", path: "docs/fase1-ahorro/ahorro-garantizado/condiciones-generales-age.pdf" }
+        ]
+      },
+      {
+        id: "proteccion-plus",
+        phase: "fase-1",
+        name: "Protección PLUS",
+        desc: "Seguro de vida de capital decreciente y prima constante vinculado a planes de ahorro. Incluye adelanto del 100% del capital en caso de invalidez.",
+        reframe: "El escudo inteligente que garantiza que tu plan de ahorro se cumpla, pase lo que pase con tu salud o ingresos.",
+        pdfs: [
+          { name: "Ficha de Producto Protección Plus", path: "docs/fase1-ahorro/proteccion-plus/Ficha_Pto-PPlus.pdf" },
+          { name: "Preguntas Frecuentes FAQs", path: "docs/fase1-ahorro/proteccion-plus/preguntas-frecuentes-proteccion-plus.pdf" },
+          { name: "Condiciones Generales Protección Plus", path: "docs/fase1-ahorro/proteccion-plus/Condiciones_Generales-PPlus.pdf" }
+        ]
+      },
+      {
+        id: "salud-vida",
+        phase: "fase-2",
+        name: "Plan Salud + Vida",
+        desc: "Solución híbrida que une medicina privada de Sanitas y seguro de vida de NN. Incluye descuentos del 12,5% y primer año de vida gratuito.",
+        reframe: "La protección total que cuida tu salud hoy y el futuro de los tuyos mañana en un solo contrato inteligente.",
+        pdfs: [
+          { name: "Folleto Plan Salud + Vida", path: "docs/fase2-salud/salud-vida/Folleto-Salud-Vida-web.pdf" },
+          { name: "Ficha Técnica Salud + Vida", path: "docs/fase2-salud/salud-vida/Ficha-Salud.pdf" },
+          { name: "Condiciones de Descuento 12.5%", path: "docs/fase2-salud/salud-vida/condiciones-descuento-12-5-anual.pdf" },
+          { name: "Condiciones Generales Salud Completo", path: "docs/fase2-salud/salud-vida/CCGG-Salud-Completo.pdf" }
+        ]
+      },
+      {
+        id: "salud-completo",
+        phase: "fase-2",
+        name: "Seguro de Salud Completo",
+        desc: "Seguro médico de cuadro médico Sanitas con acceso a +40.000 profesionales. Incluye hospitalización, especialidades y urgencias 24h sin esperas.",
+        reframe: "Acceso inmediato a la mejor medicina privada, eliminando las listas de espera para que tu salud sea siempre la prioridad.",
+        pdfs: [
+          { name: "Ficha Técnica Salud Completo", path: "docs/fase2-salud/salud-completo/ficha-salud-completo.pdf" },
+          { name: "Condiciones Generales sin Póliza", path: "docs/fase2-salud/salud-completo/CCGG-Salud-Completo-sin-poliza.pdf" },
+          { name: "Descuento por Zonas Salud Completo", path: "docs/fase2-salud/salud-completo/Salud-Completo-Descuento-Zonas.pdf" }
+        ]
+      },
+      {
+        id: "salud-copago",
+        phase: "fase-2",
+        name: "Seguro de Salud con Copago",
+        desc: "Cobertura médica completa de Sanitas con una prima mensual reducida. El cliente paga un pequeño importe solo cuando utiliza los servicios.",
+        reframe: "Medicina premium a tu alcance pagando solo por lo que usas; ahorro inteligente sin renunciar a la mejor asistencia médica.",
+        pdfs: [
+          { name: "Folleto Salud Copago Autónomos", path: "docs/fase2-salud/salud-copago/folleto-salud-completo-copago-autonomo.pdf" },
+          { name: "Ficha Técnica Salud Copago Autónomos", path: "docs/fase2-salud/salud-copago/ficha-salud-completo-copago-autonomo.pdf" },
+          { name: "Guía para Rebatir Objeciones", path: "docs/fase2-salud/salud-copago/argumentario-salud-rebatir-objecciones.pdf" },
+          { name: "Manual de Formación Salud Copago", path: "docs/fase2-salud/salud-copago/manual-de-formacion-salud-completo-copago-autonomo.pdf" },
+          { name: "Condiciones Generales Copago", path: "docs/fase2-salud/salud-copago/CCGG-salud-completo-copago-autonomo.pdf" }
+        ]
+      },
+      {
+        id: "contigo-familia",
+        phase: "fase-2",
+        name: "Contigo Familia",
+        desc: "Cobertura económica ante fallecimiento o invalidez con capital a elegir. Incluye garantía pionera para cáncer de mama de serie.",
+        reframe: "La garantía de que tu familia mantendrá su calidad de vida y proyectos, pase lo que pase, con protección específica avanzada.",
+        pdfs: [
+          { name: "Folleto Web Contigo Familia", path: "docs/fase2-salud/vida-familia/NN-Contigo-Familia-Folleto-Web.pdf" },
+          { name: "Ficha de Producto Contigo Familia", path: "docs/fase2-salud/vida-familia/Ficha-de-producto-Contigo-Familia.pdf" },
+          { name: "FAQs Contigo Familia", path: "docs/fase2-salud/vida-familia/FAQ-contigo-familia.pdf" },
+          { name: "Presentación Contigo Familia", path: "docs/fase2-salud/vida-familia/Presentacion-Contigo-Familia.pdf" },
+          { name: "Guía Chat Médico Contigo Familia", path: "docs/fase2-salud/vida-familia/Chat-medico-Contigo-Familia.pdf" },
+          { name: "Condiciones Generales Contigo Familia", path: "docs/fase2-salud/vida-familia/CFA_CCGG_V01_marketing.pdf" }
+        ]
+      },
+      {
+        id: "contigo-senior",
+        phase: "fase-2",
+        name: "Contigo Senior (+55)",
+        desc: "Ecosistema para mayores de 55: capital por accidente hasta 65.000€ y servicios de autonomía (podología, auxiliar, acompañamiento médico).",
+        reframe: "Mantén tu independencia y calidad de vida con un seguro que entiende y soluciona las necesidades reales de tu madurez.",
+        pdfs: [
+          { name: "Ficha Producto Contigo Senior", path: "docs/fase2-salud/senior/ficha-de-producto-contigo-senior.pdf" },
+          { name: "Presentación Contigo Senior", path: "docs/fase2-salud/senior/Presentacion-Contigo-Senior.pdf" },
+          { name: "Condiciones Generales Senior", path: "docs/fase2-salud/senior/CCGG-contigo-senior.pdf" }
+        ]
+      },
+      {
+        id: "liderplus",
+        phase: "fase-2",
+        name: "Accidentes LiderPlus",
+        desc: "Seguro de accidentes con capital directo de hasta 90.000€ sin exámenes médicos. Cobertura mundial 24h ante fallecimiento o invalidez.",
+        reframe: "Blindaje financiero instantáneo por menos de lo que cuesta un café; para que un tropiezo físico no sea económico.",
+        pdfs: [
+          { name: "Folleto Accidentes LiderPlus", path: "docs/Lider Plus Accidente/Liderplus-Accidentes_Folleto.pdf" },
+          { name: "Ficha LiderPlus Accidentes", path: "docs/Lider Plus Accidente/Ficha LiderPlus Accidentes.pdf" },
+          { name: "Condiciones Generales LiderPlus", path: "docs/Lider Plus Accidente/Condiciones Generales LiderPlus Accidentes.pdf" }
+        ]
+      },
+      {
+        id: "mihogar",
+        phase: "fase-3",
+        name: "Mihogar Seguro",
+        desc: "Seguro multirriesgo modular con 12 coberturas básicas. Incluye servicio 'Manitas' y descuentos de hasta el 25% por añadir servicios extras.",
+        reframe: "Configura la protección de tu hogar a medida, ahorrando más cuanto más proteges lo que de verdad te importa.",
+        pdfs: [
+          { name: "Folleto Mihogar Seguro", path: "docs/fase3-hogar/mihogar/folleto-mihogar-seguro.pdf" },
+          { name: "Ficha Producto MiHogar", path: "docs/fase3-hogar/mihogar/ficha-mihogar-seguro.pdf" },
+          { name: "Condiciones Generales MiHogar", path: "docs/fase3-hogar/mihogar/condiciones-generales-mihogar-seguro.pdf" }
+        ]
+      },
+      {
+        id: "coche",
+        phase: "fase-3",
+        name: "Seguro de Coche",
+        desc: "Alianza NN y Mutua Madrileña con valor a nuevo los 2 primeros años y asistencia km 0. Precio cerrado sin variaciones al emitir.",
+        reframe: "Tu movilidad protegida por los líderes del sector, con el compromiso de un precio estable y asistencia premium inmediata.",
+        pdfs: [
+          { name: "Folleto Seguro Autos", path: "docs/fase3-hogar/auto/Folleto-Autos.pdf" },
+          { name: "Ficha Grupo Mutua Autos", path: "docs/fase3-hogar/auto/Ficha-Grupo-Mutua-Autos.pdf" },
+          { name: "Ventajas Alianza Auto MM-NN", path: "docs/fase3-hogar/auto/Ventajas-Seguro-Auto-MM-NN.pdf" },
+          { name: "Presentación Mutua Madrileña", path: "docs/fase3-hogar/auto/Presentacion-Mutua-Madrilena.pdf" },
+          { name: "Condiciones Generales Todo Riesgo", path: "docs/fase3-hogar/auto/CG-Auto-Todo-Riesgo.pdf" }
+        ]
+      },
+      {
+        id: "moto",
+        phase: "fase-3",
+        name: "Seguro de Moto",
+        desc: "Seguro específico para motoristas con Mutua Madrileña. Asistencia km 0 y cobertura opcional para casco y vestimenta técnica.",
+        reframe: "Disfruta de la carretera con la tranquilidad de que tú y tu equipo estáis protegidos por expertos en motor.",
+        pdfs: [
+          { name: "Presentación Mutua Motos", path: "docs/fase3-hogar/motos/Presentacion-Mutua-Motos.pdf" },
+          { name: "Ficha Producto Moto TR", path: "docs/fase3-hogar/motos/PID-Motos-Todo-Riesgo.pdf" },
+          { name: "Condiciones Generales Terceros Plus", path: "docs/fase3-hogar/motos/CG-Moto-Terceros-Plus.pdf" }
+        ]
+      },
+      {
+        id: "ppsa",
+        phase: "fase-4",
+        name: "PPSA (Plan Autónomos)",
+        desc: "Plan de pensiones para autónomos RETA con deducción de hasta 5.750€/año en IRPF. Gestión profesional por Goldman Sachs AM.",
+        reframe: "La herramienta fiscal más potente para autónomos: convierte tus impuestos de hoy en tu libertad financiera del mañana.",
+        pdfs: [
+          { name: "Folleto Plan Simplificado PPSA", path: "docs/fase4-pensiones/ppsa/folleto-ppsa.pdf" },
+          { name: "Ficha del Plan de Autónomos", path: "docs/fase4-pensiones/ppsa/Ficha-Plan-Empleo-Autonomos.pdf" },
+          { name: "Argumentario Comercial PPSA", path: "docs/fase4-pensiones/ppsa/Argumentario-Comercial-PPSA.pdf" }
+        ]
+      },
+      {
+        id: "duplo",
+        phase: "fase-4",
+        name: "Sistema Duplo",
+        desc: "Plan de pensiones individual con dos perfiles (Global o Europa). Deducción de hasta 1.500€ anuales y nueva liquidez a los 10 años.",
+        reframe: "Recupera dinero de Hacienda cada año mientras construyes una jubilación sólida con gestión profesional de clase mundial.",
+        pdfs: [
+          { name: "Folleto Sistema Duplo", path: "docs/fase4-pensiones/duplo/Sistema-Duplo-Folleto.pdf" },
+          { name: "Argumentario Rescate a 10 Años", path: "docs/fase4-pensiones/duplo/Argumentario-Pensiones-Rescate-10-Anos.pdf" },
+          { name: "Manual de Traslado de Pensiones", path: "docs/fase4-pensiones/duplo/Manual-Traslado-Pensiones.pdf" }
+        ]
+      },
+      {
+        id: "contigo-autonomo",
+        phase: "fase-5",
+        name: "Contigo Autónomo",
+        desc: "Protección laboral integral: ILT (30€/día), capital de 266.000€ y enfermedades graves. Descuento del 10% por hábitos saludables.",
+        reframe: "El seguro que cubre el 'agujero' de tus ingresos cuando no puedes trabajar, garantizando la continuidad de tu negocio.",
+        pdfs: [
+          { name: "Folleto Contigo Autónomo", path: "docs/fase5-empresa/contigo-autonomo/Folleto-Contigo-Autonomo.pdf" },
+          { name: "Ficha Contigo Autónomo", path: "docs/fase5-empresa/contigo-autonomo/Ficha-Contigo-Autonomo.pdf" },
+          { name: "Condiciones Generales Autónomo", path: "docs/fase5-empresa/contigo-autonomo/CCGG-Contigo-Autonomo.pdf" }
+        ]
+      },
+      {
+        id: "ilt",
+        phase: "fase-5",
+        name: "Seguro ILT Autónomos",
+        desc: "Indemnización diaria configurable de 10 a 200€ por baja laboral. Incluye chat médico y legal 24h sin carencia en accidentes.",
+        reframe: "Tu sueldo garantizado desde el primer día de baja, para que tu única preocupación sea recuperarte y volver pronto.",
+        pdfs: [
+          { name: "Guía Selección Financiera ILT", path: "docs/fase5-empresa/contigo-autonomo/Documentacion-Seleccion-Financiera-ILT.pdf" },
+          { name: "Ficha Contigo Autónomo ILT", path: "docs/fase5-empresa/contigo-autonomo/Ficha-Contigo-Autonomo.pdf" },
+          { name: "Folleto Contigo Autónomo ILT", path: "docs/fase5-empresa/contigo-autonomo/Folleto-Contigo-Autonomo.pdf" }
+        ]
+      },
+      {
+        id: "pyme",
+        phase: "fase-5",
+        name: "Contigo Pyme",
+        desc: "Seguro colectivo de vida y accidentes adaptado a convenios laborales. Sin exámenes médicos para la plantilla y gestión 100% digital.",
+        reframe: "Tranquilidad legal para tu empresa y un beneficio social de alto valor que fideliza el talento de tu equipo.",
+        pdfs: [
+          { name: "Folleto Tríptico PYME", path: "docs/fase5-empresa/pyme/Contigo-PYME-Folleto-Triptico.pdf" },
+          { name: "Ficha de Producto PYME", path: "docs/fase5-empresa/pyme/Ficha-Contigo-PYME.pdf" },
+          { name: "Presentación Contigo PYME", path: "docs/fase5-empresa/pyme/Presentacion-Contigo-PYME.pdf" }
+        ]
+      },
+      {
+        id: "comercios",
+        phase: "fase-5",
+        name: "Seguro para Comercios",
+        desc: "Multirriesgo NN-Caser con garantía de continuidad de ingresos (lucro cesante) y asistencia urgente de Expertología 24/7.",
+        reframe: "Que nada detenga tu negocio; protegemos tu local y tus beneficios para que la persiana nunca se quede bajada.",
+        pdfs: [
+          { name: "Dossier Caser Comercio", path: "docs/fase5-empresa/comercios/Dossier-Caser-Comercio-Connect.pdf" },
+          { name: "Manual Producto Comercio Connect", path: "docs/fase5-empresa/comercios/Manual-Producto-Caser-Comercio-Connect.pdf" },
+          { name: "Ficha Producto Caser PYME", path: "docs/fase5-empresa/comercios/Ficha-Producto-Caser-PYME.pdf" }
+        ]
+      },
+      {
+        id: "salud-autonomos",
+        phase: "fase-5",
+        name: "Salud Autónomos",
+        desc: "Seguro de salud Sanitas con prima deducible al 100% en el IRPF como gasto profesional para el trabajador por cuenta propia.",
+        reframe: "Cuida tu salud con la mejor red médica mientras optimizas tu factura fiscal deduciendo el coste del seguro.",
+        pdfs: [
+          { name: "Folleto Salud Copago Autónomo", path: "docs/fase5-empresa/salud-autonomos/folleto-salud-completo-copago-autonomo.pdf" },
+          { name: "Ficha Salud Copago Autónomo", path: "docs/fase5-empresa/salud-autonomos/ficha-salud-completo-copago-autonomo.pdf" },
+          { name: "Presentación Salud y Ahorro", path: "docs/fase5-empresa/salud-autonomos/Presentacion-Salud-Negocio-Ahorro-Autonomo.pdf" },
+          { name: "Guía de Uso Salud Autónomos", path: "docs/fase5-empresa/salud-autonomos/guia-de-uso-del-seguro-salud-completo-copago-autonomo.pdf" },
+          { name: "Condiciones Generales Autónomos", path: "docs/fase5-empresa/salud-autonomos/CCGG-salud-completo-copago-autonomo.pdf" }
+        ]
+      },
+      {
+        id: "rc-pro",
+        phase: "fase-5",
+        name: "RC PRO · Caser",
+        desc: "Responsabilidad Civil profesional hasta 3.000.000 €. 3 modalidades (Básico, Estándar, Premium). Protección digital incluida y extensión run-off de 24 meses.",
+        reframe: "El escudo que protege tu patrimonio y tu reputación ante cualquier reclamación: porque un error no puede costarte todo lo que has construido.",
+        pdfs: [
+          { name: "Ficha RC General PRO Caser", path: "docs/fase5-empresa/rc-pro/Caser-RC-General-PRO.pdf" },
+          { name: "Manual Comercial RC General PRO", path: "docs/fase5-empresa/rc-pro/Manual-Comercial-RC-General-PRO.pdf" }
+        ]
+      },
+      {
+        id: "mari-carmen",
+        phase: "fase-6",
+        name: "Hipoteca Mari Carmen",
+        desc: "Préstamo hipotecario ABANCA (fijo, mixto o variable) sin comisión de apertura e intereses bonificables por vinculación.",
+        reframe: "La financiación flexible y sin costes de entrada para que tu nueva casa sea una oportunidad, no una carga.",
+        pdfs: [
+          { name: "Ficha Hipoteca Fija", path: "docs/fase6-hipotecas/abanca/abanca-maricarmen-fija-valor.pdf" },
+          { name: "Ficha Hipoteca Mixta", path: "docs/fase6-hipotecas/abanca/abanca-maricarmen-mixta-valor.pdf" },
+          { name: "Ficha Hipoteca Variable", path: "docs/fase6-hipotecas/abanca/abanca-maricarmen-variable-valor.pdf" },
+          { name: "Guía Rápida de Solicitud", path: "docs/fase6-hipotecas/abanca/guia-rapida-solicitud-hipotecas.pdf" },
+          { name: "Manual Operativo Hipotecas", path: "docs/fase6-hipotecas/abanca/manual-operativo-hipotecas.pdf" },
+          { name: "Pre-Scoring Online ABANCA", path: "docs/fase6-hipotecas/abanca/negocio-hipotecario-prescoring-online.pdf" },
+          { name: "Presentación Hipotecas ABANCA", path: "docs/fase6-hipotecas/abanca/presentacion-hipotecas-abanca.pdf" },
+          { name: "Protocolo Soporte e Incidencias", path: "docs/fase6-hipotecas/abanca/protocolo-consultas-incidencias-abanca.pdf" },
+          { name: "Manual Plataforma ABANCA", path: "docs/fase6-hipotecas/abanca/manual-plataforma-abanca.pdf" },
+          { name: "Operaciones No Planteables", path: "docs/fase6-hipotecas/abanca/operaciones-no-planteables-abanca.pdf" }
+        ]
+      },
+      {
+        id: "naranja",
+        phase: "fase-6",
+        name: "Hipoteca Naranja",
+        desc: "Hipoteca ING 100% digital, sin comisión de apertura y con gastos de formalización (notaría, registro) asumidos por el banco.",
+        reframe: "Estrena casa sin pagar gastos de formalización; la hipoteca transparente y digital que te hace el proceso mucho más fácil.",
+        pdfs: [
+          { name: "Folleto Comercial Naranja", path: "docs/fase6-hipotecas/ing/folleto-hipoteca-naranja.pdf" },
+          { name: "Guía Completa Hipoteca Naranja", path: "docs/fase6-hipotecas/ing/guia-completa-hipoteca-naranja.pdf" },
+          { name: "Guía Integral Naranja", path: "docs/fase6-hipotecas/ing/guia-integral-hipoteca-naranja.pdf" },
+          { name: "Presentación Hipotecas ING", path: "docs/fase6-hipotecas/ing/presentacion-hipotecas-ing.pdf" },
+          { name: "Presentación Ecosistema ING-NN", path: "docs/fase6-hipotecas/ing/presentacion-ecosistema-hipotecario-ing.pdf" },
+          { name: "Presentación Solidez y Agilidad", path: "docs/fase6-hipotecas/ing/presentacion-hipoteca-naranja-solidez-agilidad.pdf" },
+          { name: "Presentación Transparencia Naranja", path: "docs/fase6-hipotecas/ing/presentacion-hipoteca-naranja-transparencia.pdf" }
+        ]
+      }
+    ];
+
+    // ARGUMENTARIOS Speeches
+    const scripts = [
+      {
+        id: "sialp-script",
+        title: "1. Plan SIALP (Anclaje Temporal)",
+        text: "«Te llamo porque el reloj de Hacienda no se detiene. Tienes un límite de 5.000€ este año que, si no aprovechas antes del 31 de diciembre, desaparece para siempre.\n\nHoy tienes la oportunidad de blindar tus beneficios con un 0% de impuestos a partir del año 5. Si esperas al año que viene, habrás perdido un año completo de exención fiscal. ¿Hablamos hoy a las 10:00 o te viene mejor a las 17:00?»"
+      },
+      {
+        id: "salud-vida-script",
+        title: "2. Salud + Vida (Empatía Profesional)",
+        text: "«Sabemos que lo más importante para ti es la tranquilidad de tu familia. Por eso, hemos diseñado algo muy simple: Sanitas cuida vuestro día a día y Nationale-Nederlanden asegura vuestro futuro.\n\nEste mes, queremos que lo pruebes sin peso extra: el seguro de vida va de nuestra cuenta el primer año. Es nuestra forma de decirte que estamos contigo.»"
+      },
+      {
+        id: "ppsa-script",
+        title: "3. PPSA Autónomos (Urgencia Máxima)",
+        text: "«⏰ ¡ÚLTIMOS DÍAS! El límite de 5.750€ de deducción en tu IRPF cierra en pocos días. No es una oferta comercial, es una ventana legal que se clausura.\n\nO metes ese dinero en TU futuro y tu jubilación, o se lo queda el Estado en impuestos. Tú decides. Llámame ahora y te hago la simulación en 3 minutos.»"
+      },
+      {
+        id: "flexicuenta-script",
+        title: "4. Flexicuenta (Claridad 1-2-3)",
+        text: "«Organizar tu ahorro es tan fácil como 1, 2, 3:\n\n1. Abres tu cuenta asegurada en 3 minutos desde el móvil.\n2. Tu dinero renta y crece desde el primer euro.\n3. Dispones de él cuando quieras sin ningún tipo de comisión.\n\nSin letra pequeña, solo libertad financiera.»"
+      },
+      {
+        id: "rcpro-script",
+        title: "5. RC PRO Caser (Reframe del Riesgo)",
+        text: "«Como autónomo o empresario, tu mayor activo es lo que has construido con tu esfuerzo. Un cliente insatisfecho, un daño accidental, una reclamación... sin RC PRO, pagas con tus bienes personales.\n\nCon RC PRO Caser, cubrimos hasta 3.000.000 € de cobertura automática + protección digital incluida + 24 meses de cobertura post-cierre (run-off). Dejamos de vender seguros: convertimos tu exposición al riesgo en una ventaja competitiva. ¿Hablamos?»"
+      }
+    ];
+
+    // RESOLVE PDF LINK DYNAMICALLY
+    function resolvePDFLink(relPath) {
+      // If we are online on github pages
+      if (window.location.hostname === 'fedefonta08.github.io' || window.location.protocol === 'https:' || window.location.protocol === 'http:') {
+        return relPath;
+      }
+      // If we are opened from the downloads folder directly (not inside 06_NATIONALE_NEDERLANDEN)
+      const pathname = window.location.pathname;
+      
+      // Detect if we are on Federico's computer (where the local docs/ folder exists)
+      const isFedeComputer = pathname.toLowerCase().includes('ffont') || pathname.toLowerCase().includes('downloads/06_nationale_nederlanden');
+      
+      if (isFedeComputer) {
+        if (pathname.includes('/Downloads/Biblia_de_Ventas_NN_v2.html')) {
+          return '06_NATIONALE_NEDERLANDEN/' + relPath;
+        }
+        return relPath;
+      } else {
+        // For external agents opened locally, redirect to the online hosted PDFs
+        return 'https://fedefonta08.github.io/propuestas-nn/' + relPath;
+      }
+    }
+
+    // RENDER PRODUCTS
+    function renderProducts(filterPhase = "all", searchTerm = "") {
+      const grid = document.getElementById("productGrid");
+      grid.innerHTML = "";
+      
+      const filtered = products.filter(p => {
+        const matchesPhase = filterPhase === "all" || p.phase === filterPhase;
+        const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                              p.desc.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                              p.reframe.toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesPhase && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="text-align: center; padding: 40px; color: var(--text-muted); font-weight: 500;">No se han encontrado productos que coincidan con los filtros.</div>`;
+        return;
+      }
+
+      filtered.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "product-card glass";
+        
+        // Human phase name badge
+        const phaseLabels = {
+          "fase-1": "Fase 1: Ahorro",
+          "fase-2": "Fase 2: Salud y Vida",
+          "fase-3": "Fase 3: Hogar y Auto",
+          "fase-4": "Fase 4: Pensiones",
+          "fase-5": "Fase 5: Profesional",
+          "fase-6": "Fase 6: Hipotecas"
+        };
+
+        // Render PDF buttons if available
+        let pdfsHtml = "";
+        if (p.pdfs && p.pdfs.length > 0) {
+          const linksHtml = p.pdfs.map(pdf => {
+            const resolvedUrl = encodeURI(resolvePDFLink(pdf.path));
+            return `
+              <a href="${resolvedUrl}" target="_blank" class="pdf-link-btn">
+                <i class="fa-solid fa-file-pdf" style="color: var(--pdf-red);"></i>
+                <span>${pdf.name}</span>
+              </a>
+            `;
+          }).join("");
+          
+          pdfsHtml = `
+            <div class="pdf-box">
+              <div class="pdf-label"><i class="fa-solid fa-book-open-reader"></i> Documentos y Guías de Formación</div>
+              <div class="pdf-links">
+                ${linksHtml}
+              </div>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <div class="product-card-header">
+            <h3 class="product-title">${p.name}</h3>
+            <span class="badge">${phaseLabels[p.phase]}</span>
+          </div>
+          <p class="product-description">${p.desc}</p>
+          <div class="reframe-box">
+            <div class="reframe-label"><i class="fa-solid fa-quote-left"></i> Reframe Comercial (Mayéutica)</div>
+            ${p.reframe}
+          </div>
+          ${pdfsHtml}
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // RENDER ARGUMENTARIOS
+    function renderScripts() {
+      const tabs = document.getElementById("scriptTabs");
+      const content = document.getElementById("scriptContent");
+      tabs.innerHTML = "";
+      content.innerHTML = "";
+
+      scripts.forEach((s, idx) => {
+        // Tab button
+        const btn = document.createElement("button");
+        btn.className = `script-tab-btn ${idx === 0 ? 'active' : ''}`;
+        btn.innerText = s.title.split(" (")[0]; // Short name
+        btn.onclick = () => {
+          document.querySelectorAll(".script-tab-btn").forEach(b => b.classList.remove("active"));
+          document.querySelectorAll(".script-container").forEach(c => c.classList.remove("active"));
+          btn.classList.add("active");
+          document.getElementById(s.id).classList.add("active");
+        };
+        tabs.appendChild(btn);
+
+        // Content
+        const container = document.createElement("div");
+        container.id = s.id;
+        container.className = `script-container ${idx === 0 ? 'active' : ''}`;
+        container.innerHTML = `
+          <div class="script-card glass">
+            <div class="script-header">
+              <span class="script-title">${s.title}</span>
+              <button class="btn-copy" onclick="copyText(this, 'body-${s.id}')">
+                <i class="fa-solid fa-copy"></i> Copiar Guión
+              </button>
+            </div>
+            <div class="script-body" id="body-${s.id}">${s.text}</div>
+          </div>
+        `;
+        content.appendChild(container);
+      });
+    }
+
+    // COPY CLIPBOARD UTILITY WITH DYNAMIC FEEDBACK
+    function copyText(btnElement, sourceId) {
+      const element = document.getElementById(sourceId);
+      const textToCopy = element.innerText || element.textContent;
+
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        // Visual feedback
+        const originalContent = btnElement.innerHTML;
+        btnElement.innerHTML = `<i class="fa-solid fa-circle-check" style="color: hsl(140, 70%, 45%);"></i> ¡Copiado!`;
+        btnElement.style.borderColor = "hsl(140, 70%, 45%)";
+        btnElement.style.color = "hsl(140, 70%, 45%)";
+        
+        setTimeout(() => {
+          btnElement.innerHTML = originalContent;
+          btnElement.style.borderColor = "";
+          btnElement.style.color = "";
+        }, 2000);
+      }).catch(err => {
+        console.error('Error al copiar el texto: ', err);
+      });
+    }
+
+    // EVENT LISTENERS & NAVIGATION
+    document.addEventListener("DOMContentLoaded", () => {
+      renderProducts();
+      renderScripts();
+
+      // Search input
+      const searchInput = document.getElementById("searchInput");
+      searchInput.addEventListener("input", (e) => {
+        const activeBtn = document.querySelector(".filter-btn.active");
+        const activePhase = activeBtn ? activeBtn.getAttribute("data-phase") : "all";
+        renderProducts(activePhase, e.target.value);
+      });
+
+      // Filter tags buttons
+      const filterBtns = document.querySelectorAll(".filter-btn");
+      filterBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          filterBtns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          const phase = btn.getAttribute("data-phase");
+          renderProducts(phase, searchInput.value);
+        });
+      });
+
+      // Sidebar link switching
+      const navLinks = document.querySelectorAll(".nav-link");
+      navLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          navLinks.forEach(l => l.classList.remove("active"));
+          link.classList.add("active");
+          
+          // Switch active section
+          const target = link.getAttribute("data-target");
+          document.querySelectorAll("main > section").forEach(sec => {
+            sec.classList.remove("active");
+          });
+          document.getElementById(target).classList.add("active");
+
+          // Close sidebar on mobile after clicking
+          if (window.innerWidth <= 992) {
+            document.getElementById("sidebar").classList.remove("open");
+          }
+        });
+      });
+
+      // Mobile menu toggle
+      const menuToggleBtn = document.getElementById("menuToggleBtn");
+      menuToggleBtn.addEventListener("click", () => {
+        document.getElementById("sidebar").classList.toggle("open");
+      });
+
+      // Theme toggle
+      const themeSwitchBtn = document.getElementById("themeSwitchBtn");
+      themeSwitchBtn.addEventListener("click", () => {
+        const body = document.body;
+        const currentTheme = body.getAttribute("data-theme");
+        const icon = themeSwitchBtn.querySelector("i");
+
+        if (currentTheme === "light") {
+          body.setAttribute("data-theme", "dark");
+          icon.className = "fa-solid fa-sun";
+        } else {
+          body.setAttribute("data-theme", "light");
+          icon.className = "fa-solid fa-moon";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

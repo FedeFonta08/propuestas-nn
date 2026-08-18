@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema de Aperturas v2 — NN Xàtiva</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #0D1B2A;
+  --navy2:   #162233;
+  --orange:  #FF6B35;
+  --green:   #1E8449;
+  --green-l: #E8F8F0;
+  --green-d: #0A3D20;
+  --blue-l:  #E6F1FB;
+  --blue-d:  #0C447C;
+  --red-l:   #FDECEA;
+  --red-d:   #8B1A1A;
+  --amber-l: #FEF3C7;
+  --amber-d: #78350F;
+  --purple-l:#EDE9FE;
+  --purple-d:#3730A3;
+  --grey:    #F4F6F7;
+  --grey2:   #E9EAEC;
+  --text:    #0F172A;
+  --muted:   #64748B;
+  --border:  rgba(15,23,42,0.08);
+  --white:   #FFFFFF;
+  --sidebar: 280px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #ECEAE4;
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── TOP BAR ─────────────────────────────── */
+.topbar {
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 56px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.topbar-left { display: flex; align-items: center; gap: 16px; }
+.topbar-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--orange);
+  letter-spacing: .5px;
+}
+.topbar-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.1); }
+.topbar-title {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 400;
+}
+.topbar-stats { display: flex; gap: 24px; align-items: center; }
+.tstat { text-align: center; }
+.tstat-n {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  display: block;
+  line-height: 1;
+}
+.tstat-n.g { color: #6EE7B7; }
+.tstat-n.o { color: var(--orange); }
+.tstat-l { font-size: 9px; color: #64748B; text-transform: uppercase; letter-spacing: .6px; margin-top: 1px; }
+.topbar-prog { display: flex; align-items: center; gap: 10px; }
+.prog-bar {
+  width: 140px; height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.prog-fill {
+  height: 100%;
+  background: var(--green);
+  border-radius: 100px;
+  transition: width .3s;
+}
+.prog-label { font-size: 12px; color: #94A3B8; white-space: nowrap; }
+
+/* ── LAYOUT ──────────────────────────────── */
+.layout {
+  display: grid;
+  grid-template-columns: var(--sidebar) 1fr;
+  flex: 1;
+  overflow: hidden;
+  height: calc(100vh - 56px);
+}
+
+/* ── SIDEBAR ─────────────────────────────── */
+.sidebar {
+  background: var(--navy2);
+  overflow-y: auto;
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+.sidebar-section-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #475569;
+  margin-bottom: .5rem;
+}
+
+.regla-box {
+  background: rgba(255,107,53,0.08);
+  border: 1px solid rgba(255,107,53,0.2);
+  border-radius: 12px;
+  padding: 1rem;
+}
+.regla-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: .5rem;
+}
+.regla-text { font-size: 12px; color: #94A3B8; line-height: 1.6; }
+.regla-text strong { color: #fff; font-weight: 500; }
+
+.wa-box {
+  background: rgba(37,211,102,0.06);
+  border: 1px solid rgba(37,211,102,0.15);
+  border-radius: 12px;
+  padding: 1rem;
+}
+.wa-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #25D366;
+  margin-bottom: .5rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.wa-bubble {
+  background: #DCF8C6;
+  border-radius: 10px 10px 10px 3px;
+  padding: .75rem .875rem;
+  font-size: 12px;
+  line-height: 1.65;
+  color: #1A1A1A;
+  font-style: italic;
+  margin-bottom: .4rem;
+}
+.wa-bubble::after {
+  content: '✓✓';
+  display: block;
+  text-align: right;
+  color: #4FC3F7;
+  font-size: 10px;
+  font-style: normal;
+  margin-top: .25rem;
+}
+.wa-hint { font-size: 11px; color: #4ADE80; line-height: 1.5; }
+
+.nav-menu { display: flex; flex-direction: column; gap: 4px; }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: .625rem .875rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background .15s;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+.nav-item:hover { background: rgba(255,255,255,0.05); }
+.nav-item.active { background: rgba(255,255,255,0.08); }
+.nav-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.nav-name { font-size: 13px; color: #CBD5E1; flex: 1; }
+.nav-item.active .nav-name { color: #fff; font-weight: 500; }
+.nav-badge {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 100px;
+  letter-spacing: .3px;
+}
+
+/* ── MAIN ────────────────────────────────── */
+.main {
+  overflow-y: auto;
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.main::-webkit-scrollbar { width: 6px; }
+.main::-webkit-scrollbar-track { background: transparent; }
+.main::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 3px; }
+
+/* Script cards */
+.script-card {
+  background: var(--white);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: box-shadow .15s;
+}
+.script-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+.script-card.active-card { border: 2px solid var(--green); }
+
+.card-header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 1.125rem 1.5rem;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: background .1s;
+}
+.card-header:hover { background: #FAFBFC; }
+.card-header.open { border-bottom-color: var(--border); }
+
+.card-num {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.card-header-info {}
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+.card-why { font-size: 12px; color: var(--muted); font-style: italic; line-height: 1.4; }
+.card-header-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+.result-select {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--grey);
+  color: var(--text);
+  cursor: pointer;
+  min-width: 140px;
+}
+
+.best-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .15s;
+}
+.best-btn:hover { background: var(--grey); }
+.best-btn.winner { background: var(--green); border-color: var(--green); color: #fff; font-weight: 500; }
+
+.chevron {
+  width: 20px; height: 20px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted);
+  transition: transform .2s;
+  flex-shrink: 0;
+}
+.chevron.open { transform: rotate(180deg); }
+
+.card-body {
+  display: none;
+  padding: 1.25rem 1.5rem;
+  background: #FAFBFC;
+}
+.card-body.open { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+
+.script-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: .5rem;
+  display: block;
+}
+.script-text {
+  border-radius: 10px;
+  padding: 1rem 1.125rem;
+  font-size: 13px;
+  line-height: 1.75;
+  font-style: italic;
+  border: 1px solid;
+}
+.pregunta-box {
+  border-radius: 10px;
+  padding: .875rem 1rem;
+  font-size: 13px;
+  line-height: 1.6;
+  border: 1px solid;
+  margin-top: .75rem;
+}
+.pregunta-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: .4rem;
+  display: block;
+}
+
+/* Level headers */
+.level-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: .25rem 0;
+}
+.level-line { flex: 1; height: 1px; background: var(--border); }
+.level-badge {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 100px;
+}
+
+/* Summary panel */
+.summary-panel {
+  background: var(--navy);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.summary-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+.summary-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: .75rem; }
+.summary-card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  padding: .875rem;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.summary-n {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 2px;
+}
+.summary-l { font-size: 11px; color: #64748B; }
+.summary-rows { margin-top: 1rem; }
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 13px;
+}
+.summary-row:last-child { border-bottom: none; }
+.summary-name { color: #94A3B8; }
+.summary-val { font-weight: 500; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-logo">NN · Xàtiva</div>
+    <div class="topbar-divider"></div>
+    <div class="topbar-title">Sistema de Aperturas v2 — Calibrado</div>
+  </div>
+  <div class="topbar-stats">
+    <div class="tstat">
+      <span class="tstat-n" id="s-total">0</span>
+      <div class="tstat-l">Llamadas</div>
+    </div>
+    <div class="tstat">
+      <span class="tstat-n g" id="s-ok">0</span>
+      <div class="tstat-l">Escuchas</div>
+    </div>
+    <div class="tstat">
+      <span class="tstat-n o" id="s-citas">0</span>
+      <div class="tstat-l">Citas</div>
+    </div>
+  </div>
+  <div class="topbar-prog">
+    <div class="prog-bar">
+      <div class="prog-fill" id="prog-bar" style="width:0%"></div>
+    </div>
+    <div class="prog-label" id="prog-label">Tasa escucha: <strong>0%</strong></div>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div>
+      <div class="sidebar-section-label">Regla de oro</div>
+      <div class="regla-box">
+        <div class="regla-title">⚡ Prohibido decir</div>
+        <div class="regla-text">
+          Nunca digas <strong>"seguro"</strong>, <strong>"póliza"</strong> ni <strong>"contratar"</strong> en los primeros 30 segundos.<br><br>
+          Habla de: <strong>Sanitas · salud · descuento · medicina privada</strong>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sidebar-section-label">Paso 0 — Antes de llamar</div>
+      <div class="wa-box">
+        <div class="wa-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.098.543 4.067 1.494 5.778L0 24l6.388-1.673A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.655-.52-5.17-1.425l-.37-.22-3.793.994.994-3.698-.24-.383A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          WhatsApp previo
+        </div>
+        <div class="wa-bubble">"Hola [nombre], soy [tu nombre] de Xàtiva. Te llamo en unos minutos, es algo breve que creo que te interesa. Un saludo."</div>
+        <div class="wa-hint">Mándalo 5 min antes. Dobla la tasa de respuesta.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sidebar-section-label">Navegar por aperturas</div>
+      <div class="nav-menu" id="nav-menu"></div>
+    </div>
+
+    <div style="margin-top:auto;padding-top:1rem">
+      <div class="sidebar-section-label">La pregunta clave</div>
+      <div style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);border-radius:12px;padding:1rem">
+        <div style="font-size:14px;font-style:italic;color:#C7D2FE;line-height:1.5;margin-bottom:.75rem">"¿Tienes médico privado ahora mismo?"</div>
+        <div style="font-size:11px;color:#818CF8;line-height:1.6">
+          <strong style="color:#A5B4FC">NO →</strong> Puerta abierta.<br>
+          <strong style="color:#A5B4FC">SÍ →</strong> "¿Cuánto pagas?" → tú a tú.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main" id="main-content">
+
+    <!-- Summary at top -->
+    <div class="summary-panel">
+      <div class="summary-title">Resultados de hoy</div>
+      <div class="summary-grid">
+        <div class="summary-card">
+          <span class="summary-n" style="color:#fff" id="sum-total">0</span>
+          <div class="summary-l">Llamadas</div>
+        </div>
+        <div class="summary-card">
+          <span class="summary-n" style="color:#6EE7B7" id="sum-escucha">0</span>
+          <div class="summary-l">Escuchas</div>
+        </div>
+        <div class="summary-card">
+          <span class="summary-n" style="color:#FF6B35" id="sum-citas">0</span>
+          <div class="summary-l">Citas</div>
+        </div>
+        <div class="summary-card">
+          <span class="summary-n" style="color:#F4D03F" id="sum-pct">0%</span>
+          <div class="summary-l">Tasa éxito</div>
+        </div>
+      </div>
+      <div class="summary-rows" id="summary-rows">
+        <div style="font-size:12px;color:#475569;font-style:italic;padding:.5rem 0">Anota resultados en las aperturas y aquí verás el patrón ganador.</div>
+      </div>
+    </div>
+
+    <!-- Cards container -->
+    <div id="cards-container"></div>
+
+  </div>
+</div>
+
+<script>
+const aperturas = [
+  {
+    id:'a1', num:1, nombre:'La del reencuentro',
+    why:'Activa la relación previa. No vende nada todavía, solo reconecta.',
+    nivel:1, nivelLabel:'Suave · Para conocidos',
+    colorBg:'#EAF3DE', colorText:'#27500A', colorBorder:'#C0DD97',
+    script:'"Hola [nombre], soy [tu nombre], nos conocemos de cuando estaba en Santalucía. Oye, estoy ahora en Nationale-Nederlanden y tenemos algo de salud con Sanitas que me ha parecido que te podía encajar. ¿Tienes 2 minutos?"',
+    pregunta:'"¿Tienes médico privado ahora mismo?"',
+    preguntaBg:'#E6F1FB', preguntaBorder:'#B5D4F4', preguntaColor:'#185FA5',
+  },
+  {
+    id:'a2', num:2, nombre:'La de la salud sin seguros',
+    why:'Nunca dice seguro ni póliza. Solo habla de salud, Sanitas y descuento.',
+    nivel:1, nivelLabel:'Suave · Para conocidos',
+    colorBg:'#EAF3DE', colorText:'#27500A', colorBorder:'#C0DD97',
+    script:'"Hola [nombre], soy [tu nombre]. Oye, te llamo porque estamos con una campaña de medicina privada Sanitas con un 12,5% de descuento directo. Sin listas de espera. ¿Son 2 minutos, te cuento?"',
+    pregunta:'"¿Tu médico ahora es de la Seguridad Social o tienes privado?"',
+    preguntaBg:'#E6F1FB', preguntaBorder:'#B5D4F4', preguntaColor:'#185FA5',
+  },
+  {
+    id:'a3', num:3, nombre:'La de los números concretos',
+    why:'El 12,5% para al cerebro. Un número concreto detiene el rechazo automático.',
+    nivel:2, nivelLabel:'Directa · Con gancho concreto',
+    colorBg:'#E6F1FB', colorText:'#0C447C', colorBorder:'#B5D4F4',
+    script:'"Hola [nombre], soy [tu nombre] de Nationale-Nederlanden en Xàtiva. Mira, te llamo rápido: tenemos una campaña activa de salud privada Sanitas con descuento del 12,5% y además el primer año te dan protección de vida gratis. ¿Tienes literalmente 3 minutos?"',
+    pregunta:'"¿Cuántas veces al año vas al médico aproximadamente?"',
+    preguntaBg:'#E6F1FB', preguntaBorder:'#B5D4F4', preguntaColor:'#185FA5',
+  },
+  {
+    id:'a4', num:4, nombre:'La de la lista de espera',
+    why:'Todo el mundo ha esperado meses para ver un especialista. Toca un dolor real.',
+    nivel:2, nivelLabel:'Directa · Con gancho concreto',
+    colorBg:'#E6F1FB', colorText:'#0C447C', colorBorder:'#B5D4F4',
+    script:'"Hola [nombre], soy [tu nombre]. Oye, una pregunta rápida: ¿cuánto tiempo esperas normalmente para ver un especialista? Te lo pregunto porque tenemos acceso a Sanitas sin listas de espera, con un descuento importante ahora mismo. ¿Tienes 2 minutos?"',
+    pregunta:'Deja que responda. Su respuesta te da el argumento exacto que necesitas.',
+    preguntaBg:'#EAF3DE', preguntaBorder:'#C0DD97', preguntaColor:'#27500A',
+  },
+  {
+    id:'a5', num:5, nombre:'La del reto de 60 segundos',
+    why:'Pone el control en sus manos. ¿Quién rechaza 60 segundos? Bajo rechazo inicial.',
+    nivel:3, nivelLabel:'Atrevida · Rompe el patrón',
+    colorBg:'#FAEEDA', colorText:'#633806', colorBorder:'#FAC775',
+    script:'"Hola [nombre], soy [tu nombre]. Mira, te voy a pedir exactamente 60 segundos. Si en ese tiempo no te digo algo que te interese, cuelgas y no te molesto más. ¿Trato?"',
+    pregunta:'"Sanitas. Medicina privada. Sin esperas. Descuento 12,5% solo esta semana. Vida gratis el primer año. ¿Tienes médico privado ahora?"',
+    preguntaBg:'#FAEEDA', preguntaBorder:'#FAC775', preguntaColor:'#854F0B',
+  },
+  {
+    id:'a6', num:6, nombre:'La brutal honesta',
+    why:'Desactiva el escudo antes de que se active. La honestidad inesperada paraliza el no.',
+    nivel:3, nivelLabel:'Atrevida · Rompe el patrón',
+    colorBg:'#FAEEDA', colorText:'#633806', colorBorder:'#FAC775',
+    script:'"Hola [nombre], soy [tu nombre] y te llamo para venderte algo. Pero antes de que cuelgues, dame 30 segundos porque creo que de verdad te conviene. Si no, cuelgas y tan amigos."',
+    pregunta:'"¿Tienes médico privado o vas a la Seguridad Social?"',
+    preguntaBg:'#E6F1FB', preguntaBorder:'#B5D4F4', preguntaColor:'#185FA5',
+  },
+  {
+    id:'a7', num:7, nombre:'La de la urgencia real',
+    why:'El miedo a perder mueve más que ganar. Solo para cuando ya tienes soltura.',
+    nivel:3, nivelLabel:'Atrevida · Rompe el patrón',
+    colorBg:'#FAEEDA', colorText:'#633806', colorBorder:'#FAC775',
+    script:'"Hola [nombre], soy [tu nombre]. Oye, te llamo porque esta campaña de Sanitas acaba pronto y no quería que te quedaras sin el descuento del 12,5% por no haberme avisado a tiempo. ¿Son 2 minutos, te cuento antes de que se acabe?"',
+    pregunta:'"¿Tú y tu familia tenéis médico privado o vais al de cabecera?"',
+    preguntaBg:'#E6F1FB', preguntaBorder:'#B5D4F4', preguntaColor:'#185FA5',
+  },
+  {
+    id:'a8', num:8, nombre:'La del seguimiento',
+    why:'Segundo intento con contexto. Muy diferente a llamar en frío otra vez.',
+    nivel:4, nivelLabel:'Para los que no cogieron',
+    colorBg:'#FCEBEB', colorText:'#791F1F', colorBorder:'#F7C1C1',
+    script:'"Hola [nombre], soy [tu nombre], te mandé un mensaje ayer. Te llamo porque quería comentarte algo sobre salud privada Sanitas con una oferta que acaba pronto. ¿Tienes un momento ahora?"',
+    pregunta:'Referencia el mensaje previo. Que sepa que no es la primera vez. Da más legitimidad.',
+    preguntaBg:'#EAF3DE', preguntaBorder:'#C0DD97', preguntaColor:'#27500A',
+  },
+];
+
+const nivelColors = {
+  1: {bg:'#EAF3DE', text:'#27500A'},
+  2: {bg:'#DBEAFE', text:'#1E40AF'},
+  3: {bg:'#FEF3C7', text:'#92400E'},
+  4: {bg:'#FCE7F3', text:'#9D174D'},
+};
+
+const results = {};
+const winners = new Set();
+const openCards = new Set();
+
+function buildNav(){
+  const nav = document.getElementById('nav-menu');
+  let lastNivel = 0;
+  aperturas.forEach(a => {
+    if(a.nivel !== lastNivel){
+      lastNivel = a.nivel;
+      const nc = nivelColors[a.nivel];
+      const lbl = document.createElement('div');
+      lbl.style.cssText = `font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#475569;padding:.5rem .875rem .25rem;`;
+      lbl.textContent = 'Nivel '+a.nivel;
+      nav.appendChild(lbl);
+    }
+    const btn = document.createElement('button');
+    btn.className = 'nav-item';
+    btn.id = 'nav-'+a.id;
+    const nc = nivelColors[a.nivel];
+    btn.innerHTML = `
+      <div class="nav-dot" style="background:${a.colorText}"></div>
+      <div class="nav-name">${a.num}. ${a.nombre}</div>
+      <span class="nav-badge" style="background:${nc.bg};color:${nc.text}">${a.num}</span>
+    `;
+    btn.onclick = () => scrollToCard(a.id);
+    nav.appendChild(btn);
+  });
+}
+
+function buildCards(){
+  const container = document.getElementById('cards-container');
+  let lastNivel = 0;
+
+  aperturas.forEach(a => {
+    if(a.nivel !== lastNivel){
+      lastNivel = a.nivel;
+      const nc = nivelColors[a.nivel];
+      const lh = document.createElement('div');
+      lh.className = 'level-header';
+      lh.innerHTML = `
+        <div class="level-line"></div>
+        <span class="level-badge" style="background:${nc.bg};color:${nc.text}">Nivel ${a.nivel} · ${a.nivelLabel}</span>
+        <div class="level-line"></div>
+      `;
+      container.appendChild(lh);
+    }
+
+    const card = document.createElement('div');
+    card.className = 'script-card';
+    card.id = 'card-'+a.id;
+
+    card.innerHTML = `
+      <div class="card-header" id="hdr-${a.id}" onclick="toggleCard('${a.id}')">
+        <div class="card-num" style="background:${a.colorBg};color:${a.colorText}">${a.num}</div>
+        <div class="card-header-info">
+          <div class="card-title">${a.nombre}</div>
+          <div class="card-why">${a.why}</div>
+        </div>
+        <div class="card-header-right">
+          <select class="result-select" id="sel-${a.id}" onchange="saveResult('${a.id}',this.value)" onclick="event.stopPropagation()">
+            <option value="">— Anotar resultado —</option>
+            <option value="no_coge">No coge</option>
+            <option value="cuelga">Cuelga al oir seguros</option>
+            <option value="no_interes">No le interesa</option>
+            <option value="escucha">Me escucha ✓</option>
+            <option value="cita">Cita conseguida ★</option>
+          </select>
+          <button class="best-btn" id="btn-${a.id}" onclick="event.stopPropagation();toggleWinner('${a.id}')">Mejor apertura</button>
+          <div class="chevron" id="chv-${a.id}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="card-body" id="body-${a.id}">
+        <div>
+          <span class="script-label" style="color:${a.colorText}">Script de apertura</span>
+          <div class="script-text" style="background:${a.colorBg}20;border-color:${a.colorBorder};color:${a.colorText === '#27500A' ? '#1A2E1A' : a.colorText === '#0C447C' ? '#0A1A2E' : '#2E1A00'}">${a.script}</div>
+        </div>
+        <div>
+          <span class="script-label" style="color:${a.preguntaColor}">Si dice sí → pregunta inmediatamente</span>
+          <div class="pregunta-box" style="background:${a.preguntaBg};border-color:${a.preguntaBorder};color:${a.colorText === '#27500A' ? '#1A2E1A' : '#1A1A1A'}">
+            <span class="pregunta-label" style="color:${a.preguntaColor}">Pregunta de calificación</span>
+            ${a.pregunta}
+          </div>
+        </div>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function toggleCard(id){
+  const body = document.getElementById('body-'+id);
+  const hdr = document.getElementById('hdr-'+id);
+  const chv = document.getElementById('chv-'+id);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open');
+  hdr.classList.toggle('open');
+  chv.classList.toggle('open');
+  document.getElementById('card-'+id).classList.toggle('active-card', !isOpen);
+  document.getElementById('nav-'+id).classList.toggle('active', !isOpen);
+}
+
+function scrollToCard(id){
+  const card = document.getElementById('card-'+id);
+  const main = document.getElementById('main-content').parentElement;
+  if(card) card.scrollIntoView({behavior:'smooth', block:'start'});
+  if(!document.getElementById('body-'+id).classList.contains('open')){
+    toggleCard(id);
+  }
+}
+
+const valLabels = {no_coge:'No coge',cuelga:'Cuelga',no_interes:'No interesa',escucha:'Me escucha ✓',cita:'Cita ★'};
+const valColors = {no_coge:'#EF4444',cuelga:'#F97316',no_interes:'#94A3B8',escucha:'#10B981',cita:'#FF6B35'};
+
+function saveResult(id, val){
+  if(!val) return;
+  if(!results[id]) results[id]={no_coge:0,cuelga:0,no_interes:0,escucha:0,cita:0};
+  results[id][val]=(results[id][val]||0)+1;
+  updateStats();
+  updateSummary();
+}
+
+function updateStats(){
+  let total=0, ok=0, citas=0;
+  Object.values(results).forEach(r=>{
+    Object.entries(r).forEach(([k,v])=>{
+      total+=v;
+      if(k==='escucha'||k==='cita') ok+=v;
+      if(k==='cita') citas+=v;
+    });
+  });
+  document.getElementById('s-total').textContent=total;
+  document.getElementById('sum-total').textContent=total;
+  document.getElementById('s-ok').textContent=ok;
+  document.getElementById('sum-escucha').textContent=ok;
+  document.getElementById('s-citas').textContent=citas;
+  document.getElementById('sum-citas').textContent=citas;
+  const pct=total?Math.round(ok/total*100):0;
+  document.getElementById('sum-pct').textContent=pct+'%';
+  document.getElementById('prog-bar').style.width=pct+'%';
+  document.getElementById('prog-label').innerHTML=`Tasa escucha: <strong>${pct}%</strong>`;
+}
+
+function updateSummary(){
+  const rows = document.getElementById('summary-rows');
+  const keys = Object.keys(results);
+  if(!keys.length) return;
+  const a_map = {};
+  aperturas.forEach(a => a_map[a.id]=a.nombre);
+  let html='';
+  keys.sort((a,b)=>{
+    const okA=(results[a].escucha||0)+(results[a].cita||0);
+    const okB=(results[b].escucha||0)+(results[b].cita||0);
+    const totA=Object.values(results[a]).reduce((s,v)=>s+v,0);
+    const totB=Object.values(results[b]).reduce((s,v)=>s+v,0);
+    return (totA?okA/totA:0)<(totB?okB/totB:0)?1:-1;
+  }).forEach(k=>{
+    const r=results[k];
+    const tot=Object.values(r).reduce((s,v)=>s+v,0);
+    const ok=(r.escucha||0)+(r.cita||0);
+    const pct=tot?Math.round(ok/tot*100):0;
+    const color=ok>0?(r.cita>0?'#FF6B35':'#6EE7B7'):'#EF4444';
+    const isW=winners.has(k);
+    html+=`<div class="summary-row">
+      <span class="summary-name">${a_map[k]||k}${isW?' ★':''}</span>
+      <span class="summary-val" style="color:${color}">${ok}/${tot} — ${pct}%</span>
+    </div>`;
+  });
+  rows.innerHTML=html;
+}
+
+function toggleWinner(id){
+  const btn=document.getElementById('btn-'+id);
+  if(winners.has(id)){winners.delete(id);btn.classList.remove('winner');btn.textContent='Mejor apertura';}
+  else{winners.add(id);btn.classList.add('winner');btn.textContent='★ Marcada como mejor';}
+  updateSummary();
+}
+
+buildNav();
+buildCards();
+</script>
+</body>
+</html>

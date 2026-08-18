@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portal público de Estudio Financiero: información clara y acceso a propuestas personalizadas.">
+  <title>Estudio Financiero | Portal público</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #5f6878;
+      --orange: #e85c0f;
+      --orange-dark: #b94000;
+      --cream: #fff8f2;
+      --line: #eadfd6;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 85% 5%, rgba(232, 92, 15, .15), transparent 28rem),
+        linear-gradient(145deg, var(--white), var(--cream));
+    }
+    a { color: inherit; }
+    .shell { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 28px 0;
+    }
+    .brand { font-weight: 800; letter-spacing: -.03em; }
+    .brand span { color: var(--orange); }
+    .privacy {
+      color: var(--muted);
+      font-size: .9rem;
+      text-decoration: none;
+    }
+    main { padding: 72px 0 84px; }
+    .hero { max-width: 780px; }
+    .eyebrow {
+      display: inline-flex;
+      padding: 7px 12px;
+      border: 1px solid rgba(232, 92, 15, .25);
+      border-radius: 999px;
+      color: var(--orange-dark);
+      background: rgba(255, 255, 255, .78);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 24px 0 20px;
+      max-width: 760px;
+      font-size: clamp(2.7rem, 7vw, 5.4rem);
+      line-height: .98;
+      letter-spacing: -.065em;
+    }
+    .lead {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      line-height: 1.65;
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 20px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--white);
+      font-weight: 750;
+      text-decoration: none;
+      box-shadow: 0 12px 28px rgba(23, 32, 51, .08);
+    }
+    .button.primary {
+      color: var(--white);
+      border-color: var(--orange);
+      background: var(--orange);
+    }
+    .button:focus-visible { outline: 3px solid rgba(232, 92, 15, .35); outline-offset: 3px; }
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 76px;
+    }
+    .card {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .78);
+      box-shadow: 0 16px 42px rgba(23, 32, 51, .06);
+    }
+    .card strong { display: block; margin-bottom: 8px; font-size: 1.05rem; }
+    .card p { margin: 0; color: var(--muted); line-height: 1.55; }
+    footer {
+      padding: 24px 0 34px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .88rem;
+      line-height: 1.6;
+    }
+    @media (max-width: 760px) {
+      header { align-items: flex-start; }
+      main { padding-top: 44px; }
+      .principles { grid-template-columns: 1fr; margin-top: 52px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="brand">Estudio <span>Financiero</span></div>
+      <a class="privacy" href="SECURITY.md">Seguridad y privacidad</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <span class="eyebrow">Portal público</span>
+        <h1>Decisiones financieras con contexto, no con presión.</h1>
+        <p class="lead">
+          Accede al estudio inicial y a información comercial preparada para ayudarte a entender
+          alternativas de protección, ahorro y planificación financiera.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="https://estudio-financiero.netlify.app/">Empezar el estudio</a>
+          <a class="button" href="propuestas-nn-v2.html">Consultar propuestas</a>
+        </div>
+      </section>
+
+      <section class="principles" aria-label="Principios del servicio">
+        <article class="card">
+          <strong>Claridad</strong>
+          <p>Información comprensible para comparar necesidades, coberturas y próximos pasos.</p>
+        </article>
+        <article class="card">
+          <strong>Privacidad</strong>
+          <p>Este portal público no contiene contactos, copias del CRM ni credenciales de sistemas internos.</p>
+        </article>
+        <article class="card">
+          <strong>Acompañamiento</strong>
+          <p>Las recomendaciones finales se revisan de forma personal antes de cualquier contratación.</p>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      Los contenidos son informativos. La documentación contractual y las condiciones vigentes
+      prevalecen sobre cualquier resumen publicado en este portal.
+    </footer>
+  </div>
+</body>
+</html>

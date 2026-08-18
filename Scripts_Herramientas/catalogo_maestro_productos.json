@@ -1,0 +1,1764 @@
+{
+  "sialp": {
+    "id": "sialp",
+    "nombre_oficial": "Plan SIALP",
+    "descripcion_breve": "Seguro Individual de Ahorro a Largo Plazo. Exención fiscal total de rendimientos desde el año 5. Máx. 5.000 €/año.",
+    "precio_base": "166 €/mes",
+    "detalles_adicionales": "Aportación mínima flexible · Máximo 5.000 €/año · Costes totales ~2,5%/año",
+    "estadisticas_clave": [
+      {
+        "valor": "5.000 €",
+        "etiqueta": "Aportación máx./año"
+      },
+      {
+        "valor": "85%",
+        "etiqueta": "Garantía dinámica"
+      },
+      {
+        "valor": "Año 5+",
+        "etiqueta": "Exención fiscal"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "Exención fiscal total de rendimientos",
+        "concepto": "Desde año 5",
+        "valor_limite": "0% IRPF",
+        "es_clave": true,
+        "tipo": "fiscal"
+      },
+      {
+        "cobertura": "Garantía dinámica 85% high-water mark",
+        "concepto": "Protección continua",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "garantía"
+      },
+      {
+        "cobertura": "Cobertura por fallecimiento",
+        "concepto": "Valor inversión + 1.000 €",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Riesgo SRI",
+        "concepto": "Nivel 3 / 7 (bajo-medio)",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Rescate total sin penalización",
+        "concepto": "Desde año 5",
+        "valor_limite": "0%",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Penalización rescate anticipado",
+        "concepto": "Años 2-4",
+        "valor_limite": "1–2%",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": [
+      {
+        "pregunta": "¿Puedo sacar el dinero antes del año 5?",
+        "respuesta": "Sí, puedes rescatar en cualquier momento. Antes del año 5 los rendimientos tributan como capital mobiliario (19–26% IRPF), con penalización de 1–2% en años 2–4. A partir del año 5: exención fiscal total del 100% de los rendimientos, sin penalización."
+      },
+      {
+        "pregunta": "¿En qué se diferencia de un depósito bancario?",
+        "respuesta": "Un depósito tributa siempre sus intereses (19–26% IRPF) sin importar cuánto tiempo lo mantengas. El SIALP desde el año 5 tiene exención fiscal total: te quedas el 100% de los rendimientos. Aportando 5.000 €/año durante 25 años con rentabilidad media del 5,12%, el ahorro fiscal estimado es de 27.467 €."
+      },
+      {
+        "pregunta": "¿Qué garantía real tengo si el mercado cae?",
+        "respuesta": "La garantía dinámica del 85% del máximo histórico (high-water mark) funciona cada día: una vez que tu inversión alcanza un valor alto, el 85% de ese valor queda blindado para siempre. En el peor escenario posible, siempre recuperas mínimo el 85% de todo lo aportado."
+      },
+      {
+        "pregunta": "¿Solo puedo aportar 5.000 €/año?",
+        "respuesta": "Sí, 5.000 €/año es el límite legal del SIALP. Si quieres ahorrar más, lo complementamos con otros productos sin ese límite (Plan Flexible, Contigo Futuro). El SIALP maximiza la eficiencia fiscal dentro de esos 5.000 €."
+      },
+      {
+        "pregunta": "¿Qué pasa si paro las aportaciones?",
+        "respuesta": "El producto sigue activo y la garantía se mantiene. Pero las aportaciones periódicas son clave: permiten recuperarse más rápido ante caídas del mercado y maximizan la exposición a renta variable cuando sube. Parar las aportaciones reduce el potencial del producto, especialmente si hay bajadas."
+      },
+      {
+        "pregunta": "¿Tiene sentido mantenerlo más allá del año 5?",
+        "respuesta": "Absolutamente. Mantenerlo más allá del año 5 supone aproximadamente +19% de rentabilidad adicional respecto a un producto equivalente que tribute por sus ganancias. Cuanto más tiempo permanezca, más beneficio fiscal acumulas sin pagar nada a Hacienda. El momento de mayor rentabilidad empieza en el año 5, no termina."
+      }
+    ]
+  },
+  "flexible": {
+    "id": "flexible",
+    "nombre_oficial": "Plan Flexible (Unit Linked)",
+    "descripcion_breve": "Inversión internacional dinámica. 3 perfiles: Prudente, Equilibrado y Dinámico. Sin vencimiento fijo. Rescates parciales desde año 2.",
+    "precio_base": "Consultar",
+    "detalles_adicionales": "Prima mínima mensual a consultar · Sin vencimiento fijo · 3 perfiles de inversión",
+    "estadisticas_clave": [],
+    "coberturas_clave": [
+      {
+        "cobertura": "Perfil Prudente — predominio renta fija",
+        "concepto": "Bajo riesgo",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "perfil"
+      },
+      {
+        "cobertura": "Perfil Equilibrado — mixto RF/RV",
+        "concepto": "Riesgo moderado",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "perfil"
+      },
+      {
+        "cobertura": "Perfil Dinámico — predominio RV global",
+        "concepto": "Alto potencial",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "perfil"
+      },
+      {
+        "cobertura": "Cobertura por fallecimiento",
+        "concepto": "Valor inversión + capital",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Rescate parcial",
+        "concepto": "Desde año 2",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Cambio de perfil",
+        "concepto": "Sin coste",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": []
+  },
+  "garantizado": {
+    "id": "garantizado",
+    "nombre_oficial": "Plan Garantizado de Inversión",
+    "descripcion_breve": "Crecimiento internacional con blindaje total: recupera el 90%, 100% o hasta el 110% de tu inversión por contrato. Sin sustos, sin letra pequeña.",
+    "precio_base": "Desde 5.000 €",
+    "detalles_adicionales": "Inversión mínima 5.000 € · Sin límite máximo · Gestión NN Investment Partners",
+    "estadisticas_clave": [
+      {
+        "valor": "110%",
+        "etiqueta": "Garantía máxima"
+      },
+      {
+        "valor": "5.000 €",
+        "etiqueta": "Inversión mínima"
+      },
+      {
+        "valor": "100%",
+        "etiqueta": "Participación alza"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "Garantía 90% del capital — plazo 5 años",
+        "concepto": "Prima única",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "garantía"
+      },
+      {
+        "cobertura": "Garantía 100% del capital — plazo 10 años",
+        "concepto": "Prima única",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "garantía"
+      },
+      {
+        "cobertura": "Garantía 110% del capital — plazo 20 años",
+        "concepto": "Prima única",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "garantía"
+      },
+      {
+        "cobertura": "Revalorización 100% si mercado sube",
+        "concepto": "Sin límite al alza",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Rescate parcial anual sin coste",
+        "concepto": "Hasta 5% del valor",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Cobertura fallecimiento integrada",
+        "concepto": "Inversión + 1.000 €",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": [
+      {
+        "pregunta": "¿Qué pasa si el mercado cae un 50%?",
+        "respuesta": "Nada. Tu contrato estipula que al vencimiento recibes como mínimo el 90%, 100% o 110% de lo invertido (según el plazo elegido). La caída del mercado es nuestro riesgo, no el tuyo. Duermes tranquilo pase lo que pase en la bolsa."
+      },
+      {
+        "pregunta": "¿Puedo sacar mi dinero antes del vencimiento?",
+        "respuesta": "Sí, tienes liquidez total. Además, tienes una ventaja única: puedes rescatar hasta un 5% del valor de la inversión cada año sin ninguna penalización. Si necesitas el total antes del vencimiento, se liquida a valor de mercado del día de la solicitud."
+      },
+      {
+        "pregunta": "¿En qué se diferencia de un fondo de inversión normal?",
+        "respuesta": "Un fondo normal no te garantiza el capital: si el mercado baja un 20%, tú pierdes un 20%. El Plan Garantizado es una inversión con \"airbag\": participas en las subidas pero el capital a vencimiento es una garantía contractual de Nationale-Nederlanden."
+      },
+      {
+        "pregunta": "¿Cómo tributan los beneficios de este plan?",
+        "respuesta": "Es muy eficiente. Funciona con diferimiento fiscal: no pagas impuestos cada año mientras el capital crece. Solo tributas por el beneficio real en el momento que decidas rescatar el dinero, como rendimiento de capital mobiliario."
+      },
+      {
+        "pregunta": "¿Qué solidez respalda esta garantía?",
+        "respuesta": "Tu inversión está respaldada por el Grupo NN, una multinacional con más de 175 años de historia y una de las mejores calificaciones de solvencia de Europa (AA-). Además, como seguro de ahorro, cuenta con la supervisión de la DGSFP."
+      }
+    ]
+  },
+  "flexicuenta": {
+    "id": "flexicuenta",
+    "nombre_oficial": "Flexicuenta Asegurada",
+    "descripcion_breve": "Tu fondo de emergencia con rentabilidad garantizada y disponibilidad total. Sin comisiones, sin ataduras, sin riesgo.",
+    "precio_base": "Desde 150 €",
+    "detalles_adicionales": "Mínimo 150 € · Máximo 200.000 € · Liquidez en 24-48 horas · Sin comisiones",
+    "estadisticas_clave": [
+      {
+        "valor": "100%",
+        "etiqueta": "Disponibilidad"
+      },
+      {
+        "valor": "0 €",
+        "etiqueta": "Comisiones"
+      },
+      {
+        "valor": "Desde 150 €",
+        "etiqueta": "Aportación"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "Rentabilidad garantizada desde día 1",
+        "concepto": "Sin plazo mínimo",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "clave"
+      },
+      {
+        "cobertura": "Disponibilidad total e inmediata",
+        "concepto": "Sin penalizaciones",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "libre"
+      },
+      {
+        "cobertura": "Cero comisiones de gestión o apertura",
+        "concepto": "Coste 0 € para ti",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "ahorro"
+      },
+      {
+        "cobertura": "Riesgo nivel 1/7 (el más bajo)",
+        "concepto": "Seguridad máxima",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Aportaciones sucesivas flexibles",
+        "concepto": "Desde 150 €",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Cobertura fallecimiento integrada",
+        "concepto": "+100–600 € gratis",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": [
+      {
+        "pregunta": "¿Realmente puedo sacar el dinero cuando quiera?",
+        "respuesta": "Sí. No hay plazos de permanencia ni penalizaciones de ningún tipo. Si necesitas tu dinero hoy, lo solicitas desde tu área de cliente y lo tienes en tu cuenta bancaria habitual en un plazo de 24 a 48 horas laborables."
+      },
+      {
+        "pregunta": "¿Qué intereses me garantiza este producto?",
+        "respuesta": "El interés técnico está garantizado por contrato y se comunica de forma transparente. A diferencia de un depósito bancario, aquí el interés se aplica desde el primer euro sobre el saldo diario, lo que significa que tu dinero trabaja para ti cada minuto."
+      },
+      {
+        "pregunta": "¿Tiene algún coste o comisión oculta?",
+        "respuesta": "Ninguno. Ni comisión de apertura, ni de gestión, ni de mantenimiento. Nationale-Nederlanden no te cobra por ahorrar; al contrario, premiamos tu constancia con rentabilidad garantizada."
+      },
+      {
+        "pregunta": "¿Es seguro mi dinero en la Flexicuenta?",
+        "respuesta": "Es el producto con el nivel de riesgo más bajo del mercado (1 sobre 7). Está respaldado por la solvencia del Grupo NN y cuenta con la garantía adicional del Consorcio de Compensación de Seguros."
+      },
+      {
+        "pregunta": "¿Cómo tributan los beneficios generados?",
+        "respuesta": "Tributan como rendimiento de capital mobiliario en el IRPF (como cualquier cuenta corriente o depósito). Lo bueno es que nosotros realizamos la retención legal correspondiente para que tu declaración de la renta sea sencilla."
+      }
+    ]
+  },
+  "ahorrogarantizado": {
+    "id": "ahorrogarantizado",
+    "nombre_oficial": "Plan de Ahorro Garantizado",
+    "descripcion_breve": "Prima única desde 1.000 €. Rentabilidad mínima garantizada por contrato a 5 años. Garantía 100% del capital al vencimiento.",
+    "precio_base": "Desde 1.000 €",
+    "detalles_adicionales": "Prima única · Mínimo 1.000 € · Máximo 300.000 € · Costes ~1%/año",
+    "estadisticas_clave": [
+      {
+        "valor": "100%",
+        "etiqueta": "Capital garantizado"
+      },
+      {
+        "valor": "5 años",
+        "etiqueta": "Plazo fijo"
+      },
+      {
+        "valor": "1.000 €",
+        "etiqueta": "Prima única mínima"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "100% capital garantizado al vencimiento",
+        "concepto": "Contrato vinculante",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "garantía"
+      },
+      {
+        "cobertura": "Rentabilidad mínima fija garantizada",
+        "concepto": "Conocida desde inicio",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "clave"
+      },
+      {
+        "cobertura": "Cobertura fallecimiento",
+        "concepto": "Prima + interés acumulado",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Rescate total permitido",
+        "concepto": "Tras primer año",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Renta fija europea BBB- o superior",
+        "concepto": "Activos seguros",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Edad máxima contratación",
+        "concepto": "80 años",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": [
+      {
+        "pregunta": "¿Puedo necesitar ese dinero antes de 5 años?",
+        "respuesta": "El primer año hay iliquidez total. Del año 2 al 5 puedes rescatar el 100% (no hay rescates parciales) pero SOLO en las ventanas de febrero, junio y octubre. Si rescatas antes del vencimiento, recibes el valor de mercado: si los tipos de interés han subido desde que contrataste, puedes recuperar menos de lo invertido. La garantía del 100% solo aplica si llegas al vencimiento."
+      },
+      {
+        "pregunta": "¿Qué diferencia hay con un depósito bancario?",
+        "respuesta": "Tres diferencias clave: 1) Diferimiento fiscal: en un depósito pagas impuestos cada año por los intereses; aquí solo tributas al rescate o vencimiento. 2) Seguro de vida incluido: fallecimiento cubre prima + interés acumulado, sin coste extra. 3) Ventaja sucesoria: en caso de fallecimiento, los herederos reciben el capital directamente sin que pase por herencia, con tributación más favorable."
+      },
+      {
+        "pregunta": "¿Y si Nationale-Nederlanden tiene problemas?",
+        "respuesta": "Doble capa de protección: 1) Solvencia del Grupo NN: ratio de capital muy por encima de mínimos regulatorios. 2) Consorcio de Compensación de Seguros: organismo público que garantiza las prestaciones en caso de insolvencia de la aseguradora. No es como un banco: las pólizas de seguro tienen protección específica adicional."
+      },
+      {
+        "pregunta": "¿Qué pasa si la inflación supera la rentabilidad garantizada?",
+        "respuesta": "Esa es la principal limitación de este producto. Si la inflación es del 4% y la rentabilidad garantizada del 2%, pierdes poder adquisitivo real. Este producto es un cimiento conservador para capital que NO puedes arriesgar, no una herramienta de crecimiento. Para batir inflación, necesitas asumir riesgo (renta variable, fondos mixtos)."
+      },
+      {
+        "pregunta": "¿Puedo hacer aportaciones adicionales?",
+        "respuesta": "No. Es prima única: un solo pago al inicio. Si quieres aportar más capital, debes contratar otro Plan de Ahorro Garantizado independiente. Estrategia: algunos clientes hacen bloques de 5 años escalonados para tener vencimientos periódicos y mantener liquidez."
+      },
+      {
+        "pregunta": "¿Cómo puedo mejorar la rentabilidad garantizada?",
+        "respuesta": "Bonificación por vinculación: si tienes contratado Contigo Senior o Contigo Familia, el interés técnico garantizado puede mejorar. Consulta con tu delegado las condiciones de vinculación vigentes en el momento de contratación."
+      },
+      {
+        "pregunta": "¿Cuáles son los costes reales?",
+        "respuesta": "Coste de emisión: 0,60% único al contratar. Coste anual: 0,40% sobre el capital cada año. Total aproximado: ~1% anual integrado en la rentabilidad que ves. La rentabilidad garantizada que te muestran YA es neta de estos costes."
+      }
+    ]
+  },
+  "futuro": {
+    "id": "futuro",
+    "nombre_oficial": "Contigo Futuro",
+    "descripcion_breve": "Unit Linked con garantía diaria y creciente del 80% del mayor valor alcanzado. ESG sostenible. Prima anual desde 1.000 €. IPA: exención de prima hasta los 67 años.",
+    "precio_base": "Desde 1.000 €/año",
+    "detalles_adicionales": "Aportación mínima anual 1.000 € · Máximo 20.000 €/año · Horizonte recomendado 10 años",
+    "estadisticas_clave": [
+      {
+        "valor": "80%",
+        "etiqueta": "Garantía diaria creciente"
+      },
+      {
+        "valor": "ESG",
+        "etiqueta": "Inversión sostenible"
+      },
+      {
+        "valor": "IPA",
+        "etiqueta": "Prima exenta hasta 67 años"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "Garantía diaria 80% del máximo histórico",
+        "concepto": "Beneficios consolidados",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "único"
+      },
+      {
+        "cobertura": "Fallecimiento",
+        "concepto": "Saldo participaciones + 3.000 €",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "clave"
+      },
+      {
+        "cobertura": "IPA — exención de prima",
+        "concepto": "Hasta los 67 años",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Inversión ESG (Art. 8 sostenible)",
+        "concepto": "Fondos Amundi",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Riesgo SRI",
+        "concepto": "Nivel 3 / 7 (bajo-medio)",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Rescate sin penalización",
+        "concepto": "Desde año 5",
+        "valor_limite": "0%",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": [
+      {
+        "pregunta": "¿Qué pasa si el mercado cae justo después de contratar?",
+        "respuesta": "La garantía diaria del 80% del máximo histórico te protege desde el primer día. Si el mercado sube a 10.000 € y luego cae, el 80% (8.000 €) queda blindado para siempre. Nunca puedes perder más del 20% del máximo alcanzado, sin importar lo que haga el mercado."
+      },
+      {
+        "pregunta": "¿Cuándo puedo recuperar el dinero?",
+        "respuesta": "En cualquier momento. No hay penalización por rescate anticipado, aunque el horizonte recomendado es 10 años para maximizar el potencial de crecimiento. La liquidez total está disponible siempre."
+      },
+      {
+        "pregunta": "¿En qué invierten los fondos?",
+        "respuesta": "Fondos Amundi bajo criterios ESG (Art. 8 SFDR): empresas con buenas prácticas ambientales, sociales y de gobernanza. Son fondos regulados y supervisados, con riesgo SRI nivel 3/7 (bajo-medio), diversificados globalmente."
+      },
+      {
+        "pregunta": "¿Qué ventaja real tiene sobre un fondo de inversión normal?",
+        "respuesta": "Un fondo estándar no garantiza nada: si baja un 40%, pierdes un 40%. Contigo Futuro garantiza el 80% del máximo alcanzado cada día, más cobertura de vida (+3.000 €) y exención de prima por IPA. Tienes crecimiento con red de seguridad real."
+      },
+      {
+        "pregunta": "¿Qué cobertura de fallecimiento tiene?",
+        "respuesta": "En caso de fallecimiento, los beneficiarios reciben el 100% del saldo de participaciones más 3.000 € adicionales. Es una cobertura de vida integrada sin coste extra."
+      },
+      {
+        "pregunta": "¿Qué ocurre si sufro una invalidez permanente absoluta (IPA)?",
+        "respuesta": "Si sufres una IPA, la prima queda exenta hasta los 67 años: el producto sigue activo y creciendo sin que tengas que seguir aportando. Es una garantía de continuidad que muy pocos productos de ahorro ofrecen."
+      }
+    ]
+  },
+  "proteccionplus": {
+    "id": "proteccionplus",
+    "nombre_oficial": "Protección PLUS",
+    "descripcion_breve": "Capital decreciente con prima constante. Obligatoria asociación a ahorro. IPA integrada con adelanto de capital.",
+    "precio_base": "Consultar",
+    "detalles_adicionales": "Prima constante definida en contratación · Vinculado a producto de ahorro base",
+    "estadisticas_clave": [
+      {
+        "valor": "IPA",
+        "etiqueta": "Indemnización directa"
+      },
+      {
+        "valor": "Constant",
+        "etiqueta": "Prima invariable"
+      },
+      {
+        "valor": "Saving",
+        "etiqueta": "Vinculado a ahorro"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "Fallecimiento por cualquier causa",
+        "concepto": "Capital decreciente anual",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "base"
+      },
+      {
+        "cobertura": "Invalidez Permanente Absoluta (IPA)",
+        "concepto": "Adelanto del 100% capital",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "clave"
+      },
+      {
+        "cobertura": "Prima constante por contrato",
+        "concepto": "Sin subidas por edad",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Obligatoria asociación a plan de ahorro",
+        "concepto": "SIALP / Flexible / Futuro",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Exclusión IPA por patología previa",
+        "concepto": "Según declaración salud",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": [
+      {
+        "pregunta": "¿Por qué decrece el capital?",
+        "respuesta": "Porque a medida que pasa el tiempo, tus necesidades de protección suelen disminuir: tus hijos crecen, tus deudas bajan y, sobre todo, tu capital acumulado en el plan de ahorro asociado aumenta. Esto permite que la prima sea mucho más económica y, lo más importante, constante (no sube con la edad)."
+      },
+      {
+        "pregunta": "¿Qué pasa si tengo un accidente y no puedo trabajar?",
+        "respuesta": "Si sufres una IPA (Invalidez Permanente Absoluta), recibes el 100% del capital asegurado en ese momento de forma directa. Esto te permite cubrir tus gastos inmediatos y asegurar que tu plan de ahorro no se detenga por falta de ingresos."
+      },
+      {
+        "pregunta": "¿Puedo contratarlo sin un plan de ahorro?",
+        "respuesta": "No, Protección PLUS es un producto complementario diseñado para blindar un plan de ahorro de Nationale-Nederlanden. Si buscas un seguro de vida independiente con capital fijo, tu producto es Vida Familia."
+      },
+      {
+        "pregunta": "¿La prima sube cada año como en otros seguros?",
+        "respuesta": "No. Una de las grandes ventajas de Protección PLUS es que la prima es constante por contrato. Pagas lo mismo hoy que dentro de 10 años, lo que te permite planificar tu economía sin sorpresas de renovaciones al alza por edad."
+      }
+    ]
+  },
+  "saludvida": {
+    "id": "saludvida",
+    "nombre_oficial": "Plan Salud + Vida",
+    "descripcion_breve": "La única solución híbrida: Medicina Sanitas + Seguro de Vida en un solo contrato. Vida GRATIS el primer año y 12,5% de descuento en Salud hasta el 1 de junio de 2026. Ampliación de plazo de contratación hasta el 31 de mayo.",
+    "precio_base": "Consultar",
+    "detalles_adicionales": "Prima variable según edad y zona · Vida gratis 12 meses · Descuento del 12,5% en Salud hasta el 1 de junio de 2026. Plazo de emisión ampliado hasta el 31 de mayo.",
+    "estadisticas_clave": [
+      {
+        "valor": "12,5%",
+        "etiqueta": "Descuento en Salud hasta junio 2026"
+      },
+      {
+        "valor": "0 €",
+        "etiqueta": "Vida (1er año)"
+      },
+      {
+        "valor": "+40.000",
+        "etiqueta": "Médicos Sanitas"
+      },
+      {
+        "valor": "31/05/2026",
+        "etiqueta": "Fecha límite emisión"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "Seguro de vida — 1er año GRATIS",
+        "concepto": "Capital a elegir",
+        "valor_limite": "0 € primer año",
+        "es_clave": true,
+        "tipo": "gratis"
+      }
+    ],
+    "faqs_objeciones": [
+      {
+        "pregunta": "¿Qué incluye exactamente la parte de Salud?",
+        "respuesta": "Incluye medicina primaria, especialistas, pruebas diagnósticas, hospitalización, urgencias 24h y cobertura dental. Todo con la red de Sanitas, la mejor valorada de España, sin listas de espera y con acceso directo a más de 40.000 profesionales."
+      },
+      {
+        "pregunta": "¿Cómo funciona eso de que el Seguro de Vida es gratis?",
+        "respuesta": "Al contratar el Plan Salud + Vida, Nationale-Nederlanden te bonifica el 100% de la prima del seguro de vida durante los primeros 12 meses. Tienes protección total por fallecimiento o invalidez desde el minuto uno sin pagar de más por ello."
+      },
+      {
+        "pregunta": "¿Qué pasa con el descuento del 12,5%?",
+        "respuesta": "Es una promoción exclusiva. Si contratas con fecha efecto hasta el 1 de junio de 2026, mantendrás un descuento del 12,5% en tu prima de salud. Es un ahorro masivo acumulado año tras año."
+      },
+      {
+        "pregunta": "¿Tengo que pasar reconocimiento médico?",
+        "respuesta": "Sanitas requiere una declaración de salud sencilla. En la mayoría de los casos no es necesario examen médico presencial. El proceso de contratación es 100% digital y muy ágil para que la protección sea inmediata."
+      },
+      {
+        "pregunta": "¿Puedo incluir a toda mi familia en el mismo plan?",
+        "respuesta": "Sí, y es lo ideal. El Plan Salud + Vida permite añadir a cónyuges e hijos, extendiendo la protección de salud de Sanitas y el seguro de vida a todos los miembros de la unidad familiar con condiciones preferenciales."
+      }
+    ]
+  },
+  "saludcompleto": {
+    "id": "saludcompleto",
+    "nombre_oficial": "Seguro de Salud Completo",
+    "descripcion_breve": "Cobertura médica total con acceso directo a la red Sanitas: +40.000 profesionales y +1.000 centros en toda España.",
+    "precio_base": "Consultar",
+    "detalles_adicionales": "Prima variable según edad y zona · Red Sanitas completa · Sin carencias en urgencias",
+    "estadisticas_clave": [],
+    "coberturas_clave": [
+      {
+        "cobertura": "Medicina familiar y de cabecera",
+        "concepto": "Acceso directo",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "incluido"
+      },
+      {
+        "cobertura": "Especialidades médicas",
+        "concepto": "Sin límite",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "incluido"
+      },
+      {
+        "cobertura": "Hospitalización completa",
+        "concepto": "Incluida",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Urgencias 24h",
+        "concepto": "Incluidas",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Pruebas diagnósticas",
+        "concepto": "Sin límite",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Cobertura dental",
+        "concepto": "Incluida",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": []
+  },
+  "saludcopago": {
+    "id": "saludcopago",
+    "nombre_oficial": "Seguro de Salud con Copago",
+    "descripcion_breve": "Mismas coberturas Sanitas con prima mensual reducida. Solo pagas copago cuando usas el servicio.",
+    "precio_base": "Consultar",
+    "detalles_adicionales": "Prima reducida · Copago solo al usar el servicio · Mismas coberturas Sanitas",
+    "estadisticas_clave": [],
+    "coberturas_clave": [
+      {
+        "cobertura": "Red médica completa Sanitas",
+        "concepto": "Acceso total",
+        "valor_limite": "Prima reducida",
+        "es_clave": true,
+        "tipo": "ahorro"
+      },
+      {
+        "cobertura": "Copago por uso",
+        "concepto": "Solo cuando se usa",
+        "valor_limite": "Pequeño importe",
+        "es_clave": true,
+        "tipo": "flexible"
+      },
+      {
+        "cobertura": "Especialidades y diagnóstico",
+        "concepto": "Incluidos",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Hospitalización y urgencias 24h",
+        "concepto": "Incluidas",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Cobertura dental",
+        "concepto": "Incluida",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": []
+  },
+  "vidafamilia": {
+    "id": "vidafamilia",
+    "nombre_oficial": "Contigo Familia",
+    "descripcion_breve": "Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
+    "precio_base": "Consultar",
+    "detalles_adicionales": "Con descuento hábitos saludables −10% · Capital total: 266.000 € · *25% descuento vitalicio (excluye ILT)*",
+    "estadisticas_clave": [
+      {
+        "valor": "25% vitalicio",
+        "etiqueta": "Descuento de prima"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "Incapacidad laboral temporal (ILT)",
+        "concepto": "EXCLUIDA en esta campaña con descuento del 25%.",
+        "valor_limite": "N/A",
+        "es_clave": false,
+        "tipo": "exclusión"
+      }
+    ],
+    "faqs_objeciones": []
+  },
+  "senior": {
+    "id": "senior",
+    "nombre_oficial": "Contigo Senior (+55)",
+    "descripcion_breve": "Ecosistema de protección integral para mayores de 55. Capital por accidente hasta 65.000 €. Asistencia Sanitas + servicios reales de autonomía. 6 meses bonificados en mayo 2026.",
+    "precio_base": "Consultar",
+    "detalles_adicionales": "Prima variable según edad · Exclusivo mayores de 55 años · 6 meses bonificados en mayo 2026",
+    "estadisticas_clave": [
+      {
+        "valor": "65.000 €",
+        "etiqueta": "Capital máx. por accidente"
+      },
+      {
+        "valor": "+55 años",
+        "etiqueta": "Edad de acceso"
+      },
+      {
+        "valor": "Sanitas",
+        "etiqueta": "Red asistencial"
+      },
+      {
+        "valor": "6 meses bonif.",
+        "etiqueta": "Mayo 2026"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "6 meses bonificados",
+        "concepto": "Mayo 2026",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "bonificación"
+      }
+    ],
+    "faqs_objeciones": []
+  },
+  "accidentes": {
+    "id": "accidentes",
+    "nombre_oficial": "Seguro de Accidentes LiderPlus",
+    "descripcion_breve": "Blindaje económico inmediato ante accidentes. Sin exámenes médicos. Hasta 90.000 € de capital directo desde solo 0,36 €/día.",
+    "precio_base": "Desde 74,77 €/año",
+    "detalles_adicionales": "Opción A: 134,59 €/año · Opción B: 74,77 €/año · Contratación inmediata sin médicos",
+    "estadisticas_clave": [
+      {
+        "valor": "90.000 €",
+        "etiqueta": "Capital Máximo"
+      },
+      {
+        "valor": "0,36 €/día",
+        "etiqueta": "Coste Opción A"
+      },
+      {
+        "valor": "100% Digital",
+        "etiqueta": "Contratación"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "Opción A — Fallecimiento por accidente",
+        "concepto": "90.000 € de capital",
+        "valor_limite": "134,59 €/año",
+        "es_clave": true,
+        "tipo": "completa"
+      },
+      {
+        "cobertura": "Opción A — Invalidez Permanente Absoluta",
+        "concepto": "90.000 € de capital",
+        "valor_limite": "Incluido",
+        "es_clave": true,
+        "tipo": "completa"
+      },
+      {
+        "cobertura": "Opción B — Fallecimiento por accidente",
+        "concepto": "50.000 € de capital",
+        "valor_limite": "74,77 €/año",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Opción B — Invalidez Permanente Absoluta",
+        "concepto": "50.000 € de capital",
+        "valor_limite": "Incluido",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Invalidez Permanente Parcial",
+        "concepto": "Según baremo",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Cobertura mundial 24h",
+        "concepto": "En cualquier lugar",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": [
+      {
+        "pregunta": "¿Es compatible con mi seguro de vida actual?",
+        "respuesta": "Totalmente. Es el complemento perfecto. Mientras el seguro de vida cubre cualquier causa, LiderPlus inyecta un capital EXTRA masivo en caso de accidente, donde los gastos suelen dispararse por adaptaciones o rehabilitación."
+      },
+      {
+        "pregunta": "¿Tengo que pasar pruebas médicas?",
+        "respuesta": "No. Esa es la gran ventaja. Es de contratación inmediata. Solo necesitas declarar que estás en buen estado de salud actual. Sin analíticas ni visitas al médico."
+      },
+      {
+        "pregunta": "¿Qué cubre exactamente la Invalidez Permanente?",
+        "respuesta": "Cubre desde la pérdida de movilidad total hasta baremos parciales (pérdida de un miembro, visión, etc.). Recibes el capital para que el dinero sea la última de tus preocupaciones mientras te recuperas."
+      },
+      {
+        "pregunta": "¿El precio sube cada año por cumplir años?",
+        "respuesta": "El precio depende de tu profesión y el capital elegido, no tiene los saltos de prima por edad tan acusados como un seguro de salud. Es una de las primas más estables del mercado."
+      },
+      {
+        "pregunta": "¿Y si el accidente ocurre fuera de España?",
+        "respuesta": "Estás cubierto las 24 horas del día, los 365 días del año, en cualquier lugar del mundo. Tu protección no tiene fronteras."
+      },
+      {
+        "pregunta": "¿Cómo se cobra la indemnización?",
+        "respuesta": "De forma directa y rápida tras la acreditación del accidente. El objetivo es que dispongas de la liquidez necesaria para afrontar gastos imprevistos de forma inmediata."
+      }
+    ]
+  },
+  "hogar": {
+    "id": "hogar",
+    "nombre_oficial": "Mihogar Seguro",
+    "descripcion_breve": "Seguro modular y flexible. 12 coberturas básicas + servicios a medida. Descuentos de hasta el 25% por acumulación de garantías.",
+    "precio_base": "Consultar",
+    "detalles_adicionales": "Pago fraccionado semestral/trimestral sin recargo · Descuentos por vinculación de servicios",
+    "estadisticas_clave": [
+      {
+        "valor": "Hasta 25%",
+        "etiqueta": "Descuento servicios"
+      },
+      {
+        "valor": "12",
+        "etiqueta": "Garantías básicas"
+      },
+      {
+        "valor": "24/7",
+        "etiqueta": "Asistencia"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "Responsabilidad Civil",
+        "concepto": "Hasta 100.000 € (ampliable 200K)",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "clave"
+      },
+      {
+        "cobertura": "Daños por agua, incendio y eléctricos",
+        "concepto": "Protección total",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "base"
+      },
+      {
+        "cobertura": "Servicio de Asistencia ",
+        "concepto": "2 veces/año, 3h mano obra",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "estrella"
+      },
+      {
+        "cobertura": "Robo y daños por vandalismo",
+        "concepto": "Dentro y fuera (opc)",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Daños estéticos vivienda",
+        "concepto": "Hasta 1.500 € (ampliable 3K)",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Defensa jurídica y orientación",
+        "concepto": "Incluida",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": [
+      {
+        "pregunta": "¿Qué incluye exactamente el servicio \"Manitas\"?",
+        "respuesta": "Incluye hasta 3 horas de mano de obra para pequeños trabajos de mantenimiento o reparación (montaje de muebles, colgado de cuadros, cambio de grifos, instalación de lámparas, etc.). Puedes usarlo 2 veces al año sin coste adicional de desplazamiento o mano de obra."
+      },
+      {
+        "pregunta": "¿Cómo funcionan los descuentos por acumulación?",
+        "respuesta": "Es muy sencillo: si añades de 2 a 4 servicios adicionales (como mascotas, asistencia en viaje o reparación de electrodomésticos), te aplicamos un 10% de descuento. Si sumas de 5 a 7, el descuento sube al 20%. Con más de 7 servicios, ahorras un 25% en la prima de los servicios."
+      },
+      {
+        "pregunta": "¿Tengo recargo por pagar de forma trimestral?",
+        "respuesta": "No. Una de las grandes ventajas de Nationale-Nederlanden es que permitimos el fraccionamiento del pago de forma trimestral o semestral sin aplicar ningún tipo de recargo financiero. Pagas lo mismo, pero con más comodidad."
+      },
+      {
+        "pregunta": "¿Están cubiertos mis electrodomésticos si se averían?",
+        "respuesta": "Sí, puedes incluir la cobertura opcional de \"Reparación de electrodomésticos de gama blanca\". Cubre hasta 3 horas de mano de obra para la reparación, asegurando que tu cocina siga funcionando sin sorpresas de facturas de técnicos."
+      },
+      {
+        "pregunta": "¿Qué pasa si tengo un percance fuera de casa?",
+        "respuesta": "Mihogar Seguro ofrece opciones para cubrir el atraco fuera de la vivienda y asistencia en viaje (gastos médicos en el extranjero hasta 9.000 €). Tu protección no se limita a las cuatro paredes de tu casa, te acompaña donde vayas."
+      }
+    ]
+  },
+  "auto": {
+    "id": "auto",
+    "nombre_oficial": "Seguro de Coche",
+    "descripcion_breve": "Alianza NN + Mutua Madrileña. Valor a nuevo los 2 primeros años. Asistencia Autoclub desde km 0. Sin variaciones de precio al contratar.",
+    "precio_base": "Consultar",
+    "detalles_adicionales": "Pago aplazado en 3 veces sin intereses · Precio cerrado desde el presupuesto",
+    "estadisticas_clave": [
+      {
+        "valor": "2 años",
+        "etiqueta": "Valor a nuevo"
+      },
+      {
+        "valor": "24h",
+        "etiqueta": "Peritación rápida"
+      },
+      {
+        "valor": "KM 0",
+        "etiqueta": "Asistencia"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "Valor a nuevo (pérdida total)",
+        "concepto": "Primeros 2 años",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "ventaja"
+      },
+      {
+        "cobertura": "Asistencia en carretera Autoclub",
+        "concepto": "Desde km 0 · 24/7",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "incluido"
+      },
+      {
+        "cobertura": "Recuperación de puntos del carnet",
+        "concepto": "Gestión y costes",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "tranquilidad"
+      },
+      {
+        "cobertura": "Reparación con recambio original",
+        "concepto": "Siempre garantizado",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Recurso de multas online",
+        "concepto": "Servicio incluido",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Libre elección de taller (según mod)",
+        "concepto": "Red Mutua o propio",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": [
+      {
+        "pregunta": "¿Es verdad que el precio no cambia al emitir la póliza?",
+        "respuesta": "Exacto. A diferencia de otras compañías, Mutua Madrileña no realiza \"consulta SINCO\" durante la contratación. Esto significa que la prima que calculamos en el presupuesto se mantiene idéntica en el momento de la firma, dándote total seguridad desde el primer minuto."
+      },
+      {
+        "pregunta": "¿Qué pasa si mi coche tiene un siniestro total?",
+        "respuesta": "Si el coche tiene menos de 2 años de antigüedad, te indemnizamos por el VALOR A NUEVO. A partir del tercer año, aplicamos valor venal mejorado. Es una de las coberturas de pérdida total más potentes del mercado."
+      },
+      {
+        "pregunta": "¿Cómo funciona la asistencia en carretera?",
+        "respuesta": "La presta Autoclub Mutua, la compañía de asistencia mejor valorada por los conductores en España. Tienes cobertura desde el kilómetro 0, tanto para el vehículo como para las personas, en toda Europa y países ribereños del Mediterráneo."
+      },
+      {
+        "pregunta": "¿Puedo pagar el seguro poco a poco?",
+        "respuesta": "Sí, Mutua permite el pago aplazado en 3 veces sin ningún tipo de recargo ni intereses. Queremos que estar protegido sea fácil y no suponga un esfuerzo financiero de golpe."
+      },
+      {
+        "pregunta": "¿Qué incluye la recuperación de puntos?",
+        "respuesta": "En caso de pérdida de puntos, el seguro cubre los gastos de matriculación al curso de sensibilización y reeducación vial, además de las tasas de examen, hasta los límites establecidos en la póliza."
+      }
+    ]
+  },
+  "moto": {
+    "id": "moto",
+    "nombre_oficial": "Seguro de Moto",
+    "descripcion_breve": "Protección específica para motoristas. Asistencia desde km 0. Cobertura de indumentaria y casco. Gestión de multas incluida.",
+    "precio_base": "Consultar",
+    "detalles_adicionales": "Tres modalidades: Básico, Plus y Todo Riesgo · Fraccionamiento de pago sin recargo",
+    "estadisticas_clave": [
+      {
+        "valor": "KM 0",
+        "etiqueta": "Asistencia inmediata"
+      },
+      {
+        "valor": "Incluida",
+        "etiqueta": "Gestión de multas"
+      },
+      {
+        "valor": "Opcional",
+        "etiqueta": "Casco y Ropa"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "Asistencia en viaje desde KM 0",
+        "concepto": "Para ti y tu moto",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "clave"
+      },
+      {
+        "cobertura": "Accidentes individuales conductor",
+        "concepto": "Capital garantizado",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "incluido"
+      },
+      {
+        "cobertura": "Defensa jurídica y reclamación",
+        "concepto": "Especializada",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "base"
+      },
+      {
+        "cobertura": "Robo e Incendio (modalidad Plus)",
+        "concepto": "Pérdida total",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Indumentaria y casco (opcional)",
+        "concepto": "Protección equipo",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Gestión de multas y puntos",
+        "concepto": "Servicio Mutua",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": [
+      {
+        "pregunta": "¿Tengo asistencia si me quedo sin gasolina o pincho?",
+        "respuesta": "Sí, la asistencia de Autoclub Mutua es desde el kilómetro 0. Cubre pinchazos, falta de combustible e incluso pérdida de llaves. No te quedarás tirado en ninguna ruta."
+      },
+      {
+        "pregunta": "¿Mi acompañante también está protegido?",
+        "respuesta": "Sí, la Responsabilidad Civil Obligatoria y Voluntaria cubre los daños que pueda sufrir el pasajero en caso de accidente. Tu seguridad y la de quien te acompaña es nuestra prioridad."
+      },
+      {
+        "pregunta": "¿Qué cubre exactamente la protección de casco y ropa?",
+        "respuesta": "Es una cobertura opcional que te indemniza por los daños sufridos en tu vestimenta técnica (chaqueta, pantalones, botas, guantes) y el casco en caso de accidente. Sabemos que el equipo es caro y queremos ayudarte a reponerlo."
+      },
+      {
+        "pregunta": "¿Hay diferentes niveles de franquicia en Todo Riesgo?",
+        "respuesta": "Sí, puedes elegir entre diferentes niveles de franquicia (generalmente 200€ o 400€) para ajustar la prima anual a tu presupuesto, manteniendo la máxima protección para tu moto."
+      }
+    ]
+  },
+  "ppsa": {
+    "id": "ppsa",
+    "nombre_oficial": "PPSA (Plan Pensiones Autónomos)",
+    "descripcion_breve": "Plan de empleo para autónomos. Deducción hasta 5.750 €/año en IRPF. Gestión Goldman Sachs (50% RF + 50% RV). Rentabilidad acumulada desde inicio: +8,49%. Costes 0,84%.",
+    "precio_base": "Hasta 5.750 €/año",
+    "detalles_adicionales": "Aportación mínima 30 € · Máximo 5.750 €/año · Ahorro fiscal estimado hasta 2.300 €/año",
+    "estadisticas_clave": [
+      {
+        "valor": "5.750 €",
+        "etiqueta": "Deducción máx. anual IRPF"
+      },
+      {
+        "valor": "+8,49%",
+        "etiqueta": "Rentabilidad desde inicio"
+      },
+      {
+        "valor": "0,84%",
+        "etiqueta": "Costes totales/año"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "Deducción IRPF hasta 5.750 €/año",
+        "concepto": "Solo autónomos RETA",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "fiscal"
+      },
+      {
+        "cobertura": "Gestión Goldman Sachs AM",
+        "concepto": "50% RF + 50% RV (ESG Art.8)",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "diferencial"
+      },
+      {
+        "cobertura": "Rentabilidad acumulada desde inicio",
+        "concepto": "Sep 2024 — 2025",
+        "valor_limite": "+8,49%",
+        "es_clave": true,
+        "tipo": "rentabilidad"
+      },
+      {
+        "cobertura": "Costes de gestión + depósito",
+        "concepto": "0,80% + 0,04% = 0,84%",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Disponibilidad anticipada",
+        "concepto": "A partir de 10 años (desde 2025)",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Cese de actividad como contingencia",
+        "concepto": "Liquidez anticipada",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": [
+      {
+        "pregunta": "¿En qué se diferencia de un plan de pensiones?",
+        "respuesta": "El PPSA es un seguro de ahorro colectivo para autónomos RETA, no un plan de pensiones individual. Ventajas clave: mayor límite de aportación (5.750 €/año vs 1.500 € del plan individual), misma reducción fiscal en base imponible, y mayor protección patrimonial al ser seguro — el saldo no entra en masa hereditaria de la misma forma que un fondo."
+      },
+      {
+        "pregunta": "¿Puedo rescatar el dinero antes de jubilarme?",
+        "respuesta": "Sí. A diferencia de los planes de pensiones clásicos, el PPSA permite rescate anticipado en caso de cese de actividad como autónomo, enfermedad grave o desempleo de larga duración. Además, desde 2025, también es posible el rescate con 10+ años de antigüedad. Tienes acceso real al dinero cuando lo necesitas."
+      },
+      {
+        "pregunta": "¿Qué pasa si paro las aportaciones o cierro el negocio?",
+        "respuesta": "El producto sigue activo y el saldo acumulado sigue creciendo. Si cesas como autónomo, el cese de actividad es contingencia de rescate: puedes recuperar todo el capital en ese momento. No estás atado de por vida."
+      },
+      {
+        "pregunta": "¿Merece la pena si mi tipo marginal del IRPF es bajo?",
+        "respuesta": "Con tipo marginal del 24%: por cada 1.000 € aportados, recuperas 240 € en la declaración. Con tipo del 37%: recuperas 370 €. Incluso en el tramo más bajo, cada aportación tiene retorno fiscal garantizado desde el primer año. Y el capital sigue creciendo con rentabilidad adicional."
+      },
+      {
+        "pregunta": "¿Es seguro? ¿Qué rentabilidad tiene?",
+        "respuesta": "La cartera de inversión sigue una estrategia diversificada supervisada. Históricamente, las carteras equilibradas NN han generado rentabilidades positivas en horizontes de 5+ años. Además, las aportaciones están protegidas como seguro colectivo, con supervisión de la DGS, no solo de la CNMV."
+      },
+      {
+        "pregunta": "¿Solo puedo aportar 5.750 €/año?",
+        "respuesta": "Sí, 5.750 €/año es el límite deducible fiscal del PPSA para autónomos. Si quieres ahorrar más con ventajas adicionales, lo complementamos con el SIALP (hasta 5.000 €/año, exención de rendimientos desde año 5) o el Sistema Duplo (deducción adicional hasta límites IRPF). El PPSA maximiza la deducción base."
+      }
+    ]
+  },
+  "duplo": {
+    "id": "duplo",
+    "nombre_oficial": "Sistema Duplo",
+    "descripcion_breve": "Plan de Pensiones Individual con máxima eficiencia fiscal. Reduce tu IRPF mientras construyes tu futuro con gestión profesional internacional.",
+    "precio_base": "Aportación libre",
+    "detalles_adicionales": "Aportaciones libres desde 30 € · Máximo 1.500 €/año · Gestión NN Investment Partners",
+    "estadisticas_clave": [
+      {
+        "valor": "1.500 €",
+        "etiqueta": "Deducción Máx."
+      },
+      {
+        "valor": "10 años",
+        "etiqueta": "Liquidez Nueva"
+      },
+      {
+        "valor": "0 €",
+        "etiqueta": "Coste Traspaso"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "NN Crecimiento Global (100% RV)",
+        "concepto": "Perfil dinámico",
+        "valor_limite": "1,5%/año",
+        "es_clave": true,
+        "tipo": "potencial"
+      },
+      {
+        "cobertura": "NN Europa (20% RV + 80% RF)",
+        "concepto": "Perfil conservador",
+        "valor_limite": "1,3%/año",
+        "es_clave": true,
+        "tipo": "estable"
+      },
+      {
+        "cobertura": "Reducción base imponible IRPF",
+        "concepto": "Hasta límites legales",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Liquidez aportaciones > 10 años",
+        "concepto": "Disponible desde 2025",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Traspaso desde otras entidades",
+        "concepto": "Gratuito y gestionado",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Cambio de fondo sin impacto fiscal",
+        "concepto": "Flexibilidad total",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": [
+      {
+        "pregunta": "¿Cuánto dinero puedo desgravarme exactamente cada año?",
+        "respuesta": "El límite legal para planes individuales es de 1.500 € anuales (o el 30% de tus rendimientos netos del trabajo, la cifra menor). Si aportas el máximo, Hacienda te devolverá una parte proporcional a tu tipo marginal de IRPF en tu próxima declaración."
+      },
+      {
+        "pregunta": "¿Tengo que esperar a jubilarme para sacar el dinero?",
+        "respuesta": "Ya no es obligatorio. Además de jubilación, invalidez o enfermedad grave, desde 2025 puedes rescatar las aportaciones que tengan una antigüedad superior a 10 años. Tu plan de pensiones ahora es mucho más líquido y flexible."
+      },
+      {
+        "pregunta": "¿Qué diferencia hay entre los dos fondos del Sistema Duplo?",
+        "respuesta": "Crecimiento Global invierte el 100% en renta variable para maximizar el potencial a largo plazo. Europa es más conservador, con un 20% en renta variable y un 80% en renta fija, ideal si buscas estabilidad y proteger lo acumulado."
+      },
+      {
+        "pregunta": "¿Puedo traer mi plan de pensiones de otro banco?",
+        "respuesta": "Sí, y es un proceso totalmente gratuito. Nosotros nos encargamos de todo el trámite administrativo. Además, consulta nuestras campañas vigentes, ya que solemos bonificar los traspasos con capital extra."
+      },
+      {
+        "pregunta": "¿Cómo tributa el dinero cuando lo rescato?",
+        "respuesta": "El rescate tributa como rendimiento del trabajo. Lo ideal es planificar el cobro para minimizar el impacto. Un dato clave: las aportaciones anteriores a 2007 pueden disfrutar de una reducción del 40% si se rescatan en forma de capital."
+      },
+      {
+        "pregunta": "¿Y si quiero cambiar de perfil de riesgo en el futuro?",
+        "respuesta": "Tienes total libertad. Puedes mover tu saldo entre Crecimiento Global y Europa sin coste alguno y sin impacto fiscal, adaptando tu inversión a medida que te acerques a la edad de jubilación."
+      }
+    ]
+  },
+  "autonomo": {
+    "id": "autonomo",
+    "nombre_oficial": "Contigo Autónomo",
+    "descripcion_breve": "Protección laboral integral para autónomos con 25% de descuento vitalicio, excluyendo la cobertura de Incapacidad Laboral Temporal (ILT).",
+    "precio_base": "Consultar",
+    "detalles_adicionales": "Con descuento hábitos saludables −10% · Capital total: 266.000 € · *25% descuento vitalicio (excluye ILT)*",
+    "estadisticas_clave": [
+      {
+        "valor": "25% vitalicio",
+        "etiqueta": "Descuento de prima"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "Incapacidad laboral temporal (ILT)",
+        "concepto": "EXCLUIDA en esta campaña con descuento del 25%.",
+        "valor_limite": "N/A",
+        "es_clave": false,
+        "tipo": "exclusión"
+      }
+    ],
+    "faqs_objeciones": [
+      {
+        "pregunta": "Ya pago mucho a la Seguridad Social, ¿para qué necesito esto?",
+        "respuesta": "La SS paga 721 €/mes de media en baja por enfermedad. Si tus gastos fijos como autónomo son 900 €/mes (local, suministros, préstamos, familia), el agujero real es 179 €/mes que sale de tu bolsillo o de tus ahorros cada mes que dure la baja. Contigo Autónomo cubre exactamente ese agujero."
+      },
+      {
+        "pregunta": "¿Qué diferencia real hay con la prestación por ILT de la SS?",
+        "respuesta": "La SS cubre el 60% de tu base reguladora a partir del día 4 (accidente) o día 4 (enfermedad), con límites máximos. Contigo Autónomo añade 30 €/día complementarios desde el primer día, más 266.000 € en capital por invalidez o fallecimiento. Son coberturas que se suman, no que se excluyen."
+      },
+      {
+        "pregunta": "¿Tengo que hacer un examen médico?",
+        "respuesta": "No hay examen médico para las coberturas estándar del producto. La contratación es ágil, con declaración de salud simplificada. Para capitales elevados en algunas coberturas puede requerirse información adicional, pero en la configuración base (39,94 €/mes) no."
+      },
+      {
+        "pregunta": "¿El descuento del 10% por hábitos saludables es real y cómo funciona?",
+        "respuesta": "Sí, es real y permanente si se mantienen los hábitos. Se aplica respondiendo a un cuestionario de salud (no fumador, IMC correcto, actividad física regular). El descuento del 10% se refleja directamente en la prima desde la contratación y se mantiene mientras los hábitos se conservan en las revisiones."
+      },
+      {
+        "pregunta": "¿Puedo cancelar si el negocio va mal?",
+        "respuesta": "Sí, el seguro es anual renovable. Si cesas como autónomo o la situación cambia, puedes dar de baja sin penalización. Pero ojo: volver a contratar después de una baja laboral o de edad avanzada es más caro (o puede implicar exclusiones). La cobertura vale más cuando se contrata sano y activo."
+      },
+      {
+        "pregunta": "¿Cubre solo accidentes o también enfermedad?",
+        "respuesta": "Cubre todo: accidente, enfermedad, fallecimiento por cualquier causa, invalidez permanente total y absoluta, y enfermedades graves (cáncer incluido). La ILT de 30 €/día aplica tanto a accidente como a enfermedad. No es un seguro de accidentes limitado, es protección laboral integral."
+      }
+    ]
+  },
+  "ilt": {
+    "id": "ilt",
+    "nombre_oficial": "Seguro de Baja Laboral Autónomos (ILT)",
+    "descripcion_breve": "Indemnización diaria de 10 € a 200 €/día por incapacidad temporal. Para autónomos RETA. Cobertura accidente sin carencia. Chat médico y legal incluidos.",
+    "precio_base": "Consultar",
+    "detalles_adicionales": "Prima variable según capital diario elegido y grupo profesional · Presupuesto personalizado",
+    "estadisticas_clave": [],
+    "coberturas_clave": [
+      {
+        "cobertura": "Indemnización diaria configurable",
+        "concepto": "10 a 200 €/día",
+        "valor_limite": "Desde día 1",
+        "es_clave": true,
+        "tipo": "clave"
+      },
+      {
+        "cobertura": "Accidente — carencia",
+        "concepto": "0 días",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "inmediato"
+      },
+      {
+        "cobertura": "Enfermedad con cirugía — carencia",
+        "concepto": "6 meses",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Enfermedades comunes — carencia",
+        "concepto": "2 meses",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Chat médico Meeting Doctors",
+        "concepto": "24h, múltiples especialidades",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Chat legal Meeting Lawyers",
+        "concepto": "Familia, laboral, tráfico",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": []
+  },
+  "pyme": {
+    "id": "pyme",
+    "nombre_oficial": "Contigo Pyme",
+    "descripcion_breve": "Seguro colectivo de vida y accidentes para empleados de PYME. Sin exámenes médicos, 100% adaptado a convenios y con gestión digital.",
+    "precio_base": "Consultar",
+    "detalles_adicionales": "Prima por empleado · Según plantilla y coberturas elegidas · Gastos deducibles",
+    "estadisticas_clave": [
+      {
+        "valor": "100%",
+        "etiqueta": "Adaptado a Convenio"
+      },
+      {
+        "valor": "Cero",
+        "etiqueta": "Trámites Médicos"
+      },
+      {
+        "valor": "Deducible",
+        "etiqueta": "Impuesto Sociedades"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "Seguro de vida colectivo empleados",
+        "concepto": "Capital según convenio",
+        "valor_limite": "Consultar",
+        "es_clave": true,
+        "tipo": "base"
+      },
+      {
+        "cobertura": "Accidentes laborales y enfermedad",
+        "concepto": "Cobertura legal",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "clave"
+      },
+      {
+        "cobertura": "Sin examen médico (gran mayoría)",
+        "concepto": "Contratación directa",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Actualización automática de convenio",
+        "concepto": "Seguridad legal",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Gestión 100% digital empleados",
+        "concepto": "App y área privada",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": [
+      {
+        "pregunta": "¿Tengo que asegurar a toda la plantilla obligatoriamente?",
+        "respuesta": "Sí, para cumplir con el convenio colectivo, la póliza debe cubrir a todos los trabajadores dados de alta en la empresa. Esto garantiza que no haya vacíos legales ante una inspección o siniestro."
+      },
+      {
+        "pregunta": "¿Qué pasa si entra un nuevo empleado mañana?",
+        "respuesta": "El seguro es flexible. Las altas y bajas se gestionan de forma ágil a través del portal digital. En muchos casos, se realiza una regularización anual para simplificar al máximo tu carga administrativa."
+      },
+      {
+        "pregunta": "¿Realmente no hay exámenes médicos?",
+        "respuesta": "Para la inmensa mayoría de las pymes y capitales estándar, Nationale-Nederlanden no exige cuestionarios ni pruebas de salud. Es una de las mayores ventajas competitivas de este producto."
+      },
+      {
+        "pregunta": "¿Cubre solo accidentes laborales o también fuera del trabajo?",
+        "respuesta": "Tú eliges. Podemos configurar la póliza solo para el ámbito laboral (cumpliendo el mínimo legal) o ampliarla a 24 horas para que tus empleados estén protegidos también en su vida privada."
+      },
+      {
+        "pregunta": "¿Qué ventajas fiscales tiene para la empresa?",
+        "respuesta": "Las primas pagadas por la empresa son un gasto deducible al 100% en el Impuesto de Sociedades. Es una forma eficiente de mejorar la retribución de tus empleados."
+      },
+      {
+        "pregunta": "¿Y si el convenio cambia a mitad de año?",
+        "respuesta": "Nosotros nos encargamos. El producto está diseñado para actualizarse según las exigencias de los nuevos convenios publicados, asegurando que tu empresa nunca esté fuera de la legalidad."
+      }
+    ]
+  },
+  "comercios": {
+    "id": "comercios",
+    "nombre_oficial": "Seguro para Comercios",
+    "descripcion_breve": "Multirriesgo integral NN–Caser para negocios. Protección total para tu local, mobiliario y la continuidad de tus ingresos pase lo que pase.",
+    "precio_base": "Consultar",
+    "detalles_adicionales": "Prima modular según actividad y capitales · Valoración experta en 3 minutos",
+    "estadisticas_clave": [
+      {
+        "valor": "24/7",
+        "etiqueta": "Asistencia Urgente"
+      },
+      {
+        "valor": "Garantizada",
+        "etiqueta": "Continuidad Ingresos"
+      },
+      {
+        "valor": "Modular",
+        "etiqueta": "Pago a Medida"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "Continente y Contenido",
+        "concepto": "Protección integral local",
+        "valor_limite": "Consultar",
+        "es_clave": true,
+        "tipo": "base"
+      },
+      {
+        "cobertura": "Garantía de Continuidad (Lucro Cesante)",
+        "concepto": "Ingresos protegidos",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "estrella"
+      },
+      {
+        "cobertura": "Responsabilidad Civil Explotación",
+        "concepto": "Daños a terceros",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Daños por Agua, Fuego y Eléctricos",
+        "concepto": "Cobertura total",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Robo y Actos Vandálicos (Grafitis)",
+        "concepto": "Interior y Fachada",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Avería de Maquinaria y Equipos",
+        "concepto": "Opcional según negocio",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": [
+      {
+        "pregunta": "¿Qué cubre exactamente la \"Continuidad del Negocio\"?",
+        "respuesta": "Es la garantía más valiosa. Si un siniestro cubierto (como un incendio o inundación) te obliga a cerrar temporalmente, la póliza te compensa por los beneficios que dejas de percibir. Tu flujo de caja no se detiene aunque el local esté en obras."
+      },
+      {
+        "pregunta": "¿Están cubiertos los grafitis o el vandalismo exterior?",
+        "respuesta": "Sí, disponemos de coberturas específicas para la limpieza de grafitis y la reparación de daños por actos vandálicos en fachadas y escaparates. Mantener la imagen impecable de tu negocio es parte de nuestra protección."
+      },
+      {
+        "pregunta": "¿Mi maquinaria técnica también está segura?",
+        "respuesta": "Absolutamente. Si tu negocio depende de hornos, cámaras frigoríficas, ordenadores o maquinaria específica, podemos incluir la cobertura de Avería de Maquinaria para protegerte ante fallos eléctricos o roturas internas imprevistas."
+      },
+      {
+        "pregunta": "¿Tengo asistencia de emergencia si se rompe una tubería o cerradura?",
+        "respuesta": "Sí, el servicio de Expertología Caser está disponible las 24 horas. Enviamos a los profesionales necesarios (fontaneros, cerrajeros, electricistas) de forma urgente para que el problema se resuelva antes de que afecte a tus clientes."
+      },
+      {
+        "pregunta": "¿Cómo se valoran mis existencias y mobiliario?",
+        "respuesta": "Realizamos una valoración personalizada según tu inventario real. Además, el seguro cuenta con revalorización automática para que, con el paso de los años, nunca te quedes \"corto\" de capital asegurado ante un siniestro total."
+      },
+      {
+        "pregunta": "¿Es muy caro para un comercio pequeño?",
+        "respuesta": "Al ser un seguro modular, solo pagas por lo que realmente necesitas. Ajustamos las garantías al tamaño y riesgo real de tu actividad, ofreciendo una protección premium a un precio muy competitivo para autónomos."
+      }
+    ]
+  },
+  "saludautonomos": {
+    "id": "saludautonomos",
+    "nombre_oficial": "Salud con Copago para Autónomos",
+    "descripcion_breve": "Asistencia sanitaria privada Sanitas con copago. Prima deducible en IRPF como gasto profesional. Ahorro fiscal real.",
+    "precio_base": "Consultar",
+    "detalles_adicionales": "Prima variable · Deducible como gasto profesional en IRPF · Optimización fiscal real",
+    "estadisticas_clave": [],
+    "coberturas_clave": [
+      {
+        "cobertura": "Deducción de la prima en IRPF",
+        "concepto": "Gasto profesional",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "fiscal"
+      },
+      {
+        "cobertura": "Red médica Sanitas completa",
+        "concepto": "Con copago",
+        "valor_limite": "Consultar",
+        "es_clave": true,
+        "tipo": "incluido"
+      },
+      {
+        "cobertura": "Especialidades y diagnóstico",
+        "concepto": "Incluidos",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Hospitalización y urgencias 24h",
+        "concepto": "Incluidas",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Dental incluida",
+        "concepto": "Incluida",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": []
+  },
+  "hipotecaabanca": {
+    "id": "hipotecaabanca",
+    "nombre_oficial": "Hipoteca Mari Carmen (ABANCA)",
+    "descripcion_breve": "Préstamos hipotecarios a tipo fijo, variable o mixto. Sin comisión de apertura. Intereses bonificables según vinculación.",
+    "precio_base": "Consultar",
+    "detalles_adicionales": "Sin comisión de apertura · Tipos y condiciones personalizados según perfil",
+    "estadisticas_clave": [
+      {
+        "valor": "0 €",
+        "etiqueta": "Comisión apertura"
+      },
+      {
+        "valor": "3 tipos",
+        "etiqueta": "Fijo, variable o mixto"
+      },
+      {
+        "valor": "Bonificable",
+        "etiqueta": "Por vinculación"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "Sin comisión de apertura",
+        "concepto": "0 € al firmar",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "ventaja"
+      },
+      {
+        "cobertura": "Tipo fijo",
+        "concepto": "Cuota estable todo el plazo",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Tipo variable (Euríbor)",
+        "concepto": "Cuota ajustable",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Tipo mixto",
+        "concepto": "Fijo inicial + variable",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Bonificación de interés por vinculación",
+        "concepto": "Domiciliación + seguros",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": []
+  },
+  "hipotecaing": {
+    "id": "hipotecaing",
+    "nombre_oficial": "Hipoteca Naranja (ING)",
+    "descripcion_breve": "100% digital. Sin comisión de apertura. ING asume notaría, registro, gestoría e IAJD. Hasta 80% financiación (100% si <36 años y vivienda <400.000 €). Plazo hasta 40 años. Precios actualizados con incrementos para nuevos scorings desde el 11 de mayo.",
+    "precio_base": "Consultar",
+    "detalles_adicionales": "Solo pagas la tasación · 100% digital · Plazo máximo 40 años (75 años al finalizar) · *Precios actualizados con incrementos para nuevos scorings desde el 11 de mayo*.",
+    "estadisticas_clave": [
+      {
+        "valor": "Actualizado",
+        "etiqueta": "Precios desde 11/05"
+      }
+    ],
+    "coberturas_clave": [
+      {
+        "cobertura": "Sin comisión de apertura",
+        "concepto": "0 € al firmar",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "ventaja"
+      },
+      {
+        "cobertura": "Gastos ING asumidos",
+        "concepto": "Notaría, registro, gestoría, IAJD",
+        "valor_limite": "✓",
+        "es_clave": true,
+        "tipo": "diferencial"
+      },
+      {
+        "cobertura": "Financiación hasta 80% valor tasación",
+        "concepto": "Perfil general",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Financiación hasta 100%",
+        "concepto": "Menores de 36 años + vivienda <400K €",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Tipo variable, fija o mixta",
+        "concepto": "Fija hasta 25 años · Mixta 5-20 años fijo",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      },
+      {
+        "cobertura": "Subrogación para mejorar hipoteca actual",
+        "concepto": "Sencilla y digital",
+        "valor_limite": "✓",
+        "es_clave": false,
+        "tipo": ""
+      }
+    ],
+    "faqs_objeciones": []
+  }
+}

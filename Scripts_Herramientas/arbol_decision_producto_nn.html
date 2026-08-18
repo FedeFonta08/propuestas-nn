@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Árbol de Decisión Producto — Nationale-Nederlanden</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--nn:#FF6200;--bg:#FFFFFF;--bg2:#F5F5F3;--text:#1a1a1a;--text2:#6b6b6b;--text3:#999;--border:#e0e0e0;--radius:10px;--radius-lg:14px;--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+@media(prefers-color-scheme:dark){:root{--bg:#1a1a1a;--bg2:#2a2a2a;--text:#e8e8e8;--text2:#a0a0a0;--text3:#777;--border:#3a3a3a}}
+body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px;max-width:700px;margin:0 auto;line-height:1.6}
+h1{font-size:20px;font-weight:600;margin-bottom:4px}
+.subtitle{font-size:13px;color:var(--text2);margin-bottom:24px}
+.header-bar{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--nn)}
+.nn-logo{width:8px;height:32px;background:var(--nn);border-radius:4px}
+.breadcrumb{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;font-size:12px}
+.bc-item{padding:4px 10px;border-radius:var(--radius);background:var(--bg2);color:var(--text2)}
+.bc-active{background:rgba(255,98,0,0.15);color:var(--nn);font-weight:600}
+.bc-arrow{color:var(--text3);margin:0 -2px}
+.step{margin-bottom:24px}
+.q-text{font-size:17px;font-weight:600;color:var(--text);margin-bottom:14px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;cursor:pointer;transition:all .2s}
+.opt:hover{border-color:var(--text3);transform:translateY(-1px)}
+.opt:active{transform:translateY(0)}
+.opt .label{font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px}
+.opt .sub{font-size:12px;color:var(--text2)}
+.result{background:var(--bg);border:2.5px solid var(--nn);border-radius:var(--radius-lg);padding:20px}
+.res-prod{font-size:22px;font-weight:600;color:var(--nn);margin-bottom:6px}
+.res-why{font-size:14px;color:var(--text2);margin-bottom:18px;line-height:1.5}
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.res-card{background:var(--bg2);border-radius:var(--radius);padding:12px}
+.res-card .label{font-size:11px;color:var(--text2);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.3px}
+.res-card .value{font-size:16px;font-weight:600;color:var(--text)}
+.cross-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px}
+.cross-list{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.cross-chip{font-size:12px;padding:5px 11px;border-radius:var(--radius);background:#E1F5EE;color:#085041;font-weight:600}
+@media(prefers-color-scheme:dark){.cross-chip{background:#085041;color:#9FE1CB}.bc-active{background:rgba(255,98,0,0.25)}}
+.script-box{background:var(--bg2);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px}
+.script-box p{font-size:13px;color:var(--text);margin:0;line-height:1.6;font-style:italic}
+.restart{background:none;border:1.5px solid var(--nn);color:var(--nn);font-size:13px;font-weight:600;padding:10px 18px;border-radius:var(--radius);cursor:pointer;font-family:var(--font);transition:all .2s}
+.restart:hover{background:rgba(255,98,0,0.1)}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="header-bar">
+<div class="nn-logo"></div>
+<div><h1>Árbol de Decisión: ¿Qué Producto Vender Primero?</h1><div class="subtitle">Nationale-Nederlanden · Guía de apertura comercial</div></div>
+</div>
+
+<div class="breadcrumb" id="breadcrumb"></div>
+<div id="steps"></div>
+<div id="result" class="hidden"></div>
+
+<script>
+const TREE={
+q:'¿Es autónomo el cliente?',
+yes:{
+label:'Sí, autónomo',
+sub:'Régimen RETA / profesional',
+result:{
+product:'Contigo Autónomo (ILT)',
+why:'El dolor más agudo de un autónomo es quedarse sin ingresos por baja. Es la puerta de entrada natural.',
+pvm:'~496 pts',
+prima:'~35-55 €/mes',
+risk:'Sí',
+campana:'Estándar',
+script:'Si mañana te pones malo y no puedes abrir tu negocio... ¿quién paga tus facturas? La Seguridad Social te da unos 400 € después de 20 días. Con Contigo Autónomo, desde el día 1 cobras lo que necesitas para mantener tu nivel de vida. ¿Tiene sentido proteger eso?',
+cross:['Plan Salud+Vida','SIALP','MiHogar Seguro']
+}
+},
+no:{
+label:'No, cuenta ajena u otro',
+sub:'Asalariado / desempleado / jubilado',
+next:{
+q:'¿Tiene hijos o pareja dependiente?',
+yes:{
+label:'Sí, familia a cargo',
+sub:'Hijos menores o pareja sin ingresos',
+result:{
+product:'Plan Salud+Vida',
+why:'Con familia dependiente, la prioridad es protección por fallecimiento + acceso a sanidad privada. La campaña 12,5% dto lo hace irresistible.',
+pvm:'~1.000-1.200 pts',
+prima:'~85-130 €/mes',
+risk:'Sí',
+campana:'12,5% descuento',
+script:'Imagina que mañana te diagnostican algo serio. Con la sanidad pública esperas 4 meses para ver a un especialista. Con Plan Salud+Vida, Sanitas te atiende en 48-72h en los mejores hospitales. Y si lo peor pasa, tu familia recibe un capital para no quedarse en la calle. Ahora con 12,5% de descuento. ¿Cerramos este círculo?',
+cross:['Contigo Familia','MiHogar Seguro','SIALP']
+}
+},
+no:{
+label:'No, sin dependientes',
+sub:'Soltero/a o pareja con ingresos propios',
+next:{
+q:'¿Edad del cliente?',
+old:{
+label:'Mayor de 50',
+sub:'Pre-jubilación o jubilado',
+result:{
+product:'SIALP',
+why:'Con 50+, la urgencia es construir colchón para jubilación. SIALP ofrece exención fiscal desde el año 5 y gestión Goldman Sachs. Es el "último tren".',
+pvm:'~2.000-3.000 pts',
+prima:'167 €/mes (fija)',
+risk:'No',
+campana:'Estándar',
+script:'¿Has calculado cuánto te quedará de pensión? La brecha entre lo que necesitas y lo que te dará la Seguridad Social puede ser de 500-800 € al mes. Si empezamos ahora con 167 € al mes en un SIALP, en 10 años tendrás un colchón con gestión profesional y ventaja fiscal. ¿Prefieres empezar o seguir posponiendo?',
+cross:['Contigo Senior','Plan Salud+Vida','PPSA']
+}
+},
+young:{
+label:'Menor de 50',
+sub:'Joven o adulto medio',
+next:{
+q:'¿Tiene casa en propiedad sin seguro hogar?',
+yes:{
+label:'Sí, sin seguro hogar',
+sub:'Propietario desprotegido',
+result:{
+product:'MiHogar Seguro',
+why:'Es el "low-hanging fruit": cierre fácil, prima baja, y abre la puerta a conversación sobre protección más amplia.',
+pvm:'~200-400 pts',
+prima:'~20-35 €/mes',
+risk:'Sí',
+campana:'Estándar',
+script:'Tu casa es probablemente la inversión más grande que tienes. Si mañana se inunda, se quema, o alguien se cae en tu escalera y te demanda por 50.000 €... ¿tienes cómo cubrirlo? MiHogar Seguro por unos 25 €/mes te quita ese riesgo. ¿Tiene sentido?',
+cross:['Plan Salud+Vida','SIALP','Líder Plus Accidentes']
+}
+},
+no:{
+label:'No, ya tiene o alquila',
+sub:'Hogar cubierto o inquilino',
+result:{
+product:'Plan Salud+Vida',
+why:'Es el producto estrella universal de NN. Salud + vida en un solo producto con campaña activa. Funciona para casi cualquier perfil.',
+pvm:'~800-1.200 pts',
+prima:'~70-110 €/mes',
+risk:'Sí',
+campana:'12,5% descuento',
+script:'¿Cuánto tiempo llevas esperando la última vez que necesitaste un especialista? Con Plan Salud+Vida tienes Sanitas — especialistas en 48-72h, los mejores hospitales, sin listas de espera. Y si pasa algo grave, tu familia está protegida. Ahora con 12,5% de descuento. ¿Lo miramos?',
+cross:['SIALP','Protección Plus','MiHogar Seguro']
+}
+}
+}
+}
+}
+}
+}
+}
+};
+let path=[];
+let currentNode=TREE;
+function render(){
+const stepsEl=document.getElementById('steps');
+const resultEl=document.getElementById('result');
+const bcEl=document.getElementById('breadcrumb');
+stepsEl.innerHTML='';
+resultEl.innerHTML='';
+resultEl.classList.add('hidden');
+bcEl.innerHTML=path.map((p,i)=>
+`<span class="bc-item${i===path.length-1?' bc-active':''}">${p}</span>`
+).join('<span class="bc-arrow">→</span>');
+if(currentNode.result){
+const r=currentNode.result;
+resultEl.classList.remove('hidden');
+resultEl.innerHTML=`<div class="result">
+<div class="res-prod">${r.product}</div>
+<div class="res-why">${r.why}</div>
+<div class="res-grid">
+<div class="res-card"><div class="label">PVM estimado</div><div class="value">${r.pvm}</div></div>
+<div class="res-card"><div class="label">Prima orientativa</div><div class="value">${r.prima}</div></div>
+<div class="res-card"><div class="label">Producto riesgo</div><div class="value">${r.risk}</div></div>
+<div class="res-card"><div class="label">Campaña</div><div class="value">${r.campana}</div></div>
+</div>
+<div class="cross-title">Venta cruzada siguiente</div>
+<div class="cross-list">${r.cross.map(c=>`<span class="cross-chip">${c}</span>`).join('')}</div>
+<div class="script-box"><p>"${r.script}"</p></div>
+<button class="restart" onclick="restart()">Reiniciar árbol</button>
+</div>`;
+return;
+}
+const step=document.createElement('div');
+step.className='step';
+step.innerHTML=`<div class="q-text">${currentNode.q||currentNode.next.q}</div>`;
+const node=currentNode.q?currentNode:currentNode.next;
+const opts=document.createElement('div');
+opts.className='opts';
+const keys=Object.keys(node).filter(k=>k!=='q');
+keys.forEach(k=>{
+const o=node[k];
+const btn=document.createElement('div');
+btn.className='opt';
+btn.innerHTML=`<div class="label">${o.label}</div><div class="sub">${o.sub}</div>`;
+btn.onclick=()=>{
+path.push(o.label);
+currentNode=o.result?o:(o.next?o:o);
+if(o.result){currentNode=o}
+else if(o.next){currentNode=o}
+render();
+};
+opts.appendChild(btn);
+});
+step.appendChild(opts);
+stepsEl.appendChild(step);
+}
+function restart(){
+path=[];
+currentNode=TREE;
+render();
+}
+render();
+</script>
+</body>
+</html>

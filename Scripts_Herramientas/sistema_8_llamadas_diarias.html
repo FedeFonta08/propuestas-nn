@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema 8 Llamadas Diarias — Fede Fontanals NN</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f4f4f4;padding:1rem}
+.wrap{max-width:620px;margin:0 auto;padding:1rem 0}
+h1{font-size:18px;font-weight:500;color:#2c3e50;margin-bottom:4px}
+.subtitle{font-size:12px;color:#888;margin-bottom:16px}
+.tabs{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap}
+button.tab{padding:7px 14px;border-radius:8px;font-size:13px;cursor:pointer;border:0.5px solid #ddd;background:transparent;color:#888;font-family:Arial,sans-serif;transition:all .15s}
+button.tab.on{background:#ecf0f1;color:#2c3e50;font-weight:500;border-color:#bbb}
+.pane{display:none}.pane.on{display:block}
+.card{background:#fff;border:0.5px solid #ddd;border-radius:12px;padding:1rem 1.1rem;margin-bottom:10px}
+.row{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:0.5px solid #eee;font-size:13px;gap:12px}
+.row:last-child{border-bottom:none}
+.row .lbl{color:#888;font-size:11px;font-weight:500;min-width:90px;padding-top:1px}
+.row .val{flex:1;line-height:1.5;font-size:13px}
+.tip{border-left:2px solid #2e86c1;padding:9px 12px;font-size:13px;line-height:1.5;margin-bottom:8px;background:#ebf5fb;border-radius:0}
+.tip.ok{border-color:#1d9e75;background:#eafaf1}
+.tip.warn{border-color:#e67e22;background:#fff3e0}
+.tip.red{border-color:#c0392b;background:#ffe8e8}
+.stt{font-size:11px;font-weight:500;color:#888;text-transform:uppercase;letter-spacing:.05em;margin:16px 0 8px}
+.stt:first-child{margin-top:0}
+.step{display:flex;gap:12px;padding:10px 0;border-bottom:0.5px solid #eee;align-items:flex-start}
+.step:last-child{border-bottom:none}
+.step-n{width:28px;height:28px;border-radius:50%;background:#ebf5fb;color:#2e86c1;font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-txt{font-size:13px;line-height:1.6;flex:1}
+.obj-card{border:0.5px solid #ddd;border-radius:12px;margin-bottom:8px;overflow:hidden}
+.obj-header{padding:10px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#f8f9fa;font-size:13px;font-weight:500;user-select:none}
+.obj-body{display:none;padding:12px 14px;font-size:13px;line-height:1.6;border-top:0.5px solid #eee}
+.obj-body.open{display:block}
+.obj-tag{font-size:10px;padding:2px 6px;border-radius:4px;background:#fff3e0;color:#e67e22;font-weight:500}
+.obj-respuesta{margin-top:8px;padding:10px 12px;background:#eafaf1;border-radius:8px;font-size:13px;line-height:1.6;border-left:2px solid #1d9e75}
+.obj-pensamiento{margin-top:6px;font-size:12px;color:#888;font-style:italic}
+.apertura{background:#f8f9fa;border-radius:8px;padding:12px 14px;font-size:13px;line-height:1.7;margin-bottom:8px;border:0.5px solid #ddd;font-style:italic}
+.copy-btn{font-size:11px;padding:4px 10px;border-radius:8px;border:0.5px solid #ddd;background:transparent;color:#888;cursor:pointer;font-family:Arial,sans-serif;margin-top:6px;transition:all .15s}
+.copy-btn.copied{background:#eafaf1;color:#1d9e75;border-color:#1d9e75}
+.habit-check{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid #eee;font-size:13px;cursor:pointer}
+.habit-check:last-child{border-bottom:none}
+.habit-check input{width:18px;height:18px;cursor:pointer;accent-color:#1d9e75}
+.habit-check.done span{text-decoration:line-through;color:#aaa}
+.progress-bar{height:8px;background:#eee;border-radius:4px;overflow:hidden;margin:8px 0}
+.progress-fill{height:100%;background:#1d9e75;border-radius:4px;transition:width .3s}
+.prog-txt{font-size:12px;color:#888;text-align:right;margin-bottom:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Sistema 8 Llamadas Diarias</h1>
+<div class="subtitle">Fede Fontanals · Punto Naranja NN Xàtiva · La Costera</div>
+
+<div class="tabs">
+  <button class="tab on" onclick="st('rutina')">Rutina diaria</button>
+  <button class="tab" onclick="st('guion')">Guion de llamada</button>
+  <button class="tab" onclick="st('objeciones')">Objeciones</button>
+  <button class="tab" onclick="st('habito')">Mi hábito hoy</button>
+</div>
+
+<!-- RUTINA DIARIA -->
+<div class="pane on" id="p-rutina">
+  <div class="tip ok">El sistema decide por ti. Tú solo ejecutas. 8 llamadas al día = 160 conversaciones al mes = 16 operaciones nuevas.</div>
+
+  <div class="stt">La noche anterior — 10 minutos</div>
+  <div class="card">
+    <div class="step"><div class="step-n">1</div><div class="step-txt">Abre la pestaña <strong>ABRIL URGENTE</strong> del CRM. Mira los 8 primeros que no hayas llamado todavía.</div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-txt">Para cada uno: lee sus notas, identifica qué producto tiene y cuándo vence. 1 minuto por persona.</div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-txt">Envía el WhatsApp previo: <em>"Hola [nombre], soy Fede de Xàtiva. Te llamo mañana a las [hora], es algo breve que creo que te interesa. Saludos."</em></div></div>
+    <div class="step"><div class="step-n">4</div><div class="step-txt">Anota en el CRM: columna <strong>WhatsApp enviado = Sí</strong> + fecha.</div></div>
+  </div>
+
+  <div class="stt">Por la mañana — antes del primer café</div>
+  <div class="card">
+    <div class="step"><div class="step-n">1</div><div class="step-txt">Repasa los 8 nombres. Ya sabes quién es cada uno. Ya les avisaste. Ya no eres un desconocido.</div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-txt">Regla de oro: <strong>no digas "seguro" en los primeros 30 segundos.</strong> Pregunta primero, ofrece después.</div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-txt">Primer bloque: llama a los 4 primeros entre las 10h y las 12h.</div></div>
+    <div class="step"><div class="step-n">4</div><div class="step-txt">Segundo bloque: llama a los 4 restantes entre las 16h y las 18h.</div></div>
+  </div>
+
+  <div class="stt">Después de cada llamada — 30 segundos</div>
+  <div class="card">
+    <div class="step"><div class="step-n">1</div><div class="step-txt">Anota en el CRM: resultado, próxima acción y fecha. Sin esto el sistema no funciona.</div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-txt">Si dijo SÍ a una visita: ponla en el calendario y prepara el checklist ADN esa misma noche.</div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-txt">Si dijo NO o no contestó: fecha de siguiente intento en 7 días. El NO de hoy no es el NO de siempre.</div></div>
+  </div>
+
+  <div class="tip warn">La fricción de la decisión mata el hábito. No decidas a quién llamar por la mañana — decídelo la noche anterior. Por la mañana solo ejecutas.</div>
+</div>
+
+<!-- GUION DE LLAMADA -->
+<div class="pane" id="p-guion">
+  <div class="tip ok">Tienes 3 objetivos en cada llamada: que te recuerde, que entienda el valor, y que te dé una cita. Nada más.</div>
+
+  <div class="stt">Apertura — los primeros 20 segundos</div>
+  <div class="card">
+    <div class="apertura">"Hola [nombre], soy Fede, te llamaba porque el mes pasado te mandé un WhatsApp. Tengo algo concreto que revisar contigo, son 15 minutos y creo que te interesa. ¿Tienes un momento?"</div>
+    <button class="copy-btn" onclick="copiar(this, 'Hola [nombre], soy Fede, te llamaba porque el mes pasado te mandé un WhatsApp. Tengo algo concreto que revisar contigo, son 15 minutos y creo que te interesa. ¿Tienes un momento?')">Copiar</button>
+  </div>
+
+  <div class="stt">Si tiene póliza con vencimiento próximo</div>
+  <div class="card">
+    <div class="apertura">"[Nombre], te llamo porque veo que tienes el [producto] que vence en [mes]. Quería revisarlo contigo antes de que llegue la fecha, para asegurarme de que sigues bien cubierto y aprovechar para hacerte un análisis actualizado sin coste. ¿Cuándo puedes 20 minutos?"</div>
+    <button class="copy-btn" onclick="copiar(this, '[Nombre], te llamo porque veo que tienes el [producto] que vence en [mes]. Quería revisarlo contigo antes de que llegue la fecha, para asegurarme de que sigues bien cubierto y aprovechar para hacerte un análisis actualizado sin coste. ¿Cuándo puedes 20 minutos?')">Copiar</button>
+  </div>
+
+  <div class="stt">Si no tiene nada contigo todavía</div>
+  <div class="card">
+    <div class="apertura">"[Nombre], soy Fede, agente de Nationale-Nederlanden en Xàtiva. Te llamo porque tenemos una campaña de salud con un 12,5% de descuento que termina pronto, y pensé en ti. ¿Tienes seguro de salud ahora mismo?"</div>
+    <button class="copy-btn" onclick="copiar(this, '[Nombre], soy Fede, agente de Nationale-Nederlanden en Xàtiva. Te llamo porque tenemos una campaña de salud con un 12,5% de descuento que termina pronto, y pensé en ti. ¿Tienes seguro de salud ahora mismo?')">Copiar</button>
+  </div>
+
+  <div class="stt">Cómo pedir la visita</div>
+  <div class="card">
+    <div class="apertura">"¿Te viene bien esta semana o la próxima? Puedo ir yo a donde estés, o quedamos en un bar, donde te sea más cómodo. Son 20 minutos y te lo explico en persona."</div>
+    <button class="copy-btn" onclick="copiar(this, '¿Te viene bien esta semana o la próxima? Puedo ir yo a donde estés, o quedamos en un bar, donde te sea más cómodo. Son 20 minutos y te lo explico en persona.')">Copiar</button>
+  </div>
+
+  <div class="tip warn">Nunca digas "seguro" en los primeros 30 segundos. Pregunta primero. Que él hable primero.</div>
+
+  <div class="stt">Reglas de escucha activa</div>
+  <div class="card">
+    <div class="row"><div class="lbl">Cuando hable</div><div class="val">Calla. No interrumpas. Toma nota mentalmente de lo que le preocupa.</div></div>
+    <div class="row"><div class="lbl">Antes de responder</div><div class="val">Repite lo que ha dicho: "Entiendo, entonces lo que más te importa es..."</div></div>
+    <div class="row"><div class="lbl">La pregunta clave</div><div class="val">"¿Qué tendría que tener una propuesta para que tuviese sentido para ti?"</div></div>
+    <div class="row"><div class="lbl">Si no sabe</div><div class="val">"¿Qué es lo que más te preocupa ahora mismo en tu familia?" — y escucha.</div></div>
+  </div>
+</div>
+
+<!-- OBJECIONES -->
+<div class="pane" id="p-objeciones">
+  <div class="tip">Pulsa cada objeción para ver lo que piensa el cliente y tu respuesta exacta.</div>
+  <div class="stt">Las 8 objeciones más frecuentes</div>
+
+  <div class="obj-card">
+    <div class="obj-header" onclick="tog(this)"><span>Ya tengo seguro con otra compañía <span class="obj-tag">muy frecuente</span></span><span>+</span></div>
+    <div class="obj-body"><div class="obj-pensamiento">Lo que piensa: No sabe si está bien cubierto. Tiene miedo de pagar algo innecesario.</div><div class="obj-respuesta">"Perfecto, eso es muy bueno. ¿Y sabes exactamente qué capital cubre y si es suficiente para tu familia? El análisis que hacemos es gratuito y te muestra si tienes alguna laguna. Sin compromiso."</div></div>
+  </div>
+
+  <div class="obj-card">
+    <div class="obj-header" onclick="tog(this)"><span>Ahora no puedo, llámame en unos meses</span><span>+</span></div>
+    <div class="obj-body"><div class="obj-pensamiento">Lo que piensa: No hay urgencia real. Solo quiere evitar la decisión.</div><div class="obj-respuesta">"Lo entiendo. ¿Qué tendría que cambiar en esos meses para que fuera el momento adecuado? Te lo pregunto para saber si tiene sentido que te llame o no."</div></div>
+  </div>
+
+  <div class="obj-card">
+    <div class="obj-header" onclick="tog(this)"><span>Es muy caro</span><span>+</span></div>
+    <div class="obj-body"><div class="obj-pensamiento">Lo que piensa: No ve la relación entre el precio y el valor.</div><div class="obj-respuesta">"¿Caro comparado con qué? Estamos hablando de X euros al día — menos que un café. La pregunta real es: ¿cuánto vale la tranquilidad de saber que tu familia está protegida?"</div></div>
+  </div>
+
+  <div class="obj-card">
+    <div class="obj-header" onclick="tog(this)"><span>Tengo que hablarlo con mi pareja <span class="obj-tag">muy frecuente</span></span><span>+</span></div>
+    <div class="obj-body"><div class="obj-pensamiento">Lo que piensa: Objeción real. Necesita validación. También puede ser evasiva.</div><div class="obj-respuesta">"Tiene todo el sentido. De hecho, el análisis incluye a los dos. ¿Cuándo podríais estar los dos disponibles 20 minutos? Así os lo explico a la vez y tenéis toda la información."</div></div>
+  </div>
+
+  <div class="obj-card">
+    <div class="obj-header" onclick="tog(this)"><span>Ya lo pensaré</span><span>+</span></div>
+    <div class="obj-body"><div class="obj-pensamiento">Lo que piensa: No ve urgencia. No tiene la información suficiente para decidir.</div><div class="obj-respuesta">"Claro, es una decisión importante. Para que lo puedas pensar bien, ¿qué información te falta? Así cuando lo pienses tienes todos los datos."</div></div>
+  </div>
+
+  <div class="obj-card">
+    <div class="obj-header" onclick="tog(this)"><span>No me interesa</span><span>+</span></div>
+    <div class="obj-body"><div class="obj-pensamiento">Lo que piensa: No entiende bien qué le ofreces o no ve el valor.</div><div class="obj-respuesta">"Entendido. ¿Me puedes decir qué parte no te interesa? Así no te molesto con algo que ya tienes cubierto y si veo algo relevante para ti te lo digo sin rodeos."</div></div>
+  </div>
+
+  <div class="obj-card">
+    <div class="obj-header" onclick="tog(this)"><span>No confío en los seguros <span class="obj-tag">emocional</span></span><span>+</span></div>
+    <div class="obj-body"><div class="obj-pensamiento">Lo que piensa: Ha tenido o conoce una mala experiencia. Miedo a la letra pequeña.</div><div class="obj-respuesta">"Es una preocupación muy legítima. Por eso en NN el proceso empieza con un análisis de tus necesidades reales antes de proponer nada. El contrato lo revisamos línea por línea juntos."</div></div>
+  </div>
+
+  <div class="obj-card">
+    <div class="obj-header" onclick="tog(this)"><span>Ahora mismo no tengo dinero</span><span>+</span></div>
+    <div class="obj-body"><div class="obj-pensamiento">Lo que piensa: Puede ser real o puede ser una excusa para no decidir.</div><div class="obj-respuesta">"Lo entiendo. ¿Me puedes decir qué rango mensual sería manejable para ti? Hay opciones desde muy poco al mes. Si no hay ninguno que encaje, te lo digo con toda la honestidad."</div></div>
+  </div>
+
+  <div class="tip warn">Después de cada objeción: primero validas, luego preguntas, luego redirigues. Nunca atacas la objeción de frente.</div>
+</div>
+
+<!-- HÁBITO HOY -->
+<div class="pane" id="p-habito">
+  <div class="tip ok">Un solo compromiso diario. Marca lo que hayas hecho hoy. Sin presión, sin perfección — solo constancia.</div>
+
+  <div class="stt">Mi checklist de hoy</div>
+  <div class="card" id="checks">
+    <label class="habit-check"><input type="checkbox" onchange="updateProgress()"><span>He revisado los 8 contactos del día antes de empezar</span></label>
+    <label class="habit-check"><input type="checkbox" onchange="updateProgress()"><span>He enviado los WhatsApp previos la noche anterior</span></label>
+    <label class="habit-check"><input type="checkbox" onchange="updateProgress()"><span>He hecho el primer bloque de 4 llamadas (mañana)</span></label>
+    <label class="habit-check"><input type="checkbox" onchange="updateProgress()"><span>He hecho el segundo bloque de 4 llamadas (tarde)</span></label>
+    <label class="habit-check"><input type="checkbox" onchange="updateProgress()"><span>He anotado el resultado de cada llamada en el CRM</span></label>
+    <label class="habit-check"><input type="checkbox" onchange="updateProgress()"><span>He fijado fecha para los contactos que no contestaron</span></label>
+    <label class="habit-check"><input type="checkbox" onchange="updateProgress()"><span>He preparado los 8 contactos de mañana</span></label>
+  </div>
+
+  <div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+  <div class="prog-txt" id="prog-txt">0 de 7 completados</div>
+
+  <div class="stt">Recuerda esto cada vez que sientas el bloqueo</div>
+  <div class="card">
+    <div class="row"><div class="lbl">El NO</div><div class="val">No es un rechazo a ti. Es una decisión sobre un producto en este momento. Mañana puede cambiar.</div></div>
+    <div class="row"><div class="lbl">El silencio</div><div class="val">No contestan porque están ocupados, no porque no quieran. Vuelves en 7 días.</div></div>
+    <div class="row"><div class="lbl">La fluidez</div><div class="val">Viene con la repetición. La llamada 50 es más fluida que la 5. No hay atajo.</div></div>
+    <div class="row"><div class="lbl">El objetivo</div><div class="val">No es vender en la llamada. Es conseguir la visita presencial. Eso es todo.</div></div>
+    <div class="row"><div class="lbl">Tu fortaleza</div><div class="val">Ya sabes quién eres. Un IAM, 31.000 pasos y una vida construida desde cero. Eso no lo tiene cualquiera.</div></div>
+  </div>
+
+  <div class="tip ok">8 llamadas × 20 días = 160 conversaciones al mes. Con un 10% de conversión = 16 operaciones. Eso cambia completamente los números.</div>
+</div>
+
+</div>
+<script>
+function st(id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  event.target.classList.add('on');
+  document.getElementById('p-'+id).classList.add('on');
+}
+function tog(header){
+  const body=header.nextElementSibling;
+  const isOpen=body.classList.contains('open');
+  document.querySelectorAll('.obj-body').forEach(b=>b.classList.remove('open'));
+  document.querySelectorAll('.obj-header span:last-child').forEach(s=>s.textContent='+');
+  if(!isOpen){body.classList.add('open');header.querySelector('span:last-child').textContent='−';}
+}
+function copiar(btn,txt){
+  navigator.clipboard.writeText(txt).catch(()=>{});
+  btn.textContent='Copiado';btn.classList.add('copied');
+  setTimeout(()=>{btn.textContent='Copiar';btn.classList.remove('copied');},2000);
+}
+function updateProgress(){
+  const checks=document.querySelectorAll('#checks input');
+  const done=[...checks].filter(c=>c.checked).length;
+  const total=checks.length;
+  document.getElementById('prog').style.width=(done/total*100)+'%';
+  document.getElementById('prog-txt').textContent=done+' de '+total+' completados';
+  checks.forEach(c=>{c.closest('.habit-check').classList.toggle('done',c.checked);});
+}
+</script>
+</body>
+</html>

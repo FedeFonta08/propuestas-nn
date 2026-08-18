@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aperturas de Llamada — NN Xàtiva</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D1B2A;
+    --orange: #FF6B35;
+    --green: #1E8449;
+    --green-light: #EAF3DE;
+    --green-dark: #27500A;
+    --blue-light: #E6F1FB;
+    --blue-dark: #0C447C;
+    --amber-light: #FAEEDA;
+    --amber-dark: #633806;
+    --red-light: #FCEBEB;
+    --red-dark: #791F1F;
+    --grey: #F4F6F7;
+    --text: #1A1A2E;
+    --muted: #6B7280;
+    --border: #E5E7EB;
+    --white: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F8F7F4;
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0 0 4rem;
+  }
+
+  .hero {
+    background: var(--navy);
+    padding: 2.5rem 1.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 40px solid rgba(255,107,53,0.12);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; left: 30%;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    border: 25px solid rgba(255,255,255,0.04);
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,107,53,0.2);
+    color: var(--orange);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: .5rem;
+  }
+
+  .hero h1 span { color: var(--orange); }
+
+  .hero-sub {
+    font-size: 13px;
+    color: #94A3B8;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: .75rem;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .stat-n {
+    font-size: 22px;
+    font-weight: 500;
+    color: #fff;
+    display: block;
+  }
+
+  .stat-n.green { color: #6EE7B7; }
+  .stat-n.orange { color: var(--orange); }
+
+  .stat-l {
+    font-size: 10px;
+    color: #64748B;
+    margin-top: 2px;
+  }
+
+  .container { padding: 1.5rem; }
+
+  .whatsapp-section {
+    background: var(--green-light);
+    border-radius: 14px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #C0DD97;
+    position: relative;
+  }
+
+  .whatsapp-section::before {
+    content: 'PASO 0 — ANTES DE LLAMAR';
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--green-dark);
+    display: block;
+    margin-bottom: .5rem;
+  }
+
+  .whatsapp-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--green-dark);
+    margin-bottom: .4rem;
+  }
+
+  .whatsapp-desc {
+    font-size: 12px;
+    color: #3B6D11;
+    margin-bottom: .875rem;
+    line-height: 1.5;
+  }
+
+  .whatsapp-bubble {
+    background: #fff;
+    border-radius: 12px 12px 12px 4px;
+    padding: .875rem 1rem;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+    font-style: italic;
+    border: 1px solid #C0DD97;
+    position: relative;
+  }
+
+  .whatsapp-bubble::after {
+    content: '✓✓';
+    font-size: 11px;
+    color: #25D366;
+    display: block;
+    text-align: right;
+    margin-top: 4px;
+    font-style: normal;
+  }
+
+  .section-title {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 1.5rem 0 .75rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 1.25rem;
+    margin-bottom: .875rem;
+    border: 1px solid var(--border);
+    transition: transform .15s, box-shadow .15s;
+  }
+
+  .card:active { transform: scale(0.99); }
+
+  .card.winner {
+    border: 2px solid var(--green);
+    background: #FAFFF8;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: .875rem;
+  }
+
+  .card-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .card-info { flex: 1; }
+
+  .card-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .card-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 100px;
+    margin-top: 4px;
+  }
+
+  .card-why {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: .875rem;
+    font-style: italic;
+    padding-left: 40px;
+  }
+
+  .script {
+    border-radius: 10px;
+    padding: .875rem 1rem;
+    font-size: 13px;
+    line-height: 1.75;
+    font-style: italic;
+  }
+
+  .pregunta-box {
+    border-radius: 10px;
+    padding: .75rem 1rem;
+    margin-top: .625rem;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .pregunta-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    margin-bottom: .3rem;
+    display: block;
+  }
+
+  .result-section {
+    margin-top: 1rem;
+    padding-top: .875rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .result-label {
+    font-size: 11px;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+
+  select {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--grey);
+    color: var(--text);
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .best-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    padding: 5px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all .15s;
+  }
+
+  .best-btn.active {
+    background: var(--green);
+    border-color: var(--green);
+    color: #fff;
+  }
+
+  .regla-oro {
+    background: var(--navy);
+    border-radius: 14px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .regla-icon {
+    width: 32px;
+    height: 32px;
+    background: rgba(255,107,53,0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+  }
+
+  .regla-text {
+    font-size: 12px;
+    color: #CBD5E1;
+    line-height: 1.6;
+  }
+
+  .regla-text strong {
+    color: var(--orange);
+    font-weight: 500;
+  }
+
+  .summary-card {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .summary-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 12px;
+  }
+
+  .summary-row:last-child { border-bottom: none; }
+  .summary-name { color: #94A3B8; }
+  .summary-val { font-weight: 500; }
+  .val-escucha { color: #6EE7B7; }
+  .val-cita { color: var(--orange); }
+  .val-no { color: #F87171; }
+  .val-neutral { color: #94A3B8; }
+
+  .footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 0 1.5rem;
+  }
+
+  .footer-text {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .footer-brand {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-top: .5rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">Nationale-Nederlanden · Xàtiva</div>
+  <h1>Aperturas de<br><span>Llamada</span></h1>
+  <p class="hero-sub">8 scripts testados · Del suave al agresivo · Anota resultados y encuentra el tuyo</p>
+  <div class="stats-row">
+    <div class="stat">
+      <span class="stat-n" id="s-total">0</span>
+      <div class="stat-l">Llamadas</div>
+    </div>
+    <div class="stat">
+      <span class="stat-n green" id="s-ok">0</span>
+      <div class="stat-l">Escuchas</div>
+    </div>
+    <div class="stat">
+      <span class="stat-n orange" id="s-pct">0%</span>
+      <div class="stat-l">Tasa éxito</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="regla-oro">
+    <div class="regla-icon">⚡</div>
+    <div class="regla-text">
+      <strong>Regla de oro:</strong> Nunca digas "seguro", "póliza" ni "contratar" en los primeros 30 segundos. Habla de salud, Sanitas, descuento. La palabra seguro activa el rechazo automático.
+    </div>
+  </div>
+
+  <div class="whatsapp-section">
+    <div class="whatsapp-title">WhatsApp previo — mándalo 5 min antes</div>
+    <div class="whatsapp-desc">Cuando llames ya no eres un desconocido. Dobla la tasa de respuesta.</div>
+    <div class="whatsapp-bubble">
+      "Hola [nombre], soy [tu nombre] de Xàtiva. Te llamo en unos minutos, es algo breve que creo que te interesa. Un saludo."
+    </div>
+  </div>
+
+  <div class="section-title">Nivel 1 · Suave · Para conocidos</div>
+
+  <div class="card" id="c1">
+    <div class="card-header">
+      <div class="card-num" style="background:#EAF3DE;color:#27500A">1</div>
+      <div class="card-info">
+        <div class="card-name">La del reencuentro</div>
+        <span class="card-badge" style="background:#EAF3DE;color:#27500A">Conocidos Santalucía</span>
+      </div>
+    </div>
+    <div class="card-why">Activa la relación previa. No vende nada todavía, solo reconecta.</div>
+    <div class="script" style="background:#F8FAF8;border:1px solid #C0DD97;color:#1A2E1A">
+      "Hola [nombre], soy [tu nombre], nos conocemos de cuando estaba en Santalucía. Oye, estoy ahora en Nationale-Nederlanden y tenemos algo de salud con Sanitas que me ha parecido que te podía encajar. ¿Tienes 2 minutos?"
+    </div>
+    <div class="pregunta-box" style="background:#E6F1FB;border:1px solid #B5D4F4">
+      <span class="pregunta-label" style="color:#185FA5">Si dice sí → pregunta inmediatamente</span>
+      "¿Tienes médico privado ahora mismo?"
+    </div>
+    <div class="result-section">
+      <span class="result-label">Resultado:</span>
+      <select onchange="saveResult('c1',this.value)">
+        <option value="">— anotar —</option>
+        <option value="no_coge">No coge</option>
+        <option value="cuelga">Cuelga</option>
+        <option value="no_interes">No le interesa</option>
+        <option value="escucha">Me escucha ✓</option>
+        <option value="cita">Cita conseguida ★</option>
+      </select>
+      <button class="best-btn" id="btn-c1" onclick="toggleBest('c1')">Mejor apertura</button>
+    </div>
+  </div>
+
+  <div class="card" id="c2">
+    <div class="card-header">
+      <div class="card-num" style="background:#EAF3DE;color:#27500A">2</div>
+      <div class="card-info">
+        <div class="card-name">La de la salud sin seguros</div>
+        <span class="card-badge" style="background:#EAF3DE;color:#27500A">Frío suave</span>
+      </div>
+    </div>
+    <div class="card-why">Nunca dice seguro ni póliza. Solo habla de salud, Sanitas y descuento.</div>
+    <div class="script" style="background:#F8FAF8;border:1px solid #C0DD97;color:#1A2E1A">
+      "Hola [nombre], soy [tu nombre]. Oye, te llamo porque estamos con una campaña de medicina privada Sanitas con un 12,5% de descuento directo. Sin listas de espera. ¿Son 2 minutos, te cuento?"
+    </div>
+    <div class="pregunta-box" style="background:#E6F1FB;border:1px solid #B5D4F4">
+      <span class="pregunta-label" style="color:#185FA5">Si dice sí → pregunta inmediatamente</span>
+      "¿Tu médico ahora es de la Seguridad Social o tienes privado?"
+    </div>
+    <div class="result-section">
+      <span class="result-label">Resultado:</span>
+      <select onchange="saveResult('c2',this.value)">
+        <option value="">— anotar —</option>
+        <option value="no_coge">No coge</option>
+        <option value="cuelga">Cuelga</option>
+        <option value="no_interes">No le interesa</option>
+        <option value="escucha">Me escucha ✓</option>
+        <option value="cita">Cita conseguida ★</option>
+      </select>
+      <button class="best-btn" id="btn-c2" onclick="toggleBest('c2')">Mejor apertura</button>
+    </div>
+  </div>
+
+  <div class="section-title">Nivel 2 · Directa · Con gancho concreto</div>
+
+  <div class="card" id="c3">
+    <div class="card-header">
+      <div class="card-num" style="background:#E6F1FB;color:#0C447C">3</div>
+      <div class="card-info">
+        <div class="card-name">La de los números concretos</div>
+        <span class="card-badge" style="background:#E6F1FB;color:#0C447C">Frío directo</span>
+      </div>
+    </div>
+    <div class="card-why">El 12,5% para al cerebro. Un número concreto detiene el piloto automático del rechazo.</div>
+    <div class="script" style="background:#F8FAFF;border:1px solid #B5D4F4;color:#0A1A2E">
+      "Hola [nombre], soy [tu nombre] de Nationale-Nederlanden en Xàtiva. Mira, te llamo rápido: tenemos una campaña activa de salud privada Sanitas con descuento del 12,5% y además el primer año te dan protección de vida gratis. ¿Tienes literalmente 3 minutos?"
+    </div>
+    <div class="pregunta-box" style="background:#E6F1FB;border:1px solid #B5D4F4">
+      <span class="pregunta-label" style="color:#185FA5">Si dice sí → pregunta inmediatamente</span>
+      "¿Cuántas veces al año vas al médico aproximadamente?"
+    </div>
+    <div class="result-section">
+      <span class="result-label">Resultado:</span>
+      <select onchange="saveResult('c3',this.value)">
+        <option value="">— anotar —</option>
+        <option value="no_coge">No coge</option>
+        <option value="cuelga">Cuelga</option>
+        <option value="no_interes">No le interesa</option>
+        <option value="escucha">Me escucha ✓</option>
+        <option value="cita">Cita conseguida ★</option>
+      </select>
+      <button class="best-btn" id="btn-c3" onclick="toggleBest('c3')">Mejor apertura</button>
+    </div>
+  </div>
+
+  <div class="card" id="c4">
+    <div class="card-header">
+      <div class="card-num" style="background:#E6F1FB;color:#0C447C">4</div>
+      <div class="card-info">
+        <div class="card-name">La de la lista de espera</div>
+        <span class="card-badge" style="background:#E6F1FB;color:#0C447C">Dolor real</span>
+      </div>
+    </div>
+    <div class="card-why">Todo el mundo ha esperado meses para ver un especialista. Toca un dolor conocido y real.</div>
+    <div class="script" style="background:#F8FAFF;border:1px solid #B5D4F4;color:#0A1A2E">
+      "Hola [nombre], soy [tu nombre]. Oye, una pregunta rápida: ¿cuánto tiempo esperas normalmente para ver un especialista? Te lo pregunto porque tenemos acceso a Sanitas sin listas de espera, con un descuento importante ahora mismo. ¿Tienes 2 minutos?"
+    </div>
+    <div class="pregunta-box" style="background:#EAF3DE;border:1px solid #C0DD97">
+      <span class="pregunta-label" style="color:#27500A">Táctica especial</span>
+      Deja que responda la pregunta. Su respuesta te da el argumento exacto que necesitas.
+    </div>
+    <div class="result-section">
+      <span class="result-label">Resultado:</span>
+      <select onchange="saveResult('c4',this.value)">
+        <option value="">— anotar —</option>
+        <option value="no_coge">No coge</option>
+        <option value="cuelga">Cuelga</option>
+        <option value="no_interes">No le interesa</option>
+        <option value="escucha">Me escucha ✓</option>
+        <option value="cita">Cita conseguida ★</option>
+      </select>
+      <button class="best-btn" id="btn-c4" onclick="toggleBest('c4')">Mejor apertura</button>
+    </div>
+  </div>
+
+  <div class="section-title">Nivel 3 · Atrevida · Rompe el patrón</div>
+
+  <div class="card" id="c5">
+    <div class="card-header">
+      <div class="card-num" style="background:#FAEEDA;color:#633806">5</div>
+      <div class="card-info">
+        <div class="card-name">La del reto de 60 segundos</div>
+        <span class="card-badge" style="background:#FAEEDA;color:#633806">Alto impacto</span>
+      </div>
+    </div>
+    <div class="card-why">Pone el control en sus manos. ¿Quién rechaza 60 segundos? Muy bajo rechazo inicial.</div>
+    <div class="script" style="background:#FFFBF5;border:1px solid #FAC775;color:#2E1A00">
+      "Hola [nombre], soy [tu nombre]. Mira, te voy a pedir exactamente 60 segundos. Si en ese tiempo no te digo algo que te interese, cuelgas y no te molesto más. ¿Trato?"
+    </div>
+    <div class="pregunta-box" style="background:#FAEEDA;border:1px solid #FAC775">
+      <span class="pregunta-label" style="color:#854F0B">Cuando diga sí → 60 segundos exactos</span>
+      "Sanitas. Medicina privada. Sin esperas. Con descuento del 12,5% solo esta semana. Y el primer año te dan vida gratis. ¿Tienes médico privado ahora?"
+    </div>
+    <div class="result-section">
+      <span class="result-label">Resultado:</span>
+      <select onchange="saveResult('c5',this.value)">
+        <option value="">— anotar —</option>
+        <option value="no_coge">No coge</option>
+        <option value="cuelga">Cuelga</option>
+        <option value="no_interes">No le interesa</option>
+        <option value="escucha">Me escucha ✓</option>
+        <option value="cita">Cita conseguida ★</option>
+      </select>
+      <button class="best-btn" id="btn-c5" onclick="toggleBest('c5')">Mejor apertura</button>
+    </div>
+  </div>
+
+  <div class="card" id="c6">
+    <div class="card-header">
+      <div class="card-num" style="background:#FAEEDA;color:#633806">6</div>
+      <div class="card-info">
+        <div class="card-name">La brutal honesta</div>
+        <span class="card-badge" style="background:#FAEEDA;color:#633806">Rompe patrón</span>
+      </div>
+    </div>
+    <div class="card-why">Desactiva el escudo antes de que se active. La honestidad inesperada paraliza el no automático.</div>
+    <div class="script" style="background:#FFFBF5;border:1px solid #FAC775;color:#2E1A00">
+      "Hola [nombre], soy [tu nombre] y te llamo para venderte algo. Pero antes de que cuelgues, dame 30 segundos porque creo que de verdad te conviene. Si no, cuelgas y tan amigos."
+    </div>
+    <div class="pregunta-box" style="background:#E6F1FB;border:1px solid #B5D4F4">
+      <span class="pregunta-label" style="color:#185FA5">Cuando baje la guardia → pregunta</span>
+      "¿Tienes médico privado o vas a la Seguridad Social?"
+    </div>
+    <div class="result-section">
+      <span class="result-label">Resultado:</span>
+      <select onchange="saveResult('c6',this.value)">
+        <option value="">— anotar —</option>
+        <option value="no_coge">No coge</option>
+        <option value="cuelga">Cuelga</option>
+        <option value="no_interes">No le interesa</option>
+        <option value="escucha">Me escucha ✓</option>
+        <option value="cita">Cita conseguida ★</option>
+      </select>
+      <button class="best-btn" id="btn-c6" onclick="toggleBest('c6')">Mejor apertura</button>
+    </div>
+  </div>
+
+  <div class="card" id="c7">
+    <div class="card-header">
+      <div class="card-num" style="background:#FCEBEB;color:#791F1F">7</div>
+      <div class="card-info">
+        <div class="card-name">La de la urgencia real</div>
+        <span class="card-badge" style="background:#FCEBEB;color:#791F1F">Solo valientes</span>
+      </div>
+    </div>
+    <div class="card-why">El miedo a perder mueve más que la posibilidad de ganar. Para cuando ya tienes soltura.</div>
+    <div class="script" style="background:#FFF8F8;border:1px solid #F7C1C1;color:#2E0A0A">
+      "Hola [nombre], soy [tu nombre]. Oye, te llamo porque esta campaña de Sanitas acaba pronto y no quería que te quedaras sin el descuento del 12,5% por no haberme avisado a tiempo. ¿Son 2 minutos, te cuento antes de que se acabe?"
+    </div>
+    <div class="pregunta-box" style="background:#E6F1FB;border:1px solid #B5D4F4">
+      <span class="pregunta-label" style="color:#185FA5">Si te da la oportunidad → pregunta</span>
+      "¿Tú y tu familia tenéis médico privado o vais al de cabecera?"
+    </div>
+    <div class="result-section">
+      <span class="result-label">Resultado:</span>
+      <select onchange="saveResult('c7',this.value)">
+        <option value="">— anotar —</option>
+        <option value="no_coge">No coge</option>
+        <option value="cuelga">Cuelga</option>
+        <option value="no_interes">No le interesa</option>
+        <option value="escucha">Me escucha ✓</option>
+        <option value="cita">Cita conseguida ★</option>
+      </select>
+      <button class="best-btn" id="btn-c7" onclick="toggleBest('c7')">Mejor apertura</button>
+    </div>
+  </div>
+
+  <div class="card" id="c8">
+    <div class="card-header">
+      <div class="card-num" style="background:#FCEBEB;color:#791F1F">8</div>
+      <div class="card-info">
+        <div class="card-name">La del seguimiento</div>
+        <span class="card-badge" style="background:#FCEBEB;color:#791F1F">Para los que no cogieron</span>
+      </div>
+    </div>
+    <div class="card-why">Segundo intento con contexto. Muy diferente a llamar en frío otra vez.</div>
+    <div class="script" style="background:#FFF8F8;border:1px solid #F7C1C1;color:#2E0A0A">
+      "Hola [nombre], soy [tu nombre], te mandé un mensaje ayer. Te llamo porque quería comentarte algo sobre salud privada Sanitas con una oferta que acaba pronto. ¿Tienes un momento ahora?"
+    </div>
+    <div class="pregunta-box" style="background:#EAF3DE;border:1px solid #C0DD97">
+      <span class="pregunta-label" style="color:#27500A">Referencia el mensaje previo</span>
+      Que sepa que no es la primera vez. Eso da más legitimidad y reduces la sensación de llamada en frío.
+    </div>
+    <div class="result-section">
+      <span class="result-label">Resultado:</span>
+      <select onchange="saveResult('c8',this.value)">
+        <option value="">— anotar —</option>
+        <option value="no_coge">No coge</option>
+        <option value="cuelga">Cuelga</option>
+        <option value="no_interes">No le interesa</option>
+        <option value="escucha">Me escucha ✓</option>
+        <option value="cita">Cita conseguida ★</option>
+      </select>
+      <button class="best-btn" id="btn-c8" onclick="toggleBest('c8')">Mejor apertura</button>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div class="summary-title">Resumen de resultados</div>
+    <div id="summary-body">
+      <div style="font-size:12px;color:#475569;font-style:italic">Anota resultados arriba y aquí verás el patrón</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="footer-text">Anota resultados después de cada llamada · Al final del día verás cuál funciona mejor contigo</div>
+  <div class="footer-brand">Nationale-Nederlanden · Punto Naranja Xàtiva</div>
+</div>
+
+<script>
+const results = {};
+const best = new Set();
+const names = {
+  c1:'La del reencuentro', c2:'La de la salud sin seguros',
+  c3:'La de los números', c4:'La de la lista de espera',
+  c5:'La del reto 60s', c6:'La brutal honesta',
+  c7:'La de la urgencia', c8:'La del seguimiento'
+};
+const labels = {
+  no_coge:'No coge', cuelga:'Cuelga',
+  no_interes:'No interesa', escucha:'Me escucha ✓', cita:'Cita ★'
+};
+
+function saveResult(id, val) {
+  if (!val) return;
+  if (!results[id]) results[id] = {no_coge:0,cuelga:0,no_interes:0,escucha:0,cita:0};
+  results[id][val] = (results[id][val] || 0) + 1;
+  updateStats();
+  updateSummary();
+}
+
+function updateStats() {
+  let total = 0, ok = 0;
+  Object.values(results).forEach(r => {
+    Object.entries(r).forEach(([k,v]) => {
+      total += v;
+      if (k === 'escucha' || k === 'cita') ok += v;
+    });
+  });
+  document.getElementById('s-total').textContent = total;
+  document.getElementById('s-ok').textContent = ok;
+  document.getElementById('s-pct').textContent = total ? Math.round(ok/total*100)+'%' : '0%';
+}
+
+function updateSummary() {
+  const body = document.getElementById('summary-body');
+  const keys = Object.keys(results);
+  if (!keys.length) return;
+  let html = '';
+  keys.forEach(k => {
+    const r = results[k];
+    const total = Object.values(r).reduce((a,b) => a+b, 0);
+    const ok = (r.escucha||0) + (r.cita||0);
+    const pct = total ? Math.round(ok/total*100) : 0;
+    const cls = ok > 0 ? (r.cita ? 'val-cita' : 'val-escucha') : 'val-no';
+    html += `<div class="summary-row">
+      <span class="summary-name">${names[k]}</span>
+      <span class="summary-val ${cls}">${ok}/${total} (${pct}%)</span>
+    </div>`;
+  });
+  body.innerHTML = html;
+}
+
+function toggleBest(id) {
+  const btn = document.getElementById('btn-'+id);
+  const card = document.getElementById(id);
+  if (best.has(id)) {
+    best.delete(id);
+    btn.classList.remove('active');
+    btn.textContent = 'Mejor apertura';
+    card.classList.remove('winner');
+  } else {
+    best.add(id);
+    btn.classList.add('active');
+    btn.textContent = '★ Marcada';
+    card.classList.add('winner');
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,309 @@
+
+<style>
+  :root {
+    --nn-orange: #E85D26;
+    --nn-orange-light: #FAECE7;
+    --nn-orange-mid: #F0997B;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); }
+  .page { padding: 1.5rem 1rem; max-width: 860px; margin: 0 auto; }
+
+  .header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1.5px solid var(--nn-orange); }
+  .header-logo { width: 36px; height: 36px; background: var(--nn-orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; font-weight: 500; }
+  .header h1 { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
+  .header span { font-size: 13px; color: var(--color-text-secondary); margin-left: auto; }
+
+  .profile-card { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(0,1fr)); gap: 8px; }
+  .profile-item { display: flex; flex-direction: column; gap: 2px; }
+  .profile-label { font-size: 11px; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+  .profile-value { font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
+
+  .section-title { font-size: 13px; font-weight: 500; color: var(--nn-orange); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.75rem; }
+
+  .alert-box { background: var(--nn-orange-light); border-left: 3px solid var(--nn-orange); border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0; padding: 0.75rem 1rem; margin-bottom: 1.5rem; }
+  .alert-box p { font-size: 14px; color: #993C1D; line-height: 1.5; }
+  .alert-box strong { font-weight: 500; }
+
+  .gap-visual { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 1.5rem; }
+  .gap-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 0.9rem 1rem; }
+  .gap-card.highlight { border: 1.5px solid var(--nn-orange); background: var(--nn-orange-light); }
+  .gap-card .amount { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+  .gap-card.highlight .amount { color: var(--nn-orange); }
+  .gap-card .sublabel { font-size: 12px; color: var(--color-text-secondary); margin-top: 2px; }
+
+  .diffusion-section { margin-bottom: 1.5rem; }
+  .diffusion-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 1rem; }
+  .diff-tab { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 0.6rem 0.75rem; cursor: pointer; background: var(--color-background-primary); transition: all 0.15s; }
+  .diff-tab.active { border-color: var(--nn-orange); background: var(--nn-orange-light); }
+  .diff-tab .dt-label { font-size: 11px; color: var(--color-text-secondary); }
+  .diff-tab .dt-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+  .diff-tab.active .dt-label, .diff-tab.active .dt-title { color: #993C1D; }
+
+  .diff-content { display: none; background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; }
+  .diff-content.visible { display: block; }
+  .diff-content .dc-header { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 0.5rem; }
+  .diff-content .dc-arg { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 0.5rem; line-height: 1.5; background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.6rem 0.75rem; font-style: italic; }
+  .diff-content .dc-obj { font-size: 12px; color: var(--color-text-secondary); }
+  .diff-content .dc-obj span { font-weight: 500; color: var(--color-text-primary); }
+
+  .coverages-table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: 13px; }
+  .coverages-table th { text-align: left; font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; padding: 0 0 6px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .coverages-table td { padding: 7px 0; border-bottom: 0.5px solid var(--color-border-tertiary); color: var(--color-text-primary); vertical-align: middle; }
+  .coverages-table td:last-child { text-align: right; font-weight: 500; color: var(--nn-orange); }
+  .coverages-table tr.total td { font-weight: 500; font-size: 14px; border-bottom: none; padding-top: 10px; }
+  .coverages-table tr.total td:last-child { color: var(--nn-orange); }
+  .badge { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 20px; margin-left: 6px; background: #E1F5EE; color: #0F6E56; }
+  .badge.risk { background: var(--nn-orange-light); color: #993C1D; }
+
+  .extras-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.5rem; }
+  .extra-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.75rem 1rem; display: flex; gap: 10px; align-items: flex-start; }
+  .extra-icon { width: 28px; height: 28px; border-radius: 50%; background: #E1F5EE; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .extra-icon svg { width: 14px; height: 14px; }
+  .extra-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+  .extra-desc { font-size: 12px; color: var(--color-text-secondary); margin-top: 2px; }
+
+  .steps-section { margin-bottom: 1.5rem; }
+  .steps { display: flex; flex-direction: column; gap: 8px; }
+  .step { display: flex; gap: 12px; align-items: flex-start; background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 0.75rem 1rem; }
+  .step-num { width: 22px; height: 22px; border-radius: 50%; background: var(--nn-orange); color: #fff; font-size: 11px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-text { font-size: 13px; color: var(--color-text-primary); line-height: 1.5; }
+  .step-text strong { font-weight: 500; }
+
+  .final-box { background: var(--nn-orange); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; display: flex; justify-content: space-between; align-items: center; }
+  .final-box .fb-label { font-size: 13px; color: rgba(255,255,255,0.8); }
+  .final-box .fb-price { font-size: 26px; font-weight: 500; color: #fff; }
+  .final-box .fb-detail { font-size: 12px; color: rgba(255,255,255,0.7); }
+
+  .footer-note { font-size: 11px; color: var(--color-text-secondary); margin-top: 1rem; text-align: center; }
+</style>
+
+<div class="page">
+
+  <div class="header">
+    <div class="header-logo">N</div>
+    <h1>Guía Comercial — Contigo Autónomo</h1>
+    <span>Salva Costa Bello · 31/03/2026</span>
+  </div>
+
+  <div class="section-title">Perfil del cliente</div>
+  <div class="profile-card">
+    <div class="profile-item">
+      <span class="profile-label">Nombre</span>
+      <span class="profile-value">Salva Costa Bello</span>
+    </div>
+    <div class="profile-item">
+      <span class="profile-label">Edad</span>
+      <span class="profile-value">20 años</span>
+    </div>
+    <div class="profile-item">
+      <span class="profile-label">Profesión</span>
+      <span class="profile-value">Repartidor furgoneta</span>
+    </div>
+    <div class="profile-item">
+      <span class="profile-label">Régimen</span>
+      <span class="profile-value">Autónomo RETA</span>
+    </div>
+    <div class="profile-item">
+      <span class="profile-label">Ingresos netos</span>
+      <span class="profile-value">1.750 €/mes</span>
+    </div>
+    <div class="profile-item">
+      <span class="profile-label">Riesgo clave</span>
+      <span class="profile-value">Accidente de tráfico laboral</span>
+    </div>
+  </div>
+
+  <div class="section-title">El problema real: el agujero del RETA</div>
+  <div class="alert-box">
+    <p>Si Salva tiene un accidente mañana y no puede trabajar, la Seguridad Social le paga <strong>720,59 €/mes</strong>. Pero necesita <strong>900 €/mes</strong> para cubrir sus gastos fijos. Hay un agujero de <strong>179 €/mes</strong> que nadie cubre… salvo NN.</p>
+  </div>
+  <div class="gap-visual">
+    <div class="gap-card">
+      <div class="amount">900 €</div>
+      <div class="sublabel">Gastos fijos mensuales</div>
+    </div>
+    <div class="gap-card">
+      <div class="amount">721 €</div>
+      <div class="sublabel">Prestación RETA en IT</div>
+    </div>
+    <div class="gap-card highlight">
+      <div class="amount">179 €</div>
+      <div class="sublabel">Sin cubrir cada mes</div>
+    </div>
+  </div>
+
+  <div class="section-title">Argumento según perfil del cliente — teoría de difusión</div>
+  <div class="diffusion-section">
+    <div class="diffusion-tabs">
+      <div class="diff-tab active" onclick="showTab(0)">
+        <div class="dt-label">Innovador / early adopter</div>
+        <div class="dt-title">Quiero ser el primero</div>
+      </div>
+      <div class="diff-tab" onclick="showTab(1)">
+        <div class="dt-label">Mayoría pragmática</div>
+        <div class="dt-title">Lo hacen los demás</div>
+      </div>
+      <div class="diff-tab" onclick="showTab(2)">
+        <div class="dt-label">Rezagado / escéptico</div>
+        <div class="dt-title">No lo veo necesario</div>
+      </div>
+    </div>
+    <div class="diff-content visible" id="tab0">
+      <div class="dc-header">Para el cliente que actúa rápido y piensa en el futuro</div>
+      <div class="dc-arg">"Salva, tienes 20 años. Eres la persona más barata de asegurar en España ahora mismo. Cuando tengas pareja, una hipoteca o hijos, esto costará el doble. Contratar hoy es la mejor inversión financiera que puedes hacer con menos de 40 €/mes."</div>
+      <div class="dc-obj">Objetivo: <span>cerrar hoy con capital alto + ILT</span></div>
+    </div>
+    <div class="diff-content" id="tab1">
+      <div class="dc-header">Para el cliente que necesita validación social</div>
+      <div class="dc-arg">"Los autónomos que más aguantan las crisis son los que tienen su actividad protegida. El RETA no basta: cualquier repartidor que te pregunta si tienes baja cubierta, ya la tiene. No seas el único que queda expuesto."</div>
+      <div class="dc-obj">Objetivo: <span>normalizar la cobertura ILT como estándar del sector</span></div>
+    </div>
+    <div class="diff-content" id="tab2">
+      <div class="dc-header">Para el cliente que lo aplaza todo</div>
+      <div class="dc-arg">"Salva, no te pido que pienses en el futuro. Te pido que pienses en el lunes que viene. Si el lunes tienes un accidente con la furgoneta y no puedes repartir, ¿quién paga tu alquiler ese mes? Aquí mismo ves que la SS te da 720 € y tú necesitas 900. Eso es un hecho, no una posibilidad."</div>
+      <div class="dc-obj">Objetivo: <span>anclar en el presente, no en lo hipotético</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">Coberturas cotizadas — Contigo Autónomo</div>
+  <table class="coverages-table">
+    <thead>
+      <tr>
+        <th>Cobertura</th>
+        <th style="text-align:center">Capital</th>
+        <th style="text-align:right">Prima/mes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Fallecimiento<span class="badge">base</span></td>
+        <td style="text-align:center">16.000 €</td>
+        <td>5,25 €</td>
+      </tr>
+      <tr>
+        <td>Fallecimiento plus</td>
+        <td style="text-align:center">50.000 €</td>
+        <td>1,34 €</td>
+      </tr>
+      <tr>
+        <td>Fallecimiento por accidente<span class="badge risk">clave repartidor</span></td>
+        <td style="text-align:center">60.000 €</td>
+        <td>5,04 €</td>
+      </tr>
+      <tr>
+        <td>Fallecimiento accidente circulación<span class="badge risk">clave repartidor</span></td>
+        <td style="text-align:center">60.000 €</td>
+        <td>2,82 €</td>
+      </tr>
+      <tr>
+        <td>Invalidez permanente absoluta</td>
+        <td style="text-align:center">40.000 €</td>
+        <td>2,86 €</td>
+      </tr>
+      <tr>
+        <td>Invalidez permanente total</td>
+        <td style="text-align:center">20.000 €</td>
+        <td>3,83 €</td>
+      </tr>
+      <tr>
+        <td>Incapacidad laboral temporal (IT)<span class="badge risk">clave repartidor</span></td>
+        <td style="text-align:center">30 €/día</td>
+        <td>15,13 €</td>
+      </tr>
+      <tr>
+        <td>Capital enfermedad grave</td>
+        <td style="text-align:center">10.000 €</td>
+        <td>0,74 €</td>
+      </tr>
+      <tr>
+        <td>Capital primer diagnóstico de cáncer</td>
+        <td style="text-align:center">10.000 €</td>
+        <td>0,77 €</td>
+      </tr>
+      <tr class="total">
+        <td colspan="2">Total capital asegurado · descuento hábitos saludables −10%</td>
+        <td>39,94 €</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="extras-row">
+    <div class="extra-card">
+      <div class="extra-icon">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2a6 6 0 100 12A6 6 0 008 2zm0 1a5 5 0 110 10A5 5 0 018 3zm-.5 2.5v3.25l2.5 1.5.5-.866-2-1.2V5.5h-1z" fill="#0F6E56"/></svg>
+      </div>
+      <div>
+        <div class="extra-title">App Salud — gratis</div>
+        <div class="extra-desc">Chat médico 24h · múltiples especialidades · respuesta inmediata</div>
+      </div>
+    </div>
+    <div class="extra-card">
+      <div class="extra-icon">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1zm1 3v1h6V5H5zm0 2.5v1h6v-1H5zm0 2.5v1h4v-1H5z" fill="#0F6E56"/></svg>
+      </div>
+      <div>
+        <div class="extra-title">App Legal — gratis</div>
+        <div class="extra-desc">Chat legal · tráfico, trabajo, autónomos · respuesta en 2 min</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Cómo rellenar el expediente — paso a paso</div>
+  <div class="steps-section">
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Protección para actividad profesional</strong> — seleccionar en la primera pantalla de tipo de protección.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Datos personales:</strong> soltero · autónomo · RETA · 2 años cotizados · régimen fiscal general · sin hijos.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Ingresos:</strong> 1.750 €/mes × 12 pagas = 21.000 €/año. Ahorro: 0. Gastos anuales: 0.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>Gastos fijos negocio:</strong> introducir 900 €/mes. El sistema calculará automáticamente que la prestación RETA (720,59 €) no cubre y mostrará el gap de 179 €.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-text"><strong>Grupo profesional:</strong> marcar el segundo — trabajo manual sin maquinaria, con desplazamientos profesionales. Descripción: "Repartidor en Furgoneta".</div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-text"><strong>Declaración de salud:</strong> marcar SÍ si cumple todos los puntos (no fumador, no enfermedades previas, no cirugías, no medicación). Esto activa el descuento del 10% por hábitos saludables.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-text"><strong>Coberturas ILT:</strong> introducir 30 €/día. La franquicia recomendada es 8 días para optimizar prima/cobertura en un repartidor joven.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">8</div>
+        <div class="step-text"><strong>Datos de solicitud:</strong> primer beneficiario = Tomador. Sin residencia fuera de España. Sin cargo público. Régimen SS = RETA.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="final-box">
+    <div>
+      <div class="fb-label">Prima estimada mensual · con descuento saludable</div>
+      <div class="fb-detail">Capital total asegurado: 66.000 € · Contigo Autónomo</div>
+    </div>
+    <div>
+      <div class="fb-price">39,94 €</div>
+    </div>
+  </div>
+
+  <div class="footer-note">Expediente id: 71032_639105872136193500 · Fecha efecto: 02/04/2026 · Prima estimada pendiente de confirmación por profesión</div>
+
+</div>
+
+<script>
+function showTab(i) {
+  document.querySelectorAll('.diff-tab').forEach((t,j) => t.classList.toggle('active', i===j));
+  document.querySelectorAll('.diff-content').forEach((c,j) => c.classList.toggle('visible', i===j));
+}
+</script>

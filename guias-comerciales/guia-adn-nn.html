@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Maestra ADN — NN Xàtiva · Fede</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --nn: #C94D00;
+  --nn-light: #E85C0D;
+  --nn-glow: rgba(201,77,0,0.12);
+  --nn-bg: #FFF8F5;
+  --nn-bg2: #FFF0E8;
+  --dark: #0F0F0F;
+  --dark2: #1A1A1A;
+  --dark3: #2A2A2A;
+  --dark4: #3A3A3A;
+  --text: #F5F5F0;
+  --text2: #C0BDB8;
+  --text3: #8A8780;
+  --green: #22C55E;
+  --green-bg: rgba(34,197,94,0.12);
+  --red: #EF4444;
+  --red-bg: rgba(239,68,68,0.12);
+  --blue: #3B82F6;
+  --blue-bg: rgba(59,130,246,0.12);
+  --amber: #F59E0B;
+  --amber-bg: rgba(245,158,11,0.12);
+  --purple: #A855F7;
+  --purple-bg: rgba(168,85,247,0.12);
+  --r: 12px;
+  --r-lg: 18px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ══ HEADER ══════════════════════════════════════ */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15,15,15,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 2px solid var(--nn);
+  padding: 0 2rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo-box {
+  width: 36px; height: 36px;
+  background: var(--nn);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 20px rgba(201,77,0,0.3);
+}
+
+.logo-box svg { width: 18px; height: 18px; }
+
+.logo-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 1.5px;
+  color: var(--text);
+}
+
+.logo-sub {
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.5px;
+}
+
+.header-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--nn-light);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.header-back:hover { opacity: 1; }
+
+/* ══ LEVEL TABS ══════════════════════════════════ */
+.level-bar {
+  background: var(--dark2);
+  border-bottom: 1px solid var(--dark3);
+  padding: 0 2rem;
+  display: flex;
+  gap: 0;
+  position: sticky;
+  top: 60px;
+  z-index: 99;
+}
+
+.level-tab {
+  padding: 14px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text3);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.level-tab:hover { color: var(--text2); }
+
+.level-tab.active {
+  color: var(--nn-light);
+  border-bottom-color: var(--nn);
+}
+
+.level-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.badge-quick { background: var(--green-bg); color: var(--green); }
+.badge-guide { background: var(--blue-bg); color: var(--blue); }
+.badge-deep { background: var(--purple-bg); color: var(--purple); }
+
+/* ══ HERO ════════════════════════════════════════ */
+.hero {
+  padding: 4rem 2rem 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(201,77,0,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--nn-light);
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(42px, 6vw, 64px);
+  letter-spacing: 3px;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.hero h1 span { color: var(--nn-light); }
+
+.hero-desc {
+  font-size: 18px;
+  color: var(--text2);
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ══ CONTENT ═════════════════════════════════════ */
+.content {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+
+.level-content {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.level-content.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ══ SECTIONS ════════════════════════════════════ */
+.section {
+  margin-top: 3rem;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 1.5rem;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--dark3);
+}
+
+.section-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.icon-orange { background: var(--nn-glow); }
+.icon-green { background: var(--green-bg); }
+.icon-blue { background: var(--blue-bg); }
+.icon-purple { background: var(--purple-bg); }
+.icon-amber { background: var(--amber-bg); }
+.icon-red { background: var(--red-bg); }
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 1.5px;
+  color: var(--text);
+}
+
+.section-sub {
+  font-size: 12px;
+  color: var(--text3);
+  letter-spacing: 0.5px;
+}
+
+/* ══ CARDS ═══════════════════════════════════════ */
+.card {
+  background: var(--dark2);
+  border: 1px solid var(--dark3);
+  border-radius: var(--r-lg);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s;
+}
+
+.card:hover { border-color: var(--dark4); }
+
+.card-accent {
+  border-left: 4px solid var(--nn);
+}
+
+.card-green { border-left: 4px solid var(--green); }
+.card-blue { border-left: 4px solid var(--blue); }
+.card-purple { border-left: 4px solid var(--purple); }
+.card-amber { border-left: 4px solid var(--amber); }
+.card-red { border-left: 4px solid var(--red); }
+
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-title .num {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--nn);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card p {
+  color: var(--text2);
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+
+.card p:last-child { margin-bottom: 0; }
+
+.case-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 16px;
+  margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+  .case-grid { grid-template-columns: 1fr; }
+}
+
+.case-data {
+  background: var(--dark3);
+  border-radius: var(--r);
+  padding: 1rem;
+  font-size: 15px;
+}
+
+.case-data ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+.case-data li {
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--dark4);
+  padding-bottom: 6px;
+}
+
+.case-data li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.case-data strong {
+  color: var(--text);
+}
+
+.case-tag {
+  display: inline-block;
+  background: var(--nn-glow);
+  color: var(--nn-light);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* ══ COLLAPSIBLE ═════════════════════════════════ */
+.collapse-trigger {
+  width: 100%;
+  background: var(--dark2);
+  border: 1px solid var(--dark3);
+  border-radius: var(--r-lg);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-bottom: 4px;
+  transition: all 0.3s;
+  color: var(--text);
+  font-family: inherit;
+  font-size: inherit;
+  text-align: left;
+}
+
+.collapse-trigger:hover {
+  border-color: var(--nn);
+  background: var(--dark3);
+}
+
+.collapse-trigger.open {
+  border-color: var(--nn);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-bottom: 0;
+  background: var(--dark3);
+}
+
+.collapse-trigger .label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.collapse-trigger .fase-num {
+  background: var(--nn);
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.collapse-trigger .chevron {
+  transition: transform 0.3s;
+  color: var(--text3);
+}
+
+.collapse-trigger.open .chevron { transform: rotate(180deg); }
+
+.collapse-body {
+  display: none;
+  background: var(--dark2);
+  border: 1px solid var(--nn);
+  border-top: none;
+  border-bottom-left-radius: var(--r-lg);
+  border-bottom-right-radius: var(--r-lg);
+  padding: 1.5rem;
+  margin-bottom: 12px;
+  animation: slideDown 0.3s ease;
+}
+
+.collapse-body.open { display: block; }
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ══ DIALOGUE BOXES ══════════════════════════════ */
+.dialogue {
+  background: var(--dark3);
+  border-radius: var(--r);
+  padding: 1.25rem;
+  margin: 12px 0;
+  position: relative;
+}
+
+.dialogue-bad {
+  border-left: 4px solid var(--red);
+}
+
+.dialogue-good {
+  border-left: 4px solid var(--green);
+}
+
+.dialogue-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.label-bad { color: var(--red); }
+.label-good { color: var(--green); }
+
+.dialogue p {
+  color: var(--text2);
+  font-size: 15px;
+  line-height: 1.65;
+  margin-bottom: 6px;
+  font-style: italic;
+}
+
+.dialogue p:last-child { margin-bottom: 0; }
+
+.dialogue .speaker {
+  color: var(--nn-light);
+  font-weight: 600;
+  font-style: normal;
+}
+
+.dialogue .silence {
+  display: block;
+  text-align: center;
+  color: var(--amber);
+  font-weight: 600;
+  font-style: normal;
+  padding: 6px 0;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+/* ══ TIP BOXES ═══════════════════════════════════ */
+.tip {
+  background: rgba(201,77,0,0.06);
+  border: 1px solid rgba(201,77,0,0.2);
+  border-radius: var(--r);
+  padding: 1rem 1.25rem;
+  margin: 12px 0;
+}
+
+.tip-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--nn-light);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tip p {
+  color: var(--text2);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.warning {
+  background: var(--red-bg);
+  border: 1px solid rgba(239,68,68,0.25);
+}
+
+.warning .tip-title { color: var(--red); }
+
+.golden {
+  background: var(--amber-bg);
+  border: 1px solid rgba(245,158,11,0.25);
+}
+
+.golden .tip-title { color: var(--amber); }
+
+/* ══ COMPARISON TABLE ════════════════════════════ */
+.vs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.vs-col {
+  background: var(--dark3);
+  border-radius: var(--r);
+  padding: 1rem;
+}
+
+.vs-col.bad { border-top: 3px solid var(--red); }
+.vs-col.good { border-top: 3px solid var(--green); }
+
+.vs-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.vs-col.bad .vs-label { color: var(--red); }
+.vs-col.good .vs-label { color: var(--green); }
+
+.vs-col li {
+  color: var(--text2);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 4px;
+  margin-left: 16px;
+}
+
+/* ══ FLOW STEPS ══════════════════════════════════ */
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 16px 0;
+}
+
+.flow-step {
+  display: flex;
+  gap: 16px;
+  position: relative;
+}
+
+.flow-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 36px;
+}
+
+.flow-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--nn);
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.flow-connector {
+  width: 2px;
+  flex: 1;
+  background: var(--dark4);
+  min-height: 16px;
+}
+
+.flow-content {
+  padding-bottom: 20px;
+  flex: 1;
+}
+
+.flow-content h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.flow-content p {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.6;
+}
+
+/* ══ PRIORITY TABLE ══════════════════════════════ */
+.priority-grid {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.priority-row {
+  display: grid;
+  grid-template-columns: 40px 1.5fr 1.5fr 1fr auto;
+  gap: 10px;
+  align-items: center;
+  background: var(--dark3);
+  border-radius: var(--r);
+  padding: 12px 16px;
+  font-size: 14px;
+}
+
+.priority-rank {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: var(--nn-light);
+}
+
+.priority-profile { font-weight: 600; color: var(--text); }
+.priority-product { color: var(--text2); }
+.priority-pts {
+  font-weight: 700;
+  color: var(--green);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+}
+
+/* ══ CHECKLIST ═══════════════════════════════════ */
+.checklist {
+  margin: 12px 0;
+}
+
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--dark3);
+}
+
+.check-item:last-child { border-bottom: none; }
+
+.check-box {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--dark4);
+  border-radius: 6px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check-box.checked {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.check-box.checked::after {
+  content: '✓';
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.check-text {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.5;
+}
+
+.check-text strong { color: var(--text); }
+
+/* ══ KEYWORD ═════════════════════════════════════ */
+.kw {
+  display: inline-block;
+  background: var(--nn-glow);
+  color: var(--nn-light);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ══ QUOTE ═══════════════════════════════════════ */
+.quote {
+  border-left: 4px solid var(--nn);
+  padding: 1rem 1.5rem;
+  margin: 16px 0;
+  background: rgba(201,77,0,0.04);
+  border-radius: 0 var(--r) var(--r) 0;
+}
+
+.quote p {
+  font-size: 18px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.quote .author {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--nn-light);
+  font-style: normal;
+  margin-top: 6px;
+}
+
+/* ══ TOAST ═══════════════════════════════════════ */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--nn);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  z-index: 200;
+  transition: transform 0.3s;
+  box-shadow: 0 8px 30px rgba(201,77,0,0.4);
+}
+
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ══ FOOTER ══════════════════════════════════════ */
+.footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  border-top: 1px solid var(--dark3);
+  margin-top: 4rem;
+}
+
+.footer-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: var(--text3);
+}
+
+.footer-brand span { color: var(--nn-light); }
+
+/* ══ RESPONSIVE ══════════════════════════════════ */
+@media (max-width: 768px) {
+  .header { padding: 0 1rem; }
+  .level-bar { padding: 0 0.5rem; overflow-x: auto; }
+  .level-tab { padding: 12px 14px; font-size: 12px; }
+  .hero { padding: 2.5rem 1.5rem 2rem; }
+  .content { padding: 0 1.25rem 3rem; }
+  .vs-grid { grid-template-columns: 1fr; }
+  .priority-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .priority-rank { display: none; }
+  .card { padding: 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <div>
+      <div class="logo-text">GUÍA MAESTRA ADN</div>
+      <div class="logo-sub">Manual del Asesor Consultivo · NN Xàtiva</div>
+    </div>
+  </div>
+  <a class="header-back" href="https://fedefonta08.github.io/propuestas-nn/" target="_blank">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Volver al Panel
+  </a>
+</div>
+
+<!-- ══ LEVEL TABS ══ -->
+<div class="level-bar">
+  <div class="level-tab active" onclick="switchLevel('quick')">
+    ⚡ Cheat Sheet <span class="level-badge badge-quick">1 MIN</span>
+  </div>
+  <div class="level-tab" onclick="switchLevel('guide')">
+    📋 Casos Prácticos ADN <span class="level-badge badge-guide">ESTUDIO</span>
+  </div>
+  <div class="level-tab" onclick="switchLevel('deep')">
+    🧠 Manual de Neuroventas <span class="level-badge badge-deep">FORMACIÓN</span>
+  </div>
+</div>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="hero-label">Sistema de asesoramiento consultivo</div>
+  <h1>DIAGNOSTICA. NO <span>VENDAS.</span></h1>
+  <p class="hero-desc">El ADN no es un formulario. Es tu herramienta de diagnóstico financiero. Esta guía te enseña a usarlo para que el cliente descubra por sí mismo lo que necesita.</p>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════════════════════════════════════════
+     NIVEL 1: CHEAT SHEET
+     Pestaña rápida con el esqueleto conversacional y prioridades
+═══════════════════════════════════════════════════ -->
+<div class="level-content active" id="level-quick">
+
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-orange">📞</div>
+      <div>
+        <div class="section-title">FLUJO DE LA ENTREVISTA ADN (GUION OPERACIONAL)</div>
+        <div class="section-sub">Estructura conversacional en 5 fases críticas</div>
+      </div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot">1</div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>APERTURA · 3 minutos (Desarme Límbico)</h4>
+          <p><span class="speaker">"No estoy aquí para venderte nada. Estoy aquí para ayudarte a descubrir si tienes algún agujero en tu protección que no has visto."</span></p>
+          <div class="tip">
+            <div class="tip-title">🎯 Meta</div>
+            <p>Neutraliza la defensa instintiva de 2 segundos. Pide permiso y cede el control al cliente para que elija participar.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot">2</div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>DESCUBRIMIENTO · 10-15 minutos (Auditoría General)</h4>
+          <p>Sondeo: <span class="speaker">"¿Cómo es un mes normal para ti económicamente? Sin entrar en detalles... ¿cuánto entra y cuánto sale?"</span></p>
+          <p>Reflejo: <span class="speaker">"Entonces te sobran unos Z € al mes... ¿a dónde van?"</span></p>
+          <p>Mina táctica: <span class="speaker">"Si mañana tienes una emergencia grave, ¿de dónde sale el dinero?"</span></p>
+          <div class="golden">
+            <div class="tip-title">⚡ Regla de oro</div>
+            <p>Utiliza siempre los números del cliente ("Tú has dicho que ingresas..."). Discutir con sus propios datos es cognitivamente imposible.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot">3</div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>ACTIVACIÓN DE CONCIENCIA · 5-10 minutos (Cuantificar la Brecha)</h4>
+          <p>Incapacidad Temporal: <span class="speaker">"Si enfermas y tienes que parar 3 meses, ¿sabes al céntimo cuánto te ingresará la Seguridad Social cada día?"</span></p>
+          <p>Protección Familiar: <span class="speaker">"Si el motor económico de esta casa se apaga hoy... ¿cuántos meses exactos aguantaría tu familia pagando la hipoteca?"</span></p>
+          <p>Jubilación: <span class="speaker">"Cuando dejes de trabajar, vas a necesitar Z €/mes. ¿De dónde van a salir si la Seguridad Social solo te ingresa la mitad?"</span></p>
+          <div class="warning">
+            <div class="tip-title">🤫 Regla del Silencio de 10 Segundos</div>
+            <p>Tras la pregunta demoledora, cállate. Cuenta mentalmente hasta 10. Deja que el cliente asimile el abismo. El primero que habla, pierde poder.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot">4</div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>RECAPITULACIÓN · 2-3 minutos (Espejo del Dolor)</h4>
+          <p><span class="speaker">"Recapitulemos tus números: si tienes una baja cobras solo 339 € al mes frente a fijos de 2.000 €; si faltas, tu familia no tiene liquidez; y en jubilación te faltarán 900 € al mes. ¿Es correcto?"</span></p>
+          <p>Pregunta de control: <span class="speaker">"¿Qué quieres hacer con esta información?"</span></p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot">5</div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>SOLUCIÓN NATURAL · 5-10 minutos (Cerrar la Hemorragia)</h4>
+          <p><span class="speaker">"No vengo a venderte nada. Vengo a enseñarte cómo cerrar estas fugas. Te explico cómo Nationale-Nederlanden blinda estos riesgos por contrato y tú decides..."</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHEAT: OBJECIONES VRP -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-red">🛡️</div>
+      <div>
+        <div class="section-title">MANEJO DE OBJECIONES (MÉTODO VRP)</div>
+        <div class="section-sub">Validar · Reencuadrar · Proyectar</div>
+      </div>
+    </div>
+
+    <div class="card card-red">
+      <div class="card-title">"Es demasiado caro"</div>
+      <p><span class="speaker">"Entiendo perfectamente que quieras cuidar tu dinero (Validar). Pero déjame preguntarte algo: ¿qué es más caro, asumir un coste de 200 € al mes hoy o perder 2.000 € al mes de forma indefinida si mañana tienes un accidente y tu taller se para? (Reencuadrar)"</span></p>
+    </div>
+
+    <div class="card card-amber">
+      <div class="card-title">"Ya tengo un seguro con mi banco"</div>
+      <p><span class="speaker">"Qué gran noticia, demuestra que eres una persona muy previsora (Validar). Sin embargo, ¿sabes al céntimo cuánto cobraría tu familia al mes si faltas y si ese capital extingue la hipoteca o los deja con 0 € de liquidez para comer? Comparemos coberturas contra coberturas, no precios (Reencuadrar)"</span></p>
+    </div>
+
+    <div class="card card-blue">
+      <div class="card-title">"Déjame que lo piense"</div>
+      <p><span class="speaker">"Por supuesto, es una decisión muy seria y es sano meditarla (Validar). Para que lo pienses con toda la información: ¿qué te frena realmente? ¿Es el presupuesto, el producto o la confianza? (Reencuadrar) Si en 6 meses ocurre un imprevisto médico, ¿pensarás 'menos mal que contraté' o 'por qué no lo dejé resuelto'? (Proyectar)"</span></p>
+    </div>
+  </div>
+
+  <!-- CHEAT: BUYER PERSONAS (S1 A S5) -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-purple">👥</div>
+      <div>
+        <div class="section-title">FRAMEWORK DE BUYER PERSONAS (S1 A S5)</div>
+        <div class="section-sub">Estrategia de venta rápida y segmentación por perfil vital</div>
+      </div>
+    </div>
+
+    <div class="priority-grid">
+      <div class="priority-row" style="border-left: 4px solid var(--green)">
+        <div class="priority-rank">S1</div>
+        <div class="priority-profile">Joven (18-30 años)</div>
+        <div class="priority-product">SIALP Plan Creciente (Ahorro)</div>
+        <div class="priority-pts">El coste del retraso</div>
+        <span class="case-tag" style="background:var(--green-bg);color:var(--green)">Tiempo</span>
+      </div>
+      <div class="priority-row" style="border-left: 4px solid var(--blue)">
+        <div class="priority-rank">S2</div>
+        <div class="priority-profile">Constructor (28-38 años)</div>
+        <div class="priority-product">SIALP + Contigo Familia</div>
+        <div class="priority-pts">Equilibrio Familiar / Hipoteca</div>
+        <span class="case-tag" style="background:var(--blue-bg);color:var(--blue)">Hogar</span>
+      </div>
+      <div class="priority-row" style="border-left: 4px solid var(--purple)">
+        <div class="priority-rank">S3</div>
+        <div class="priority-profile">Protector (36-52 años)</div>
+        <div class="priority-product">SIALP + Sistema Duplo</div>
+        <div class="priority-pts">La hipoteca del tiempo / Carga</div>
+        <span class="case-tag" style="background:var(--purple-bg);color:var(--purple)">Estabilidad</span>
+      </div>
+      <div class="priority-row" style="border-left: 4px solid var(--red)">
+        <div class="priority-rank">S3A</div>
+        <div class="priority-profile">Autónomo RETA (36-52 años)</div>
+        <div class="priority-product">PPSA Autónomos + ILT Baja</div>
+        <div class="priority-pts">La mesa de 3 patas / Persiana</div>
+        <span class="case-tag" style="background:var(--red-bg);color:var(--red)">RETA</span>
+      </div>
+      <div class="priority-row" style="border-left: 4px solid var(--amber)">
+        <div class="priority-rank">S4</div>
+        <div class="priority-profile">Planificador (50-64 años)</div>
+        <div class="priority-product">Sistema Duplo + SIALP</div>
+        <div class="priority-pts">El Reloj Fiscal del IRPF</div>
+        <span class="case-tag" style="background:var(--amber-bg);color:var(--amber)">Fiscal</span>
+      </div>
+      <div class="priority-row" style="border-left: 4px solid var(--nn)">
+        <div class="priority-rank">S5</div>
+        <div class="priority-profile">Senior (55+ años)</div>
+        <div class="priority-product">PPSA + Contigo Senior</div>
+        <div class="priority-pts">El Blindaje del Legado / Herencia</div>
+        <span class="case-tag">Legado</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     NIVEL 2: CASOS PRÁCTICOS ADN (MAPEO TÉCNICO)
+     Documentación detallada de las 4 fases del ADN con casos reales
+═══════════════════════════════════════════════════ -->
+<div class="level-content" id="level-guide">
+
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-orange">🧬</div>
+      <div>
+        <div class="section-title">LOS 4 CASOS REALES DEL ADN FINANCIERO</div>
+        <div class="section-sub">Mapeo de pantallas, datos económicos y ganchos de venta por fase</div>
+      </div>
+    </div>
+
+    <!-- FASE 1: JUBILACIÓN -->
+    <button class="collapse-trigger" onclick="toggleCollapse(this)">
+      <div class="label"><div class="fase-num">1</div> Fase 1: Jubilación — Caso Francisco (S4)</div>
+      <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="collapse-body">
+      <div class="case-grid">
+        <div>
+          <p><strong>Descripción del Caso (S4 - Planificador):</strong> Francisco, 65 años (Xàtiva), ingeniero. Autónomo RETA con 38 años cotizados. Cree que con su plan de pensiones bancario y ahorros va sobrado y que ya es muy tarde para cambiar.</p>
+          <p><strong>Vulnerabilidad principal:</strong> Brecha fiscal y pérdida de poder de compra severa por la ineficiencia fiscal del plan de pensiones del banco.</p>
+          <p><strong>Solución propuesta:</strong> <strong>PPSA Autónomos (Aportación + Traspaso)</strong> para máxima deducibilidad fiscal en el último año activo (hasta 5.750 €) y optimización del capital acumulado de su plan de pensiones bancario ineficiente con la gestión delegada de Goldman Sachs.</p>
+        </div>
+        <div class="case-data">
+          <div class="case-tag">Datos Clave</div>
+          <ul>
+            <li>Edad: <strong>65 años</strong></li>
+            <li>Régimen: <strong>Autónomo RETA</strong></li>
+            <li>Años Cotizados: <strong>38 años</strong></li>
+            <li>Fórmula propuesta: <strong>PPSA Autónomos (Aportación + Traspaso)</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">1</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>Bypass del Sistema RETA (Captura: 20260604_121843.jpg) · Progreso 57%</h4>
+            <p><strong>Pregunta Mágica:</strong> "Francisco, para calcular tu pensión exacta necesitamos introducir tu base de cotización actual del RETA. ¿Tributas por la base ordinaria general o tienes alguna bonificación especial activa en tu cuota?"</p>
+            <p><strong>Validación:</strong> "Excelente. Registrar la cotización general nos asegura estimar con total precisión tu pensión pública de jubilación y detectar cualquier desfase impositivo."</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">2</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>Fuga Fiscal del Plan del Banco (Captura: 20260604_121849.jpg) · Progreso 57%</h4>
+            <p><strong>Pregunta Mágica:</strong> "¿Sabes qué retención fiscal exacta del IRPF te va a aplicar Hacienda cuando rescates de golpe el capital de tu plan de pensiones del banco tradicional?"</p>
+            <p><strong>Validación:</strong> "Es muy normal no conocer el impacto del rescate. Los bancos no suelen avisar de que un rescate ineficiente puede llevarse hasta el 40% de tu ahorro en impuestos. Vamos a planificarlo de forma progresiva."</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">3</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>El Reloj de Urgencia (Captura: 20260604_121859.jpg) · Progreso 57%</h4>
+            <p><strong>Pregunta Mágica:</strong> "Francisco, estás en tu último año de cotización antes de jubilarte. Lo que no deduzcas fiscalmente hoy, lo perderás para siempre. ¿Tiene sentido regalarle IRPF al Estado en tu último año en activo?"</p>
+            <p><strong>Validación:</strong> "Es de lo más inteligente. Utilizar el PPSA de autónomos en este último sprint fiscal te permite deducir el máximo legal y asegurar que ese dinero se quede en tu bolsillo, no en el de Hacienda."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 2: PROTECCIÓN -->
+    <button class="collapse-trigger" onclick="toggleCollapse(this)">
+      <div class="label"><div class="fase-num">2</div> Fase 2: Protección — Casos Nuria (S2) y Jordi (S3A)</div>
+      <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="collapse-body">
+      <div class="vs-grid">
+        <div class="vs-col good">
+          <div class="vs-label">A. Perfil Familiar (S2) — Caso Nuria</div>
+          <p style="font-size:14px;color:var(--text)">Nuria, 41 años (Carcaixent). Administrativa. Casada y madre de 2 niños. Cree que está totalmente protegida por el seguro de vida vinculado a la hipoteca y la pensión de viudedad.</p>
+          <p style="font-size:14px;color:var(--text2)"><strong>Hemorragia:</strong> El seguro del banco amortiza la deuda pero deja a la familia con **0 € líquidos** en caso de fallecimiento. La pensión de viudedad pública estimada es de solo **954,33 €/mes**, lo que genera una brecha mensual de ~300 € para mantener a sus hijos.</p>
+          <p style="font-size:14px;color:var(--nn-light)"><strong>Solución:</strong> Contigo Familia con capital líquido mensual para los dependientes.</p>
+        </div>
+        <div class="vs-col good" style="border-top-color: var(--nn)">
+          <div class="vs-label">B. Perfil Autónomo (S3A) — Caso Jordi</div>
+          <p style="font-size:14px;color:var(--text)">Jordi, 45 años (Xàtiva). Propietario de un taller mecánico. Casado y con 1 hijo (8 años). Cotiza al mínimo en RETA (cuota de 452 €/mes). Confía en que 'nunca se pone enfermo'.</p>
+          <p style="font-size:14px;color:var(--text2)"><strong>Hemorragia:</strong> En caso de baja por ILT (enfermedad/accidente), la Seguridad Social solo le ingresará **339 €/mes**. Los fijos del taller (alquiler de nave, suministros, impuestos) suman **2.000 €/mes** y no se paran. Su brecha es de **1.661 €/mes**.</p>
+          <p style="font-size:14px;color:var(--nn-light)"><strong>Solución:</strong> Contigo Familia ILT con subsidio de baja diaria de 50 €/día.</p>
+        </div>
+      </div>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">1</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>El Engaño del Seguro Bancario (Nuria) · Captura: 20260604_130214.jpg</h4>
+            <p><strong>Pregunta Mágica:</strong> "Nuria, es magnífico que tengas asegurada la vivienda con el banco. Pero déjame hacerte una pregunta: si tú faltas mañana, el banco cobra la hipoteca y cancela la deuda... pero ¿de dónde saca tu marido el efectivo mensual para pagar el colegio de los niños, la luz y la comida?"</p>
+            <p><strong>Validación:</strong> "Exacto. Ese seguro protege al banco, no a tu familia. Necesitamos un escudo de liquidez directa que mantenga el nivel de vida de tus hijos, no solo la hipoteca del banco."</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">2</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>El Motor Parado del Taller (Jordi) · Captura: 20260604_130420.jpg</h4>
+            <p><strong>Pregunta Mágica:</strong> "Jordi, tú eres el motor de tu taller: si tus manos se paran por una fractura, la persiana se queda bajada. Si el Estado solo te paga 339 € al mes y la nave te cuesta 2.000 €, ¿de qué cuenta de ahorros saldrán los 1.661 € de brecha cada mes?"</p>
+            <p><strong>Validación:</strong> "Es muy duro. Trabajar al mínimo te ahorra cuota hoy, pero te expone a una quiebra inmediata ante una simple baja. Crear un escudo diario de subsidio es la única forma de que tu negocio no dependa de tu salud."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 3: AHORRO E INVERSIÓN -->
+    <button class="collapse-trigger" onclick="toggleCollapse(this)">
+      <div class="label"><div class="fase-num">3</div> Fase 3: Ahorro e Inversión — Francisco y Noelia (S3)</div>
+      <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="collapse-body">
+      <div class="case-grid">
+        <div>
+          <p><strong>Contexto Financiero Consolidado (S3 - Protector):</strong></p>
+          <p>Francisco (autónomo) y su pareja Noelia (cuenta ajena, 1.300 €/mes netos en 12 pagas, grupo Ingenieros). Ingresos del hogar: **59.400 €/año** (**4.950 €/mes** netos conjuntos). Gastos: **25.000 €/año** (**2.083,33 €/mes**). Patrimonio líquido: **36.000 €**. Excedente neto: **2.866,67 €/mes**.</p>
+          <p>Mapeamos la secuencia de sus 3 huchas/sueños activos:</p>
+        </div>
+        <div class="case-data">
+          <div class="case-tag">Presupuesto Familiar</div>
+          <ul>
+            <li>Ingresos netos: <strong>4.950 €/mes</strong></li>
+            <li>Gastos fijos: <strong>2.083 €/mes</strong></li>
+            <li>Excedente libre: <strong>2.867 €/mes</strong></li>
+            <li>Ahorro inicial: <strong>36.000 €</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">A</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>Hucha 1: Comprarme una casa (14 pantallas, 20260604_133608.jpg a 133805.jpg)</h4>
+            <p><strong>Configuración:</strong> 0 € iniciales de sus ahorros, acumulando cuota regular a 25 años. Ahorro disponible libre de 2.866,67 €/mes. El simulador les recuerda la brecha de jubilación de Francisco (-339 €/mes) y protección (180 €/mes).</p>
+            <p><strong>Pregunta Mágica:</strong> "Francisco, el portal muestra que ingresáis netos 4.950 € al mes. Con vuestro excedente mensual de 2.866 €, podéis cubrir la jubilación y abrir la hucha de la casa sin alterar vuestro nivel de vida actual. ¿Habéis pensado destinar una parte de vuestros 36.000 € acumulados a la entrada o empezamos de cero?"</p>
+            <p><strong>Validación:</strong> "Mantener intacto vuestro fondo de emergencia de 36.000 € es una gran decisión protectora. Programar el ahorro de la casa mes a mes desde el excedente os garantiza llegar a la meta sin esfuerzo."</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">B</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>Hucha 2: La educación de sus hijos (18 pantallas, 20260604_134745.jpg a 134945.jpg)</h4>
+            <p><strong>Configuración:</strong> Deciden asignar **1.000 €** de su patrimonio acumulado, reduciendo su fondo de emergencia a **35.000 €**. Debido al interés compuesto a largo plazo, la aportación mensual simulada es de 16,67 €/mes, resultando en un gap de cotización neta de solo **-2 €/mes**.</p>
+            <p><strong>Pregunta Mágica:</strong> "Al apartar 1.000 € hoy para los estudios de tu hijo, tu fondo de emergencia queda en 35.000 € (muy robusto) y la cuota regular mensual requerida por el simulador cae a solo 2 € al mes. ¿Cómo valoras que el futuro académico de tu hijo quede prácticamente blindado por contrato con solo 2 € al mes?"</p>
+            <p><strong>Validación:</strong> "Es el poder del tiempo y del interés compuesto. Apartar una pequeña parte inicial y programar una cuota simbólica de 2 € os garantiza la universidad de Andrés sin tensionar el día a día."</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">C</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>Hucha 3: ¿Quizás un viaje? (17 pantallas, 20260604_135253.jpg a 135502.jpg)</h4>
+            <p><strong>Configuración:</strong> Objetivo de 500 € a 5 años (sin capital inicial), aportando una cuota mensual de **8,33 €/mes** (redondeado a 8 €/mes en el resumen de metas cruzadas).</p>
+            <p><strong>Pregunta Mágica:</strong> "Para esta hucha de ilusión de 500 €, el sistema calcula una cuota periódica de solo 8 € al mes. ¿Procedemos a abrir un Plan Creciente SIALP, que a sus 5 años de vencimiento exactos os entregará el dinero 100% libre de impuestos?"</p>
+            <p><strong>Validación:</strong> "Excelente. El SIALP a 5 años es perfecto para viajes programados: blinda el capital contra caídas gracias a su suelo del 80% y os exime por completo de pagar IRPF a su retirada."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 4: HOGAR Y AUTOS -->
+    <button class="collapse-trigger" onclick="toggleCollapse(this)">
+      <div class="label"><div class="fase-num">4</div> Fase 4: Hogar y Autos — Venta Cruzada a Jordi (S3A)</div>
+      <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="collapse-body">
+      <div class="case-grid">
+        <div>
+          <p><strong>Estrategia Comercial (S3A - Autónomo RETA):</strong> El portal recopila la aseguradora actual, la fecha de vencimiento y la prima anual. Su objetivo es detectar ineficiencias económicas y agendar contactos futuros 1-2 meses antes del vencimiento.</p>
+          <p><strong>Soluciones asociadas:</strong></p>
+          <p>→ **Mihogar Seguro** (alianza Caser): Seguro modular con 12 coberturas básicas, servicio Manitas y descuentos de hasta el 25%.</p>
+          <p>→ **Autos MM Globalis** (alianza Mutua Madrileña): Asistencia desde el Km 0, recuperación de puntos, recursos de multas y valor a nuevo los 2 primeros años.</p>
+        </div>
+        <div class="case-data">
+          <div class="case-tag">Datos de Captura</div>
+          <ul>
+            <li>Vencimiento común: <strong>04/06/2026</strong></li>
+            <li>Aseguradora actual: <strong>[Campo de Entrada]</strong></li>
+            <li>Prima anual actual: <strong>[Campo de Entrada]</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">1</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>Módulo Hogar (5 pantallas, 20260604_142134.jpg a 142220.jpg) · Progreso 48%</h4>
+            <p><strong>Pregunta Mágica:</strong> "Jordi, tu seguro de hogar está con el banco por imperativo de la hipoteca. Pero ¿sabías que la ley de contrato de seguros te permite cambiar de compañía notificando con un mes de antelación? ¿Te gustaría ver cuánto de más te está cobrando el banco al año en comparación con nuestro seguro modular Mihogar?"</p>
+            <p><strong>Validación:</strong> "Muy bien. Auditar la póliza del banco es el primer paso para recuperar el control. Ahorrarte un 25% anual manteniendo mejores coberturas y servicio Manitas integrado es lo más sensato."</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot">2</div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>Módulo Auto (4 pantallas, 20260604_142320.jpg a 142358.jpg) · Progreso 47%</h4>
+            <p><strong>Pregunta Mágica:</strong> "Para tu furgoneta y el coche familiar, Mapfre es una aseguradora de renombre, pero su prima anual suele fluctuar mucho. MM Globalis (Mutua Madrileña) nos da un precio cerrado y estable al emitir, además de asistencia Km 0 desde el minuto uno. ¿Cuándo vence tu póliza actual para que te calculemos la cotización exacta?"</p>
+            <p><strong>Validación:</strong> "Perfecto. Registrar el vencimiento del 4 de junio nos permite planificar tu ahorro de autos con antelación para que cuando llegue el recibo no tengas que pagarlo de golpe bajo las condiciones del banco."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     NIVEL 3: MANUAL DE NEUROVENTAS
+     Psicología avanzada, de las transcripciones de audios
+═══════════════════════════════════════════════════ -->
+<div class="level-content" id="level-deep">
+
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-purple">🧠</div>
+      <div>
+        <div class="section-title">PSICOLOGÍA Y COMUNICACIÓN CONSULTIVA</div>
+        <div class="section-sub">Tácticas de desmontaje de defensas y activación límbica del cliente</div>
+      </div>
+    </div>
+
+    <!-- SUBSECCIÓN 1 -->
+    <div class="card card-purple">
+      <div class="card-title">1. La "Llamada de Rescate" (Los Primeros 20 Segundos)</div>
+      <p>El manual interno de NN prohíbe esconderse tras el correo masivo, considerándolo "pereza comercial disfrazada de productividad". La llamada de rescate busca capturar 30 minutos del cliente desarmando su amígdala (detector de amenazas) mediante una **vulnerabilidad comercial anticipada**.</p>
+      
+      <div class="dialogue dialogue-good">
+        <div class="dialogue-label label-good">GUION TÁCTICO DE APERTURA</div>
+        <p><span class="speaker">Asesor:</span> "Hola Francisco, buenos días. Soy Fede Fontanals, tu delegado de Nationale-Nederlanden en Xàtiva. Te llamo rápido porque tu tiempo es oro..."</p>
+        <p><span class="speaker">Asesor:</span> "Te envié un correo hace unos días, pero, siendo muy honesto contigo, me quedé frío al leerlo. Parecía el típico correo masivo comercial, muy aburrido, y probablemente ni lo abriste..."</p>
+        <p><span class="speaker">Cliente:</span> (Sorprendido, baja la guardia) "Pues... la verdad es que no lo recuerdo..."</p>
+        <p><span class="speaker">Asesor:</span> "Es normal. Precisamente por eso te llamo. Estamos realizando una auditoría rápida de 15 minutos en tu sector para profesionales autónomos, para detectar una brecha severa que hay en la Seguridad Social. Si tras meter tus números en el simulador veo que estás 100% protegido, seré el primero en felicitarte y colgaré la llamada. ¿Te viene mejor el martes a las 10:00 en tu despacho o el miércoles por la tarde?"</p>
+      </div>
+      <p style="font-size:14px;color:var(--text3)">*Nota: El asesor no vende un seguro por teléfono; vende una auditoría gratuita de 15 minutos utilizando la honestidad radical.*</p>
+    </div>
+
+    <!-- SUBSECCIÓN 2 -->
+    <div class="card card-purple">
+      <div class="card-title">2. Clasificación Clínica de los Silencios Post-Pregunta Dura</div>
+      <p>Tras lanzar una pregunta de activación de conciencia, el manual ordena hacer un silencio absoluto de 10 segundos. No debes "rescatar" cognitivamente al cliente de su incomodidad. Dependiendo de su comportamiento no verbal, el silencio se gestiona de tres formas:</p>
+      
+      <div class="vs-grid">
+        <div class="vs-col good">
+          <div class="vs-label">A. Silencio Reflexivo</div>
+          <p style="font-size:14px;color:var(--text)">**Indicadores:** Ceño fruncido, mirada desviada hacia un lado o hacia arriba, haciendo cuentas mentales.</p>
+          <p style="font-size:14px;color:var(--green)">**Táctica del Asesor:** Inmovilidad absoluta. No interrumpas el cálculo del neocórtex del cliente.</p>
+        </div>
+        <div class="vs-col good" style="border-top-color: var(--amber)">
+          <div class="vs-label">B. Silencio Defensivo</div>
+          <p style="font-size:14px;color:var(--text)">**Indicadores:** Mandíbula tensa, brazos cruzados, mirada fija y rígida. Siente el secuestro amigdalino por verse acorralado.</p>
+          <p style="font-size:14px;color:var(--amber)">**Táctica del Asesor:** Empatía táctica. Rompe suavemente a los 10 segundos: *"Sé que mirar estos números es incómodo, pero es mi obligación profesional mostrártelo..."*</p>
+        </div>
+      </div>
+      
+      <div class="vs-grid" style="grid-template-columns:1fr;margin-top:0;">
+        <div class="vs-col good" style="border-top-color: var(--red)">
+          <div class="vs-label">C. Silencio de Resistencia</div>
+          <p style="font-size:14px;color:var(--text)">**Indicadores:** Evitación total de la mirada, rigidez y congelación. No confía en ti para compartir sus datos económicos.</p>
+          <p style="font-size:14px;color:var(--red)">**Táctica del Asesor:** Desescalada inmediata. *"Oye, frena un momento. Mi intención no es juzgar tu economía, sino darte claridad sobre tu Seguridad Social. ¿Hay algo de lo que te he planteado que te incomode?"*</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBSECCIÓN 3 -->
+    <div class="card card-purple">
+      <div class="card-title">3. Las Metáforas Visuales de la Disonancia (Sesgo Antigravity)</div>
+      <p>El cerebro humano rechaza de forma instintiva la jerga técnica compleja o los nombres comerciales abstractos de seguros. El **Sesgo Antigravity** consiste en traducir conceptos áridos en imágenes visuales instantáneas:</p>
+      
+      <div class="vs-grid">
+        <div class="vs-col bad">
+          <div class="vs-label">Jerga comercial (Falsa seguridad)</div>
+          <ul>
+            <li>"Seguro de vida de capital decreciente..."</li>
+            <li>"Cartera diversificada Goldman Sachs 50/50..."</li>
+            <li>"Deducciones en la base imponible del IRPF..."</li>
+            <li>"Seguro de baja ILT diaria RETA..."</li>
+          </ul>
+        </div>
+        <div class="vs-col good">
+          <div class="vs-label">Sesgo Antigravity (Traducir a imágenes)</div>
+          <ul>
+            <li>"El escudo inteligente de tu hipoteca."</li>
+            <li>"El colchón de los directivos de Goldman Sachs."</li>
+            <li>"El grifo de Hacienda que podemos cerrar."</li>
+            <li>"La persiana de tu taller en caso de enfermedad."</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBSECCIÓN 4 -->
+    <div class="card card-purple">
+      <div class="card-title">4. El Cerebro Multiagente (Los 4 Sesgos de la Élite Comercial)</div>
+      <p>El manual describe un marco mental basado en sesgos conversacionales inspirados en cómo procesan la información diferentes perfiles de IA, adaptando el argumento de venta según la personalidad del cliente:</p>
+      
+      <div class="priority-grid">
+        <div class="priority-row" style="background:var(--dark3); border-left:4px solid var(--nn)">
+          <div class="priority-profile">🛡️ Sesgo Gemini (El Médico)</div>
+          <div class="priority-product">"Si tras auditar tus datos veo que estás protegido, te daré la enhorabuena y colgaré. Mi valor está en el diagnóstico, no en la póliza."</div>
+          <div class="case-tag">Genera Confianza</div>
+        </div>
+        <div class="priority-row" style="background:var(--dark3); border-left:4px solid var(--blue)">
+          <div class="priority-profile">🔍 Sesgo Comet (Hiperpersonalización)</div>
+          <div class="priority-product">"He analizado tu sector y tu situación: como autónomo con 2 dependientes, la Seguridad Social te deja una brecha exacta de 1.661 €."</div>
+          <div class="case-tag">Elimina la Genérica</div>
+        </div>
+        <div class="priority-row" style="background:var(--dark3); border-left:4px solid var(--red)">
+          <div class="priority-profile">🤠 Sesgo Cowboy (FOMO/Binario)</div>
+          <div class="priority-product">"Las opciones son binarias: o decides destinar 200 € al futuro de tus hijos hoy, o el azar decidirá si acaban dependiendo del Estado."</div>
+          <div class="case-tag">Urgencia Cruda</div>
+        </div>
+        <div class="priority-row" style="background:var(--dark3); border-left:4px solid var(--purple)">
+          <div class="priority-profile">📈 Sesgo Clow (El Reloj Fiscal)</div>
+          <div class="priority-product">"Hacienda cierra su ventanilla el 31 de diciembre. Si no deduces esos 5.750 € antes de las 12 de la noche, habrás regalado ese dinero."</div>
+          <div class="case-tag">Urgencia Temporal</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBSECCIÓN 5: BUYER PERSONAS S1-S5 -->
+    <div class="card card-purple">
+      <div class="card-title">5. El Framework Completo de Persuasión: Buyer Personas (S1 a S5)</div>
+      <p>Adapta tu mayéutica y el gancho de venta consultiva según la mentalidad y momento vital del cliente:</p>
+
+      <!-- S1 -->
+      <div class="dialogue" style="border-left: 4px solid var(--green); background: var(--dark3); margin-bottom: 12px;">
+        <div class="dialogue-label" style="color:var(--green)">🟢 S1: Joven (18–30 años) — El poder del Tiempo</div>
+        <p><strong>Enfoque Límbico:</strong> Sienten invulnerabilidad física y ven la jubilación a años luz. Priorizan ocio, viajes o el primer coche/vivienda.</p>
+        <p><strong>La Pregunta Detonante:</strong> <em>"Si pudieras comprar hoy un billete para que tu 'yo del futuro' viaje gratis y te costara la mitad de lo que le costará dentro de diez años... ¿lo comprarías hoy o esperarías a que doble el precio por retrasarte?"</em></p>
+        <p><strong>Estrategia de Producto:</strong> <strong>Plan Creciente SIALP</strong>. Argumentar el coste de no hacer nada (ahorrar 50 €/mes hoy equivale a tener que aportar 250 €/mes a los 45).</p>
+      </div>
+
+      <!-- S2 -->
+      <div class="dialogue" style="border-left: 4px solid var(--blue); background: var(--dark3); margin-bottom: 12px;">
+        <div class="dialogue-label" style="color:var(--blue)">🔵 S2: Constructor (28–38 años) — Equilibrio Familiar</div>
+        <p><strong>Enfoque Límbico:</strong> Máxima presión de gastos (hipoteca, niños pequeños). Su cerebro está enfocado en sobrevivir al mes.</p>
+        <p><strong>La Pregunta Detonante:</strong> <em>"Nuria, si vuestro sueldo de casa cayera a la mitad de golpe por una enfermedad, ¿qué proyectos de tus hijos tendrías que cancelar hoy? Creemos un escudo para que vuestros fijos nunca amenacen la estabilidad."</em></p>
+        <p><strong>Estrategia de Producto:</strong> <strong>SIALP + Contigo Familia</strong>. Enlazar el ahorro a la seguridad familiar y el blindaje hipotecario.</p>
+      </div>
+
+      <!-- S3 -->
+      <div class="dialogue" style="border-left: 4px solid var(--purple); background: var(--dark3); margin-bottom: 12px;">
+        <div class="dialogue-label" style="color:var(--purple)">🟣 S3: Protector (36–52 años) — El tramo de Máxima Carga</div>
+        <p><strong>Enfoque Límbico:</strong> Preocupados por la estabilidad. Sienten la hipoteca del tiempo: ven que el retiro se acerca pero sus ahorros están parados al 0% en el banco.</p>
+        <p><strong>La Pregunta Detonante:</strong> <em>"Si dejas tu dinero en la libreta del banco al 0%, ¿estás protegiendo tu esfuerzo o le estás garantizando a la inflación que se coma las vacaciones de tu jubilación de forma silenciosa?"</em></p>
+        <p><strong>Estrategia de Producto:</strong> <strong>SIALP + Sistema Duplo</strong>. Demostrar la brecha en papel e incentivar la rentabilidad activa.</p>
+      </div>
+
+      <!-- S3A -->
+      <div class="dialogue" style="border-left: 4px solid var(--red); background: var(--dark3); margin-bottom: 12px;">
+        <div class="dialogue-label" style="color:var(--red)">🔴 S3A: Autónomo (36–52 años) — La Alerta del RETA</div>
+        <p><strong>Enfoque Límbico:</strong> Pánico al parón del negocio. Saben que si sus manos no trabajan, el negocio se hunde.</p>
+        <p><strong>La Pregunta Detonante:</strong> <em>"Jordi, cotizas al mínimo para pagar menos cuota. Pero si tu negocio tiene 2.000 € de gastos fijos que no perdonan y el RETA solo te ingresa 339 € al mes por baja, ¿de dónde salen los 1.660 € mensuales de brecha para que tu persiana no se quede bajada para siempre?"</em></p>
+        <p><strong>Estrategia de Producto:</strong> <strong>PPSA Autónomos (hasta 5.750 €/año de deducción IRPF) + Seguro ILT</strong>. El argumento es la supervivencia del negocio.</p>
+      </div>
+
+      <!-- S4 -->
+      <div class="dialogue" style="border-left: 4px solid var(--amber); background: var(--dark3); margin-bottom: 12px;">
+        <div class="dialogue-label" style="color:var(--amber)">🟡 S4: Planificador (50–64 años) — La Última Ventana</div>
+        <p><strong>Enfoque Límbico:</strong> Urgencia máxima. Quedan menos de 10-15 años de vida laboral activa. Sus hijos ya son independientes y sus ingresos son estables y altos.</p>
+        <p><strong>La Pregunta Detonante:</strong> <em>"Francisco, estás en el último tramo de tu vida laboral donde puedes obligar a Hacienda a devolverte hasta el 40% de lo que ahorres en tu declaración anual. ¿Prefieres dejarle ese dinero al Estado o meterlo en tu plan de jubilación familiar?"</em></p>
+        <p><strong>Estrategia de Producto:</strong> <strong>Sistema Duplo (gestión Goldman Sachs) + SIALP</strong>. Foco total en la desgravación por el Reloj Fiscal.</p>
+      </div>
+
+      <!-- S5 -->
+      <div class="dialogue" style="border-left: 4px solid var(--nn); background: var(--dark3); margin-bottom: 12px;">
+        <div class="dialogue-label" style="color:var(--nn-light)">🟤 S5: Senior (55+ años) — Consolidación y Legado</div>
+        <p><strong>Enfoque Límbico:</strong> Miedo a ser una carga para sus hijos, a la pérdida de autonomía y a que la herencia quede bloqueada o con altos impuestos.</p>
+        <p><strong>La Pregunta Detonante:</strong> <em>"El día de mañana, ¿quieres que tus hijos tengan que pedir un préstamo para poder liquidar el impuesto de sucesiones de tu herencia, o prefieres dejarles un cheque líquido blindado por contrato y exento de tributación?"</em></p>
+        <p><strong>Estrategia de Producto:</strong> <strong>PPSA (capital garantizado) + Contigo Senior</strong>. El argumento es la tranquilidad hereditaria y la autonomía.</p>
+      </div>
+    </div>
+
+    <!-- SUBSECCIÓN 6 -->
+    <div class="card card-purple">
+      <div class="card-title">6. La Venta Lógica: El Dolor Matemático</div>
+      <p>El manual insiste: **el dolor abstracto no vende, el dolor matemático sí**. No le digas al cliente que "su jubilación será difícil". Haz que sea su propio cerebro el que choque contra la disonancia cognitiva de sus números reales:</p>
+
+      <div class="dialogue dialogue-bad">
+        <div class="dialogue-label label-bad">ENFOQUE DE VENDEDOR TRADICIONAL (ABSTRACTO)</div>
+        <p><span class="speaker">Vendedor:</span> "Deberías contratar el SIALP porque la inflación es muy alta y vas a perder poder adquisitivo en el banco..."</p>
+        <p style="font-size:13px;color:var(--red)">*Resultado: El cliente desconecta de inmediato porque la inflación es un concepto lejano.*</p>
+      </div>
+
+      <div class="dialogue dialogue-good">
+        <div class="dialogue-label label-good">ENFOQUE DE ASESOR CONSULTIVO (MATEMÁTICO)</div>
+        <p><span class="speaker">Asesor:</span> "Noelia, tú eres muy prudente y entiendo que te dé tranquilidad tener tus 36.000 € en la libreta del banco de siempre..."</p>
+        <p><span class="speaker">Asesor:</span> "Pero hagamos un cálculo matemático rápido: con la subida de precios actual al 3%, tus 36.000 € comprarán dentro de 10 años exactamente lo mismo que comprarías hoy con 28.000 €."</p>
+        <p><span class="speaker">Asesor:</span> "Dejar el dinero parado al 0% significa que le estás regalando al banco una pérdida garantizada de 8.000 € de tu poder de compra. ¿Tiene sentido perder 8.000 € de tus ahorros por miedo a que la bolsa caiga?"</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- .content -->
+
+<!-- ══ FOOTER ══ -->
+<div class="footer">
+  <div class="footer-brand">GUÍA MAESTRA ADN · <span>Fede Fontanals</span> · Punto Naranja NN Xàtiva</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── TABS ──────────────────────────────────────
+function switchLevel(level) {
+  document.querySelectorAll('.level-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.level-content').forEach(c => c.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.getElementById('level-' + level).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── COLLAPSE ─────────────────────────────────
+function toggleCollapse(trigger) {
+  const body = trigger.nextElementSibling;
+  const isOpen = trigger.classList.contains('open');
+
+  // Close all others
+  document.querySelectorAll('.collapse-trigger.open').forEach(t => {
+    if (t !== trigger) {
+      t.classList.remove('open');
+      t.nextElementSibling.classList.remove('open');
+    }
+  });
+
+  trigger.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+
+// ── CHECKLIST ────────────────────────────────
+function toggleCheck(box) {
+  box.classList.toggle('checked');
+  const total = document.querySelectorAll('.check-box').length;
+  const checked = document.querySelectorAll('.check-box.checked').length;
+  if (checked === total) {
+    showToast('🎉 10/10 — ¡Asesor experto!');
+  } else if (checked > 0) {
+    showToast(checked + '/' + total + ' completados');
+  }
+}
+
+// ── TOAST ────────────────────────────────────
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2200);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe Definitivo AdN · Diagnóstico Financiero Personalizado</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --nn-orange: #F39200;
+  --nn-orange-dark: #C94D00;
+  --nn-orange-glow: rgba(243, 146, 0, 0.12);
+  --dark-bg: #0B132B;
+  --dark-card: #1C2541;
+  --dark-card-hover: #222E50;
+  --dark-border: rgba(255, 255, 255, 0.08);
+  --text-primary: #F8F9FA;
+  --text-secondary: #A0AEC0;
+  --text-muted: #718096;
+  
+  --green: #10B981;
+  --green-glow: rgba(16, 185, 129, 0.12);
+  --red: #EF4444;
+  --red-glow: rgba(239, 68, 68, 0.12);
+  --blue: #3B82F6;
+  --blue-glow: rgba(59, 130, 246, 0.12);
+  --amber: #F59E0B;
+  --amber-glow: rgba(245, 158, 11, 0.12);
+  --r-lg: 16px;
+  --r-md: 10px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--dark-bg);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(20, 43, 71, 0.6) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(243, 146, 0, 0.07) 0px, transparent 50%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.6;
+  padding-bottom: 4rem;
+}
+
+/* ══ HEADER ══════════════════════════════════════ */
+header {
+  border-bottom: 2px solid var(--nn-orange-dark);
+  background: rgba(11, 19, 43, 0.9);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0.75rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-block {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-badge {
+  background: var(--nn-orange);
+  color: #000;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 6px;
+  letter-spacing: 1px;
+}
+
+.logo-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.logo-sub {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.advisor-badge {
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--dark-border);
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  color: var(--text-secondary);
+}
+
+.advisor-badge strong {
+  color: var(--nn-orange);
+}
+
+/* ══ SELECTOR BAR ════════════════════════════════ */
+.selector-bar {
+  background: var(--dark-card);
+  border-bottom: 1px solid var(--dark-border);
+  padding: 1rem 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.selector-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--dark-border);
+  color: var(--text-secondary);
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.selector-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(243, 146, 0, 0.4);
+  color: var(--text-primary);
+}
+
+.selector-btn.active {
+  background: var(--nn-orange-glow);
+  border-color: var(--nn-orange);
+  color: var(--nn-orange);
+  box-shadow: 0 0 12px rgba(243, 146, 0, 0.15);
+}
+
+/* ══ CONTAINER ═══════════════════════════════════ */
+.container {
+  max-width: 1080px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+/* ══ HERO CASE ═══════════════════════════════════ */
+.case-hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.case-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--nn-orange);
+  background: var(--nn-orange-glow);
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+}
+
+.case-hero h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.case-hero p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ══ DASHBOARD GRID ══════════════════════════════ */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1.8fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ══ CARD STYLING ════════════════════════════════ */
+.panel-card {
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border);
+  border-radius: var(--r-lg);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.panel-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: transparent;
+}
+
+.card-orange::before { background: var(--nn-orange); }
+.card-green::before { background: var(--green); }
+.card-blue::before { background: var(--blue); }
+.card-amber::before { background: var(--amber); }
+
+.card-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ══ SCORE GAUGE ═════════════════════════════════ */
+.score-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.gauge-container {
+  width: 160px;
+  height: 160px;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.gauge-svg {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.gauge-bg {
+  fill: none;
+  stroke: rgba(255,255,255,0.05);
+  stroke-width: 10;
+}
+
+.gauge-fill {
+  fill: none;
+  stroke: var(--nn-orange);
+  stroke-width: 10;
+  stroke-dasharray: 440;
+  stroke-dashoffset: 440;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s ease-in-out;
+}
+
+.gauge-text-val {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.score-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.25rem;
+}
+
+.score-tag-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.3rem 0.8rem;
+  border-radius: 30px;
+  margin-top: 1rem;
+}
+
+/* ══ FICHA FAMILIAR ══════════════════════════════ */
+.ficha-list {
+  list-style: none;
+  width: 100%;
+}
+
+.ficha-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed var(--dark-border);
+  padding: 0.7rem 0;
+  font-size: 0.9rem;
+}
+
+.ficha-item:last-child {
+  border-bottom: none;
+}
+
+.ficha-label {
+  color: var(--text-secondary);
+}
+
+.ficha-val {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ══ GAP BARS & VISUALIZATIONS ═══════════════════ */
+.gap-block {
+  margin-bottom: 1.5rem;
+}
+
+.gap-block:last-child {
+  margin-bottom: 0;
+}
+
+.gap-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+
+.gap-title {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.gap-amount {
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.gap-bar-outer {
+  height: 12px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--dark-border);
+}
+
+.gap-bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  width: 0%;
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bar-red { background: var(--red); box-shadow: 0 0 10px rgba(239, 68, 68, 0.4); }
+.bar-green { background: var(--green); box-shadow: 0 0 10px rgba(16, 185, 129, 0.4); }
+.bar-blue { background: var(--blue); box-shadow: 0 0 10px rgba(59, 130, 246, 0.4); }
+.bar-amber { background: var(--amber); box-shadow: 0 0 10px rgba(245, 158, 11, 0.4); }
+
+.gap-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 0.35rem;
+  line-height: 1.4;
+}
+
+/* ══ HUCHAS DIAL ═════════════════════════════════ */
+.hucha-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.hucha-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--dark-border);
+  border-radius: var(--r-md);
+  padding: 0.85rem;
+  text-align: center;
+}
+
+.hucha-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.hucha-name {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.hucha-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--nn-orange);
+  margin: 0.25rem 0;
+}
+
+.hucha-quota {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* ══ LA RECETA ═══════════════════════════════════ */
+.receta-card {
+  margin-top: 2rem;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: 1rem;
+  border-radius: var(--r-md);
+  border: 1px solid var(--dark-border);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.88rem;
+  background: var(--dark-card);
+}
+
+th, td {
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid var(--dark-border);
+}
+
+th {
+  background: rgba(255,255,255,0.02);
+  color: var(--text-primary);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+td strong {
+  color: var(--text-primary);
+}
+
+.badge-prod {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.badge-orange { background: var(--nn-orange-glow); color: var(--nn-orange); border: 1px solid rgba(243, 146, 0, 0.2); }
+.badge-blue { background: var(--blue-glow); color: #93C5FD; border: 1px solid rgba(59, 130, 246, 0.2); }
+.badge-green { background: var(--green-glow); color: #A7F3D0; border: 1px solid rgba(16, 185, 129, 0.2); }
+
+/* ══ PLAN DE ACCION CHECKLIST ════════════════════ */
+.action-card {
+  margin-top: 2rem;
+}
+
+.action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.action-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 0.85rem 1rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--dark-border);
+  border-radius: var(--r-md);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.action-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(243, 146, 0, 0.2);
+}
+
+.action-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--text-muted);
+  border-radius: 5px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.action-item.completed .action-checkbox {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.action-item.completed .action-checkbox::after {
+  content: '✓';
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.action-text {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.action-item.completed .action-text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.action-text strong {
+  color: var(--text-primary);
+}
+
+.action-item.completed .action-text strong {
+  color: var(--text-muted);
+}
+
+/* ══ INTERACTIVE BUTTON ══════════════════════════ */
+.cta-wrapper {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.cta-btn {
+  background: var(--nn-orange);
+  color: #000;
+  border: none;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 1rem 2.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px var(--nn-orange-glow);
+  transition: all 0.3s;
+}
+
+.cta-btn:hover {
+  background: var(--text-primary);
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(255, 255, 255, 0.15);
+}
+
+/* ══ FOOTER ══════════════════════════════════════ */
+footer {
+  text-align: center;
+  padding: 3rem 2rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--dark-border);
+  margin-top: 4rem;
+}
+
+/* ══ TOAST ═══════════════════════════════════════ */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--green);
+  color: white;
+  padding: 0.75rem 1.75rem;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  z-index: 200;
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-block">
+    <div class="logo-badge">NN</div>
+    <div>
+      <h1 class="logo-title">Informe de Diagnóstico Financiero (AdN)</h1>
+      <div class="logo-sub">Punto Naranja de Xàtiva · Nationale-Nederlanden</div>
+    </div>
+  </div>
+  <div class="advisor-badge">
+    Asesor Consultivo: <strong>Fede</strong>
+  </div>
+</header>
+
+<!-- SELECTOR DE CLIENTE -->
+<div class="selector-bar">
+  <button class="selector-btn active" onclick="loadCase('francisco')">Francisco (Jubilación S4)</button>
+  <button class="selector-btn" onclick="loadCase('nuria')">Nuria (Protección Familiar S2)</button>
+  <button class="selector-btn" onclick="loadCase('jordi')">Jordi (Protección ILT RETA S3A)</button>
+  <button class="selector-btn" onclick="loadCase('ahorro')">Francisco & Noelia (Ahorro/Inversión S3)</button>
+</div>
+
+<!-- CONTAINER -->
+<div class="container">
+  
+  <!-- HERO CASE -->
+  <div class="case-hero">
+    <span class="case-badge" id="case-category">Jubilación</span>
+    <h2 id="case-client-name">Francisco</h2>
+    <p id="case-client-summary">Cercano a jubilarse. Cotiza por régimen RETA. Busca mitigar la brecha fiscal y la pérdida de poder adquisitivo al jubilarse.</p>
+  </div>
+
+  <!-- DASHBOARD GRID -->
+  <div class="dashboard-grid">
+    
+    <!-- LEFT PANEL: FICHA Y SCORE -->
+    <div style="display:flex; flex-direction:column; gap:1.5rem;">
+      
+      <!-- SCORE CARD -->
+      <div class="panel-card card-orange score-section">
+        <div class="card-title">🛡️ Score de Seguridad</div>
+        <div class="gauge-container">
+          <svg class="gauge-svg">
+            <circle class="gauge-bg" cx="80" cy="80" r="70"></circle>
+            <circle class="gauge-fill" id="gauge-fill-id" cx="80" cy="80" r="70"></circle>
+          </svg>
+          <div class="gauge-text-val" id="gauge-val-text">35%</div>
+        </div>
+        <div class="score-label">Cobertura de Riesgos Actual</div>
+        <span class="score-tag-badge" id="score-status-badge" style="background:var(--red-glow); color:var(--red);">INFRAPROTEGIDO</span>
+      </div>
+
+      <!-- FICHA FAMILIAR -->
+      <div class="panel-card card-blue">
+        <div class="card-title">👥 Ficha de la Unidad Familiar</div>
+        <ul class="ficha-list" id="ficha-data-list">
+          <!-- Injected dynamically -->
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- RIGHT PANEL: BRECHAS DETECTADAS -->
+    <div class="panel-card card-amber" style="display:flex; flex-direction:column; justify-content:space-between;">
+      <div>
+        <div class="card-title" id="gap-panel-title">🩹 Radiografía de Vulnerabilidades y Brechas</div>
+        <div id="gap-visuals-container">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+      
+      <!-- HUCHAS (Visible only for Ahorro Case) -->
+      <div id="huchas-wrapper" style="display: none; margin-top: 1.5rem; border-top: 1px dashed var(--dark-border); padding-top: 1.5rem;">
+        <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.75rem; text-align: left;">
+          🎯 Huchas y Metas Programadas:
+        </div>
+        <div class="hucha-grid" id="huchas-grid-container">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LA RECETA MÉDICA (TABLA DE SOLUCIONES) -->
+  <div class="panel-card card-green receta-card">
+    <div class="card-title">🩺 La Receta del Médico Financiero</div>
+    <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:0.5rem;" id="receta-explainer">Para cerrar de inmediato las hemorragias detectadas, se recomiendan las siguientes soluciones moduladas por contrato:</p>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Solución Recomendada</th>
+            <th>Producto</th>
+            <th>Aportación / Cobertura</th>
+            <th>Ventaja Principal</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody id="receta-table-body">
+          <!-- Injected dynamically -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PLAN DE ACCIÓN CHECKLIST -->
+  <div class="panel-card card-blue action-card">
+    <div class="card-title">⚡ Plan de Acción Prioritario</div>
+    <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:0.5rem;">Completa los siguientes pasos operativos para blindar tu patrimonio y activar tu receta:</p>
+    <div class="action-list" id="action-list-container">
+      <!-- Injected dynamically -->
+    </div>
+  </div>
+
+  <!-- CTA DE TRAMITACIÓN -->
+  <div class="cta-wrapper">
+    <button class="cta-btn" onclick="submitProposal()">Tramitar Solicitud del ADN</button>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Este informe de diagnóstico se basa exclusivamente en los datos financieros aportados por el cliente durante el proceso ADN.</p>
+  <p style="margin-top: 0.5rem; opacity: 0.6;">Nationale-Nederlanden © 2026 · Punto Naranja Xàtiva</p>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast-notify">✓ Acción completada con éxito</div>
+
+<script>
+/* ══ BASE DE DATOS DE CASOS ════════════════════════ */
+const CASES = {
+  francisco: {
+    category: "Jubilación (S4)",
+    name: "Francisco",
+    summary: "Autónomo cercano a jubilarse (65 años) con 38 años cotizados en régimen RETA. Busca mitigar la brecha fiscal de su plan bancario tradicional y la pérdida de poder adquisitivo.",
+    score: 40,
+    scoreStatus: "Infraseguro Fiscal",
+    scoreBadgeColor: "var(--red)",
+    scoreBadgeBg: "var(--red-glow)",
+    ficha: [
+      { label: "Edad del Titular", val: "65 años" },
+      { label: "Cónyuge", val: "Francisca (59 años)" },
+      { label: "Régimen Cotización", val: "Autónomo RETA" },
+      { label: "Años Cotizados", val: "38 años" },
+      { label: "Patrimonio Líquido", val: "Ahorros seguros en cuenta corriente" },
+      { label: "Inversión actual", val: "Plan de pensiones tradicional bancario" }
+    ],
+    brechas: [
+      {
+        title: "Brecha Anual de Jubilación",
+        amount: "-9.000 €/año",
+        fillWidth: 68,
+        colorClass: "bar-red",
+        desc: "Pensión pública estimada de la Seguridad Social de 1.450 €/mes frente a un objetivo de nivel de vida de 2.200 €/mes. Brecha de -750 €/mes."
+      },
+      {
+        title: "Déficit Acumulado (Fuga Límbica a 20 años)",
+        amount: "-180.000 €",
+        fillWidth: 85,
+        colorClass: "bar-red",
+        desc: "Déficit total acumulado estimado para un retiro de 20 años hasta los 85 años de edad si no se tapona la diferencia de ingresos."
+      },
+      {
+        title: "Hemorragia por Recorte del IRPF (Hacienda)",
+        amount: "Hasta 40% pérdida",
+        fillWidth: 60,
+        colorClass: "bar-amber",
+        desc: "Riesgo de rescate ineficiente del plan de pensiones bancario en forma de capital, tributando en el tramo más alto del IRPF. Pérdida masiva de liquidez."
+      }
+    ],
+    receta: [
+      {
+        sol: "Aportación deducible",
+        prod: "PPSA Autónomos",
+        badgeClass: "badge-orange",
+        quota: "Máximo legal",
+        benefit: "Deduce hasta 5.750 €/año directamente de la base imponible del IRPF en su último año activo.",
+        status: "Recomendado"
+      },
+      {
+        sol: "Traspaso de Plan",
+        prod: "PPSA Autónomos",
+        badgeClass: "badge-orange",
+        quota: "Todo el acumulado",
+        benefit: "Movilizar el capital de su plan bancario tradicional al PPSA de NN para optimizar rentabilidad y comisiones con la gestión de Goldman Sachs sin impacto fiscal.",
+        status: "Recomendado"
+      }
+    ],
+    acciones: [
+      { text: "Recuperar la última <strong>base de cotización de autónomos RETA</strong> en la Seguridad Social para simulación definitiva." },
+      { text: "Solicitar el desglose de comisiones y el <strong>documento de rescate simulado</strong> de su plan de pensiones bancario." },
+      { text: "Programar la transferencia deducible extraordinaria de <strong>5.750 €</strong> al PPSA de Autónomos de NN antes del 31 de diciembre." }
+    ]
+  },
+  
+  nuria: {
+    category: "Protección Familiar (S2)",
+    name: "Nuria",
+    summary: "Administrativa de 41 años, casada y con 2 hijos menores de 25. Cuenta con seguro de vida bancario vinculado a la hipoteca, pero carece de protección líquida familiar.",
+    score: 35,
+    scoreStatus: "Infraseguro de Vida",
+    scoreBadgeColor: "var(--red)",
+    scoreBadgeBg: "var(--red-glow)",
+    ficha: [
+      { label: "Edad de la Titular", val: "41 años" },
+      { label: "Ubicación", val: "Carcaixent" },
+      { label: "Hijos a cargo", val: "2 niños menores de 25 años" },
+      { label: "Seguro Hipotecario", val: "Póliza de amortización en banco (BBVA)" },
+      { label: "Ingresos Familiares", val: "Sostenidos en régimen general" }
+    ],
+    brechas: [
+      {
+        title: "Liquidez Familiar Disponible (Fallecimiento)",
+        amount: "0 € Líquidos",
+        fillWidth: 95,
+        colorClass: "bar-red",
+        desc: "El seguro de vida del banco amortiza la hipoteca pero deja 0 € en efectivo para gastos diarios de comida, ropa y colegio de los niños."
+      },
+      {
+        title: "Brecha Viudedad vs Gasto Familiar",
+        amount: "-245,67 €/mes",
+        fillWidth: 62,
+        colorClass: "bar-red",
+        desc: "Pensión de viudedad pública estimada por el simulador de 954,33 €/mes frente a un mínimo vital familiar requerido de 1.200 €/mes."
+      }
+    ],
+    receta: [
+      {
+        sol: "Escudo de Liquidez Familiar",
+        prod: "Contigo Familia",
+        badgeClass: "badge-orange",
+        quota: "Capital periódico",
+        benefit: "Descuento vitalicio de colectivo del 25%. Aporta capital en efectivo de libre disposición directo al cónyuge.",
+        status: "Recomendado"
+      }
+    ],
+    acciones: [
+      { text: "Revisar las condiciones particulares del seguro de vida del <strong>BBVA vinculado a la hipoteca</strong> para ver si es posible desvincularlo legalmente." },
+      { text: "Comprobar la <strong>cotización exacta del grupo administrativo</strong> en la Seguridad Social para afinar la pensión de viudedad." },
+      { text: "Emitir propuesta <strong>Contigo Familia</strong> con descuento colectivo, garantizando el primer año gratuito." }
+    ]
+  },
+  
+  jordi: {
+    category: "Protección ILT RETA (S3A)",
+    name: "Jordi",
+    summary: "Autónomo de 45 años con taller mecánico propio en Xàtiva. Casado y con 1 hijo (8 años). Cotiza al mínimo en RETA, lo que expone su negocio ante cualquier baja médica.",
+    score: 30,
+    scoreStatus: "Riesgo de Quiebra",
+    scoreBadgeColor: "var(--red)",
+    scoreBadgeBg: "var(--red-glow)",
+    ficha: [
+      { label: "Edad del Titular", val: "45 años" },
+      { label: "Ubicación", val: "Xàtiva" },
+      { label: "Actividad", val: "Mecánico Autónomo RETA" },
+      { label: "Hijos a cargo", val: "1 hijo (8 años)" },
+      { label: "Cuota RETA Mensual", val: "452 €/mes (Cotización Mínima)" },
+      { label: "Gastos Fijos Taller", val: "2.000 €/mes (Alquiler + Suministros + Tasas)" }
+    ],
+    brechas: [
+      {
+        title: "Brecha por Baja (ILT) Mensual",
+        amount: "-1.661 €/mes",
+        fillWidth: 83,
+        colorClass: "bar-red",
+        desc: "Prestación por baja de la Seguridad Social RETA de solo 339 €/mes frente a costes fijos ineludibles del taller de 2.000 €/mes."
+      },
+      {
+        title: "Vencimientos Seguros Actuales",
+        amount: "Próximo Vencimiento",
+        fillWidth: 50,
+        colorClass: "bar-amber",
+        desc: "Seguros de Hogar y Autos dispersos en otras aseguradoras. Próxima fecha clave de vencimiento registrada: 04/06/2026."
+      }
+    ],
+    receta: [
+      {
+        sol: "Subsidio Diario de Baja",
+        prod: "Contigo Familia ILT",
+        badgeClass: "badge-orange",
+        quota: "50 €/día",
+        benefit: "Garantiza un subsidio diario que cubre los 1.661 €/mes de diferencia en caso de baja médica, accidente o enfermedad.",
+        status: "Recomendado"
+      },
+      {
+        sol: "Seguro de Comercio / Hogar",
+        prod: "Mihogar Seguro",
+        badgeClass: "badge-green",
+        quota: "Tarifa modular",
+        benefit: "Seguro en alianza con Caser. 12 coberturas integradas y descuento del 25% frente al seguro del banco.",
+        status: "Recomendado"
+      },
+      {
+        sol: "Seguro Flota de Vehículos",
+        prod: "Autos MM Globalis",
+        badgeClass: "badge-blue",
+        quota: "Prima reducida",
+        benefit: "En alianza con Mutua Madrileña. Asistencia en carretera desde el Km 0 y precio cerrado sin sorpresas.",
+        status: "Recomendado"
+      }
+    ],
+    acciones: [
+      { text: "Revisar el recibo bancario de la cuota de autónomo RETA para comprobar si hay alguna <strong>bonificación activa</strong>." },
+      { text: "Programar alerta comercial para notificar el cambio de las pólizas de Hogar y Autos <strong>un mes antes del 4 de junio</strong>." },
+      { text: "Cotizar <strong>Contigo Familia ILT</strong> con subsidio diario de 50 €/día sin período de carencia por accidente." }
+    ]
+  },
+  
+  ahorro: {
+    category: "Ahorro e Inversión (S3)",
+    name: "Francisco y Noelia",
+    summary: "Pareja con ingresos conjuntos estables (4.950 €/mes netos) y gastos de 2.083 €/mes. Tienen 36.000 € en cuenta corriente al 0% perdiendo poder de compra contra la inflación.",
+    score: 50,
+    scoreStatus: "Fuga por Inflación",
+    scoreBadgeColor: "var(--amber)",
+    scoreBadgeBg: "var(--amber-glow)",
+    ficha: [
+      { label: "Ingresos del Hogar", val: "4.950 €/mes netos conjuntos" },
+      { label: "Gastos del Hogar", val: "2.083 €/mes" },
+      { label: "Excedente Neto Mensual", val: "2.867 €/mes (Capacidad de Ahorro)" },
+      { label: "Patrimonio Líquido", val: "36.000 € (En cuenta de ahorros al 0%)" },
+      { label: "Destino Metas", val: "Entrada casa, Universidad hijo, Viaje familiar" }
+    ],
+    brechas: [
+      {
+        title: "Pérdida por Inflación (Efecto Carcoma en 10 años)",
+        amount: "-8.000 €",
+        fillWidth: 72,
+        colorClass: "bar-red",
+        desc: "Tener 36.000 € parados en el banco de toda la vida al 0% equivale a reducir el valor de compra real a 28.000 € debido al encarecimiento de la vida (3% anual)."
+      },
+      {
+        title: "Optimización del Excedente de Ahorro",
+        amount: "2.867 € libres/mes",
+        fillWidth: 100,
+        colorClass: "bar-green",
+        desc: "Se detecta una gran capacidad de ahorro no aprovechada que permite cubrir los 3 proyectos activos sin modificar su nivel de vida."
+      }
+    ],
+    huchas: [
+      { icon: "🏠", name: "Hucha 1: Casa", val: "Entrada Vivienda", quota: "Ahorro periódico a 25 años", desc: "0 € iniciales" },
+      { icon: "🎓", name: "Hucha 2: Estudios", val: "Universidad Hijo", quota: "16,67 €/mes (-2 € gap)", desc: "1.000 € fondo" },
+      { icon: "✈️", name: "Hucha 3: Viaje", val: "Viaje Familiar", quota: "8,33 €/mes (SIALP)", desc: "0 € fondo" }
+    ],
+    receta: [
+      {
+        sol: "Garantía de Ahorro",
+        prod: "Plan Creciente SIALP",
+        badgeClass: "badge-orange",
+        quota: "8 €/mes (Viaje) + regular",
+        benefit: "Ahorro exento de tributación en el año 5. Blindaje del 80% o 85% del capital máximo alcanzado.",
+        status: "Recomendado"
+      },
+      {
+        sol: "Inversión a Largo Plazo",
+        prod: "Contigo Futuro",
+        badgeClass: "badge-blue",
+        quota: "Cartera diversificada",
+        benefit: "Aprovecha el interés compuesto para la universidad del niño, apartando 1.000 € iniciales (fondo baja a 35.000 €).",
+        status: "Recomendado"
+      }
+    ],
+    acciones: [
+      { text: "Transferir <strong>1.000 €</strong> de la cuenta de ahorro tradicional para abrir la hucha de estudios del niño (Ahorro familiar seguro queda en 35.000 €)." },
+      { text: "Configurar la aportación mensual de <strong>8 €</strong> en el simulador SIALP para el proyecto viaje familiar." },
+      { text: "Fijar aportación periódica a 25 años para el capital de entrada de la futura casa sin alterar el remanente libre." }
+    ]
+  }
+};
+
+/* ══ LOGICA DE CARGA DINÁMICA ════════════════════ */
+let activeCaseKey = 'francisco';
+
+function loadCase(key) {
+  activeCaseKey = key;
+  const data = CASES[key];
+  
+  // Update Buttons Active State
+  document.querySelectorAll('.selector-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  event.currentTarget.classList.add('active');
+  
+  // Hero Section
+  document.getElementById('case-category').innerText = data.category;
+  document.getElementById('case-client-name').innerText = data.name;
+  document.getElementById('case-client-summary').innerText = data.summary;
+  
+  // Score Gauge & Badges
+  const fill = document.getElementById('gauge-fill-id');
+  const dashOffset = 440 - (440 * data.score) / 100;
+  fill.style.strokeDashoffset = dashOffset;
+  document.getElementById('gauge-val-text').innerText = data.score + '%';
+  
+  const badge = document.getElementById('score-status-badge');
+  badge.innerText = data.scoreStatus.toUpperCase();
+  badge.style.color = data.scoreBadgeColor;
+  badge.style.backgroundColor = data.scoreBadgeBg;
+  
+  // Ficha Familiar
+  const fichaList = document.getElementById('ficha-data-list');
+  fichaList.innerHTML = '';
+  data.ficha.forEach(item => {
+    fichaList.innerHTML += `
+      <li class="ficha-item">
+        <span class="ficha-label">${item.label}</span>
+        <span class="ficha-val">${item.val}</span>
+      </li>
+    `;
+  });
+  
+  // Brechas y Vulnerabilidades
+  const gapContainer = document.getElementById('gap-visuals-container');
+  gapContainer.innerHTML = '';
+  data.brechas.forEach(gap => {
+    gapContainer.innerHTML += `
+      <div class="gap-block">
+        <div class="gap-header">
+          <span class="gap-title">${gap.title}</span>
+          <span class="gap-amount">${gap.amount}</span>
+        </div>
+        <div class="gap-bar-outer">
+          <div class="gap-bar-fill ${gap.colorClass}" style="width: 0%;" data-w="${gap.fillWidth}"></div>
+        </div>
+        <div class="gap-desc">${gap.desc}</div>
+      </div>
+    `;
+  });
+  
+  // Trigger animations of the progress bars
+  setTimeout(() => {
+    document.querySelectorAll('.gap-bar-fill').forEach(bar => {
+      bar.style.width = bar.dataset.w + '%';
+    });
+  }, 100);
+  
+  // Huchas Section (Specific to Ahorro e Inversión)
+  const huchasWrapper = document.getElementById('huchas-wrapper');
+  if (data.huchas) {
+    huchasWrapper.style.display = 'block';
+    const huchasContainer = document.getElementById('huchas-grid-container');
+    huchasContainer.innerHTML = '';
+    data.huchas.forEach(hucha => {
+      huchasContainer.innerHTML += `
+        <div class="hucha-card">
+          <div class="hucha-icon">${hucha.icon}</div>
+          <div class="hucha-name">${hucha.name}</div>
+          <div class="hucha-val">${hucha.val}</div>
+          <div class="hucha-quota">${hucha.quota}</div>
+          <div style="font-size:0.7rem; color:var(--text-muted); margin-top:4px;">${hucha.desc}</div>
+        </div>
+      `;
+    });
+  } else {
+    huchasWrapper.style.display = 'none';
+  }
+  
+  // Receta Médica (Soluciones)
+  const tableBody = document.getElementById('receta-table-body');
+  tableBody.innerHTML = '';
+  data.receta.forEach(row => {
+    tableBody.innerHTML += `
+      <tr>
+        <td><strong>${row.sol}</strong></td>
+        <td><span class="badge-prod ${row.badgeClass}">${row.prod}</span></td>
+        <td><span style="font-family:'JetBrains Mono', monospace; font-weight:600;">${row.quota}</span></td>
+        <td>${row.benefit}</td>
+        <td><span style="color:var(--nn-orange); font-weight:700;">● ${row.status}</span></td>
+      </tr>
+    `;
+  });
+  
+  // Plan de Acción (Checklist)
+  const actionContainer = document.getElementById('action-list-container');
+  actionContainer.innerHTML = '';
+  data.acciones.forEach((act, idx) => {
+    actionContainer.innerHTML += `
+      <div class="action-item" onclick="toggleAction(this)">
+        <div class="action-checkbox"></div>
+        <div class="action-text">${act.text}</div>
+      </div>
+    `;
+  });
+}
+
+/* ══ COMPORTAMIENTO INTERACTIVO ══════════════════ */
+function toggleAction(element) {
+  element.classList.toggle('completed');
+  if (element.classList.contains('completed')) {
+    showToast("Acción prioritaria marcada como realizada");
+  }
+}
+
+function showToast(message) {
+  const toast = document.getElementById('toast-notify');
+  toast.innerText = message;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2500);
+}
+
+function submitProposal() {
+  const clientName = CASES[activeCaseKey].name;
+  showToast(`Tramitando la solicitud ADN para el caso de ${clientName}...`);
+  setTimeout(() => {
+    alert(`Propuesta comercial del cliente ${clientName} enviada con éxito a la plataforma Nationale-Nederlanden.`);
+  }, 800);
+}
+
+// Initial Load
+document.addEventListener('DOMContentLoaded', () => {
+  loadCase('francisco');
+});
+</script>
+
+</body>
+</html>

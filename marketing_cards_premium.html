@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Premium NN - Kit de Social Media</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;800&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+    <style>
+        :root {
+            --nn-orange: #EE7F00;
+            --nn-orange-light: #FF9D33;
+            --nn-orange-dark: #C94D00;
+            --nn-anthracite: #1A1A1A;
+            --nn-white: #FFFFFF;
+            --nn-glass: rgba(255, 255, 255, 0.1);
+            --nn-glass-border: rgba(255, 255, 255, 0.2);
+            --nn-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            --nn-shadow-card: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        /* Export Actions Overlay */
+        .card-actions {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .ad-card:hover .card-actions {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .action-btn {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .action-btn:hover {
+            background: var(--nn-orange);
+            transform: scale(1.1);
+        }
+
+        .action-btn i {
+            font-size: 1.1rem;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--nn-orange);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 100px;
+            font-weight: 700;
+            z-index: 1000;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #050505;
+            background-image: url('premium_finance_bg_1778486636664.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+            padding: 60px 20px;
+            overflow-x: hidden;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 5.5rem;
+            line-height: 0.9;
+            letter-spacing: 4px;
+            background: linear-gradient(to bottom, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        header h1 span {
+            color: var(--nn-orange);
+            -webkit-text-fill-color: var(--nn-orange);
+        }
+
+        header p {
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.7);
+            max-width: 700px;
+            margin: 0 auto;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--nn-orange);
+            margin: 60px 0 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            letter-spacing: 1px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--nn-orange), transparent);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 50px;
+            justify-items: center;
+        }
+
+        /* 9:16 Marketing Card */
+        .ad-card {
+            width: 320px;
+            height: 569px; /* 9:16 ratio */
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 
+                0 10px 30px rgba(0,0,0,0.3),
+                0 1px 1px rgba(255,255,255,0.1) inset;
+            transition: transform 0.4s cubic-bezier(0.2, 1, 0.2, 1);
+            cursor: pointer;
+            color: var(--nn-anthracite);
+        }
+
+        .ad-card:hover {
+            transform: translateY(-20px) scale(1.02);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.7);
+        }
+
+        /* Card Sections - Precise Calibration */
+        .header-zone {
+            height: 10%;
+            background: linear-gradient(135deg, var(--nn-orange), var(--nn-orange-dark));
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo-placeholder {
+            font-weight: 800;
+            color: white;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: -0.2px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .logo-box {
+            background: white;
+            color: var(--nn-orange);
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 900;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hook-zone {
+            height: 20%;
+            background: linear-gradient(to bottom, var(--nn-orange), var(--nn-orange-dark));
+            padding: 0 25px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hook-zone::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.12) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hook-zone h2 {
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.6rem;
+            line-height: 1.05;
+            text-transform: uppercase;
+            z-index: 2;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.25);
+        }
+
+        .body-zone {
+            height: 36%;
+            background: white;
+            padding: 25px 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .body-zone::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(238, 127, 0, 0.03) 0%, transparent 15%);
+            pointer-events: none;
+        }
+
+        .product-label {
+            font-weight: 800;
+            color: var(--nn-orange);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            letter-spacing: 1.2px;
+            display: block;
+        }
+
+        .benefits-list li {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            line-height: 1.15;
+            color: #333;
+        }
+
+        .benefits-list li i {
+            background: rgba(238, 127, 0, 0.08);
+            color: var(--nn-orange);
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 0.65rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .cta-zone {
+            height: 22%;
+            background: linear-gradient(135deg, var(--nn-orange-dark), var(--nn-orange));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 15px;
+            text-align: center;
+            color: white;
+            position: relative;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+            z-index: 5;
+            gap: 10px;
+        }
+
+        .cta-highlight {
+            font-weight: 800;
+            font-size: 0.92rem;
+            letter-spacing: 0.2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            text-transform: uppercase;
+            line-height: 1.1;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+
+        .cta-subtext {
+            font-size: 0.7rem;
+            font-weight: 700;
+            background: rgba(255,255,255,0.25);
+            padding: 8px 18px;
+            border-radius: 100px;
+            border: 1px solid rgba(255,255,255,0.2);
+            white-space: nowrap;
+            display: inline-block;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .footer-zone {
+            height: 12%;
+            background: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 12px 20px 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .agent-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .agent-name {
+            font-weight: 800;
+            font-size: 0.78rem;
+            color: var(--nn-anthracite);
+            line-height: 1.2;
+            margin-bottom: 2px;
+            white-space: nowrap;
+        }
+
+        .agent-contact {
+            font-size: 0.68rem;
+            color: #444;
+            font-weight: 700;
+            letter-spacing: -0.1px;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        .partner-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .partner-label {
+            font-size: 0.52rem;
+            font-weight: 800;
+            color: #ccc;
+            text-transform: uppercase;
+        }
+
+        .partner-brand {
+            font-weight: 900;
+            font-size: 0.9rem;
+            color: #0055a5;
+            letter-spacing: -0.4px;
+        }
+
+        .claim {
+            width: 100%;
+            text-align: center;
+            font-size: 0.45rem;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+            padding-top: 10px;
+            line-height: 1;
+            opacity: 0.8;
+        }
+
+        /* Badge */
+        .badge-offer {
+            position: absolute;
+            top: 25px;
+            right: -30px;
+            background: #E31D2D;
+            color: white;
+            padding: 6px 40px;
+            transform: rotate(45deg);
+            font-weight: 800;
+            font-size: 0.75rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 10;
+            letter-spacing: 1px;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stagger-1 { animation: fadeInUp 0.6s ease-out 0.2s both; }
+        .stagger-2 { animation: fadeInUp 0.6s ease-out 0.4s both; }
+        .stagger-3 { animation: fadeInUp 0.6s ease-out 0.6s both; }
+        .stagger-4 { animation: fadeInUp 0.6s ease-out 0.8s both; }
+
+        /* Floating Nav */
+        .floating-nav {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 15px 40px;
+            border-radius: 100px;
+            border: 1px solid var(--nn-glass-border);
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .nav-btn {
+            background: transparent;
+            color: white;
+            border: none;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            padding: 5px 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            color: var(--nn-orange);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .nav-btn.active {
+            background: var(--nn-orange);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 3.5rem; }
+            .container { padding: 0 10px; }
+            .floating-nav { width: 90%; padding: 10px; gap: 5px; }
+            .nav-btn { font-size: 1rem; padding: 5px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+
+    <div class="container">
+        <header>
+            <h1>MARKETING <span>PREMIUM</span></h1>
+            <p>Estrategia visual de alto impacto para captación y fidelización de tu cartera de clientes en Xàtiva.</p>
+        </header>
+
+        <!-- PILOT PHASE -->
+        <div id="section-pilot" class="section-title">Fase Piloto (Semana 1-2)</div>
+        <div class="cards-grid">
+            
+            <!-- CARD: SALUD + VIDA -->
+            <div class="ad-card stagger-1">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
+                <div class="badge-offer">12,5% DTO</div>
+                <div class="header-zone">
+                    <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
+                </div>
+                <div class="hook-zone">
+                    <h2>Tu salud y tu familia, en un solo plan</h2>
+                </div>
+                <div class="body-zone">
+                    <span class="product-label">Plan Salud + Vida</span>
+                    <ul class="benefits-list">
+                        <li><i>✓</i> Atención médica privada</li>
+                        <li><i>✓</i> Cobertura dental avanzada</li>
+                        <li><i>✓</i> Protección familiar total</li>
+                    </ul>
+                </div>
+                <div class="cta-zone">
+                    <div class="cta-highlight">VIDA GRATIS EL 1er AÑO</div>
+                    <div class="cta-subtext">Estudio personalizado gratis</div>
+                </div>
+                <div class="footer-zone">
+                    <div class="footer-top">
+                        <div class="agent-info">
+                            <span class="agent-name">Fede Fontanals</span>
+                            <span class="agent-contact">+34 680 507 186</span>
+                        </div>
+                        <div class="partner-logo-container">
+                            <span class="partner-label">Con</span>
+                            <span class="partner-brand">Sanitas</span>
+                        </div>
+                    </div>
+                    <div class="claim">Lo que a ti te importa, a nosotros nos importa</div>
+                </div>
+            </div>
+
+            <!-- CARD: SIALP -->
+            <div class="ad-card stagger-2">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
+                <div class="header-zone">
+                    <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
+                </div>
+                <div class="hook-zone">
+                    <h2>Ahorra sin pagar impuestos</h2>
+                </div>
+                <div class="body-zone">
+                    <span class="product-label">Plan Inversión SIALP</span>
+                    <ul class="benefits-list">
+                        <li><i>✓</i> Exención fiscal total año 5</li>
+                        <li><i>✓</i> Rentabilidad garantizada</li>
+                        <li><i>✓</i> Liquidez total inmediata</li>
+                    </ul>
+                </div>
+                <div class="cta-zone">
+                    <div class="cta-highlight">100% LIBRE DE IMPUESTOS</div>
+                    <div class="cta-subtext">Optimiza tu ahorro inteligente</div>
+                </div>
+                <div class="footer-zone">
+                    <div class="footer-top">
+                        <div class="agent-info">
+                            <span class="agent-name">Fede Fontanals</span>
+                            <span class="agent-contact">+34 680 507 186</span>
+                        </div>
+                    </div>
+                    <div class="claim">Lo que a ti te importa, a nosotros nos importa</div>
+                </div>
+            </div>
+
+            <!-- CARD: MIHOGAR -->
+            <div class="ad-card stagger-3">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
+                <div class="header-zone">
+                    <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
+                </div>
+                <div class="hook-zone">
+                    <h2>Tu hogar protegido en 3 minutos</h2>
+                </div>
+                <div class="body-zone">
+                    <span class="product-label">Mihogar Seguro</span>
+                    <ul class="benefits-list">
+                        <li><i>✓</i> Presupuesto instantáneo</li>
+                        <li><i>✓</i> Coberturas premium</li>
+                        <li><i>✓</i> Asistencia 24/7 incluida</li>
+                    </ul>
+                </div>
+                <div class="cta-zone">
+                    <div class="cta-highlight">PIDE TU PRECIO EN 3 MIN</div>
+                    <div class="cta-subtext">Protege tu hogar ahora</div>
+                </div>
+                <div class="footer-zone">
+                    <div class="footer-top">
+                        <div class="agent-info">
+                            <span class="agent-name">Fede Fontanals</span>
+                            <span class="agent-contact">+34 680 507 186</span>
+                        </div>
+                    </div>
+                    <div class="claim">Lo que a ti te importa, a nosotros nos importa</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FASE 2 & BEYOND -->
+        <div id="section-ahorro" class="section-title">Estrategia Avanzada (Ahorro e Inversión)</div>
+        <div class="cards-grid">
+            
+            <!-- CARD: CONTIGO SENIOR -->
+            <div class="ad-card stagger-4">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
+                <div class="badge-offer">6 MESES GRATIS</div>
+                <div class="header-zone">
+                    <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
+                </div>
+                <div class="hook-zone">
+                    <h2>A partir de los 55, más cuidado</h2>
+                </div>
+                <div class="body-zone">
+                    <span class="product-label">Contigo Senior (+55)</span>
+                    <ul class="benefits-list">
+                        <li><i>✓</i> Indemnización hasta 65.000€</li>
+                        <li><i>✓</i> Servicios salud a domicilio</li>
+                        <li><i>✓</i> Sin exámenes médicos</li>
+                    </ul>
+                </div>
+                <div class="cta-zone">
+                    <div class="cta-highlight">6 MESES BONIFICADOS</div>
+                    <div class="cta-subtext">Protección Senior 55+</div>
+                </div>
+                <div class="footer-zone">
+                    <div class="footer-top">
+                        <div class="agent-info">
+                            <span class="agent-name">Fede Fontanals</span>
+                            <span class="agent-contact">+34 680 507 186</span>
+                        </div>
+                        <div class="partner-logo-container">
+                            <span class="partner-label">Con</span>
+                            <span class="partner-brand">Sanitas</span>
+                        </div>
+                    </div>
+                    <div class="claim">Lo que a ti te importa, a nosotros nos importa</div>
+                </div>
+            </div>
+
+            <!-- CARD: CONTIGO FUTURO -->
+            <div class="ad-card" style="animation-delay: 1s">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
+                <div class="header-zone">
+                    <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
+                </div>
+                <div class="hook-zone">
+                    <h2>Tu dinero, siempre protegido</h2>
+                </div>
+                <div class="body-zone">
+                    <span class="product-label">Contigo Futuro</span>
+                    <ul class="benefits-list">
+                        <li><i>✓</i> Garantía 80% máximo histórico</li>
+                        <li><i>✓</i> Inversión sostenible ESG</li>
+                        <li><i>✓</i> Consolida beneficios a diario</li>
+                    </ul>
+                </div>
+                <div class="cta-zone">
+                    <div class="cta-highlight">SEGURIDAD Y CRECIMIENTO</div>
+                    <div class="cta-subtext">Tu estrategia de inversión ideal</div>
+                </div>
+                <div class="footer-zone">
+                    <div class="footer-top">
+                        <div class="agent-info">
+                            <span class="agent-name">Fede Fontanals</span>
+                            <span class="agent-contact">+34 680 507 186</span>
+                        </div>
+                    </div>
+                    <div class="claim">Lo que a ti te importa, a nosotros nos importa</div>
+                </div>
+            </div>
+
+            <!-- CARD: PPSA AUTONOMOS -->
+            <div class="ad-card" style="animation-delay: 1.2s">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
+                <div class="header-zone">
+                    <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
+                </div>
+                <div class="hook-zone">
+                    <h2>Autónomo: paga menos IRPF</h2>
+                </div>
+                <div class="body-zone">
+                    <span class="product-label">Plan Pensiones Autónomos</span>
+                    <ul class="benefits-list">
+                        <li><i>✓</i> Deduce hasta 5.750€/año</li>
+                        <li><i>✓</i> Gestión de Goldman Sachs</li>
+                        <li><i>✓</i> Asegura tu futuro hoy</li>
+                    </ul>
+                </div>
+                <div class="cta-zone">
+                    <div class="cta-highlight">MÁXIMA VENTAJA FISCAL</div>
+                    <div class="cta-subtext">Estudio de ahorro fiscal</div>
+                </div>
+                <div class="footer-zone">
+                    <div class="footer-top">
+                        <div class="agent-info">
+                            <span class="agent-name">Fede Fontanals</span>
+                            <span class="agent-contact">+34 680 507 186</span>
+                        </div>
+                        <div class="partner-logo-container">
+                            <span class="partner-label">Con</span>
+                            <span class="partner-brand">Goldman Sachs</span>
+                        </div>
+                    </div>
+                    <div class="claim">Lo que a ti te importa, a nosotros nos importa</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW PRODUCTS FROM FOLDERS -->
+        <div id="section-especialistas" class="section-title">Especialistas & Protección (Nuevos)</div>
+        <div class="cards-grid">
+
+            <!-- CARD: CONTIGO AUTÓNOMO -->
+            <div class="ad-card" style="animation-delay: 1.4s">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
+                <div class="header-zone">
+                    <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
+                </div>
+                <div class="hook-zone">
+                    <h2>¿Y si mañana no puedes abrir?</h2>
+                </div>
+                <div class="body-zone">
+                    <span class="product-label">Contigo Autónomo</span>
+                    <ul class="benefits-list">
+                        <li><i>✓</i> Cobras aunque no trabajes</li>
+                        <li><i>✓</i> Cubre el hueco del RETA</li>
+                        <li><i>✓</i> Incluye Médico y Abogado</li>
+                    </ul>
+                </div>
+                <div class="cta-zone">
+                    <div class="cta-highlight">HASTA 40€/DÍA EXTRAS</div>
+                    <div class="cta-subtext">Protege tu negocio siempre</div>
+                </div>
+                <div class="footer-zone">
+                    <div class="footer-top">
+                        <div class="agent-info">
+                            <span class="agent-name">Fede Fontanals</span>
+                            <span class="agent-contact">+34 680 507 186</span>
+                        </div>
+                    </div>
+                    <div class="claim">Lo que a ti te importa, a nosotros nos importa</div>
+                </div>
+            </div>
+
+            <!-- CARD: CONTIGO FAMILIA -->
+            <div class="ad-card" style="animation-delay: 1.6s">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
+                <div class="header-zone">
+                    <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
+                </div>
+                <div class="hook-zone">
+                    <h2>Lo más valioso no es el dinero</h2>
+                </div>
+                <div class="body-zone">
+                    <span class="product-label">Contigo Familia</span>
+                    <ul class="benefits-list">
+                        <li><i>✓</i> Protección familiar total</li>
+                        <li><i>✓</i> Cubre cualquier causa</li>
+                        <li><i>✓</i> Chat médico 24h incluido</li>
+                    </ul>
+                </div>
+                <div class="cta-zone">
+                    <div class="cta-highlight">MÉDICO Y ABOGADO GRATIS</div>
+                    <div class="cta-subtext">Tranquilidad familiar total</div>
+                </div>
+                <div class="footer-zone">
+                    <div class="footer-top">
+                        <div class="agent-info">
+                            <span class="agent-name">Fede Fontanals</span>
+                            <span class="agent-contact">+34 680 507 186</span>
+                        </div>
+                    </div>
+                    <div class="claim">Lo que a ti te importa, a nosotros nos importa</div>
+                </div>
+            </div>
+
+            <!-- CARD: MAXIPLAN INVERSIÓN PREMIUM -->
+            <div class="ad-card" style="animation-delay: 1.8s">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
+                <div class="badge-offer">INVERSIÓN PRO</div>
+                <div class="header-zone">
+                    <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
+                </div>
+                <div class="hook-zone">
+                    <h2>Tu ahorro, en buenas manos</h2>
+                </div>
+                <div class="body-zone">
+                    <span class="product-label">Maxiplan Inversión Premium</span>
+                    <ul class="benefits-list">
+                        <li><i>✓</i> Expertos de Goldman Sachs</li>
+                        <li><i>✓</i> Gestión activa de carteras</li>
+                        <li><i>✓</i> Sin preocuparte de los mercados</li>
+                    </ul>
+                </div>
+                <div class="cta-zone">
+                    <div class="cta-highlight">RENTABILIDAD INTELIGENTE</div>
+                    <div class="cta-subtext">Tu estrategia de futuro</div>
+                </div>
+                <div class="footer-zone">
+                    <div class="footer-top">
+                        <div class="agent-info">
+                            <span class="agent-name">Fede Fontanals</span>
+                            <span class="agent-contact">+34 680 507 186</span>
+                        </div>
+                        <div class="partner-logo-container">
+                            <span class="partner-label">Con</span>
+                            <span class="partner-brand">Goldman Sachs</span>
+                        </div>
+                    </div>
+                    <div class="claim">Lo que a ti te importa, a nosotros nos importa</div>
+                </div>
+            </div>
+
+            <!-- CARD: PROTECCIÓN PLUS -->
+            <div class="ad-card" style="animation-delay: 2s">
+                <div class="card-actions">
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'copy')" title="Copiar Imagen">📋</button>
+                    <button class="action-btn" onclick="exportCard(this.closest('.ad-card'), 'download')" title="Descargar PNG">💾</button>
+                </div>
+                <div class="header-zone">
+                    <div class="logo-placeholder"><div class="logo-box">NN</div> Nationale-Nederlanden</div>
+                </div>
+                <div class="hook-zone">
+                    <h2>Un extra cuando más lo necesitas</h2>
+                </div>
+                <div class="body-zone">
+                    <span class="product-label">Protección PLUS</span>
+                    <ul class="benefits-list">
+                        <li><i>✓</i> Capital extra por accidente</li>
+                        <li><i>✓</i> Doble capital en circulación</li>
+                        <li><i>✓</i> Refuerza tu seguro actual</li>
+                    </ul>
+                </div>
+                <div class="cta-zone">
+                    <div class="cta-highlight">DOBLE PROTECCIÓN</div>
+                    <div class="cta-subtext">Tu protección plus ideal</div>
+                </div>
+                <div class="footer-zone">
+                    <div class="footer-top">
+                        <div class="agent-info">
+                            <span class="agent-name">Fede Fontanals</span>
+                            <span class="agent-contact">+34 680 507 186</span>
+                        </div>
+                    </div>
+                    <div class="claim">Lo que a ti te importa, a nosotros nos importa</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="floating-nav">
+        <button class="nav-btn active" onclick="scrollToId('section-pilot', this)">Kit Piloto</button>
+        <button class="nav-btn" onclick="scrollToId('section-ahorro', this)">Ahorro</button>
+        <button class="nav-btn" onclick="scrollToId('section-especialistas', this)">Especialistas</button>
+        <button class="nav-btn" onclick="window.location.href='index.html'" style="color:var(--nn-orange)">Dashboard</button>
+    </div>
+
+    <div id="toast" class="toast">¡Imagen copiada al portapapeles!</div>
+
+    <script>
+        function scrollToId(id, btn) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            }
+        }
+
+        async function exportCard(cardElement, action) {
+            showToast('📸 Procesando diseño premium...');
+
+            const actions = cardElement.querySelector('.card-actions');
+            const originalStyle = cardElement.getAttribute('style') || '';
+            
+            // Critical: Force fixed dimensions for the capture engine to prevent reflow
+            const width = 320;
+            const height = 569;
+
+            // Temporary preparation
+            cardElement.style.transform = 'none';
+            cardElement.style.transition = 'none';
+            cardElement.style.animation = 'none';
+            cardElement.style.width = width + 'px';
+            cardElement.style.height = height + 'px';
+            actions.style.display = 'none';
+
+            // Allow UI to update
+            await new Promise(r => setTimeout(r, 200));
+
+            try {
+                // Use html-to-image with strict dimensions
+                const dataUrl = await htmlToImage.toPng(cardElement, {
+                    width: width,
+                    height: height,
+                    style: {
+                        transform: 'none',
+                        margin: '0',
+                        padding: '0',
+                        borderRadius: '28px',
+                        left: '0',
+                        top: '0'
+                    },
+                    pixelRatio: 3, // Higher quality for sharing
+                    backgroundColor: '#ffffff'
+                });
+
+                if (action === 'download') {
+                    const label = cardElement.querySelector('.product-label');
+                    const name = label ? label.innerText.replace(/\s+/g, '_') : 'Anuncio';
+                    const link = document.createElement('a');
+                    link.download = `NN_${name}.png`;
+                    link.href = dataUrl;
+                    link.click();
+                    showToast('✅ ¡Imagen guardada!');
+                } else if (action === 'copy') {
+                    const blob = await (await fetch(dataUrl)).blob();
+                    try {
+                        const item = new ClipboardItem({ "image/png": blob });
+                        await navigator.clipboard.write([item]);
+                        showToast('✅ ¡Copiado! Pégala en WhatsApp');
+                    } catch (e) {
+                        showToast('❌ Usa el botón de Descargar');
+                    }
+                }
+            } catch (err) {
+                console.error('Export Error:', err);
+                showToast('❌ Error de renderizado');
+            } finally {
+                // Restore original styles exactly
+                cardElement.setAttribute('style', originalStyle);
+                actions.style.display = 'flex';
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+    </script>
+</body>
+</html>
+

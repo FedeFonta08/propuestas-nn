@@ -1,0 +1,95 @@
+# ============================================
+# 🟠 ECOSISTEMA DESPEGUE — CONFIGURACIÓN GIT
+# ============================================
+
+# 1. Bloqueo de Lenguajes y Herramientas Locales
+*.py
+*.pyc
+*.bat
+*.sh
+*.exe
+__pycache__/
+requirements.txt
+
+# 2. Bloqueo de Datos y Credenciales (Seguridad Crítica)
+*.json
+*.xlsx
+*.xls
+*.csv
+*.env
+*.env.*
+*.txt
+*.log
+credentials.json
+token*.json
+Contraseña*.txt
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite
+*.sqlite3
+*.db
+
+# 3. Bloqueo de Documentación de Trabajo e IDE
+*.md
+!README.md
+!SECURITY.md
+!.github/*.md
+.vscode/
+.idea/
+.DS_Store
+desktop.ini
+
+# 4. Bloqueo de Borradores y Pruebas HTML (Purga de Ruido)
+# Ignoramos todos los HTML que NO sean herramientas Core
+COPIADOR_*.html
+PARA_ENVIO_*.html
+PROPUESTA_*.html
+PRUEBA_*.html
+preview_*.html
+fede_photo_*.txt
+log_envio.txt
+
+# 5. CARPETAS LOCALES — NO SUBIR A GITHUB
+CRM_Contactos/
+Campanas_Promociones/
+Contratos_Polizas/
+Estrategia_Analisis/
+Formacion/
+Marketing_Branding/
+PTD_Transformacion/
+Plantillas_Excel/
+Presentaciones/
+Productos_Guias/
+Propuestas_Clientes/
+Reclutamiento_CV/
+scratch/
+
+# 6. PERMITIR SOLO CARPETAS NECESARIAS PARA GITHUB PAGES
+!assets/
+!docs/
+!guias-comerciales/
+!.github/
+
+# Carpeta de Herramientas - Bloqueamos todo lo interno
+Scripts_Herramientas/*
+!Scripts_Herramientas/*.html
+!Scripts_Herramientas/assets/
+!Scripts_Herramientas/assets/**
+# Bloqueo explícito de scripts en esa carpeta
+Scripts_Herramientas/*.py
+
+# 7. DATOS GENERADOS Y HERRAMIENTAS OPERATIVAS — SIEMPRE PRIVADOS
+private/
+data/
+exports/
+backups/
+**/*contactos*.html
+**/*cumple*.html
+**/*birthday*.html
+**/*crm_export*
+**/Briefing_Lunes_ADN.html
+**/panel-despegue*.html
+**/aperturas_desktop_v[4-9].html
+index_v4_premium.html

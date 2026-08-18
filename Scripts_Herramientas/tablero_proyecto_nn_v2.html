@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tablero Proyecto NN — Buyer Persona</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#1a1a1a;padding:24px;max-width:800px;margin:0 auto}
+h1{font-size:20px;font-weight:600;margin-bottom:4px}
+.subtitle{font-size:13px;color:#666;margin-bottom:20px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.stat{background:#fff;border-radius:10px;padding:14px;border:1px solid #e5e3dc}
+.stat-n{font-size:24px;font-weight:600}
+.stat-n.verde{color:#0F6E56}
+.stat-n.ambar{color:#854F0B}
+.stat-l{font-size:12px;color:#888;margin-top:2px}
+.progbar{height:6px;background:#e5e3dc;border-radius:3px;margin-bottom:24px;overflow:hidden}
+.progbar-fill{height:100%;background:#1D9E75;border-radius:3px;transition:width 0.4s}
+.nota{background:#FAEEDA;border-radius:10px;padding:14px 16px;font-size:13px;color:#633806;margin-bottom:24px;line-height:1.6;border:1px solid #FAC775}
+.nota strong{font-weight:600}
+.fase{margin-bottom:8px;background:#fff;border-radius:12px;border:1px solid #e5e3dc;overflow:hidden}
+.fase-header{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;border-bottom:1px solid #f0ede6}
+.fase-badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px}
+.badge-activa{background:#E1F5EE;color:#085041}
+.badge-proxima{background:#FAEEDA;color:#633806}
+.badge-futura{background:#F1EFE8;color:#5F5E5A}
+.fase-titulo{font-size:14px;font-weight:600;flex:1}
+.fase-prog{font-size:12px;color:#888;font-weight:500}
+.tareas{padding:8px 12px 12px}
+.tarea{display:flex;align-items:flex-start;gap:12px;padding:10px 12px;border-radius:8px;margin-top:6px;cursor:pointer;border:1px solid #eee;background:#fafaf8;transition:background 0.12s}
+.tarea:hover{background:#f0ede6}
+.tarea.hecha{opacity:0.5}
+.tarea.hecha .tarea-titulo{text-decoration:line-through;color:#999}
+.check{width:20px;height:20px;border-radius:5px;border:2px solid #ccc;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all 0.15s;background:#fff}
+.check.on{background:#1D9E75;border-color:#1D9E75}
+.check-svg{display:none;width:12px;height:12px}
+.check.on .check-svg{display:block}
+.tarea-body{flex:1}
+.tarea-titulo{font-size:14px;font-weight:600;margin-bottom:3px}
+.tarea-desc{font-size:12px;color:#666;line-height:1.5;margin-bottom:6px}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:11px;font-weight:500;padding:2px 8px;border-radius:5px}
+.tag-verde{background:#E1F5EE;color:#085041}
+.tag-coral{background:#FAECE7;color:#993C1D}
+.tag-azul{background:#E6F1FB;color:#185FA5}
+.tag-gris{background:#F1EFE8;color:#5F5E5A}
+.tag-ambar{background:#FAEEDA;color:#633806}
+.btn-reset{display:block;margin:16px auto 0;font-size:12px;color:#999;background:none;border:none;cursor:pointer;padding:6px 12px;border-radius:6px}
+.btn-reset:hover{background:#e5e3dc;color:#555}
+</style>
+</head>
+<body>
+
+<h1>Proyecto NN — Buyer Persona y Campaña CRM</h1>
+<p class="subtitle">Todos los temas abiertos en una sola vista. Marca cada tarea al terminarla. · Actualizado 14/04/2026 — Fase 7 Radar Comercial añadida</p>
+
+<div class="stats">
+  <div class="stat"><div class="stat-n verde" id="s-hechas">0</div><div class="stat-l">Completadas</div></div>
+  <div class="stat"><div class="stat-n ambar" id="s-pend">0</div><div class="stat-l">Pendientes</div></div>
+  <div class="stat"><div class="stat-n" id="s-total" style="color:#444">0</div><div class="stat-l">Total tareas</div></div>
+  <div class="stat"><div class="stat-n" id="s-pct" style="color:#1D9E75">0%</div><div class="stat-l">Progreso</div></div>
+</div>
+
+<div class="progbar"><div class="progbar-fill" id="barra" style="width:0%"></div></div>
+
+<div class="nota"><strong>Regla de trabajo:</strong> Coge una tarea, termínala por completo, márcala. Si surge algo nuevo, añádelo al final de la fase. No saltes a otra tarea hasta terminar la actual.</div>
+
+<div id="tablero"></div>
+<button class="btn-reset" onclick="resetTodo()">Reiniciar tablero</button>
+
+<script>
+const FASES=[
+  {id:"f1",titulo:"Fase 1 — Conocimiento de producto NN",badge:"En curso",estado:"activa",tareas:[
+    {id:"t1",titulo:"Catálogo NN completo analizado",desc:"Hecho hoy: Contigo Senior, AGE, SIALP, Plan Salud+Vida, Contigo Autónomo, LiderPlus, Hogar, SCC, Hipotecas ING/Abanca, Duplo.",tags:"verde:Completado hoy"},
+    {id:"t2",titulo:"Confirmar plazo pago AGE al fallecimiento",desc:"Preguntar a Antonio: ¿cuántos días reales tarda NN en pagar al beneficiario? Si son 48h, ese argumento es potentísimo para el senior.",tags:"coral:Pendiente Antonio|coral:Bloqueante"},
+    {id:"t3",titulo:"Confirmar AGE fuera de masa hereditaria",desc:"Verificar con documentación interna que el AGE está exento al 100% como seguro de vida. No usar el argumento hasta confirmarlo.",tags:"coral:Pendiente Antonio"},
+    {id:"t4",titulo:"Confirmar acceso prescriptor hipotecas ING",desc:"¿Tienes ya activado el canal prescriptor o necesitas formación/validación previa para derivar leads de hipoteca?",tags:"coral:Pendiente Antonio"},
+  ]},
+  {id:"f2",titulo:"Fase 2 — Investigación y buyer personas",badge:"En curso",estado:"activa",tareas:[
+    {id:"t5",titulo:"Análisis comparativo 4 IAs completado",desc:"Comet (competidores), GPT (estrategia comercial), Perplexity (patrones mercado), Gemini (tendencias). Conclusiones extraídas.",tags:"verde:Completado hoy"},
+    {id:"t6",titulo:"Matriz buyer personas NN definida",desc:"6 segmentos: Joven S1, Constructor S2, Protector Familiar S3, Autónomo S3A, Planificador S4, Senior S5. Productos y mensajes asignados.",tags:"verde:Completado hoy"},
+    {id:"t7",titulo:"Mensajes WhatsApp por segmento redactados",desc:"5 segmentos con mensaje de apertura y seguimiento. Variantes para hipotecas, salud, ahorro y Decesos→NN.",tags:"verde:Completado hoy"},
+    {id:"t8",titulo:"Scripts de llamada por segmento",desc:"Pendiente: guiones de llamada para convertir la respuesta al WhatsApp en reunión/propuesta. Empezar por S5 Senior.",tags:"ambar:Siguiente paso"},
+  ]},
+  {id:"f3",titulo:"Fase 3 — Segmentación del CRM (965 contactos)",badge:"Próxima",estado:"proxima",tareas:[
+    {id:"t9",titulo:"Añadir columnas al Sheets del CRM",desc:"3 columnas nuevas: SEGMENTO, PRODUCTO_PPAL, AUTÓNOMO. Instrucciones y fórmulas ya preparadas.",tags:"azul:Fórmula lista"},
+    {id:"t10",titulo:"Aplicar fórmula de clasificación automática",desc:"La fórmula detecta edad + palabras clave en notas y asigna segmento. Lista para copiar y pegar en Sheets.",tags:"azul:Fórmula lista"},
+    {id:"t11",titulo:"Revisar y corregir los S0 (sin edad/datos)",desc:"Los contactos sin fecha de nacimiento quedan como S0. Llamarles primero solo para actualizar datos, sin vender.",tags:"gris:Manual"},
+    {id:"t12",titulo:"Identificar autónomos manualmente",desc:"Revisar notas de los ~48 estimados. No hay forma automática fiable. Hacerlo en tandas de 50 contactos.",tags:"gris:Manual"},
+    {id:"t13",titulo:"Validar estimación por segmento con datos reales",desc:"~435 seniors, ~193 planificadores, ~174 protectores, ~77 constructores, ~48 autónomos, ~38 jóvenes.",tags:"gris:Verificar"},
+  ]},
+  {id:"f4",titulo:"Fase 4 — Campaña Senior S5 — Primera oleada",badge:"Futura",estado:"futura",tareas:[
+    {id:"t14",titulo:"Preparar argumentario Contigo Senior vs Decesos",desc:"Script completo para presentar Contigo Senior a quien ya tiene Decesos en Santalucía. Con gancho del AGE VIP si se confirma el plazo.",tags:"coral:Espera confirmación Antonio"},
+    {id:"t15",titulo:"Lanzar WhatsApp a primeros 50 seniors",desc:"Empezar con los más conocidos. Medir tasa de respuesta antes de escalar al resto.",tags:"gris:Tras segmentación"},
+    {id:"t16",titulo:"Aplicar seguimiento a los 3-4 días",desc:"Mensaje de seguimiento ya redactado. Aplicarlo a los que no respondieron al primer mensaje.",tags:"gris:Tras primer envío"},
+    {id:"t17",titulo:"Script de cierre reunión presencial senior",desc:"El senior necesita calidez y visita. Preparar guión para la propuesta Contigo Senior + AGE en persona.",tags:"gris:Tras primeras respuestas"},
+  ]},
+  {id:"f5",titulo:"Fase 5 — Campaña hipotecas S2 + S3 + S3A",badge:"Futura",estado:"futura",tareas:[
+    {id:"t18",titulo:"Confirmar activación canal hipotecas ING",desc:"Pendiente de respuesta de Antonio. No lanzar campaña hasta tenerlo activo.",tags:"coral:Bloqueante"},
+    {id:"t19",titulo:"Filtrar constructores y protectores del CRM",desc:"Extraer S2 y S3 del Sheets una vez segmentado. ~251 contactos objetivo.",tags:"gris:Tras segmentación"},
+    {id:"t20",titulo:"Lanzar WhatsApp hipotecas",desc:"Mensajes ya redactados para primera hipoteca (S2) y mejora de condiciones (S3). Personalizar con nombre.",tags:"gris:Tras activación canal"},
+  ]},
+  {id:"f6",titulo:"Fase 6 — Organización en Claude (proyecto NN)",badge:"Próxima",estado:"proxima",tareas:[
+    {id:"t21",titulo:"Mover conversaciones al proyecto NN Comercial",desc:"Abrir claude.ai → Proyectos → NN Comercial → Nueva conversación desde ahí. Todas las sesiones comerciales van dentro del proyecto.",tags:"azul:Acción rápida"},
+    {id:"t22",titulo:"Subir documentos clave al proyecto Claude",desc:"Subir: Sheets CRM, mensajes WhatsApp, matriz buyer personas, catálogo NN. Así no hay que repetir contexto.",tags:"azul:Acción rápida"},
+    {id:"t23",titulo:"Revisar instrucciones de los 3 proyectos",desc:"NN Comercial · Máster IA · Personal. Confirmar que las instrucciones de contexto están actualizadas en cada uno.",tags:"gris:Revisar"},
+  ]},
+  {id:"f7",titulo:"Fase 7 — Sistema Radar Comercial NN",badge:"En curso",estado:"activa",tareas:[
+    {id:"t24",titulo:"Crear Radar Comercial NN en Google Sheets",desc:"Sheets con 4 pestañas: RADAR COMERCIAL, NOVEDADES PRODUCTO, DASHBOARD AGENCIA, Instrucciones. Creado y subido a Drive — carpeta 01 · CRM y Sistema de Gestión.",tags:"verde:Completado 14/04"},
+    {id:"t25",titulo:"Cargar Entre Nosotros #557 en el Radar",desc:"Primera carga manual con 6 campañas activas y 6 novedades de producto. Historial iniciado. Acceso público solo lectura activado.",tags:"verde:Completado 14/04"},
+    {id:"t26",titulo:"Conectar Radar con Panel DESPEGUE",desc:"Panel v3 construido con sección 📡 Radar Comercial que lee el Sheets automáticamente vía API pública. Pendiente: subir panel-despegue-v3-radar.html a GitHub como index.html.",tags:"ambar:Pendiente subir GitHub"},
+    {id:"t27",titulo:"Subir Panel DESPEGUE v3 a GitHub",desc:"Reemplazar index.html del repo FedeFonta08/propuestas-nn con el nuevo panel-despegue-v3-radar.html. Archivo descargado. Método: editor GitHub web o drag & drop.",tags:"coral:Pendiente"},
+    {id:"t28",titulo:"Flujo semanal automático Entre Nosotros",desc:"Cada semana: reenviar correo a fefontanals@gmail.com → Claude lo lee → actualiza 3 pestañas del Radar → resumen ejecutivo + 3 acciones. Tiempo para Fede: 0 minutos extra.",tags:"gris:Operativo desde próxima semana"},
+    {id:"t29",titulo:"Conectar Radar con Sistema de Llamadas v4",desc:"Mostrar campaña activa relevante al llamar a un contacto según su segmento buyer persona. Requiere cruzar CRM con Radar.",tags:"gris:Fase siguiente"},
+    {id:"t30",titulo:"Conectar Radar con CRM 965 contactos",desc:"Cruzar novedades semanales con segmentos del CRM. Ej: nueva ampliación SIALP 75 años → filtrar contactos 55-75 años para llamar esta semana.",tags:"gris:Fase siguiente"},
+  ]},
+];
+
+const KEY="nn_tablero_v2";
+let done=JSON.parse(localStorage.getItem(KEY)||"{}");
+function save(){localStorage.setItem(KEY,JSON.stringify(done))}
+function tagHtml(s){
+  return s.split("|").map(t=>{
+    const[c,l]=t.split(":");
+    const m={verde:"tag-verde",coral:"tag-coral",azul:"tag-azul",gris:"tag-gris",ambar:"tag-ambar"};
+    return`<span class="tag ${m[c]||'tag-gris'}">${l}</span>`;
+  }).join("");
+}
+function updateStats(){
+  let tot=0,hech=0;
+  FASES.forEach(f=>f.tareas.forEach(t=>{tot++;if(done[t.id])hech++;}));
+  document.getElementById("s-total").textContent=tot;
+  document.getElementById("s-hechas").textContent=hech;
+  document.getElementById("s-pend").textContent=tot-hech;
+  const p=tot?Math.round(hech/tot*100):0;
+  document.getElementById("s-pct").textContent=p+"%";
+  document.getElementById("barra").style.width=p+"%";
+}
+function toggle(id){done[id]=!done[id];save();render();updateStats()}
+function render(){
+  let html="";
+  FASES.forEach((f,i)=>{
+    const hech=f.tareas.filter(t=>done[t.id]).length;
+    const bc=f.estado==="activa"?"badge-activa":f.estado==="proxima"?"badge-proxima":"badge-futura";
+    html+=`<div class="fase">
+      <div class="fase-header">
+        <span class="fase-badge ${bc}">${f.badge}</span>
+        <span class="fase-titulo">${f.titulo}</span>
+        <span class="fase-prog">${hech}/${f.tareas.length}</span>
+      </div>
+      <div class="tareas">`;
+    f.tareas.forEach(t=>{
+      const d=!!done[t.id];
+      html+=`<div class="tarea${d?" hecha":""}" onclick="toggle('${t.id}')">
+        <div class="check${d?" on":""}">
+          <svg class="check-svg" viewBox="0 0 12 12" fill="none">
+            <path d="M2 6L5 9L10 3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="tarea-body">
+          <div class="tarea-titulo">${t.titulo}</div>
+          <div class="tarea-desc">${t.desc}</div>
+          <div class="tags">${tagHtml(t.tags)}</div>
+        </div>
+      </div>`;
+    });
+    html+=`</div></div>`;
+    if(i<FASES.length-1)html+=`<div style="height:8px"></div>`;
+  });
+  document.getElementById("tablero").innerHTML=html;
+}
+function resetTodo(){if(confirm("¿Reiniciar el tablero? Se perderán las marcas.")){done={};save();render();updateStats();}}
+render();updateStats();
+</script>
+</body>
+</html>

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Reclutamiento | Punto Naranja NN</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+        :root {
+            --nn-orange: #EA650D;
+            --nn-orange-light: #FFF3E8;
+            --nn-orange-mid: #FF8A3D;
+            --nn-blue: #002244;
+            --nn-blue-light: #0A3A6B;
+            --bg: #FAFBFC;
+            --card: #FFFFFF;
+            --text: #1A2332;
+            --text-muted: #5A6B7F;
+            --border: #E4E9F0;
+            --green: #0D9668;
+            --green-bg: #ECFDF5;
+            --red-soft: #FEF2F2;
+            --radius: 14px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex; justify-content: center;
+            padding: 1rem;
+            -webkit-font-smoothing: antialiased;
+        }
+        .app { width: 100%; max-width: 520px; display: flex; flex-direction: column; gap: 1.25rem; }
+
+        /* ── HEADER ── */
+        .header {
+            background: linear-gradient(135deg, var(--nn-blue) 0%, var(--nn-blue-light) 100%);
+            color: #fff; padding: 1.5rem; border-radius: var(--radius);
+            box-shadow: 0 8px 24px rgba(0,34,68,0.25);
+            position: relative; overflow: hidden;
+        }
+        .header::before {
+            content: ''; position: absolute; top: -40px; right: -40px;
+            width: 120px; height: 120px; border-radius: 50%;
+            background: var(--nn-orange); opacity: 0.12;
+        }
+        .header h1 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.2rem; }
+        .header .sub { font-size: 0.82rem; color: #94A3B8; margin-bottom: 1.2rem; }
+        .header .evp {
+            background: rgba(234,101,13,0.15); border-left: 3px solid var(--nn-orange);
+            padding: 0.65rem 0.8rem; border-radius: 0 8px 8px 0;
+            font-size: 0.85rem; font-style: italic; color: #FFD4B0; line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+        .header .evp strong { color: #fff; font-style: normal; }
+        .input-row { display: flex; flex-direction: column; gap: 0.35rem; }
+        .input-row label { font-size: 0.7rem; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+        .input-row input {
+            width: 100%; padding: 0.65rem 0.8rem; font-size: 1rem;
+            border: 2px solid rgba(255,255,255,0.15); border-radius: 8px;
+            background: rgba(255,255,255,0.08); color: #fff; outline: none;
+            font-family: inherit; font-weight: 500; transition: border-color 0.2s;
+        }
+        .input-row input::placeholder { color: #64748B; }
+        .input-row input:focus { border-color: var(--nn-orange); }
+
+        /* ── SECTION LABELS ── */
+        .section-label {
+            font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase;
+            letter-spacing: 1px; font-weight: 700; margin-bottom: 0.5rem;
+        }
+
+        /* ── PERFIL BUTTONS ── */
+        .perfil-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.45rem; }
+        .perfil-grid.five { grid-template-columns: repeat(3,1fr); }
+        .perfil-btn {
+            background: var(--card); border: 1.5px solid var(--border);
+            padding: 0.6rem 0.4rem; border-radius: 10px;
+            font-size: 0.78rem; font-weight: 600; color: var(--text-muted);
+            cursor: pointer; transition: all 0.2s; text-align: center;
+            font-family: inherit; line-height: 1.25;
+        }
+        .perfil-btn:hover { border-color: var(--nn-orange); color: var(--nn-orange); }
+        .perfil-btn.active { background: var(--nn-orange); color: #fff; border-color: var(--nn-orange); }
+        .perfil-btn .emoji { display: block; font-size: 1.1rem; margin-bottom: 0.2rem; }
+
+        /* ── SCRIPT DISPLAY ── */
+        .script-box {
+            background: var(--card); padding: 1.4rem; border-radius: var(--radius);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border-left: 4px solid var(--nn-orange);
+            min-height: 180px;
+        }
+        .script-content { display: none; font-size: 1rem; line-height: 1.65; color: var(--text); }
+        .script-content.active { display: block; animation: fadeUp 0.3s ease; }
+        .script-content p { margin-bottom: 0.9rem; }
+        .dyn { font-weight: 700; color: var(--nn-orange); background: var(--nn-orange-light); padding: 0 4px; border-radius: 4px; }
+
+        /* ── PLAN TALENT / CARRERA ── */
+        .talent-section {
+            background: var(--card); border-radius: var(--radius);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04); overflow: hidden;
+        }
+        .talent-header {
+            background: linear-gradient(135deg, var(--nn-orange) 0%, var(--nn-orange-mid) 100%);
+            color: #fff; padding: 1rem 1.2rem; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+            font-weight: 700; font-size: 0.95rem;
+        }
+        .talent-header .arrow { transition: transform 0.3s; font-size: 1.2rem; }
+        .talent-header.open .arrow { transform: rotate(180deg); }
+        .talent-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+        .talent-body.open { max-height: 3000px; }
+        .talent-body-inner { padding: 1.2rem; }
+        .pillar {
+            padding: 0.9rem; margin-bottom: 0.7rem;
+            background: var(--bg); border-radius: 10px;
+            border-left: 3px solid var(--nn-orange);
+        }
+        .pillar h4 { font-size: 0.85rem; font-weight: 700; color: var(--nn-blue); margin-bottom: 0.3rem; }
+        .pillar p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; }
+        .pillar .highlight { color: var(--nn-orange); font-weight: 600; }
+
+        /* ── CAREER PATH ── */
+        .career-path { margin-top: 0.8rem; }
+        .career-step {
+            display: flex; gap: 0.75rem; margin-bottom: 0.6rem;
+            padding: 0.8rem; background: #fff; border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        .career-step .phase {
+            min-width: 52px; height: 52px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.7rem; font-weight: 700; color: #fff;
+            flex-shrink: 0; text-align: center; line-height: 1.15;
+        }
+        .phase-lc { background: #6366F1; }
+        .phase-ln { background: #0EA5E9; }
+        .phase-le { background: var(--green); }
+        .phase-iy { background: var(--nn-orange); }
+        .career-step .info h5 { font-size: 0.82rem; font-weight: 700; color: var(--text); margin-bottom: 0.15rem; }
+        .career-step .info p { font-size: 0.75rem; color: var(--text-muted); line-height: 1.35; }
+        .career-step .info .money { color: var(--green); font-weight: 700; }
+
+        /* ── OBJECIONES ── */
+        .obj-section { margin-top: 0.2rem; }
+        .obj-btn {
+            background: var(--card); color: var(--text); cursor: pointer;
+            padding: 0.85rem 1rem; width: 100%; text-align: left;
+            border: 1.5px solid var(--border); outline: none; transition: 0.2s;
+            border-radius: 10px; margin-bottom: 0.4rem;
+            font-weight: 600; font-size: 0.88rem; font-family: inherit;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .obj-btn:hover { background: #F8FAFC; border-color: #CBD5E1; }
+        .obj-btn::after { content: '+'; color: var(--nn-orange); font-size: 1.2rem; font-weight: 700; transition: transform 0.2s; }
+        .obj-btn.active { border-color: var(--nn-orange); background: var(--nn-orange-light); }
+        .obj-btn.active::after { content: '−'; }
+        .obj-panel {
+            max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+            margin-bottom: 0.4rem; margin-top: -0.3rem;
+        }
+        .obj-panel.open { max-height: 600px; }
+        .obj-panel-inner {
+            padding: 1rem 1.1rem; background: #F8FAFC;
+            border: 1.5px solid var(--border); border-top: none;
+            border-radius: 0 0 10px 10px;
+            font-size: 0.9rem; line-height: 1.55; color: var(--nn-blue);
+        }
+        .obj-panel-inner .tag {
+            display: inline-block; font-size: 0.65rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 0.2rem 0.5rem; border-radius: 4px; margin-bottom: 0.5rem;
+        }
+        .tag-filtro { background: #FEE2E2; color: #991B1B; }
+        .tag-dato { background: #DBEAFE; color: #1E40AF; }
+        .tag-validacion { background: var(--green-bg); color: #065F46; }
+        .tag-escasez { background: #FEF3C7; color: #92400E; }
+        .tag-talent { background: var(--nn-orange-light); color: var(--nn-orange); }
+
+        /* ── POST-CAFÉ ── */
+        .postcafe {
+            background: var(--card); border-radius: var(--radius);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding: 1.2rem; border-top: 3px solid var(--green);
+        }
+        .postcafe h3 { font-size: 0.95rem; font-weight: 700; color: var(--green); margin-bottom: 0.7rem; }
+        .step-list { counter-reset: steps; }
+        .step-item {
+            counter-increment: steps; position: relative;
+            padding-left: 2.2rem; margin-bottom: 0.6rem;
+            font-size: 0.85rem; line-height: 1.45; color: var(--text);
+        }
+        .step-item::before {
+            content: counter(steps); position: absolute; left: 0; top: 0;
+            width: 1.6rem; height: 1.6rem; border-radius: 50%;
+            background: var(--green-bg); color: var(--green);
+            font-size: 0.75rem; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* ── REGISTRO RÁPIDO ── */
+        .registro {
+            background: var(--card); border-radius: var(--radius);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding: 1.2rem; border-top: 3px solid var(--nn-blue);
+        }
+        .registro h3 { font-size: 0.95rem; font-weight: 700; color: var(--nn-blue); margin-bottom: 0.7rem; }
+        .reg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+        .reg-field { display: flex; flex-direction: column; gap: 0.2rem; }
+        .reg-field.full { grid-column: 1 / -1; }
+        .reg-field label { font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.3px; }
+        .reg-field input, .reg-field select, .reg-field textarea {
+            padding: 0.55rem 0.7rem; border: 1.5px solid var(--border);
+            border-radius: 8px; font-size: 0.85rem; font-family: inherit;
+            outline: none; transition: border-color 0.2s; background: #fff;
+        }
+        .reg-field input:focus, .reg-field select:focus, .reg-field textarea:focus { border-color: var(--nn-orange); }
+        .reg-field textarea { resize: vertical; min-height: 50px; }
+        .btn-copy {
+            margin-top: 0.7rem; width: 100%; padding: 0.7rem;
+            background: var(--nn-blue); color: #fff; border: none;
+            border-radius: 10px; font-size: 0.88rem; font-weight: 700;
+            cursor: pointer; font-family: inherit; transition: background 0.2s;
+        }
+        .btn-copy:hover { background: var(--nn-blue-light); }
+        .btn-copy.copied { background: var(--green); }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+
+    <!-- ═══ HEADER ═══ -->
+    <div class="header">
+        <h1>Centro de Reclutamiento</h1>
+        <div class="sub">Punto Naranja Xàtiva · La Costera</div>
+        <div class="evp"><strong>«En Nationale-Nederlanden es la persona la que hace al profesional.»</strong><br>Plan Talent — Plan de desarrollo profesional</div>
+        <div class="input-row">
+            <label>Nombre del candidato</label>
+            <input type="text" id="candidateName" placeholder="Ej. Laura Gómez" oninput="updateNames()" autocomplete="off">
+        </div>
+    </div>
+
+    <!-- ═══ PERFILES ═══ -->
+    <div>
+        <div class="section-label">Perfil del candidato</div>
+        <div class="perfil-grid five">
+            <button class="perfil-btn active" onclick="showScript('s-comercial',this)"><span class="emoji">🎯</span>Comercial</button>
+            <button class="perfil-btn" onclick="showScript('s-sector',this)"><span class="emoji">🏢</span>Seguros</button>
+            <button class="perfil-btn" onclick="showScript('s-contacto',this)"><span class="emoji">☕</span>Conocido</button>
+            <button class="perfil-btn" onclick="showScript('s-junior',this)"><span class="emoji">🚀</span>Junior</button>
+            <button class="perfil-btn" onclick="showScript('s-referenciador',this)"><span class="emoji">🤝</span>Referenciador</button>
+        </div>
+    </div>
+
+    <!-- ═══ SCRIPTS ═══ -->
+    <div class="script-box">
+
+        <!-- Comercial General -->
+        <div id="s-comercial" class="script-content active">
+            <p>«Hola <span class="dyn">[Candidato]</span>, soy Fede, Delegado del Punto Naranja de Nationale-Nederlanden en Xàtiva. He pensado en ti por una razón concreta.»</p>
+            <p>«Estamos seleccionando a las 4 personas que van a liderar la expansión en La Costera. No busco un perfil; busco una persona. En NN tenemos un lema: <strong>es la persona la que hace al profesional</strong>. Nosotros ponemos la formación — incluyendo un título universitario homologado por la UPV — , la tecnología y una multinacional con 175 años de historia. Tú solo pones tu actitud.»</p>
+            <p>«Quiero invitarte a un café de 20 minutos. Te enseño el plan de carrera real con números y decides si encaja con tu ambición. ¿Te viene mejor el martes o el miércoles?»</p>
+        </div>
+
+        <!-- Sector Seguros -->
+        <div id="s-sector" class="script-content">
+            <p>«Hola <span class="dyn">[Candidato]</span>, soy Fede, Delegado de Nationale-Nederlanden en Xàtiva. Sé que estás en el sector, así que voy directo.»</p>
+            <p>«Acabamos de abrir el Punto Naranja para toda la comarca y estoy cerrando los 4 agentes clave. La diferencia con lo que conoces: aquí no vendemos pólizas sueltas a precio. Hacemos planificación financiera integral con un método consultivo propio — el ADN del Cliente — que ninguna otra compañía tiene. El modelo retributivo es otro nivel: anticipo + complemento riesgo + comisiones por producción + cartera recurrente desde el año 2.»</p>
+            <p>«No te pido que dejes nada. Te pido 20 minutos de café para que veas los números y compares tú mismo. ¿Martes o jueves?»</p>
+        </div>
+
+        <!-- Conocido -->
+        <div id="s-contacto" class="script-content">
+            <p>«¡Hola <span class="dyn">[Candidato]</span>! Soy Fede, ¿qué tal? Te llamo por un tema profesional, te cuento rápido.»</p>
+            <p>«Me han nombrado Delegado del nuevo Punto Naranja de Nationale-Nederlanden en Xàtiva. Estoy formando mi equipo de confianza y he pensado en ti directamente. Es un proyecto de emprendimiento real: en dos años puedes tener tu propio equipo comercial, con formación continua que incluye un título por la Universidad Politécnica de Valencia.»</p>
+            <p>«Quiero invitarte a un café, te cuento los números reales y, si te vibra, genial; si no, nos hemos puesto al día. ¿Principios o finales de semana?»</p>
+        </div>
+
+        <!-- Junior -->
+        <div id="s-junior" class="script-content">
+            <p>«Hola <span class="dyn">[Candidato]</span>, soy Fede, Delegado de Nationale-Nederlanden en Xàtiva. He visto tu currículum y tu actitud encaja con lo que buscamos.»</p>
+            <p>«En NN decimos que <strong>es la persona la que hace al profesional</strong>. No me preocupa que no tengas experiencia. Tenemos el Plan Talent: un programa de desarrollo profesional con formación continua, título universitario homologado por la UPV, y un plan de carrera con hitos claros. De la parte técnica, los productos y la fiscalidad me encargo yo y el equipo de formación. Tú solo necesitas hambre y ganas de aprender una profesión sin techo salarial.»</p>
+            <p>«Son 20 minutos de entrevista. Te cuento el plan y decides. ¿Lunes a las 10 o martes por la tarde?»</p>
+        </div>
+
+        <!-- Referenciador -->
+        <div id="s-referenciador" class="script-content">
+            <p>«Hola <span class="dyn">[Candidato]</span>, soy Fede de Nationale-Nederlanden en Xàtiva. Te llamo porque sé que tienes una red de contactos muy amplia y quiero proponerte algo que no requiere que vendas nada.»</p>
+            <p>«Nationale-Nederlanden tiene un programa de Referenciadores: tú me presentas a personas que puedan necesitar protección financiera — familias, autónomos, gente con hipoteca — y si la operación se cierra, tú cobras. Por ejemplo: una Contigo Familia son 300€ para ti, un Plan de Salud entre 100 y 300€, una hipoteca vinculada hasta 270€. Sin darte de alta como autónomo en seguros, sin formación obligatoria, sin horarios.»</p>
+            <p>«Solo necesitas conocer gente y que yo haga mi trabajo. ¿Te interesa que te explique cómo funciona con un café de 15 minutos?»</p>
+        </div>
+    </div>
+
+    <!-- ═══ POR QUÉ NN — PLAN TALENT ═══ -->
+    <div class="talent-section">
+        <div class="talent-header" onclick="toggleTalent(this)" id="talentToggle">
+            🟠 Por qué NN — Plan Talent (enseñar en el café)
+            <span class="arrow">▼</span>
+        </div>
+        <div class="talent-body" id="talentBody">
+            <div class="talent-body-inner">
+
+                <div class="pillar">
+                    <h4>🎓 Formación con Título Universitario</h4>
+                    <p>Formación continua que culmina en un <span class="highlight">título homologado por la Universidad Politécnica de Valencia</span>. Somos los únicos del sector que ofrecen esto. No es un curso interno — es un título oficial.</p>
+                </div>
+                <div class="pillar">
+                    <h4>📈 Un Crecimiento Tangible</h4>
+                    <p>Remuneración atractiva vinculada a tus objetivos. Reconocimiento constante. Y en un margen de <span class="highlight">2 años puedes tener tu propio equipo comercial</span> — tu propio negocio con el respaldo de una multinacional.</p>
+                </div>
+                <div class="pillar">
+                    <h4>🏆 175 Años de Respaldo</h4>
+                    <p>Grupo NN: 175 años cuidando de nuestros clientes. <span class="highlight">Premio a la Excelencia Empresarial</span> — Servicio de Atención al Cliente del año en seguros de vida. No es una startup, es una multinacional holandesa cotizada en bolsa.</p>
+                </div>
+                <div class="pillar">
+                    <h4>📱 Oficina Digital</h4>
+                    <p>Toda tu oficina cabe en un iPad. Movilidad total, sin burocracia física. Tú decides dónde y cuándo trabajas. <span class="highlight">Tú decides cuánto quieres ganar</span> en función de tu esfuerzo.</p>
+                </div>
+                <div class="pillar">
+                    <h4>🤝 «Somos como tú»</h4>
+                    <p>Te cuidamos para que cuides a tus clientes. Te queremos con opiniones e ideas. Somos trotamundos — viajes y eventos anuales de cohesión. Entorno saludable que te acepta <span class="highlight">tal y como eres</span>.</p>
+                </div>
+
+                <!-- PLAN DE CARRERA -->
+                <div class="section-label" style="margin-top:1rem;">Plan de carrera real</div>
+                <div class="career-path">
+                    <div class="career-step">
+                        <div class="phase phase-lc">LC<br>3m</div>
+                        <div class="info">
+                            <h5>Ejecutivo Naranja Iniciación</h5>
+                            <p>Fase de prueba: 3 meses. Anticipo <span class="money">400€/mes</span> condicionado a 1 op. riesgo + 90% PMA. PMA trimestral: 4.840 pts. Comisión producción mínima hasta 25%.</p>
+                        </div>
+                    </div>
+                    <div class="career-step">
+                        <div class="phase phase-ln">LN<br>12m</div>
+                        <div class="info">
+                            <h5>Ejecutivo Naranja Plus</h5>
+                            <p>Anticipo <span class="money">400€ + complemento 200-300€/mes</span>. Revisiones trimestrales. Si 100% PMA + PMRA → complementos adicionales. PMA anual ~70.422 pts.</p>
+                        </div>
+                    </div>
+                    <div class="career-step">
+                        <div class="phase phase-le">LE<br>12m</div>
+                        <div class="info">
+                            <h5>Ejecutivo Innova</h5>
+                            <p>Anticipo <span class="money">1.000€/mes</span> (si 100% PMA + 50% riesgo). Complemento riesgo hasta <span class="money">550€</span> adicionales. Regularización anual. Bono calidad 300€ si Semáforo 10.</p>
+                        </div>
+                    </div>
+                    <div class="career-step">
+                        <div class="phase phase-iy">IY<br>∞</div>
+                        <div class="info">
+                            <h5>Ejecutivo (Consolidación)</h5>
+                            <p>Sin anticipo: comisiones directas por cada recibo cobrado. Contigo Familia <span class="money">36%</span>, Salud <span class="money">3,84%</span>, Contigo Senior hasta <span class="money">24%</span>. Cartera recurrente del año 2 en adelante.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REFERENCIADOR -->
+                <div class="section-label" style="margin-top:1rem;">Comisiones referenciador (no agente)</div>
+                <div class="pillar" style="border-left-color: var(--green);">
+                    <p style="font-size:0.78rem; line-height:1.5;">
+                        <strong>Contigo Familia:</strong> 300€ · <strong>Salud Completo:</strong> 100-300€ según prima · <strong>Contigo Senior:</strong> 300€ · <strong>SIALP:</strong> 250€ · <strong>Contigo Futuro:</strong> 250€ · <strong>Contigo Autónomo ILT:</strong> 150€ · <strong>Vida Hipoteca ING:</strong> 270€ · <strong>Vida Hipoteca Abanca:</strong> 90-270€ · <strong>MiHogar:</strong> 100€<br>
+                        <span style="color:var(--text-muted); font-size:0.72rem;">Sujeto a IVA + IRPF. Operaciones >150€ prima anualizada.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ OBJECIONES ═══ -->
+    <div class="obj-section">
+        <div class="section-label">Rebate de objeciones</div>
+
+        <button class="obj-btn" onclick="toggleObj(this)">¿Y si no vendo nada los primeros meses?</button>
+        <div class="obj-panel">
+            <div class="obj-panel-inner">
+                <span class="tag tag-dato">DATO REAL</span>
+                <p>«<span class="dyn">[Candidato]</span>, en la fase inicial (3 meses) tienes un anticipo de 400€/mes condicionado a que hagas al menos una operación de riesgo y mantengas el 90% de tu producción mínima. Si un mes no llegas, no lo cobras, pero tampoco te lo descuentan de nada. A partir del 4º mes se añaden complementos de 200-300€ según tu porcentaje de riesgo. Y hay una regla clave: si el resultado final es negativo en cualquier comisión, no se te descuenta del resto. No hay deuda. El sistema te protege mientras aprendes.»</p>
+            </div>
+        </div>
+
+        <button class="obj-btn" onclick="toggleObj(this)">¿Cuánto se gana de verdad?</button>
+        <div class="obj-panel">
+            <div class="obj-panel-inner">
+                <span class="tag tag-dato">DATO REAL</span>
+                <p>«Te enseño la mecánica real sin inventar cifras. En la fase Innova, que es la de consolidación: anticipo máximo 1.000€ + complemento riesgo hasta 550€ = 1.550€/mes garantizado si cumples objetivos. Encima, comisiones por cada recibo que cobre tu cliente y comisión por producción mínima de hasta el 25% sobre lo producido. Un agente cumpliendo objetivos con buen % de riesgo factura entre 1.800 y 2.500€/mes en su primer año completo. Y eso crece: la cartera genera ingresos recurrentes del año 2 en adelante — Salud al 5%, Contigo Familia al 10%, MiHogar al 15%. No son ingresos puntuales; es un negocio que se acumula.»</p>
+            </div>
+        </div>
+
+        <button class="obj-btn" onclick="toggleObj(this)">Pero... ¿esto es autónomo / mercantil?</button>
+        <div class="obj-panel">
+            <div class="obj-panel-inner">
+                <span class="tag tag-filtro">FILTRO</span>
+                <p>«Sí, <span class="dyn">[Candidato]</span>, es un contrato mercantil. Y te explico por qué: no busco a un empleado al que decirle a qué hora ir al baño. Busco a un socio de negocio. Te ofrezco la infraestructura, la marca y la formación — incluido un título universitario por la UPV — para que montes tu propia cartera de clientes. Si confías en tu capacidad y quieres ingresos sin techo, nos sentamos a hablar. ¿Nos tomamos ese café?»</p>
+            </div>
+        </div>
+
+        <button class="obj-btn" onclick="toggleObj(this)">Busco algo con sueldo fijo + comisiones</button>
+        <div class="obj-panel">
+            <div class="obj-panel-inner">
+                <span class="tag tag-filtro">FILTRO</span>
+                <p>«El problema del fijo es que siempre viene con un jefe, un horario estricto y un límite a lo que puedes ganar. Aquí tienes anticipos desde el primer mes — 400€ garantizados si cumples una operación de riesgo — que suben progresivamente hasta 1.000€ + complementos. Pero el objetivo real es tu independencia financiera. NN tiene un plan de arranque económico diseñado para que no salgas a la intemperie. Sentémonos 20 minutos y te enseño cómo funciona mes a mes.»</p>
+            </div>
+        </div>
+
+        <button class="obj-btn" onclick="toggleObj(this)">No tengo ni idea de seguros</button>
+        <div class="obj-panel">
+            <div class="obj-panel-inner">
+                <span class="tag tag-validacion">VALIDACIÓN</span><span class="tag tag-talent" style="margin-left:0.3rem;">PLAN TALENT</span>
+                <p>«Casi nadie la tiene cuando empieza, <span class="dyn">[Candidato]</span>. Y a veces es mejor porque no traes vicios de otras compañías. NN tiene el Plan Talent: un programa de formación continua que incluye un título universitario homologado por la Universidad Politécnica de Valencia. De la parte técnica — productos, fiscalidad, método consultivo — me encargo yo. Yo no busco a un experto en pólizas; busco a una persona con empatía y ganas de aprender. Lo demás te lo enseñamos todo.»</p>
+            </div>
+        </div>
+
+        <button class="obj-btn" onclick="toggleObj(this)">¿Qué tengo que vender exactamente?</button>
+        <div class="obj-panel">
+            <div class="obj-panel-inner">
+                <span class="tag tag-validacion">CURIOSIDAD</span>
+                <p>«No vas a ir puerta a puerta vendiendo pólizas. Nos dedicamos a la planificación financiera: ayudamos a familias a proteger su futuro, a autónomos a optimizar su fiscalidad, y a personas con hipoteca a tener las mejores condiciones. Usamos un método propio — el ADN del Cliente — donde es el propio cliente quien descubre lo que necesita. Tú solo facilitas esa conversación. Por teléfono es frío explicártelo; por eso quiero que nos sentemos 20 minutos y te lo enseñe de forma visual.»</p>
+            </div>
+        </div>
+
+        <button class="obj-btn" onclick="toggleObj(this)">Déjame que me lo piense / Mándame info</button>
+        <div class="obj-panel">
+            <div class="obj-panel-inner">
+                <span class="tag tag-escasez">ESCASEZ</span>
+                <p>«<span class="dyn">[Candidato]</span>, te puedo mandar un dossier, pero siendo transparente: estoy cerrando 4 plazas para arrancar la operativa del Punto Naranja y ya tengo candidatos avanzados. Un PDF no te va a transmitir la energía del proyecto ni vas a poder preguntarme sobre el plan de carrera. No pierdes nada por tomarte un café de 20 minutos conmigo. Si no lo ves claro, al menos tienes la información completa de primera mano. ¿Nos vemos el lunes?»</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ POST-CAFÉ ═══ -->
+    <div class="postcafe">
+        <h3>✅ Después del café — Siguiente paso</h3>
+        <div class="step-list">
+            <div class="step-item">Confirmar interés del candidato (sí/no/lo piensa)</div>
+            <div class="step-item">Enviar documentación NN: Plan Talent + resumen plan de carrera</div>
+            <div class="step-item">Agendar entrevista formal con Antonio Morote (coordinador)</div>
+            <div class="step-item">Inicio proceso de alta: documentación mercantil + formación inicial</div>
+            <div class="step-item">Primera semana: acompañamiento en campo (primeras visitas conjuntas)</div>
+        </div>
+    </div>
+
+    <!-- ═══ REGISTRO RÁPIDO ═══ -->
+    <div class="registro">
+        <h3>📋 Registro rápido del candidato</h3>
+        <div class="reg-grid">
+            <div class="reg-field full">
+                <label>Nombre completo</label>
+                <input type="text" id="regNombre" placeholder="Nombre y apellidos">
+            </div>
+            <div class="reg-field">
+                <label>Teléfono</label>
+                <input type="tel" id="regTel" placeholder="+34 600 000 000">
+            </div>
+            <div class="reg-field">
+                <label>Perfil</label>
+                <select id="regPerfil">
+                    <option>Comercial</option>
+                    <option>Sector seguros</option>
+                    <option>Conocido</option>
+                    <option>Junior</option>
+                    <option>Referenciador</option>
+                </select>
+            </div>
+            <div class="reg-field">
+                <label>Fecha del café</label>
+                <input type="date" id="regFecha">
+            </div>
+            <div class="reg-field">
+                <label>Interés (1-5)</label>
+                <select id="regInteres">
+                    <option>5 — Muy alto</option>
+                    <option>4 — Alto</option>
+                    <option>3 — Medio</option>
+                    <option>2 — Bajo</option>
+                    <option>1 — Frío</option>
+                </select>
+            </div>
+            <div class="reg-field full">
+                <label>Notas</label>
+                <textarea id="regNotas" placeholder="Observaciones, situación actual, motivación..."></textarea>
+            </div>
+        </div>
+        <button class="btn-copy" onclick="copyRegistro()">📋 Copiar al portapapeles</button>
+    </div>
+
+</div>
+
+<script>
+function updateNames() {
+    const v = document.getElementById('candidateName').value.trim();
+    const name = v === '' ? '[Candidato]' : v;
+    document.querySelectorAll('.dyn').forEach(el => el.textContent = name);
+    document.getElementById('regNombre').value = v;
+}
+
+function showScript(id, btn) {
+    document.querySelectorAll('.script-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.perfil-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+}
+
+function toggleTalent(header) {
+    header.classList.toggle('open');
+    document.getElementById('talentBody').classList.toggle('open');
+}
+
+function toggleObj(btn) {
+    const wasActive = btn.classList.contains('active');
+    // Close all
+    document.querySelectorAll('.obj-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.obj-panel').forEach(p => p.classList.remove('open'));
+    if (!wasActive) {
+        btn.classList.add('active');
+        const panel = btn.nextElementSibling;
+        panel.classList.add('open');
+    }
+}
+
+function copyRegistro() {
+    const data = [
+        `📋 CANDIDATO NN — ${new Date().toLocaleDateString('es-ES')}`,
+        `Nombre: ${document.getElementById('regNombre').value || '—'}`,
+        `Teléfono: ${document.getElementById('regTel').value || '—'}`,
+        `Perfil: ${document.getElementById('regPerfil').value}`,
+        `Fecha café: ${document.getElementById('regFecha').value || '—'}`,
+        `Interés: ${document.getElementById('regInteres').value}`,
+        `Notas: ${document.getElementById('regNotas').value || '—'}`,
+    ].join('\n');
+    navigator.clipboard.writeText(data).then(() => {
+        const btn = document.querySelector('.btn-copy');
+        btn.textContent = '✅ Copiado';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = '📋 Copiar al portapapeles'; btn.classList.remove('copied'); }, 2000);
+    });
+}
+</script>
+</body>
+</html>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- FOOTER RGPD — FULL WIDTH -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<footer style="width: 100%; background: #EDE8E3; border-top: 1px solid #D1D5DB; padding: 24px 20px; font-family: 'DM Sans', sans-serif; color: #5A5048; text-align: center; font-size: 12px; line-height: 1.6; clear: both;">
+  <div style="max-width: 600px; margin: 0 auto;">
+    <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,.1);">
+      <strong style="color: #111827; display: block; margin-bottom: 4px;">Nationale-Nederlanden Vida y Generales</strong>
+      Av. de Bruselas, 16 · Parque Arroyo de la Vega · 28108 Alcobendas (Madrid)<br>
+      <a href="tel:+34916026000" style="color: #C94D00; text-decoration: none; font-weight: 600;">☎️ +34 91 602 60 00</a>
+    </div>
+    <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,.1);">
+      <strong style="color: #111827; display: block; margin-bottom: 4px;">Derechos RGPD/LOPDGDD</strong>
+      <a href="mailto:seleccion.redcomercial@nnespana.com?subject=Ejercicio%20derechos%20ARCO" style="color: #C94D00; text-decoration: none; font-weight: 600;">Ejercer derechos ARCO</a> · 
+      <a href="mailto:dpo@nnespana.es" style="color: #C94D00; text-decoration: none; font-weight: 600;">DPO</a><br>
+      <a href="https://www.aepd.es/" target="_blank" style="color: #C94D00; text-decoration: none; font-weight: 600;">Reclamaciones ante AEPD</a>
+    </div>
+    <div style="background: linear-gradient(135deg, #FBF0EC 0%, #FFF5EE 100%); border: 2px solid #C94D00; border-radius: 12px; padding: 16px; margin: 0;">
+      <div style="font-size: 14px; font-weight: 700; color: #0A1628; margin-bottom: 4px;">🟠 Federico Fontanals</div>
+      <div style="font-size: 11px; font-weight: 500; color: #6B7280; margin-bottom: 12px; text-transform: uppercase; letter-spacing: .08em;">Delegado de Xàtiva/La Costera Punto Naranja · Xàtiva</div>
+      <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px;">
+        <a href="mailto:federico.fontanals@nnespana.com" style="display: inline-flex; align-items: center; gap: 4px; padding: 8px 12px; background: white; border-radius: 20px; border: 1px solid #D1D5DB; color: #C94D00; text-decoration: none; font-weight: 600; font-size: 12px;">📧 Email</a>
+        <a href="tel:+34680507186" style="display: inline-flex; align-items: center; gap: 4px; padding: 8px 12px; background: white; border-radius: 20px; border: 1px solid #D1D5DB; color: #C94D00; text-decoration: none; font-weight: 600; font-size: 12px;">☎️ Llamada</a>
+        <a href="https://wa.me/34680507186" target="_blank" style="display: inline-flex; align-items: center; gap: 4px; padding: 8px 12px; background: white; border-radius: 20px; border: 1px solid #D1D5DB; color: #C94D00; text-decoration: none; font-weight: 600; font-size: 12px;">💬 WhatsApp</a>
+      </div>
+      <div style="font-size: 10px; color: #8B7D75; line-height: 1.5;">
+        Documento informativo no contractual · Datos verificados de condiciones generales y documentación oficial NN
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- BANNER RGPD — FULL WIDTH -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div style="width: 100%; background: #FFE8D5; border-top: 3px solid #C94D00; padding: 20px; margin-top: 0; font-family: 'DM Sans', sans-serif; color: #5A5048;">
+  <div style="max-width: 600px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 16px;">
+      <strong style="color: #C94D00; font-size: 14px;">⚖️ Protección de Datos (RGPD/LOPDGDD)</strong>
+    </div>
+    <div style="font-size: 12px; line-height: 1.6; margin-bottom: 0;">
+      <strong>Responsable:</strong> Nationale-Nederlanden Vida y Nationale-Nederlanden Generales, S.A.E (Av. Bruselas, 16 · 28108 Alcobendas, Madrid)<br>
+      <strong>Tus derechos ARCO-POL:</strong> Acceso, Rectificación, Cancelación, Oposición y Portabilidad<br>
+      <strong>Derecho de oposición:</strong> Responde "BAJA" a cualquier email para excluirte · <strong>DPO:</strong> dpo@nnespana.es
+    </div>
+  </div>
+</html>
