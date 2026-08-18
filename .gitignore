@@ -11,10 +11,6 @@
 __pycache__/
 requirements.txt
 
-# --- EXCEPCIÓN AUTOMATIZACIÓN (Necesario para GitHub Actions) ---
-!requirements.txt
-!Scripts_Herramientas/birthday_automation.py
-
 # 2. Bloqueo de Datos y Credenciales (Seguridad Crítica)
 *.json
 *.xlsx
@@ -27,11 +23,19 @@ requirements.txt
 credentials.json
 token*.json
 Contraseña*.txt
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite
+*.sqlite3
+*.db
 
 # 3. Bloqueo de Documentación de Trabajo e IDE
 *.md
 !README.md
-!MAPA_ARQUITECTURA.md
+!SECURITY.md
+!.github/*.md
 .vscode/
 .idea/
 .DS_Store
@@ -76,6 +80,12 @@ Scripts_Herramientas/*
 # Bloqueo explícito de scripts en esa carpeta
 Scripts_Herramientas/*.py
 
-# Re-permitir scripts de automatización específicos
-!Scripts_Herramientas/birthday_automation.py
-!Scripts_Herramientas/auth_drive.py
+# 7. DATOS GENERADOS Y HERRAMIENTAS OPERATIVAS — SIEMPRE PRIVADOS
+private/
+data/
+exports/
+backups/
+**/*contactos*.html
+**/*cumple*.html
+**/*birthday*.html
+**/*crm_export*
