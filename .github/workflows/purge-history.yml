@@ -1,0 +1,48 @@
+name: One-time sensitive history purge
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/purge-history.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: one-time-sensitive-history-purge
+  cancel-in-progress: false
+
+jobs:
+  purge:
+    if: github.repository == 'FedeFonta08/propuestas-nn'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact triggering commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Verify sanitized tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          node .github/scripts/security_audit.mjs
+          grep -q "Portal público" index.html
+          test ! -e Scripts_Herramientas/Felicitaciones_Cumple_NN.html
+          test ! -e cockpit_llamadas.html
+          test ! -e google_apps_script.js
+          test ! -e radar_db.json
+
+      - name: Replace repository history with a sanitized root
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "GitHub Security Cleanup"
+          git config user.email "security-cleanup@users.noreply.github.com"
+          git checkout --orphan sanitized-main
+          git rm --cached -- .github/workflows/purge-history.yml
+          git commit -m "security: sanitized repository root"
+          test "$(git rev-list --count HEAD)" -eq 1
+          test -z "$(git ls-tree -r --name-only HEAD | grep 'purge-history.yml' || true)"
+          git push --force origin HEAD:refs/heads/main HEAD:refs/heads/master
